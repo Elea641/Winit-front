@@ -1,0 +1,36 @@
+<mat-toolbar>
+  <button mat-button [matMenuTriggerFor]="menu" *ngIf="isMobile">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>PLANNING</button>
+    <button mat-menu-item>CLASSEMENT</button>
+  </mat-menu>
+  <img src="../../../../assets/logo-white.png" alt="logo_WinIt" />
+  <div class="container-buttons-navbar-left" *ngIf="!isMobile">
+    <button mat-button routerLink="/tournament">PLANNING</button>
+    <button mat-button>CLASSEMENT</button>
+  </div>
+  <span class="navbar-spacer"></span>
+  <button mat-raised-button *ngIf="isMobile" color="primary">CONNEXION</button>
+  <button
+    *ngIf="!isMobile"
+    mat-icon-button
+    class="example-icon"
+    aria-label="icon-button with account icon"
+    [matMenuTriggerFor]="profil"
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #profil="matMenu">
+    <a *ngIf="!userId" mat-menu-item routerLink="/auth/login">
+      <span>Se connecter</span>
+    </a>
+    <a *ngIf="userId" mat-menu-item routerLink="/profile">
+      <span>Profil</span>
+    </a>
+    <a *ngIf="userId" mat-menu-item (click)="goToDisconnected('')">
+      <span>Sign out</span>
+    </a>
+  </mat-menu>
+</mat-toolbar>

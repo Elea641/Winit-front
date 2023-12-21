@@ -1,0 +1,32 @@
+@import "../../../../assets/style/variables.scss";
+
+.mat-toolbar {
+  position: fixed;
+  height: 3.5rem;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  background-color: $background-color;
+
+  img {
+    width: 5rem;
+  }
+
+  .container-buttons-navbar-left {
+    margin: 1rem;
+  }
+
+  .navbar-spacer {
+    flex: 1 1 auto;
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    color: white;
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: black;
+  }
+}
