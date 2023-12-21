@@ -7,9 +7,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TournamentService {
-  // private tournamentDataUrl = '../model/tournament-list.model.ts';
-  // constructor(private http: HttpClient) {}
-  // getAllTournaments(): Observable<Tournament[]> {
-  //   return this.http.get<Tournament[]>(this.tournamentDataUrl);
-  // }
+  private tournamentDataUrl = '../assets/list-tournament.model.json';
+
+  constructor(private http: HttpClient) {}
+
+  getAllTournaments(): Observable<Tournament[]> {
+    return this.http.get<Tournament[]>(this.tournamentDataUrl);
+  }
 }

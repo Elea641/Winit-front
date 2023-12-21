@@ -12,17 +12,13 @@ import { TournamentService } from 'src/app/tournament/shared/tournament.service'
   styleUrls: ['./tournament-list.component.scss'],
 })
 export class TournamentListComponent implements OnInit {
-  tournaments!: Tournament[];
-
-  tournamentList: Tournament[] = [
-    new Tournament(1, 'Tournoi A', 10),
-    new Tournament(2, 'Tournoi B', 8),
-    new Tournament(3, 'Tournoi C', 12),
-  ];
+  tournaments$!: Observable<Tournament[]>;
 
   constructor(private tournamentService: TournamentService) {}
 
   ngOnInit(): void {
-    this.tournaments = this.tournamentList;
+    this.tournaments$ = this.tournamentService
+      .getAllTournaments()
+      .pipe(map((data) => data));
   }
 }
