@@ -1,5 +1,26 @@
 [
-  {"id": 1, "name": "Tournoi A", "participants": 10},
-  {"id": 2, "name": "Tournoi B", "participants": 8},
-  {"id": 3, "name": "Tournoi C", "participants": 12}
+  {
+    "id": 1,
+    "name": "Tournoi A",
+    "description": "le tournoi 1",
+    "sport": "basket",
+    "currentPlayers": 2,
+    "maxPlayers": 10
+  },
+  {
+    "id": 2,
+    "name": "Tournoi B",
+    "description": "le tournoi 2",
+    "sport": "foot",
+    "currentPlayers": 1,
+    "maxPlayers": 12
+  },
+  {
+    "id": 3,
+    "name": "Tournoi B",
+    "description": "le tournoi 3",
+    "sport": "volley",
+    "currentPlayers": 4,
+    "maxPlayers": 45
+  }
 ]
