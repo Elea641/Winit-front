@@ -1,0 +1,39 @@
+@import "../../../../styles.scss";
+
+mat-card > img {
+    width: 250px;
+    height: 200px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.playercount {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+mat-card-content, p {
+    padding-top: 4%;
+}
+
+.tournament-sport {
+    color: #4D4D4D;
+    text-transform: uppercase;
+}
+
+.tournament-inscription-date {
+    font-size: 0.75rem;
+}
+
+::ng-deep .mat-mdc-card-content {
+    background-color: $card-background-color;
+}
+
