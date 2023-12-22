@@ -1,5 +1,5 @@
 <div *ngIf="tournaments$" class="carousel">
-    <div *ngFor="let tournament of tournaments$ | async">
+    <div class="tournament-card" *ngFor="let tournament of tournaments$ | async">
         <app-tournament-card [tournament]="tournament"></app-tournament-card>
     </div>
 </div>

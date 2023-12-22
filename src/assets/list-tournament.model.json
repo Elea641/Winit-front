@@ -2,7 +2,9 @@
   {
     "id": 1,
     "name": "Tournoi A",
-    "description": "le tournoi 1",
+    "date": "1 février",
+    "inscription_limit_date": "1 février",
+    "place": "Bordeaux",
     "sport": "basket",
     "currentPlayers": 2,
     "maxPlayers": 10
@@ -10,17 +12,31 @@
   {
     "id": 2,
     "name": "Tournoi B",
-    "description": "le tournoi 2",
+    "date": "4 mars",
+    "inscription_limit_date": "1 février",
+    "place": "Bordeaux",
     "sport": "foot",
-    "currentPlayers": 1,
+    "currentPlayers": 4,
     "maxPlayers": 12
   },
   {
     "id": 3,
-    "name": "Tournoi B",
-    "description": "le tournoi 3",
+    "name": "Tournoi C",
+    "date": "8 janvier",
+    "inscription_limit_date": "1 février",
+    "place": "Bordeaux",
     "sport": "volley",
     "currentPlayers": 4,
     "maxPlayers": 45
+  },
+  {
+    "id": 4,
+    "name": "Tournoi D",
+    "date": "31 octobre",
+    "inscription_limit_date": "1 février",
+    "place": "Bordeaux",
+    "sport": "babyfoot",
+    "currentPlayers": 1,
+    "maxPlayers": 2
   }
 ]

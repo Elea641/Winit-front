@@ -14,7 +14,18 @@
             </div>
         </div>
         <p class="tournament-sport">{{ tournament.sport }}</p>
-        <p class="tournament-inscription-date">Inscription jusqu'au {{ tournament.date }}</p>
-        
+        <div class="row-secondary">
+            <span class="material-symbols-outlined">
+                calendar_month
+            </span>
+            <p>{{ tournament.date }}</p>
+        </div>
+        <div class="row-secondary">
+            <span class="material-symbols-outlined">
+                location_on
+            </span>
+            <p>{{ tournament.place }}</p>
+        </div>
+        <p class="tournament-inscription-date">Inscription jusqu'au {{ tournament.inscription_limit_date }}</p>
     </mat-card-content>
 </mat-card>
