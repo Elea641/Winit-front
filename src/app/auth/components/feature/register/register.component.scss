@@ -1,0 +1,49 @@
+@import "../../../../../assets/style/variables.scss";
+
+.register-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-block {
+  width: 50%;
+}
+
+h1 {
+  color: white;
+  font-weight: normal;
+}
+
+mat-divider {
+  margin: 10px 0;
+}
+
+mat-form-field {
+  width: 50%;
+  padding: 8px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+button {
+  width: 50%;
+  margin: 10px 0;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: white;
+}
+
+.mat-mdc-raised-button:hover,
+.mat-mdc-raised-button:focus {
+  color: $background-color;
+}
