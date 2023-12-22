@@ -2,16 +2,22 @@
   <div class="register-block">
     <h1>Inscription</h1>
     <mat-divider></mat-divider>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form-container">
+    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onSubmit()" class="register-form-container">
 
       <mat-form-field appearance="outline">
         <mat-label>Prénom</mat-label>
         <input matInput type="text" formControlName="firstName">
+        <mat-error *ngIf="registerForm.controls['firstName'].errors && !registerForm.controls['firstName'].pristine">
+          {{ getErrorMessage('firstName') }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Nom</mat-label>
         <input matInput type="text" formControlName="lastName">
+        <mat-error *ngIf="registerForm.controls['lastName'].errors && !registerForm.controls['lastName'].pristine">
+          {{ getErrorMessage('lastName') }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -21,26 +27,38 @@
             {{ sport.viewName }}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="registerForm.controls['sport'].errors && !registerForm.controls['sport'].pristine">
+          {{ getErrorMessage('sport') }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Adresse email</mat-label>
         <input matInput type="email" formControlName="email">
+        <mat-error *ngIf="registerForm.controls['email'].errors && !registerForm.controls['email'].pristine">
+          {{ getErrorMessage('email') }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Mot de passe</mat-label>
         <input matInput type="text" formControlName="password">
+        <mat-error *ngIf="registerForm.controls['password'].errors && !registerForm.controls['password'].pristine">
+          {{ getErrorMessage('password') }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Confirmez le mot de passe</mat-label>
         <input matInput type="text" formControlName="confirmPassword">
+        <mat-error *ngIf="registerForm.controls['confirmPassword'].errors && !registerForm.controls['confirmPassword'].pristine">
+          {{ getErrorMessage('confirmPassword') }}
+        </mat-error>
       </mat-form-field>
 
       <div class="button-container">
         <button mat-raised-button color="primary" type="submit">S'INSCRIRE</button>
-        <button mat-stroked-button color="primary" type="submit">SE CONNECTER</button>
+        <button mat-stroked-button color="primary">SE CONNECTER</button>
       </div>
     </form>
   </div>

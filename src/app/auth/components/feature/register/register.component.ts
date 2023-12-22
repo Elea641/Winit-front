@@ -1,17 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatSelectModule} from "@angular/material/select";
-
-interface Sport {
-  name: string;
-  viewName: string;
-}
+import {Sport} from "../../../models/sport.model";
 
 @Component({
   selector: 'app-register',
@@ -21,13 +17,32 @@ interface Sport {
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  constructor(private fb: FormBuilder) {}
 
-  registerForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    confirmPassword: new FormControl('')
+  registerForm = this.fb.group({
+    firstName: ['', [
+      Validators.required,
+      Validators.maxLength(25)
+    ]],
+    lastName: ['', [
+      Validators.required,
+      Validators.maxLength(25)
+    ]],
+    sport: ['', [
+      Validators.required
+    ]],
+    email: ['', [
+      Validators.required,
+      Validators.email,
+    ]],
+    password: ['', [
+      Validators.required,
+      Validators.minLength(8)
+    ]],
+    confirmPassword: ['', [
+      Validators.required,
+      Validators.minLength(8)
+    ]]
   })
 
   sports: Sport[] = [
@@ -37,6 +52,16 @@ export class RegisterComponent {
     {name: 'handball', viewName: 'Handball'},
     {name: 'esport', viewName: 'E-sport'},
   ];
+
+  getErrorMessage(controlName: string) {
+    const control = this.registerForm.get(controlName);
+
+    if (control?.invalid) {
+      return 'Champ invalide';
+    }
+
+    return '';
+  }
 
   onSubmit() {
 
