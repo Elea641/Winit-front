@@ -12,7 +12,17 @@ import {Sport} from "../../../models/sport.model";
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDividerModule, MatGridListModule, MatSelectModule, FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatGridListModule,
+    MatSelectModule,
+    FormsModule
+  ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
