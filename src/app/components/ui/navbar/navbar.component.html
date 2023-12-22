@@ -20,7 +20,7 @@
     aria-label="icon-button with account icon"
     [matMenuTriggerFor]="profil"
   >
-    <mat-icon>account_circle</mat-icon>
+    <mat-icon>person</mat-icon>
   </button>
   <mat-menu #profil="matMenu">
     <a *ngIf="!userId" mat-menu-item routerLink="/auth/login">
