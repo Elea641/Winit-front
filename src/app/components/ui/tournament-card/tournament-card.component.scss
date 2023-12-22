@@ -1,8 +1,13 @@
 @import "../../../../styles.scss";
 
+mat-card {
+    width: 300px;
+    height: 250px;
+}
+
 mat-card > img {
-    width: 250px;
-    height: 200px;
+    height: 50%;
+    box-shadow: 0px 7px 10px 2px rgba(0,0,0,0.73);
 }
 
 .row {
@@ -21,11 +26,15 @@ mat-card > img {
 }
 
 .playercount {
-    width: 35%;
+    width: 30%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     font-weight: bold;
+
+    & p {
+        padding-left: 5%;
+    }
 }
 
 mat-card-content, p {

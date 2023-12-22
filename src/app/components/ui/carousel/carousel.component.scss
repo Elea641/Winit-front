@@ -1,5 +1,10 @@
 .carousel {
     margin-top: 10vh;
     display: flex;
-    justify-content: space-between;
+    padding-bottom: 4%;
+    
+    & div {
+        margin-right: 5%;
+    }
 }
+
