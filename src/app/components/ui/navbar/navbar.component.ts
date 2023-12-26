@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,10 +25,12 @@ import { filter } from 'rxjs';
 export class NavbarComponent implements OnInit {
   userId: number = 0;
   isMobile: boolean = false;
+  logoUrl: string = '../../../assets/logo-white.png';
 
   constructor(
     private router: Router,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private el: ElementRef
   ) {
     this.breakpointObserver
       .observe([Breakpoints.HandsetPortrait, Breakpoints.HandsetLandscape])
@@ -43,11 +45,31 @@ export class NavbarComponent implements OnInit {
       .subscribe(() => {
         window.scrollTo(0, 0);
       });
+
+    this.addClickOutsideListener();
   }
 
   goToDisconnected(url: string) {
     this.router.navigate([url]).then(() => {
       window.location.reload();
+    });
+  }
+
+  toggleLogo() {
+    this.logoUrl = '../../../assets/logo-orange.png';
+  }
+
+  toggleLogoButton() {
+    this.logoUrl = '../../../assets/logo-white.png';
+  }
+
+  private addClickOutsideListener() {
+    document.addEventListener('click', (event) => {
+      const clickedElement = event.target as HTMLElement;
+
+      if (!this.el.nativeElement.contains(clickedElement)) {
+        this.logoUrl = '../../../assets/logo-white.png';
+      }
     });
   }
 }
