@@ -3,13 +3,14 @@
 
 .container-sidebar {
   background-color: $background-sidebar-color;
-  height: calc(100vh - 3.5rem);
+  height: calc(100vh - 3.5rem - 0.2rem);
   top: 0.2rem;
+  z-index: 0;
 
   .container-sidebar-menu {
     background-color: $background-sidebar-color;
     width: 12rem;
-    border-right: 1px solid $box-shadow-sidebar-color;
+    border-right: 1px solid $border-sidebar-color;
 
     .container-sidebar-menu-input {
       padding: 0.5rem;
