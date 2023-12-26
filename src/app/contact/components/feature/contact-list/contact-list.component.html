@@ -1,0 +1,5 @@
+<div class="container-contact-list">
+  <div *ngFor="let contact of contacts$ | async">
+    <app-contact-card [contact]="contact"></app-contact-card>
+  </div>
+</div>

@@ -23,9 +23,9 @@ import { filter } from 'rxjs';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  userId: number = 0;
+  userId: number = 1;
   isMobile: boolean = false;
-  logoUrl: string = '../../../assets/logo-white.png';
+  logoUrl: string = '../../../assets/pictures/logo-white.png';
 
   constructor(
     private router: Router,
@@ -56,11 +56,11 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleLogo() {
-    this.logoUrl = '../../../assets/logo-orange.png';
+    this.logoUrl = '../../../assets/pictures/logo-orange.png';
   }
 
   toggleLogoButton() {
-    this.logoUrl = '../../../assets/logo-white.png';
+    this.logoUrl = '../../../assets/pictures/logo-white.png';
   }
 
   private addClickOutsideListener() {
@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit {
       const clickedElement = event.target as HTMLElement;
 
       if (!this.el.nativeElement.contains(clickedElement)) {
-        this.logoUrl = '../../../assets/logo-white.png';
+        this.logoUrl = '../../../assets/pictures/logo-white.png';
       }
     });
   }

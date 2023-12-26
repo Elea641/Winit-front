@@ -32,7 +32,7 @@
     <a *ngIf="!userId" mat-menu-item routerLink="">
       <span>Se connecter</span>
     </a>
-    <a *ngIf="userId" mat-menu-item routerLink="">
+    <a *ngIf="userId" mat-menu-item routerLink="/profile">
       <span>Profil</span>
     </a>
     <a *ngIf="userId" mat-menu-item (click)="goToDisconnected('')">
