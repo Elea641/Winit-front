@@ -1,0 +1,10 @@
+/* Flexbox utility */
+
+@mixin flex {
+  display: flex;
+}
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}

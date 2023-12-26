@@ -1,0 +1,49 @@
+@import "../../../../assets/style/variables.scss";
+@import "../../../../assets/style/mixins.scss";
+
+.container-sidebar {
+  background-color: $background-sidebar-color;
+  height: calc(100vh - 3.5rem);
+  top: 0.2rem;
+
+  .container-sidebar-menu {
+    background-color: $background-sidebar-color;
+    width: 12rem;
+    border-right: 1px solid $box-shadow-sidebar-color;
+
+    .container-sidebar-menu-input {
+      padding: 0.5rem;
+    }
+
+    h2 {
+      padding: 0.5rem;
+    }
+
+    .line {
+      border: 1px solid $line-sidebar-color;
+      margin: 0 0.5rem 1rem 0.5rem;
+    }
+
+    .container-sidebar-menu-button {
+      margin: 0;
+      padding: 0.5rem;
+      width: 12rem;
+      background-color: $background-sidebar-color;
+      box-shadow: none;
+    }
+  }
+
+  .sidenav-button {
+    @include flex-align-center;
+    height: calc(100vh - 3.5rem);
+  }
+
+  ::ng-deep .mdc-button__label {
+    width: 100%;
+    text-align: left;
+  }
+
+  ::ng-deep .mat-mdc-raised-button:not(:disabled) {
+    text-align: center;
+  }
+}

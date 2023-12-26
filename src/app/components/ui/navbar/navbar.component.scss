@@ -24,13 +24,17 @@
   }
 
   .mat-mdc-raised-button:not(:disabled) {
-    color: white;
+    color: $button-navbar-color-text;
   }
 
   .mat-mdc-raised-button:hover,
   .mat-mdc-raised-button:focus {
-    color: black;
+    color: $button-navbar-color-focus;
   }
+}
+
+::ng-deep .mat-mdc-button > .mat-icon {
+  width: 2rem;
 }
 
 ::ng-deep .navbar-custom-menu {
