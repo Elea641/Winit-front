@@ -1,0 +1,25 @@
+@import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
+
+.container-contact-card {
+  width: 15rem;
+  margin: 2rem;
+  background-color: $background-contact-card-color;
+
+  .container-contact-card-description {
+    color: $color-contact-card-color;
+
+    h1 {
+      text-align: center;
+    }
+  }
+
+  .container-contact-card-actions {
+    @include flex-justify-content-center;
+
+    img {
+      margin: 0.5rem 0.5rem 0 0.5rem;
+      width: 3rem;
+    }
+  }
+}

@@ -18,6 +18,4 @@ import { RouterModule } from '@angular/router';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent {
-  logoUrl: string = '../../../assets/logo-white.png';
-}
+export class FooterComponent {}
