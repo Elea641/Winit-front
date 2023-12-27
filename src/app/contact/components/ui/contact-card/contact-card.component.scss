@@ -8,6 +8,10 @@
 
   .container-contact-card-description {
     color: $color-contact-card-color;
+
+    h1 {
+      text-align: center;
+    }
   }
 
   .container-contact-card-actions {

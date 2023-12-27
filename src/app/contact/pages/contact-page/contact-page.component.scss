@@ -20,12 +20,21 @@
   }
 
   .container-contact-page-actions {
-    margin: 5rem;
+    margin: 3rem;
     @include flex-wrap;
 
-    img {
-      margin-bottom: 1rem;
-      width: 4rem;
+    .button-contact {
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+
+      img {
+        margin: 1rem;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
   }
 

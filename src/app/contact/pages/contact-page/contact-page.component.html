@@ -3,25 +3,13 @@
   <h1>ADRESSES AUXQUELLES NOUS POUVONS ÊTRE JOINTS</h1>
   <div class="line"></div>
   <div class="container-contact-page-actions">
-    <div class="container-contact-page-actions-item">
-      <a href="https://www.linkedin.com" target="_blank">
-        <img src="../../../../assets/pictures/call.png" alt="logo_instagram" />
-      </a>
-      <h3>00.00.00.00.00</h3>
-      <a href="https://www.linkedin.com" target="_blank">
-        <img
-          src="../../../../assets/pictures/e-mail.png"
-          alt="logo_instagram"
-        />
-      </a>
-      <h3>www.WinIt.com</h3>
-      <a href="https://www.linkedin.com" target="_blank">
-        <img
-          src="../../../../assets/pictures/linkedin.png"
-          alt="logo_instagram"
-        />
-      </a>
-      <h3>https://www.linkedin.com/WinIt/</h3>
+    <div
+      *ngFor="let contactDetails of contactDetails$ | async"
+      class="container-contact-page-actions-item"
+    >
+      <button class="button-contact" (click)="openDialog(contactDetails)">
+        <img src="{{ contactDetails.url_picture }}" alt="logo_instagram" />
+      </button>
     </div>
   </div>
 </div>
