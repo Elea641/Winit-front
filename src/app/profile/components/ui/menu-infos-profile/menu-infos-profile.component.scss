@@ -1,0 +1,25 @@
+@import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
+
+.menu-infos-profile-container {
+  padding: 0;
+  display: flex;
+  background-color: $background-menu-infos-profile-color;
+
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $button-menu-infos-profile-color-text;
+    line {
+      border: 1px solid $button-menu-infos-profile-color-text;
+    }
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $button-menu-infos-profile-color-focus;
+  }
+
+  ::ng-deep .mat-mdc-raised-button:not(:disabled) {
+    background-color: $background-menu-infos-profile-color;
+    box-shadow: none;
+  }
+}

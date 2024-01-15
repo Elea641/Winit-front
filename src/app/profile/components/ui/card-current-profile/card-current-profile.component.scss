@@ -1,0 +1,41 @@
+@import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
+
+.profile-card-container {
+  @include flex-column;
+  .profile-card-container-button {
+    @include flex-space-between;
+    .profile-card-container-infos {
+      @include flex-wrap-left;
+      color: $text-card-current-profile-color;
+      font-size: 1.8rem;
+      p:first-child {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .profile-card-container-other-infos {
+    @include flex;
+    margin: 1rem 0;
+    color: $text-card-current-profile-color;
+    .profile-card-container-other-info {
+      @include flex-align-center;
+      padding: 0 1rem 0 0;
+      p {
+        font-size: 1.2rem;
+
+        padding: 0 0.5rem;
+      }
+    }
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $button-card-current-profile-color-text;
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $button-card-current-profile-color-focus;
+  }
+}
