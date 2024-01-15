@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<mat-card class="example-card">
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    
+    <mat-card-content>
+        <div class="row">
+            <h3>{{ tournament.name }}</h3>
+            <div class="playercount">
+                <span class="material-symbols-outlined">
+                    group
+                </span>
+                <p>{{ tournament.currentPlayers }} / {{ tournament.maxPlayers }}</p>
+            </div>
+        </div>
+        <p class="tournament-sport">{{ tournament.sport }}</p>
+        <div class="row-secondary">
+            <span class="material-symbols-outlined">
+                calendar_month
+            </span>
+            <p>{{ tournament.date }}</p>
+        </div>
+        <div class="row-secondary">
+            <span class="material-symbols-outlined">
+                location_on
+            </span>
+            <p>{{ tournament.place }}</p>
+        </div>
+        <p class="tournament-inscription-date">Inscription jusqu'au {{ tournament.inscription_limit_date }}</p>
+    </mat-card-content>
+</mat-card>
