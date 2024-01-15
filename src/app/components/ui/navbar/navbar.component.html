@@ -18,9 +18,9 @@
     <button mat-button (click)="toggleLogoButton()">CLASSEMENT</button>
   </div>
   <span class="navbar-spacer"></span>
-  <button mat-raised-button *ngIf="isMobile" color="primary">CONNEXION</button>
+  <button mat-raised-button *ngIf="!userId" color="primary">CONNEXION</button>
   <button
-    *ngIf="!isMobile"
+    *ngIf="userId"
     mat-icon-button
     aria-label="icon-button with account icon"
     [matMenuTriggerFor]="profil"
@@ -29,10 +29,6 @@
     <mat-icon>person</mat-icon>
   </button>
   <mat-menu #profil="matMenu" class="navbar-custom-menu">
-    <a *ngIf="!userId" mat-menu-item routerLink="">
-      <mat-icon>login</mat-icon>
-      <span>Se connecter</span>
-    </a>
     <a *ngIf="userId" mat-menu-item routerLink="/profile">
       <mat-icon>person</mat-icon>
       <span>Profil</span>
