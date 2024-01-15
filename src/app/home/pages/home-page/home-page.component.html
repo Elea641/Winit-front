@@ -1,11 +1,13 @@
-<div class="container-home-desktop" *ngIf="!isMobile">
+<div class="container-home-desktop">
   <app-sidebar></app-sidebar>
-  <h1>Home page</h1>
+<section class="tournaments">
+  <div class="ongoing-tournaments">
+    <h2>Tournois en cours</h2>
+    <app-carousel></app-carousel>
+  </div>
+  <div class="open-tournaments">
+    <h2>Tournois ouverts à l'inscription</h2>
+    <app-carousel></app-carousel>
+  </div>
+</section>
 </div>
-
-<div class="container-home-mobile" *ngIf="isMobile">
-  <app-sidebar></app-sidebar>
-  <h1>Home page</h1>
-</div>
-<p>home-page works!</p>
-<app-carousel></app-carousel>

@@ -37,7 +37,7 @@
   </div>
 </mat-drawer-container>
 
-<mat-toolbar class="sidebar-mobile-container">
+<mat-toolbar class="sidebar-mobile-container" *ngIf="isMobile">
   <div class="container-sidebar-menu-input">
     <app-input-search></app-input-search>
   </div>
