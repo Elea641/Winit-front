@@ -26,6 +26,12 @@
   justify-content: center;
 }
 
+@mixin flex-space-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 /* Media */
 @mixin media-large-screen {
   @media screen and (min-width: 1024px) {

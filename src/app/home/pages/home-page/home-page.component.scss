@@ -1,5 +1,9 @@
 @import "../../../../assets/style/mixins.scss";
 
-.container-home {
+.container-home-desktop {
   @include flex;
+}
+
+.container-home-mobile {
+  @include flex-column-center;
 }

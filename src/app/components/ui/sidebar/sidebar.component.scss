@@ -9,7 +9,7 @@
 
   .container-sidebar-menu {
     background-color: $background-sidebar-color;
-    width: 12rem;
+    width: 15rem;
     border-right: 1px solid $border-sidebar-color;
 
     .container-sidebar-menu-input {
@@ -18,6 +18,7 @@
 
     h2 {
       padding: 0.5rem;
+      font-size: 1.5rem;
     }
 
     .line {
@@ -28,7 +29,7 @@
     .container-sidebar-menu-button {
       margin: 0;
       padding: 0.5rem;
-      width: 12rem;
+      width: 15rem;
       background-color: $background-sidebar-color;
       box-shadow: none;
     }
@@ -38,35 +39,20 @@
     @include flex-align-center;
     height: calc(100vh - 3.5rem);
   }
-
-  ::ng-deep .mdc-button__label {
-    width: 100%;
-    text-align: left;
-  }
-
-  ::ng-deep .mat-mdc-raised-button:not(:disabled) {
-    text-align: center;
-  }
 }
 
-.mat-toolbar {
-  height: 3.5rem;
+.sidebar-mobile-container {
+  width: 100vw;
+  height: 5.8rem;
   z-index: 1;
   background-color: $background-navbar-color;
   box-shadow: 0 2px 2px $box-shadow-navbar-color;
 
-  .navbar-button-logo {
-    img {
-      width: 5rem;
-    }
-  }
+  @include flex-space-around;
 
-  .container-buttons-navbar-left {
-    margin: 1rem;
-  }
-
-  .navbar-spacer {
-    flex: 1 1 auto;
+  .filter-button-container {
+    height: 3.5rem;
+    font-size: 1.5rem;
   }
 
   .mat-mdc-raised-button:not(:disabled) {
@@ -79,8 +65,8 @@
   }
 }
 
-::ng-deep .navbar-custom-menu {
-  margin-top: 12px;
+::ng-deep .sidebar-custom-menu {
+  margin-top: 27px;
 }
 
 ::ng-deep .mat-mdc-menu-content {

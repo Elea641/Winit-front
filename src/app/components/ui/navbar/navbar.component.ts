@@ -5,8 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { filter } from 'rxjs';
+import { BreakpointService } from '../../shared/breakpoint.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,14 +29,13 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private breakpointObserver: BreakpointObserver,
-    private el: ElementRef
+    private el: ElementRef,
+    private breakpointService: BreakpointService
   ) {
-    this.breakpointObserver
-      .observe([Breakpoints.HandsetPortrait, Breakpoints.HandsetLandscape])
-      .subscribe((result) => {
-        this.isMobile = result.matches;
-      });
+    this.isMobile = this.breakpointService.isMobileDevice();
+    this.breakpointService.isMobileChanged.subscribe((isMobile) => {
+      this.isMobile = isMobile;
+    });
   }
 
   ngOnInit(): void {

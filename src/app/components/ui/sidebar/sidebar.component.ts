@@ -5,9 +5,9 @@ import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { InputSearchComponent } from '../../feature/input-search/input-search.component';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { BreakpointService } from '../../shared/breakpoint.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -32,14 +32,13 @@ export class SidebarComponent implements OnInit {
   isDrawerOpened = false;
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
+    private breakpointService: BreakpointService,
     private el: ElementRef
   ) {
-    this.breakpointObserver
-      .observe([Breakpoints.HandsetPortrait, Breakpoints.HandsetLandscape])
-      .subscribe((result) => {
-        this.isMobile = result.matches;
-      });
+    this.isMobile = this.breakpointService.isMobileDevice();
+    this.breakpointService.isMobileChanged.subscribe((isMobile) => {
+      this.isMobile = isMobile;
+    });
   }
 
   ngOnInit(): void {
