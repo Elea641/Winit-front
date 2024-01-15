@@ -7,9 +7,15 @@
     (buttonClick)="onButtonClicked($event)"
   ></app-menu-infos-profile>
   <div *ngIf="buttonValueClicked === 'resultats'">
-    <app-list-resultats></app-list-resultats>
+    <app-list-resultats
+      *ngIf="currentProfile$ | async as currentProfile"
+      [currentProfile]="currentProfile"
+    ></app-list-resultats>
   </div>
   <div *ngIf="buttonValueClicked === 'team'">
-    <app-list-team-members></app-list-team-members>
+    <!-- <app-list-team-members
+      *ngIf="currentProfile$ | async as currentProfile"
+      [currentProfile]="currentProfile"
+    ></app-list-team-members> -->
   </div>
 </div>

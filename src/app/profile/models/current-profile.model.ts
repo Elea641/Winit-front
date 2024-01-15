@@ -4,8 +4,8 @@ export class CurrentProfile {
   public lastname: string;
   public city: string;
   public team: string;
+  public allPlayed: number;
   public results: {
-    allPlayed: number;
     win: number;
     second: number;
     third: number;
@@ -22,6 +22,7 @@ export class CurrentProfile {
     this.lastname = profileData.lastname;
     this.city = profileData.city;
     this.team = profileData.team;
+    this.allPlayed = profileData.allPlayed;
     this.results = profileData.results[0];
     this.lastTournamentsPlayed = [
       {

@@ -13,9 +13,4 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class CardCurrentProfileComponent {
   @Input() currentProfile!: CurrentProfile | null;
-  ngOnInit(): void {
-    if (this.currentProfile) {
-      console.log(this.currentProfile);
-    }
-  }
 }

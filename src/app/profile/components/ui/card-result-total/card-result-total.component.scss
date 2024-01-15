@@ -1,0 +1,33 @@
+@import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
+
+.card-result-total-container {
+  background-color: $background-card-result-total-color;
+  @include flex-column;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+
+  .card-result-total-container-infos {
+    @include flex;
+    padding: 0.5rem;
+    p {
+      width: 50%;
+      text-align: center;
+      color: $number-card-result-total-color;
+      font-size: 1.5rem;
+    }
+
+    .card-result-total-container-text {
+      width: 50%;
+      color: $text-card-result-total-color;
+      text-align: left;
+      font-size: 1.2rem;
+      align-self: center;
+    }
+  }
+
+  .line {
+    border: 1px solid $line-card-result-total-color;
+    width: 100%;
+  }
+}

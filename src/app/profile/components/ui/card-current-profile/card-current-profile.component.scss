@@ -32,6 +32,7 @@
 
   .mat-mdc-raised-button:not(:disabled) {
     color: $button-card-current-profile-color-text;
+    z-index: 0;
   }
 
   .mat-mdc-raised-button:hover,

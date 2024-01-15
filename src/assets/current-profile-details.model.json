@@ -3,7 +3,8 @@
         "lastname": "Voliotis",
         "city": "Bordeaux",
         "team": "WinIt",
-        "results": [{"allPlayed": 50, "win": 10, "second": 5, "third": 3}],
+        "allPlayed": 50,
+        "results": {"win": 10, "second": 5, "third": 3},
         "lastTournamentsPlayed": [
             {"lastTournament": "karaté", "result": 1},
             {"penultimateTournament": "natation", "result": 1},
