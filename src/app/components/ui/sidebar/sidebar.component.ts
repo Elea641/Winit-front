@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { InputSearchComponent } from '../../feature/input-search/input-search.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,6 +17,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
     RouterModule,
     InputSearchComponent,
   ],

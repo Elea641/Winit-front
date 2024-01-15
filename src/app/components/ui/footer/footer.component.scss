@@ -21,10 +21,15 @@
   }
 
   .line {
-    width: 12rem;
-    height: 1px;
-    border-top: 1px solid $line-footer-color;
-    margin: 2rem;
+    display: none;
+
+    @include media-large-screen {
+      display: block;
+      height: 1px;
+      border-top: 1px solid $line-footer-color;
+      margin: 2rem;
+      width: 12rem;
+    }
   }
 
   .container-footer-social-network {

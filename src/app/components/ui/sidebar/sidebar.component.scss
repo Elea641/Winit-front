@@ -48,3 +48,41 @@
     text-align: center;
   }
 }
+
+.mat-toolbar {
+  height: 3.5rem;
+  z-index: 1;
+  background-color: $background-navbar-color;
+  box-shadow: 0 2px 2px $box-shadow-navbar-color;
+
+  .navbar-button-logo {
+    img {
+      width: 5rem;
+    }
+  }
+
+  .container-buttons-navbar-left {
+    margin: 1rem;
+  }
+
+  .navbar-spacer {
+    flex: 1 1 auto;
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $button-navbar-color-text;
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $button-navbar-color-focus;
+  }
+}
+
+::ng-deep .navbar-custom-menu {
+  margin-top: 12px;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background-color: $background-navbar-color;
+}

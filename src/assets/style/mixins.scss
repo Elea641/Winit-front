@@ -25,3 +25,10 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* Media */
+@mixin media-large-screen {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
