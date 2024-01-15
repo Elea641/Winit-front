@@ -37,28 +37,21 @@
   </div>
 </mat-drawer-container>
 
-<mat-toolbar>
+<mat-toolbar class="sidebar-mobile-container">
+  <div class="container-sidebar-menu-input">
+    <app-input-search></app-input-search>
+  </div>
   <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
+    class="filter-button-container"
+    mat-button
+    [matMenuTriggerFor]="menu"
+    *ngIf="isMobile"
   >
-    <mat-icon>menu</mat-icon>
+    Filtres
   </button>
-  <span>My App</span>
-  <span class="example-spacer"></span>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with share icon"
-  >
-    <mat-icon>share</mat-icon>
-  </button>
+  <mat-menu #menu="matMenu" class="sidebar-custom-menu">
+    <button mat-menu-item>Chronologiques</button>
+    <button mat-menu-item>A venir</button>
+    <button mat-menu-item>Non complet</button>
+  </mat-menu>
 </mat-toolbar>

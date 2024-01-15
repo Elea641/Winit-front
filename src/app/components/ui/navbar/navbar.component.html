@@ -30,12 +30,15 @@
   </button>
   <mat-menu #profil="matMenu" class="navbar-custom-menu">
     <a *ngIf="!userId" mat-menu-item routerLink="">
+      <mat-icon>login</mat-icon>
       <span>Se connecter</span>
     </a>
     <a *ngIf="userId" mat-menu-item routerLink="/profile">
+      <mat-icon>person</mat-icon>
       <span>Profil</span>
     </a>
     <a *ngIf="userId" mat-menu-item (click)="goToDisconnected('')">
+      <mat-icon>logout</mat-icon>
       <span>Sign out</span>
     </a>
   </mat-menu>
