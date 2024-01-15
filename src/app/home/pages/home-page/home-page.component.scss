@@ -3,8 +3,21 @@
 
 .container-home-desktop {
   @include flex;
+  @include media-mobile-screen;
+}
+
+.tournament-container  {
+  @include flex-column-center;
+
+  margin:auto
 }
 
 h2 {
+  font-size: 1.25rem;
   color: $secondary-color;
+  margin-bottom: 1.5rem;
+}
+
+hr {
+  margin: 2rem;
 }

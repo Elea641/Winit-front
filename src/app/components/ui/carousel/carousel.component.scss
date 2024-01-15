@@ -1,13 +1,16 @@
 .carousel-container {
-    max-width: 95vw;
-    /* margin: auto; */
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 50px;
+    max-width: calc(100vw - 350px);
+
+    @media screen and (max-width:768px) {
+        max-width: 85vw;
+    }
+
+    @media screen and (max-width: 425px) {
+        max-width: 75vw;
+    }
 } 
 
 .carousel {
-    margin-top: 10vh;
     display: flex;
 }
 
@@ -17,10 +20,3 @@
     margin-left: auto;
     margin-right: auto;
 }
-
-.slide {
-    align-items: center;
-}
-
-
-

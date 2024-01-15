@@ -1,28 +1,11 @@
 @import "../../../../styles.scss";
 
-/* mat-card {
-    width: 300px;
-    height: 300px;
-}
- */
-
-/*  mat-card {
-    height: 50%;
- }
-mat-card > img {
-    /* height: 50%; 
-    width: 300px;
-    height: 100%;
-    box-shadow: 0px 7px 10px 2px rgba(0,0,0,0.73);
-}
- */
  mat-card {
     width: 300px;
     height: 300px;
+    margin-right: 30px;
 }
  mat-card > img {
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
     height: 50%;
  }
