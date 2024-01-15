@@ -6,11 +6,13 @@
   top: 0;
   left: 0;
   z-index: 1;
+  background-color: $background-navbar-color;
+  box-shadow: 0 2px 2px $box-shadow-navbar-color;
 
-  background-color: $background-color;
-
-  img {
-    width: 5rem;
+  .navbar-button-logo {
+    img {
+      width: 5rem;
+    }
   }
 
   .container-buttons-navbar-left {
@@ -22,11 +24,19 @@
   }
 
   .mat-mdc-raised-button:not(:disabled) {
-    color: white;
+    color: $button-navbar-color-text;
   }
 
   .mat-mdc-raised-button:hover,
   .mat-mdc-raised-button:focus {
-    color: black;
+    color: $button-navbar-color-focus;
   }
+}
+
+::ng-deep .navbar-custom-menu {
+  margin-top: 12px;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background-color: $background-navbar-color;
 }

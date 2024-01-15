@@ -1,10 +1,26 @@
+.carousel-container {
+    max-width: 95%;
+    /* margin: auto; */
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 50px;
+} 
+
 .carousel {
     margin-top: 10vh;
     display: flex;
-    padding-bottom: 4%;
-    
-    & div {
-        margin-right: 5%;
-    }
 }
+
+.app-tournament-card {
+    display: inline-block;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slide {
+    align-items: center;
+}
+
+
 

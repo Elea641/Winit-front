@@ -1,0 +1,74 @@
+@import "../../../../assets/style/variables.scss";
+@import "../../../../assets/style/mixins.scss";
+
+.container-sidebar {
+  background-color: $background-sidebar-color;
+  height: calc(100vh - 3.5rem - 0.2rem);
+  top: 0.2rem;
+  z-index: 0;
+
+  .container-sidebar-menu {
+    background-color: $background-sidebar-color;
+    width: 15rem;
+    border-right: 1px solid $border-sidebar-color;
+
+    .container-sidebar-menu-input {
+      padding: 0.5rem;
+    }
+
+    h2 {
+      padding: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .line {
+      border: 1px solid $line-sidebar-color;
+      margin: 0 0.5rem 1rem 0.5rem;
+    }
+
+    .container-sidebar-menu-button {
+      margin: 0;
+      padding: 0.5rem;
+      width: 15rem;
+      background-color: $background-sidebar-color;
+      box-shadow: none;
+    }
+  }
+
+  .sidenav-button {
+    @include flex-align-center;
+    height: calc(100vh - 3.5rem);
+  }
+}
+
+.sidebar-mobile-container {
+  width: 100vw;
+  height: 5.8rem;
+  z-index: 1;
+  background-color: $background-navbar-color;
+  box-shadow: 0 2px 2px $box-shadow-navbar-color;
+
+  @include flex-space-around;
+
+  .filter-button-container {
+    height: 3.5rem;
+    font-size: 1.5rem;
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $button-navbar-color-text;
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $button-navbar-color-focus;
+  }
+}
+
+::ng-deep .sidebar-custom-menu {
+  margin-top: 27px;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background-color: $background-navbar-color;
+}

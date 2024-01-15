@@ -1,0 +1,40 @@
+/* Flexbox utility */
+
+@mixin flex {
+  display: flex;
+}
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@mixin flex-space-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Media */
+@mixin media-large-screen {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
