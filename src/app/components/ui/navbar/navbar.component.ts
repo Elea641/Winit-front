@@ -50,6 +50,7 @@ export class NavbarComponent implements OnInit {
   }
 
   goToDisconnected(url: string) {
+    localStorage.clear();
     this.router.navigate([url]).then(() => {
       window.location.reload();
     });
