@@ -1,0 +1,80 @@
+@import "../../../../styles.scss";
+
+/* mat-card {
+    width: 300px;
+    height: 300px;
+}
+ */
+
+/*  mat-card {
+    height: 50%;
+ }
+mat-card > img {
+    /* height: 50%; 
+    width: 300px;
+    height: 100%;
+    box-shadow: 0px 7px 10px 2px rgba(0,0,0,0.73);
+}
+ */
+ mat-card {
+    width: 300px;
+    height: 300px;
+}
+ mat-card > img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 50%;
+ }
+
+@media screen and (max-width: 1224) {
+    .mat-card > img {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row-secondary {
+    display: flex;
+    align-items: center;
+
+    & p {
+        padding: 0 0.5em;
+    }
+}
+
+.playercount {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: bold;
+
+    & p {
+        padding-left: 5%;
+    }
+}
+
+mat-card-content, p {
+    padding-top: 4%;
+}
+
+.tournament-sport {
+    color: #4D4D4D;
+    text-transform: uppercase;
+    padding-bottom: 4%;
+}
+
+.tournament-inscription-date {
+    font-size: 0.75rem;
+}
+
+::ng-deep .mat-mdc-card-content {
+    background-color: $card-background-color;
+}

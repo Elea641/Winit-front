@@ -1,9 +1,10 @@
 @import "../../../../assets/style/mixins.scss";
+@import "../../../../assets/style/variables.scss";
 
 .container-home-desktop {
   @include flex;
 }
 
-.container-home-mobile {
-  @include flex-column-center;
+h2 {
+  color: $secondary-color;
 }

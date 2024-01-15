@@ -1,5 +1,82 @@
 [
-  {"id": 1, "name": "Tournoi A", "participants": 10},
-  {"id": 2, "name": "Tournoi B", "participants": 8},
-  {"id": 3, "name": "Tournoi C", "participants": 12}
+  {
+    "id": 1,
+    "name": "Tournoi A",
+    "date": "1 février",
+    "inscription_limit_date": "1 février",
+    "place": "Bordeaux",
+    "sport": "basket",
+    "currentPlayers": 2,
+    "maxPlayers": 10
+  },
+  {
+    "id": 2,
+    "name": "Tournoi B",
+    "date": "4 mars",
+    "inscription_limit_date": "1 février",
+    "place": "Bordeaux",
+    "sport": "foot",
+    "currentPlayers": 4,
+    "maxPlayers": 12
+  },
+  {
+    "id": 3,
+    "name": "Tournoi C",
+    "date": "8 janvier",
+    "inscription_limit_date": "1 février",
+    "place": "Bordeaux",
+    "sport": "volley",
+    "currentPlayers": 4,
+    "maxPlayers": 45
+  },
+  {
+    "id": 4,
+    "name": "Tournoi D",
+    "date": "31 octobre",
+    "inscription_limit_date": "1 février",
+    "place": "Bordeaux",
+    "sport": "babyfoot",
+    "currentPlayers": 1,
+    "maxPlayers": 2
+  },
+  {
+    "id": 5,
+    "name": "Tournoi E",
+    "date": "24 octobre",
+    "inscription_limit_date": "1 février",
+    "place": "Paris",
+    "sport": "babyfoot",
+    "currentPlayers": 12,
+    "maxPlayers": 24
+  },
+  {
+    "id": 6,
+    "name": "Tournoi E",
+    "date": "31 avril",
+    "inscription_limit_date": "1 mars",
+    "place": "Marseille",
+    "sport": "volley",
+    "currentPlayers": 4,
+    "maxPlayers": 9
+  },
+  {
+    "id": 7,
+    "name": "Tournoi F",
+    "date": "23 juillet",
+    "inscription_limit_date": "04 août",
+    "place": "Bordeaux",
+    "sport": "babyfoot",
+    "currentPlayers": 7,
+    "maxPlayers": 8
+  },
+  {
+    "id": 8,
+    "name": "Tournoi G",
+    "date": "31 octobre",
+    "inscription_limit_date": "1 février",
+    "place": "Bordeaux",
+    "sport": "babyfoot",
+    "currentPlayers": 13,
+    "maxPlayers": 21
+  }
 ]
