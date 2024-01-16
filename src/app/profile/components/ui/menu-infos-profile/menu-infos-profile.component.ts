@@ -13,8 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class MenuInfosProfileComponent {
   @Output() buttonClick = new EventEmitter<string>();
+  isDefaultStyleFocus = true;
 
   onButtonClick(value: string) {
     this.buttonClick.emit(value);
+    this.isDefaultStyleFocus = false;
   }
 }

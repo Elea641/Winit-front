@@ -25,7 +25,7 @@ import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
 export class CurrentProfileDetailsComponent {
   currentProfile$!: Observable<CurrentProfile>;
   teamMembers$!: Observable<TeamMembers>;
-  buttonValueClicked!: string;
+  buttonValueClicked: string = 'resultats';
 
   constructor(private profileService: ProfileService) {}
 

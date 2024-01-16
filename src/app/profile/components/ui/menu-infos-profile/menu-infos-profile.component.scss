@@ -6,12 +6,14 @@
   display: flex;
   background-color: $background-menu-infos-profile-color;
 
+  .mat-mdc-raised-button:not(:disabled).active {
+    background-color: $background-menu-infos-profile-color;
+    color: $button-menu-infos-profile-color-focus;
+  }
+
   .mat-mdc-raised-button:not(:disabled) {
     color: $button-menu-infos-profile-color-text;
     z-index: 0;
-    line {
-      border: 1px solid $button-menu-infos-profile-color-text;
-    }
   }
 
   .mat-mdc-raised-button:hover,

@@ -1,5 +1,15 @@
-<mat-toolbar class="menu-infos-profile-container">
-  <button mat-raised-button (click)="onButtonClick('resultats')">
+<!-- menu-infos-profile.component.html -->
+<mat-toolbar
+  [ngClass]="{
+    'default-style-focus': isDefaultStyleFocus,
+  }"
+  class="menu-infos-profile-container"
+>
+  <button
+    mat-raised-button
+    [ngClass]="{ active: isDefaultStyleFocus }"
+    (click)="onButtonClick('resultats')"
+  >
     RESULTATS
   </button>
   <button mat-raised-button (click)="onButtonClick('team')">EQUIPES</button>
