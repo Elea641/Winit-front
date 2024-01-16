@@ -1,0 +1,14 @@
+{
+    "name": "WinIt Tournament",
+    "sport": "Karaté",
+    "city": "Bordeaux",
+    "teams": [
+        {"team": "Team1", "result": 0},
+        {"team": "Team2", "result": 0},
+        {"team": "Team3", "result": 0},
+        {"team": "Team4", "result": 0},
+        {"team": "Team5", "result": 0},
+        {"team": "Team6", "result": 0},
+        {"team": "Team7", "result": 0}
+    ]
+}
