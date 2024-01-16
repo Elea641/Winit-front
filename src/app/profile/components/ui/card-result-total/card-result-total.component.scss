@@ -30,4 +30,8 @@
     border: 1px solid $line-card-result-total-color;
     width: 100%;
   }
+
+  @include media-large-screen {
+    width: 30vw;
+  }
 }

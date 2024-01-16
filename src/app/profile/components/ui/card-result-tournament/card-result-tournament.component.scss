@@ -46,4 +46,10 @@
       padding-top: 0.5rem;
     }
   }
+
+  @include media-large-screen {
+    width: 30vw;
+    display: flex;
+    margin: 2rem 0.5rem 0 0;
+  }
 }
