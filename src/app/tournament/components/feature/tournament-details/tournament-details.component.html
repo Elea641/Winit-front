@@ -12,6 +12,9 @@
   </div>
 
   <div *ngIf="buttonValueClicked === 'teams'">
-    <app-list-teams-tournament></app-list-teams-tournament>
+    <app-list-teams-tournament
+      *ngIf="tournamentDetails$ | async as tournamentDetails"
+      [tournamentDetails]="tournamentDetails"
+    ></app-list-teams-tournament>
   </div>
 </div>
