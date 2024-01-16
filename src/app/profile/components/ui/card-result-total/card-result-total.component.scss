@@ -4,7 +4,7 @@
 .card-result-total-container {
   background-color: $background-card-result-total-color;
   @include flex-column;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   padding: 0.5rem;
 
   .card-result-total-container-infos {

@@ -4,3 +4,6 @@
 <div *ngFor="let result of getObjectEntries(currentProfile?.results)">
   <app-card-result-tournament [result]="result"></app-card-result-tournament>
 </div>
+<app-list-last-tounaments-played
+  [currentProfile]="currentProfile"
+></app-list-last-tounaments-played>

@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardResultTotalComponent } from '../card-result-total/card-result-total.component';
+import { CardResultTotalComponent } from '../../ui/card-result-total/card-result-total.component';
 import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
-import { CardResultTournamentComponent } from '../card-result-tournament/card-result-tournament.component';
+import { CardResultTournamentComponent } from '../../ui/card-result-tournament/card-result-tournament.component';
+import { ListLastTounamentsPlayedComponent } from '../../ui/list-last-tounaments-played/list-last-tounaments-played.component';
 
 @Component({
   selector: 'app-list-resultats',
@@ -11,6 +12,7 @@ import { CardResultTournamentComponent } from '../card-result-tournament/card-re
     CommonModule,
     CardResultTotalComponent,
     CardResultTournamentComponent,
+    ListLastTounamentsPlayedComponent,
   ],
   templateUrl: './list-resultats.component.html',
   styleUrls: ['./list-resultats.component.scss'],
