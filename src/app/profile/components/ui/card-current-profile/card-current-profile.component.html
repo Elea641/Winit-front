@@ -1,0 +1,20 @@
+<div class="profile-card-container">
+  <div class="profile-card-container-button">
+    <div class="profile-card-container-infos">
+      <p>{{ currentProfile?.firstname }}</p>
+      <p>{{ currentProfile?.lastname }}</p>
+    </div>
+    <button mat-raised-button color="primary">MODIFIER</button>
+  </div>
+  <div class="profile-card-container-other-infos">
+    <div class="profile-card-container-other-info">
+      <mat-icon>location_on</mat-icon>
+      <p>{{ currentProfile?.city }}</p>
+    </div>
+    <div class="profile-card-container-other-info">
+      <mat-icon>people</mat-icon>
+      <p>Team</p>
+      <p>{{ currentProfile?.team }}</p>
+    </div>
+  </div>
+</div>
