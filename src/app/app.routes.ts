@@ -17,11 +17,6 @@ export const routes: Routes = [
     children: [{ path: 'register', component: RegisterComponent }],
   },
   { path: 'tournament/create', component: TournamentFormComponent},
-  {
-    path: 'auth',
-    component: AuthPageComponent,
-    children: [{ path: 'register', component: RegisterComponent }],
-  },
   { path: '', component: HomePageComponent },
   { path: '**', redirectTo: '' },
 ];
