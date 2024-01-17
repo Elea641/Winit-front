@@ -1,0 +1,57 @@
+<mat-drawer-container class="container-sidebar" autosize *ngIf="!isMobile">
+  <mat-drawer #drawer mode="side" class="container-sidebar-menu">
+    <div class="container-sidebar-menu-input">
+      <app-input-search></app-input-search>
+    </div>
+    <h2>Filtres</h2>
+    <div class="line"></div>
+    <button
+      (click)="showFiller = !showFiller"
+      mat-raised-button
+      class="container-sidebar-menu-button"
+    >
+      Chronologiques
+    </button>
+    <button
+      (click)="showFiller = !showFiller"
+      mat-raised-button
+      class="container-sidebar-menu-button"
+    >
+      A venir
+    </button>
+    <button
+      (click)="showFiller = !showFiller"
+      mat-raised-button
+      class="container-sidebar-menu-button"
+    >
+      Non complet
+    </button>
+  </mat-drawer>
+
+  <div class="sidenav-button">
+    <button mat-icon-button (click)="toggleDrawer()">
+      <mat-icon>{{
+        isDrawerOpened ? "arrow_back_ios" : "arrow_forward_ios"
+      }}</mat-icon>
+    </button>
+  </div>
+</mat-drawer-container>
+
+<mat-toolbar class="sidebar-mobile-container" *ngIf="isMobile">
+  <div class="container-sidebar-menu-input">
+    <app-input-search></app-input-search>
+  </div>
+  <button
+    class="filter-button-container"
+    mat-button
+    [matMenuTriggerFor]="menu"
+    *ngIf="isMobile"
+  >
+    Filtres
+  </button>
+  <mat-menu #menu="matMenu" class="sidebar-custom-menu">
+    <button mat-menu-item>Chronologiques</button>
+    <button mat-menu-item>A venir</button>
+    <button mat-menu-item>Non complet</button>
+  </mat-menu>
+</mat-toolbar>

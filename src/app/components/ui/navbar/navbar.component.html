@@ -2,34 +2,39 @@
   <button mat-button [matMenuTriggerFor]="menu" *ngIf="isMobile">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>PLANNING</button>
-    <button mat-menu-item>CLASSEMENT</button>
+  <mat-menu #menu="matMenu" class="navbar-custom-menu">
+    <button mat-menu-item routerLink="/tournament" (click)="toggleLogoButton()">
+      PLANNING
+    </button>
+    <button mat-menu-item (click)="toggleLogoButton()">CLASSEMENT</button>
   </mat-menu>
-  <img src="../../../../assets/logo-white.png" alt="logo_WinIt" />
+  <a class="navbar-button-logo" routerLink="/home" (click)="toggleLogo()">
+    <img [src]="logoUrl" alt="logo_WinIt" />
+  </a>
   <div class="container-buttons-navbar-left" *ngIf="!isMobile">
-    <button mat-button routerLink="/tournament">PLANNING</button>
-    <button mat-button>CLASSEMENT</button>
+    <button mat-button routerLink="/tournament" (click)="toggleLogoButton()">
+      PLANNING
+    </button>
+    <button mat-button (click)="toggleLogoButton()">CLASSEMENT</button>
   </div>
   <span class="navbar-spacer"></span>
-  <button mat-raised-button *ngIf="isMobile" color="primary">CONNEXION</button>
+  <button mat-raised-button *ngIf="!userId" color="primary">CONNEXION</button>
   <button
-    *ngIf="!isMobile"
+    *ngIf="userId"
     mat-icon-button
-    class="example-icon"
     aria-label="icon-button with account icon"
     [matMenuTriggerFor]="profil"
+    (click)="toggleLogoButton()"
   >
     <mat-icon>person</mat-icon>
   </button>
-  <mat-menu #profil="matMenu">
-    <a *ngIf="!userId" mat-menu-item routerLink="/auth/login">
-      <span>Se connecter</span>
-    </a>
+  <mat-menu #profil="matMenu" class="navbar-custom-menu">
     <a *ngIf="userId" mat-menu-item routerLink="/profile">
+      <mat-icon>person</mat-icon>
       <span>Profil</span>
     </a>
     <a *ngIf="userId" mat-menu-item (click)="goToDisconnected('')">
+      <mat-icon>logout</mat-icon>
       <span>Sign out</span>
     </a>
   </mat-menu>

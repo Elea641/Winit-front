@@ -47,4 +47,10 @@ $WinIt-Front-theme: mat.define-dark-theme(
 body {
   font-family: "Roboto", "Helvetica Neue", sans-serif;
   background-color: $background-color;
+  list-style: none;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

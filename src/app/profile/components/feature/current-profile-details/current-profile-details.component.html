@@ -1,0 +1,21 @@
+<div class="current-profile-container">
+  <app-card-current-profile
+    *ngIf="currentProfile$ | async as currentProfile"
+    [currentProfile]="currentProfile"
+  ></app-card-current-profile>
+  <app-menu-infos-profile
+    (buttonClick)="onButtonClicked($event)"
+  ></app-menu-infos-profile>
+  <div *ngIf="buttonValueClicked === 'resultats'">
+    <app-list-resultats
+      *ngIf="currentProfile$ | async as currentProfile"
+      [currentProfile]="currentProfile"
+    ></app-list-resultats>
+  </div>
+  <div *ngIf="buttonValueClicked === 'team'">
+    <app-list-team-members
+      *ngIf="teamMembers$ | async as teamMembers"
+      [teamMembers]="teamMembers"
+    ></app-list-team-members>
+  </div>
+</div>

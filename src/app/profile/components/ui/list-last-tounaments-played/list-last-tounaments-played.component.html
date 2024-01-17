@@ -1,0 +1,60 @@
+<div class="list-last-tounaments-played-container">
+  <div class="list-last-tounaments-played-container-hearder">
+    <h2>DERNIERS TOURNOIS JOUÉS</h2>
+  </div>
+  <div class="list-last-tounaments-played-container-body">
+    <div class="list-last-tounaments-played-container-body-details">
+      <div class="list-last-tounaments-played-container-body-detail">
+        <img
+          src="../../../../../assets/pictures/award.png"
+          alt="sport detail image"
+        />
+        <div>
+          <h3>Dernier tournoi</h3>
+          <p>
+            {{
+              currentProfile.lastTournamentsPlayed[0].lastTournament | titlecase
+            }}
+          </p>
+        </div>
+      </div>
+      <button mat-raised-button>RÉSULTATS</button>
+    </div>
+    <div class="list-last-tounaments-played-container-body-details">
+      <div class="list-last-tounaments-played-container-body-detail">
+        <img
+          src="../../../../../assets/pictures/award.png"
+          alt="sport detail image"
+        />
+        <div>
+          <h3>Dernier tournoi</h3>
+          <p>
+            {{
+              currentProfile.lastTournamentsPlayed[1].penultimateTournament
+                | titlecase
+            }}
+          </p>
+        </div>
+      </div>
+      <button mat-raised-button>RÉSULTATS</button>
+    </div>
+    <div class="list-last-tounaments-played-container-body-details">
+      <div class="list-last-tounaments-played-container-body-detail">
+        <img
+          src="../../../../../assets/pictures/award.png"
+          alt="sport detail image"
+        />
+        <div>
+          <h3>Dernier tournoi</h3>
+          <p>
+            {{
+              currentProfile.lastTournamentsPlayed[2].antepenultimateTournament
+                | titlecase
+            }}
+          </p>
+        </div>
+      </div>
+      <button mat-raised-button>RÉSULTATS</button>
+    </div>
+  </div>
+</div>

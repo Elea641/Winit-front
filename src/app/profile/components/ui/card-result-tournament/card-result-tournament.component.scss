@@ -1,0 +1,55 @@
+@import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
+
+.card-result-tournament {
+  background-color: $background-card-result-tournament-color;
+  @include flex;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  position: relative;
+
+  .card-result-tournament-img {
+    position: relative;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    img {
+      display: block;
+      margin: 0 auto;
+      width: 8rem;
+    }
+
+    p {
+      color: $text-card-result-tournament-color;
+      font-size: 1.2rem;
+      position: absolute;
+      top: 54%;
+      left: 47%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .line {
+    border: 1px solid $line-card-result-tournament-color;
+    margin: 0.5rem 0 0.5rem 0;
+  }
+
+  .card-result-tournament-infos {
+    @include flex-column-center-align-justify;
+    width: 60%;
+    p {
+      color: $number-card-result-tournament-color;
+      font-size: 1.8rem;
+    }
+
+    .card-result-tournament-info-text {
+      font-size: 1rem;
+      color: $text-card-result-tournament-color;
+      padding-top: 0.5rem;
+    }
+  }
+
+  @include media-large-screen {
+    width: 30vw;
+    display: flex;
+    margin: 2rem 0.5rem 0 0;
+  }
+}

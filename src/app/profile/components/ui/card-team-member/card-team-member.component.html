@@ -1,0 +1,11 @@
+<div class="list-team-members-container">
+  <div class="list-team-members-container-header">
+    <h2>{{ teamMembers?.team }}</h2>
+  </div>
+  <div
+    class="list-team-members-container-body"
+    *ngFor="let member of teamMembers?.members"
+  >
+    <p>{{ member }}</p>
+  </div>
+</div>
