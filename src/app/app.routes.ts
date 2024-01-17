@@ -6,8 +6,6 @@ import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.
 import { RegisterComponent } from './auth/components/feature/register/register.component';
 import { AuthPageComponent } from './auth/pages/auth-page/auth-page.component';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
-import { RegisterComponent } from './auth/components/feature/register/register.component';
-import { AuthPageComponent } from './auth/pages/auth-page/auth-page.component';
 
 export const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
