@@ -6,7 +6,7 @@
       <mat-form-field appearance="outline" class="register-form-field">
         <mat-label>Prénom</mat-label>
         <input matInput type="text" formControlName="firstName">
-        <mat-error *ngIf="registerForm.get('firstName')?.errors && !registerForm.get('firstName')?.pristine"
+        <mat-error *ngIf="firstName?.errors && !firstName?.pristine"
                    class="error-message-size">
           Prénom invalide
         </mat-error>
@@ -15,7 +15,7 @@
       <mat-form-field appearance="outline" class="register-form-field">
         <mat-label>Nom</mat-label>
         <input matInput type="text" formControlName="lastName">
-        <mat-error *ngIf="registerForm.get('lastName')?.errors && !registerForm.get('lastName')?.pristine"
+        <mat-error *ngIf="lastName?.errors && !lastName?.pristine"
                    class="error-message-size">
           Nom invalide
         </mat-error>
@@ -33,7 +33,7 @@
       <mat-form-field appearance="outline" class="register-form-field">
         <mat-label>Adresse email</mat-label>
         <input matInput type="email" formControlName="email">
-        <mat-error *ngIf="registerForm.get('email')?.errors && !registerForm.get('email')?.pristine"
+        <mat-error *ngIf="email?.errors && !email?.pristine"
                    class="error-message-size">
           Email invalide
         </mat-error>
@@ -42,7 +42,7 @@
       <mat-form-field appearance="outline" class="register-form-field">
         <mat-label>Mot de passe</mat-label>
         <input matInput type="password" formControlName="password">
-        <mat-error *ngIf="registerForm.get('password')?.errors && !registerForm.get('password')?.pristine"
+        <mat-error *ngIf="password?.errors && !password?.pristine"
                    class="error-message-size">
           Le mot de passe doit contenir au moins 8 caractères
         </mat-error>
@@ -51,7 +51,7 @@
       <mat-form-field appearance="outline" class="register-form-field">
         <mat-label>Confirmez le mot de passe</mat-label>
         <input matInput type="password" formControlName="confirmPassword">
-        <div *ngIf="registerForm.hasError('noMatch') && !registerForm.get('confirmPassword')?.pristine"
+        <div *ngIf="registerForm.hasError('noMatch') && !confirmPassword?.pristine"
              class="custom-error-message error-message-size">
           {{ confirmError() }}
         </div>
@@ -61,9 +61,9 @@
       <mat-checkbox formControlName="acceptTerms">
         <mat-label>J'accepte les conditions d'utilisation de WinIt.</mat-label>
       </mat-checkbox>
-      <mat-error *ngIf="registerForm.get('acceptTerms')?.errors &&
-      (!registerForm.get('acceptTerms')?.pristine ||
-      (!registerForm.get('firstName')?.pristine && !registerForm.get('lastName')?.pristine && !registerForm.get('email')?.pristine && !registerForm.get('password')?.pristine && !registerForm.get('confirmPassword')?.pristine)
+      <mat-error *ngIf="acceptTerms?.errors &&
+      (!acceptTerms?.pristine ||
+      (!firstName?.pristine && !lastName?.pristine && !email?.pristine && !password?.pristine && !confirmPassword?.pristine)
       )"
                  class="error-message-size">
         Vous devez accepter les conditions d'utilisation pour vous inscrire.
