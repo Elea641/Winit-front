@@ -18,7 +18,7 @@ import { User } from '../../../models/user.model';
 import { checkPasswordMatch } from '../../../shared/password-match';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AuthService } from '../../../shared/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -34,6 +34,7 @@ import { Router } from '@angular/router';
     MatSelectModule,
     FormsModule,
     MatCheckboxModule,
+    RouterModule
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],

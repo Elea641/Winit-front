@@ -6,42 +6,49 @@ import { Injectable } from '@angular/core';
 export class HelperTournamentService {
   calculPhase(totalTeams: number) {
     let c = 1;
-    let randomMatchs;
+    let randomMatchs = 0;
     let a;
-    while (totalTeams / (c * 2)) {
+    while (Math.floor(totalTeams / (c * 2))) {
       c *= 2;
       a = Math.floor(totalTeams / c);
       randomMatchs = totalTeams % c;
     }
-
-    console.log('nombre de poule', c, 'random', randomMatchs);
+    return { c, randomMatchs };
   }
 
-  convertToTournamentPhase(totalTeams: number): string {
+  convertToTournamentPhase(totalPhase: any): object {
     let numRounds = 0;
-    let teamsRemaining = totalTeams;
+    let teamsRemaining = totalPhase.c;
 
     while (teamsRemaining > 1) {
       teamsRemaining /= 2;
       numRounds++;
     }
-    switch (numRounds) {
-      case 0:
-        return 'Finale';
-      case 1:
-        return 'Demi-finale';
-      case 2:
-        return 'Quart de finale';
-      case 3:
-        return 'Huitièmes de finale';
-      case 4:
-        return 'Seizièmes de finale';
-      case 5:
-        return 'Phase préliminaire';
-      case 6:
-        return 'Phase de préqualification';
-      default:
-        return `Tour ${numRounds}`;
+
+    const phases: any = {
+      phase1: 'Finale',
+      phase2: 'Demi-finale',
+      phase3: 'Quart de finale',
+      phase4: 'Huitièmes de finale',
+      phase5: 'Seizièmes de finale',
+      phase6: 'Phase préliminaire',
+      phase7: 'Phase de préqualification',
+      phase8: 'Phase de préqualification aléatoire',
+    };
+
+    const result: any = {};
+
+    for (let i = 1; i <= numRounds; i++) {
+      result[`phase${i}`] = phases[`phase${i}`];
     }
+
+    if (totalPhase?.randomMatchs > 0) {
+      result[`phase${numRounds + 1}`];
+      result[`phase${numRounds + 2}`] = 'Phase de préqualification aléatoire';
+    } else {
+      result[`phase${numRounds + 1}`];
+    }
+
+    return result;
   }
 }

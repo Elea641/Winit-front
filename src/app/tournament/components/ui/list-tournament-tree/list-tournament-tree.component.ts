@@ -14,15 +14,20 @@ import { HelperTournamentService } from 'src/app/tournament/shared/helper-tourna
 export class ListTournamentTreeComponent {
   @Input() tournamentDetails!: TournamentDetails;
   convertedSelection: string | undefined;
+  tournamentPhase!: any;
 
   constructor(private helperTournamentService: HelperTournamentService) {}
 
   ngOnInit(): void {
-    const totalTeams = 16;
-    const tournamentPhase =
-      this.helperTournamentService.convertToTournamentPhase(totalTeams);
-    console.log(`Le tournoi est maintenant en ${tournamentPhase}.`);
+    const totalTeams = 9;
 
-    this.helperTournamentService.calculPhase(totalTeams);
+    const totalPhase = this.helperTournamentService.calculPhase(totalTeams);
+
+    this.tournamentPhase =
+      this.helperTournamentService.convertToTournamentPhase(totalPhase);
+  }
+
+  getObjectKeys(obj: any): string[] {
+    return Object.keys(obj);
   }
 }

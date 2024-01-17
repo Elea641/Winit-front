@@ -1,8 +1,9 @@
 <div class="list-tournament-tree-container">
-  <div>
-    <app-card-tournament-match
+  <div *ngFor="let key of getObjectKeys(tournamentPhase)">
+    <h2>{{ tournamentPhase[key] }}</h2>
+    <!-- <app-card-tournament-match
       *ngFor="let team of tournamentDetails.teams"
       [team]="team"
-    ></app-card-tournament-match>
+    ></app-card-tournament-match> -->
   </div>
 </div>

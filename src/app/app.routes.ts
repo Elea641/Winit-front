@@ -6,16 +6,22 @@ import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.
 import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
 import { RegisterComponent } from './auth/components/feature/register/register.component';
 import { AuthPageComponent } from './auth/pages/auth-page/auth-page.component';
+import { LoginFormComponent } from './auth/components/feature/login-form/login-form.component';
+import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 
 export const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
   { path: 'contact', component: ContactPageComponent },
   { path: 'tournament', component: TournamentPageComponent },
-  { path: 'tournament/:id', component: TournamentDetailsPageComponent },
+  { path: 'tournament/create', component: TournamentFormComponent },
+  { path: 'tournament/:id([0-9]+)', component: TournamentDetailsPageComponent },
   {
     path: 'auth',
     component: AuthPageComponent,
-    children: [{ path: 'register', component: RegisterComponent }],
+    children: [
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginFormComponent },
+    ],
   },
   { path: '', component: HomePageComponent },
   { path: '**', redirectTo: '' },

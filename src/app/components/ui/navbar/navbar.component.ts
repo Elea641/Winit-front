@@ -23,7 +23,7 @@ import { BreakpointService } from '../../shared/breakpoint.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  userId: number = 1;
+  userId: number = 0;
   isMobile: boolean = false;
   logoUrl: string = '../../../assets/pictures/logo-white.png';
 
