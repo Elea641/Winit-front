@@ -13,6 +13,7 @@ import { TournamentDetails } from 'src/app/tournament/models/tournament-details.
 export class ListTeamsTournamentComponent {
   @Input() tournamentDetails!: TournamentDetails;
   totalinscription!: number;
+
   ngOnInit(): void {
     this.totalinscription = this.tournamentDetails.teams.length;
   }

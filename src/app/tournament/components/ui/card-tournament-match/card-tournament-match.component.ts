@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,8 +6,12 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card-tournament-match.component.html',
-  styleUrls: ['./card-tournament-match.component.scss']
+  styleUrls: ['./card-tournament-match.component.scss'],
 })
 export class CardTournamentMatchComponent {
+  @Input() team: any;
 
+  ngOnInit(): void {
+    console.log(this.team);
+  }
 }

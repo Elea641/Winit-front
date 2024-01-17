@@ -2,8 +2,8 @@
 @import "../../../../../assets/style/mixins.scss";
 
 .list-teams-tounament {
-  color: $button-list-teams-tournamentt-color-text;
-  margin: 1rem;
+  color: $button-list-teams-tournament-color-text;
+  margin: 0.5rem 0;
 
   .list-teams-tounament-header {
     @include flex-justify-content-space-between;

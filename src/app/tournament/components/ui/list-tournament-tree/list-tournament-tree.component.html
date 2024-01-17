@@ -1,0 +1,17 @@
+<div class="list-tournament-tree-container">
+  <div>
+    <h2>Quart de finale</h2>
+    <app-card-tournament-match
+      *ngFor="let team of tournamentDetails.teams"
+      [team]="team"
+    ></app-card-tournament-match>
+  </div>
+  <div>
+    <h2>Demi-finale</h2>
+    <app-card-tournament-match></app-card-tournament-match>
+  </div>
+  <div>
+    <h2>Finale</h2>
+    <app-card-tournament-match></app-card-tournament-match>
+  </div>
+</div>

@@ -1,6 +1,8 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.card-tournament-match-container {
-  background-color: $background-card-tournament-match-color;
+.list-tournament-tree-container {
+  h2 {
+    color: $text-list-tournament-tree-color;
+  }
 }
