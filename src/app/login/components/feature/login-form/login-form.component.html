@@ -1,0 +1,24 @@
+<p>login form</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div formGroupName="credentials">
+        <div>
+            <label>
+                Email
+                <input type="text" formControlName="email">
+                <div *ngIf="loginForm.get('credentials.email')?.errors && !loginForm.get('credentials.email')?.pristine" class="error-msg">
+                    <div [hidden]="!loginForm.get('credentials.email')?.errors?.['required']">username is required.</div>
+                    <div [hidden]="!loginForm.get('credentials.email')?.invalid">username is invalid.</div>
+                </div>
+                <div *ngIf="loginForm.controls"></div>
+            </label>
+        </div>
+        <div>
+            <label>
+                Mot de passe
+                <input type="text" formControlName="password">
+            </label>
+        </div>
+    </div>
+    
+    <button type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+</form>
