@@ -5,7 +5,7 @@ import { ContactPageComponent } from './contact/pages/contact-page/contact-page.
 import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.component';
 import { RegisterComponent } from './auth/components/feature/register/register.component';
 import { AuthPageComponent } from './auth/pages/auth-page/auth-page.component';
-import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
+import { LoginFormComponent } from './auth/components/feature/login-form/login-form.component';
 
 export const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
@@ -16,7 +16,7 @@ export const routes: Routes = [
     component: AuthPageComponent,
     children: [
       { path: 'register', component: RegisterComponent },
-      { path: 'login', component: LoginPageComponent }
+      { path: 'login', component: LoginFormComponent }
     ],
   },
   { path: '', component: HomePageComponent },
