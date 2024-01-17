@@ -1,4 +1,4 @@
-import {Sport} from "./sport.model";
+import { Sport } from './sport.model';
 
 export class User {
   firstName?: string;
@@ -6,6 +6,7 @@ export class User {
   sport?: Sport;
   email?: string;
   password?: string;
-  role?: string;
+  roles?: { id: number };
   createdAt?: Date;
+  enabled?: boolean;
 }
