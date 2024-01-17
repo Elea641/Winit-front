@@ -6,5 +6,6 @@ export class User {
   sport?: Sport;
   email?: string;
   password?: string;
-  confirmPassword?: string;
+  role?: string;
+  createdAt?: Date;
 }
