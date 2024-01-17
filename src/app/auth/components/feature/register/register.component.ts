@@ -18,6 +18,7 @@ import { User } from '../../../models/user.model';
 import { checkPasswordMatch } from '../../../shared/password-match';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AuthService } from '../../../shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -123,7 +124,7 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('acceptTerms')!;
   }
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   onSubmit() {
     const newUser: User = {
@@ -149,5 +150,6 @@ export class RegisterComponent implements OnInit {
         console.error('Error:', error);
       }
     );
+    this.router.navigate(['/home']);
   }
 }
