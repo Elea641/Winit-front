@@ -5,25 +5,32 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .register-block {
-  width: 50%;
+  margin-top: 10vh;
+  padding: 16px;
+  min-width: 200px;
+  max-width: 800px;
+  width: 100%;
 }
 
-h1 {
+.registration-title {
   color: white;
   font-weight: normal;
 }
 
-mat-divider {
-  margin: 10px 0;
+.register-divider {
+  margin: 16px 0;
 }
 
-mat-form-field {
+.register-form-field {
   width: 50%;
   padding: 8px;
+}
+
+.error-message-size {
+  font-size: small;
 }
 
 .button-container {
@@ -32,11 +39,12 @@ mat-form-field {
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-top: 16px;
 }
 
-button {
+.register-button, .login-button {
   width: 50%;
-  margin: 10px 0;
+  margin-bottom: 16px;
 }
 
 .mat-mdc-raised-button:not(:disabled) {
@@ -46,4 +54,22 @@ button {
 .mat-mdc-raised-button:hover,
 .mat-mdc-raised-button:focus {
   color: $background-color;
+}
+
+@media screen and (max-width: 768px) {
+  .register-form-field {
+    width: 100%;
+  }
+
+  .registration-title {
+    font-size: large;
+  }
+
+  .register-button, .login-button {
+    width: 100%;
+  }
+
+  .register-block {
+    margin-bottom: 5vh;
+  }
 }
