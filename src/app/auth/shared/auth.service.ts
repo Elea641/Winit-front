@@ -10,7 +10,8 @@ export class AuthService {
 
   constructor(public http: HttpClient) { }
 
-  private url = '';
+  private url = 'https://localhost:8080';
+
   postRegister(user: User): Observable<User> {
     return this.http.post<User>(`${this.url}/api/auth/register`, user);
   }
