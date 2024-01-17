@@ -1,0 +1,59 @@
+<form [formGroup]="tournamentForm.form" (ngSubmit)="onSubmit()">
+
+    <!-- Name -->
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" type="text" formControlName="name" />
+      <div *ngIf="tournamentForm.form.get('name')?.invalid && (tournamentForm.form.get('name')?.dirty || tournamentForm.form.get('name')?.touched)"> 
+        <small class="error" *ngIf="tournamentForm.form.get('name')?.errors?.['required']">Name is required.</small>
+      </div>
+    </div>
+  
+    <!-- Date -->
+    <div>
+      <label for="date">Date:</label>
+      <input id="date" type="date" formControlName="date" />
+      <div *ngIf="tournamentForm.form.get('date')?.invalid && (tournamentForm.form.get('date')?.dirty || tournamentForm.form.get('date')?.touched)"> 
+        <small class="error" *ngIf="tournamentForm.form.get('date')?.errors?.['required']">date is required.</small>
+      </div>
+    </div>
+  
+    <!-- Inscription Limit Date -->
+    <div>
+      <label for="inscriptionLimitDate">Inscription Limit Date:</label>
+      <input id="inscriptionLimitDate" type="date" formControlName="inscriptionLimitDate" />
+      <div *ngIf="tournamentForm.form.get('inscriptionLimitDate')?.invalid && (tournamentForm.form.get('inscriptionLimitDate')?.dirty || tournamentForm.form.get('inscriptionLimitDate')?.touched)"> 
+        <small class="error" *ngIf="tournamentForm.form.get('inscriptionLimitDate')?.errors?.['required']">date is required.</small>
+      </div>
+    </div>
+  
+    <!-- Place -->
+    <div>
+      <label for="place">Place:</label>
+      <input id="place" type="text" formControlName="place" />
+      <div *ngIf="tournamentForm.form.get('place')?.invalid && (tournamentForm.form.get('place')?.dirty || tournamentForm.form.get('place')?.touched)"> 
+        <small class="error" *ngIf="tournamentForm.form.get('place')?.errors?.['required']">date is required.</small>
+      </div>
+    </div>
+  
+    <!-- Sport -->
+    <div>
+      <label for="sport">Sport:</label>
+      <input id="sport" type="text" formControlName="sport" />
+      <div *ngIf="tournamentForm.form.get('sport')?.invalid && (tournamentForm.form.get('sport')?.dirty || tournamentForm.form.get('sport')?.touched)"> 
+        <small class="error" *ngIf="tournamentForm.form.get('sport')?.errors?.['required']">date is required.</small>
+      </div>
+    </div>
+
+    <!-- Max Players -->
+    <div>
+      <label for="maxPlayers">Max Players:</label>
+      <input id="maxPlayers" type="number" formControlName="maxPlayers" />
+      <div *ngIf="tournamentForm.form.get('maxPlayers')?.invalid && (tournamentForm.form.get('maxPlayers')?.dirty || tournamentForm.form.get('maxPlayers')?.touched)"> 
+        <small class="error" *ngIf="tournamentForm.form.get('maxPlayers')?.errors?.['required']">date is required.</small>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="!tournamentForm.form.valid">Submit</button>
+  </form>
+  
