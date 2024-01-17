@@ -18,7 +18,13 @@
     <button mat-button (click)="toggleLogoButton()">CLASSEMENT</button>
   </div>
   <span class="navbar-spacer"></span>
-  <button mat-raised-button *ngIf="!userId" color="primary">CONNEXION</button>
+  <button 
+    mat-raised-button 
+    *ngIf="!userId" 
+    color="primary"
+    routerLink="/login"
+    >CONNEXION
+  </button>
   <button
     *ngIf="userId"
     mat-icon-button
