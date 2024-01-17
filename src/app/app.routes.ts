@@ -6,6 +6,8 @@ import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.
 import { RegisterComponent } from './auth/components/feature/register/register.component';
 import { AuthPageComponent } from './auth/pages/auth-page/auth-page.component';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
+import { RegisterComponent } from './auth/components/feature/register/register.component';
+import { AuthPageComponent } from './auth/pages/auth-page/auth-page.component';
 
 export const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
@@ -17,6 +19,11 @@ export const routes: Routes = [
     children: [{ path: 'register', component: RegisterComponent }],
   },
   { path: 'tournament/create', component: TournamentFormComponent},
+  {
+    path: 'auth',
+    component: AuthPageComponent,
+    children: [{ path: 'register', component: RegisterComponent }],
+  },
   { path: '', component: HomePageComponent },
   { path: '**', redirectTo: '' },
 ];
