@@ -10,8 +10,4 @@ import { CommonModule } from '@angular/common';
 })
 export class CardTournamentMatchComponent {
   @Input() team: any;
-
-  ngOnInit(): void {
-    console.log(this.team);
-  }
 }

@@ -8,7 +8,10 @@
   ></app-menu-infos-tournament>
 
   <div *ngIf="buttonValueClicked === 'matchs'">
-    <app-card-tournament-match></app-card-tournament-match>
+    <app-list-tournament-tree
+      *ngIf="tournamentDetails$ | async as tournamentDetails"
+      [tournamentDetails]="tournamentDetails"
+    ></app-list-tournament-tree>
   </div>
 
   <div *ngIf="buttonValueClicked === 'teams'">

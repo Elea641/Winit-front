@@ -144,12 +144,12 @@ export class RegisterComponent implements OnInit {
           console.log('Response:', 'The form is invalid');
         } else {
           console.log('Response:', response);
+          this.router.navigate(['/home']);
         }
       },
       (error) => {
         console.error('Error:', error);
       }
     );
-    this.router.navigate(['/home']);
   }
 }
