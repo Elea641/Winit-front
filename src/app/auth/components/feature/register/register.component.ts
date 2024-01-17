@@ -11,6 +11,7 @@ import {Sport} from "../../../models/sport.model";
 import {User} from "../../../models/user.model";
 import {checkPasswordMatch} from "../../../shared/password-match";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {AuthService} from "../../../shared/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -42,7 +43,7 @@ export class RegisterComponent implements OnInit {
     {name: 'waterpolo', viewName: 'Water-polo'}
   ];
 
-  user: User = { firstName: '', lastName: '', email: '', sport: this.sports[0], password: '', confirmPassword: '' };
+  user: User = { firstName: '', lastName: '', email: '', sport: this.sports[0], password: '' };
 
   registerForm!: FormGroup;
 
@@ -67,7 +68,7 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.minLength(8)
         ]),
-        confirmPassword: new FormControl(this.user.confirmPassword, [
+        confirmPassword: new FormControl('', [
           Validators.required
         ]),
         acceptTerms: new FormControl(false, [
@@ -108,14 +109,37 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('confirmPassword')!;
   }
 
-  constructor(
-  ) {}
+  get acceptTerms() {
+    return this.registerForm.get('acceptTerms')!;
+  }
+
+  constructor(public authService: AuthService) {}
 
   onSubmit() {
-    if (this.registerForm.invalid) {
-      console.log('Le formulaire n\'est pas valide');
-    } else {
-      console.log(this.registerForm.value);
+      const newUser: User = {
+        firstName: this.firstName.value,
+          lastName: this.lastName.value,
+          sport: this.sport.value,
+          email: this.email.value,
+          password: this.password.value,
+          role: 'ROLE_USER',
+          createdAt: new Date(),
+      };
+
+        this.authService.postRegister(newUser).subscribe(
+            (response) => {
+                if (response === null) {
+                    console.log(
+                        'Response:',
+                        "The form is invalid"
+                    );
+                } else {
+                    console.log('Response:', response);
+                }
+            },
+            (error) => {
+                console.error('Error:', error);
+            }
+        );
     }
   }
-}
