@@ -2,10 +2,18 @@
   <div *ngIf="totalPhase.randomMatchs">
     <h2>Phase de sélection aléatoire</h2>
     <div *ngFor="let match of getNumberArray(totalPhase.randomMatchs)">
-      <app-card-tournament-match></app-card-tournament-match>
+      <!-- Ajouter une condition pour la première itération -->
+      <!-- <app-card-tournament-match
+        [namesTeamList]="getTeamName(i)"
+      ></app-card-tournament-match> -->
     </div>
   </div>
-  <div *ngFor="let phaseKey of getObjectKeys(tournamentPhase.result).reverse()">
+  <div
+    *ngFor="
+      let phaseKey of getObjectKeys(tournamentPhase.result).reverse();
+      let index = index
+    "
+  >
     <div
       *ngIf="
         tournamentPhase.result[phaseKey] !== 'Phase de sélection aléatoire'
@@ -17,10 +25,15 @@
           *ngFor="
             let match of getNumberArray(
               tournamentPhase.totalPhaseMatchs[phaseKey]
-            )
+            );
+            let i = index
           "
         >
-          <app-card-tournament-match></app-card-tournament-match>
+          <!-- Ajouter une condition pour la première itération -->
+          <app-card-tournament-match
+            [namesTeamList]="getTeamName(i)"
+            [index]="index"
+          ></app-card-tournament-match>
         </div>
       </div>
     </div>

@@ -16,19 +16,21 @@ export class ListTournamentTreeComponent {
   convertedSelection: string | undefined;
   tournamentPhase!: any;
   totalPhase: any;
+  namesTeamList: any;
 
   constructor(private helperTournamentService: HelperTournamentService) {}
 
   ngOnInit(): void {
-    console.log(this.tournamentDetails);
-
     this.totalPhase = this.helperTournamentService.calculPhase(
       this.tournamentDetails.participants
     );
 
     this.tournamentPhase =
       this.helperTournamentService.convertToTournamentPhase(this.totalPhase);
-    console.log(this.tournamentPhase);
+
+    this.namesTeamList = this.helperTournamentService.randomizeTeams(
+      this.tournamentDetails.teams
+    );
   }
 
   getObjectKeys(obj: any): any[] {
@@ -37,5 +39,13 @@ export class ListTournamentTreeComponent {
 
   getNumberArray(length: number): number[] {
     return new Array(length).fill(0).map((_, index) => index);
+  }
+
+  getTeamName(index: number): string {
+    if (index >= 0 && index < this.namesTeamList.length) {
+      return this.namesTeamList[index];
+    } else {
+      return '';
+    }
   }
 }

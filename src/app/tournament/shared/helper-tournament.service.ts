@@ -7,12 +7,10 @@ export class HelperTournamentService {
   calculPhase(totalTeams: number) {
     let count = 1;
     let randomMatchs = 0;
-    let a;
     let totalMatchesWithoutRandoms = 0;
     while (Math.floor(totalTeams / (count * 2))) {
       count *= 2;
-      a = Math.floor(totalTeams / count);
-      randomMatchs = totalTeams % count;
+      randomMatchs = (totalTeams % count) * 2;
     }
 
     totalMatchesWithoutRandoms = totalTeams - randomMatchs;
@@ -55,12 +53,31 @@ export class HelperTournamentService {
       result[`phase${i}`] = phases[`phase${i}`];
     }
 
-    if (totalPhase?.randomMatchs > 0) {
-      result[`phase${numRounds + 1}`];
-    } else {
+    if (totalPhase?.randomMatchs) {
       result[`phase${numRounds + 1}`];
     }
 
     return { result, totalPhaseMatchs };
+  }
+
+  randomizeTeams(teams: any): object {
+    if (teams.length === 0) {
+      return [];
+    }
+
+    const shuffledTeams = [...teams];
+
+    this.shuffleArray(shuffledTeams);
+
+    const randomizedTeamNames = shuffledTeams.map((team) => team.team);
+
+    return randomizedTeamNames;
+  }
+
+  private shuffleArray(array: any[]): void {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
   }
 }
