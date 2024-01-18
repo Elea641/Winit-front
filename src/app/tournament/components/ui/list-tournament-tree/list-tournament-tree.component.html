@@ -1,9 +1,28 @@
 <div class="list-tournament-tree-container">
-  <div *ngFor="let key of getObjectKeys(tournamentPhase)">
-    <h2>{{ tournamentPhase[key] }}</h2>
-    <!-- <app-card-tournament-match
-      *ngFor="let team of tournamentDetails.teams"
-      [team]="team"
-    ></app-card-tournament-match> -->
+  <div *ngIf="totalPhase.randomMatchs">
+    <h2>Phase de sélection aléatoire</h2>
+    <div *ngFor="let match of getNumberArray(totalPhase.randomMatchs)">
+      <app-card-tournament-match></app-card-tournament-match>
+    </div>
+  </div>
+  <div *ngFor="let phaseKey of getObjectKeys(tournamentPhase.result).reverse()">
+    <div
+      *ngIf="
+        tournamentPhase.result[phaseKey] !== 'Phase de sélection aléatoire'
+      "
+    >
+      <h2>{{ tournamentPhase.result[phaseKey] }}</h2>
+      <div>
+        <div
+          *ngFor="
+            let match of getNumberArray(
+              tournamentPhase.totalPhaseMatchs[phaseKey]
+            )
+          "
+        >
+          <app-card-tournament-match></app-card-tournament-match>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -31,6 +31,8 @@
         {"team": "Team4", "result": 0, "url": "../assets/pictures/award.png"},
         {"team": "Team5", "result": 0, "url": "../assets/pictures/award.png"},
         {"team": "Team6", "result": 0, "url": "../assets/pictures/award.png"},
-        {"team": "Team7", "result": 0, "url": "../assets/pictures/award.png"}
-    ]
+        {"team": "Team7", "result": 0, "url": "../assets/pictures/award.png"},
+        {"team": "Team4", "result": 0, "url": "../assets/pictures/award.png"},
+        {"team": "Team5", "result": 0, "url": "../assets/pictures/award.png"}
+        ]
 }

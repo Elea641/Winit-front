@@ -15,19 +15,27 @@ export class ListTournamentTreeComponent {
   @Input() tournamentDetails!: TournamentDetails;
   convertedSelection: string | undefined;
   tournamentPhase!: any;
+  totalPhase: any;
 
   constructor(private helperTournamentService: HelperTournamentService) {}
 
   ngOnInit(): void {
-    const totalTeams = 9;
+    console.log(this.tournamentDetails);
 
-    const totalPhase = this.helperTournamentService.calculPhase(totalTeams);
+    this.totalPhase = this.helperTournamentService.calculPhase(
+      this.tournamentDetails.participants
+    );
 
     this.tournamentPhase =
-      this.helperTournamentService.convertToTournamentPhase(totalPhase);
+      this.helperTournamentService.convertToTournamentPhase(this.totalPhase);
+    console.log(this.tournamentPhase);
   }
 
-  getObjectKeys(obj: any): string[] {
+  getObjectKeys(obj: any): any[] {
     return Object.keys(obj);
+  }
+
+  getNumberArray(length: number): number[] {
+    return new Array(length).fill(0).map((_, index) => index);
   }
 }
