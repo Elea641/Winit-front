@@ -1,3 +1,14 @@
-<div *ngFor="let tournament of tournaments$ | async">
-  <p>{{ tournament.name }}</p>
+<div class="container-home-desktop">
+  <app-sidebar></app-sidebar>
+  <div class="tournament-container">
+    <section class="all-tournaments">
+        <h1>Tous les tournois</h1>
+        <mat-divider></mat-divider>
+        <div *ngFor="let tournament of tournaments$ | async" class="tournament-list">
+          <app-tournament-card [tournament]="tournament" class="tournament-card"></app-tournament-card>
+        </div>
+    </section>
+  </div>
 </div>
+
+
