@@ -10,6 +10,7 @@
       >
         <app-card-tournament-match
           [namesTeamList]="getTeamName(j, 'randomMatchs')"
+          [indexRandomTeams]="j"
         ></app-card-tournament-match>
       </div>
     </div>
@@ -37,7 +38,7 @@
         >
           <app-card-tournament-match
             [namesTeamList]="getTeamName(i)"
-            [index]="index"
+            [indexRemainingTeams]="index"
             [randomMatchs]="totalPhase.randomMatchs"
             [countMatchs]="totalPhase.count"
           ></app-card-tournament-match>

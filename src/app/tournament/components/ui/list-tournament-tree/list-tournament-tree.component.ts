@@ -57,21 +57,29 @@ export class ListTournamentTreeComponent {
     return new Array(length).fill(0).map((_, index) => index);
   }
 
-  getTeamName(index: number, phaseKey?: string): string {
+  getTeamName(
+    index: number,
+    phaseKey?: string
+  ): { teamName: string; isEven: boolean } {
+    const result = { teamName: '', isEven: false };
+
     if (index >= 0) {
       if (phaseKey === 'randomMatchs') {
-        return this.namesTeamListRandom.randomTeams[index];
+        result.teamName = this.namesTeamListRandom.randomTeams[index];
       } else {
         const difference = index - this.totalPhase.count;
 
         if (difference >= 0 && difference < this.totalPhase.count) {
-          return '';
+          result.teamName = '';
         } else {
-          return this.namesTeamListPhase.remainingTeams[index] ?? 'Name';
+          result.teamName =
+            this.namesTeamListPhase.remainingTeams[index] ?? 'Name';
         }
       }
-    } else {
-      return '';
+
+      result.isEven = index % 2 === 0;
     }
+
+    return result;
   }
 }

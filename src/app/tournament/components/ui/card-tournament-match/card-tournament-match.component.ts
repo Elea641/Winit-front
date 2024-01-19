@@ -10,11 +10,17 @@ import { CommonModule } from '@angular/common';
 })
 export class CardTournamentMatchComponent implements OnInit {
   @Input() namesTeamList: any;
-  @Input() index: any;
+  @Input() indexRemainingTeams: any;
+  @Input() indexRandomTeams: any;
   @Input() randomMatchs: any;
   @Input() countMatchs: any;
+  isEven: string = '';
 
   ngOnInit(): void {
-    console.log(this.namesTeamList);
+    if (this.namesTeamList.isEven === true) {
+      this.isEven = 'even';
+    } else {
+      this.isEven = 'odd';
+    }
   }
 }

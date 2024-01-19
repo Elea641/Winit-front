@@ -1,17 +1,23 @@
-<div class="card-tournament-match-container">
-  <div class="card-tournament-match-container-details" *ngIf="index === 0">
-    <p>{{ namesTeamList }}</p>
-    <p>0</p>
+<div class="card-tournament-match-container" [ngClass]="isEven">
+  <div
+    class="card-tournament-match-container-details"
+    *ngIf="indexRemainingTeams === 0"
+  >
+    <p>{{ namesTeamList.teamName }}</p>
+    <p class="test">0</p>
     <div class="line"></div>
   </div>
   <div class="card-tournament-match-container-details" *ngIf="!randomMatchs">
-    <p>{{ namesTeamList }}</p>
-    <p>0</p>
+    <p>{{ namesTeamList.teamName }}</p>
+    <p class="test">0</p>
     <div class="line"></div>
   </div>
-  <div class="card-tournament-match-container-details" *ngIf="index > 0">
+  <div
+    class="card-tournament-match-container-details"
+    *ngIf="indexRemainingTeams > 0"
+  >
     <p>Name</p>
-    <p>0</p>
+    <p class="test">0</p>
     <div class="line"></div>
   </div>
 </div>

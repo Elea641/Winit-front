@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { Tournament } from 'src/app/tournament/models/tournament.model';
-import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
   selector: 'app-tournament-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatBadgeModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule],
   templateUrl: './tournament-card.component.html',
   styleUrls: ['./tournament-card.component.scss']
 })
