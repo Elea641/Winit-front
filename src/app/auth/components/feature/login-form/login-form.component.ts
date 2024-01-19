@@ -7,6 +7,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/auth/shared/auth.service';
+import { UserAuth } from 'src/app/auth/models/user-auth.model';
+import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
+import { Observable } from 'rxjs';
+import { TokenService } from 'src/app/auth/shared/token.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-form',
@@ -20,14 +25,18 @@ import { AuthService } from 'src/app/auth/shared/auth.service';
     MatDividerModule,
     RouterModule
   ],
-    templateUrl: './login-form.component.html',
-    styleUrls: ['./login-form.component.scss']
-  })
-  export class LoginFormComponent implements OnInit{
-    
-    loginForm!: FormGroup;
-    
-    constructor(public authService: AuthService, private router: Router) {}
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss']
+})
+export class LoginFormComponent implements OnInit{
+  
+  loginForm!: FormGroup;
+  userAuth: UserAuth = new UserAuth("", "");
+  
+  constructor(
+    public authService: AuthService,
+    private LsService: LocalStorageService
+    ) {}
     
     ngOnInit(): void {
       
@@ -46,7 +55,8 @@ import { AuthService } from 'src/app/auth/shared/auth.service';
     }
     
     onSubmit() {
-      console.log(this.loginForm.value);
-      
+      this.userAuth = new UserAuth(this.email.value, this.password.value)
+      this.LsService.clearToken();
+      this.authService.signIn(this.userAuth);
     }
   }
