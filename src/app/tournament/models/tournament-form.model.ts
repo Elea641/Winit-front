@@ -12,11 +12,17 @@ export class TournamentForm {
         return this.fb.group({
             id: [null],
             name: ['', Validators.required],
-            date: ['', Validators.required],
-            inscriptionLimitDate: ['', Validators.required],
             place: ['', Validators.required],
+            date: ['', Validators.required],
             sport: ['', Validators.required],
-            maxPlayers: [null, Validators.required],
+            playersPerTeam: ['', Validators.required],
+            minTeams: ['', Validators.required],
+            maxTeams: ['', Validators.required],
+            gameLength: ['', Validators.required],
+            privacy: ['', Validators.required],
+            playerCategory: ['', Validators.required],
+            tournamentFormat: ['', Validators.required],
+            tournamentBanner: ['']
         })
     }
 }
