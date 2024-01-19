@@ -8,10 +8,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './card-tournament-match.component.html',
   styleUrls: ['./card-tournament-match.component.scss'],
 })
-export class CardTournamentMatchComponent {
-  @Input() team: any;
-  @Input() key: any;
+export class CardTournamentMatchComponent implements OnInit {
   @Input() namesTeamList: any;
   @Input() index: any;
   @Input() randomMatchs: any;
+  @Input() countMatchs: any;
+
+  ngOnInit(): void {
+    console.log(this.namesTeamList);
+  }
 }

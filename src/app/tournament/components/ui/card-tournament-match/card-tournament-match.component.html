@@ -1,11 +1,17 @@
 <div class="card-tournament-match-container">
-  <div *ngIf="index === 0">
+  <div class="card-tournament-match-container-details" *ngIf="index === 0">
     <p>{{ namesTeamList }}</p>
+    <p>0</p>
+    <div class="line"></div>
   </div>
-  <div *ngIf="randomMatchs">
-    <p>test</p>
-  </div>
-  <div *ngIf="!randomMatchs">
+  <div class="card-tournament-match-container-details" *ngIf="!randomMatchs">
     <p>{{ namesTeamList }}</p>
+    <p>0</p>
+    <div class="line"></div>
+  </div>
+  <div class="card-tournament-match-container-details" *ngIf="index > 0">
+    <p>Name</p>
+    <p>0</p>
+    <div class="line"></div>
   </div>
 </div>

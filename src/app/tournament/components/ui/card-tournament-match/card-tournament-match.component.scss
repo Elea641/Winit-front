@@ -2,6 +2,29 @@
 @import "../../../../../assets/style/mixins.scss";
 
 .card-tournament-match-container {
+  display: flex;
+  position: relative;
+  height: 3rem;
+
   background-color: $background-card-tournament-match-color;
-  color: beige;
+  color: $text-card-tournament-match-color;
+  width: calc(50vw - 2rem);
+
+  .card-tournament-match-container-details {
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .line {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    left: 100%;
+    border-right: 2px solid $line-card-tournament-match-color;
+    height: 2.5rem;
+    width: 0;
+  }
 }

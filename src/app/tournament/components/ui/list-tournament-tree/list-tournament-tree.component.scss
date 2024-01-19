@@ -2,7 +2,16 @@
 @import "../../../../../assets/style/mixins.scss";
 
 .list-tournament-tree-container {
+  width: 100%;
+
   h2 {
     color: $text-list-tournament-tree-color;
+  }
+
+  .list-tournament-tree-container-cards {
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

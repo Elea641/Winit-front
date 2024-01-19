@@ -1,15 +1,17 @@
 <div class="list-tournament-tree-container">
   <div *ngIf="totalPhase.randomMatchs">
     <h2>Phase de sélection aléatoire</h2>
-    <div
-      *ngFor="
-        let match of getNumberArray(totalPhase.randomMatchs);
-        let j = index
-      "
-    >
-      <app-card-tournament-match
-        [namesTeamList]="getTeamName(j, 'randomMatchs')"
-      ></app-card-tournament-match>
+    <div class="list-tournament-tree-container-cards">
+      <div
+        *ngFor="
+          let match of getNumberArray(totalPhase.randomMatchs);
+          let j = index
+        "
+      >
+        <app-card-tournament-match
+          [namesTeamList]="getTeamName(j, 'randomMatchs')"
+        ></app-card-tournament-match>
+      </div>
     </div>
   </div>
   <div
@@ -24,7 +26,7 @@
       "
     >
       <h2>{{ tournamentPhase.result[phaseKey] }}</h2>
-      <div>
+      <div class="list-tournament-tree-container-cards">
         <div
           *ngFor="
             let match of getNumberArray(
@@ -37,6 +39,7 @@
             [namesTeamList]="getTeamName(i)"
             [index]="index"
             [randomMatchs]="totalPhase.randomMatchs"
+            [countMatchs]="totalPhase.count"
           ></app-card-tournament-match>
         </div>
       </div>

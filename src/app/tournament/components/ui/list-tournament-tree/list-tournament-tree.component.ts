@@ -62,7 +62,13 @@ export class ListTournamentTreeComponent {
       if (phaseKey === 'randomMatchs') {
         return this.namesTeamListRandom.randomTeams[index];
       } else {
-        return this.namesTeamListPhase.remainingTeams[index];
+        const difference = index - this.totalPhase.count;
+
+        if (difference >= 0 && difference < this.totalPhase.count) {
+          return '';
+        } else {
+          return this.namesTeamListPhase.remainingTeams[index] ?? 'Name';
+        }
       }
     } else {
       return '';
