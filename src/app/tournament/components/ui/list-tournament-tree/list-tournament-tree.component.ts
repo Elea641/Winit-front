@@ -17,6 +17,8 @@ export class ListTournamentTreeComponent {
   tournamentPhase!: any;
   totalPhase: any;
   namesTeamList: any;
+  namesTeamListPhase: any;
+  namesTeamListRandom: any;
 
   constructor(private helperTournamentService: HelperTournamentService) {}
 
@@ -31,6 +33,20 @@ export class ListTournamentTreeComponent {
     this.namesTeamList = this.helperTournamentService.randomizeTeams(
       this.tournamentDetails.teams
     );
+
+    const { randomTeams, remainingTeams } =
+      this.helperTournamentService.divideTeamsForPhases(
+        this.namesTeamList,
+        this.totalPhase.randomMatchs
+      );
+
+    this.namesTeamListPhase = {
+      remainingTeams,
+    };
+
+    this.namesTeamListRandom = {
+      randomTeams,
+    };
   }
 
   getObjectKeys(obj: any): any[] {
@@ -41,9 +57,13 @@ export class ListTournamentTreeComponent {
     return new Array(length).fill(0).map((_, index) => index);
   }
 
-  getTeamName(index: number): string {
-    if (index >= 0 && index < this.namesTeamList.length) {
-      return this.namesTeamList[index];
+  getTeamName(index: number, phaseKey?: string): string {
+    if (index >= 0) {
+      if (phaseKey === 'randomMatchs') {
+        return this.namesTeamListRandom.randomTeams[index];
+      } else {
+        return this.namesTeamListPhase.remainingTeams[index];
+      }
     } else {
       return '';
     }

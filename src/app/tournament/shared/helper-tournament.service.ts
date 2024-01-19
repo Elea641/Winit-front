@@ -80,4 +80,13 @@ export class HelperTournamentService {
       [array[i], array[j]] = [array[j], array[i]];
     }
   }
+
+  divideTeamsForPhases(
+    teams: any[],
+    randomMatchs: number
+  ): { randomTeams: any[]; remainingTeams: any[] } {
+    const randomTeams = teams.slice(0, randomMatchs);
+    const remainingTeams = teams.slice(randomMatchs);
+    return { randomTeams, remainingTeams };
+  }
 }
