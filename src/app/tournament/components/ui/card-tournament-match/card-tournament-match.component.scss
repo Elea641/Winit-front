@@ -1,0 +1,46 @@
+@import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
+
+.card-tournament-match-container {
+  display: flex;
+  position: relative;
+  height: 3rem;
+  background-color: $background-card-tournament-match-color;
+  color: $text-card-tournament-match-color;
+  width: calc(50vw - 2rem);
+  margin: 0.45rem 0;
+
+  .card-tournament-match-container-details {
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.even {
+  .line {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    left: 100%;
+    border-right: 2px solid $line-card-tournament-match-color;
+    height: 2.5rem;
+    width: 0;
+  }
+}
+
+.odd {
+  .card-tournament-match-container-details {
+    position: relative;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    .test {
+      display: block;
+      position: absolute;
+      right: calc(100% - 1.2rem);
+    }
+  }
+}

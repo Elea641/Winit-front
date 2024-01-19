@@ -1,0 +1,28 @@
+@import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
+
+.list-teams-tounament {
+  color: $button-list-teams-tournament-color-text;
+  margin: 0.5rem 0;
+
+  .list-teams-tounament-header {
+    @include flex-justify-content-space-between;
+
+    .list-teams-tounament-total-members {
+      @include flex-column-center;
+    }
+  }
+
+  .list-teams-tounament-body {
+    @include flex-align-center;
+    padding: 0.5rem 0;
+    img {
+      width: 4rem;
+      padding-right: 1rem;
+    }
+
+    .list-teams-tounament-body-text {
+      font-size: 1rem;
+    }
+  }
+}

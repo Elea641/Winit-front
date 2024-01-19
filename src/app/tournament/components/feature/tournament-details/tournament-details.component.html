@@ -1,0 +1,23 @@
+<div class="tournament-details-container">
+  <app-card-details-tournament
+    *ngIf="tournamentDetails$ | async as tournamentDetails"
+    [tournamentDetails]="tournamentDetails"
+  ></app-card-details-tournament>
+  <app-menu-infos-tournament
+    (buttonClick)="onButtonClicked($event)"
+  ></app-menu-infos-tournament>
+
+  <div *ngIf="buttonValueClicked === 'matchs'">
+    <app-list-tournament-tree
+      *ngIf="tournamentDetails$ | async as tournamentDetails"
+      [tournamentDetails]="tournamentDetails"
+    ></app-list-tournament-tree>
+  </div>
+
+  <div *ngIf="buttonValueClicked === 'teams'">
+    <app-list-teams-tournament
+      *ngIf="tournamentDetails$ | async as tournamentDetails"
+      [tournamentDetails]="tournamentDetails"
+    ></app-list-teams-tournament>
+  </div>
+</div>

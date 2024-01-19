@@ -1,0 +1,49 @@
+<div class="list-tournament-tree-container">
+  <div *ngIf="totalPhase.randomMatchs">
+    <h2>Phase de sélection aléatoire</h2>
+    <div class="list-tournament-tree-container-cards">
+      <div
+        *ngFor="
+          let match of getNumberArray(totalPhase.randomMatchs);
+          let j = index
+        "
+      >
+        <app-card-tournament-match
+          [namesTeamList]="getTeamName(j, 'randomMatchs')"
+          [indexRandomTeams]="j"
+        ></app-card-tournament-match>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngFor="
+      let phaseKey of getObjectKeys(tournamentPhase.result).reverse();
+      let index = index
+    "
+  >
+    <div
+      *ngIf="
+        tournamentPhase.result[phaseKey] !== 'Phase de sélection aléatoire'
+      "
+    >
+      <h2>{{ tournamentPhase.result[phaseKey] }}</h2>
+      <div class="list-tournament-tree-container-cards">
+        <div
+          *ngFor="
+            let match of getNumberArray(
+              tournamentPhase.totalPhaseMatchs[phaseKey]
+            );
+            let i = index
+          "
+        >
+          <app-card-tournament-match
+            [namesTeamList]="getTeamName(i)"
+            [indexRemainingTeams]="index"
+            [randomMatchs]="totalPhase.randomMatchs"
+            [countMatchs]="totalPhase.count"
+          ></app-card-tournament-match>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
