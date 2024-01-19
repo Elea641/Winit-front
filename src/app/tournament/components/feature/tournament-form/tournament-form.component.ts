@@ -3,8 +3,11 @@ import { CommonModule } from '@angular/common';
 import { TournamentForm } from 'src/app/tournament/models/tournament-form.model';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-tournament-form',
@@ -14,7 +17,10 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule,
+    MatGridListModule,
+    MatButtonModule
   ],
   templateUrl: './tournament-form.component.html',
   styleUrls: ['./tournament-form.component.scss']
