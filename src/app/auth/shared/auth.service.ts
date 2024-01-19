@@ -18,18 +18,15 @@ export class AuthService {
   constructor(public http: HttpClient,  private tokenService: TokenService) {}
   
   postRegister(user: User): Observable<User> {
-    console.log(user);
-
     return this.http.post<User>(`${this.url}/register`, user);
   }
 
   // Je me connecte : j'envoie mon objet UserAuth et je m'abonne à la réponse de mon serveur. Lorsque je la reçois, je reçois le token que je stock en localStorage.
   signIn(userAuth: UserAuth): void {
     this.tokenService.resetToken();
+    
     this.http.post<any>(`${this.url}/login`, userAuth)
       .subscribe((tokenFromDB: TokenResponse) => {
-        console.log(tokenFromDB);
-        
         this.tokenService.updateToken(tokenFromDB);
       })
   }

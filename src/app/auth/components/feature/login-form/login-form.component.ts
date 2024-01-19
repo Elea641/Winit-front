@@ -11,6 +11,7 @@ import { UserAuth } from 'src/app/auth/models/user-auth.model';
 import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
 import { Observable } from 'rxjs';
 import { TokenService } from 'src/app/auth/shared/token.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-form',
@@ -24,22 +25,17 @@ import { TokenService } from 'src/app/auth/shared/token.service';
     MatDividerModule,
     RouterModule
   ],
-    templateUrl: './login-form.component.html',
-    styleUrls: ['./login-form.component.scss']
-  })
-  export class LoginFormComponent implements OnInit{
-    
-    loginForm!: FormGroup;
-    userAuth: UserAuth = new UserAuth("", "");
-
-    tokenDetailsSubject$!: Observable<any>;
-    
-    constructor(
-      public authService: AuthService,
-      private router: Router,
-      private LsService: LocalStorageService,
-      private tokenS: TokenService,
-
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss']
+})
+export class LoginFormComponent implements OnInit{
+  
+  loginForm!: FormGroup;
+  userAuth: UserAuth = new UserAuth("", "");
+  
+  constructor(
+    public authService: AuthService,
+    private LsService: LocalStorageService
     ) {}
     
     ngOnInit(): void {
@@ -48,8 +44,6 @@ import { TokenService } from 'src/app/auth/shared/token.service';
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required]),
       })
-      this.tokenDetailsSubject$ = this.tokenS._getTokenDetailsSubject$()
-
     }
     
     get email() {

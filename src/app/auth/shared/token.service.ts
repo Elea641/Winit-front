@@ -19,6 +19,7 @@ export class TokenService {
 
   // Mise à jour du token
   updateToken(tokenFromDB: TokenResponse) {
+    
     // Remise à zéro du localStorage puis ajout du nouveau Token reçu du serveur
     this._clearLocalStorageAndThenPutNewToken(tokenFromDB);
     // Décoder le Token pour accéder à son corps (où les Claims sont accessibles, notamment le ROLE du user)
