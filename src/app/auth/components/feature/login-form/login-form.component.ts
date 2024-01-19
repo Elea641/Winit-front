@@ -7,6 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/auth/shared/auth.service';
+import { UserAuth } from 'src/app/auth/models/user-auth.model';
+import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
+import { Observable } from 'rxjs';
+import { TokenService } from 'src/app/auth/shared/token.service';
 
 @Component({
   selector: 'app-login-form',
@@ -26,8 +30,17 @@ import { AuthService } from 'src/app/auth/shared/auth.service';
   export class LoginFormComponent implements OnInit{
     
     loginForm!: FormGroup;
+    userAuth: UserAuth = new UserAuth("", "");
+
+    tokenDetailsSubject$!: Observable<any>;
     
-    constructor(public authService: AuthService, private router: Router) {}
+    constructor(
+      public authService: AuthService,
+      private router: Router,
+      private LsService: LocalStorageService,
+      private tokenS: TokenService,
+
+    ) {}
     
     ngOnInit(): void {
       
@@ -35,6 +48,8 @@ import { AuthService } from 'src/app/auth/shared/auth.service';
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required]),
       })
+      this.tokenDetailsSubject$ = this.tokenS._getTokenDetailsSubject$()
+
     }
     
     get email() {
@@ -46,7 +61,8 @@ import { AuthService } from 'src/app/auth/shared/auth.service';
     }
     
     onSubmit() {
-      console.log(this.loginForm.value);
-      
+      this.userAuth = new UserAuth(this.email.value, this.password.value)
+      this.LsService.clearToken();
+      this.authService.signIn(this.userAuth);
     }
   }
