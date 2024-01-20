@@ -19,6 +19,7 @@ import { checkPasswordMatch } from '../../../shared/password-match';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AuthService } from '../../../shared/auth.service';
 import { Router, RouterModule } from '@angular/router';
+import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -34,7 +35,7 @@ import { Router, RouterModule } from '@angular/router';
     MatSelectModule,
     FormsModule,
     MatCheckboxModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
@@ -49,18 +50,22 @@ export class RegisterComponent implements OnInit {
     { name: 'volleyball', viewName: 'Volleyball' },
     { name: 'waterpolo', viewName: 'Water-polo' },
   ];
-
+  registerForm!: FormGroup;
   user: User = {
     firstName: '',
     lastName: '',
     email: '',
     sport: this.sports[0],
     password: '',
-    roles: { id: 1 },
+    requiredRole: 'ROLE_USER',
     enabled: true,
   };
 
-  registerForm!: FormGroup;
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private localService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup(
@@ -125,8 +130,6 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('acceptTerms')!;
   }
 
-  constructor(public authService: AuthService, private router: Router) {}
-
   onSubmit() {
     const newUser: User = {
       firstName: this.firstName.value,
@@ -134,7 +137,7 @@ export class RegisterComponent implements OnInit {
       sport: this.sport.value,
       email: this.email.value,
       password: this.password.value,
-      roles: { id: 1 },
+      requiredRole: 'ROLE_USER',
       createdAt: new Date(),
       enabled: true,
     };
@@ -145,7 +148,8 @@ export class RegisterComponent implements OnInit {
           console.log('Response:', 'The form is invalid');
         } else {
           console.log('Response:', response);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/login']);
+          this.localService.clearToken();
         }
       },
       (error) => {

@@ -6,7 +6,7 @@ export class User {
   sport?: Sport;
   email?: string;
   password?: string;
-  roles?: { id: number };
+  requiredRole?: string;
   createdAt?: Date;
   enabled?: boolean;
 }
