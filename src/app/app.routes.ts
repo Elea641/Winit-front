@@ -8,6 +8,8 @@ import { RegisterComponent } from './auth/components/feature/register/register.c
 import { AuthPageComponent } from './auth/pages/auth-page/auth-page.component';
 import { LoginFormComponent } from './auth/components/feature/login-form/login-form.component';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
+import { BackOfficePageComponent } from './back-office/pages/back-office-page/back-office-page.component';
+import { AdminGuard } from './auth/core/admin.guard';
 
 export const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
@@ -15,6 +17,11 @@ export const routes: Routes = [
   { path: 'tournament', component: TournamentPageComponent },
   { path: 'tournament/create', component: TournamentFormComponent },
   { path: 'tournament/:id([0-9]+)', component: TournamentDetailsPageComponent },
+  {
+    path: 'back-office',
+    component: BackOfficePageComponent,
+    canActivate: [AdminGuard],
+  },
   {
     path: 'auth',
     component: AuthPageComponent,
