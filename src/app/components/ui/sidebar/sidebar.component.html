@@ -1,4 +1,4 @@
-<mat-drawer-container class="container-sidebar" autosize *ngIf="!isMobile">
+<mat-drawer-container class="container-sidebar" autosize *ngIf="isDesktop">
   <mat-drawer #drawer mode="side" class="container-sidebar-menu">
     <div class="container-sidebar-menu-input">
       <app-input-search></app-input-search>
@@ -37,7 +37,7 @@
   </div>
 </mat-drawer-container>
 
-<mat-toolbar class="sidebar-mobile-container" *ngIf="isMobile">
+<mat-toolbar class="sidebar-mobile-container" *ngIf="!isDesktop">
   <div class="container-sidebar-menu-input">
     <app-input-search></app-input-search>
   </div>
@@ -45,7 +45,7 @@
     class="filter-button-container"
     mat-button
     [matMenuTriggerFor]="menu"
-    *ngIf="isMobile"
+    *ngIf="!isDesktop"
   >
     Filtres
   </button>

@@ -2,10 +2,15 @@
 @import "../../../../assets/style/mixins.scss";
 
 .container-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
   background-color: $background-sidebar-color;
   top: 0.2rem;
-  z-index: 0;
-  min-height: 111vh;
+  overflow-y: auto;
+  height: calc(100vh + 3.5rem);
+  margin-top: 3.3rem;
 
   .container-sidebar-menu {
     background-color: $background-sidebar-color;
@@ -36,8 +41,8 @@
   }
 
   .sidenav-button {
-    @include flex-align-center;
-    min-height: 111vh;
+    position: fixed;
+    top: calc(55% - 3.5rem);
   }
 }
 
@@ -47,7 +52,6 @@
   z-index: 1;
   background-color: $background-navbar-color;
   box-shadow: 0 2px 2px $box-shadow-navbar-color;
-
   @include flex-space-around;
 
   .filter-button-container {

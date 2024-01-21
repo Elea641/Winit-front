@@ -1,6 +1,14 @@
-<div class="container-home-desktop">
-  <app-sidebar></app-sidebar>
-  <div class="tournament-container">
+<div class="container-home">
+  <app-sidebar
+    (isDrawerOpenedChange)="handleDrawerChange($event)"
+  ></app-sidebar>
+  <div
+    class="tournament-container-home"
+    [ngStyle]="{
+      'margin-left.rem': isOpen === 'open' ? 15 : 0,
+      'width.%': isOpen === 'open' ? 65 : 100
+    }"
+  >
     <section class="tournaments">
       <div class="ongoing-tournaments">
         <h1>Tournois en cours</h1>

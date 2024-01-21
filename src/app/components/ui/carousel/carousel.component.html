@@ -1,18 +1,25 @@
-
 <!-- <div class="tournament-card" *ngFor="let tournament of tournaments$ | async">
     <app-tournament-card [tournament]="tournament"></app-tournament-card>
 </div> -->
-
 <div *ngIf="tournaments$">
-    <div class="carousel-container">
-        <ngx-slick-carousel class="carousel" 
-        #slickModal="slick-carousel" 
-        [config]="slideConfig">
-        <div ngxSlickItem *ngFor="let slide of tournaments$ | async" class="slide">
-            <app-tournament-card [tournament]="slide" class="app-tournament-card"></app-tournament-card>
-        </div>
+  <div class="carousel-container">
+    <ngx-slick-carousel
+      class="carousel"
+      #slickModal="slick-carousel"
+      [config]="slideConfig"
+    >
+      <div
+        ngxSlickItem
+        *ngFor="let slide of tournaments$ | async"
+        class="slide"
+      >
+        <app-tournament-card
+          [tournament]="slide"
+          class="app-tournament-card"
+        ></app-tournament-card>
+      </div>
     </ngx-slick-carousel>
-</div>
+  </div>
 </div>
 <!-- <button (click)="addSlide()">Add</button>
     <button (click)="removeSlide()">Remove</button>

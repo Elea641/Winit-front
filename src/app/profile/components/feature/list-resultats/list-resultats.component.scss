@@ -5,13 +5,12 @@
   .list-resultats-container {
     @include flex-column-center;
 
-    .list-resultats-container-resultats {
-      width: 100%;
-      padding: 0 1rem;
-    }
+    .list-resultats-container-resultats-desktop {
+      @include flex-justify-align-center;
 
-    .list-resultats-container-items {
-      @include flex-wrap-left;
+      .list-resultats-container-items {
+        @include flex;
+      }
     }
   }
 }
