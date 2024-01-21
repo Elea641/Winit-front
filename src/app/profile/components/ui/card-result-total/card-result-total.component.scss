@@ -4,7 +4,6 @@
 .card-result-total-container {
   background-color: $background-card-result-total-color;
   @include flex-column;
-  margin-top: 1rem;
   padding: 0.5rem;
 
   .card-result-total-container-infos {
@@ -32,6 +31,22 @@
   }
 
   @include media-large-screen {
-    width: 30vw;
+    height: 7rem;
+    margin: 0 0.5rem 0 0;
+    width: 20vw;
+
+    .card-result-total-container-infos {
+      @include flex;
+      padding: 0.5rem;
+      p {
+        width: 20%;
+      }
+
+      .card-result-total-container-text {
+        width: 80%;
+        padding: 0 0.5rem;
+        font-size: 1rem;
+      }
+    }
   }
 }

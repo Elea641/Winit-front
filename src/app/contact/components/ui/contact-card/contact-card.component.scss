@@ -6,6 +6,10 @@
   margin: 2rem;
   background-color: $background-contact-card-color;
 
+  .container-contact-card-profile-picture {
+    filter: grayscale(100%) saturate(0%);
+  }
+
   .container-contact-card-description {
     color: $color-contact-card-color;
 

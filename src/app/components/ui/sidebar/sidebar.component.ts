@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { InputSearchComponent } from '../../feature/input-search/input-search.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BreakpointService } from '../../shared/breakpoint.service';
+import { BreakpointService } from '../../../shared/breakpoint.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -27,7 +27,7 @@ import { BreakpointService } from '../../shared/breakpoint.service';
 })
 export class SidebarComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
-  isMobile: boolean = false;
+  isMobile: boolean | undefined = false;
   showFiller = false;
   isDrawerOpened = false;
 

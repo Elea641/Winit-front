@@ -6,7 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
-import { BreakpointService } from '../../shared/breakpoint.service';
+import { BreakpointService } from '../../../shared/breakpoint.service';
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +24,7 @@ import { BreakpointService } from '../../shared/breakpoint.service';
 })
 export class NavbarComponent implements OnInit {
   userId: number = 0;
-  isMobile: boolean = false;
+  isMobile: boolean | undefined = false;
   logoUrl: string = '../../../assets/pictures/logo-white.png';
 
   constructor(
@@ -34,7 +34,9 @@ export class NavbarComponent implements OnInit {
   ) {
     this.isMobile = this.breakpointService.isMobileDevice();
     this.breakpointService.isMobileChanged.subscribe((isMobile) => {
-      this.isMobile = isMobile;
+      if (isMobile !== undefined) {
+        this.isMobile = isMobile;
+      }
     });
   }
 

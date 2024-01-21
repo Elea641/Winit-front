@@ -6,6 +6,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class BreakpointService {
   private isMobile: boolean = false;
+  private isTablet: boolean = false;
+  private isDesktop: boolean = false;
   public isMobileChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private breakpointObserver: BreakpointObserver) {
@@ -16,11 +18,24 @@ export class BreakpointService {
         if (this.isMobile !== newIsMobile) {
           this.isMobile = newIsMobile;
           this.isMobileChanged.emit(this.isMobile);
+        } else if (this.isTablet !== newIsMobile) {
+          this.isTablet = newIsMobile;
+          this.isMobileChanged.emit(this.isTablet);
+        } else if (this.isDesktop !== newIsMobile) {
+          this.isDesktop = newIsMobile;
+          this.isMobileChanged.emit(this.isDesktop);
         }
       });
   }
 
-  isMobileDevice(): boolean {
-    return this.isMobile;
+  isMobileDevice(): boolean | undefined {
+    if (this.isMobile) {
+      return this.isMobile;
+    } else if (this.isTablet) {
+      return this.isTablet;
+    } else if (this.isDesktop) {
+      return this.isDesktop;
+    }
+    return false;
   }
 }

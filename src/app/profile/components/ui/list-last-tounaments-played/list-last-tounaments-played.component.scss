@@ -62,6 +62,7 @@
     .mat-mdc-raised-button:focus {
       color: $button-list-last-tournaments-playede-color-focus;
     }
+
     ::ng-deep .mat-mdc-raised-button:not(:disabled) {
       background-color: $background-list-last-tournaments-played-color;
       box-shadow: none;

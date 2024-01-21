@@ -1,14 +1,16 @@
 <div class="list-resultats-container">
-  <div class="list-resultats-container-resultats">
-    <app-card-result-total
-      [currentProfile]="currentProfile"
-    ></app-card-result-total>
-  </div>
-  <div class="list-resultats-container-items">
-    <div *ngFor="let result of getObjectEntries(currentProfile?.results)">
-      <app-card-result-tournament
-        [result]="result"
-      ></app-card-result-tournament>
+  <div class="list-resultats-container-resultats-desktop">
+    <div class="list-resultats-container-resultats">
+      <app-card-result-total
+        [currentProfile]="currentProfile"
+      ></app-card-result-total>
+    </div>
+    <div class="list-resultats-container-items">
+      <div *ngFor="let result of getObjectEntries(currentProfile?.results)">
+        <app-card-result-tournament
+          [result]="result"
+        ></app-card-result-tournament>
+      </div>
     </div>
   </div>
   <app-list-last-tounaments-played
