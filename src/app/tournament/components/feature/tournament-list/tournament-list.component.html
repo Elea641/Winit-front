@@ -1,14 +1,25 @@
-<div class="container-home-desktop">
-  <app-sidebar></app-sidebar>
-  <div class="tournament-container">
+<div class="container-tournament">
+  <app-sidebar
+    (isDrawerOpenedChange)="handleDrawerChange($event)"
+  ></app-sidebar>
+  <div
+    class="tournament-container"
+    [ngStyle]="{
+      'margin-left.rem': isOpen === 'open' ? 15 : 0,
+      'width.%': isOpen === 'open' ? 80 : 100
+    }"
+  >
     <section class="all-tournaments">
-        <h1>Tous les tournois</h1>
-        <mat-divider></mat-divider>
-        <div *ngFor="let tournament of tournaments$ | async" class="tournament-list">
-          <app-tournament-card [tournament]="tournament" class="tournament-card"></app-tournament-card>
+      <h1>Tous les tournois</h1>
+      <div class="line"></div>
+      <div class="all-tournaments-cards">
+        <div
+          *ngFor="let tournament of tournaments$ | async"
+          class="tournament-list"
+        >
+          <app-tournament-card [tournament]="tournament"></app-tournament-card>
         </div>
+      </div>
     </section>
   </div>
 </div>
-
-

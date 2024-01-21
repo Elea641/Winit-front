@@ -1,29 +1,58 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
 import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BreakpointService {
-  private isMobile: boolean = false;
-  public isMobileChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private devices: { [key: string]: boolean } = {
+    isMobile: false,
+    isTablet: false,
+    isDesktop: false,
+  };
+
+  public deviceChanged: { [key: string]: EventEmitter<boolean> } = {
+    isMobile: new EventEmitter<boolean>(),
+    isTablet: new EventEmitter<boolean>(),
+    isDesktop: new EventEmitter<boolean>(),
+  };
 
   constructor(private breakpointObserver: BreakpointObserver) {
-    this.breakpointObserver
-      .observe([`(max-width: 768px)`])
-      .subscribe((result) => {
-        const newIsMobile = result.matches;
+    const breakpoints = [
+      { key: 'isMobile', mediaQuery: Breakpoints.XSmall },
+      { key: 'isTablet', mediaQuery: Breakpoints.Small },
+      { key: 'isDesktop', mediaQuery: Breakpoints.Medium },
+    ];
 
-        if (this.isMobile !== newIsMobile) {
-          this.isMobile = newIsMobile;
-          this.isMobileChanged.emit(this.isMobile);
-        }
-      });
+    breakpoints.forEach((config) => {
+      this.breakpointObserver
+        .observe([config.mediaQuery])
+        .subscribe((state: BreakpointState) => {
+          const newValue = state.matches;
 
-    this.isMobileChanged.emit(this.isMobile);
+          if (this.devices[config.key] !== newValue) {
+            this.devices[config.key] = newValue;
+            this.deviceChanged[config.key].emit(newValue);
+          }
+        });
+
+      this.deviceChanged[config.key].emit(this.devices[config.key]);
+    });
   }
 
-  isMobileDevice(): boolean | undefined {
-    return this.isMobile;
+  isMobileDevice(): boolean {
+    return this.devices['isMobile'];
+  }
+
+  isTabletDevice(): boolean {
+    return this.devices['isTablet'];
+  }
+
+  isDesktopDevice(): boolean {
+    return this.devices['isDesktop'];
   }
 }

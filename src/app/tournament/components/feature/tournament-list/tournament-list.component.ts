@@ -23,6 +23,8 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class TournamentListComponent implements OnInit {
   tournaments$!: Observable<Tournament[]>;
+  isDrawerOpened: boolean = false;
+  isOpen: string = '';
 
   constructor(private tournamentService: TournamentService) {}
 
@@ -30,5 +32,14 @@ export class TournamentListComponent implements OnInit {
     this.tournaments$ = this.tournamentService
       .getAllTournaments()
       .pipe(map((data) => data));
+
+    if (this.isDrawerOpened === true) {
+      this.isOpen = 'open';
+    }
+  }
+
+  handleDrawerChange(isDrawerOpened: boolean) {
+    this.isDrawerOpened = isDrawerOpened;
+    this.isOpen = isDrawerOpened ? 'open' : 'close';
   }
 }

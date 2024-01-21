@@ -3,16 +3,13 @@
 
 .container-home {
   @include flex-align-center;
-  margin: 5rem 0 3rem 0;
   padding: 0 2rem;
   width: 100vw;
 
   .tournament-container-home {
     width: 100%;
-    .test {
-      background-color: red;
-      width: 100%;
-    }
+    padding-left: 1rem;
+
     h1 {
       color: $secondary-color;
       font-weight: normal;

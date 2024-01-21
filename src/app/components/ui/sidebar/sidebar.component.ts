@@ -36,7 +36,7 @@ export class SidebarComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   @Output() isDrawerOpenedChange: EventEmitter<boolean> =
     new EventEmitter<boolean>();
-  isMobile: boolean | undefined = false;
+  isDesktop: boolean | undefined = false;
   showFiller = false;
   isDrawerOpened = false;
 
@@ -47,10 +47,12 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.addClickOutsideListener();
-    this.isMobile = this.breakpointService.isMobileDevice();
-    this.breakpointService.isMobileChanged.subscribe((isMobile) => {
-      this.isMobile = isMobile;
-    });
+    this.isDesktop = this.breakpointService.isMobileDevice();
+    this.breakpointService.deviceChanged['isDesktop'].subscribe(
+      (isDesktop: boolean) => {
+        this.isDesktop = isDesktop;
+      }
+    );
   }
 
   toggleIcon() {

@@ -33,11 +33,13 @@ export class NavbarComponent implements OnInit {
     private breakpointService: BreakpointService
   ) {
     this.isMobile = this.breakpointService.isMobileDevice();
-    this.breakpointService.isMobileChanged.subscribe((isMobile) => {
-      if (isMobile !== undefined) {
-        this.isMobile = isMobile;
+    this.breakpointService.deviceChanged['isMobile'].subscribe(
+      (isMobile: boolean) => {
+        if (isMobile !== undefined) {
+          this.isMobile = isMobile;
+        }
       }
-    });
+    );
   }
 
   ngOnInit(): void {

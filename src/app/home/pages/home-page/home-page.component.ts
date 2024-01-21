@@ -23,8 +23,6 @@ export class HomePageComponent {
   ngOnInit(): void {
     if (this.isDrawerOpened === true) {
       this.isOpen = 'open';
-    } else {
-      this.isOpen = 'close';
     }
   }
 
