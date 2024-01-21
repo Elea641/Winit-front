@@ -1,4 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
@@ -27,6 +34,8 @@ import { BreakpointService } from '../../../shared/breakpoint.service';
 })
 export class SidebarComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
+  @Output() isDrawerOpenedChange: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
   isMobile: boolean | undefined = false;
   showFiller = false;
   isDrawerOpened = false;
@@ -34,15 +43,14 @@ export class SidebarComponent implements OnInit {
   constructor(
     private breakpointService: BreakpointService,
     private el: ElementRef
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+    this.addClickOutsideListener();
     this.isMobile = this.breakpointService.isMobileDevice();
     this.breakpointService.isMobileChanged.subscribe((isMobile) => {
       this.isMobile = isMobile;
     });
-  }
-
-  ngOnInit(): void {
-    this.addClickOutsideListener();
   }
 
   toggleIcon() {
@@ -52,6 +60,7 @@ export class SidebarComponent implements OnInit {
   toggleDrawer() {
     this.drawer.toggle();
     this.isDrawerOpened = this.drawer.opened;
+    this.isDrawerOpenedChange.emit(this.isDrawerOpened);
   }
 
   private addClickOutsideListener() {
@@ -61,6 +70,7 @@ export class SidebarComponent implements OnInit {
       if (!this.el.nativeElement.contains(clickedElement)) {
         this.drawer.close();
         this.isDrawerOpened = false;
+        this.isDrawerOpenedChange.emit(this.isDrawerOpened);
       }
     });
   }

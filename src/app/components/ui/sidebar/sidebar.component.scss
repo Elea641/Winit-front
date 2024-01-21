@@ -41,8 +41,8 @@
   }
 
   .sidenav-button {
-    @include flex-align-center;
-    min-height: 111vh;
+    position: fixed;
+    top: calc(55% - 3.5rem);
   }
 }
 

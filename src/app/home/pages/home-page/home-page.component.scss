@@ -1,21 +1,34 @@
 @import "../../../../assets/style/mixins.scss";
 @import "../../../../assets/style/variables.scss";
 
-.container-home-desktop {
+.container-home {
   @include flex-align-center;
-}
+  margin: 5rem 0 3rem 0;
+  padding: 0 2rem;
+  width: 100vw;
 
-.tournament-container {
-  @include flex-column-center;
-  margin: 2rem auto;
-}
+  .tournament-container-home {
+    width: 100%;
+    .test {
+      background-color: red;
+      width: 100%;
+    }
+    h1 {
+      color: $secondary-color;
+      font-weight: normal;
+      margin: 2rem 0 1rem 0;
+    }
 
-h1 {
-  color: $secondary-color;
-  font-weight: normal;
-  margin: 16px 0;
-}
+    hr {
+      margin: 2rem;
+    }
+  }
 
-hr {
-  margin: 2rem;
+  @include media-mobile-tablet-screen {
+    @include flex-column-center;
+  }
+
+  @include media-large-screen {
+    @include flex-column-center;
+  }
 }

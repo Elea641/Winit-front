@@ -3,9 +3,11 @@
 
 .mat-toolbar {
   @include flex-column-center;
-  z-index: 0;
+  z-index: 2;
+  position: relative;
   background-color: $background-footer-color;
   border-top: 1px solid $border-footer-color;
+  min-height: 40vh;
 
   img {
     margin-top: 1rem;

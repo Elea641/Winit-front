@@ -75,13 +75,19 @@
 }
 
 @mixin media-mobile-screen {
-  @media screen and (max-width: 768px) {
-    @include flex-column-center;
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin media-tablet-screen {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    @content;
   }
 }
 
 @mixin media-mobile-tablet-screen {
   @media screen and (max-width: 1024px) {
-    @include flex-column-center;
+    @content;
   }
 }
