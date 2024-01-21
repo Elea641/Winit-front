@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.addClickOutsideListener();
-    this.isDesktop = this.breakpointService.isMobileDevice();
+    this.isDesktop = this.breakpointService.isDesktopDevice();
     this.breakpointService.deviceChanged['isDesktop'].subscribe(
       (isDesktop: boolean) => {
         this.isDesktop = isDesktop;
