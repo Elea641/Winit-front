@@ -1,7 +1,7 @@
 @import "../../../../assets/style/variables.scss";
 @import "../../../../assets/style/mixins.scss";
 
-.container-sidebar {
+.container-sidebar-desktop {
   position: fixed;
   top: 0;
   left: 0;
@@ -46,27 +46,30 @@
   }
 }
 
-.sidebar-mobile-container {
-  width: 100vw;
-  height: 5.8rem;
-  z-index: 1;
-  background-color: $background-navbar-color;
-  box-shadow: 0 2px 2px $box-shadow-navbar-color;
-  @include flex-space-around;
+.container-sidebar-mobile {
+  @include media-mobile-tablet-screen {
+    width: 100vw;
+    height: 5.8rem;
+    z-index: 1;
+    background-color: $background-navbar-color;
+    box-shadow: 0 2px 2px $box-shadow-navbar-color;
+    @include flex-space-around;
 
-  .filter-button-container {
-    height: 3.5rem;
-    font-size: 1.5rem;
-  }
+    .filter-button-container {
+      height: 3.5rem;
+      font-size: 1.5rem;
+    }
 
-  .mat-mdc-raised-button:not(:disabled) {
-    color: $button-navbar-color-text;
-  }
+    .mat-mdc-raised-button:not(:disabled) {
+      color: $button-navbar-color-text;
+    }
 
-  .mat-mdc-raised-button:hover,
-  .mat-mdc-raised-button:focus {
-    color: $button-navbar-color-focus;
+    .mat-mdc-raised-button:hover,
+    .mat-mdc-raised-button:focus {
+      color: $button-navbar-color-focus;
+    }
   }
+  display: none;
 }
 
 ::ng-deep .sidebar-custom-menu {

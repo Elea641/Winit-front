@@ -37,6 +37,7 @@ export class SidebarComponent implements OnInit {
   @Output() isDrawerOpenedChange: EventEmitter<boolean> =
     new EventEmitter<boolean>();
   isDesktop: boolean | undefined = false;
+  isLargeDesktop: boolean | undefined = false;
   showFiller = false;
   isDrawerOpened = false;
 
@@ -53,6 +54,15 @@ export class SidebarComponent implements OnInit {
         this.isDesktop = isDesktop;
       }
     );
+
+    this.isLargeDesktop = this.breakpointService.isLargeDesktopDevice();
+    this.breakpointService.deviceChanged['isLargeDesktop'].subscribe(
+      (isLargeDesktop: boolean) => {
+        this.isLargeDesktop = isLargeDesktop;
+      }
+    );
+
+    console.log(this.isLargeDesktop);
   }
 
   toggleIcon() {

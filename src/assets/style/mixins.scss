@@ -69,7 +69,7 @@
 
 /* Media */
 @mixin media-large-screen {
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1024px) and (max-width: 2000px) {
     @content;
   }
 }
@@ -81,13 +81,13 @@
 }
 
 @mixin media-tablet-screen {
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
     @content;
   }
 }
 
 @mixin media-mobile-tablet-screen {
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1023px) {
     @content;
   }
 }

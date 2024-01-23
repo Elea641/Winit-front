@@ -54,3 +54,10 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
+
+app-sidebar {
+  .mdc-button__label {
+    width: 100%;
+    text-align: left;
+  }
+}

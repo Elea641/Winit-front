@@ -1,8 +1,4 @@
-import {
-  BreakpointObserver,
-  Breakpoints,
-  BreakpointState,
-} from '@angular/cdk/layout';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
@@ -13,19 +9,28 @@ export class BreakpointService {
     isMobile: false,
     isTablet: false,
     isDesktop: false,
+    isLargeDesktop: false,
   };
 
   public deviceChanged: { [key: string]: EventEmitter<boolean> } = {
     isMobile: new EventEmitter<boolean>(),
     isTablet: new EventEmitter<boolean>(),
     isDesktop: new EventEmitter<boolean>(),
+    isLargeDesktop: new EventEmitter<boolean>(),
   };
 
   constructor(private breakpointObserver: BreakpointObserver) {
     const breakpoints = [
-      { key: 'isMobile', mediaQuery: Breakpoints.XSmall },
-      { key: 'isTablet', mediaQuery: Breakpoints.Small },
-      { key: 'isDesktop', mediaQuery: Breakpoints.Medium },
+      { key: 'isMobile', mediaQuery: '(max-width: 599.99px)' },
+      {
+        key: 'isTablet',
+        mediaQuery: '(min-width: 600px) and (max-width: 959.99px)',
+      },
+      {
+        key: 'isDesktop',
+        mediaQuery: '(min-width: 960px) and (max-width: 1199.99px)',
+      },
+      { key: 'isLargeDesktop', mediaQuery: '(min-width: 1200px)' },
     ];
 
     breakpoints.forEach((config) => {
@@ -54,5 +59,9 @@ export class BreakpointService {
 
   isDesktopDevice(): boolean {
     return this.devices['isDesktop'];
+  }
+
+  isLargeDesktopDevice(): boolean {
+    return this.devices['isLargeDesktop'];
   }
 }
