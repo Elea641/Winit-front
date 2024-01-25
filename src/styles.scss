@@ -55,9 +55,4 @@ body {
   display: none;
 }
 
-app-sidebar {
-  .mdc-button__label {
-    width: 100%;
-    text-align: left;
-  }
-}
+@import "./assets/style/global.scss";
