@@ -10,12 +10,12 @@ import { TokenService } from './token.service';
 import { UserAuth } from '../models/user-auth.model';
 import { TokenResponse } from '../models/token.model';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private url = 'http://localhost:8080/api/auth';
   private _httpErrorSubject$: BehaviorSubject<HttpErrorResponse> =
     new BehaviorSubject(new HttpErrorResponse({}));
   private _httpSuccessSubject$: BehaviorSubject<HttpResponse<any>> =
@@ -24,7 +24,7 @@ export class AuthService {
   constructor(public http: HttpClient, private tokenService: TokenService, private router: Router) {}
 
   postRegister(user: User): Observable<User> {
-    return this.http.post<User>(`${this.url}/register`, user);
+    return this.http.post<User>(`${environment.urlApi}/auth/register`, user);
   }
 
   // Je me connecte : j'envoie mon objet UserAuth et je m'abonne à la réponse de mon serveur. Lorsque je la reçois, je reçois le token que je stock en localStorage.
@@ -32,7 +32,7 @@ export class AuthService {
     this.tokenService.resetToken();
 
     this.http
-      .post<any>(`${this.url}/login`, userAuth)
+      .post<any>(`${environment.urlApi}/auth/login`, userAuth)
       .subscribe((tokenFromDB: TokenResponse) => {
         this.tokenService.updateToken(tokenFromDB);
         this.router.navigate(['/home']);
