@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 import { BreakpointService } from '../../../shared/breakpoint.service';
+import { TokenService } from 'src/app/auth/shared/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,14 +24,15 @@ import { BreakpointService } from '../../../shared/breakpoint.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  userId: number = 0;
+  currentUser!: any;
   isMobile: boolean | undefined = false;
   logoUrl: string = '../../../assets/pictures/logo-white.png';
 
   constructor(
     private router: Router,
     private el: ElementRef,
-    private breakpointService: BreakpointService
+    private breakpointService: BreakpointService,
+    private tokenService: TokenService
   ) {
     this.isMobile = this.breakpointService.isMobileDevice();
     this.breakpointService.deviceChanged['isMobile'].subscribe(
@@ -50,6 +52,10 @@ export class NavbarComponent implements OnInit {
       });
 
     this.addClickOutsideListener();
+    console.log();
+    this.currentUser = this.tokenService._getTokenDetailsSubject$();
+    console.log(this.currentUser.source._value);
+    
   }
 
   goToDisconnected(url: string) {

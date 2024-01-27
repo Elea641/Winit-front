@@ -60,8 +60,6 @@ export class SidebarComponent implements OnInit {
         this.isLargeDesktop = isLargeDesktop;
       }
     );
-
-    console.log(this.isLargeDesktop);
   }
 
   toggleIcon() {

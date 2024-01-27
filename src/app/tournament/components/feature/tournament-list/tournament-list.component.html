@@ -6,10 +6,13 @@
     class="tournament-container"
     [ngStyle]="{
       'margin-left.rem': isOpen === 'open' ? 15 : 0,
-      'width.%': isOpen === 'open' ? 80 : 100
+      'width.%': isOpen === 'open' ? 80 : 100,
+      'transition.s':  0.3
     }"
   >
-    <section class="all-tournaments">
+    <section class="all-tournaments"  [ngStyle]="{
+      'transition.s':  0.3
+    }">
       <h1>Tous les tournois</h1>
       <div class="line"></div>
       <div class="all-tournaments-cards">

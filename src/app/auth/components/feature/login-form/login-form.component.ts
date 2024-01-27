@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/auth/shared/auth.service';
 import { UserAuth } from 'src/app/auth/models/user-auth.model';
 import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
@@ -39,7 +39,6 @@ export class LoginFormComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private localService: LocalStorageService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +46,6 @@ export class LoginFormComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
-    console.log(this.loginForm);
   }
 
   get email() {
@@ -62,6 +60,5 @@ export class LoginFormComponent implements OnInit {
     this.userAuth = new UserAuth(this.email.value, this.password.value);
     this.localService.clearToken();
     this.authService.signIn(this.userAuth);
-    this.router.navigate(['/home']);
   }
 }

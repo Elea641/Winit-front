@@ -9,6 +9,7 @@ import { User } from '../models/user.model';
 import { TokenService } from './token.service';
 import { UserAuth } from '../models/user-auth.model';
 import { TokenResponse } from '../models/token.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class AuthService {
   private _httpSuccessSubject$: BehaviorSubject<HttpResponse<any>> =
     new BehaviorSubject(new HttpResponse({}));
 
-  constructor(public http: HttpClient, private tokenService: TokenService) {}
+  constructor(public http: HttpClient, private tokenService: TokenService, private router: Router) {}
 
   postRegister(user: User): Observable<User> {
     return this.http.post<User>(`${this.url}/register`, user);
@@ -34,6 +35,7 @@ export class AuthService {
       .post<any>(`${this.url}/login`, userAuth)
       .subscribe((tokenFromDB: TokenResponse) => {
         this.tokenService.updateToken(tokenFromDB);
+        this.router.navigate(['/home']);
       });
   }
 

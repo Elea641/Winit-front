@@ -24,11 +24,11 @@ export class BreakpointService {
       { key: 'isMobile', mediaQuery: '(max-width: 599.99px)' },
       {
         key: 'isTablet',
-        mediaQuery: '(min-width: 600px) and (max-width: 959.99px)',
+        mediaQuery: '(min-width: 600px) and (max-width: 1024px)',
       },
       {
         key: 'isDesktop',
-        mediaQuery: '(min-width: 960px) and (max-width: 1199.99px)',
+        mediaQuery: '(min-width: 1024px) and (max-width: 1199.99px)',
       },
       { key: 'isLargeDesktop', mediaQuery: '(min-width: 1200px)' },
     ];
