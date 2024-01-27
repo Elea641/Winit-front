@@ -1,5 +1,5 @@
 <div class="list-tournament-tree-container">
-  <div *ngIf="totalPhase.randomMatchs">
+  <div class="list-tournament-tree-container-details" *ngIf="totalPhase.randomMatchs">
     <h2>Phase de sélection aléatoire</h2>
     <div class="list-tournament-tree-container-cards">
       <div
@@ -21,7 +21,7 @@
       let index = index
     "
   >
-    <div
+    <div class="list-tournament-tree-container-details"
       *ngIf="
         tournamentPhase.result[phaseKey] !== 'Phase de sélection aléatoire'
       "
