@@ -2,33 +2,29 @@
 @import "../../../../../assets/style/mixins.scss";
 
 @include media-mobile-tablet-screen {
-.list-tournament-tree-container {
-  width: 100%;
-.list-tournament-tree-container-details {
-  h2 {
-    color: $text-list-tournament-tree-color;
-  }
+  .list-tournament-tree-container {
+    width: 100%;
+    .list-tournament-tree-container-details {
+      h2 {
+        color: $text-list-tournament-tree-color;
+      }
 
-  .list-tournament-tree-container-cards {
-    margin: 1rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+      .list-tournament-tree-container-cards {
+        margin: 1rem 0;
+        @include flex-wrap-align-center;
+      }
+    }
   }
-}
-}
 }
 
 @include media-large-screen {
   .list-tournament-tree-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    @include flex-wrap-align-center;
     width: 100%;
 
     .list-tournament-tree-container-details {
       padding: 0 2rem 0 0;
-      
+
       h2 {
         color: $text-list-tournament-tree-color;
         width: 15vw;
@@ -37,9 +33,11 @@
         align-items: flex-end;
         padding-bottom: 1rem;
       }
-  
+
       .list-tournament-tree-container-cards {
         color: $text-list-tournament-tree-color;
+        margin-top: auto;
+        margin-bottom: auto;
       }
     }
   }
