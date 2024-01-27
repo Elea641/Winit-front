@@ -20,13 +20,13 @@
   <span class="navbar-spacer"></span>
   <button 
     mat-raised-button 
-    *ngIf="!userId" 
+    *ngIf="!currentUser.source._value" 
     color="primary"
     routerLink="/auth/login"
     >CONNEXION
   </button>
   <button
-    *ngIf="userId"
+    *ngIf="currentUser.source._value"
     mat-icon-button
     aria-label="icon-button with account icon"
     [matMenuTriggerFor]="profil"
@@ -35,11 +35,11 @@
     <mat-icon>person</mat-icon>
   </button>
   <mat-menu #profil="matMenu" class="navbar-custom-menu">
-    <a *ngIf="userId" mat-menu-item routerLink="/profile">
+    <a *ngIf="currentUser.source._value" mat-menu-item routerLink="/profile">
       <mat-icon>person</mat-icon>
       <span>Profil</span>
     </a>
-    <a *ngIf="userId" mat-menu-item (click)="goToDisconnected('')">
+    <a *ngIf="currentUser.source._value" mat-menu-item (click)="goToDisconnected('')">
       <mat-icon>logout</mat-icon>
       <span>Sign out</span>
     </a>

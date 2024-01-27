@@ -8,7 +8,6 @@
   .tournament-container {
     width: 100%;
     padding: 0 3rem;
-    @include flex-column-center;
 
     .all-tournaments {
       margin: 2rem 0;
@@ -20,7 +19,7 @@
 
       .line {
         border: 1px solid $line-sidebar-color;
-        margin: 0 0.5rem 1rem 0.5rem;
+        margin: 0 0 1rem 0;
       }
       .all-tournaments-cards {
         @include flex-wrap;

@@ -147,9 +147,11 @@ export class RegisterComponent implements OnInit {
         if (response === null) {
           console.log('Response:', 'The form is invalid');
         } else {
-          console.log('Response:', response);
-          this.router.navigate(['/login']);
-          this.localService.clearToken();
+          if(response) {
+            this.localService.clearToken();
+            this.router.navigate(['/auth/login']);
+            console.log('Response:', response);
+          }
         }
       },
       (error) => {
