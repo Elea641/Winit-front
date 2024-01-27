@@ -1,6 +1,9 @@
 <div class="list-tournament-tree-container">
-  <div class="list-tournament-tree-container-details" *ngIf="totalPhase.randomMatchs">
-    <h2>Phase de sélection aléatoire</h2>
+  <div
+    class="list-tournament-tree-container-details"
+    *ngIf="totalPhase.randomMatchs"
+  >
+    <h2>Phase de présélection</h2>
     <div class="list-tournament-tree-container-cards">
       <div
         *ngFor="
@@ -21,7 +24,8 @@
       let index = index
     "
   >
-    <div class="list-tournament-tree-container-details"
+    <div
+      class="list-tournament-tree-container-details"
       *ngIf="
         tournamentPhase.result[phaseKey] !== 'Phase de sélection aléatoire'
       "

@@ -3,7 +3,7 @@
 
 @include media-mobile-tablet-screen {
 .card-tournament-match-container {
-    display: flex;
+    @include flex;
     position: relative;
     height: 3rem;
     background-color: $background-card-tournament-match-color;
@@ -14,9 +14,7 @@
     .card-tournament-match-container-details {
       width: 100%;
       padding: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include flex-space-between;
     }
   }
   
@@ -38,7 +36,7 @@
       flex-direction: row-reverse;
       justify-content: space-between;
   
-      .test {
+      .score-match-card {
         display: block;
         position: absolute;
         right: calc(100% - 1.2rem);
@@ -48,5 +46,57 @@
 }
 
 @include media-large-screen {
+  .card-tournament-match-container {
+    @include flex;
+    height: 3rem;
+    background-color: $background-card-tournament-match-color;
+    color: $text-card-tournament-match-color;
+    width: 15vw;
+    margin: 0;
+    position: relative;
 
+    .card-tournament-match-container-details {
+      @include flex;
+      width: 100%;
+      position: relative;
+      padding-left: 1rem;
+
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+      }
+
+      .score-match-card {
+        display: block;
+        position: absolute;
+        top: 30%;
+        right: 0;
+        width: 15%;
+      }
+    }
+  }
+
+    .line {
+      display: block;
+      position: absolute;
+      z-index: 1;
+      right: 98.5%;
+      border-left: 2px solid $line-card-tournament-match-color;
+      height: 3rem;
+      width: 0;
+    }
+
+  .odd {
+    margin-bottom: 2rem;
+
+    .card-tournament-match-container-details {
+      border-top: 2px solid $line-secondary-card-result-tournament-color;
+    }
+
+    .line {
+      height: 2.85rem;
+    }
+  }
 }

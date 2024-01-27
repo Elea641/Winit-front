@@ -23,12 +23,19 @@
   .list-tournament-tree-container {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     width: 100%;
 
     .list-tournament-tree-container-details {
-      padding: 0 0.5rem;
+      padding: 0 2rem 0 0;
+      
       h2 {
         color: $text-list-tournament-tree-color;
+        width: 15vw;
+        height: 5rem;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 1rem;
       }
   
       .list-tournament-tree-container-cards {
