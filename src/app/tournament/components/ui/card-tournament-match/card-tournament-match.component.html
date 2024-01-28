@@ -1,4 +1,10 @@
-<div class="card-tournament-match-container" [ngClass]="isEven">
+<div
+  class="card-tournament-match-container"
+  [ngClass]="isEven"
+  [ngStyle]="{
+    'margin-bottom.rem': (isDesktop || isLargeDesktop) && !isLastIteration && isEven === 'odd' ? margin : 0
+  }"
+>
   <div
     class="card-tournament-match-container-details"
     *ngIf="indexRemainingTeams === 0"
