@@ -52,10 +52,7 @@ export class NavbarComponent implements OnInit {
       });
 
     this.addClickOutsideListener();
-    console.log();
     this.currentUser = this.tokenService._getTokenDetailsSubject$();
-    console.log(this.currentUser.source._value);
-    
   }
 
   goToDisconnected(url: string) {

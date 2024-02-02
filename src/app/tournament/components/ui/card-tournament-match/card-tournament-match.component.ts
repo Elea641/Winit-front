@@ -15,7 +15,7 @@ export class CardTournamentMatchComponent implements OnInit {
   @Input() indexRandomTeams: any;
   @Input() randomMatchs: any;
   @Input() totalPhaseMatchs: any;
-  @Input() isLastIteration: boolean = false; 
+  @Input() isLastIteration: boolean = false;
   isDesktop: boolean | undefined = false;
   isLargeDesktop: boolean | undefined = false;
   margin: number = 0;
@@ -45,17 +45,14 @@ export class CardTournamentMatchComponent implements OnInit {
       (isLargeDesktop: boolean) => {
         this.isLargeDesktop = isLargeDesktop;
       }
-    );    
-
-    console.log(this.indexRemainingTeams);
-    
+    );
   }
 
   marginCalculator(indexRemainingTeams: number, indexRandomTeams: number) {
     if (indexRemainingTeams === 0) {
-      this.margin = (2 ** (indexRemainingTeams + 2.6)) - 2;
+      this.margin = 2 ** (indexRemainingTeams + 2.6) - 2;
     } else if (indexRemainingTeams > 0) {
-      this.margin = (2 ** (indexRemainingTeams + 3)) - 2;
+      this.margin = 2 ** (indexRemainingTeams + 3) - 2;
     } else if (indexRandomTeams) {
       this.margin = 2;
     }
