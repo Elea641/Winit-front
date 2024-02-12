@@ -7,6 +7,16 @@
       PLANNING
     </button>
     <button mat-menu-item (click)="toggleLogoButton()">CLASSEMENT</button>
+    <button mat-menu-item routerLink="/tournament" (click)="toggleLogoButton()">
+      PLANNING
+    </button>
+    <button
+      mat-menu-item
+      routerLink="/add-roaster"
+      (click)="toggleLogoButton()"
+    >
+      ROASTER
+    </button>
   </mat-menu>
   <a class="navbar-button-logo" routerLink="/home" (click)="toggleLogo()">
     <img [src]="logoUrl" alt="logo_WinIt" />
@@ -16,14 +26,18 @@
       PLANNING
     </button>
     <button mat-button (click)="toggleLogoButton()">CLASSEMENT</button>
+    <button mat-button routerLink="/add-roaster" (click)="toggleLogoButton()">
+      ROASTER
+    </button>
   </div>
   <span class="navbar-spacer"></span>
-  <button 
-    mat-raised-button 
-    *ngIf="!currentUser.source._value" 
+  <button
+    mat-raised-button
+    *ngIf="!currentUser.source._value"
     color="primary"
     routerLink="/auth/login"
-    >CONNEXION
+  >
+    CONNEXION
   </button>
   <button
     *ngIf="currentUser.source._value"
@@ -39,7 +53,11 @@
       <mat-icon>person</mat-icon>
       <span>Profil</span>
     </a>
-    <a *ngIf="currentUser.source._value" mat-menu-item (click)="goToDisconnected('')">
+    <a
+      *ngIf="currentUser.source._value"
+      mat-menu-item
+      (click)="goToDisconnected('')"
+    >
       <mat-icon>logout</mat-icon>
       <span>Sign out</span>
     </a>
