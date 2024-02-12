@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TournamentDetailsComponent } from '../../components/feature/tournament-details/tournament-details.component';
 
@@ -9,4 +9,10 @@ import { TournamentDetailsComponent } from '../../components/feature/tournament-
   templateUrl: './tournament-details-page.component.html',
   styleUrls: ['./tournament-details-page.component.scss'],
 })
-export class TournamentDetailsPageComponent {}
+export class TournamentDetailsPageComponent implements OnInit {
+  @Input() public id!: number;
+
+  ngOnInit(): void {
+    console.log(this.id);
+  }
+}
