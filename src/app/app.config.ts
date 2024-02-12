@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -8,12 +8,13 @@ import { TokenInterceptorInterceptor } from './core/token-interceptor.intercepto
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes), 
-    provideAnimations(), 
+    provideRouter(routes, withComponentInputBinding()),
+    provideAnimations(),
     provideHttpClient(),
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorInterceptor,
-    multi: true
-  }],
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorInterceptor,
+      multi: true,
+    },
+  ],
 };

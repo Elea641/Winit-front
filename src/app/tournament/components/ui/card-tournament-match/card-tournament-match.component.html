@@ -1,23 +1,30 @@
-<div class="card-tournament-match-container" [ngClass]="isEven">
+<div
+  class="card-tournament-match-container"
+  [ngClass]="isEven"
+  [ngStyle]="{
+    'margin-bottom.rem': (isDesktop || isLargeDesktop) && !isLastIteration && isEven === 'odd' ? margin : 0
+  }"
+>
   <div
     class="card-tournament-match-container-details"
     *ngIf="indexRemainingTeams === 0"
   >
     <p>{{ namesTeamList.teamName }}</p>
-    <p class="test">0</p>
+    <p class="score-match-card">0</p>
     <div class="line"></div>
   </div>
   <div class="card-tournament-match-container-details" *ngIf="!randomMatchs">
     <p>{{ namesTeamList.teamName }}</p>
-    <p class="test">0</p>
+    <p class="score-match-card">0</p>
     <div class="line"></div>
   </div>
+
   <div
     class="card-tournament-match-container-details"
     *ngIf="indexRemainingTeams > 0"
   >
     <p>Name</p>
-    <p class="test">0</p>
+    <p class="score-match-card">0</p>
     <div class="line"></div>
   </div>
 </div>
