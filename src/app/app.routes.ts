@@ -10,7 +10,8 @@ import { LoginFormComponent } from './auth/components/feature/login-form/login-f
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { BackOfficePageComponent } from './back-office/pages/back-office-page/back-office-page.component';
 import { AdminGuard } from './auth/core/admin.guard';
-import { RoasterCreatedPageComponent } from './roaster/pages/roaster-created-page/roaster-created-page.component';
+import { RoasterPageComponent } from './roaster/pages/roaster-page/roaster-page.component';
+import { CreateRoasterComponent } from './roaster/components/feature/create-roaster/create-roaster.component';
 
 export const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
@@ -24,8 +25,9 @@ export const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
-    path: 'add-roaster',
-    component: RoasterCreatedPageComponent,
+    path: 'roasters',
+    component: RoasterPageComponent,
+    children: [{ path: 'create', component: CreateRoasterComponent }],
   },
   {
     path: 'auth',

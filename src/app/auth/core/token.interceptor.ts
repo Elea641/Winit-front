@@ -31,6 +31,8 @@ export class TokenInterceptor implements HttpInterceptor {
         headers: request.headers.set('Authorization', 'Bearer ' + idToken),
       });
 
+      console.log(cloned);
+
       return this.mapStream(cloned, next);
     } else {
       return this.mapStream(request, next);

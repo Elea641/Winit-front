@@ -12,7 +12,7 @@
     </button>
     <button
       mat-menu-item
-      routerLink="/add-roaster"
+      routerLink="/roasters/create"
       (click)="toggleLogoButton()"
     >
       ROASTER
@@ -26,7 +26,11 @@
       PLANNING
     </button>
     <button mat-button (click)="toggleLogoButton()">CLASSEMENT</button>
-    <button mat-button routerLink="/add-roaster" (click)="toggleLogoButton()">
+    <button
+      mat-button
+      routerLink="/roasters/create"
+      (click)="toggleLogoButton()"
+    >
       ROASTER
     </button>
   </div>

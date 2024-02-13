@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { Roaster } from 'src/app/roaster/models/roaster.model';
 import { RoasterService } from 'src/app/roaster/shared/roaster.service';
+import { SportService } from 'src/app/shared/sport.service';
+import { Sport } from 'src/app/models/sport.model';
 
 @Component({
   selector: 'app-create-roaster',
@@ -34,13 +36,22 @@ import { RoasterService } from 'src/app/roaster/shared/roaster.service';
 export class CreateRoasterComponent {
   roasterForm!: FormGroup;
   roaster: Roaster = new Roaster('', '');
+  sports: Sport[] = [];
 
-  constructor(public roasterService: RoasterService) {}
+  constructor(
+    public roasterService: RoasterService,
+    private sportService: SportService
+  ) {}
 
   ngOnInit(): void {
     this.roasterForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       sport: new FormControl('', [Validators.required]),
+    });
+
+    this.sportService.getAllSports().subscribe((sports) => {
+      this.sports = sports;
+      console.log(this.sports);
     });
   }
 
