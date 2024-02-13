@@ -1,0 +1,10 @@
+@import "../../../auth/components/feature/register/register.component.scss";
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & .reset-password-form-field {
+    width: 50%;
+  }
+}

@@ -1,1 +1,16 @@
 @import "../register/register.component.scss";
+
+.reset-password-link {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 8px;
+
+  & a {
+    text-decoration: none;
+    color: $button-card-details-tournament-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

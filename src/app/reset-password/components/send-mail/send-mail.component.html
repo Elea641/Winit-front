@@ -1,0 +1,28 @@
+<div class="register-page-container">
+  <div class="register-block">
+    <h1>Mot de passe oublié</h1>
+    <mat-divider></mat-divider>
+    <form [formGroup]="sendResetPasswordMailForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="reset-password-form-field">
+        <mat-label>Adresse email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error
+          *ngIf="email?.errors && !email?.pristine"
+          class="error-message-size"
+        >
+          Email invalide
+        </mat-error>
+      </mat-form-field>
+      <div class="button-container">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="register-button"
+        >
+          ENVOYER
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,8 +12,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { AuthService } from 'src/app/auth/shared/auth.service';
 import { UserAuth } from 'src/app/auth/models/user-auth.model';
+import { AuthService } from 'src/app/auth/shared/auth.service';
 import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private localService: LocalStorageService,
+    private localService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
