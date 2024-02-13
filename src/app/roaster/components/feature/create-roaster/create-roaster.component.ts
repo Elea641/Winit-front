@@ -16,6 +16,7 @@ import { Roaster } from 'src/app/roaster/models/roaster.model';
 import { RoasterService } from 'src/app/roaster/shared/roaster.service';
 import { SportService } from 'src/app/shared/sport.service';
 import { Sport } from 'src/app/models/sport.model';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-create-roaster',
@@ -29,6 +30,7 @@ import { Sport } from 'src/app/models/sport.model';
     FormsModule,
     MatDividerModule,
     RouterModule,
+    MatSelectModule,
   ],
   templateUrl: './create-roaster.component.html',
   styleUrls: ['./create-roaster.component.scss'],
@@ -51,7 +53,6 @@ export class CreateRoasterComponent {
 
     this.sportService.getAllSports().subscribe((sports) => {
       this.sports = sports;
-      console.log(this.sports);
     });
   }
 

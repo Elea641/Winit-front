@@ -11,8 +11,10 @@ export class RoasterService {
   constructor(public http: HttpClient, private router: Router) {}
 
   addRoaster(roaster: Roaster): void {
-    this.http.post<any>(`${environment.urlApi}/`, roaster).subscribe(() => {
-      this.router.navigate(['/home']);
-    });
+    this.http
+      .post<any>(`${environment.urlApi}/roasters/add`, roaster)
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+      });
   }
 }

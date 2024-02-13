@@ -31,8 +31,6 @@ export class TokenInterceptor implements HttpInterceptor {
         headers: request.headers.set('Authorization', 'Bearer ' + idToken),
       });
 
-      console.log(cloned);
-
       return this.mapStream(cloned, next);
     } else {
       return this.mapStream(request, next);
@@ -45,7 +43,6 @@ export class TokenInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap((incomingRequest) => {
-        console.log(incomingRequest);
         // j'intercepte les requêtes que mon serveur me renvoie en statut 200 (Statut : succès)
         if (incomingRequest instanceof HttpResponse) {
           this.authS.setHttpSuccessSubject$(incomingRequest);
