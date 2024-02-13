@@ -42,7 +42,8 @@ mat-divider {
   margin-top: 16px;
 }
 
-.register-button, .login-button {
+.register-button,
+.login-button {
   width: 50%;
   margin-bottom: 16px;
 }
@@ -56,6 +57,10 @@ mat-divider {
   color: $background-color;
 }
 
+.mail-taken-error {
+  padding: 0 16px;
+}
+
 @media screen and (max-width: 768px) {
   .register-form-field {
     width: 100%;
@@ -65,7 +70,8 @@ mat-divider {
     font-size: large;
   }
 
-  .register-button, .login-button {
+  .register-button,
+  .login-button {
     width: 100%;
   }
 
