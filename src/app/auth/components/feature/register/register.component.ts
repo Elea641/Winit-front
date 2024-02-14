@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Router, RouterModule } from '@angular/router';
 import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
+import { ToastService } from 'src/app/shared/toast.service';
 import { Sport } from '../../../models/sport.model';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../shared/auth.service';
@@ -64,9 +65,10 @@ export class RegisterComponent implements OnInit {
   public isMailTaken: boolean = false;
 
   constructor(
-    public authService: AuthService,
+    private authService: AuthService,
     private router: Router,
-    private localService: LocalStorageService
+    private localService: LocalStorageService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -149,6 +151,10 @@ export class RegisterComponent implements OnInit {
         if (response) {
           this.localService.clearToken();
           this.router.navigate(['/auth/login']);
+          this.toastService.showSuccess(
+            'Vous pouvez vous connecter',
+            'Compte créé avec succès'
+          );
         }
       },
       (error) => {
