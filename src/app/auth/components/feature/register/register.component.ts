@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,19 +7,20 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatSelectModule } from '@angular/material/select';
-import { Sport } from '../../../models/sport.model';
-import { User } from '../../../models/user.model';
-import { checkPasswordMatch } from '../../../shared/password-match';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AuthService } from '../../../shared/auth.service';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { Router, RouterModule } from '@angular/router';
 import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
+import { ToastService } from 'src/app/shared/toast.service';
+import { Sport } from '../../../models/sport.model';
+import { User } from '../../../models/user.model';
+import { AuthService } from '../../../shared/auth.service';
+import { checkPasswordMatch } from '../../../shared/password-match';
 
 @Component({
   selector: 'app-register',
@@ -61,10 +62,13 @@ export class RegisterComponent implements OnInit {
     enabled: true,
   };
 
+  public isMailTaken: boolean = false;
+
   constructor(
-    public authService: AuthService,
+    private authService: AuthService,
     private router: Router,
-    private localService: LocalStorageService
+    private localService: LocalStorageService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -144,6 +148,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.postRegister(newUser).subscribe(
       (response) => {
+<<<<<<< HEAD
         if (response === null) {
           console.log('Response:', 'The form is invalid');
         } else {
@@ -152,10 +157,24 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['/auth/login']);
             console.log('Response:', response);
           }
+=======
+        if (response) {
+          this.localService.clearToken();
+          this.router.navigate(['/auth/login']);
+          this.toastService.showSuccess(
+            'Vous pouvez vous connecter',
+            'Compte créé avec succès'
+          );
+>>>>>>> 7c98df06b3e171cd1c4418eafd64885c6a2e9380
         }
       },
       (error) => {
-        console.error('Error:', error);
+        if (error.error.error_message == 'Email already taken.') {
+          this.isMailTaken = true;
+          this.registerForm.controls['email'].setErrors({
+            isMailTaken: true,
+          });
+        }
       }
     );
   }
