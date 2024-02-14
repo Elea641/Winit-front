@@ -2,14 +2,14 @@
   [ngClass]="{
     'default-style-focus': isDefaultStyleFocus,
   }"
-  class="menu-infos-profile-container"
+  class="menu-buttons-container"
 >
   <button
     mat-raised-button
     [ngClass]="{ active: isDefaultStyleFocus }"
-    (click)="onButtonClick('resultats')"
+    *ngFor="let label of formattedLabels"
+    (click)="onButtonClick(label)"
   >
-    RESULTATS
+    {{ label }}
   </button>
-  <button mat-raised-button (click)="onButtonClick('team')">EQUIPES</button>
 </mat-toolbar>

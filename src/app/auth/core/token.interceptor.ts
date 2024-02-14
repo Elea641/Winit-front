@@ -43,7 +43,6 @@ export class TokenInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap((incomingRequest) => {
-        console.log(incomingRequest);
         // j'intercepte les requêtes que mon serveur me renvoie en statut 200 (Statut : succès)
         if (incomingRequest instanceof HttpResponse) {
           this.authS.setHttpSuccessSubject$(incomingRequest);

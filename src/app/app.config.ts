@@ -1,20 +1,24 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
-import { routes } from './app.routes';
-import { TokenInterceptorInterceptor } from './core/token-interceptor.interceptor';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { TokenInterceptor } from './auth/core/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
     provideAnimations(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorInterceptor,
+      useClass: TokenInterceptor,
       multi: true,
     },
     provideAnimations(), // required animations providers

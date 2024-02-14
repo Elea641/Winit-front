@@ -11,8 +11,4 @@ import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
 })
 export class CardTeamMemberComponent {
   @Input() teamMembers!: TeamMembers | null;
-
-  ngOnInit(): void {
-    console.log(this.teamMembers);
-  }
 }

@@ -4,10 +4,10 @@ import { CardCurrentProfileComponent } from '../../ui/card-current-profile/card-
 import { ProfileService } from 'src/app/profile/shared/profile.service';
 import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
 import { Observable } from 'rxjs';
-import { MenuInfosProfileComponent } from '../../ui/menu-infos-profile/menu-infos-profile.component';
 import { ListResultatsComponent } from '../list-resultats/list-resultats.component';
 import { ListTeamMembersComponent } from '../list-team-members/list-team-members.component';
 import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
+import { MenuButtonsComponent } from 'src/app/components/ui/menu-buttons/menu-buttons.component';
 
 @Component({
   selector: 'app-current-profile-details',
@@ -15,7 +15,7 @@ import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
   imports: [
     CommonModule,
     CardCurrentProfileComponent,
-    MenuInfosProfileComponent,
+    MenuButtonsComponent,
     ListResultatsComponent,
     ListTeamMembersComponent,
   ],
