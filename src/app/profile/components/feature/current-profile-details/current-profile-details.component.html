@@ -3,9 +3,13 @@
     *ngIf="currentProfile$ | async as currentProfile"
     [currentProfile]="currentProfile"
   ></app-card-current-profile>
-  <app-menu-infos-profile
+
+  <app-menu-buttons
+    [buttonLabels]="['resultats', 'team']"
     (buttonClick)="onButtonClicked($event)"
-  ></app-menu-infos-profile>
+  >
+  </app-menu-buttons>
+
   <div *ngIf="buttonValueClicked === 'resultats'">
     <app-list-resultats
       *ngIf="currentProfile$ | async as currentProfile"

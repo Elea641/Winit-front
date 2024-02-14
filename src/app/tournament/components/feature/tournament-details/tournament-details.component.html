@@ -3,9 +3,10 @@
     *ngIf="tournamentDetails$ | async as tournamentDetails"
     [tournamentDetails]="tournamentDetails"
   ></app-card-details-tournament>
-  <app-menu-infos-tournament
+  <app-menu-buttons
+    [buttonLabels]="['matchs', 'teams']"
     (buttonClick)="onButtonClicked($event)"
-  ></app-menu-infos-tournament>
+  ></app-menu-buttons>
 
   <div *ngIf="buttonValueClicked === 'matchs'">
     <app-list-tournament-tree

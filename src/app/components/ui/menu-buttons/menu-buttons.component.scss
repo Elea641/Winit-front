@@ -1,7 +1,8 @@
-@import "../../../../../assets/style/variables.scss";
-@import "../../../../../assets/style/mixins.scss";
+@import "../../../../assets/style/variables.scss";
+@import "../../../../assets/style/mixins.scss";
 
-.menu-infos-profile-container {
+.menu-buttons-container {
+  width: 100vw;
   padding: 0;
   display: flex;
   background-color: $background-menu-infos-profile-color;

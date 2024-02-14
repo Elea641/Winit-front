@@ -1,11 +1,15 @@
-<!-- <div class="team-detail-container">
-    <app-menu-roaster (buttonClick)="onButtonClicked($event)"></app-menu-roaster>
-  
-    <div *ngIf="buttonValueClicked === 'list-team'">
-      <app-list-team></app-list-team>
-    </div>
-  
-    <div *ngIf="buttonValueClicked === 'create-team'">
-      <app-create-team> ></app-create-team>
-    </div>
-  </div> -->
+<div class="team-detail-container">
+  <app-menu-buttons
+    [buttonLabels]="['create-team', 'list-team']"
+    (buttonClick)="onButtonClicked($event)"
+  >
+  </app-menu-buttons>
+
+  <div *ngIf="buttonValueClicked === 'list-team'">
+    <app-list-team></app-list-team>
+  </div>
+
+  <div *ngIf="buttonValueClicked === 'create-team'">
+    <app-create-team></app-create-team>
+  </div>
+</div>
