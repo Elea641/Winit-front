@@ -148,16 +148,6 @@ export class RegisterComponent implements OnInit {
 
     this.authService.postRegister(newUser).subscribe(
       (response) => {
-<<<<<<< HEAD
-        if (response === null) {
-          console.log('Response:', 'The form is invalid');
-        } else {
-          if (response) {
-            this.localService.clearToken();
-            this.router.navigate(['/auth/login']);
-            console.log('Response:', response);
-          }
-=======
         if (response) {
           this.localService.clearToken();
           this.router.navigate(['/auth/login']);
@@ -165,7 +155,6 @@ export class RegisterComponent implements OnInit {
             'Vous pouvez vous connecter',
             'Compte créé avec succès'
           );
->>>>>>> 7c98df06b3e171cd1c4418eafd64885c6a2e9380
         }
       },
       (error) => {
