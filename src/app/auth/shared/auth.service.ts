@@ -21,7 +21,11 @@ export class AuthService {
   private _httpSuccessSubject$: BehaviorSubject<HttpResponse<any>> =
     new BehaviorSubject(new HttpResponse({}));
 
-  constructor(public http: HttpClient, private tokenService: TokenService, private router: Router) {}
+  constructor(
+    public http: HttpClient,
+    private tokenService: TokenService,
+    private router: Router
+  ) {}
 
   postRegister(user: User): Observable<User> {
     return this.http.post<User>(`${environment.urlApi}/auth/register`, user);
@@ -35,7 +39,7 @@ export class AuthService {
       .post<any>(`${environment.urlApi}/auth/login`, userAuth)
       .subscribe((tokenFromDB: TokenResponse) => {
         this.tokenService.updateToken(tokenFromDB);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       });
   }
 
