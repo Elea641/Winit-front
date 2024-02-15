@@ -7,3 +7,7 @@
   ::ng-deep .ngx-mat-dropzone mat-label {
     display: none;
   }
+
+  .wi-file-upload div {
+    cursor: pointer !important;
+  }

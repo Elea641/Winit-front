@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,7 +7,7 @@ import {MatChipsModule} from '@angular/material/chips';
 
 import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 import { DropzoneMaterialModule } from '@ngx-dropzone/material';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-file-upload',
@@ -29,9 +29,8 @@ export class FileUploadComponent {
   @Input() formControlNameValue!: string;
   @Input() labelValue!: string;
 
-  ngOnInit(): void {
-    this.clearUploadFile();
-  }
+  constructor(
+  ) {  }
 
   clearUploadFile() {
     this.groupParent.controls[this.formControlNameValue].setValue(null);
@@ -51,13 +50,13 @@ export class FileUploadComponent {
   }
 
   getErrorMessage(errorKey: any, errorValue: any) {
-    // Customize error messages based on error key and value
+
     if (errorKey === 'required') {
       return 'This field is required.';
     } else if (errorKey === 'minlength') {
       return `Minimum length is ${errorValue.requiredLength}.`;
     }
-    // Add more conditions based on your validation criteria
+
     return 'Validation error.';
   }
 }
