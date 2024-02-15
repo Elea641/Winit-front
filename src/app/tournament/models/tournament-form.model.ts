@@ -10,19 +10,19 @@ export class TournamentForm {
 
     private createForm() {
         return this.fb.group({
-            id: [null],
             name: ['', Validators.required],
             place: ['', Validators.required],
             date: ['', Validators.required],
+            inscriptionLimitDate: [''],
             sport: ['', Validators.required],
             playersPerTeam: ['', Validators.required],
-            minTeams: ['', Validators.required],
+            minTeams: [''],
             maxTeams: ['', Validators.required],
             gameLength: ['', Validators.required],
             privacy: ['', Validators.required],
             playerCategory: ['', Validators.required],
             tournamentFormat: ['', Validators.required],
-            tournamentBanner: ['']
+            tournamentBanner: [null]
         })
     }
 }
