@@ -57,8 +57,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userAuth = new UserAuth(this.email.value, this.password.value);
-    this.localService.clearToken();
-    this.authService.signIn(this.userAuth);
+    if (this.loginForm.valid) {
+      this.userAuth = new UserAuth(this.email.value, this.password.value);
+      this.localService.clearToken();
+      this.authService.signIn(this.userAuth);
+    }
   }
 }

@@ -14,9 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { Router, RouterModule } from '@angular/router';
-import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
-import { ToastService } from 'src/app/shared/toast.service';
+import { RouterModule } from '@angular/router';
 import { Sport } from '../../../models/sport.model';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../shared/auth.service';
@@ -62,14 +60,7 @@ export class RegisterComponent implements OnInit {
     enabled: true,
   };
 
-  public isMailTaken: boolean = false;
-
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private localService: LocalStorageService,
-    private toastService: ToastService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup(
@@ -135,40 +126,19 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    const newUser: User = {
-      firstName: this.firstName.value,
-      lastName: this.lastName.value,
-      sport: this.sport.value,
-      email: this.email.value,
-      password: this.password.value,
-      requiredRole: 'ROLE_USER',
-      createdAt: new Date(),
-      enabled: true,
-    };
+    if (this.registerForm.valid) {
+      const newUser: User = {
+        firstName: this.firstName.value,
+        lastName: this.lastName.value,
+        sport: this.sport.value,
+        email: this.email.value,
+        password: this.password.value,
+        requiredRole: 'ROLE_USER',
+        createdAt: new Date(),
+        enabled: true,
+      };
 
-    this.authService.postRegister(newUser).subscribe(
-      (response) => {
-        if (response) {
-          this.localService.clearToken();
-          this.router.navigate(['/auth/login']);
-          this.toastService.showSuccess(
-            'Vous pouvez vous connecter',
-            'Compte créé avec succès'
-          );
-        }
-      },
-      (error) => {
-        console.log(error);
-
-        if (error.error.error_message == 'Email already taken.') {
-          console.log(error.error.error_message, 'dedans');
-
-          this.isMailTaken = true;
-          this.registerForm.controls['email'].setErrors({
-            isMailTaken: true,
-          });
-        }
-      }
-    );
+      this.authService.postRegister(newUser);
+    }
   }
 }
