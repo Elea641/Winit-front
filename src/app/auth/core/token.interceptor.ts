@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
   HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
   HttpResponse,
 } from '@angular/common/http';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 import { LocalStorageService } from '../shared/local-storage.service';
 import { Router } from '@angular/router';
