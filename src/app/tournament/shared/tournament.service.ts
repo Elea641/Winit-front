@@ -8,10 +8,17 @@ import { Observable } from 'rxjs';
 })
 export class TournamentService {
   private tournamentDataUrl = '../assets/list-tournament.model.json';
+  private apiUrl = 'http://localhost:8080/api/tournament/';
 
   constructor(private http: HttpClient) {}
 
   getAllTournaments(): Observable<Tournament[]> {
     return this.http.get<Tournament[]>(this.tournamentDataUrl);
+  }
+
+  createTournament(tournament: Tournament): Observable<Tournament> {
+    console.log(tournament);
+
+    return this.http.post<Tournament>(`${this.apiUrl}/create`, tournament);
   }
 }
