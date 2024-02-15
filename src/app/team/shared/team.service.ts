@@ -3,27 +3,26 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Team } from '../models/team.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
+import { CreatedTeam } from '../models/created-team.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeamService {
-  private errorMessageSubject = new BehaviorSubject<string>('');
-
   constructor(
     public http: HttpClient,
     private router: Router,
     private toastService: ToastService
   ) {}
 
-  getErrorMessage() {
-    return this.errorMessageSubject.asObservable();
+  getAllTeamsByUser(): Observable<Team[]> {
+    return this.http.get<Team[]>(`${environment.urlApi}/teams`);
   }
 
-  addTeam(team: Team): void {
-    this.http.post<any>(`${environment.urlApi}/teams/add`, team).subscribe(
+  addTeam(team: CreatedTeam): void {
+    this.http.post<any>(`${environment.urlApi}/teams`, team).subscribe(
       (response) => {
         if (response) {
           this.router.navigate(['/']);

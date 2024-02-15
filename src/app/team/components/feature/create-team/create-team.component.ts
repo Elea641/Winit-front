@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { TeamService } from 'src/app/team/shared/team.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { CreatedTeam } from 'src/app/team/models/created-team.model';
 
 @Component({
   selector: 'app-create-team',
@@ -38,7 +39,7 @@ import { ToastService } from 'src/app/shared/toast.service';
 })
 export class CreateTeamComponent {
   teamForm!: FormGroup;
-  team: Team = new Team('', '');
+  team: CreatedTeam = new CreatedTeam('', '');
   sports: Sport[] = [];
 
   constructor(
@@ -49,8 +50,16 @@ export class CreateTeamComponent {
 
   ngOnInit(): void {
     this.teamForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      sport: new FormControl('', [Validators.required]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          `[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*`
+        ),
+      ]),
+      sport: new FormControl('', [
+        Validators.required,
+        Validators.pattern('[a-zA-Z]*'),
+      ]),
     });
 
     this.sportService.getAllSports().subscribe((sports) => {
@@ -68,7 +77,7 @@ export class CreateTeamComponent {
 
   onSubmit() {
     if (this.teamForm.valid) {
-      this.team = new Team(this.name.value, this.sport.value);
+      this.team = new CreatedTeam(this.name.value, this.sport.value);
       this.teamService.addTeam(this.team);
     } else {
       this.toastService.showError(

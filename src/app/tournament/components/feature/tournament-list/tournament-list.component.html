@@ -7,14 +7,17 @@
     [ngStyle]="{
       'margin-left.rem': isOpen === 'open' ? 15 : 0,
       'width.%': isOpen === 'open' ? 80 : 100,
-      'transition.s':  0.3
+      'transition.s': 0.3
     }"
   >
-    <section class="all-tournaments"  [ngStyle]="{
-      'transition.s':  0.3
-    }">
-      <h1>Tous les tournois</h1>
-      <div class="line"></div>
+    <section
+      class="all-tournaments"
+      [ngStyle]="{
+        'transition.s': 0.3
+      }"
+    >
+      <h1>TOUS LES TOURNOIS</h1>
+      <mat-divider class="team-divider"></mat-divider>
       <div class="all-tournaments-cards">
         <div
           *ngFor="let tournament of tournaments$ | async"

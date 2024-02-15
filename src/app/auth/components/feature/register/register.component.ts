@@ -135,40 +135,42 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    const newUser: User = {
-      firstName: this.firstName.value,
-      lastName: this.lastName.value,
-      sport: this.sport.value,
-      email: this.email.value,
-      password: this.password.value,
-      requiredRole: 'ROLE_USER',
-      createdAt: new Date(),
-      enabled: true,
-    };
+    if (this.registerForm.valid) {
+      const newUser: User = {
+        firstName: this.firstName.value,
+        lastName: this.lastName.value,
+        sport: this.sport.value,
+        email: this.email.value,
+        password: this.password.value,
+        requiredRole: 'ROLE_USER',
+        createdAt: new Date(),
+        enabled: true,
+      };
 
-    this.authService.postRegister(newUser).subscribe(
-      (response) => {
-        if (response) {
-          this.localService.clearToken();
-          this.router.navigate(['/auth/login']);
-          this.toastService.showSuccess(
-            'Vous pouvez vous connecter',
-            'Compte créé avec succès'
-          );
+      this.authService.postRegister(newUser).subscribe(
+        (response) => {
+          if (response) {
+            this.localService.clearToken();
+            this.router.navigate(['/auth/login']);
+            this.toastService.showSuccess(
+              'Vous pouvez vous connecter',
+              'Compte créé avec succès'
+            );
+          }
+        },
+        (error) => {
+          console.log(error);
+
+          if (error.error.error_message == 'Email already taken.') {
+            console.log(error.error.error_message, 'dedans');
+
+            this.isMailTaken = true;
+            this.registerForm.controls['email'].setErrors({
+              isMailTaken: true,
+            });
+          }
         }
-      },
-      (error) => {
-        console.log(error);
-
-        if (error.error.error_message == 'Email already taken.') {
-          console.log(error.error.error_message, 'dedans');
-
-          this.isMailTaken = true;
-          this.registerForm.controls['email'].setErrors({
-            isMailTaken: true,
-          });
-        }
-      }
-    );
+      );
+    }
   }
 }
