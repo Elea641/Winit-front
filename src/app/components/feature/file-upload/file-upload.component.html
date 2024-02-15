@@ -1,0 +1,23 @@
+<mat-form-field appearance="outline" class="wi-tournament-form-field-big register-form-field" [formGroup]="groupParent">
+    <mat-label>{{ labelValue }}</mat-label>
+    <ngx-mat-dropzone>
+        <input type="file" fileInput [formControlName]="formControlNameValue"/>
+    </ngx-mat-dropzone>
+    <mat-icon matSuffix color="primary">cloud_upload</mat-icon>
+    <div *ngIf="groupParent.controls[formControlNameValue].value">
+        <mat-chip-row (removed)="clearUploadFile()">
+            {{ groupParent.controls[formControlNameValue].value }}
+            <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </mat-chip-row>
+    </div>
+    <mat-error *ngIf="groupParent.controls[formControlNameValue]?.invalid && (groupParent.controls[formControlNameValue]?.dirty || groupParent.controls[formControlNameValue]?.touched)">
+        <small class="error" *ngIf="groupParent.controls[formControlNameValue]?.errors?.['required']">Test</small>
+    </mat-error>
+    <div *ngIf="groupParent.controls[formControlNameValue]?.invalid && (groupParent.controls[formControlNameValue]?.dirty || groupParent.controls[formControlNameValue]?.touched)">
+        <mat-error *ngFor="let error of getControlErrors(groupParent.controls[formControlNameValue])">
+            <small class="error">{{ error }}</small>
+        </mat-error>
+    </div>
+</mat-form-field>
