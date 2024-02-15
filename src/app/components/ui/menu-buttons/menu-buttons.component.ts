@@ -26,8 +26,6 @@ export class MenuButtonsComponent implements OnInit {
 
   onButtonClick(label: string) {
     const formattedLabelConvert = label.toLowerCase().replace(/ /g, '-');
-    console.log(label);
-
     this.buttonClick.emit(formattedLabelConvert);
     this.isDefaultStyleFocus = false;
   }

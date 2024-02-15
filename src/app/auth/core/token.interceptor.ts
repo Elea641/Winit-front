@@ -10,12 +10,14 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 import { LocalStorageService } from '../shared/local-storage.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
     private authS: AuthService,
-    private lsService: LocalStorageService
+    private lsService: LocalStorageService,
+    private router: Router
   ) {}
 
   intercept(
@@ -51,6 +53,11 @@ export class TokenInterceptor implements HttpInterceptor {
       // J'intercepte les requêtes que mon serveur me renvoit en statut 400 (Statut : erreur)
       catchError((err: HttpErrorResponse) => {
         this.authS.setHttpErrorSubject$(err);
+
+        if (err.error.is_token_expired == 'true') {
+          this.lsService.clearToken();
+          this.router.navigate(['/auth/login']);
+        }
         return throwError(() => err);
       })
     );

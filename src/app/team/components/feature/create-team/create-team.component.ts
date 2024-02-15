@@ -17,6 +17,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { TeamService } from 'src/app/team/shared/team.service';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-create-team',
@@ -42,7 +43,8 @@ export class CreateTeamComponent {
 
   constructor(
     public teamService: TeamService,
-    private sportService: SportService
+    private sportService: SportService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -65,9 +67,14 @@ export class CreateTeamComponent {
   }
 
   onSubmit() {
-    this.team = new Team(this.name.value, this.sport.value);
-    console.log(this.team);
-
-    this.teamService.addTeam(this.team);
+    if (this.teamForm.valid) {
+      this.team = new Team(this.name.value, this.sport.value);
+      this.teamService.addTeam(this.team);
+    } else {
+      this.toastService.showError(
+        'Erreur',
+        'Veuillez remplir tous les champs obligatoires'
+      );
+    }
   }
 }

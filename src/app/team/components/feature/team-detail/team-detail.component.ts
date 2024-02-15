@@ -17,7 +17,7 @@ import { CreateTeamComponent } from '../create-team/create-team.component';
   styleUrls: ['./team-detail.component.scss'],
 })
 export class TeamDetailComponent {
-  buttonValueClicked: string = 'list';
+  buttonValueClicked: string = 'list-team';
 
   onButtonClicked(label: string) {
     this.buttonValueClicked = label;
