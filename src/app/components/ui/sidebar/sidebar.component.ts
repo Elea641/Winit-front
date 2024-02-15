@@ -76,10 +76,12 @@ export class SidebarComponent implements OnInit {
     document.addEventListener('click', (event) => {
       const clickedElement = event.target as HTMLElement;
 
-      if (!this.el.nativeElement.contains(clickedElement)) {
-        this.drawer.close();
-        this.isDrawerOpened = false;
-        this.isDrawerOpenedChange.emit(this.isDrawerOpened);
+      if (this.isDesktop) {
+        if (!this.el.nativeElement.contains(clickedElement)) {
+          this.drawer.close();
+          this.isDrawerOpened = false;
+          this.isDrawerOpenedChange.emit(this.isDrawerOpened);
+        }
       }
     });
   }

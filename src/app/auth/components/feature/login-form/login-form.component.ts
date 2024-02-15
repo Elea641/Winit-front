@@ -15,7 +15,6 @@ import { RouterModule } from '@angular/router';
 import { UserAuth } from 'src/app/auth/models/user-auth.model';
 import { AuthService } from 'src/app/auth/shared/auth.service';
 import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
-import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-login-form',
@@ -39,8 +38,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private localService: LocalStorageService,
-    private toastService: ToastService
+    private localService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +60,5 @@ export class LoginFormComponent implements OnInit {
     this.userAuth = new UserAuth(this.email.value, this.password.value);
     this.localService.clearToken();
     this.authService.signIn(this.userAuth);
-    this.toastService.showSuccess('bravo félicitations', 'Connexion réussie');
   }
 }

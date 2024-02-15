@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
   HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
   HttpResponse,
 } from '@angular/common/http';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 import { LocalStorageService } from '../shared/local-storage.service';
 
@@ -50,9 +50,8 @@ export class TokenInterceptor implements HttpInterceptor {
       }),
       // J'intercepte les requêtes que mon serveur me renvoit en statut 400 (Statut : erreur)
       catchError((err: HttpErrorResponse) => {
-        console.log(err);
         this.authS.setHttpErrorSubject$(err);
-        return throwError(() => new Error('Une erreur est survenue'));
+        return throwError(() => err);
       })
     );
   }

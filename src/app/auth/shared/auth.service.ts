@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpResponse,
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ToastService } from 'src/app/shared/toast.service';
+import { environment } from 'src/environments/environment';
+import { TokenResponse } from '../models/token.model';
+import { UserAuth } from '../models/user-auth.model';
 import { User } from '../models/user.model';
 import { TokenService } from './token.service';
-import { UserAuth } from '../models/user-auth.model';
-import { TokenResponse } from '../models/token.model';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,12 @@ export class AuthService {
   private _httpSuccessSubject$: BehaviorSubject<HttpResponse<any>> =
     new BehaviorSubject(new HttpResponse({}));
 
-  constructor(public http: HttpClient, private tokenService: TokenService, private router: Router) {}
+  constructor(
+    public http: HttpClient,
+    private tokenService: TokenService,
+    private router: Router,
+    private toastService: ToastService
+  ) {}
 
   postRegister(user: User): Observable<User> {
     return this.http.post<User>(`${environment.urlApi}/auth/register`, user);
@@ -35,7 +41,11 @@ export class AuthService {
       .post<any>(`${environment.urlApi}/auth/login`, userAuth)
       .subscribe((tokenFromDB: TokenResponse) => {
         this.tokenService.updateToken(tokenFromDB);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
+        this.toastService.showSuccess(
+          'bravo félicitations',
+          'Connexion réussie'
+        );
       });
   }
 
