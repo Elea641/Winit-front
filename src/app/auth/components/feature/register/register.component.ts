@@ -158,8 +158,6 @@ export class RegisterComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
-
         if (error.error.error_message == 'Email already taken.') {
           console.log(error.error.error_message, 'dedans');
 

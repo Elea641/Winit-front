@@ -37,16 +37,26 @@ export class AuthService {
   signIn(userAuth: UserAuth): void {
     this.tokenService.resetToken();
 
-    this.http
-      .post<any>(`${environment.urlApi}/auth/login`, userAuth)
-      .subscribe((tokenFromDB: TokenResponse) => {
-        this.tokenService.updateToken(tokenFromDB);
-        this.router.navigate(['/']);
-        this.toastService.showSuccess(
-          'bravo félicitations',
-          'Connexion réussie'
-        );
-      });
+    this.http.post<any>(`${environment.urlApi}/auth/login`, userAuth).subscribe(
+      (tokenFromDB: TokenResponse) => {
+        if (tokenFromDB) {
+          this.tokenService.updateToken(tokenFromDB);
+          this.router.navigate(['/']);
+          this.toastService.showSuccess(
+            'bravo félicitations',
+            'Connexion réussie'
+          );
+        }
+      },
+      (error) => {
+        if (error.error.bad_credentials === 'true') {
+          this.toastService.showError(
+            'La combinaison email / mot de passe est incorrecte.',
+            'Connexion impossible'
+          );
+        }
+      }
+    );
   }
 
   getHttpErrorSubject$(): Observable<HttpErrorResponse> {
