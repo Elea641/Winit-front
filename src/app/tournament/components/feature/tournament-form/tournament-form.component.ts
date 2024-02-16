@@ -22,6 +22,7 @@ import { FileUploadComponent } from "../../../../components/feature/file-upload/
 import { Tournament } from 'src/app/tournament/models/tournament.model';
 import { TournamentEntityMappers } from 'src/app/tournament/shared/mappers/TournamentEntityMappers';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
+import { SportService } from 'src/app/shared/sport.service';
 
 @Component({
     selector: 'app-tournament-form',
@@ -48,15 +49,7 @@ import { TournamentService } from 'src/app/tournament/shared/tournament.service'
 export class TournamentFormComponent implements OnInit {
   tournamentForm!: TournamentForm["form"];
 
-  sports: Sport[] = [
-    { name: 'basketball', viewName: 'Basketball' },
-    { name: 'esport', viewName: 'E-sport' },
-    { name: 'football', viewName: 'Football' },
-    { name: 'handball', viewName: 'Handball' },
-    { name: 'petanque', viewName: 'Pétanque' },
-    { name: 'volleyball', viewName: 'Volleyball' },
-    { name: 'waterpolo', viewName: 'Water-polo' },
-  ];
+  sports!: Sport[];
 
   tournamentPrivacies: string[] = [
     "Public",
@@ -85,17 +78,21 @@ export class TournamentFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private tournamentEntityMappers: TournamentEntityMappers,
-    private tournamentService: TournamentService) {
+    private tournamentService: TournamentService,
+    private sportService: SportService) {
     this.isDisplayedInscriptionLimitDate = false;
   }
 
   ngOnInit(): void {
     this.tournamentForm = new TournamentForm(this.fb)["form"];
+    this.sportService.getAllSports().subscribe((sports) => {
+      this.sports = sports;
+    })
   }
 
   toggleIncriptionLimitDate(event: any) {
     this.isDisplayedInscriptionLimitDate = !this.isDisplayedInscriptionLimitDate;
-    console.log(this.isDisplayedInscriptionLimitDate);
+    
     if (this.isDisplayedInscriptionLimitDate)
     {
       this.tournamentForm.controls["inscriptionLimitDate"].addValidators(Validators.required);
@@ -107,18 +104,9 @@ export class TournamentFormComponent implements OnInit {
     console.log(this.tournamentForm.controls["inscriptionLimitDate"].validator)
   }
 
-  logErrors() {
-    console.log(this.tournamentForm.errors);
-  }
-
-  logValues() {
-    console.log(this.tournamentForm.value);
-  }
-
   onSubmit() {
-    const newTournament: Tournament = this.tournamentEntityMappers.ToCreationEntity(this.tournamentForm);
-
     if (this.tournamentForm.valid) {
+      const newTournament: Tournament = this.tournamentEntityMappers.ToCreationEntity(this.tournamentForm);
       this.tournamentService.createTournament(newTournament);
     } else {
       console.log("Error submitting form");
