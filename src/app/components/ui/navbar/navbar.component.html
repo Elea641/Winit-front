@@ -32,6 +32,7 @@
     </button>
     <button mat-button (click)="toggleLogoButton()">CLASSEMENT</button>
     <button
+      *ngIf="!isUserEmpty(currentUser | async)"
       mat-button
       routerLink="/teams"
       (click)="toggleLogoButton(); unsubscribeFromSelectedTeam()"
