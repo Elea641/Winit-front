@@ -1,0 +1,15 @@
+<div class="member-detail-container">
+  <app-menu-buttons
+    [buttonLabels]="['create-member', 'list-member']"
+    (buttonClick)="onButtonClicked($event)"
+  >
+  </app-menu-buttons>
+
+  <div *ngIf="buttonValueClicked === 'list-member'">
+    <app-list-member></app-list-member>
+  </div>
+
+  <div *ngIf="buttonValueClicked === 'create-member'">
+    <app-create-member></app-create-member>
+  </div>
+</div>

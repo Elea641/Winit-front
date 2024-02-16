@@ -2,12 +2,12 @@
 @import "../../../../../assets/style/mixins.scss";
 
 .list-team-container {
-  padding: 0 1rem;
+  padding: 0 2rem;
 
   h1 {
     color: $secondary-color;
     font-weight: normal;
-    margin: 2rem 0.5rem 1rem 0.5rem;
+    margin: 1rem 0.5rem;
   }
 
   mat-divider {

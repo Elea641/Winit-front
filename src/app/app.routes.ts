@@ -18,6 +18,8 @@ import { ListTeamMembersComponent } from './profile/components/feature/list-team
 import { TeamDetailCardComponent } from './team/components/ui/team-detail-card/team-detail-card.component';
 import { TeamDetailPageComponent } from './team/pages/team-detail-page/team-detail-page.component';
 import { UserGuard } from './auth/core/user.guard';
+import { CreateMemberComponent } from './team/components/feature/create-member/create-member.component';
+import { ListMemberComponent } from './team/components/feature/list-member/list-member.component';
 
 export const routes: Routes = [
   {
@@ -56,11 +58,21 @@ export const routes: Routes = [
   {
     path: 'teams-details',
     component: TeamDetailPageComponent,
+    canActivate: [UserGuard],
     children: [
       {
         path: ':nameTeam',
         component: TeamDetailCardComponent,
-        canActivate: [UserGuard],
+        children: [
+          {
+            path: 'create-member',
+            component: CreateMemberComponent,
+          },
+          {
+            path: 'list-member',
+            component: ListMemberComponent,
+          },
+        ],
       },
     ],
   },
