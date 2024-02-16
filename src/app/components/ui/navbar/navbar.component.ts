@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { filter } from 'rxjs';
+import { BehaviorSubject, Observable, filter } from 'rxjs';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { TokenService } from 'src/app/auth/shared/token.service';
 import { TeamService } from 'src/app/team/shared/team.service';
@@ -28,6 +28,9 @@ export class NavbarComponent implements OnInit {
   currentUser!: any;
   isMobile: boolean | undefined = false;
   logoUrl: string = '../../../assets/pictures/logo-white.png';
+  private currentUserSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
 
   constructor(
     private router: Router,
@@ -52,6 +55,14 @@ export class NavbarComponent implements OnInit {
         window.scrollTo(0, 0);
       });
     this.currentUser = this.tokenService._getTokenDetailsSubject$();
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.currentUserSubject.asObservable();
+  }
+
+  isUserEmpty(user: any): boolean {
+    return !user || Object.keys(user).length === 0;
   }
 
   goToDisconnected(url: string) {

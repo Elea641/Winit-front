@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Team } from 'src/app/team/models/team.model';
 import { TeamService } from 'src/app/team/shared/team.service';

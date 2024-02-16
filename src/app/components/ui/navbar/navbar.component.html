@@ -42,14 +42,14 @@
   <span class="navbar-spacer"></span>
   <button
     mat-raised-button
-    *ngIf="!currentUser.source._value"
+    *ngIf="isUserEmpty(currentUser | async)"
     color="primary"
     routerLink="/auth/login"
   >
     CONNEXION
   </button>
   <button
-    *ngIf="currentUser.source._value"
+    *ngIf="!isUserEmpty(currentUser | async)"
     mat-icon-button
     aria-label="icon-button with account icon"
     [matMenuTriggerFor]="profil"
@@ -59,7 +59,7 @@
   </button>
   <mat-menu #profil="matMenu" class="navbar-custom-menu">
     <a
-      *ngIf="currentUser.source._value"
+      *ngIf="!isUserEmpty(currentUser | async)"
       mat-menu-item
       routerLink="/profile"
       (click)="unsubscribeFromSelectedTeam()"
@@ -68,7 +68,7 @@
       <span>Profil</span>
     </a>
     <a
-      *ngIf="currentUser.source._value"
+      *ngIf="!isUserEmpty(currentUser | async)"
       mat-menu-item
       (click)="goToDisconnected(''); unsubscribeFromSelectedTeam()"
     >
