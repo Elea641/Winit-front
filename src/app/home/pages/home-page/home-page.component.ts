@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { MatDividerModule } from '@angular/material/divider';
 import { CarouselComponent } from 'src/app/components/ui/carousel/carousel.component';
 import { SidebarComponent } from 'src/app/components/ui/sidebar/sidebar.component';
-import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-home-page',

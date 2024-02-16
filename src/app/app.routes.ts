@@ -11,9 +11,19 @@ import { TournamentFormComponent } from './tournament/components/feature/tournam
 import { BackOfficePageComponent } from './back-office/pages/back-office-page/back-office-page.component';
 import { AdminGuard } from './auth/core/admin.guard';
 import {UpdateProfilePageComponent} from "./profile/pages/update-profile-page/update-profile-page.component";
+import { TeamPageComponent } from './team/pages/team-page/team-page.component';
+import { CreateTeamComponent } from './team/components/feature/create-team/create-team.component';
+import { ListTeamComponent } from './team/components/feature/list-team/list-team.component';
+import { ListResultatsComponent } from './profile/components/feature/list-resultats/list-resultats.component';
+import { ListTeamMembersComponent } from './profile/components/feature/list-team-members/list-team-members.component';
 
 export const routes: Routes = [
-  { path: 'profile', component: ProfilePageComponent },
+  { path: 'profile', component: ProfilePageComponent,
+    children: [
+      { path: 'resultats', component: ListResultatsComponent },
+      { path: 'team', component: ListTeamMembersComponent },
+    ],
+  },
   { path: 'profile/:id([0-9]+)/update', component: UpdateProfilePageComponent },
   { path: 'contact', component: ContactPageComponent },
   { path: 'tournament', component: TournamentPageComponent },
@@ -23,6 +33,14 @@ export const routes: Routes = [
     path: 'back-office',
     component: BackOfficePageComponent,
     canActivate: [AdminGuard],
+  },
+  {
+    path: 'teams',
+    component: TeamPageComponent,
+    children: [
+      { path: 'create-team', component: CreateTeamComponent },
+      { path: 'list-team', component: ListTeamComponent },
+    ],
   },
   {
     path: 'auth',

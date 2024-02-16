@@ -3,18 +3,32 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
-import { TokenInterceptorInterceptor } from './core/token-interceptor.interceptor';
+import { provideToastr } from 'ngx-toastr';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { TokenInterceptor } from './auth/core/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
     provideAnimations(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorInterceptor,
+      useClass: TokenInterceptor,
       multi: true,
     },
+    provideAnimations(), // required animations providers
+    provideToastr({
+      timeOut: 4000,
+      progressBar: true,
+      positionClass: 'toast-bottom-right',
+      maxOpened: 4,
+      autoDismiss: true,
+      closeButton: true,
+    }), // Toastr providers
   ],
 };

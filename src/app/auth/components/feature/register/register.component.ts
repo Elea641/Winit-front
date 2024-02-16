@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,19 +7,18 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { RouterModule } from '@angular/router';
 import { Sport } from '../../../models/sport.model';
 import { User } from '../../../models/user.model';
-import { checkPasswordMatch } from '../../../shared/password-match';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AuthService } from '../../../shared/auth.service';
-import { Router, RouterModule } from '@angular/router';
-import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
+import { checkPasswordMatch } from '../../../shared/password-match';
 
 @Component({
   selector: 'app-register',
@@ -61,11 +60,7 @@ export class RegisterComponent implements OnInit {
     enabled: true,
   };
 
-  constructor(
-    public authService: AuthService,
-    private router: Router,
-    private localService: LocalStorageService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup(
@@ -131,32 +126,19 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    const newUser: User = {
-      firstName: this.firstName.value,
-      lastName: this.lastName.value,
-      sport: this.sport.value,
-      email: this.email.value,
-      password: this.password.value,
-      requiredRole: 'ROLE_USER',
-      createdAt: new Date(),
-      enabled: true,
-    };
+    if (this.registerForm.valid) {
+      const newUser: User = {
+        firstName: this.firstName.value,
+        lastName: this.lastName.value,
+        sport: this.sport.value,
+        email: this.email.value,
+        password: this.password.value,
+        requiredRole: 'ROLE_USER',
+        createdAt: new Date(),
+        enabled: true,
+      };
 
-    this.authService.postRegister(newUser).subscribe(
-      (response) => {
-        if (response === null) {
-          console.log('Response:', 'The form is invalid');
-        } else {
-          if(response) {
-            this.localService.clearToken();
-            this.router.navigate(['/auth/login']);
-            console.log('Response:', response);
-          }
-        }
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    );
+      this.authService.postRegister(newUser);
+    }
   }
 }
