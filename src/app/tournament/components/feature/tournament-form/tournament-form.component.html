@@ -3,14 +3,14 @@
         <h1 class="registration-title">Création d'un tournoi</h1>
         <mat-divider class="register-divider"></mat-divider>
 
-        <form [formGroup]="tournamentForm.form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()">
 
             <!-- Name -->
-            <mat-form-field appearance="outline" class="register-form-field">
+            <mat-form-field appearance="outline" class="wi-tournament-form-field-big register-form-field">
                 <mat-label for="name">Nom du tournoi</mat-label>
                 <input id="name" type="text" formControlName="name" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('name')?.invalid && (tournamentForm.form.get('name')?.dirty || tournamentForm.form.get('name')?.touched)" class="error-message-size"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('name')?.errors?.['required']">Nom du tournoi requis</small>
+                <mat-error *ngIf="tournamentForm.controls['name']?.invalid && (tournamentForm.controls['name']?.dirty || tournamentForm.controls['name']?.touched)" class="error-message-size"> 
+                    <small class="error" *ngIf="tournamentForm.controls['name']?.errors?.['required']">Nom du tournoi requis</small>
                 </mat-error>
             </mat-form-field>
 
@@ -18,8 +18,8 @@
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="place">Lieu du tournoi</mat-label>
                 <input id="place" type="text" formControlName="place" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('place')?.invalid && (tournamentForm.form.get('place')?.dirty || tournamentForm.form.get('place')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('place')?.errors?.['required']">Lieu du tournoi requis</small>
+                <mat-error *ngIf="tournamentForm.controls['place']?.invalid && (tournamentForm.controls['place']?.dirty || tournamentForm.controls['place']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['place']?.errors?.['required']">Lieu du tournoi requis</small>
                 </mat-error>
             </mat-form-field>
 
@@ -27,17 +27,37 @@
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="date">Date du tournoi</mat-label>
                 <input id="date" type="date" formControlName="date" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('date')?.invalid && (tournamentForm.form.get('date')?.dirty || tournamentForm.form.get('date')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('date')?.errors?.['required']">Date du tournoi requise</small>
+                <mat-error *ngIf="tournamentForm.controls['date']?.invalid && (tournamentForm.controls['date']?.dirty || tournamentForm.controls['date']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['date']?.errors?.['required']">Date du tournoi requise</small>
                 </mat-error>
             </mat-form-field>
+
+            <!-- Inscription Limit Date -->
+            <mat-checkbox (click)="toggleIncriptionLimitDate($event)">Fermer les inscriptions avant le début du tournoi</mat-checkbox>
+            <mat-form-field appearance="outline" class="wi-tournament-form-field-big register-form-field" [class.wi-displayLimitInscriptionDate]="!isDisplayedInscriptionLimitDate" [class.wi-hideLimitInscriptionDate]="isDisplayedInscriptionLimitDate">
+                <mat-label for="inscriptionLimitDate">Date limite d'inscription au tournoi</mat-label>
+                <input id="inscriptionLimitDate" type="date" formControlName="inscriptionLimitDate" matInput/>
+                <mat-error *ngIf="tournamentForm.controls['inscriptionLimitDate']?.invalid && (tournamentForm.controls['inscriptionLimitDate']?.dirty || tournamentForm.controls['inscriptionLimitDate']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['inscriptionLimitDate']?.errors?.['required']">Date limite d'inscription au tournoi requise</small>
+                </mat-error>
+            </mat-form-field>
+            <div class="mat-mdc-form-field-subscript-wrapper mat-mdc-form-field-bottom-align ng-tns-c1205077789-4" ng-reflect-ng-switch="hint" [class.wi-displayWrapper]="isDisplayedInscriptionLimitDate">
+                <div class="mat-mdc-form-field-hint-wrapper ng-tns-c1205077789-4 ng-trigger ng-trigger-transitionMessages ng-star-inserted" style="opacity: 1; transform: translateY(0%);">
+                    <div class="mat-mdc-form-field-hint-spacer ng-tns-c1205077789-4">
+                    </div>
+                </div>
+            </div>
 
             <!-- Sport -->
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="sport">Sport</mat-label>
-                <input id="sport" type="text" formControlName="sport" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('sport')?.invalid && (tournamentForm.form.get('sport')?.dirty || tournamentForm.form.get('sport')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('sport')?.errors?.['required']">Sport du tournoi requis</small>
+                <mat-select formControlName="sport">
+                    <mat-option *ngFor="let sport of sports" [value]="sport.name">
+                        {{ sport.viewName }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="tournamentForm.controls['sport']?.invalid && (tournamentForm.controls['sport']?.dirty || tournamentForm.controls['sport']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['sport']?.errors?.['required']">Sport du tournoi requis</small>
                 </mat-error>
             </mat-form-field>
 
@@ -45,8 +65,8 @@
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="playersPerTeam">Nombre de joueurs par équipes</mat-label>
                 <input id="playersPerTeam" type="number" formControlName="playersPerTeam" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('playersPerTeam')?.invalid && (tournamentForm.form.get('playersPerTeam')?.dirty || tournamentForm.form.get('playersPerTeam')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('playersPerTeam')?.errors?.['required']">Durée par match requise</small>
+                <mat-error *ngIf="tournamentForm.controls['playersPerTeam']?.invalid && (tournamentForm.controls['playersPerTeam']?.dirty || tournamentForm.controls['playersPerTeam']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['playersPerTeam']?.errors?.['required']">Durée par match requise</small>
                 </mat-error>
             </mat-form-field>
 
@@ -54,8 +74,8 @@
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="minTeams">Nombre min. d'équipes</mat-label>
                 <input id="minTeams" type="number" formControlName="minTeams" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('minTeams')?.invalid && (tournamentForm.form.get('minTeams')?.dirty || tournamentForm.form.get('minTeams')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('minTeams')?.errors?.['required']">Nombre min. d'équipes requis</small>
+                <mat-error *ngIf="tournamentForm.controls['minTeams']?.invalid && (tournamentForm.controls['minTeams']?.dirty || tournamentForm.controls['minTeams']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['minTeams']?.errors?.['required']">Nombre min. d'équipes requis</small>
                 </mat-error>
             </mat-form-field>
 
@@ -63,8 +83,8 @@
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="maxTeams">Nombre max d'équipes</mat-label>
                 <input id="maxTeams" type="number" formControlName="maxTeams" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('maxTeams')?.invalid && (tournamentForm.form.get('maxTeams')?.dirty || tournamentForm.form.get('maxTeams')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('maxTeams')?.errors?.['required']">Nombre max d'équipes requis</small>
+                <mat-error *ngIf="tournamentForm.controls['maxTeams']?.invalid && (tournamentForm.controls['maxTeams']?.dirty || tournamentForm.controls['maxTeams']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['maxTeams']?.errors?.['required']">Nombre max d'équipes requis</small>
                 </mat-error>
             </mat-form-field>
 
@@ -72,48 +92,55 @@
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="gameLength">Durée par match</mat-label>
                 <input id="gameLength" type="number" formControlName="gameLength" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('gameLength')?.invalid && (tournamentForm.form.get('gameLength')?.dirty || tournamentForm.form.get('gameLength')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('gameLength')?.errors?.['required']">Durée par match requise</small>
+                <mat-error *ngIf="tournamentForm.controls['gameLength']?.invalid && (tournamentForm.controls['gameLength']?.dirty || tournamentForm.controls['gameLength']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['gameLength']?.errors?.['required']">Durée par match requise</small>
                 </mat-error>
             </mat-form-field>
 
             <!-- Privacy -->
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="privacy">Visibilité</mat-label>
-                <input id="privacy" type="text" formControlName="privacy" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('privacy')?.invalid && (tournamentForm.form.get('privacy')?.dirty || tournamentForm.form.get('privacy')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('privacy')?.errors?.['required']">Visibilité requise</small>
+                <mat-select formControlName="privacy">
+                    <mat-option *ngFor="let tournamentPrivacy of tournamentPrivacies" [value]="tournamentPrivacy">
+                        {{ tournamentPrivacy }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="tournamentForm.controls['privacy']?.invalid && (tournamentForm.controls['privacy']?.dirty || tournamentForm.controls['privacy']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['privacy']?.errors?.['required']">Visibilité requise</small>
                 </mat-error>
             </mat-form-field>
 
             <!-- Player Category -->
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="playerCategory">Catégorie</mat-label>
-                <input id="playerCategory" type="text" formControlName="playerCategory" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('playerCategory')?.invalid && (tournamentForm.form.get('playerCategory')?.dirty || tournamentForm.form.get('playerCategory')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('playerCategory')?.errors?.['required']">Catégorie requise</small>
+                <mat-select formControlName="playerCategory">
+                    <mat-option *ngFor="let playerCategory of playerCategories" [value]="playerCategory">
+                        {{ playerCategory }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="tournamentForm.controls['playerCategory']?.invalid && (tournamentForm.controls['playerCategory']?.dirty || tournamentForm.controls['playerCategory']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['playerCategory']?.errors?.['required']">Catégorie requise</small>
                 </mat-error>
             </mat-form-field>
 
             <!-- Tournament Format -->
             <mat-form-field appearance="outline" class="register-form-field">
                 <mat-label for="tournamentFormat">Format</mat-label>
-                <input id="tournamentFormat" type="text" formControlName="tournamentFormat" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('tournamentFormat')?.invalid && (tournamentForm.form.get('tournamentFormat')?.dirty || tournamentForm.form.get('tournamentFormat')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('tournamentFormat')?.errors?.['required']">Catégorie requise</small>
+                <mat-select formControlName="tournamentFormat">
+                    <mat-option *ngFor="let tournamentFormat of tournamentFormats" [value]="tournamentFormat">
+                        {{ tournamentFormat }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="tournamentForm.controls['tournamentFormat']?.invalid && (tournamentForm.controls['tournamentFormat']?.dirty || tournamentForm.controls['tournamentFormat']?.touched)"> 
+                    <small class="error" *ngIf="tournamentForm.controls['tournamentFormat']?.errors?.['required']">Catégorie requise</small>
                 </mat-error>
             </mat-form-field>
 
             <!-- Tournament Banner -->
-            <mat-form-field appearance="outline" class="register-form-field">
-                <mat-label for="tournamentBanner">Bannière du tournoi</mat-label>
-                <input id="tournamentBanner" type="text" formControlName="tournamentBanner" matInput/>
-                <mat-error *ngIf="tournamentForm.form.get('tournamentBanner')?.invalid && (tournamentForm.form.get('tournamentBanner')?.dirty || tournamentForm.form.get('tournamentBanner')?.touched)"> 
-                    <small class="error" *ngIf="tournamentForm.form.get('tournamentBanner')?.errors?.['required']">Bannière requise</small>
-                </mat-error>
-            </mat-form-field>
+            <app-file-upload [groupParent]="tournamentForm" formControlNameValue="tournamentBanner" labelValue="Bannière du tournoi"></app-file-upload>
+
             <div class="button-container">
-                <button mat-raised-button color="primary" type="submit" class="register-button" [disabled]="tournamentForm.form.invalid">Submit</button>
+                <button mat-raised-button color="primary" type="submit" class="register-button" [disabled]="tournamentForm.invalid">CREER LE TOURNOI</button>
             </div>
 
         </form>
