@@ -17,11 +17,13 @@ import { ListResultatsComponent } from './profile/components/feature/list-result
 import { ListTeamMembersComponent } from './profile/components/feature/list-team-members/list-team-members.component';
 import { TeamDetailCardComponent } from './team/components/ui/team-detail-card/team-detail-card.component';
 import { TeamDetailPageComponent } from './team/pages/team-detail-page/team-detail-page.component';
+import { UserGuard } from './auth/core/user.guard';
 
 export const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent,
+    canActivate: [UserGuard],
     children: [
       { path: 'resultats', component: ListResultatsComponent },
       { path: 'team', component: ListTeamMembersComponent },
@@ -39,15 +41,28 @@ export const routes: Routes = [
   {
     path: 'teams',
     component: TeamPageComponent,
+    canActivate: [UserGuard],
     children: [
-      { path: 'create-team', component: CreateTeamComponent },
-      { path: 'list-team', component: ListTeamComponent },
+      {
+        path: 'create-team',
+        component: CreateTeamComponent,
+      },
+      {
+        path: 'list-team',
+        component: ListTeamComponent,
+      },
     ],
   },
   {
     path: 'teams-details',
     component: TeamDetailPageComponent,
-    children: [{ path: ':nameTeam', component: TeamDetailCardComponent }],
+    children: [
+      {
+        path: ':nameTeam',
+        component: TeamDetailCardComponent,
+        canActivate: [UserGuard],
+      },
+    ],
   },
   {
     path: 'auth',
