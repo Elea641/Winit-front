@@ -1,0 +1,8 @@
+<div *ngIf="selectedTeam" class="team-list-card-container">
+  <h1>VOTRE ÉQUIPE</h1>
+  <mat-divider></mat-divider>
+  <div class="team-list-card-infos-container">
+    <h1>{{ selectedTeam.name | uppercase }}</h1>
+    <h2>{{ selectedTeam.sport | titlecase }}</h2>
+  </div>
+</div>
