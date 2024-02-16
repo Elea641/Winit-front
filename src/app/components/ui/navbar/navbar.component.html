@@ -3,7 +3,11 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu" class="navbar-custom-menu">
-    <button mat-menu-item routerLink="/tournament" (click)="toggleLogoButton()">
+    <button
+      mat-menu-item
+      routerLink="/tournament"
+      (click)="toggleLogoButton(); unsubscribeFromSelectedTeam()"
+    >
       PLANNING
     </button>
     <button mat-menu-item (click)="toggleLogoButton()">CLASSEMENT</button>
@@ -11,29 +15,41 @@
       ÉQUIPES
     </button>
   </mat-menu>
-  <a class="navbar-button-logo" routerLink="/home" (click)="toggleLogo()">
+  <a
+    class="navbar-button-logo"
+    routerLink="/home"
+    (click)="toggleLogo(); unsubscribeFromSelectedTeam()"
+  >
     <img [src]="logoUrl" alt="logo_WinIt" />
   </a>
   <div class="container-buttons-navbar-left" *ngIf="!isMobile">
-    <button mat-button routerLink="/tournament" (click)="toggleLogoButton()">
+    <button
+      mat-button
+      routerLink="/tournament"
+      (click)="toggleLogoButton(); unsubscribeFromSelectedTeam()"
+    >
       PLANNING
     </button>
     <button mat-button (click)="toggleLogoButton()">CLASSEMENT</button>
-    <button mat-button routerLink="/teams" (click)="toggleLogoButton()">
+    <button
+      mat-button
+      routerLink="/teams"
+      (click)="toggleLogoButton(); unsubscribeFromSelectedTeam()"
+    >
       ÉQUIPES
     </button>
   </div>
   <span class="navbar-spacer"></span>
   <button
     mat-raised-button
-    *ngIf="!currentUser.source._value"
+    *ngIf="isUserEmpty(currentUser | async)"
     color="primary"
     routerLink="/auth/login"
   >
     CONNEXION
   </button>
   <button
-    *ngIf="currentUser.source._value"
+    *ngIf="!isUserEmpty(currentUser | async)"
     mat-icon-button
     aria-label="icon-button with account icon"
     [matMenuTriggerFor]="profil"
@@ -42,14 +58,19 @@
     <mat-icon>person</mat-icon>
   </button>
   <mat-menu #profil="matMenu" class="navbar-custom-menu">
-    <a *ngIf="currentUser.source._value" mat-menu-item routerLink="/profile">
+    <a
+      *ngIf="!isUserEmpty(currentUser | async)"
+      mat-menu-item
+      routerLink="/profile"
+      (click)="unsubscribeFromSelectedTeam()"
+    >
       <mat-icon>person</mat-icon>
       <span>Profil</span>
     </a>
     <a
-      *ngIf="currentUser.source._value"
+      *ngIf="!isUserEmpty(currentUser | async)"
       mat-menu-item
-      (click)="goToDisconnected('')"
+      (click)="goToDisconnected(''); unsubscribeFromSelectedTeam()"
     >
       <mat-icon>logout</mat-icon>
       <span>Sign out</span>
