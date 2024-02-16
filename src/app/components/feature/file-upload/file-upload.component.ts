@@ -34,6 +34,7 @@ export class FileUploadComponent {
 
   clearUploadFile() {
     this.groupParent.controls[this.formControlNameValue].setValue(null);
+    this.groupParent.controls[this.formControlNameValue].updateValueAndValidity();
   }
 
   getControlErrors(control: AbstractControl) {
