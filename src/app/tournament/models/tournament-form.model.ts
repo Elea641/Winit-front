@@ -10,19 +10,44 @@ export class TournamentForm {
 
     private createForm() {
         return this.fb.group({
-            name: ['', Validators.required],
-            place: ['', Validators.required],
-            date: ['', Validators.required],
+            name: ['', [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(30)
+            ]],
+            place: ['', [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(30)
+            ]],
+            date: ['', [
+                Validators.required,
+                // dateTournamentCreationValidator()
+            ]],
             inscriptionLimitDate: [''],
-            sport: ['', Validators.required],
+            sport: ['', [
+                Validators.required,
+                // sportTournamentCreationValidator()
+            ]],
             playersPerTeam: ['', Validators.required],
             minTeams: [''],
             maxTeams: ['', Validators.required],
             gameLength: ['', Validators.required],
-            privacy: ['', Validators.required],
-            playerCategory: ['', Validators.required],
-            tournamentFormat: ['', Validators.required],
-            tournamentBanner: [null]
+            privacy: ['', [
+                Validators.required,
+                // privacyTournamentCreationValidator()
+            ]],
+            playerCategory: ['', [
+                Validators.required,
+                // playerCategoryTournamentCreationValidator()
+            ]],
+            tournamentFormat: ['', [
+                Validators.required,
+                // formatTournamentCreationValidator()
+            ]],
+            tournamentBanner: [null,
+                // bannerTournamentCreationValidator() 
+            ]
         })
     }
 }
