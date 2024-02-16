@@ -6,6 +6,7 @@ import { TeamMembers } from '../models/teamMembers.model';
 import {User} from "../../auth/models/user.model";
 import {environment} from "../../../environments/environment";
 import {LocalStorageService} from "../../auth/shared/local-storage.service";
+import {CurrentUser} from "../../auth/models/current-user.model";
 
 @Injectable({
   providedIn: 'root',
@@ -30,12 +31,10 @@ export class ProfileService {
   }
 
   updateProfile(userId: number, user: User): Observable<User> {
-    const token = this.lsService.getToken();
-    const headers = new HttpHeaders()
-      .set('Authorization', 'Bearer ' + token)
-      .set('Content-Type', 'application/json');
-    const options = { headers: headers };
+    return this.http.put<User>(`${environment.urlApi}/users/${userId}`, user);
+  }
 
-    return this.http.put<User>(`${environment.urlApi}/users/${userId}`, user, options);
+  getCurrentUser(): Observable<CurrentUser> {
+    return this.http.get<CurrentUser>(`${environment.urlApi}/users/myself`);
   }
 }

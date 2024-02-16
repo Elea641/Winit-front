@@ -35,6 +35,7 @@ export class UpdateProfileComponent implements OnInit {
     firstName: 'Coline',
     lastName: 'Guerin',
     email: 'coco@gmail.com',
+    city: 'Bordeaux'
   };
 
   constructor(
