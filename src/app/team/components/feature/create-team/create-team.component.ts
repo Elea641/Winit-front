@@ -7,9 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Sport } from 'src/app/models/sport.model';
-import { SportService } from 'src/app/shared/sport.service';
-import { Team } from 'src/app/team/models/team.model';
+import { SportService } from 'src/app/sport/shared/sport.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { TeamService } from 'src/app/team/shared/team.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { CreatedTeam } from 'src/app/team/models/created-team.model';
+import { Sport } from 'src/app/auth/models/sport.model';
 
 @Component({
   selector: 'app-create-team',

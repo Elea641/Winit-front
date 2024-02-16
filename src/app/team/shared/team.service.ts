@@ -11,6 +11,11 @@ import { CreatedTeam } from '../models/created-team.model';
   providedIn: 'root',
 })
 export class TeamService {
+  private selectedTeamSubject: BehaviorSubject<Team | null> =
+    new BehaviorSubject<Team | null>(null);
+  private isSelectedSubject: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+
   constructor(
     public http: HttpClient,
     private router: Router,
@@ -38,5 +43,23 @@ export class TeamService {
         }
       }
     );
+  }
+
+  setSelectTeam(team: Team): void {
+    this.selectedTeamSubject.next(team);
+    this.isSelectedSubject.next(true);
+  }
+
+  unselectTeam(): void {
+    this.selectedTeamSubject.next(null);
+    this.isSelectedSubject.next(false);
+  }
+
+  getSelectedTeam(): Observable<Team | null> {
+    return this.selectedTeamSubject.asObservable();
+  }
+
+  isSelectedTeam(): Observable<boolean> {
+    return this.isSelectedSubject.asObservable();
   }
 }

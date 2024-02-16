@@ -8,6 +8,8 @@
     }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions class="team-list-card-actions">
-    <button color="primary" mat-stroked-button>VOIR</button>
+    <button color="primary" mat-stroked-button (click)="onSelectTeam(team)">
+      VOIR
+    </button>
   </mat-card-actions>
 </mat-card>

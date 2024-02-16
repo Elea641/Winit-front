@@ -15,6 +15,7 @@ import { CreateTeamComponent } from './team/components/feature/create-team/creat
 import { ListTeamComponent } from './team/components/feature/list-team/list-team.component';
 import { ListResultatsComponent } from './profile/components/feature/list-resultats/list-resultats.component';
 import { ListTeamMembersComponent } from './profile/components/feature/list-team-members/list-team-members.component';
+import { TeamDetailCardComponent } from './team/components/ui/team-detail-card/team-detail-card.component';
 
 export const routes: Routes = [
   {

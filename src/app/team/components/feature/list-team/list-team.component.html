@@ -3,7 +3,7 @@
   <mat-divider class="team-divider"></mat-divider>
   <div class="list-team-cards-container">
     <app-team-list-card
-      *ngFor="let team of teams"
+      *ngFor="let team of teams$ | async"
       [team]="team"
     ></app-team-list-card>
   </div>

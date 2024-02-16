@@ -4,6 +4,7 @@ import { TeamService } from 'src/app/team/shared/team.service';
 import { Team } from 'src/app/team/models/team.model';
 import { TeamListCardComponent } from '../../ui/team-list-card/team-list-card.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-team',
@@ -13,12 +14,10 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrls: ['./list-team.component.scss'],
 })
 export class ListTeamComponent {
-  teams: Team[] = [];
+  teams$: Observable<Team[]> = new Observable<Team[]>();
   constructor(private teamService: TeamService) {}
 
   ngOnInit(): void {
-    this.teamService.getAllTeamsByUser().subscribe((teams) => {
-      this.teams = teams;
-    });
+    this.teams$ = this.teamService.getAllTeamsByUser();
   }
 }

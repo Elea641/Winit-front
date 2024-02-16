@@ -8,6 +8,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { TokenService } from 'src/app/auth/shared/token.service';
+import { TeamService } from 'src/app/team/shared/team.service';
 
 @Component({
   selector: 'app-navbar',
@@ -30,9 +31,9 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private el: ElementRef,
     private breakpointService: BreakpointService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private teamService: TeamService
   ) {
     this.isMobile = this.breakpointService.isMobileDevice();
     this.breakpointService.deviceChanged['isMobile'].subscribe(
@@ -50,8 +51,7 @@ export class NavbarComponent implements OnInit {
       .subscribe(() => {
         window.scrollTo(0, 0);
       });
-
-    this.addClickOutsideListener();
+    this.teamService.unselectTeam();
     this.currentUser = this.tokenService._getTokenDetailsSubject$();
   }
 
@@ -68,15 +68,5 @@ export class NavbarComponent implements OnInit {
 
   toggleLogoButton() {
     this.logoUrl = '../../../assets/pictures/logo-white.png';
-  }
-
-  private addClickOutsideListener() {
-    document.addEventListener('click', (event) => {
-      const clickedElement = event.target as HTMLElement;
-
-      if (!this.el.nativeElement.contains(clickedElement)) {
-        this.logoUrl = '../../../assets/pictures/logo-white.png';
-      }
-    });
   }
 }

@@ -4,12 +4,16 @@
     (buttonClick)="onButtonClicked($event)"
   >
   </app-menu-buttons>
-
-  <div *ngIf="buttonValueClicked === 'list-team'">
-    <app-list-team></app-list-team>
+  <div *ngIf="isSelectedTeam$ | async">
+    <app-team-detail-card></app-team-detail-card>
   </div>
+  <div *ngIf="!(isSelectedTeam$ | async)">
+    <div *ngIf="buttonValueClicked === 'list-team'">
+      <app-list-team></app-list-team>
+    </div>
 
-  <div *ngIf="buttonValueClicked === 'create-team'">
-    <app-create-team></app-create-team>
+    <div *ngIf="buttonValueClicked === 'create-team'">
+      <app-create-team></app-create-team>
+    </div>
   </div>
 </div>
