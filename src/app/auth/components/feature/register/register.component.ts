@@ -138,34 +138,7 @@ export class RegisterComponent implements OnInit {
         enabled: true,
       };
 
-<<<<<<< HEAD
-      this.authService.postRegister(newUser).subscribe(
-        (response) => {
-          if (response) {
-            this.localService.clearToken();
-            this.router.navigate(['/auth/login']);
-            this.toastService.showSuccess(
-              'Vous pouvez vous connecter',
-              'Compte créé avec succès'
-            );
-          }
-        },
-        (error) => {
-          console.log(error);
-
-          if (error.error.error_message == 'Email already taken.') {
-            console.log(error.error.error_message, 'dedans');
-
-            this.isMailTaken = true;
-            this.registerForm.controls['email'].setErrors({
-              isMailTaken: true,
-            });
-          }
-        }
-      );
-=======
       this.authService.postRegister(newUser);
->>>>>>> 715cc12760fd440456d4d7588a26689158321cb7
     }
   }
 }
