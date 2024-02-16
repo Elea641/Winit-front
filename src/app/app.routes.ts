@@ -10,9 +10,11 @@ import { LoginFormComponent } from './auth/components/feature/login-form/login-f
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { BackOfficePageComponent } from './back-office/pages/back-office-page/back-office-page.component';
 import { AdminGuard } from './auth/core/admin.guard';
+import {UpdateProfilePageComponent} from "./profile/pages/update-profile-page/update-profile-page.component";
 
 export const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
+  { path: 'profile/:id([0-9]+)/update', component: UpdateProfilePageComponent },
   { path: 'contact', component: ContactPageComponent },
   { path: 'tournament', component: TournamentPageComponent },
   { path: 'tournament/create', component: TournamentFormComponent },
