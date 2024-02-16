@@ -14,9 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { Router, RouterModule } from '@angular/router';
-import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
-import { ToastService } from 'src/app/shared/toast.service';
+import { RouterModule } from '@angular/router';
 import { Sport } from '../../../models/sport.model';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../shared/auth.service';
@@ -62,14 +60,7 @@ export class RegisterComponent implements OnInit {
     enabled: true,
   };
 
-  public isMailTaken: boolean = false;
-
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private localService: LocalStorageService,
-    private toastService: ToastService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup(
@@ -147,6 +138,7 @@ export class RegisterComponent implements OnInit {
         enabled: true,
       };
 
+<<<<<<< HEAD
       this.authService.postRegister(newUser).subscribe(
         (response) => {
           if (response) {
@@ -171,6 +163,9 @@ export class RegisterComponent implements OnInit {
           }
         }
       );
+=======
+      this.authService.postRegister(newUser);
+>>>>>>> 715cc12760fd440456d4d7588a26689158321cb7
     }
   }
 }

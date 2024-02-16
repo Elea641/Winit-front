@@ -20,5 +20,6 @@ export class TeamListCardComponent {
 
   onSelectTeam(team: Team): void {
     this.teamService.setSelectTeam(team);
+    this.router.navigate([`teams-details/${team.name}`]);
   }
 }

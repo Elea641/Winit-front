@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { TokenResponse } from '../models/token.model';
 import { UserAuth } from '../models/user-auth.model';
 import { User } from '../models/user.model';
+import { LocalStorageService } from './local-storage.service';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -26,27 +27,57 @@ export class AuthService {
     public http: HttpClient,
     private tokenService: TokenService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private localStorageService: LocalStorageService
   ) {}
 
-  postRegister(user: User): Observable<User> {
-    return this.http.post<User>(`${environment.urlApi}/auth/register`, user);
+  postRegister(user: User): void {
+    this.http.post<User>(`${environment.urlApi}/auth/register`, user).subscribe(
+      (response) => {
+        if (response) {
+          this.localStorageService.clearToken();
+          this.router.navigate(['/auth/login']);
+          this.toastService.showSuccess(
+            'Vous pouvez vous connecter',
+            'Compte créé avec succès'
+          );
+        }
+      },
+      (error) => {
+        if (error.error.error_message === 'Email already taken.') {
+          this.toastService.showError(
+            'Un compte avec cette adresse mail existe déjà.',
+            'Inscription impossible'
+          );
+        }
+      }
+    );
   }
 
   // Je me connecte : j'envoie mon objet UserAuth et je m'abonne à la réponse de mon serveur. Lorsque je la reçois, je reçois le token que je stock en localStorage.
   signIn(userAuth: UserAuth): void {
     this.tokenService.resetToken();
 
-    this.http
-      .post<any>(`${environment.urlApi}/auth/login`, userAuth)
-      .subscribe((tokenFromDB: TokenResponse) => {
-        this.tokenService.updateToken(tokenFromDB);
-        this.router.navigate(['/']);
-        this.toastService.showSuccess(
-          'bravo félicitations',
-          'Connexion réussie'
-        );
-      });
+    this.http.post<any>(`${environment.urlApi}/auth/login`, userAuth).subscribe(
+      (tokenFromDB: TokenResponse) => {
+        if (tokenFromDB) {
+          this.tokenService.updateToken(tokenFromDB);
+          this.router.navigate(['/']);
+          this.toastService.showSuccess(
+            'bravo félicitations',
+            'Connexion réussie'
+          );
+        }
+      },
+      (error) => {
+        if (error.error.bad_credentials === 'true') {
+          this.toastService.showError(
+            'La combinaison email / mot de passe est incorrecte.',
+            'Connexion impossible'
+          );
+        }
+      }
+    );
   }
 
   getHttpErrorSubject$(): Observable<HttpErrorResponse> {

@@ -16,6 +16,7 @@ import { ListTeamComponent } from './team/components/feature/list-team/list-team
 import { ListResultatsComponent } from './profile/components/feature/list-resultats/list-resultats.component';
 import { ListTeamMembersComponent } from './profile/components/feature/list-team-members/list-team-members.component';
 import { TeamDetailCardComponent } from './team/components/ui/team-detail-card/team-detail-card.component';
+import { TeamDetailPageComponent } from './team/pages/team-detail-page/team-detail-page.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,11 @@ export const routes: Routes = [
       { path: 'create-team', component: CreateTeamComponent },
       { path: 'list-team', component: ListTeamComponent },
     ],
+  },
+  {
+    path: 'teams-details',
+    component: TeamDetailPageComponent,
+    children: [{ path: ':nameTeam', component: TeamDetailCardComponent }],
   },
   {
     path: 'auth',

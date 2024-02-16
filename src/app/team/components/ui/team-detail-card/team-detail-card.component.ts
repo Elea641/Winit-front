@@ -2,11 +2,12 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Team } from 'src/app/team/models/team.model';
 import { TeamService } from 'src/app/team/shared/team.service';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-team-detail-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatDividerModule],
   templateUrl: './team-detail-card.component.html',
   styleUrls: ['./team-detail-card.component.scss'],
 })

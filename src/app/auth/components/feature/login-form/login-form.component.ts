@@ -35,6 +35,7 @@ import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
 export class LoginFormComponent implements OnInit {
   loginForm!: FormGroup;
   userAuth: UserAuth = new UserAuth('', '');
+  isBadCredentials: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -57,8 +58,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userAuth = new UserAuth(this.email.value, this.password.value);
-    this.localService.clearToken();
-    this.authService.signIn(this.userAuth);
+    if (this.loginForm.valid) {
+      this.userAuth = new UserAuth(this.email.value, this.password.value);
+      this.localService.clearToken();
+      this.authService.signIn(this.userAuth);
+    }
   }
 }
