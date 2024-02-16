@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -51,7 +51,6 @@ export class NavbarComponent implements OnInit {
       .subscribe(() => {
         window.scrollTo(0, 0);
       });
-    this.teamService.unselectTeam();
     this.currentUser = this.tokenService._getTokenDetailsSubject$();
   }
 
@@ -68,5 +67,9 @@ export class NavbarComponent implements OnInit {
 
   toggleLogoButton() {
     this.logoUrl = '../../../assets/pictures/logo-white.png';
+  }
+
+  unsubscribeFromSelectedTeam(): void {
+    this.teamService.unselectTeam();
   }
 }
