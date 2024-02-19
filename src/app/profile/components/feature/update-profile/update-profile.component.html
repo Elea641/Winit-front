@@ -24,20 +24,20 @@
       <mat-form-field appearance="outline" class="update-profile-form-field">
         <mat-label>Ville</mat-label>
         <input matInput type="text" formControlName="city">
-        <mat-error *ngIf="lastName?.errors && !lastName?.pristine"
+        <mat-error *ngIf="city?.errors && !city?.pristine"
                    class="error-message-size">
           Ville invalide
         </mat-error>
       </mat-form-field>
 
-      <!--<mat-form-field appearance="outline" class="update-profile-form-field">
+      <mat-form-field appearance="outline" class="update-profile-form-field">
         <mat-label>Sport pratiqué</mat-label>
         <mat-select formControlName="sport">
           <mat-option *ngFor="let sport of sports" [value]="sport.name">
-            {{ sport.viewName }}
+            {{ sport.name }}
           </mat-option>
         </mat-select>
-      </mat-form-field>-->
+      </mat-form-field>
 
       <mat-form-field appearance="outline" class="update-profile-form-field">
         <mat-label>Adresse email</mat-label>
@@ -47,11 +47,6 @@
           Email invalide
         </mat-error>
       </mat-form-field>
-
-      <!--<div>
-        <label for="profileImage">Photo de profil :</label>
-        <input type="file" id="profileImage" formControlName="profileImage">
-      </div>-->
 
       <div class="button-container">
         <button mat-raised-button color="primary" type="submit">VALIDER</button>
