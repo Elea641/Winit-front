@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ListMemberComponent } from '../list-member/list-member.component';
 import { CreateMemberComponent } from '../create-member/create-member.component';
 import { MenuButtonsComponent } from 'src/app/components/ui/menu-buttons/menu-buttons.component';
-import { TeamDetailCardComponent } from '../../ui/team-detail-card/team-detail-card.component';
-
 @Component({
   selector: 'app-member-detail',
   standalone: true,
@@ -13,7 +11,6 @@ import { TeamDetailCardComponent } from '../../ui/team-detail-card/team-detail-c
     ListMemberComponent,
     CreateMemberComponent,
     MenuButtonsComponent,
-    TeamDetailCardComponent,
   ],
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.scss'],

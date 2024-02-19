@@ -65,6 +65,11 @@ export const routes: Routes = [
         component: TeamDetailCardComponent,
         children: [
           {
+            path: '',
+            redirectTo: 'list-member',
+            pathMatch: 'full',
+          },
+          {
             path: 'create-member',
             component: CreateMemberComponent,
           },
