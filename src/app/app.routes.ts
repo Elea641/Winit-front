@@ -20,6 +20,7 @@ import { TeamDetailPageComponent } from './team/pages/team-detail-page/team-deta
 import { UserGuard } from './auth/core/user.guard';
 import { CreateMemberComponent } from './team/components/feature/create-member/create-member.component';
 import { ListMemberComponent } from './team/components/feature/list-member/list-member.component';
+import { teamResolver } from './team/shared/team-resolver';
 
 export const routes: Routes = [
   {
@@ -61,8 +62,10 @@ export const routes: Routes = [
     canActivate: [UserGuard],
     children: [
       {
-        path: ':nameTeam',
+        path: ':teamName',
         component: TeamDetailCardComponent,
+        resolve: { team: teamResolver },
+
         children: [
           {
             path: '',

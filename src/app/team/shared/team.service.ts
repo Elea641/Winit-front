@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Team } from '../models/team.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
 import { CreatedTeam } from '../models/created-team.model';
 
@@ -26,11 +26,17 @@ export class TeamService {
     return this.http.get<Team[]>(`${environment.urlApi}/teams`);
   }
 
+  getTeamByTeamName(teamName: string): Observable<Team> {
+    return this.http.get<Team>(`${environment.urlApi}/teams/${teamName}`);
+  }
+
   addTeam(team: CreatedTeam): void {
     this.http.post<any>(`${environment.urlApi}/teams`, team).subscribe(
       (response) => {
         if (response) {
-          this.router.navigate(['/']);
+          console.log(team.name);
+
+          this.router.navigate([`/teams-details/${team.name}`]);
           this.toastService.showSuccess(
             'Bravo félicitations',
             'Création de votre équipe'

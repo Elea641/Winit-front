@@ -16,6 +16,6 @@
   }
 
   .list-team-cards-container {
-    @include flex-wrap;
+    @include flex-wrap-left;
   }
 }
