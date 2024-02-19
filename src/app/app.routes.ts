@@ -10,6 +10,7 @@ import { LoginFormComponent } from './auth/components/feature/login-form/login-f
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { BackOfficePageComponent } from './back-office/pages/back-office-page/back-office-page.component';
 import { AdminGuard } from './auth/core/admin.guard';
+import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { CreateTeamComponent } from './team/components/feature/create-team/create-team.component';
 import { ListTeamComponent } from './team/components/feature/list-team/list-team.component';
@@ -32,6 +33,11 @@ export const routes: Routes = [
       { path: 'team', component: ListTeamMembersComponent },
     ],
   },
+  {
+    path: 'profile/update',
+    component: UpdateProfilePageComponent,
+    canActivate: [UserGuard],
+  },
   { path: 'contact', component: ContactPageComponent },
   { path: 'tournament', component: TournamentPageComponent },
   { path: 'tournament/create', component: TournamentFormComponent },
@@ -44,7 +50,6 @@ export const routes: Routes = [
   {
     path: 'teams',
     component: TeamPageComponent,
-    canActivate: [UserGuard],
     children: [
       {
         path: 'create-team',
