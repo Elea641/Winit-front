@@ -1,14 +1,14 @@
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
+import { forbiddenFileFormat } from "../shared/validators/forbidden-file-format.directive";
+import { SportService } from "src/app/sport/shared/sport.service";
 import { minimumDate } from "../shared/validators/minimum-date.directive";
-import { SportService } from "src/app/shared/sport.service";
-import { FileInputValidators } from "@ngx-dropzone/cdk";
-import { maximumDate } from "../shared/validators/maximum-date.directive";
 import { allowedSports } from "../shared/validators/allowed-sports.directive";
 import { enumValidator } from "../shared/validators/allowed-enums.directive";
 import { TournamentPrivacyEnum } from "./enum/tournamentPrivacyEnum";
 import { PlayerCategoryEnum } from "./enum/playerCategoryEnum";
 import { TournamentFormatEnum } from "./enum/tournamentFormatEnum";
-import { forbiddenFileFormat } from "../shared/validators/forbidden-file-format.directive";
+import { maximumDate } from "../shared/validators/maximum-date.directive";
 
 
 export class TournamentForm {
