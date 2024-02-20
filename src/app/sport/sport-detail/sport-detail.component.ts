@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
+import { GetImageService } from 'src/app/shared/get-image.service';
 
 @Component({
   selector: 'app-sport-detail',
@@ -13,19 +13,11 @@ export class SportDetailComponent {
   @Input() sport: any;
   image: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private getImageService: GetImageService) {}
 
   ngOnInit() {
-    this.http
-      .get(`http://localhost:8080/uploads/${this.sport.imageUrl}`, {
-        responseType: 'blob',
-      })
-      .subscribe((response) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          this.image = reader.result as string;
-        };
-        reader.readAsDataURL(response);
-      });
+    this.getImageService.getImage(this.sport.imageUrl).subscribe((data) => {
+      this.image = data;
+    });
   }
 }
