@@ -10,21 +10,34 @@ import { LoginFormComponent } from './auth/components/feature/login-form/login-f
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { BackOfficePageComponent } from './back-office/pages/back-office-page/back-office-page.component';
 import { AdminGuard } from './auth/core/admin.guard';
-import { UpdateProfilePageComponent } from "./profile/pages/update-profile-page/update-profile-page.component";
+import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { CreateTeamComponent } from './team/components/feature/create-team/create-team.component';
 import { ListTeamComponent } from './team/components/feature/list-team/list-team.component';
 import { ListResultatsComponent } from './profile/components/feature/list-resultats/list-resultats.component';
 import { ListTeamMembersComponent } from './profile/components/feature/list-team-members/list-team-members.component';
+import { TeamDetailCardComponent } from './team/components/ui/team-detail-card/team-detail-card.component';
+import { TeamDetailPageComponent } from './team/pages/team-detail-page/team-detail-page.component';
+import { UserGuard } from './auth/core/user.guard';
+import { CreateMemberComponent } from './team/components/feature/create-member/create-member.component';
+import { ListMemberComponent } from './team/components/feature/list-member/list-member.component';
+import { teamResolver } from './team/shared/team-resolver';
 
 export const routes: Routes = [
-  { path: 'profile', component: ProfilePageComponent,
+  {
+    path: 'profile',
+    component: ProfilePageComponent,
+    canActivate: [UserGuard],
     children: [
       { path: 'resultats', component: ListResultatsComponent },
       { path: 'team', component: ListTeamMembersComponent },
     ],
   },
-  { path: 'profile/update', component: UpdateProfilePageComponent },
+  {
+    path: 'profile/update',
+    component: UpdateProfilePageComponent,
+    canActivate: [UserGuard],
+  },
   { path: 'contact', component: ContactPageComponent },
   { path: 'tournament', component: TournamentPageComponent },
   { path: 'tournament/create', component: TournamentFormComponent },
@@ -38,8 +51,42 @@ export const routes: Routes = [
     path: 'teams',
     component: TeamPageComponent,
     children: [
-      { path: 'create-team', component: CreateTeamComponent },
-      { path: 'list-team', component: ListTeamComponent },
+      {
+        path: 'create-team',
+        component: CreateTeamComponent,
+      },
+      {
+        path: 'list-team',
+        component: ListTeamComponent,
+      },
+    ],
+  },
+  {
+    path: 'teams-details',
+    component: TeamDetailPageComponent,
+    canActivate: [UserGuard],
+    children: [
+      {
+        path: ':teamName',
+        component: TeamDetailCardComponent,
+        resolve: { team: teamResolver },
+
+        children: [
+          {
+            path: '',
+            redirectTo: 'list-member',
+            pathMatch: 'full',
+          },
+          {
+            path: 'create-member',
+            component: CreateMemberComponent,
+          },
+          {
+            path: 'list-member',
+            component: ListMemberComponent,
+          },
+        ],
+      },
     ],
   },
   {

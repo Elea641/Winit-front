@@ -8,7 +8,7 @@
 }
 
 .update-block {
-  margin-top: 10vh;
+  margin-top: 2vh;
   padding: 16px;
   min-width: 200px;
   max-width: 800px;
@@ -16,12 +16,14 @@
 }
 
 h1 {
-  color: white;
+  color: $secondary-color;
   font-weight: normal;
+  margin: 2rem 0.5rem 1rem 0.5rem;
 }
 
 mat-divider {
-  margin: 16px 0;
+  margin: 0.5rem 0.5rem 2rem 0.5rem;
+  border-top-color: $secondary-color;
 }
 
 .update-profile-form-field {
