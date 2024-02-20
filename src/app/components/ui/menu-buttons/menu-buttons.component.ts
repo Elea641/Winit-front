@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TeamService } from 'src/app/team/shared/team.service';
@@ -19,14 +19,18 @@ export class MenuButtonsComponent implements OnInit {
   isDefaultStyleFocus = true;
   teamName: string = '';
 
-  constructor(private teamService: TeamService, private router: Router) {}
+  constructor(
+    private teamService: TeamService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.formattedLabels = this.buttonLabels.map((label) =>
       label.toUpperCase().replace(/-/g, ' ')
     );
-    this.teamService.getSelectedTeam().subscribe((team) => {
-      this.teamName = team?.name || '';
+    this.route.paramMap.subscribe((params) => {
+      this.teamName = params.get('teamName') || '';
     });
   }
 
