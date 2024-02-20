@@ -1,6 +1,4 @@
 // To be updated
 export class Sport {
-  name?: string;
-  imageUrl?: string;
-  numberOfPlayers?: number;
+  constructor(public name: string, public numberOfPlayers: number) {}
 }

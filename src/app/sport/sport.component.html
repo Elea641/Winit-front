@@ -1,0 +1,37 @@
+<div class="register-page-container">
+  <div class="register-block">
+    <h1 class="registration-title">Nouveau sport</h1>
+    <mat-divider class="register-divider"></mat-divider>
+
+    <form [formGroup]="sportForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="register-form-field">
+        <mat-label>name</mat-label>
+        <input matInput type="text" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="register-form-field">
+        <mat-label>nb players</mat-label>
+        <input matInput type="text" formControlName="numberOfPlayers" />
+      </mat-form-field>
+
+      <app-file-upload
+        [groupParent]="sportForm"
+        formControlNameValue="image"
+        labelValue="image"
+      ></app-file-upload>
+
+      <div class="button-container">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="register-button"
+        >
+          ENVOYER
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-sport-list></app-sport-list>
