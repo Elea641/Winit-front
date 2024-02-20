@@ -12,24 +12,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import { Observable, Subject, map, takeUntil } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 import { DropzoneMaterialModule } from '@ngx-dropzone/material';
 
 import { TournamentForm } from 'src/app/tournament/models/tournament-form.model';
 import { Sport } from 'src/app/auth/models/sport.model';
-import { Tournament } from 'src/app/tournament/models/tournament.model';
 
 import { FileUploadComponent } from "../../../../components/feature/file-upload/file-upload.component";
 import { TournamentEntityMappers } from 'src/app/tournament/shared/mappers/TournamentEntityMappers';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
-import { SportService } from 'src/app/shared/sport.service';
+import { SportService } from 'src/app/sport/shared/sport.service';
+import { minimumDate } from 'src/app/tournament/shared/validators/minimum-date.directive';
+
 import { TournamentPrivacyEnum } from 'src/app/tournament/models/enum/tournamentPrivacyEnum';
 import { PlayerCategoryEnum } from 'src/app/tournament/models/enum/playerCategoryEnum';
 import { TournamentFormatEnum } from 'src/app/tournament/models/enum/tournamentFormatEnum';
-import { minimumDate } from 'src/app/tournament/shared/validators/minimum-date.directive';
-import { maximumDate } from 'src/app/tournament/shared/validators/maximum-date.directive';
 
 @Component({
   selector: 'app-tournament-form',
