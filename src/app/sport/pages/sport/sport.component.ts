@@ -15,9 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 import { DropzoneMaterialModule } from '@ngx-dropzone/material';
-import { FileUploadComponent } from '../components/feature/file-upload/file-upload.component';
-import { Sport } from '../models/sport.model';
-import { SportListComponent } from './sport-list/sport-list.component';
+import { FileUploadComponent } from '../../../components/feature/file-upload/file-upload.component';
+import { SportListComponent } from '../../components/feature/sport-list/sport-list.component';
+import { Sport } from '../../models/sport.model';
 
 @Component({
   selector: 'app-sport',

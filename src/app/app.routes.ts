@@ -9,7 +9,7 @@ import { HomePageComponent } from './home/pages/home-page/home-page.component';
 import { ListResultatsComponent } from './profile/components/feature/list-resultats/list-resultats.component';
 import { ListTeamMembersComponent } from './profile/components/feature/list-team-members/list-team-members.component';
 import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.component';
-import { SportComponent } from './sport/sport.component';
+import { SportComponent } from './sport/pages/sport/sport.component';
 import { CreateTeamComponent } from './team/components/feature/create-team/create-team.component';
 import { ListTeamComponent } from './team/components/feature/list-team/list-team.component';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';

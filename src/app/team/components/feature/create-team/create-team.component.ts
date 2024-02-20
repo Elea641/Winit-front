@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,17 +7,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Sport } from 'src/app/models/sport.model';
-import { SportService } from 'src/app/shared/sport.service';
-import { Team } from 'src/app/team/models/team.model';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterModule } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { TeamService } from 'src/app/team/shared/team.service';
+import { RouterModule } from '@angular/router';
+import { SportService } from 'src/app/shared/sport.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { Sport } from 'src/app/sport/models/sport.model';
+import { Team } from 'src/app/team/models/team.model';
+import { TeamService } from 'src/app/team/shared/team.service';
 
 @Component({
   selector: 'app-create-team',
