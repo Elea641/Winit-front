@@ -9,8 +9,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { Observable, Subject, map, takeUntil } from 'rxjs';
 
@@ -32,26 +32,26 @@ import { minimumDate } from 'src/app/tournament/shared/validators/minimum-date.d
 import { maximumDate } from 'src/app/tournament/shared/validators/maximum-date.directive';
 
 @Component({
-    selector: 'app-tournament-form',
-    standalone: true,
-    templateUrl: './tournament-form.component.html',
-    styleUrls: ['./tournament-form.component.scss'],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatDividerModule,
-        MatGridListModule,
-        MatButtonModule,
-        MatIconModule,
-        MatChipsModule,
-        MatCheckboxModule,
-        DropzoneCdkModule,
-        DropzoneMaterialModule,
-        FileUploadComponent
-    ]
+  selector: 'app-tournament-form',
+  standalone: true,
+  templateUrl: './tournament-form.component.html',
+  styleUrls: ['./tournament-form.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDividerModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    DropzoneCdkModule,
+    DropzoneMaterialModule,
+    FileUploadComponent,
+  ],
 })
 export class TournamentFormComponent implements OnInit, OnDestroy {
   tournamentForm!: TournamentForm["form"];
@@ -69,7 +69,8 @@ export class TournamentFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private tournamentEntityMappers: TournamentEntityMappers,
     private tournamentService: TournamentService,
-    private sportService: SportService) {
+    private sportService: SportService
+  ) {
     this.isDisplayedInscriptionLimitDate = false;
   }
 
@@ -110,7 +111,7 @@ export class TournamentFormComponent implements OnInit, OnDestroy {
       const newTournament: AbstractControl = this.tournamentForm.value;
       this.tournamentService.createTournament(newTournament);
     } else {
-      console.log("Error submitting form");
+      console.log('Error submitting form');
     }
   }
 

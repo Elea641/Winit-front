@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,17 +7,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Sport } from 'src/app/models/sport.model';
-import { SportService } from 'src/app/shared/sport.service';
-import { Team } from 'src/app/team/models/team.model';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterModule } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { TeamService } from 'src/app/team/shared/team.service';
+import { RouterModule } from '@angular/router';
+import { Sport } from 'src/app/auth/models/sport.model';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SportService } from 'src/app/sport/shared/sport.service';
+import { CreatedTeam } from 'src/app/team/models/created-team.model';
+import { TeamService } from 'src/app/team/shared/team.service';
 
 @Component({
   selector: 'app-create-team',
@@ -38,7 +38,7 @@ import { ToastService } from 'src/app/shared/toast.service';
 })
 export class CreateTeamComponent {
   teamForm!: FormGroup;
-  team: Team = new Team('', '');
+  team: CreatedTeam = new CreatedTeam('', '');
   sports: Sport[] = [];
 
   constructor(
@@ -49,8 +49,16 @@ export class CreateTeamComponent {
 
   ngOnInit(): void {
     this.teamForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      sport: new FormControl('', [Validators.required]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          `[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*`
+        ),
+      ]),
+      sport: new FormControl('', [
+        Validators.required,
+        Validators.pattern('[a-zA-Z]*'),
+      ]),
     });
 
     this.sportService.getAllSports().subscribe((sports) => {
@@ -68,7 +76,7 @@ export class CreateTeamComponent {
 
   onSubmit() {
     if (this.teamForm.valid) {
-      this.team = new Team(this.name.value, this.sport.value);
+      this.team = new CreatedTeam(this.name.value, this.sport.value);
       this.teamService.addTeam(this.team);
     } else {
       this.toastService.showError(

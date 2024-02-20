@@ -3,7 +3,7 @@
 
 .container-home {
   @include flex-align-center;
-  padding: 0 2rem;
+  padding: 0 2rem 2rem 2rem;
   width: 100vw;
 
   .tournament-container-home {
@@ -13,11 +13,12 @@
     h1 {
       color: $secondary-color;
       font-weight: normal;
-      margin: 2rem;
+      margin: 2rem 0.5rem 1rem 0.5rem;
     }
 
-    hr {
-      margin: 2rem;
+    mat-divider {
+      margin: 0.5rem;
+      border-top-color: $secondary-color;
     }
   }
 

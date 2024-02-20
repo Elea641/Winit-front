@@ -14,13 +14,15 @@
 
       h1 {
         color: $secondary-color;
-        margin-bottom: 1rem;
+        font-weight: normal;
+        margin: 1rem 0.5rem;
       }
 
-      .line {
-        border: 1px solid $line-sidebar-color;
-        margin: 0 0 1rem 0;
+      mat-divider {
+        margin: 0.5rem;
+        border-top-color: $secondary-color;
       }
+
       .all-tournaments-cards {
         @include flex-wrap;
 

@@ -1,0 +1,25 @@
+@import "../../../../../assets/style/variables.scss";
+
+.team-list-card-container {
+  padding: 1rem 2rem 0 2rem;
+
+  h1 {
+    color: $secondary-color;
+    font-weight: normal;
+    margin: 1rem 0;
+  }
+
+  mat-divider {
+    margin: 0.5rem;
+    border-top-color: $secondary-color;
+  }
+
+  .team-list-card-infos-container {
+    margin: 2rem 0;
+    color: $secondary-color;
+
+    h2 {
+      color: $number-card-team-detail-color;
+    }
+  }
+}

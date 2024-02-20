@@ -7,19 +7,23 @@
     [ngStyle]="{
       'margin-left.rem': isOpen === 'open' ? 15 : 0,
       'width.%': isOpen === 'open' ? 80 : 100,
-      'transition.s':  0.3
+      'transition.s': 0.3
     }"
   >
-    <section class="tournaments" [ngStyle]="{
-      'transition.s':  0.3
-    }">
+    <section
+      class="tournaments"
+      [ngStyle]="{
+        'transition.s': 0.3
+      }"
+    >
       <div class="ongoing-tournaments">
-        <h1>Tournois en cours</h1>
+        <h1>TOURNOIS EN COURS</h1>
+        <mat-divider></mat-divider>
         <app-carousel></app-carousel>
       </div>
-      <hr />
       <div class="open-tournaments">
-        <h1>Tournois ouverts à l'inscription</h1>
+        <h1>TOURNOIS OUVERTS À L'INSCRIPTION</h1>
+        <mat-divider></mat-divider>
         <app-carousel></app-carousel>
       </div>
     </section>

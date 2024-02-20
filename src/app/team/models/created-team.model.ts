@@ -1,3 +1,3 @@
-export class Roaster {
+export class CreatedTeam {
   constructor(public name: string, public sport: string) {}
 }
