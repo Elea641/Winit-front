@@ -26,7 +26,14 @@ export const routes: Routes = [
     ],
   },
   { path: 'contact', component: ContactPageComponent },
-  { path: 'tournament', component: TournamentPageComponent },
+  { 
+    path: 'tournament', 
+    component: TournamentPageComponent,
+    // children: [
+    //   // { path: 'create', component: TournamentFormComponent },
+    //   // { path: ':id([0-9]+)', component: TournamentDetailsPageComponent}
+    // ]
+  },
   { path: 'tournament/create', component: TournamentFormComponent },
   { path: 'tournament/:id([0-9]+)', component: TournamentDetailsPageComponent },
   {

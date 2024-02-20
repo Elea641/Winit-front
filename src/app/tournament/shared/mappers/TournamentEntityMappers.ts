@@ -14,17 +14,17 @@ export class TournamentEntityMappers {
             date: model.controls["date"].value,
             place: model.controls["place"].value,
             sport: model.controls["sport"].value,
-            playersPerTeam: model.controls["playerPerTeam"].value,
-            maxPlayers: model.controls["maxPlayers"].value,
-            minTeams: model.controls["minTeams"].value,
+            playersPerTeam: model.controls["playersPerTeam"].value,
+            maxPlayers: model.controls["maxPlayers"]?.value,
+            minTeams: model.controls["minTeams"]?.value,
             maxTeams: model.controls["maxTeams"].value,
             gameLength: model.controls["gameLength"].value,
             privacy: model.controls["privacy"].value,
             playerCategory: model.controls["playerCategory"].value,
             tournamentFormat: model.controls["tournamentFormat"].value,
-            tournamentBanner: model.controls["tournamentBanner"].value,
-            inscriptionLimitDate: model.controls["inscriptionLimitDate"].value,
-            currentPlayers: model.controls["currentPlayers"].value,
+            tournamentBanner: model.controls["tournamentBanner"]?.value,
+            inscriptionLimitDate: model.controls["inscriptionLimitDate"]?.value,
+            currentPlayers: model.controls["currentPlayers"]?.value,
         };
 
         return tournament;
