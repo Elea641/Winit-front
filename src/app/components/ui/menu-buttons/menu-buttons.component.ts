@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TeamService } from 'src/app/team/shared/team.service';
@@ -17,19 +17,32 @@ export class MenuButtonsComponent implements OnInit {
   @Input() buttonLabels: string[] = [];
   formattedLabels: string[] = [];
   isDefaultStyleFocus = true;
+  teamName: string = '';
 
-  constructor(private teamService: TeamService) {}
+  constructor(private teamService: TeamService, private router: Router) {}
 
   ngOnInit(): void {
     this.formattedLabels = this.buttonLabels.map((label) =>
       label.toUpperCase().replace(/-/g, ' ')
     );
+    this.teamService.getSelectedTeam().subscribe((team) => {
+      this.teamName = team?.name || '';
+    });
   }
 
   onButtonClick(label: string) {
-    const formattedLabelConvert = label.toLowerCase().replace(/ /g, '-');
-    this.buttonClick.emit(formattedLabelConvert);
-    this.isDefaultStyleFocus = false;
-    this.teamService.unselectTeam();
+    if (label === 'CREATE MEMBER' || label === 'LIST MEMBER') {
+      const formattedLabelConvert = label.toLowerCase().replace(/ /g, '-');
+      this.router.navigate([
+        '/teams-details',
+        this.teamName,
+        formattedLabelConvert,
+      ]);
+    } else {
+      const formattedLabelConvert = label.toLowerCase().replace(/ /g, '-');
+      this.buttonClick.emit(formattedLabelConvert);
+      this.isDefaultStyleFocus = false;
+      this.teamService.unselectTeam();
+    }
   }
 }

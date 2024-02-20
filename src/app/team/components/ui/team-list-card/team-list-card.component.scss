@@ -6,13 +6,13 @@
   margin: 2rem;
   background-color: $background-card-team-list-color;
   color: $text-card-team-list-color;
+
   .team-list-card-subtitle {
     color: $number-card-team-list-color;
     margin-top: 1rem;
   }
 
   .team-list-card-actions {
-    @include flex-justify-content-center;
     button {
       width: 100%;
     }
