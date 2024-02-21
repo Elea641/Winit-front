@@ -1,0 +1,8 @@
+@import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
+
+.list-members-container {
+  @include flex-align-center;
+  justify-content: space-evenly;
+  padding: 0 2rem;
+}

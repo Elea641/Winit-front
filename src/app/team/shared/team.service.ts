@@ -72,8 +72,35 @@ export class TeamService {
           }
         },
         (error) => {
-          if (error.error === "Le membre n'existe pas") {
+          if (error.error) {
             this.toastService.showError(error.error, 'Une erreur est survenue');
+          }
+        }
+      );
+  }
+
+  deleteMemberByName(teamName: string, memberName: string): void {
+    console.log(teamName, memberName);
+
+    this.http
+      .delete<any>(
+        `${environment.urlApi}/teams/${teamName}/members/${memberName}`
+      )
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.toastService.showSuccess(
+              'Membre supprimé avec succès',
+              "Le membre a été supprimé de l'équipe"
+            );
+          }
+        },
+        (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              'Une erreur est survenue lors de la suppression du membre'
+            );
           }
         }
       );
