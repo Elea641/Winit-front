@@ -1,0 +1,15 @@
+@import "../../../../assets/style/variables.scss";
+
+.reset-filters-button {
+  display: flex;
+  justify-content: space-around;
+
+  & button {
+    margin-top: 16px;
+    color: #fff;
+  }
+}
+
+.selected {
+  color: $card-background-color;
+}

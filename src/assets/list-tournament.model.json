@@ -2,8 +2,8 @@
   {
     "id": 1,
     "name": "Tournoi A",
-    "date": "1 février",
-    "inscription_limit_date": "1 février",
+    "date": "2026-02-01",
+    "inscription_limit_date": "2022-03-01",
     "place": "Bordeaux",
     "sport": "basket",
     "currentPlayers": 2,
@@ -12,8 +12,8 @@
   {
     "id": 2,
     "name": "Tournoi B",
-    "date": "4 mars",
-    "inscription_limit_date": "1 février",
+    "date": "2023-02-04",
+    "inscription_limit_date": "2022-03-01",
     "place": "Bordeaux",
     "sport": "foot",
     "currentPlayers": 4,
@@ -22,8 +22,8 @@
   {
     "id": 3,
     "name": "Tournoi C",
-    "date": "8 janvier",
-    "inscription_limit_date": "1 février",
+    "date": "2024-02-03",
+    "inscription_limit_date": "2022-03-01",
     "place": "Bordeaux",
     "sport": "volley",
     "currentPlayers": 4,
@@ -32,18 +32,18 @@
   {
     "id": 4,
     "name": "Tournoi D",
-    "date": "31 octobre",
-    "inscription_limit_date": "1 février",
+    "date": "2025-03-01",
+    "inscription_limit_date": "2024-03-01",
     "place": "Bordeaux",
     "sport": "babyfoot",
-    "currentPlayers": 1,
+    "currentPlayers": 2,
     "maxPlayers": 2
   },
   {
     "id": 5,
     "name": "Tournoi E",
-    "date": "24 octobre",
-    "inscription_limit_date": "1 février",
+    "date": "2021-03-17",
+    "inscription_limit_date": "2022-03-01",
     "place": "Paris",
     "sport": "babyfoot",
     "currentPlayers": 12,
@@ -52,18 +52,18 @@
   {
     "id": 6,
     "name": "Tournoi E",
-    "date": "31 avril",
-    "inscription_limit_date": "1 mars",
+    "date": "2025-02-08",
+    "inscription_limit_date": "2024-03-01",
     "place": "Marseille",
     "sport": "volley",
-    "currentPlayers": 4,
+    "currentPlayers": 9,
     "maxPlayers": 9
   },
   {
     "id": 7,
     "name": "Tournoi F",
-    "date": "23 juillet",
-    "inscription_limit_date": "04 août",
+    "date": "2023-10-23",
+    "inscription_limit_date": "2024-03-01",
     "place": "Bordeaux",
     "sport": "babyfoot",
     "currentPlayers": 7,
@@ -72,11 +72,11 @@
   {
     "id": 8,
     "name": "Tournoi G",
-    "date": "31 octobre",
-    "inscription_limit_date": "1 février",
+    "date": "2022-05-13",
+    "inscription_limit_date": "2024-03-01",
     "place": "Bordeaux",
     "sport": "babyfoot",
-    "currentPlayers": 13,
+    "currentPlayers": 21,
     "maxPlayers": 21
   }
 ]

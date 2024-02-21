@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -6,15 +7,14 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
-import { InputSearchComponent } from '../../feature/input-search/input-search.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
 import { BreakpointService } from '../../../shared/breakpoint.service';
+import { InputSearchComponent } from '../../feature/input-search/input-search.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -30,11 +30,20 @@ import { BreakpointService } from '../../../shared/breakpoint.service';
     InputSearchComponent,
   ],
   templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   @Output() isDrawerOpenedChange: EventEmitter<boolean> =
     new EventEmitter<boolean>();
+  @Output() newSearchValueEventFromSidebar = new EventEmitter<string>();
+  @Output() newChronologicalFilterChange = new EventEmitter<boolean>();
+  @Output() newShowOnlyUpcomingTournaments = new EventEmitter<boolean>();
+  @Output() newShowNonFullTournaments = new EventEmitter<boolean>();
+  @Output() newResetFilter = new EventEmitter<any>();
+  chronologicalFilter: boolean = false;
+  showOnlyUpcomingTournaments: boolean = false;
+  showNonFullTournaments: boolean = false;
   isDesktop: boolean | undefined = false;
   isLargeDesktop: boolean | undefined = false;
   showFiller = false;
@@ -84,5 +93,31 @@ export class SidebarComponent implements OnInit {
         }
       }
     });
+  }
+
+  onReceiveSearchValueFromInput(value: string) {
+    this.newSearchValueEventFromSidebar.emit(value);
+  }
+
+  sendChronologicalFilterChangeToParent() {
+    this.chronologicalFilter = !this.chronologicalFilter;
+    this.newChronologicalFilterChange.emit(this.chronologicalFilter);
+  }
+
+  sendShowOnlyUpcomingTournamentsToParent() {
+    this.showOnlyUpcomingTournaments = !this.showOnlyUpcomingTournaments;
+    this.newShowOnlyUpcomingTournaments.emit(this.showOnlyUpcomingTournaments);
+  }
+
+  sendShowNonFullTournaments() {
+    this.showNonFullTournaments = !this.showNonFullTournaments;
+    this.newShowNonFullTournaments.emit(this.showNonFullTournaments);
+  }
+
+  sendResetFilters() {
+    this.newResetFilter.emit();
+    this.chronologicalFilter = false;
+    this.showOnlyUpcomingTournaments = false;
+    this.showNonFullTournaments = false;
   }
 }

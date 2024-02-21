@@ -4,7 +4,9 @@
 >
   <mat-drawer #drawer mode="side" class="container-sidebar-menu">
     <div class="container-sidebar-menu-input">
-      <app-input-search></app-input-search>
+      <app-input-search
+        (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)"
+      ></app-input-search>
     </div>
     <h2>Filtres</h2>
     <div class="line"></div>
@@ -12,13 +14,17 @@
       (click)="showFiller = !showFiller"
       mat-raised-button
       class="container-sidebar-menu-button"
+      (click)="sendChronologicalFilterChangeToParent()"
     >
-      Chronologiques
+      <span [ngClass]="{ selected: !chronologicalFilter }">Alphabétique</span> /
+      <span [ngClass]="{ selected: chronologicalFilter }">chronologique</span>
     </button>
     <button
       (click)="showFiller = !showFiller"
+      (click)="sendShowOnlyUpcomingTournamentsToParent()"
       mat-raised-button
       class="container-sidebar-menu-button"
+      [ngClass]="{ selected: showOnlyUpcomingTournaments }"
     >
       A venir
     </button>
@@ -26,9 +32,16 @@
       (click)="showFiller = !showFiller"
       mat-raised-button
       class="container-sidebar-menu-button"
+      (click)="sendShowNonFullTournaments()"
+      [ngClass]="{ selected: showNonFullTournaments }"
     >
       Non complet
     </button>
+    <div class="reset-filters-button">
+      <button mat-raised-button color="primary" (click)="sendResetFilters()">
+        Réinitialiser les filtres
+      </button>
+    </div>
   </mat-drawer>
 
   <div class="sidenav-button">
@@ -45,14 +58,23 @@
   *ngIf="!isDesktop || !isLargeDesktop"
 >
   <div class="container-sidebar-menu-input">
-    <app-input-search></app-input-search>
+    <app-input-search
+      (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)"
+    >
+    </app-input-search>
   </div>
   <button class="filter-button-container" mat-button [matMenuTriggerFor]="menu">
     Filtres
   </button>
   <mat-menu #menu="matMenu" class="sidebar-custom-menu">
-    <button mat-menu-item>Chronologiques</button>
-    <button mat-menu-item>A venir</button>
-    <button mat-menu-item>Non complet</button>
+    <button mat-menu-item (click)="sendChronologicalFilterChangeToParent()">
+      Chronologiques
+    </button>
+    <button mat-menu-item (click)="sendShowOnlyUpcomingTournamentsToParent()">
+      A venir
+    </button>
+    <button mat-menu-item (click)="sendShowNonFullTournaments()">
+      Non complet
+    </button>
   </mat-menu>
 </mat-toolbar>
