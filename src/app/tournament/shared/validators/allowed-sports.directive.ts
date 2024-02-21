@@ -2,7 +2,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 import { Subscription, map, of, tap } from "rxjs";
 
-import { Sport } from "src/app/auth/models/sport.model";
+import { Sport } from "src/app/sport/models/sport.model";
 import { SportService } from "src/app/sport/shared/sport.service";
 
 export function allowedSports(sportService: SportService): ValidatorFn {
