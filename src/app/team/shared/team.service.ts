@@ -58,6 +58,27 @@ export class TeamService {
     );
   }
 
+  addMember(teamName: string, member: Member): void {
+    this.http
+      .post<any>(`${environment.urlApi}/teams/${teamName}/members`, member)
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.router.navigate([`/teams-details/${teamName}/list-member`]);
+            this.toastService.showSuccess(
+              'Bravo félicitations',
+              "Ajout de votre membre à l'équipe"
+            );
+          }
+        },
+        (error) => {
+          if (error.error === "Le membre n'existe pas") {
+            this.toastService.showError(error.error, 'Une erreur est survenue');
+          }
+        }
+      );
+  }
+
   setSelectTeam(team: Team): void {
     this.selectedTeamSubject.next(team);
     this.isSelectedSubject.next(true);

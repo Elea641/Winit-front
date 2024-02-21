@@ -67,9 +67,9 @@ export class CreateMemberComponent {
   onSubmit() {
     if (this.memberForm.valid) {
       this.member = new Member(this.name.value);
-      console.log(this.member);
-
-      // this.teamService.addMember(this.member);
+      if (this.teamName$?.name) {
+        this.teamService.addMember(this.teamName$?.name, this.member);
+      }
     } else {
       this.toastService.showError(
         'Erreur',

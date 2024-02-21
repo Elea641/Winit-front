@@ -19,10 +19,11 @@ import { ListTeamComponent } from './team/components/feature/list-team/list-team
 import { TeamDetailCardComponent } from './team/components/ui/team-detail-card/team-detail-card.component';
 import { TeamDetailPageComponent } from './team/pages/team-detail-page/team-detail-page.component';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
-import { teamResolver } from './team/shared/team-resolver';
+import { teamResolver } from './team/shared/resolvers/team-resolver';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
 import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
+import { memberResolver } from './team/shared/resolvers/member-resolver';
 
 export const routes: Routes = [
   {
@@ -84,6 +85,7 @@ export const routes: Routes = [
           {
             path: 'list-member',
             component: ListMemberComponent,
+            resolve: { member: memberResolver },
           },
         ],
       },
