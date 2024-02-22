@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./list-member.component.scss'],
 })
 export class ListMemberComponent implements OnInit {
-  members: Member[] | null = null;
+  members: Member[] = [];
   teamName: string = '';
 
   constructor(
