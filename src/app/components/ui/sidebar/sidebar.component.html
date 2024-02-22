@@ -37,6 +37,7 @@
     >
       Non complet
     </button>
+    <mat-divider></mat-divider>
     <div class="reset-filters-button">
       <button mat-raised-button color="primary" (click)="sendResetFilters()">
         Réinitialiser les filtres
@@ -67,14 +68,39 @@
     Filtres
   </button>
   <mat-menu #menu="matMenu" class="sidebar-custom-menu">
-    <button mat-menu-item (click)="sendChronologicalFilterChangeToParent()">
-      Chronologiques
+    <button
+      mat-menu-item
+      (click)="sendChronologicalFilterChangeToParent()"
+      (click)="$event.stopPropagation()"
+    >
+      <span [ngClass]="{ selected: !chronologicalFilter }">Alphabétique</span> /
+      <span [ngClass]="{ selected: chronologicalFilter }">chronologique</span>
     </button>
-    <button mat-menu-item (click)="sendShowOnlyUpcomingTournamentsToParent()">
+    <button
+      mat-menu-item
+      (click)="sendShowOnlyUpcomingTournamentsToParent()"
+      (click)="$event.stopPropagation()"
+      [ngClass]="{ selected: showOnlyUpcomingTournaments }"
+    >
       A venir
     </button>
-    <button mat-menu-item (click)="sendShowNonFullTournaments()">
+    <button
+      mat-menu-item
+      (click)="sendShowNonFullTournaments()"
+      (click)="$event.stopPropagation()"
+      [ngClass]="{ selected: showNonFullTournaments }"
+    >
       Non complet
+    </button>
+    <mat-divider></mat-divider>
+    <button
+      mat-button
+      color="primary"
+      (click)="sendResetFilters()"
+      (click)="$event.stopPropagation()"
+      class="mobile-reset-filters-button"
+    >
+      Réinitialiser les filtres
     </button>
   </mat-menu>
 </mat-toolbar>

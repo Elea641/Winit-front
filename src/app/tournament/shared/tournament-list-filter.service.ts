@@ -14,8 +14,13 @@ export class TournamentListFilterService {
   ) {
     return tournaments$.pipe(
       map((tournaments: Tournament[]) => {
-        return tournaments.filter((tournament: Tournament) =>
-          tournament.name.toLowerCase().includes(searchValue.toLowerCase())
+        return tournaments.filter(
+          (tournament: Tournament) =>
+            tournament.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+            tournament.place
+              .toLowerCase()
+              .includes(searchValue.toLowerCase()) ||
+            tournament.sport.toLowerCase().includes(searchValue.toLowerCase())
         );
       })
     );
@@ -43,26 +48,14 @@ export class TournamentListFilterService {
     );
   }
 
-  updateFilteredTournaments(
-    filteredTournaments$: Observable<Tournament[]>,
-    showOnlyUpcomingTournaments: boolean,
-    showNonFullTournaments: boolean
-  ) {
-    return filteredTournaments$.pipe(
-      map((tournaments) => {
-        return tournaments.filter((tournament) => {
-          let passesShowOnlyUpcomingTournaments =
-            !showOnlyUpcomingTournaments ||
-            new Date(tournament.date).setHours(0, 0, 0, 0) >=
-              new Date().setHours(0, 0, 0, 0);
-          let passesShowNonFullTournaments =
-            !showNonFullTournaments ||
-            tournament.currentPlayers! < tournament.maxPlayers;
-          return (
-            passesShowOnlyUpcomingTournaments && passesShowNonFullTournaments
-          );
-        });
-      })
+  checkIfTournamentIsUpcoming(tournament: Tournament): boolean {
+    return (
+      new Date(tournament.date).setHours(0, 0, 0, 0) >=
+      new Date().setHours(0, 0, 0, 0)
     );
+  }
+
+  checkIfTournamentIsNotFull(tournament: Tournament): boolean {
+    return tournament.currentPlayers! < tournament.maxPlayers;
   }
 }

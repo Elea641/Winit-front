@@ -84,7 +84,6 @@ export class TournamentListComponent implements OnInit {
 
   onReceiveShowOnlyUpcomingTournaments(value: boolean) {
     this.showOnlyUpcomingTournaments = value;
-
     this.updateFilteredTournaments();
   }
 
@@ -99,11 +98,14 @@ export class TournamentListComponent implements OnInit {
         return tournaments.filter((tournament) => {
           let passesShowOnlyUpcomingTournaments =
             !this.showOnlyUpcomingTournaments ||
-            new Date(tournament.date).setHours(0, 0, 0, 0) >=
-              new Date().setHours(0, 0, 0, 0);
+            this.tournamentListFilterService.checkIfTournamentIsUpcoming(
+              tournament
+            );
           let passesShowNonFullTournaments =
             !this.showNonFullTournaments ||
-            tournament.currentPlayers! < tournament.maxPlayers;
+            this.tournamentListFilterService.checkIfTournamentIsNotFull(
+              tournament
+            );
           return (
             passesShowOnlyUpcomingTournaments && passesShowNonFullTournaments
           );

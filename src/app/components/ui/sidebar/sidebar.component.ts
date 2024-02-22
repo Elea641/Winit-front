@@ -8,6 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
@@ -28,6 +29,7 @@ import { InputSearchComponent } from '../../feature/input-search/input-search.co
     MatMenuModule,
     RouterModule,
     InputSearchComponent,
+    MatDividerModule,
   ],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],

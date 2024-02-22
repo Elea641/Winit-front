@@ -14,7 +14,7 @@
     "name": "Tournoi B",
     "date": "2023-02-04",
     "inscription_limit_date": "2022-03-01",
-    "place": "Bordeaux",
+    "place": "Paris",
     "sport": "foot",
     "currentPlayers": 4,
     "maxPlayers": 12
@@ -34,7 +34,7 @@
     "name": "Tournoi D",
     "date": "2025-03-01",
     "inscription_limit_date": "2024-03-01",
-    "place": "Bordeaux",
+    "place": "Marseille",
     "sport": "babyfoot",
     "currentPlayers": 2,
     "maxPlayers": 2
