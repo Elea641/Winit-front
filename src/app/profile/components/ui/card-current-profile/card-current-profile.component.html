@@ -1,20 +1,20 @@
 <div class="profile-card-container">
   <div class="profile-card-container-button">
     <div class="profile-card-container-infos">
-      <p>{{ currentProfile?.firstname }}</p>
-      <p>{{ currentProfile?.lastname }}</p>
+      <p>{{ currentUser?.firstName }}</p>
+      <p>{{ currentUser?.lastName }}</p>
     </div>
     <button mat-raised-button color="primary" [routerLink]="['/profile/update']">MODIFIER<mat-icon>keyboard_arrow_right</mat-icon></button>
   </div>
   <div class="profile-card-container-other-infos">
     <div class="profile-card-container-other-info">
       <mat-icon>location_on</mat-icon>
-      <p>{{ currentProfile?.city }}</p>
+      <p>{{ currentUser?.city }}</p>
     </div>
     <div class="profile-card-container-other-info">
-      <mat-icon>people</mat-icon>
-      <p>Team</p>
-      <p>{{ currentProfile?.team }}</p>
+      <mat-icon>sports_volleyball</mat-icon>
+      <p>Sport</p>
+      <p>{{ currentUser?.sport }}</p>
     </div>
   </div>
 </div>

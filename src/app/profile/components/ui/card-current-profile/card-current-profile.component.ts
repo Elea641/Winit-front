@@ -4,6 +4,7 @@ import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {RouterLink} from "@angular/router";
+import {User} from "../../../../auth/models/user.model";
 
 @Component({
   selector: 'app-card-current-profile',
@@ -14,4 +15,5 @@ import {RouterLink} from "@angular/router";
 })
 export class CardCurrentProfileComponent {
   @Input() currentProfile!: CurrentProfile | null;
+  @Input() currentUser!: User | null;
 }
