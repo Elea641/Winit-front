@@ -14,9 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { Router, RouterModule } from '@angular/router';
-import { Team } from 'src/app/team/models/team.model';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-member',
@@ -37,12 +35,13 @@ import { Team } from 'src/app/team/models/team.model';
 export class CreateMemberComponent {
   memberForm!: FormGroup;
   member: Member = new Member('');
-  teamName$!: Team | null;
+  teamName: string = '';
 
   constructor(
     public teamService: TeamService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -55,8 +54,8 @@ export class CreateMemberComponent {
       ]),
     });
 
-    this.teamService.getSelectedTeam().subscribe((name) => {
-      this.teamName$ = name;
+    this.route.parent?.params.subscribe((params) => {
+      this.teamName = params['teamName'];
     });
   }
 
@@ -67,9 +66,9 @@ export class CreateMemberComponent {
   onSubmit() {
     if (this.memberForm.valid) {
       this.member = new Member(this.name.value);
-      console.log(this.member);
-
-      // this.teamService.addMember(this.member);
+      if (this.teamName) {
+        this.teamService.addMember(this.teamName, this.member);
+      }
     } else {
       this.toastService.showError(
         'Erreur',
@@ -79,8 +78,6 @@ export class CreateMemberComponent {
   }
 
   onClick() {
-    this.router.navigate([
-      `/teams-details/${this.teamName$?.name}/list-member`,
-    ]);
+    this.router.navigate([`/teams-details/${this.teamName}/list-member`]);
   }
 }
