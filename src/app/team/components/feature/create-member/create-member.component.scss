@@ -3,8 +3,4 @@
 
 form {
   @include flex-column-center-align-justify;
-
-  .button-container {
-    padding: 8px;
-  }
 }

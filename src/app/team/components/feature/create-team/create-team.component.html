@@ -6,7 +6,7 @@
     <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="outline" class="team-form-field">
         <mat-label>Nom</mat-label>
-        <input matInput type="text" formControlName="name" />
+        <input matInput type="text" formControlName="name" class="test" />
         <mat-error
           *ngIf="name?.errors && !name?.pristine"
           class="error-message-size"
