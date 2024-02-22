@@ -8,7 +8,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
-import {Sport} from "../../../../auth/models/sport.model";
 import {User} from "../../../../auth/models/user.model";
 import {ProfileService} from "../../../shared/profile.service";
 import {SportService} from "../../../../sport/shared/sport.service";
@@ -25,23 +24,16 @@ import {Router} from "@angular/router";
 export class UpdateProfileComponent implements OnInit {
 
     updateProfileForm!: FormGroup;
-    sports!: Sport[];
     currentUser!: User;
 
     constructor(
         private profileService: ProfileService,
-        private sportService: SportService,
         private toastService: ToastService,
         private router: Router
     ) {
     }
 
     ngOnInit(): void {
-        this.sportService.getAllSports().subscribe(
-            (sports) => {
-                this.sports = sports;
-            });
-
         this.profileService.getCurrentUser().subscribe(
             (currentUser) => {
                 this.currentUser = currentUser;
@@ -49,8 +41,7 @@ export class UpdateProfileComponent implements OnInit {
                     firstName: this.currentUser.firstName,
                     lastName: this.currentUser.lastName,
                     city: this.currentUser.city,
-                    email: this.currentUser.email,
-                    sport: this.currentUser.sport
+                    email: this.currentUser.email
                 })
             },
             (error) => {
@@ -73,13 +64,13 @@ export class UpdateProfileComponent implements OnInit {
                     Validators.maxLength(25),
                 ]),
                 city: new FormControl('', [
+                  Validators.required,
                     Validators.maxLength(25),
                 ]),
                 email: new FormControl('', [
                     Validators.required,
                     Validators.email,
-                ]),
-                sport: new FormControl('', []),
+                ])
             },
         );
     }
