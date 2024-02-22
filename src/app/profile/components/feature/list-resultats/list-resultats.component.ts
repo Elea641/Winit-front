@@ -4,6 +4,7 @@ import { CardResultTotalComponent } from '../../ui/card-result-total/card-result
 import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
 import { CardResultTournamentComponent } from '../../ui/card-result-tournament/card-result-tournament.component';
 import { ListLastTounamentsPlayedComponent } from '../../ui/list-last-tounaments-played/list-last-tounaments-played.component';
+import {ListNextTournamentsComponent} from "../../ui/list-next-tournaments/list-next-tournaments.component";
 
 @Component({
   selector: 'app-list-resultats',
@@ -13,6 +14,7 @@ import { ListLastTounamentsPlayedComponent } from '../../ui/list-last-tounaments
     CardResultTotalComponent,
     CardResultTournamentComponent,
     ListLastTounamentsPlayedComponent,
+    ListNextTournamentsComponent,
   ],
   templateUrl: './list-resultats.component.html',
   styleUrls: ['./list-resultats.component.scss'],

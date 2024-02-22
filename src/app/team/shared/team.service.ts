@@ -6,6 +6,7 @@ import { Team } from '../models/team.model';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
 import { CreatedTeam } from '../models/created-team.model';
+import { Member } from '../models/member.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,12 @@ export class TeamService {
     return this.http.get<Team>(`${environment.urlApi}/teams/${teamName}`);
   }
 
+  getAllMembersByTeam(teamName: string): Observable<Member[]> {
+    return this.http.get<Member[]>(
+      `${environment.urlApi}/teams/${teamName}/members`
+    );
+  }
+
   addTeam(team: CreatedTeam): void {
     this.http.post<any>(`${environment.urlApi}/teams`, team).subscribe(
       (response) => {
@@ -49,6 +56,60 @@ export class TeamService {
         }
       }
     );
+  }
+
+  addMember(teamName: string, member: Member): void {
+    this.http
+      .post<any>(`${environment.urlApi}/teams/${teamName}/members`, member)
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.router.navigate([`/teams-details/${teamName}/list-member`]);
+            this.toastService.showSuccess(
+              'Bravo félicitations',
+              "Ajout de votre membre à l'équipe"
+            );
+          }
+        },
+        (error) => {
+          if (error.error) {
+            this.toastService.showError(error.error, 'Une erreur est survenue');
+          }
+        }
+      );
+  }
+
+  deleteMemberByName(teamName: string, memberName: string): Observable<any> {
+    return new Observable((observer) => {
+      this.http
+        .delete<any>(
+          `${environment.urlApi}/teams/${teamName}/members/${memberName}`
+        )
+        .subscribe(
+          (response) => {
+            if (response) {
+              this.toastService.showSuccess(
+                'Membre supprimé avec succès',
+                "Le membre a été supprimé de l'équipe"
+              );
+
+              this.getAllMembersByTeam(teamName).subscribe((members) => {
+                observer.next(members);
+                observer.complete();
+              });
+            }
+          },
+          (error) => {
+            if (error.error) {
+              this.toastService.showError(
+                error.error,
+                'Une erreur est survenue lors de la suppression du membre'
+              );
+            }
+            observer.error(error);
+          }
+        );
+    });
   }
 
   setSelectTeam(team: Team): void {

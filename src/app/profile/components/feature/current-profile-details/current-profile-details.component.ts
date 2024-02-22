@@ -8,6 +8,8 @@ import { ListResultatsComponent } from '../list-resultats/list-resultats.compone
 import { ListTeamMembersComponent } from '../list-team-members/list-team-members.component';
 import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
 import { MenuButtonsComponent } from 'src/app/components/ui/menu-buttons/menu-buttons.component';
+import {User} from "../../../../auth/models/user.model";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @Component({
   selector: 'app-current-profile-details',
@@ -18,23 +20,21 @@ import { MenuButtonsComponent } from 'src/app/components/ui/menu-buttons/menu-bu
     MenuButtonsComponent,
     ListResultatsComponent,
     ListTeamMembersComponent,
+    MatTabsModule,
   ],
   templateUrl: './current-profile-details.component.html',
   styleUrls: ['./current-profile-details.component.scss'],
 })
 export class CurrentProfileDetailsComponent {
   currentProfile$!: Observable<CurrentProfile>;
+  currentUser$!: Observable<User>;
   teamMembers$!: Observable<TeamMembers>;
-  buttonValueClicked: string = 'resultats';
 
   constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {
     this.currentProfile$ = this.profileService.getCurrentProfile();
+    this.currentUser$ = this.profileService.getCurrentUser();
     this.teamMembers$ = this.profileService.getTeamMembers();
-  }
-
-  onButtonClicked(value: string) {
-    this.buttonValueClicked = value;
   }
 }

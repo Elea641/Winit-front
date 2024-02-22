@@ -24,7 +24,7 @@ export class HelperProfileService {
   resultatsToString(result: ConvertWinEnum): string {
     switch (result) {
       case ConvertWinEnum.One:
-        return 'Tournois gagnés';
+        return 'Premières places';
 
       case ConvertWinEnum.Two:
         return 'Deuxièmes places';

@@ -4,8 +4,8 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { TeamService } from './team.service';
-import { Team } from '../models/team.model';
+import { TeamService } from '../team.service';
+import { Team } from '../../models/team.model';
 import { inject } from '@angular/core';
 
 export const teamResolver: ResolveFn<Team | null> = (

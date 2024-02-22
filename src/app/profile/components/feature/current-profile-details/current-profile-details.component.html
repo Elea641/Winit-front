@@ -1,25 +1,22 @@
 <div class="current-profile-container">
   <app-card-current-profile
-    *ngIf="currentProfile$ | async as currentProfile"
-    [currentProfile]="currentProfile"
+    *ngIf="currentUser$ | async as currentUser"
+    [currentUser]="currentUser"
   ></app-card-current-profile>
-
-  <app-menu-buttons
-    [buttonLabels]="['resultats', 'team']"
-    (buttonClick)="onButtonClicked($event)"
-  >
-  </app-menu-buttons>
-
-  <div *ngIf="buttonValueClicked === 'resultats'">
-    <app-list-resultats
-      *ngIf="currentProfile$ | async as currentProfile"
-      [currentProfile]="currentProfile"
-    ></app-list-resultats>
-  </div>
-  <div *ngIf="buttonValueClicked === 'team'">
-    <app-list-team-members
-      *ngIf="teamMembers$ | async as teamMembers"
-      [teamMembers]="teamMembers"
-    ></app-list-team-members>
+  <div class="profile-tabs">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="RÉSULTATS">
+        <app-list-resultats
+          *ngIf="currentProfile$ | async as currentProfile"
+          [currentProfile]="currentProfile"
+        ></app-list-resultats>
+      </mat-tab>
+      <mat-tab label="ÉQUIPES">
+        <app-list-team-members
+          *ngIf="teamMembers$ | async as teamMembers"
+          [teamMembers]="teamMembers"
+        ></app-list-team-members>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>
