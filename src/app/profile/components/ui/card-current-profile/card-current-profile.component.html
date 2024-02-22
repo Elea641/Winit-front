@@ -12,9 +12,8 @@
       <p>{{ currentUser?.city }}</p>
     </div>
     <div class="profile-card-container-other-info">
-      <mat-icon>sports_volleyball</mat-icon>
-      <p>Sport</p>
-      <p>{{ currentUser?.sport }}</p>
+      <mat-icon>check_circle_outline</mat-icon>
+      <p>Membre depuis le {{ currentUser?.createdAt | date:'dd-MM-yyyy'}}</p>
     </div>
   </div>
 </div>
