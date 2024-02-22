@@ -1,12 +1,11 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.list-last-tournaments-played-container {
+.list-next-tournaments-container {
   color: $text-list-last-tournaments-played-color;
   margin-top: 1rem;
 
-
-  .list-last-tournaments-played-container-header {
+  .list-next-tournaments-container-header {
     @include flex-align-center;
     background-color: $hearder-list-last-tournaments-played-color;
     height: 3.5rem;
@@ -19,7 +18,7 @@
     }
   }
 
-  .list-last-tournaments-played-container-body {
+  .list-next-tournaments-container-body {
     @include flex-column-center;
     background-color: $background-list-last-tournaments-played-color;
     border-radius: 0 0 4px 4px;
@@ -29,7 +28,7 @@
       width: 3.5rem;
     }
 
-    .list-last-tournaments-played-container-body-details {
+    .list-next-tournaments-container-body-details {
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -41,7 +40,7 @@
         padding: 1rem;
       }
 
-      .list-last-tournaments-played-container-body-detail {
+      .list-next-tournaments-container-body-detail {
         @include flex-align-center;
 
         h3 {
@@ -85,6 +84,5 @@
   @include media-large-screen {
     width: 47vw;
     margin-top: 1.5rem;
-    margin-right: 1vw;
   }
 }

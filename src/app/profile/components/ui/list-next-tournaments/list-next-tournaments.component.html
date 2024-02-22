@@ -1,0 +1,27 @@
+<div class="list-next-tournaments-container">
+  <div class="list-next-tournaments-container-header">
+    <h2>PROCHAINS TOURNOIS</h2>
+  </div>
+  <div class="list-next-tournaments-container-body">
+    <div class="list-next-tournaments-container-body-details">
+      <div class="list-next-tournaments-container-body-detail">
+        <img
+          src="../../../../../assets/pictures/award.png"
+          alt="sport detail image"
+        />
+        <div>
+          <p>
+            {{
+            currentProfile.lastTournamentsPlayed[0].lastTournament | titlecase
+            }}
+          </p>
+          <h3>Tournoi de Pâques</h3>
+        </div>
+      </div>
+      <button mat-raised-button>VOIR PLUS</button>
+    </div>
+    <div class="list-next-tournaments-container-body-details">
+      <p>Vous n'avez pas d'autres tournois prévus pour le moment.</p>
+    </div>
+  </div>
+</div>

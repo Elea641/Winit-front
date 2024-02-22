@@ -13,7 +13,12 @@
       </div>
     </div>
   </div>
-  <app-list-last-tounaments-played
-    [currentProfile]="currentProfile"
-  ></app-list-last-tounaments-played>
+  <div class="list-resultats-container-resultats-desktop">
+    <app-list-last-tounaments-played
+      [currentProfile]="currentProfile"
+    ></app-list-last-tounaments-played>
+    <app-list-next-tournaments
+      [currentProfile]="currentProfile"
+    ></app-list-next-tournaments>
+  </div>
 </div>
