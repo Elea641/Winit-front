@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Member } from 'src/app/team/models/member.model';
 import { TeamService } from 'src/app/team/shared/team.service';
-import { Team } from 'src/app/team/models/team.model';
 import { MemberCardComponent } from '../../ui/member-card/member-card.component';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -16,10 +15,12 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ListMemberComponent implements OnInit {
   members: Member[] | null = null;
-  team!: Team;
+  teamName: string = '';
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -27,14 +28,19 @@ export class ListMemberComponent implements OnInit {
       this.members = member;
     });
 
-    this.teamService.getSelectedTeam().subscribe((team) => {
-      if (team) {
-        this.team = team;
-      }
+    this.route.parent?.params.subscribe((params) => {
+      this.teamName = params['teamName'];
     });
   }
 
   onDelete(member: string) {
-    this.teamService.deleteMemberByName(this.team.name, member);
+    this.teamService.deleteMemberByName(this.teamName, member).subscribe(
+      (members) => {
+        this.members = members;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }

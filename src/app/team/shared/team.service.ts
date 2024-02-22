@@ -79,31 +79,37 @@ export class TeamService {
       );
   }
 
-  deleteMemberByName(teamName: string, memberName: string): void {
-    console.log(teamName, memberName);
+  deleteMemberByName(teamName: string, memberName: string): Observable<any> {
+    return new Observable((observer) => {
+      this.http
+        .delete<any>(
+          `${environment.urlApi}/teams/${teamName}/members/${memberName}`
+        )
+        .subscribe(
+          (response) => {
+            if (response) {
+              this.toastService.showSuccess(
+                'Membre supprimé avec succès',
+                "Le membre a été supprimé de l'équipe"
+              );
 
-    this.http
-      .delete<any>(
-        `${environment.urlApi}/teams/${teamName}/members/${memberName}`
-      )
-      .subscribe(
-        (response) => {
-          if (response) {
-            this.toastService.showSuccess(
-              'Membre supprimé avec succès',
-              "Le membre a été supprimé de l'équipe"
-            );
+              this.getAllMembersByTeam(teamName).subscribe((members) => {
+                observer.next(members);
+                observer.complete();
+              });
+            }
+          },
+          (error) => {
+            if (error.error) {
+              this.toastService.showError(
+                error.error,
+                'Une erreur est survenue lors de la suppression du membre'
+              );
+            }
+            observer.error(error);
           }
-        },
-        (error) => {
-          if (error.error) {
-            this.toastService.showError(
-              error.error,
-              'Une erreur est survenue lors de la suppression du membre'
-            );
-          }
-        }
-      );
+        );
+    });
   }
 
   setSelectTeam(team: Team): void {
