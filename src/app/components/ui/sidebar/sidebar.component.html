@@ -4,21 +4,50 @@
 >
   <mat-drawer #drawer mode="side" class="container-sidebar-menu">
     <div class="container-sidebar-menu-input">
-      <app-input-search></app-input-search>
+      <app-input-search
+        (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)"
+      ></app-input-search>
     </div>
     <h2>Filtres</h2>
     <div class="line"></div>
+
+    <div class="container-sidebar-menu-button sidebar-select-sport">
+      <mat-label>Trier par sport</mat-label>
+      <mat-select [(value)]="selectedSport" class="selected">
+        <mat-option
+          selected="selected"
+          value=""
+          (click)="sendSportFilter(selectedSport)"
+          (click)="$event.stopPropagation()"
+          >Aucun</mat-option
+        >
+        <mat-option
+          *ngFor="let sport of sports"
+          value="{{ sport.name }}"
+          (click)="$event.stopPropagation()"
+          (click)="sendSportFilter(selectedSport)"
+          >{{ sport.name }}</mat-option
+        >
+      </mat-select>
+    </div>
+
     <button
       (click)="showFiller = !showFiller"
       mat-raised-button
       class="container-sidebar-menu-button"
+      (click)="sendChronologicalFilterChangeToParent()"
     >
-      Chronologiques
+      Trier par :
+      <span [ngClass]="{ selected: !chronologicalFilter }">Nom</span> /
+      <span [ngClass]="{ selected: chronologicalFilter }">Date</span>
     </button>
+    <mat-divider></mat-divider>
     <button
       (click)="showFiller = !showFiller"
+      (click)="sendShowOnlyUpcomingTournamentsToParent()"
       mat-raised-button
       class="container-sidebar-menu-button"
+      [ngClass]="{ selected: showOnlyUpcomingTournaments }"
     >
       A venir
     </button>
@@ -26,9 +55,18 @@
       (click)="showFiller = !showFiller"
       mat-raised-button
       class="container-sidebar-menu-button"
+      (click)="sendShowNonFullTournaments()"
+      [ngClass]="{ selected: showNonFullTournaments }"
     >
       Non complet
     </button>
+
+    <mat-divider></mat-divider>
+    <div class="reset-filters-button">
+      <button mat-raised-button color="primary" (click)="sendResetFilters()">
+        Réinitialiser les filtres
+      </button>
+    </div>
   </mat-drawer>
 
   <div class="sidenav-button">
@@ -45,14 +83,72 @@
   *ngIf="!isDesktop || !isLargeDesktop"
 >
   <div class="container-sidebar-menu-input">
-    <app-input-search></app-input-search>
+    <app-input-search
+      (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)"
+    >
+    </app-input-search>
   </div>
   <button class="filter-button-container" mat-button [matMenuTriggerFor]="menu">
     Filtres
   </button>
   <mat-menu #menu="matMenu" class="sidebar-custom-menu">
-    <button mat-menu-item>Chronologiques</button>
-    <button mat-menu-item>A venir</button>
-    <button mat-menu-item>Non complet</button>
+    <div class="sidebar-select-sport-mobile" mat-menu-item>
+      <mat-label>Trier par sport</mat-label>
+      <mat-select
+        [(value)]="selectedSport"
+        class="selected"
+        (click)="$event.stopPropagation()"
+      >
+        <mat-option
+          selected="selected"
+          value=""
+          (click)="sendSportFilter(selectedSport)"
+          (click)="$event.stopPropagation()"
+          >Aucun</mat-option
+        >
+        <mat-option
+          *ngFor="let sport of sports"
+          value="{{ sport.name }}"
+          (click)="$event.stopPropagation()"
+          (click)="sendSportFilter(selectedSport)"
+          >{{ sport.name }}</mat-option
+        >
+      </mat-select>
+    </div>
+
+    <button
+      mat-menu-item
+      (click)="sendChronologicalFilterChangeToParent()"
+      (click)="$event.stopPropagation()"
+    >
+      <span [ngClass]="{ selected: !chronologicalFilter }">Alphabétique</span> /
+      <span [ngClass]="{ selected: chronologicalFilter }">chronologique</span>
+    </button>
+    <button
+      mat-menu-item
+      (click)="sendShowOnlyUpcomingTournamentsToParent()"
+      (click)="$event.stopPropagation()"
+      [ngClass]="{ selected: showOnlyUpcomingTournaments }"
+    >
+      A venir
+    </button>
+    <button
+      mat-menu-item
+      (click)="sendShowNonFullTournaments()"
+      (click)="$event.stopPropagation()"
+      [ngClass]="{ selected: showNonFullTournaments }"
+    >
+      Non complet
+    </button>
+    <mat-divider></mat-divider>
+    <button
+      mat-button
+      color="primary"
+      (click)="sendResetFilters()"
+      (click)="$event.stopPropagation()"
+      class="mobile-reset-filters-button"
+    >
+      Réinitialiser les filtres
+    </button>
   </mat-menu>
 </mat-toolbar>

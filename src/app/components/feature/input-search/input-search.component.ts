@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-input-search',
@@ -21,5 +21,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   styleUrls: ['./input-search.component.scss'],
 })
 export class InputSearchComponent {
-  value = '';
+  searchValue: string = '';
+  @Output() newSearchValueEventFromInput = new EventEmitter<string>();
+
+  sendSearchValueToParent() {
+    this.newSearchValueEventFromInput.emit(this.searchValue);
+  }
 }
