@@ -7,14 +7,15 @@
   margin-top: 1rem;
   padding: 0.5rem;
   position: relative;
+  border-radius: 4px;
 
   .card-result-tournament-img {
     position: relative;
     padding: 0.5rem;
     img {
       display: block;
-      margin: 0 auto;
-      width: 8rem;
+      margin: 0 0.7rem 0 0.7rem;
+      width: 6rem;
     }
 
     p {
@@ -29,12 +30,12 @@
 
   .line {
     border: 1px solid $line-card-result-tournament-color;
-    margin: 0.5rem 0 0.5rem 0;
+    margin: 0.5rem 0 0.5rem 0.5rem;
   }
 
   .card-result-tournament-infos {
     @include flex-column-center-align-justify;
-    width: 60%;
+    width: 40%;
     p {
       color: $number-card-result-tournament-color;
       font-size: 1.8rem;
@@ -44,23 +45,24 @@
       font-size: 1rem;
       color: $text-card-result-tournament-color;
       padding: 0.5rem 0 0 0.5rem;
+      text-align: center;
     }
   }
 
   @include media-large-screen {
-    width: 24vw;
+    width: 23vw;
     display: flex;
-    margin: 0 0.5rem 0 0;
+    margin: 1.5rem 1vw 0 0;
     height: 7rem;
 
     .card-result-tournament-img {
       img {
-        width: 4rem;
+        width: 5rem;
       }
 
       p {
-        top: 45%;
-        font-size: 0.8rem;
+        top: 52%;
+        font-size: 1rem;
       }
     }
 
