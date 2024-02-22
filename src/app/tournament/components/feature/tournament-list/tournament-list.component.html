@@ -7,6 +7,7 @@
       onReceiveShowOnlyUpcomingTournaments($event)
     "
     (newShowNonFullTournaments)="onReceiveShowNonFullTournaments($event)"
+    (newSportFilter)="onReceiveSportFilter($event)"
     (newResetFilter)="onReceiveResetFilters($event)"
   ></app-sidebar>
   <div
@@ -23,16 +24,28 @@
         'transition.s': 0.3
       }"
     >
-      <h1>TOUS LES TOURNOIS</h1>
-      <mat-divider></mat-divider>
-      <div class="all-tournaments-cards">
-        <div
-          *ngFor="let tournament of filteredTournaments$ | async"
-          class="tournament-list"
-        >
-          <app-tournament-card [tournament]="tournament"></app-tournament-card>
+      <ng-template #elseBlock>
+        <h2 class="no-tournament-to-show">
+          Aucun tournoi ne correspond à vos critères de recherche
+        </h2>
+      </ng-template>
+      <ng-container
+        *ngIf="(filteredTournaments$ | async)?.length; else elseBlock"
+      >
+        <h1>TOUS LES TOURNOIS</h1>
+        <mat-divider></mat-divider>
+
+        <div class="all-tournaments-cards">
+          <div
+            *ngFor="let tournament of filteredTournaments$ | async"
+            class="tournament-list"
+          >
+            <app-tournament-card
+              [tournament]="tournament"
+            ></app-tournament-card>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </section>
   </div>
 </div>

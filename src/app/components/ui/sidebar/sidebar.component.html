@@ -10,15 +10,38 @@
     </div>
     <h2>Filtres</h2>
     <div class="line"></div>
+
+    <div class="container-sidebar-menu-button sidebar-select-sport">
+      <mat-label>Trier par sport</mat-label>
+      <mat-select [(value)]="selectedSport" class="selected">
+        <mat-option
+          selected="selected"
+          value=""
+          (click)="sendSportFilter(selectedSport)"
+          (click)="$event.stopPropagation()"
+          >Aucun</mat-option
+        >
+        <mat-option
+          *ngFor="let sport of sports"
+          value="{{ sport.name }}"
+          (click)="$event.stopPropagation()"
+          (click)="sendSportFilter(selectedSport)"
+          >{{ sport.name }}</mat-option
+        >
+      </mat-select>
+    </div>
+
     <button
       (click)="showFiller = !showFiller"
       mat-raised-button
       class="container-sidebar-menu-button"
       (click)="sendChronologicalFilterChangeToParent()"
     >
-      <span [ngClass]="{ selected: !chronologicalFilter }">Alphabétique</span> /
-      <span [ngClass]="{ selected: chronologicalFilter }">chronologique</span>
+      Trier par :
+      <span [ngClass]="{ selected: !chronologicalFilter }">Nom</span> /
+      <span [ngClass]="{ selected: chronologicalFilter }">Date</span>
     </button>
+    <mat-divider></mat-divider>
     <button
       (click)="showFiller = !showFiller"
       (click)="sendShowOnlyUpcomingTournamentsToParent()"
@@ -37,6 +60,7 @@
     >
       Non complet
     </button>
+
     <mat-divider></mat-divider>
     <div class="reset-filters-button">
       <button mat-raised-button color="primary" (click)="sendResetFilters()">
@@ -68,6 +92,30 @@
     Filtres
   </button>
   <mat-menu #menu="matMenu" class="sidebar-custom-menu">
+    <div class="sidebar-select-sport-mobile" mat-menu-item>
+      <mat-label>Trier par sport</mat-label>
+      <mat-select
+        [(value)]="selectedSport"
+        class="selected"
+        (click)="$event.stopPropagation()"
+      >
+        <mat-option
+          selected="selected"
+          value=""
+          (click)="sendSportFilter(selectedSport)"
+          (click)="$event.stopPropagation()"
+          >Aucun</mat-option
+        >
+        <mat-option
+          *ngFor="let sport of sports"
+          value="{{ sport.name }}"
+          (click)="$event.stopPropagation()"
+          (click)="sendSportFilter(selectedSport)"
+          >{{ sport.name }}</mat-option
+        >
+      </mat-select>
+    </div>
+
     <button
       mat-menu-item
       (click)="sendChronologicalFilterChangeToParent()"

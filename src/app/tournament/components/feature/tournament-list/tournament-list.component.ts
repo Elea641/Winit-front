@@ -31,6 +31,7 @@ export class TournamentListComponent implements OnInit {
   chronologicalFilter: boolean = false;
   showOnlyUpcomingTournaments: boolean = false;
   showNonFullTournaments: boolean = false;
+  selectedSport: string = '';
 
   constructor(
     private tournamentService: TournamentService,
@@ -114,10 +115,32 @@ export class TournamentListComponent implements OnInit {
     );
   }
 
+  onReceiveSportFilter(value: string) {
+    this.selectedSport = value;
+    if (this.selectedSport === '') {
+      this.filteredTournaments$ =
+        this.tournamentListFilterService.filterTournamentListBySearchTerm(
+          this.searchValue,
+          this.tournaments$
+        );
+    } else {
+      this.filteredTournaments$ = this.tournaments$;
+      this.filteredTournaments$ =
+        this.tournamentListFilterService.filterTournamentBySport(
+          this.filteredTournaments$,
+          this.selectedSport
+        );
+    }
+
+    this.showNonFullTournaments = false;
+    this.showOnlyUpcomingTournaments = false;
+  }
+
   onReceiveResetFilters(event: any) {
     this.filteredTournaments$ = this.tournaments$;
     this.chronologicalFilter = false;
     this.showOnlyUpcomingTournaments = false;
     this.showNonFullTournaments = false;
+    this.selectedSport = '';
   }
 }

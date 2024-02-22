@@ -20,7 +20,9 @@ export class TournamentListFilterService {
             tournament.place
               .toLowerCase()
               .includes(searchValue.toLowerCase()) ||
-            tournament.sport.toLowerCase().includes(searchValue.toLowerCase())
+            tournament.sport.name
+              .toLowerCase()
+              .includes(searchValue.toLowerCase())
         );
       })
     );
@@ -57,5 +59,18 @@ export class TournamentListFilterService {
 
   checkIfTournamentIsNotFull(tournament: Tournament): boolean {
     return tournament.currentPlayers! < tournament.maxPlayers;
+  }
+
+  filterTournamentBySport(
+    filteredTournaments$: Observable<Tournament[]>,
+    selectedSport: string
+  ) {
+    return filteredTournaments$.pipe(
+      map((tournaments: Tournament[]) => {
+        return tournaments.filter(
+          (tournament: Tournament) => tournament.sport.name === selectedSport
+        );
+      })
+    );
   }
 }
