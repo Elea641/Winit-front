@@ -4,4 +4,11 @@
 .tournament-details-container {
   @include flex-column;
   padding: 1rem 2rem;
+
+  .mat-tabs {
+    padding: 1rem 0;
+  }
+  ::ng-deep .mdc-tab__text-label {
+    color: $secondary-color;
+  }
 }

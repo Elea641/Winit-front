@@ -6,17 +6,17 @@ import { TournamentDetails } from 'src/app/tournament/models/tournament-details.
 import { CardDetailsTournamentComponent } from '../../ui/card-details-tournament/card-details-tournament.component';
 import { ListTeamsTournamentComponent } from '../../ui/list-teams-tournament/list-teams-tournament.component';
 import { ListTournamentTreeComponent } from '../../ui/list-tournament-tree/list-tournament-tree.component';
-import { MenuButtonsComponent } from 'src/app/components/ui/menu-buttons/menu-buttons.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-tournament-details',
   standalone: true,
   imports: [
     CommonModule,
-    MenuButtonsComponent,
     CardDetailsTournamentComponent,
     ListTeamsTournamentComponent,
     ListTournamentTreeComponent,
+    MatTabsModule,
   ],
   templateUrl: './tournament-details.component.html',
   styleUrls: ['./tournament-details.component.scss'],

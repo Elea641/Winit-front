@@ -6,7 +6,22 @@
     <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="outline" class="team-form-field">
         <mat-label>Nom</mat-label>
-        <input matInput type="text" formControlName="name" class="test" />
+        <input
+          matInput
+          [matAutocomplete]="auto"
+          type="text"
+          formControlName="name"
+          class="test"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let user of filteredUsers | async"
+            [value]="user.firstName"
+          >
+            {{ user.firstName | titlecase }}
+          </mat-option>
+        </mat-autocomplete>
+
         <mat-error
           *ngIf="name?.errors && !name?.pristine"
           class="error-message-size"

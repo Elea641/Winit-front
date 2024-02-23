@@ -3,22 +3,23 @@
     *ngIf="tournamentDetails$ | async as tournamentDetails"
     [tournamentDetails]="tournamentDetails"
   ></app-card-details-tournament>
-  <app-menu-buttons
-    [buttonLabels]="['matchs', 'teams']"
-    (buttonClick)="onButtonClicked($event)"
-  ></app-menu-buttons>
 
-  <div *ngIf="buttonValueClicked === 'matchs'">
-    <app-list-tournament-tree
-      *ngIf="tournamentDetails$ | async as tournamentDetails"
-      [tournamentDetails]="tournamentDetails"
-    ></app-list-tournament-tree>
-  </div>
-
-  <div *ngIf="buttonValueClicked === 'teams'">
-    <app-list-teams-tournament
-      *ngIf="tournamentDetails$ | async as tournamentDetails"
-      [tournamentDetails]="tournamentDetails"
-    ></app-list-teams-tournament>
-  </div>
+  <mat-tab-group
+    mat-stretch-tabs="false"
+    mat-align-tabs="start"
+    class="mat-tabs"
+  >
+    <mat-tab label="MATCH">
+      <app-list-tournament-tree
+        *ngIf="tournamentDetails$ | async as tournamentDetails"
+        [tournamentDetails]="tournamentDetails"
+      ></app-list-tournament-tree
+    ></mat-tab>
+    <mat-tab label="ÉQUIPE">
+      <app-list-teams-tournament
+        *ngIf="tournamentDetails$ | async as tournamentDetails"
+        [tournamentDetails]="tournamentDetails"
+      ></app-list-teams-tournament
+    ></mat-tab>
+  </mat-tab-group>
 </div>

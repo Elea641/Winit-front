@@ -13,17 +13,15 @@ import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { SportComponent } from './sport/pages/sport/sport.component';
 import { CreateMemberComponent } from './team/components/feature/create-member/create-member.component';
-import { CreateTeamComponent } from './team/components/feature/create-team/create-team.component';
 import { ListMemberComponent } from './team/components/feature/list-member/list-member.component';
-import { ListTeamComponent } from './team/components/feature/list-team/list-team.component';
 import { TeamDetailCardComponent } from './team/components/ui/team-detail-card/team-detail-card.component';
-import { TeamDetailPageComponent } from './team/pages/team-detail-page/team-detail-page.component';
-import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { teamResolver } from './team/shared/resolvers/team-resolver';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
 import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
 import { memberResolver } from './team/shared/resolvers/member-resolver';
+import { userResolver } from './auth/shared/resolvers/user-resolver';
+import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 
 export const routes: Routes = [
   {
@@ -53,44 +51,18 @@ export const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
-    path: 'teams',
-    component: TeamPageComponent,
-    children: [
-      {
-        path: 'create-team',
-        component: CreateTeamComponent,
-      },
-      {
-        path: 'list-team',
-        component: ListTeamComponent,
-      },
-    ],
-  },
-  {
     path: 'teams-details',
-    component: TeamDetailPageComponent,
+    component: TeamPageComponent,
     canActivate: [UserGuard],
     children: [
       {
         path: ':teamName',
         component: TeamDetailCardComponent,
-        resolve: { team: teamResolver },
-        children: [
-          {
-            path: '',
-            redirectTo: 'list-member',
-            pathMatch: 'full',
-          },
-          {
-            path: 'create-member',
-            component: CreateMemberComponent,
-          },
-          {
-            path: 'list-member',
-            component: ListMemberComponent,
-            resolve: { member: memberResolver },
-          },
-        ],
+        resolve: {
+          team: teamResolver,
+          user: userResolver,
+          member: memberResolver,
+        },
       },
     ],
   },

@@ -8,8 +8,10 @@ import { ListResultatsComponent } from '../list-resultats/list-resultats.compone
 import { ListTeamMembersComponent } from '../list-team-members/list-team-members.component';
 import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
 import { MenuButtonsComponent } from 'src/app/components/ui/menu-buttons/menu-buttons.component';
-import {User} from "../../../../auth/models/user.model";
-import {MatTabsModule} from "@angular/material/tabs";
+import { User } from '../../../../auth/models/user.model';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CreateTeamComponent } from 'src/app/team/components/feature/create-team/create-team.component';
+import { ListTeamComponent } from 'src/app/team/components/feature/list-team/list-team.component';
 
 @Component({
   selector: 'app-current-profile-details',
@@ -21,6 +23,8 @@ import {MatTabsModule} from "@angular/material/tabs";
     ListResultatsComponent,
     ListTeamMembersComponent,
     MatTabsModule,
+    CreateTeamComponent,
+    ListTeamComponent,
   ],
   templateUrl: './current-profile-details.component.html',
   styleUrls: ['./current-profile-details.component.scss'],
