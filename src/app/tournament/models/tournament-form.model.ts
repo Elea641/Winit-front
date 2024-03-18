@@ -1,10 +1,22 @@
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
+import { forbiddenFileFormat } from "../shared/validators/forbidden-file-format.directive";
+import { SportService } from "src/app/sport/shared/sport.service";
+import { minimumDate } from "../shared/validators/minimum-date.directive";
+import { allowedSports } from "../shared/validators/allowed-sports.directive";
+import { enumValidator } from "../shared/validators/allowed-enums.directive";
+import { TournamentPrivacyEnum } from "./enum/tournamentPrivacyEnum";
+import { PlayerCategoryEnum } from "./enum/playerCategoryEnum";
+import { TournamentFormatEnum } from "./enum/tournamentFormatEnum";
+import { maximumDate } from "../shared/validators/maximum-date.directive";
+
 
 export class TournamentForm {
     form: FormGroup;
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private sportService: SportService) {
         this.form = this.createForm();
     }
 
@@ -18,16 +30,16 @@ export class TournamentForm {
             place: ['', [
                 Validators.required,
                 Validators.minLength(3),
-                Validators.maxLength(30)
+                Validators.maxLength(50)
             ]],
             date: ['', [
                 Validators.required,
-                // dateTournamentCreationValidator()
+                minimumDate()
             ]],
             inscriptionLimitDate: [''],
             sport: ['', [
                 Validators.required,
-                // sportTournamentCreationValidator()
+                allowedSports(this.sportService)
             ]],
             playersPerTeam: ['', Validators.required],
             minTeams: [''],
@@ -35,19 +47,20 @@ export class TournamentForm {
             gameLength: ['', Validators.required],
             privacy: ['', [
                 Validators.required,
-                // privacyTournamentCreationValidator()
+                enumValidator(TournamentPrivacyEnum)
             ]],
             playerCategory: ['', [
                 Validators.required,
-                // playerCategoryTournamentCreationValidator()
+                enumValidator(PlayerCategoryEnum)
             ]],
             tournamentFormat: ['', [
                 Validators.required,
-                // formatTournamentCreationValidator()
+                enumValidator(TournamentFormatEnum)
             ]],
             tournamentBanner: [null,
-                // bannerTournamentCreationValidator() 
+                // [FileInputValidators.accept("image/*")]
+                forbiddenFileFormat(),
             ]
-        })
+        }, { validators: maximumDate })
     }
 }

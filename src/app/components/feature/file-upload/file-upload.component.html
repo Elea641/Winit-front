@@ -12,12 +12,5 @@
             </button>
         </mat-chip-row>
     </div>
-    <mat-error *ngIf="groupParent.controls[formControlNameValue]?.invalid && (groupParent.controls[formControlNameValue]?.dirty || groupParent.controls[formControlNameValue]?.touched)">
-        <small class="error" *ngIf="groupParent.controls[formControlNameValue]?.errors?.['required']">Test</small>
-    </mat-error>
-    <div *ngIf="groupParent.controls[formControlNameValue]?.invalid && (groupParent.controls[formControlNameValue]?.dirty || groupParent.controls[formControlNameValue]?.touched)">
-        <mat-error *ngFor="let error of getControlErrors(groupParent.controls[formControlNameValue])">
-            <small class="error">{{ error }}</small>
-        </mat-error>
-    </div>
+    <mat-error>Type de fichiers acceptés : .jpeg, .jpg, .png, .gif</mat-error>
 </mat-form-field>

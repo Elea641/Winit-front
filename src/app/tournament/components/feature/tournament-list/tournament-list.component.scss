@@ -33,6 +33,12 @@
     }
   }
 
+  .no-tournament-to-show {
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
   @include media-large-screen {
     .tournament-container {
       width: 100%;

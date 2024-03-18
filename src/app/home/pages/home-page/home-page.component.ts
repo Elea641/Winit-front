@@ -16,18 +16,4 @@ import { SidebarComponent } from 'src/app/components/ui/sidebar/sidebar.componen
     MatDividerModule,
   ],
 })
-export class HomePageComponent {
-  isDrawerOpened: boolean = false;
-  isOpen: string = '';
-
-  ngOnInit(): void {
-    if (this.isDrawerOpened === true) {
-      this.isOpen = 'open';
-    }
-  }
-
-  handleDrawerChange(isDrawerOpened: boolean) {
-    this.isDrawerOpened = isDrawerOpened;
-    this.isOpen = isDrawerOpened ? 'open' : 'close';
-  }
-}
+export class HomePageComponent {}

@@ -1,0 +1,39 @@
+@import "../../../../assets/style/variables.scss";
+
+.reset-filters-button {
+  display: flex;
+  justify-content: space-around;
+
+  & button {
+    margin-top: 16px;
+    color: #fff;
+  }
+}
+
+::ng-deep .mat-mdc-menu-content {
+  text-align: center;
+}
+
+.selected {
+  color: $card-background-color;
+}
+
+.sidebar-select-sport {
+  & mat-label {
+    font-size: 0.85rem;
+  }
+  & mat-select {
+    padding-top: 0.3rem;
+  }
+}
+
+::ng-deep .mat-mdc-menu-item-text {
+  display: flex;
+  width: 100%;
+  & mat-label {
+    width: 50%;
+  }
+  & mat-select {
+    width: 50%;
+  }
+}
