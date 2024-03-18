@@ -1,32 +1,41 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
 
 <mat-card class="tournament-card">
-    <img mat-card-image src="../../../../assets/pictures/balles-sport-differents.jpg" alt="Photo of a Shiba Inu">
-    <div class="playercount">
-        <span class="material-symbols-outlined text-white group-icon">
-                    group
-                </span>
-        <span class="text-white small-font number-players">{{ tournament.currentPlayers }} / {{ tournament.maxPlayers }}</span>
-    </div>
+  <img
+    mat-card-image
+    src="../../../../assets/pictures/balles-sport-differents.jpg"
+    alt="Photo of a Shiba Inu"
+  />
+  <div class="playercount">
+    <span class="material-symbols-outlined text-white group-icon"> group </span>
+    <span class="text-white small-font number-players"
+      >{{ tournament.currentPlayers }} / {{ tournament.maxPlayers }}</span
+    >
+  </div>
   <mat-card-header>
-    <mat-card-subtitle class="tournament-sport small-font">{{ tournament.sport }}</mat-card-subtitle>
-    <mat-card-title class="tournament-title text-white">{{ tournament.name }}</mat-card-title>
+    <mat-card-subtitle class="tournament-sport small-font">{{
+      tournament.sport
+    }}</mat-card-subtitle>
+    <mat-card-title class="tournament-title text-white">{{
+      tournament.name
+    }}</mat-card-title>
   </mat-card-header>
-    <mat-card-content>
-        <div class="row small-font">
-            <span class="material-symbols-outlined text-white">
-                calendar_month
-            </span>
-            <p class="text-white">{{ tournament.date }}</p>
-        </div>
-        <div class="row">
-            <span class="material-symbols-outlined text-white">
-                location_on
-            </span>
-            <p class="text-white">{{ tournament.place }}</p>
-        </div>
-    </mat-card-content>
+  <mat-card-content>
+    <div class="row small-font">
+      <span class="material-symbols-outlined text-white"> calendar_month </span>
+      <p class="text-white">{{ tournament.date }}</p>
+    </div>
+    <div class="row">
+      <span class="material-symbols-outlined text-white"> location_on </span>
+      <p class="text-white">{{ tournament.place }}</p>
+    </div>
+  </mat-card-content>
   <mat-card-actions>
-    <button mat-stroked-button color="primary" class="see-more-button">Voir plus</button>
+    <button mat-stroked-button color="primary" class="see-more-button">
+      Voir plus
+    </button>
   </mat-card-actions>
 </mat-card>

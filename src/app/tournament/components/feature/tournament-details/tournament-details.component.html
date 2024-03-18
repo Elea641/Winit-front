@@ -10,11 +10,13 @@
     class="mat-tabs"
   >
     <mat-tab label="MATCH">
-      <app-list-tournament-tree
-        *ngIf="tournamentDetails$ | async as tournamentDetails"
-        [tournamentDetails]="tournamentDetails"
-      ></app-list-tournament-tree
-    ></mat-tab>
+      <ul>
+        <app-list-tournament-tree
+          *ngIf="tournamentDetails$ | async as tournamentDetails"
+          [tournamentDetails]="tournamentDetails"
+        ></app-list-tournament-tree>
+      </ul>
+    </mat-tab>
     <mat-tab label="ÉQUIPE">
       <app-list-teams-tournament
         *ngIf="tournamentDetails$ | async as tournamentDetails"

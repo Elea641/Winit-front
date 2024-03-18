@@ -61,7 +61,7 @@ export class CreateMemberComponent {
       ]),
     });
 
-    this.route.parent?.params.subscribe((params) => {
+    this.route.params.subscribe((params) => {
       this.teamName = params['teamName'];
     });
 
