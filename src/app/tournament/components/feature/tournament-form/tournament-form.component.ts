@@ -93,17 +93,6 @@ export class TournamentFormComponent implements OnInit, OnDestroy {
       this.tournamentForm.controls["inscriptionLimitDate"].removeValidators(Validators.required);
     }
   }
-  
-  // logStuff() {
-  //   console.log("Tournament : ");
-  //   console.log(this.tournamentForm);
-  //   console.log("Value : ");
-  //   console.log(this.tournamentForm.value);
-  //   console.log("Errors : ");
-  //   console.log(this.tournamentForm.errors);
-  //   console.log("Invalid :");
-  //   console.log(this.tournamentForm.invalid);
-  // }
 
   onSubmit() {
     if (this.tournamentForm.valid) {
