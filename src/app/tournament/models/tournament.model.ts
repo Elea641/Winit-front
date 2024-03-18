@@ -1,3 +1,5 @@
+import { Sport } from 'src/app/sport/models/sport.model';
+
 export class Tournament {
   constructor(
     public id: number,
@@ -16,6 +18,6 @@ export class Tournament {
     public sport?: string,
     public tournamentBanner?: string,
     public inscriptionLimitDate?: Date,
-    public currentPlayers?: number,
+    public currentPlayers?: number
   ) {}
 }
