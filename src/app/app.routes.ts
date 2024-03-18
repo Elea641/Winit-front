@@ -41,7 +41,10 @@ export const routes: Routes = [
     canActivate: [UserGuard],
   },
   { path: 'contact', component: ContactPageComponent },
-  { path: 'tournament', component: TournamentPageComponent },
+  { 
+    path: 'tournament', 
+    component: TournamentPageComponent,
+  },
   { path: 'tournament/create', component: TournamentFormComponent },
   { path: 'tournament/:id([0-9]+)', component: TournamentDetailsPageComponent },
   {

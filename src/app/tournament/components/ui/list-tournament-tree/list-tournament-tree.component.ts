@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardTournamentMatchComponent } from '../card-tournament-match/card-tournament-match.component';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
-import { HelperTournamentService } from 'src/app/tournament/shared/helper-tournament.service';
+import { HelperTournamentService } from 'src/app/tournament/shared/helpers/helper-tournament.service';
 
 @Component({
   selector: 'app-list-tournament-tree',
