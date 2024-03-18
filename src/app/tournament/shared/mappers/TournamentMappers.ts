@@ -8,8 +8,6 @@ import { TournamentCreationDto } from "../../models/tournament-creation-dto.mode
 export class TournamentMappers {
     ToCreationDto(model: TournamentForm["form"]): TournamentCreationDto {
 
-        console.log(new Date(model.controls["date"].value));
-
         const tournament: TournamentCreationDto = {
             name: model.controls["name"].value,
             date: model.controls["date"].value,
@@ -32,13 +30,10 @@ export class TournamentMappers {
     ToFormData(model: TournamentCreationDto): FormData {
         const formData = new FormData();
 
-        console.log("Value : ", model.sport);
-
         formData.append('name', model.name);
         formData.append('date', model.date.toString());
         formData.append('place', model.place);
         formData.append('sportName', model.sport);
-        console.log("FormData Sport : ", formData.get('sport'));
         formData.append('playersPerTeam', String(model.playersPerTeam));
         formData.append('maxTeams', String(model.maxTeams));
         formData.append('gameLength', String(model.gameLength));
