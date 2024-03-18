@@ -17,8 +17,18 @@
   .team-list-card-infos-container {
     margin: 2rem 0;
     color: $secondary-color;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    h1 {
+      grid-column-start: 1;
+      grid-column-end: 1;
+    }
 
     h2 {
+      grid-column-start: 1;
+      grid-column-end: 1;
       color: $number-card-team-detail-color;
     }
   }

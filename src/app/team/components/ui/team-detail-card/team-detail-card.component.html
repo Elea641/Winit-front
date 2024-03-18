@@ -4,7 +4,7 @@
   <div class="team-list-card-infos-container">
     <h1>{{ selectedTeam.name | uppercase }}</h1>
     <h2>{{ selectedTeam.sport | titlecase }}</h2>
+    <button mat-button color="warn" (click)="onDelete()">SUPPRIMER</button>
   </div>
 </div>
-
 <app-member-detail [selectedTeam]="selectedTeam"></app-member-detail>
