@@ -20,7 +20,7 @@ export class TournamentListFilterService {
             tournament.place
               .toLowerCase()
               .includes(searchValue.toLowerCase()) ||
-            tournament.sport.name
+            tournament.sport
               .toLowerCase()
               .includes(searchValue.toLowerCase())
         );
@@ -68,7 +68,7 @@ export class TournamentListFilterService {
     return filteredTournaments$.pipe(
       map((tournaments: Tournament[]) => {
         return tournaments.filter(
-          (tournament: Tournament) => tournament.sport.name === selectedSport
+          (tournament: Tournament) => tournament.sport === selectedSport
         );
       })
     );

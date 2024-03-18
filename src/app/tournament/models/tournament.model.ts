@@ -1,5 +1,3 @@
-import { Sport } from 'src/app/sport/models/sport.model';
-
 export class Tournament {
   constructor(
     public id: number,
