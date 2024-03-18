@@ -18,7 +18,6 @@ import { TournamentMappers } from './mappers/TournamentMappers';
 })
 export class TournamentService {
   private tournamentDataUrl = '../assets/list-tournament.model.json';
-  // private apiUrl = `${environment.urlApi}` + "/tournaments";
   private apiUrl = `${environment.urlApi}` + "/tournaments/create";
   private tournamentByIdDataUrl = '../assets/tournament-details.model.json';
 
@@ -36,10 +35,10 @@ export class TournamentService {
 
       this.http.post<Tournament>(this.apiUrl, tournamentCreationDto, { headers }).subscribe(
         (response) => {
-          console.log("Response: ", response);
+          console.warn("Response: ", response);
           if (response) {
             console.log("success");
-            this.router.navigate(['/tournament/' + response.id]);
+            this.router.navigate(['/tournament/' + response]);
             this.toastService.showSuccess(
               "Votre tournoi est prêt !",
               "Tournoi créé avec succès"
@@ -47,7 +46,7 @@ export class TournamentService {
           }
         },
         (error) => {
-          console.log("Error: ", error);
+          console.error("Error: ", error);
           const errorMessage = error?.error?.error_message || 'Une erreur est survenue';
           this.toastService.showError(
             errorMessage,
