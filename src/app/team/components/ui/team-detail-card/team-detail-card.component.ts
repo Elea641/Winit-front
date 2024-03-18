@@ -5,6 +5,7 @@ import { TeamService } from 'src/app/team/shared/team.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MemberDetailComponent } from '../../feature/member-detail/member-detail.component';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-team-detail-card',
@@ -14,6 +15,7 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
     MatDividerModule,
     MemberDetailComponent,
     RouterOutlet,
+    MatButtonModule,
   ],
   templateUrl: './team-detail-card.component.html',
   styleUrls: ['./team-detail-card.component.scss'],
@@ -35,5 +37,14 @@ export class TeamDetailCardComponent {
         this.selectedTeam = team;
       });
     });
+  }
+
+  onDelete() {
+    this.teamService.deleteTeamByName(this.teamName).subscribe(
+      () => {},
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }

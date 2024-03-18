@@ -5,6 +5,7 @@ import { Member } from 'src/app/team/models/member.model';
 import { TeamService } from 'src/app/team/shared/team.service';
 import { MemberCardComponent } from '../../ui/member-card/member-card.component';
 import { MatButtonModule } from '@angular/material/button';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-member',
@@ -16,33 +17,48 @@ import { MatButtonModule } from '@angular/material/button';
 export class ListMemberComponent implements OnInit {
   members: Member[] = [];
   teamName: string = '';
+  memberAddedSubscription: Subscription | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private teamService: TeamService,
-    private route: ActivatedRoute
+    private teamService: TeamService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.activatedRoute.params.subscribe((params) => {
       this.teamName = params['teamName'];
     });
 
-    this.activatedRoute.data.subscribe(({ member }) => {
-      if (member) {
-        this.members = member;
-      } else {
-        this.teamService
-          .getAllMembersByTeam(this.teamName)
-          .subscribe((member) => (this.members = member));
+    this.refreshMembers();
+
+    this.memberAddedSubscription = this.teamService
+      .getMemberAddedSubject()
+      .subscribe(() => {
+        this.refreshMembers();
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.memberAddedSubscription) {
+      this.memberAddedSubscription.unsubscribe();
+    }
+  }
+
+  refreshMembers() {
+    this.teamService.getAllMembersByTeam(this.teamName).subscribe(
+      (members) => {
+        this.members = members;
+      },
+      (error) => {
+        console.error(error);
       }
-    });
+    );
   }
 
   onDelete(member: string) {
     this.teamService.deleteMemberByName(this.teamName, member).subscribe(
-      (members) => {
-        this.members = members;
+      () => {
+        this.refreshMembers();
       },
       (error) => {
         console.error(error);

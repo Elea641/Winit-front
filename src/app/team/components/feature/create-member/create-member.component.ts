@@ -77,7 +77,7 @@ export class CreateMemberComponent {
 
   private _filter(value: string): CurrentUser[] {
     const filterValue = value.toLowerCase();
-    return this.users.filter((user: CurrentUser) => {
+    return this.users?.filter((user: CurrentUser) => {
       const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
       return fullName.includes(filterValue);
     });
@@ -92,6 +92,7 @@ export class CreateMemberComponent {
       this.member = new Member(this.name.value);
       if (this.teamName) {
         this.teamService.addMember(this.teamName, this.member);
+        this.memberForm.reset();
       }
     } else {
       this.toastService.showError(
