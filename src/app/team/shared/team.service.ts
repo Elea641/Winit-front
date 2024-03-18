@@ -21,7 +21,8 @@ export class TeamService {
   constructor(
     public http: HttpClient,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private route: Router
   ) {}
 
   getAllTeamsByUser(): Observable<Team[]> {
@@ -115,34 +116,28 @@ export class TeamService {
     });
   }
 
-  deleteTeamByName(teamName: string): Observable<any> {
-    return new Observable((observer) => {
-      this.http
-        .delete<any>(`${environment.urlApi}/teams/${teamName}`)
-        .subscribe(
-          (response) => {
-            if (response) {
-              this.toastService.showSuccess(
-                'Suppression',
-                "L'équipe supprimé avec succès"
-              );
-
-              this.getAllTeamsByUser().subscribe(() => {
-                observer.complete();
-              });
-            }
-          },
-          (error) => {
-            if (error.error) {
-              this.toastService.showError(
-                error.error,
-                'Une erreur est survenue lors de la suppression du membre'
-              );
-            }
-            observer.error(error);
+  deleteTeamByName(teamName: string) {
+    return this.http
+      .delete<any>(`${environment.urlApi}/teams/${teamName}`)
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.toastService.showSuccess(
+              'Suppression',
+              "L'équipe supprimé avec succès"
+            );
+            this.route.navigate(['/profile']);
           }
-        );
-    });
+        },
+        (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              'Une erreur est survenue lors de la suppression du membre'
+            );
+          }
+        }
+      );
   }
 
   setSelectTeam(team: Team): void {

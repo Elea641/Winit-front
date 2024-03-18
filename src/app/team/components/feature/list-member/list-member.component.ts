@@ -6,11 +6,18 @@ import { TeamService } from 'src/app/team/shared/team.service';
 import { MemberCardComponent } from '../../ui/member-card/member-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { Subscription } from 'rxjs';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-list-member',
   standalone: true,
-  imports: [CommonModule, MemberCardComponent, MatButtonModule],
+  imports: [
+    CommonModule,
+    MemberCardComponent,
+    MatButtonModule,
+    MatDialogModule,
+  ],
   templateUrl: './list-member.component.html',
   styleUrls: ['./list-member.component.scss'],
 })
@@ -21,7 +28,8 @@ export class ListMemberComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private teamService: TeamService
+    private teamService: TeamService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -55,14 +63,20 @@ export class ListMemberComponent implements OnInit {
     );
   }
 
-  onDelete(member: string) {
-    this.teamService.deleteMemberByName(this.teamName, member).subscribe(
-      () => {
-        this.refreshMembers();
-      },
-      (error) => {
-        console.error(error);
+  openDialog(member: string) {
+    const dialogRef = this.dialog.open(DeleteModalComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.teamService.deleteMemberByName(this.teamName, member).subscribe(
+          () => {
+            this.refreshMembers();
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
       }
-    );
+    });
   }
 }
