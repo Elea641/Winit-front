@@ -1,22 +1,16 @@
-import {
-  ActivatedRouteSnapshot,
-  Params,
-  ResolveFn,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ResolveFn } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { TeamService } from '../team.service';
 import { inject } from '@angular/core';
 import { Member } from '../../models/member.model';
 
-export const memberResolver: ResolveFn<Member[] | null> = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
-): Observable<Member[] | null> => {
-  const params: Params | undefined = route.parent?.params;
+export const memberResolver: ResolveFn<Member[] | null> = (): Observable<
+  Member[] | null
+> => {
+  const teamName: string | null = inject(TeamService).getSelectedNameTeam();
 
-  if (params) {
-    return inject(TeamService).getAllMembersByTeam(params['teamName']);
+  if (teamName) {
+    return inject(TeamService).getAllMembersByTeam(teamName);
   } else {
     return of(null);
   }

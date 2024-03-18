@@ -24,12 +24,18 @@ export class ListMemberComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ member }) => {
-      this.members = member;
+    this.route.params.subscribe((params) => {
+      this.teamName = params['teamName'];
     });
 
-    this.route.parent?.params.subscribe((params) => {
-      this.teamName = params['teamName'];
+    this.activatedRoute.data.subscribe(({ member }) => {
+      if (member) {
+        this.members = member;
+      } else {
+        this.teamService
+          .getAllMembersByTeam(this.teamName)
+          .subscribe((member) => (this.members = member));
+      }
     });
   }
 

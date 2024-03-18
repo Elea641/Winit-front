@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Team } from '../models/team.model';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
 import { CreatedTeam } from '../models/created-team.model';
 import { Member } from '../models/member.model';
@@ -16,6 +16,7 @@ export class TeamService {
     new BehaviorSubject<Team | null>(null);
   private isSelectedSubject: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
+  private memberAddedSubject: Subject<void> = new Subject<void>();
 
   constructor(
     public http: HttpClient,
@@ -37,12 +38,14 @@ export class TeamService {
     );
   }
 
+  getMemberAddedSubject(): Observable<void> {
+    return this.memberAddedSubject.asObservable();
+  }
+
   addTeam(team: CreatedTeam): void {
     this.http.post<any>(`${environment.urlApi}/teams`, team).subscribe(
       (response) => {
         if (response) {
-          console.log(team.name);
-
           this.router.navigate([`/teams-details/${team.name}`]);
           this.toastService.showSuccess(
             'Bravo félicitations',
@@ -64,7 +67,7 @@ export class TeamService {
       .subscribe(
         (response) => {
           if (response) {
-            this.router.navigate([`/teams-details/${teamName}/list-member`]);
+            this.memberAddedSubject.next();
             this.toastService.showSuccess(
               'Bravo félicitations',
               "Ajout de votre membre à l'équipe"
@@ -124,6 +127,11 @@ export class TeamService {
 
   getSelectedTeam(): Observable<Team | null> {
     return this.selectedTeamSubject.asObservable();
+  }
+
+  getSelectedNameTeam(): string | null {
+    const selectedTeam = this.selectedTeamSubject.getValue();
+    return selectedTeam ? selectedTeam.name : null;
   }
 
   isSelectedTeam(): Observable<boolean> {

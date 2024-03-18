@@ -1,4 +1,4 @@
-<div class="list-tournament-tree-container">
+<li class="list-tournament-tree-container">
   <div
     class="list-tournament-tree-container-details"
     *ngIf="totalPhase.randomMatchs"
@@ -27,7 +27,8 @@
     <div
       class="list-tournament-tree-container-details"
       *ngIf="
-        tournamentPhase.result[phaseKey] !== 'Phase de présélection' && totalPhase
+        tournamentPhase.result[phaseKey] !== 'Phase de présélection' &&
+        totalPhase
       "
     >
       <h2>{{ tournamentPhase.result[phaseKey] }}</h2>
@@ -38,7 +39,7 @@
               tournamentPhase.totalPhaseMatchs[phaseKey]
             );
             let i = index;
-            let last = last;
+            let last = last
           "
         >
           <app-card-tournament-match
@@ -52,4 +53,4 @@
       </div>
     </div>
   </div>
-</div>
+</li>

@@ -20,12 +20,20 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 })
 export class TeamDetailCardComponent {
   selectedTeam: Team | null = null;
+  teamName: string = '';
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private teamService: TeamService
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ team }) => {
-      this.selectedTeam = team;
+    this.activatedRoute.params.subscribe((params) => {
+      this.teamName = params['teamName'];
+
+      this.teamService.getTeamByTeamName(this.teamName).subscribe((team) => {
+        this.selectedTeam = team;
+      });
     });
   }
 }
