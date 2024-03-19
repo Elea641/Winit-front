@@ -1,7 +1,7 @@
 <div *ngFor="let member of members" class="list-members-container">
   <app-member-card [member]="member"></app-member-card>
   <button
-    *ngIf="member.name !== teamName"
+    *ngIf="member.name !== leadTeamName"
     mat-button
     color="warn"
     (click)="openDialog(member.name)"

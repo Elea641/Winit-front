@@ -28,9 +28,10 @@ export class MemberDetailComponent {
 
   ngOnInit(): void {
     this.teamService.getMemberAddedSubject().subscribe(() => {
-      this.tabGroup.selectedIndex = 0;
+      setTimeout(() => {
+        this.tabGroup.selectedIndex = 0;
+      });
     });
-    console.log(this.selectedTeam);
   }
 
   onButtonClicked(label: string) {

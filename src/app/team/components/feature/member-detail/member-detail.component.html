@@ -1,4 +1,4 @@
-<div class="member-detail-container">
+<div class="member-detail-container" *ngIf="selectedTeam">
   <div class="member-detail-container">
     <mat-tab-group
       mat-stretch-tabs="false"
@@ -7,11 +7,14 @@
       #tabGroup
     >
       <mat-tab label="LISTE DES MEMBRES">
-        <app-list-member></app-list-member
-      ></mat-tab>
-      <mat-tab label="AJOUT D'UN MEMBRE">
-        <app-create-member></app-create-member
-      ></mat-tab>
+        <app-list-member></app-list-member>
+      </mat-tab>
+      <mat-tab
+        *ngIf="selectedTeam.numberOfMemberInTeam < selectedTeam.numberOfPlayers"
+        label="AJOUT D'UN MEMBRE"
+      >
+        <app-create-member></app-create-member>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div>

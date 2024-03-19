@@ -57,7 +57,7 @@ export class ListMemberComponent implements OnInit {
     this.teamService.getAllMembersByTeam(this.teamName).subscribe(
       (teamDetails) => {
         this.members = teamDetails.members;
-        this.teamName = teamDetails.leadTeamName;
+        this.leadTeamName = teamDetails.leadTeamName;
       },
       (error) => {
         console.error(error);
