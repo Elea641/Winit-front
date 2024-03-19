@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
 import { CreatedTeam } from '../models/created-team.model';
 import { Member } from '../models/member.model';
+import { TeamDetails } from '../models/team-details.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,8 +34,8 @@ export class TeamService {
     return this.http.get<Team>(`${environment.urlApi}/teams/${teamName}`);
   }
 
-  getAllMembersByTeam(teamName: string): Observable<Member[]> {
-    return this.http.get<Member[]>(
+  getAllMembersByTeam(teamName: string): Observable<TeamDetails> {
+    return this.http.get<TeamDetails>(
       `${environment.urlApi}/teams/${teamName}/members`
     );
   }

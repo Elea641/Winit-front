@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -32,7 +32,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatDividerModule,
     RouterModule,
     MatAutocompleteModule,
-    AsyncPipe,
   ],
   templateUrl: './create-member.component.html',
   styleUrls: ['./create-member.component.scss'],
@@ -76,7 +75,7 @@ export class CreateMemberComponent {
   }
 
   private _filter(value: string): CurrentUser[] {
-    const filterValue = value.toLowerCase();
+    const filterValue = value?.toLowerCase();
     return this.users?.filter((user: CurrentUser) => {
       const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
       return fullName.includes(filterValue);

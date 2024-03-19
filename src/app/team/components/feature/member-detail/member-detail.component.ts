@@ -30,6 +30,7 @@ export class MemberDetailComponent {
     this.teamService.getMemberAddedSubject().subscribe(() => {
       this.tabGroup.selectedIndex = 0;
     });
+    console.log(this.selectedTeam);
   }
 
   onButtonClicked(label: string) {

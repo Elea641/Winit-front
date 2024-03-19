@@ -8,6 +8,7 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-team-detail-card',
@@ -19,6 +20,7 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
     RouterOutlet,
     MatButtonModule,
     MatDialogModule,
+    MatIconModule,
   ],
   templateUrl: './team-detail-card.component.html',
   styleUrls: ['./team-detail-card.component.scss'],

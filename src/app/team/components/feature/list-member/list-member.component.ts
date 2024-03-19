@@ -22,8 +22,9 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
   styleUrls: ['./list-member.component.scss'],
 })
 export class ListMemberComponent implements OnInit {
-  members: Member[] = [];
   teamName: string = '';
+  members: Member[] = [];
+  leadTeamName: string = '';
   memberAddedSubscription: Subscription | undefined;
 
   constructor(
@@ -54,8 +55,9 @@ export class ListMemberComponent implements OnInit {
 
   refreshMembers() {
     this.teamService.getAllMembersByTeam(this.teamName).subscribe(
-      (members) => {
-        this.members = members;
+      (teamDetails) => {
+        this.members = teamDetails.members;
+        this.teamName = teamDetails.leadTeamName;
       },
       (error) => {
         console.error(error);
