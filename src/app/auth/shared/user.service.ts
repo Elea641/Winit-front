@@ -8,11 +8,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class UserService {
-
   constructor(private http: HttpClient) {}
 
   getOneUser(email: string): Observable<CurrentUser> {
-    return this.http.get<CurrentUser>(`${environment.urlApi}/users/email/${email}`);
+    return this.http.get<CurrentUser>(
+      `${environment.urlApi}/users/email/${email}`
+    );
   }
 
   getAllUsers(): Observable<CurrentUser[]> {

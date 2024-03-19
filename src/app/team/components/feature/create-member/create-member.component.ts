@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -15,6 +15,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { CurrentUser } from 'src/app/auth/models/current-user.model';
+import { Observable, map, startWith } from 'rxjs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-create-member',
@@ -28,6 +31,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
     FormsModule,
     MatDividerModule,
     RouterModule,
+    MatAutocompleteModule,
+    AsyncPipe,
   ],
   templateUrl: './create-member.component.html',
   styleUrls: ['./create-member.component.scss'],
@@ -36,6 +41,8 @@ export class CreateMemberComponent {
   memberForm!: FormGroup;
   member: Member = new Member('');
   teamName: string = '';
+  users: CurrentUser[] = [];
+  filteredUsers!: Observable<CurrentUser[]>;
 
   constructor(
     public teamService: TeamService,
@@ -54,8 +61,25 @@ export class CreateMemberComponent {
       ]),
     });
 
-    this.route.parent?.params.subscribe((params) => {
+    this.route.params.subscribe((params) => {
       this.teamName = params['teamName'];
+    });
+
+    this.route.data.subscribe(({ user }) => {
+      this.users = user;
+    });
+
+    this.filteredUsers = this.memberForm.controls['name'].valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value))
+    );
+  }
+
+  private _filter(value: string): CurrentUser[] {
+    const filterValue = value.toLowerCase();
+    return this.users?.filter((user: CurrentUser) => {
+      const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+      return fullName.includes(filterValue);
     });
   }
 
@@ -68,6 +92,7 @@ export class CreateMemberComponent {
       this.member = new Member(this.name.value);
       if (this.teamName) {
         this.teamService.addMember(this.teamName, this.member);
+        this.memberForm.reset();
       }
     } else {
       this.toastService.showError(

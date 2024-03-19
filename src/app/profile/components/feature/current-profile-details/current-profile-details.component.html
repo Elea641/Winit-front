@@ -12,10 +12,16 @@
         ></app-list-resultats>
       </mat-tab>
       <mat-tab label="ÉQUIPES">
-        <app-list-team-members
-          *ngIf="teamMembers$ | async as teamMembers"
-          [teamMembers]="teamMembers"
-        ></app-list-team-members>
+        <div class="tabs-team">
+          <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+            <mat-tab label="LISTE DE VOS ÉQUIPES">
+              <app-list-team></app-list-team>
+            </mat-tab>
+            <mat-tab label="CRÉATION D'UNE ÉQUIPE">
+              <app-create-team></app-create-team
+            ></mat-tab>
+          </mat-tab-group>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>

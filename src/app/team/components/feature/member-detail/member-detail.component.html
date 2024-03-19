@@ -1,7 +1,17 @@
 <div class="member-detail-container">
-  <app-menu-buttons
-    [buttonLabels]="['create-member', 'list-member']"
-    (buttonClick)="onButtonClicked($event)"
-  >
-  </app-menu-buttons>
+  <div class="member-detail-container">
+    <mat-tab-group
+      mat-stretch-tabs="false"
+      mat-align-tabs="start"
+      class="mat-tabs"
+      #tabGroup
+    >
+      <mat-tab label="LISTE DES MEMBRES">
+        <app-list-member></app-list-member
+      ></mat-tab>
+      <mat-tab label="AJOUT D'UN MEMBRE">
+        <app-create-member></app-create-member
+      ></mat-tab>
+    </mat-tab-group>
+  </div>
 </div>
