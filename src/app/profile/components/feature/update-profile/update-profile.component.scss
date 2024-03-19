@@ -35,13 +35,15 @@ mat-divider {
   font-size: small;
 }
 
-.button-container {
+button {
+  margin: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.delete-button-container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: end;
   width: 100%;
-  margin-top: 16px;
-  padding: 0 8px;
+  padding: 0 1rem;
 }
 
 .mat-mdc-raised-button:not(:disabled) {
