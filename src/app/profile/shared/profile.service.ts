@@ -1,6 +1,6 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {lastValueFrom, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import { CurrentProfile } from '../models/current-profile.model';
 import { TeamMembers } from '../models/teamMembers.model';
 import {User} from "../../auth/models/user.model";
@@ -16,8 +16,9 @@ export class ProfileService {
   private teamMembersDataUrl = '../assets/list-team-members.model.json';
 
   constructor(
-    private http: HttpClient,
-  ) {}
+    private http: HttpClient
+  ) {
+  }
 
   getCurrentProfile(): Observable<CurrentProfile> {
     return this.http.get<CurrentProfile>(this.currentProfiletDataUrl);
@@ -27,11 +28,15 @@ export class ProfileService {
     return this.http.get<TeamMembers>(this.teamMembersDataUrl);
   }
 
+  getCurrentUser(): Observable<User> {
+    return this.http.get<User>(`${environment.urlApi}/users/myself`);
+  }
+
   updateProfile(userId: number, user: User): Observable<User> {
     return this.http.put<User>(`${environment.urlApi}/users/${userId}`, user);
   }
 
-  getCurrentUser(): Observable<User>{
-    return this.http.get<User>(`${environment.urlApi}/users/myself`);
+  deleteProfile(userId: number): Observable<any> {
+    return this.http.delete(`${environment.urlApi}/users/${userId}`);
   }
 }

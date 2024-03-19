@@ -15,7 +15,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
-import { Sport } from '../../../models/sport.model';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../shared/auth.service';
 import { checkPasswordMatch } from '../../../shared/password-match';
@@ -40,21 +39,12 @@ import { checkPasswordMatch } from '../../../shared/password-match';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  sports: Sport[] = [
-    { name: 'basketball', viewName: 'Basketball' },
-    { name: 'esport', viewName: 'E-sport' },
-    { name: 'football', viewName: 'Football' },
-    { name: 'handball', viewName: 'Handball' },
-    { name: 'petanque', viewName: 'Pétanque' },
-    { name: 'volleyball', viewName: 'Volleyball' },
-    { name: 'waterpolo', viewName: 'Water-polo' },
-  ];
+
   registerForm!: FormGroup;
   user: User = {
     firstName: '',
     lastName: '',
     email: '',
-    sport: this.sports[0],
     password: '',
     requiredRole: 'ROLE_USER',
     enabled: true,
@@ -73,11 +63,14 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.maxLength(25),
         ]),
+        city: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(25),
+        ]),
         email: new FormControl(this.user.email, [
           Validators.required,
           Validators.email,
         ]),
-        sport: new FormControl(this.user.sport, []),
         password: new FormControl(this.user.password, [
           Validators.required,
           Validators.minLength(8),
@@ -105,12 +98,12 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('lastName')!;
   }
 
-  get email() {
-    return this.registerForm.get('email')!;
+  get city() {
+    return this.registerForm.get('city')!;
   }
 
-  get sport() {
-    return this.registerForm.get('sport')!;
+  get email() {
+    return this.registerForm.get('email')!;
   }
 
   get password() {
@@ -130,7 +123,7 @@ export class RegisterComponent implements OnInit {
       const newUser: User = {
         firstName: this.firstName.value,
         lastName: this.lastName.value,
-        sport: this.sport.value,
+        city: this.city.value,
         email: this.email.value,
         password: this.password.value,
         requiredRole: 'ROLE_USER',
