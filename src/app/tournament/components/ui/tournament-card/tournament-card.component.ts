@@ -12,7 +12,7 @@ import { Tournament } from 'src/app/tournament/models/tournament.model';
   styleUrls: ['./tournament-card.component.scss']
 })
 export class TournamentCardComponent {
-
+// TEST
   @Input()
   public tournament!: Tournament;
 }
