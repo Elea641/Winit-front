@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Tournament } from 'src/app/tournament/models/tournament.model';
+import { Component, OnInit } from '@angular/core';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Observable, map } from 'rxjs';
+import { Tournament } from 'src/app/tournament/models/tournament.model';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { TournamentCardComponent } from '../../../tournament/components/ui/tournament-card/tournament-card.component';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
 
 @Component({
   selector: 'app-carousel',
@@ -14,7 +15,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
   styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent implements OnInit {
-  tournaments$!: Observable<Tournament[]>;
+  tournaments$!: Observable<TournamentCard[]>;
 
   constructor(private tournamentService: TournamentService) {}
 
@@ -23,12 +24,13 @@ export class CarouselComponent implements OnInit {
       .getAllTournaments()
       .pipe(map((data) => data));
   }
+
   slideConfig = {
     variableWidth: true,
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
-    infinite: true,
+    infinite: false,
     responsive: [
       {
         breakpoint: 1224,
