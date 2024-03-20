@@ -1,0 +1,40 @@
+@import "../../../../../assets/style/variables.scss";
+
+.mat-mdc-table {
+  background-color: #050c1f;;
+}
+
+.mat-mdc-header-row {
+  background-color: #31abc758;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+
+.mat-mdc-paginator {
+  background-color: transparent;
+}
+
+.mat-column-position {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: white;
+}
+
+.mat-mdc-raised-button:hover,
+.mat-mdc-raised-button:focus {
+  color: $background-color;
+}

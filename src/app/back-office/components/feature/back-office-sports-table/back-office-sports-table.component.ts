@@ -27,18 +27,31 @@ import {SportService} from "../../../../sport/shared/sport.service";
   styleUrls: ['./back-office-sports-table.component.scss']
 })
 export class BackOfficeSportsTableComponent implements OnInit {
-  sports: Sport[] = [];
-  displayedColumns: string[] = ['position', 'name', 'image_url', 'number_of_players'];
-  dataSource = new MatTableDataSource<Sport>(this.sports);
+  dataSource!: MatTableDataSource<Sport>;
+  displayedColumns = ["position", "name", "imageUrl", "numberOfPlayers", "actions"];
+  positionColumnData: number = 0;
 
-  constructor(private sportService: SportService) {
+  constructor(
+    private sportService: SportService
+  ) {
   }
 
-  ngOnInit(): void {
-    this.sportService.getAllSports().subscribe((sports) => {
-      this.sports = sports;
-      this.dataSource.data = this.sports;
-    });
+  ngOnInit() {
+    this.fetchSports();
+  }
+
+  fetchSports() {
+    this.sportService.getAllSports().subscribe(
+      (sports: Sport[]) => {
+        sports.forEach((sport, index) => {
+          sport.position = ++this.positionColumnData;
+        });
+        this.dataSource = new MatTableDataSource<Sport>(sports);
+      },
+      (error) => {
+        console.error("Error fetching sports:", error);
+      }
+    );
   }
 
   applyFilter(event: Event) {
