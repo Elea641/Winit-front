@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { Observable, map } from 'rxjs';
-import { Tournament } from 'src/app/tournament/models/tournament.model';
 import { TournamentListFilterService } from 'src/app/tournament/shared/tournament-list-filter.service';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { CarouselComponent } from '../../../../components/ui/carousel/carousel.component';
 import { SidebarComponent } from '../../../../components/ui/sidebar/sidebar.component';
 import { TournamentCardComponent } from '../../ui/tournament-card/tournament-card.component';
+import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
 
 @Component({
   selector: 'app-tournament-list',
@@ -23,8 +23,8 @@ import { TournamentCardComponent } from '../../ui/tournament-card/tournament-car
   styleUrls: ['./tournament-list.component.scss'],
 })
 export class TournamentListComponent implements OnInit {
-  tournaments$!: Observable<Tournament[]>;
-  filteredTournaments$!: Observable<Tournament[]>;
+  tournaments$!: Observable<TournamentCard[]>;
+  filteredTournaments$!: Observable<TournamentCard[]>;
   isDrawerOpened: boolean = false;
   isOpen: string = '';
   searchValue: string = '';

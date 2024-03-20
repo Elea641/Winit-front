@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -30,5 +30,6 @@ export const appConfig: ApplicationConfig = {
       autoDismiss: true,
       closeButton: true,
     }), // Toastr providers
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
   ],
 };

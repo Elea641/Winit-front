@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Tournament } from '../models/tournament.model';
+import { TournamentCard } from '../models/tournament-card.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,26 +11,24 @@ export class TournamentListFilterService {
 
   filterTournamentListBySearchTerm(
     searchValue: string,
-    tournaments$: Observable<Tournament[]>
+    tournaments$: Observable<TournamentCard[]>
   ) {
     return tournaments$.pipe(
-      map((tournaments: Tournament[]) => {
+      map((tournaments: TournamentCard[]) => {
         return tournaments.filter(
-          (tournament: Tournament) =>
+          (tournament: TournamentCard) =>
             tournament.name.toLowerCase().includes(searchValue.toLowerCase()) ||
             tournament.place
               .toLowerCase()
               .includes(searchValue.toLowerCase()) ||
-            tournament.sport
-              .toLowerCase()
-              .includes(searchValue.toLowerCase())
+            tournament.sport.toLowerCase().includes(searchValue.toLowerCase())
         );
       })
     );
   }
 
   filterTournamentByAlphabeticalOrder(
-    filteredTournaments$: Observable<Tournament[]>
+    filteredTournaments$: Observable<TournamentCard[]>
   ) {
     return filteredTournaments$.pipe(
       map((tournaments) =>
@@ -39,7 +38,7 @@ export class TournamentListFilterService {
   }
 
   filterTournamentListByChronologicalOrder(
-    filteredTournaments$: Observable<Tournament[]>
+    filteredTournaments$: Observable<TournamentCard[]>
   ) {
     return filteredTournaments$.pipe(
       map((tournaments) =>
@@ -50,25 +49,27 @@ export class TournamentListFilterService {
     );
   }
 
-  checkIfTournamentIsUpcoming(tournament: Tournament): boolean {
+  checkIfTournamentIsUpcoming(tournament: TournamentCard): boolean {
     return (
       new Date(tournament.date).setHours(0, 0, 0, 0) >=
       new Date().setHours(0, 0, 0, 0)
     );
   }
 
-  checkIfTournamentIsNotFull(tournament: Tournament): boolean {
-    return tournament.currentPlayers! < tournament.maxPlayers;
+  checkIfTournamentIsNotFull(tournament: TournamentCard): boolean {
+    return (
+      tournament.currentNumberOfParticipants! < tournament.maxNumberOfTeams
+    );
   }
 
   filterTournamentBySport(
-    filteredTournaments$: Observable<Tournament[]>,
+    filteredTournaments$: Observable<TournamentCard[]>,
     selectedSport: string
   ) {
     return filteredTournaments$.pipe(
-      map((tournaments: Tournament[]) => {
+      map((tournaments: TournamentCard[]) => {
         return tournaments.filter(
-          (tournament: Tournament) => tournament.sport === selectedSport
+          (tournament: TournamentCard) => tournament.sport === selectedSport
         );
       })
     );
