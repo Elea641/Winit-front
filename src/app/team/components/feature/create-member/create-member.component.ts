@@ -11,10 +11,9 @@ import { TeamService } from 'src/app/team/shared/team.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { Member } from 'src/app/team/models/member.model';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
 import { Observable, map, startWith } from 'rxjs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -29,8 +28,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    MatDividerModule,
-    RouterModule,
     MatAutocompleteModule,
   ],
   templateUrl: './create-member.component.html',

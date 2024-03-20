@@ -16,6 +16,7 @@ import { TournamentDetailsPageComponent } from './tournament/pages/tournament-de
 import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
 import { memberResolver } from './team/shared/resolvers/member-resolver';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
+import { CreateTeamPageComponent } from './team/pages/create-team-page/create-team-page.component';
 
 export const routes: Routes = [
   {
@@ -29,8 +30,8 @@ export const routes: Routes = [
     canActivate: [UserGuard],
   },
   { path: 'contact', component: ContactPageComponent },
-  { 
-    path: 'tournament', 
+  {
+    path: 'tournament',
     component: TournamentPageComponent,
   },
   { path: 'tournament/create', component: TournamentFormComponent },
@@ -40,6 +41,7 @@ export const routes: Routes = [
     component: BackOfficePageComponent,
     canActivate: [AdminGuard],
   },
+  { path: 'new-team', component: CreateTeamPageComponent },
   {
     path: 'teams-details',
     component: TeamPageComponent,

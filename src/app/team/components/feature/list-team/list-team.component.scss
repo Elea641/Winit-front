@@ -22,5 +22,21 @@
       flex-wrap: wrap;
       flex-direction: row;
     }
+    @include media-tablet-screen {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+  }
+
+  .list-team-container-button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1rem;
+    width: 100%;
+
+    ::ng-deep .mat-mdc-raised-button:not(:disabled) {
+      color: $secondary-color;
+    }
   }
 }
