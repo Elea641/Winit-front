@@ -3,6 +3,10 @@
 
 .list-members-container {
   @include flex-align-center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 0 2rem;
+
+  .mat-mdc-button:not(:disabled) {
+    width: 12rem;
+  }
 }

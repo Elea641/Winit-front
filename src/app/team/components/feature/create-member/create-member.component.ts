@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
 import { Observable, map, startWith } from 'rxjs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -37,6 +37,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   styleUrls: ['./create-member.component.scss'],
 })
 export class CreateMemberComponent {
+  @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
   memberForm!: FormGroup;
   member: Member = new Member('');
   teamName: string = '';
@@ -46,7 +47,6 @@ export class CreateMemberComponent {
   constructor(
     public teamService: TeamService,
     private toastService: ToastService,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -64,22 +64,10 @@ export class CreateMemberComponent {
       this.teamName = params['teamName'];
     });
 
-    this.route.data.subscribe(({ user }) => {
-      this.users = user;
-    });
-
     this.filteredUsers = this.memberForm.controls['name'].valueChanges.pipe(
       startWith(''),
-      map((value) => this._filter(value))
+      map((value) => value.toLowerCase())
     );
-  }
-
-  private _filter(value: string): CurrentUser[] {
-    const filterValue = value?.toLowerCase();
-    return this.users?.filter((user: CurrentUser) => {
-      const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
-      return fullName.includes(filterValue);
-    });
   }
 
   get name() {
@@ -92,6 +80,7 @@ export class CreateMemberComponent {
       if (this.teamName) {
         this.teamService.addMember(this.teamName, this.member);
         this.memberForm.reset();
+        this.cancelClicked.emit();
       }
     } else {
       this.toastService.showError(
@@ -102,6 +91,6 @@ export class CreateMemberComponent {
   }
 
   onClick() {
-    this.router.navigate([`/teams-details/${this.teamName}/list-member`]);
+    this.cancelClicked.emit();
   }
 }

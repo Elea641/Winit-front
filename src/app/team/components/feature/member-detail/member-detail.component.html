@@ -13,7 +13,9 @@
         *ngIf="selectedTeam.numberOfMemberInTeam < selectedTeam.numberOfPlayers"
         label="AJOUT D'UN MEMBRE"
       >
-        <app-create-member></app-create-member>
+        <app-create-member
+          (cancelClicked)="handleCancelClick()"
+        ></app-create-member>
       </mat-tab>
     </mat-tab-group>
   </div>
