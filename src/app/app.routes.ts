@@ -10,13 +10,13 @@ import { HomePageComponent } from './home/pages/home-page/home-page.component';
 import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.component';
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { SportComponent } from './sport/pages/sport/sport.component';
-import { TeamDetailCardComponent } from './team/components/ui/team-detail-card/team-detail-card.component';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
 import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
 import { memberResolver } from './team/shared/resolvers/member-resolver';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { CreateTeamPageComponent } from './team/pages/create-team-page/create-team-page.component';
+import { teamResolver } from './team/shared/resolvers/team-resolver';
 
 export const routes: Routes = [
   {
@@ -43,19 +43,13 @@ export const routes: Routes = [
   },
   { path: 'new-team', component: CreateTeamPageComponent },
   {
-    path: 'teams-details',
+    path: 'teams-details/:teamName',
     component: TeamPageComponent,
     canActivate: [UserGuard],
-
-    children: [
-      {
-        path: ':teamName',
-        component: TeamDetailCardComponent,
-        resolve: {
-          member: memberResolver,
-        },
-      },
-    ],
+    resolve: {
+      member: memberResolver,
+      team: teamResolver,
+    },
   },
   {
     path: 'auth',

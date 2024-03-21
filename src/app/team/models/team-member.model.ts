@@ -1,5 +1,5 @@
 import { Member } from './member.model';
 
-export class TeamDetails {
+export class TeamMember {
   constructor(public members: Member[], public leadTeamName: string) {}
 }
