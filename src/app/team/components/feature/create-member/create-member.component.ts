@@ -44,6 +44,10 @@ export class CreateMemberComponent {
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.teamName = params['teamName'];
+    });
+
     this.memberForm = new FormGroup({
       name: new FormControl('', [
         Validators.required,
@@ -51,10 +55,6 @@ export class CreateMemberComponent {
           `[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*`
         ),
       ]),
-    });
-
-    this.route.params.subscribe((params) => {
-      this.teamName = params['teamName'];
     });
   }
 

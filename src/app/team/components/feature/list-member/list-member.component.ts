@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 import { MemberService } from 'src/app/team/shared/member.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { TeamMember } from 'src/app/team/models/team-member.model';
 import { Team } from 'src/app/team/models/team.model';
 
@@ -27,6 +27,7 @@ export class ListMemberComponent {
   @Input() teamMembers$!: Observable<TeamMember | null>;
   members: Member[] = [];
   leadTeamName: string = '';
+  private memberSubscription!: Subscription;
 
   constructor(private memberService: MemberService, public dialog: MatDialog) {}
 
@@ -37,6 +38,18 @@ export class ListMemberComponent {
         this.members = teamMember?.members;
       }
     });
+
+    this.memberSubscription = this.memberService.member$.subscribe((member) => {
+      if (member) {
+        this.members.push(member);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.memberSubscription) {
+      this.memberSubscription.unsubscribe();
+    }
   }
 
   openDialog(member: string) {
@@ -45,7 +58,11 @@ export class ListMemberComponent {
       if (result === true) {
         this.team$.subscribe((team) => {
           if (team) {
-            this.memberService.deleteMemberByName(team.name, member);
+            this.memberService
+              .deleteMemberByName(team.name, member)
+              .subscribe((members) => {
+                this.members = members.members;
+              });
           }
         });
       }
