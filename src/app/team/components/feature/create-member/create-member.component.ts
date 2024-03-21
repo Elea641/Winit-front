@@ -64,10 +64,11 @@ export class CreateMemberComponent {
 
   onSubmit() {
     if (this.memberForm.valid) {
-      this.member = new Member(this.name.value);
+      this.member = new Member(this.name.value.toLowerCase());
       if (this.teamName) {
         this.memberService.addMember(this.teamName, this.member);
         this.cancelClicked.emit();
+        this.memberForm.reset();
       }
     } else {
       this.toastService.showError(

@@ -6,7 +6,7 @@
     <h2>{{ team.sport | titlecase }}</h2>
     <div class="list-teams-tounament-total-members">
       <mat-icon>people</mat-icon>
-      <p>{{ team.numberOfMemberInTeam }}/{{ team.numberOfPlayers }}</p>
+      <p>{{ teamMembersCount }}/{{ team.numberOfPlayers }}</p>
     </div>
     <button mat-button color="warn" (click)="openDialog()">SUPPRIMER</button>
   </div>

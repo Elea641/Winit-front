@@ -14,6 +14,14 @@ export class MemberService {
     new BehaviorSubject<Member | null>(null);
   public member$: Observable<Member | null> =
     this.membersSubject.asObservable();
+  private teamMembersCountAddSubject: BehaviorSubject<number> =
+    new BehaviorSubject<number>(0);
+  public teamMembersCountAdd$: Observable<number | null> =
+    this.teamMembersCountAddSubject.asObservable();
+  private teamMembersCountDeletedSubject: BehaviorSubject<number> =
+    new BehaviorSubject<number>(0);
+  public teamMembersCountDeleted$: Observable<number | null> =
+    this.teamMembersCountDeletedSubject.asObservable();
 
   constructor(public http: HttpClient, private toastService: ToastService) {}
 
@@ -34,6 +42,7 @@ export class MemberService {
               "Ajout de votre membre à l'équipe"
             );
             this.membersSubject.next(member);
+            this.teamMembersCountAddSubject.next(1);
           }
         },
         (error) => {
@@ -59,6 +68,7 @@ export class MemberService {
             'Membre supprimé avec succès',
             "Le membre a été supprimé de l'équipe"
           );
+          this.teamMembersCountDeletedSubject.next(1);
         }),
         catchError((error) => {
           this.toastService.showError(
