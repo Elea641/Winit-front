@@ -1,7 +1,9 @@
 @import "../../../../../assets/style/variables.scss";
 
 .mat-mdc-table {
-  background-color: #050c1f;;
+  background-color: #050c1f;
+  overflow: hidden !important;
+  border-radius: 4px;
 }
 
 .mat-mdc-header-row {
