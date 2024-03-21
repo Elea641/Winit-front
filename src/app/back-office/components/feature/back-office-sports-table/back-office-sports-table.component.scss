@@ -1,13 +1,13 @@
 @import "../../../../../assets/style/variables.scss";
 
 .mat-mdc-table {
-  background-color: #050c1f;
+  background-color: $back-office-table-background-color;
   overflow: hidden !important;
   border-radius: 4px;
 }
 
 .mat-mdc-header-row {
-  background-color: #31abc758;
+  background-color: $back-office-table-header-color;
 }
 
 .mat-mdc-form-field {
@@ -39,4 +39,23 @@
 .mat-mdc-raised-button:hover,
 .mat-mdc-raised-button:focus {
   color: $background-color;
+}
+
+.actions-cell{
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.actions-cell > a {
+  padding-right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.delete-link {
+  color: $back-office-delete-color;
 }

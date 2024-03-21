@@ -23,7 +23,7 @@
 
   <ng-container matColumnDef="imageUrl">
     <th mat-header-cell *matHeaderCellDef>Lien de l'image</th>
-    <td mat-cell *matCellDef="let sport"> {{sport.imageUrl}} </td>
+    <td mat-cell *matCellDef="let sport"><a href="{{sport.imageUrl}}">{{sport.imageUrl}}</a></td>
   </ng-container>
 
   <ng-container matColumnDef="numberOfPlayers">
@@ -34,14 +34,21 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef>
-      <mat-icon>edit</mat-icon>
-      <mat-icon>delete</mat-icon>
+      <div class="actions-cell">
+        <a class="edit-link" href="/"><mat-icon>edit</mat-icon></a>
+        <a class="delete-link" href="/"><mat-icon>delete</mat-icon></a>
+      </div>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<mat-paginator [hidePageSize]=true
+               showFirstLastButtons
+               aria-label="Select page of sports">
+</mat-paginator>
 
 
 
