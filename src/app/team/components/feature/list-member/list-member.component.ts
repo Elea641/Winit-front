@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Member } from 'src/app/team/models/member.model';
-import { TeamService } from 'src/app/team/shared/team.service';
 import { MemberCardComponent } from '../../ui/member-card/member-card.component';
 import { MatButtonModule } from '@angular/material/button';
-import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
+import { MemberService } from 'src/app/team/shared/member.service';
+import { Observable, Subscription } from 'rxjs';
+import { TeamMember } from 'src/app/team/models/team-member.model';
+import { Team } from 'src/app/team/models/team.model';
 
 @Component({
   selector: 'app-list-member',
@@ -21,61 +22,49 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
   templateUrl: './list-member.component.html',
   styleUrls: ['./list-member.component.scss'],
 })
-export class ListMemberComponent implements OnInit {
+export class ListMemberComponent {
+  @Input() team$!: Observable<Team | null>;
+  @Input() teamMembers$!: Observable<TeamMember | null>;
   members: Member[] = [];
-  teamName: string = '';
-  memberAddedSubscription: Subscription | undefined;
+  leadTeamName: string = '';
+  private memberSubscription!: Subscription;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private teamService: TeamService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private memberService: MemberService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.teamName = params['teamName'];
+    this.teamMembers$.subscribe((teamMember) => {
+      if (teamMember) {
+        this.leadTeamName = teamMember?.leadTeamName;
+        this.members = teamMember?.members;
+      }
     });
 
-    this.refreshMembers();
-
-    this.memberAddedSubscription = this.teamService
-      .getMemberAddedSubject()
-      .subscribe(() => {
-        this.refreshMembers();
-      });
+    this.memberSubscription = this.memberService.member$.subscribe((member) => {
+      if (member) {
+        this.members.push(member);
+      }
+    });
   }
 
   ngOnDestroy(): void {
-    if (this.memberAddedSubscription) {
-      this.memberAddedSubscription.unsubscribe();
+    if (this.memberSubscription) {
+      this.memberSubscription.unsubscribe();
     }
-  }
-
-  refreshMembers() {
-    this.teamService.getAllMembersByTeam(this.teamName).subscribe(
-      (members) => {
-        this.members = members;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
   }
 
   openDialog(member: string) {
     const dialogRef = this.dialog.open(DeleteModalComponent);
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        this.teamService.deleteMemberByName(this.teamName, member).subscribe(
-          () => {
-            this.refreshMembers();
-          },
-          (error) => {
-            console.error(error);
+        this.team$.subscribe((team) => {
+          if (team) {
+            this.memberService
+              .deleteMemberByName(team.name, member)
+              .subscribe((members) => {
+                this.members = members.members;
+              });
           }
-        );
+        });
       }
     });
   }
