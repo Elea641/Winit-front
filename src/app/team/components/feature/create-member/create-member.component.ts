@@ -7,16 +7,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TeamService } from 'src/app/team/shared/team.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { Member } from 'src/app/team/models/member.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
-import { CurrentUser } from 'src/app/auth/models/current-user.model';
-import { Observable, map, startWith } from 'rxjs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MemberService } from 'src/app/team/shared/member.service';
 
 @Component({
   selector: 'app-create-member',
@@ -38,11 +36,9 @@ export class CreateMemberComponent {
   memberForm!: FormGroup;
   member: Member = new Member('');
   teamName: string = '';
-  users: CurrentUser[] = [];
-  filteredUsers!: Observable<CurrentUser[]>;
 
   constructor(
-    public teamService: TeamService,
+    public memberService: MemberService,
     private toastService: ToastService,
     private route: ActivatedRoute
   ) {}
@@ -60,11 +56,6 @@ export class CreateMemberComponent {
     this.route.params.subscribe((params) => {
       this.teamName = params['teamName'];
     });
-
-    this.filteredUsers = this.memberForm.controls['name'].valueChanges.pipe(
-      startWith(''),
-      map((value) => value.toLowerCase())
-    );
   }
 
   get name() {
@@ -75,8 +66,7 @@ export class CreateMemberComponent {
     if (this.memberForm.valid) {
       this.member = new Member(this.name.value);
       if (this.teamName) {
-        this.teamService.addMember(this.teamName, this.member);
-        this.memberForm.reset();
+        this.memberService.addMember(this.teamName, this.member);
         this.cancelClicked.emit();
       }
     } else {
