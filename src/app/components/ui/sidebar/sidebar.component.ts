@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
@@ -18,6 +19,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { InputSearchComponent } from '../../feature/input-search/input-search.component';
+import { SportService } from 'src/app/sport/shared/sport.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -56,15 +59,18 @@ export class SidebarComponent implements OnInit {
   showFiller = false;
   isDrawerOpened = false;
 
-  sports = [{ name: 'volley' }, { name: 'football' }, { name: 'basket' }];
+  sports: string[] = [];
   selectedSport: string = '';
 
   constructor(
     private breakpointService: BreakpointService,
-    private el: ElementRef
+    private el: ElementRef,
+    private sportService: SportService
   ) {}
 
   ngOnInit(): void {
+    this.getSportsNames();
+
     this.addClickOutsideListener();
     this.isDesktop = this.breakpointService.isDesktopDevice();
     this.breakpointService.deviceChanged['isDesktop'].subscribe(
@@ -72,13 +78,18 @@ export class SidebarComponent implements OnInit {
         this.isDesktop = isDesktop;
       }
     );
-
     this.isLargeDesktop = this.breakpointService.isLargeDesktopDevice();
     this.breakpointService.deviceChanged['isLargeDesktop'].subscribe(
       (isLargeDesktop: boolean) => {
         this.isLargeDesktop = isLargeDesktop;
       }
     );
+  }
+
+  getSportsNames() {
+    this.sportService
+      .getAllSportsNames()
+      .subscribe((sports) => (this.sports = sports));
   }
 
   toggleIcon() {

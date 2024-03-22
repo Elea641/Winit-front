@@ -23,10 +23,10 @@
         >
         <mat-option
           *ngFor="let sport of sports"
-          value="{{ sport.name }}"
+          value="{{ sport }}"
           (click)="$event.stopPropagation()"
           (click)="sendSportFilter(selectedSport)"
-          >{{ sport.name }}</mat-option
+          >{{ sport }}</mat-option
         >
       </mat-select>
     </div>
@@ -108,10 +108,10 @@
         >
         <mat-option
           *ngFor="let sport of sports"
-          value="{{ sport.name }}"
+          value="{{ sport }}"
           (click)="$event.stopPropagation()"
           (click)="sendSportFilter(selectedSport)"
-          >{{ sport.name }}</mat-option
+          >{{ sport }}</mat-option
         >
       </mat-select>
     </div>
