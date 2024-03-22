@@ -31,25 +31,25 @@ export class ListMemberComponent {
 
   constructor(private memberService: MemberService, public dialog: MatDialog) {}
 
+  ngOnDestroy(): void {
+    if (this.memberSubscription) {
+      this.memberSubscription.unsubscribe();
+    }
+  }
+
   ngOnInit(): void {
+    this.memberSubscription = this.memberService.member$.subscribe((member) => {
+      if (member) {
+        this.members.push(member);
+      }
+    });
+
     this.teamMembers$.subscribe((teamMember) => {
       if (teamMember) {
         this.leadTeamName = teamMember?.leadTeamName;
         this.members = teamMember?.members;
       }
     });
-
-    this.memberSubscription = this.memberService.member$.subscribe((member) => {
-      if (member) {
-        this.members.push(member);
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.memberSubscription) {
-      this.memberSubscription.unsubscribe();
-    }
   }
 
   openDialog(member: string) {

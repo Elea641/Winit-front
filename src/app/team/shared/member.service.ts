@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/shared/toast.service';
 import { Member } from '../models/member.model';
+import { TeamService } from './team.service';
+import { Team } from '../models/team.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +16,17 @@ export class MemberService {
     new BehaviorSubject<Member | null>(null);
   public member$: Observable<Member | null> =
     this.membersSubject.asObservable();
+  private teamMembersCountSubject: BehaviorSubject<number> =
+    new BehaviorSubject<number>(0);
+  public teamMembersCount$: Observable<number> =
+    this.teamMembersCountSubject.asObservable();
+  private team!: Team;
 
-  constructor(public http: HttpClient, private toastService: ToastService) {}
+  constructor(
+    public http: HttpClient,
+    private toastService: ToastService,
+    private teamService: TeamService
+  ) {}
 
   getAllMembersByTeam(teamName: string): Observable<TeamMember> {
     return this.http.get<TeamMember>(
@@ -34,6 +45,7 @@ export class MemberService {
               "Ajout de votre membre à l'équipe"
             );
             this.membersSubject.next(member);
+            this.teamMembersCountSubject.next(1);
           }
         },
         (error) => {
@@ -59,6 +71,7 @@ export class MemberService {
             'Membre supprimé avec succès',
             "Le membre a été supprimé de l'équipe"
           );
+          this.teamMembersCountSubject.next(-1);
         }),
         catchError((error) => {
           this.toastService.showError(

@@ -15,6 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MemberService } from 'src/app/team/shared/member.service';
+import { UserService } from 'src/app/auth/shared/user.service';
+import { CurrentUser } from 'src/app/auth/models/current-user.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-member',
@@ -35,12 +38,14 @@ export class CreateMemberComponent {
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
   memberForm!: FormGroup;
   member: Member = new Member('');
+  users$!: Observable<CurrentUser[]>;
   teamName: string = '';
 
   constructor(
     public memberService: MemberService,
     private toastService: ToastService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +61,8 @@ export class CreateMemberComponent {
         ),
       ]),
     });
+
+    this.users$ = this.userService.getAllUsers();
   }
 
   get name() {
@@ -64,10 +71,11 @@ export class CreateMemberComponent {
 
   onSubmit() {
     if (this.memberForm.valid) {
-      this.member = new Member(this.name.value);
+      this.member = new Member(this.name.value.toLowerCase());
       if (this.teamName) {
         this.memberService.addMember(this.teamName, this.member);
         this.cancelClicked.emit();
+        this.memberForm.reset();
       }
     } else {
       this.toastService.showError(

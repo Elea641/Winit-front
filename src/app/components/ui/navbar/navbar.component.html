@@ -11,14 +11,13 @@
       PLANNING
     </button>
     <button mat-menu-item (click)="toggleLogoButton()">CLASSEMENT</button>
-    <button mat-menu-item routerLink="/teams" (click)="toggleLogoButton()">
-      ÉQUIPES
-    </button>
-    <button 
-      *ngIf="!isUserEmpty(currentUser | async)" 
-      mat-menu-item routerLink="/tournament/create" 
-      (click)="toggleLogoButton()">
-      CREER UN TOURNOI
+    <button
+      *ngIf="!isUserEmpty(currentUser | async)"
+      mat-menu-item
+      routerLink="/tournament/create"
+      (click)="toggleLogoButton()"
+    >
+      CRÉER UN TOURNOI
     </button>
   </mat-menu>
   <a
@@ -40,17 +39,10 @@
     <button
       *ngIf="!isUserEmpty(currentUser | async)"
       mat-button
-      routerLink="/teams"
-      (click)="toggleLogoButton(); unsubscribeFromSelectedTeam()"
+      routerLink="/tournament/create"
+      (click)="toggleLogoButton()"
     >
-      ÉQUIPES
-    </button>
-    <button 
-      *ngIf="!isUserEmpty(currentUser | async)"
-      mat-button 
-      routerLink="/tournament/create" 
-      (click)="toggleLogoButton()">
-      CREER UN TOURNOI
+      CRÉER UN TOURNOI
     </button>
   </div>
   <span class="navbar-spacer"></span>
