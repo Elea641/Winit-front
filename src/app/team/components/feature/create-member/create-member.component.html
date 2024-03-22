@@ -15,7 +15,7 @@
             *ngFor="let user of users$ | async"
             [value]="user.firstName"
           >
-            {{ user.firstName | titlecase }}
+            {{ user.firstName | titlecase }} {{ user.lastName | titlecase }}
           </mat-option>
         </mat-autocomplete>
 
