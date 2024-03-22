@@ -13,7 +13,7 @@
         ></app-list-member>
       </mat-tab>
       <mat-tab
-        *ngIf="team.numberOfMemberInTeam < team.numberOfPlayers"
+        *ngIf="membersCount < team.numberOfPlayers"
         label="AJOUT D'UN MEMBRE"
       >
         <app-create-member

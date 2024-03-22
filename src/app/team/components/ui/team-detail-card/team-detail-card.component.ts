@@ -25,9 +25,8 @@ import { MemberService } from 'src/app/team/shared/member.service';
 })
 export class TeamDetailCardComponent {
   @Input() team$!: Observable<Team | null>;
-  private teamMembersCountAddSubscription!: Subscription;
-  private teamMembersCountDeletedSubscription!: Subscription;
-  public teamMembersCount!: number;
+  public membersCount!: number;
+  public teamMembersCountSubscription!: Subscription;
 
   constructor(
     private teamService: TeamService,
@@ -35,47 +34,27 @@ export class TeamDetailCardComponent {
     private memberService: MemberService
   ) {}
 
-  ngOnInit() {
-    this.teamMembersCountAddSubscription =
-      this.memberService.teamMembersCountAdd$.subscribe(
-        (teamMembersAddCount) => {
-          if (teamMembersAddCount) {
-            this.updateTeamMembersCount(teamMembersAddCount);
-          }
-        }
-      );
-
-    this.teamMembersCountDeletedSubscription =
-      this.memberService.teamMembersCountDeleted$.subscribe(
-        (teamMembersDeletedCount) => {
-          if (teamMembersDeletedCount) {
-            this.updateTeamMembersCount(-teamMembersDeletedCount);
-          }
-        }
-      );
-
-    this.team$.subscribe((team) => {
-      if (team) {
-        this.teamMembersCount = team.numberOfMemberInTeam;
-      }
-    });
-  }
-
   ngOnDestroy(): void {
-    if (this.teamMembersCountAddSubscription) {
-      this.teamMembersCountAddSubscription.unsubscribe();
-    }
-    if (this.teamMembersCountDeletedSubscription) {
-      this.teamMembersCountDeletedSubscription.unsubscribe();
+    if (this.teamMembersCountSubscription) {
+      this.teamMembersCountSubscription.unsubscribe();
     }
   }
 
-  updateTeamMembersCount(change: number): void {
-    this.team$.subscribe((team) => {
-      if (team) {
-        this.teamMembersCount += change;
-      }
-    });
+  ngOnInit() {
+    this.teamMembersCountSubscription =
+      this.memberService.teamMembersCount$.subscribe(() => {
+        this.team$.subscribe((team) => {
+          if (team) {
+            this.teamService
+              .getTeamByTeamName(team.name)
+              .subscribe((newteam) => {
+                if (newteam) {
+                  this.membersCount = newteam.numberOfMemberInTeam;
+                }
+              });
+          }
+        });
+      });
   }
 
   openDialog() {
