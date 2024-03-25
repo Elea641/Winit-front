@@ -17,6 +17,8 @@ import { memberResolver } from './team/shared/resolvers/member-resolver';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { CreateTeamPageComponent } from './team/pages/create-team-page/create-team-page.component';
 import { teamResolver } from './team/shared/resolvers/team-resolver';
+import { tournamentResolver } from './tournament/shared/resolvers/tournament-resolver';
+import { SelectTeamPageComponent } from './tournament/pages/select-team-page/select-team-page.component';
 
 export const routes: Routes = [
   {
@@ -35,7 +37,14 @@ export const routes: Routes = [
     component: TournamentPageComponent,
   },
   { path: 'tournament/create', component: TournamentFormComponent },
-  { path: 'tournament/:id([0-9]+)', component: TournamentDetailsPageComponent },
+  {
+    path: 'tournament/:id',
+    component: TournamentDetailsPageComponent,
+    resolve: {
+      tournament: tournamentResolver,
+    },
+    children: [{ path: 'team', component: SelectTeamPageComponent }],
+  },
   {
     path: 'back-office',
     component: BackOfficePageComponent,

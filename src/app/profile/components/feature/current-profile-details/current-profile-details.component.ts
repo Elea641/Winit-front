@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { CardCurrentProfileComponent } from '../../ui/card-current-profile/card-current-profile.component';
 import { ProfileService } from 'src/app/profile/shared/profile.service';
 import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
@@ -11,6 +11,7 @@ import { User } from '../../../../auth/models/user.model';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CreateTeamComponent } from 'src/app/team/components/feature/create-team/create-team.component';
 import { ListTeamComponent } from 'src/app/team/components/feature/list-team/list-team.component';
+import * as fr from '@angular/common/locales/fr';
 
 @Component({
   selector: 'app-current-profile-details',
@@ -32,7 +33,9 @@ export class CurrentProfileDetailsComponent {
   currentUser$!: Observable<User>;
   teamMembers$!: Observable<TeamMembers>;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService) {
+    registerLocaleData(fr.default);
+  }
 
   ngOnInit(): void {
     this.currentProfile$ = this.profileService.getCurrentProfile();

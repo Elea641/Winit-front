@@ -1,10 +1,17 @@
 export class TournamentDetails {
   constructor(
-    public name: string,
     public sport: string,
-    public city: string,
-    public date: Date,
+    public place: string,
     public participants: number,
+    public maxNumberOfTeams: number,
+    public name: string,
+    public date: Date,
+    public inscriptionLimitDate: Date,
+    public createdAt: Date,
+    public currentNumberOfParticipants: number | null,
+    public format: string,
+    public imageUrl: string,
+    public privacy: string,
     public teams: { team: string; result: number; url: string }[]
   ) {}
 }

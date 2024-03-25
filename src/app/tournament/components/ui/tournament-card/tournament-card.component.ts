@@ -5,7 +5,6 @@ import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { GetImageService } from 'src/app/shared/get-image.service';
 import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
-import { Tournament } from 'src/app/tournament/models/tournament.model';
 import * as fr from '@angular/common/locales/fr';
 
 @Component({

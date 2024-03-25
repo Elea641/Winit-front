@@ -3,37 +3,59 @@
 
 .card-details-tournament-container {
   color: $text-card-details-tournament-color-primary;
+  display: flex;
 
-  h3 {
-    color: $text-card-details-tournament-colo-secondary;
+  img {
+    max-width: 20rem;
   }
 
-  .card-details-tournament-container-header {
-    @include flex-justify-content-space-between;
+  .card-details-tournament-container-body {
+    padding-left: 2rem;
+    @include flex-column;
 
-    h2 {
-      padding: 1rem 2rem 1rem 0;
-    }
-  }
+    .card-details-tournament-container-header {
+      h3 {
+        color: $text-card-details-tournament-colo-secondary;
+        padding-top: 1rem;
+      }
 
-  .card-details-tournament-container-other-info {
-    @include flex-align-center;
-    .card-details-tournament-container-other-info-details {
-      @include flex;
-      padding-right: 1rem;
-      p {
-        padding: 0 0.5rem;
+      h2 {
+        padding-top: 1rem;
+      }
+
+      .card-details-tournament-container-header-inscription {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
       }
     }
-  }
 
-  .mat-mdc-raised-button:not(:disabled) {
-    color: $button-card-current-profile-color-text;
-    z-index: 0;
-  }
+    .card-details-tournament-container-other-info {
+      @include flex-align-center;
+      padding-top: 1rem;
 
-  .mat-mdc-raised-button:hover,
-  .mat-mdc-raised-button:focus {
-    color: $button-card-current-profile-color-focus;
+      .card-details-tournament-container-other-info-details {
+        @include flex-wrap;
+
+        ::ng-deep .mat-icon {
+          margin-right: 0.5rem;
+        }
+
+        p {
+          padding-right: 0.8rem;
+        }
+      }
+    }
+
+    .mat-mdc-raised-button:not(:disabled) {
+      color: $button-card-current-profile-color-text;
+      z-index: 0;
+    }
+
+    .mat-mdc-raised-button:hover,
+    .mat-mdc-raised-button:focus {
+      color: $button-card-current-profile-color-focus;
+    }
   }
 }
