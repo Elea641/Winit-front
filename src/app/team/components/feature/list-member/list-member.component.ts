@@ -9,6 +9,8 @@ import { MemberService } from 'src/app/team/shared/member.service';
 import { Observable, Subscription } from 'rxjs';
 import { TeamMember } from 'src/app/team/models/team-member.model';
 import { Team } from 'src/app/team/models/team.model';
+import { UserService } from 'src/app/auth/shared/user.service';
+import { CurrentUser } from 'src/app/auth/models/current-user.model';
 
 @Component({
   selector: 'app-list-member',
@@ -28,8 +30,13 @@ export class ListMemberComponent {
   members: Member[] = [];
   leadTeamName: string = '';
   private memberSubscription!: Subscription;
+  users$!: Observable<CurrentUser[]>;
 
-  constructor(private memberService: MemberService, public dialog: MatDialog) {}
+  constructor(
+    private memberService: MemberService,
+    public dialog: MatDialog,
+    private userService: UserService
+  ) {}
 
   ngOnDestroy(): void {
     if (this.memberSubscription) {
@@ -50,19 +57,31 @@ export class ListMemberComponent {
         this.members = teamMember?.members;
       }
     });
+
+    this.users$ = this.userService.getAllUsers();
   }
 
-  openDialog(member: string) {
+  openDialog(memberName: string) {
     const dialogRef = this.dialog.open(DeleteModalComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.team$.subscribe((team) => {
           if (team) {
-            this.memberService
-              .deleteMemberByName(team.name, member)
-              .subscribe((members) => {
-                this.members = members.members;
-              });
+            this.users$.subscribe((users) => {
+              const user = users.find((u) => u.firstName === memberName);
+              if (user) {
+                const memberEmail = user.email;
+                if (memberEmail) {
+                  this.memberService
+                    .deleteMemberByName(team.name, memberEmail)
+                    .subscribe((members) => {
+                      this.members = members.members;
+                    });
+                }
+              } else {
+                console.error('Utilisateur introuvable');
+              }
+            });
           }
         });
       }

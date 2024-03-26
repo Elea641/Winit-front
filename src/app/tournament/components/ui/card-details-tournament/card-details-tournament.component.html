@@ -12,7 +12,14 @@
         class="card-details-tournament-container-header-inscription"
       >
         <p>{{ remainingTime }}</p>
-        <button mat-raised-button color="primary">PARTICIPER</button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          [routerLink]="['/tournament', tournamentId, 'teams']"
+        >
+          PARTICIPER
+        </button>
       </div>
     </div>
     <div class="card-details-tournament-container-other-info">

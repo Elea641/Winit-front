@@ -6,10 +6,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { Observable, Subscription } from 'rxjs';
 import * as fr from '@angular/common/locales/fr';
 import { GetImageService } from 'src/app/shared/get-image.service';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-card-details-tournament',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, DatePipe],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    DatePipe,
+    RouterModule,
+  ],
   templateUrl: './card-details-tournament.component.html',
   styleUrls: ['./card-details-tournament.component.scss'],
 })
@@ -19,12 +26,20 @@ export class CardDetailsTournamentComponent {
   public tournamentDate!: Date;
   public currentDate: Date = new Date();
   public remainingTime: string = '';
+  public tournamentId!: number;
 
-  constructor(private getImageService: GetImageService) {
+  constructor(
+    private getImageService: GetImageService,
+    private route: ActivatedRoute
+  ) {
     registerLocaleData(fr.default);
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.tournamentId = Number(params['id']);
+    });
+
     this.updateCurrentDate();
 
     this.tournament$.subscribe((tournament) => {

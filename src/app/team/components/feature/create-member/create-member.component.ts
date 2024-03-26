@@ -17,7 +17,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { UserService } from 'src/app/auth/shared/user.service';
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-create-member',
@@ -71,12 +71,29 @@ export class CreateMemberComponent {
 
   onSubmit() {
     if (this.memberForm.valid) {
-      this.member = new Member(this.name.value.toLowerCase());
-      if (this.teamName) {
-        this.memberService.addMember(this.teamName, this.member);
-        this.cancelClicked.emit();
-        this.memberForm.reset();
-      }
+      const selectedUserName = this.memberForm.get('name')!.value;
+      this.users$
+        .pipe(
+          map((users) =>
+            users.find((user) => user.firstName === selectedUserName)
+          )
+        )
+        .subscribe((selectedUser) => {
+          if (selectedUser && selectedUser.email) {
+            const selectedUserEmail = selectedUser.email;
+            this.member = new Member(selectedUserEmail.toLowerCase());
+            if (this.teamName) {
+              this.memberService.addMember(this.teamName, this.member);
+              this.cancelClicked.emit();
+              this.memberForm.reset();
+            }
+          } else {
+            this.toastService.showError(
+              'Erreur',
+              "L'utilisateur sélectionné n'a pas d'adresse e-mail valide"
+            );
+          }
+        });
     } else {
       this.toastService.showError(
         'Erreur',
