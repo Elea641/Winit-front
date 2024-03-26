@@ -1,4 +1,4 @@
-<div class="menu-member-container" *ngIf="team$ | async as team">
+<nav *ngIf="team$ | async as team">
   <mat-tab-group
     mat-stretch-tabs="false"
     mat-align-tabs="start"
@@ -6,7 +6,9 @@
     #tabGroup
   >
     <mat-tab label="LISTE DES MEMBRES">
-      <app-list-member [team$]="team$"></app-list-member>
+      <ul>
+        <app-list-member [team$]="team$"></app-list-member>
+      </ul>
     </mat-tab>
     <mat-tab *ngIf="membersCount < team.totalPlayers" label="AJOUT D'UN MEMBRE">
       <app-create-member
@@ -14,4 +16,4 @@
       ></app-create-member>
     </mat-tab>
   </mat-tab-group>
-</div>
+</nav>

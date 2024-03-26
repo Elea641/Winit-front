@@ -2,47 +2,38 @@
 @import "../../../../../assets/style/mixins.scss";
 
 section {
-  @include flex-column-center-align-justify;
   margin-top: 2vh;
   padding: 2rem;
+  width: 100%;
 
   h1 {
     color: $secondary-color;
     font-weight: normal;
     margin: 1rem 0;
-    width: 100%;
     text-align: left;
   }
 
   .mat-divider {
-    margin: 0.5rem;
     border-top-color: $secondary-color;
     width: 100%;
   }
 
   form {
-    padding: 8px;
-  }
-
-  .error-message-size {
-    font-size: small;
-  }
-
-  .button-container {
     @include flex-column-center-align-justify;
-    margin-top: 1rem;
+
+    .mat-mdc-form-field {
+      margin-top: 2rem;
+      width: 100%;
+    }
+
+    .error-message-size {
+      font-size: small;
+    }
+
     button {
-      width: 15rem;
+      width: 100%;
+      margin-top: 2rem;
     }
-
-    button:first-child {
-      margin-bottom: 2rem;
-    }
-  }
-
-  .mat-mdc-form-field {
-    display: flex;
-    margin: 2rem 0;
   }
 
   .mat-mdc-raised-button:not(:disabled) {
@@ -55,9 +46,13 @@ section {
   }
 
   @media screen and (min-width: 768px) {
-    .button-container {
+    form {
+      .mat-mdc-form-field {
+        width: 50vw;
+      }
+
       button {
-        width: 25rem;
+        width: 50vw;
       }
     }
   }

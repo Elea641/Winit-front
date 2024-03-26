@@ -1,4 +1,4 @@
-<div *ngFor="let member of members" class="list-members-container">
+<li *ngFor="let member of members" class="list-members-container">
   <app-member-card [member]="member"></app-member-card>
   <button
     *ngIf="member.firstName !== leaderTeamName"
@@ -8,4 +8,4 @@
   >
     SUPPRIMER
   </button>
-</div>
+</li>

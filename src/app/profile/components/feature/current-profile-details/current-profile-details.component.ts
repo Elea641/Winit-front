@@ -9,7 +9,7 @@ import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
 import { User } from '../../../../auth/models/user.model';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CreateTeamComponent } from 'src/app/team/components/feature/create-team/create-team.component';
-import { ListTeamComponent } from 'src/app/team/components/feature/list-team/list-team.component';
+import { ListTeamComponent } from 'src/app/profile/components/feature/list-team/list-team.component';
 import * as fr from '@angular/common/locales/fr';
 
 @Component({
