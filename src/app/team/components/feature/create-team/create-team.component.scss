@@ -1,73 +1,63 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.created-team-container {
+section {
   @include flex-column-center-align-justify;
-  .team-block {
-    margin-top: 2vh;
-    padding: 2rem;
+  margin-top: 2vh;
+  padding: 2rem;
+
+  h1 {
+    color: $secondary-color;
+    font-weight: normal;
+    margin: 1rem 0;
     width: 100%;
+    text-align: left;
+  }
 
-    h1 {
-      color: $secondary-color;
-      font-weight: normal;
-      margin: 1rem 0.5rem;
+  .mat-divider {
+    margin: 0.5rem;
+    border-top-color: $secondary-color;
+    width: 100%;
+  }
+
+  form {
+    padding: 8px;
+  }
+
+  .error-message-size {
+    font-size: small;
+  }
+
+  .button-container {
+    @include flex-column-center-align-justify;
+    margin-top: 1rem;
+    button {
+      width: 15rem;
     }
 
-    mat-divider {
-      margin: 0.5rem;
-      border-top-color: $secondary-color;
+    button:first-child {
+      margin-bottom: 2rem;
     }
+  }
 
-    .team-form-field {
-      width: 50%;
-      padding: 8px;
-    }
+  .mat-mdc-form-field {
+    display: flex;
+    margin: 2rem 0;
+  }
 
-    .error-message-size {
-      font-size: small;
-    }
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $secondary-color;
+  }
 
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $background-color;
+  }
+
+  @media screen and (min-width: 768px) {
     .button-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      margin-top: 16px;
-    }
-
-    .team-button,
-    .login-button {
-      width: 50%;
-      margin-bottom: 16px;
-    }
-
-    .mat-mdc-raised-button:not(:disabled) {
-      color: white;
-    }
-
-    .mat-mdc-raised-button:hover,
-    .mat-mdc-raised-button:focus {
-      color: $background-color;
-    }
-
-    @media screen and (max-width: 768px) {
-      .team-form-field {
-        width: 100%;
-      }
-
-      .team-title {
-        font-size: large;
-      }
-
-      .team-button,
-      .login-button {
-        width: 100%;
-      }
-
-      .team-block {
-        margin-bottom: 5vh;
+      button {
+        width: 25rem;
       }
     }
   }

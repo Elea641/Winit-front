@@ -1,10 +1,10 @@
 <div *ngFor="let member of members" class="list-members-container">
   <app-member-card [member]="member"></app-member-card>
   <button
-    *ngIf="member.name !== leadTeamName"
+    *ngIf="member.firstName !== leaderTeamName"
     mat-button
     color="warn"
-    (click)="openDialog(member.name)"
+    (click)="openDialog(member.firstName)"
   >
     SUPPRIMER
   </button>

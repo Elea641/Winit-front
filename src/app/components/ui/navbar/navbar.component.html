@@ -3,11 +3,7 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu" class="navbar-custom-menu">
-    <button
-      mat-menu-item
-      routerLink="/tournament"
-      (click)="toggleLogoButton(); unsubscribeFromSelectedTeam()"
-    >
+    <button mat-menu-item routerLink="/tournament" (click)="toggleLogoButton()">
       PLANNING
     </button>
     <button mat-menu-item (click)="toggleLogoButton()">CLASSEMENT</button>
@@ -20,19 +16,11 @@
       CRÉER UN TOURNOI
     </button>
   </mat-menu>
-  <a
-    class="navbar-button-logo"
-    routerLink="/home"
-    (click)="toggleLogo(); unsubscribeFromSelectedTeam()"
-  >
+  <a class="navbar-button-logo" routerLink="/home" (click)="toggleLogo()">
     <img [src]="logoUrl" alt="logo_WinIt" />
   </a>
   <div class="container-buttons-navbar-left" *ngIf="!isMobile">
-    <button
-      mat-button
-      routerLink="/tournament"
-      (click)="toggleLogoButton(); unsubscribeFromSelectedTeam()"
-    >
+    <button mat-button routerLink="/tournament" (click)="toggleLogoButton()">
       PLANNING
     </button>
     <button mat-button (click)="toggleLogoButton()">CLASSEMENT</button>
@@ -68,7 +56,6 @@
       *ngIf="!isUserEmpty(currentUser | async)"
       mat-menu-item
       routerLink="/profile"
-      (click)="unsubscribeFromSelectedTeam()"
     >
       <mat-icon>person</mat-icon>
       <span>Profil</span>
@@ -76,7 +63,7 @@
     <a
       *ngIf="!isUserEmpty(currentUser | async)"
       mat-menu-item
-      (click)="goToDisconnected(''); unsubscribeFromSelectedTeam()"
+      (click)="goToDisconnected('')"
     >
       <mat-icon>logout</mat-icon>
       <span>Sign out</span>

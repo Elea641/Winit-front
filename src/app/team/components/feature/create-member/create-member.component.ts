@@ -37,7 +37,7 @@ import { Observable, map } from 'rxjs';
 export class CreateMemberComponent {
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
   memberForm!: FormGroup;
-  member: Member = new Member('');
+  member: Member = new Member(0, '', '');
   users$!: Observable<CurrentUser[]>;
   teamName: string = '';
 
@@ -79,9 +79,11 @@ export class CreateMemberComponent {
           )
         )
         .subscribe((selectedUser) => {
-          if (selectedUser && selectedUser.email) {
-            const selectedUserEmail = selectedUser.email;
-            this.member = new Member(selectedUserEmail.toLowerCase());
+          if (selectedUser && selectedUser.firstName) {
+            // this.member = new Member(
+            //   selectedUser.firstName.toLowerCase(),
+
+            // );
             if (this.teamName) {
               this.memberService.addMember(this.teamName, this.member);
               this.cancelClicked.emit();

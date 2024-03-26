@@ -7,7 +7,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Observable, Subscription } from 'rxjs';
-import { TeamMember } from 'src/app/team/models/team-member.model';
 import { Team } from 'src/app/team/models/team.model';
 import { UserService } from 'src/app/auth/shared/user.service';
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
@@ -26,9 +25,8 @@ import { CurrentUser } from 'src/app/auth/models/current-user.model';
 })
 export class ListMemberComponent {
   @Input() team$!: Observable<Team | null>;
-  @Input() teamMembers$!: Observable<TeamMember | null>;
   members: Member[] = [];
-  leadTeamName: string = '';
+  leaderTeamName: string = '';
   private memberSubscription!: Subscription;
   users$!: Observable<CurrentUser[]>;
 
@@ -51,40 +49,33 @@ export class ListMemberComponent {
       }
     });
 
-    this.teamMembers$.subscribe((teamMember) => {
-      if (teamMember) {
-        this.leadTeamName = teamMember?.leadTeamName;
-        this.members = teamMember?.members;
-      }
-    });
-
     this.users$ = this.userService.getAllUsers();
   }
 
   openDialog(memberName: string) {
-    const dialogRef = this.dialog.open(DeleteModalComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
-        this.team$.subscribe((team) => {
-          if (team) {
-            this.users$.subscribe((users) => {
-              const user = users.find((u) => u.firstName === memberName);
-              if (user) {
-                const memberEmail = user.email;
-                if (memberEmail) {
-                  this.memberService
-                    .deleteMemberByName(team.name, memberEmail)
-                    .subscribe((members) => {
-                      this.members = members.members;
-                    });
-                }
-              } else {
-                console.error('Utilisateur introuvable');
-              }
-            });
-          }
-        });
-      }
-    });
+    // const dialogRef = this.dialog.open(DeleteModalComponent);
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   if (result === true) {
+    //     this.team$.subscribe((team) => {
+    //       if (team) {
+    //         this.users$.subscribe((users) => {
+    //           const user = users.find((u) => u.firstName === memberName);
+    //           if (user) {
+    //             const memberEmail = user.email;
+    //             if (memberEmail) {
+    //               this.memberService
+    //                 .deleteMemberByName(team.name, memberEmail)
+    //                 .subscribe((members) => {
+    //                   this.members = members.members;
+    //                 });
+    //             }
+    //           } else {
+    //             console.error('Utilisateur introuvable');
+    //           }
+    //         });
+    //       }
+    //     });
+    //   }
+    // });
   }
 }

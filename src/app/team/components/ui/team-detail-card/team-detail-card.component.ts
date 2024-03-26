@@ -49,7 +49,7 @@ export class TeamDetailCardComponent {
               .getTeamByTeamName(team.name)
               .subscribe((newteam) => {
                 if (newteam) {
-                  this.membersCount = newteam.numberOfMemberInTeam;
+                  this.membersCount = newteam.teamMembersCount;
                 }
               });
           }
@@ -63,7 +63,7 @@ export class TeamDetailCardComponent {
       if (result === true) {
         this.team$.subscribe((team) => {
           if (team) {
-            this.teamService.deleteTeamByName(team.name);
+            this.teamService.deleteTeam(team.name);
           }
         });
       }

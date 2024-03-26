@@ -13,7 +13,6 @@ import { SportComponent } from './sport/pages/sport/sport.component';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
 import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
-import { memberResolver } from './team/shared/resolvers/member-resolver';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { CreateTeamPageComponent } from './team/pages/create-team-page/create-team-page.component';
 import { teamResolver } from './team/shared/resolvers/team-resolver';
@@ -63,7 +62,6 @@ export const routes: Routes = [
     component: TeamPageComponent,
     canActivate: [UserGuard],
     resolve: {
-      member: memberResolver,
       team: teamResolver,
     },
   },

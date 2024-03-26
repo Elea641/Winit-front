@@ -7,7 +7,6 @@ import { Observable, catchError, concatMap, of } from 'rxjs';
 import { Team } from '../../models/team.model';
 import { TeamService } from '../../shared/team.service';
 import { MemberService } from '../../shared/member.service';
-import { TeamMember } from '../../models/team-member.model';
 
 @Component({
   selector: 'app-team-page',
@@ -23,13 +22,11 @@ import { TeamMember } from '../../models/team-member.model';
 })
 export class TeamPageComponent {
   team$!: Observable<Team | null>;
-  teamMembers$!: Observable<TeamMember | null>;
   teamName: string = '';
 
   constructor(
     private route: ActivatedRoute,
-    private teamService: TeamService,
-    private memberService: MemberService
+    private teamService: TeamService
   ) {}
 
   ngOnInit() {
@@ -44,18 +41,6 @@ export class TeamPageComponent {
         } else {
           return this.teamService
             .getTeamByTeamName(this.teamName)
-            .pipe(catchError(() => of(null)));
-        }
-      })
-    );
-
-    this.teamMembers$ = this.route.data.pipe(
-      concatMap((data) => {
-        if (data && data['member']) {
-          return of(data['member']);
-        } else {
-          return this.memberService
-            .getAllMembersByTeam(this.teamName)
             .pipe(catchError(() => of(null)));
         }
       })

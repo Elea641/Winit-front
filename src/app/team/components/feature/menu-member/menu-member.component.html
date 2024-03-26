@@ -6,15 +6,9 @@
     #tabGroup
   >
     <mat-tab label="LISTE DES MEMBRES">
-      <app-list-member
-        [team$]="team$"
-        [teamMembers$]="teamMembers$"
-      ></app-list-member>
+      <app-list-member [team$]="team$"></app-list-member>
     </mat-tab>
-    <mat-tab
-      *ngIf="membersCount < team.numberOfPlayers"
-      label="AJOUT D'UN MEMBRE"
-    >
+    <mat-tab *ngIf="membersCount < team.totalPlayers" label="AJOUT D'UN MEMBRE">
       <app-create-member
         (cancelClicked)="handleCancelClick()"
       ></app-create-member>

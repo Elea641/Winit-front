@@ -5,7 +5,6 @@ import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { ListMemberComponent } from '../list-member/list-member.component';
 import { CreateMemberComponent } from '../create-member/create-member.component';
 import { Observable, Subscription } from 'rxjs';
-import { TeamMember } from 'src/app/team/models/team-member.model';
 import { TeamService } from 'src/app/team/shared/team.service';
 import { MemberService } from 'src/app/team/shared/member.service';
 
@@ -23,7 +22,6 @@ import { MemberService } from 'src/app/team/shared/member.service';
 })
 export class MenuMemberComponent {
   @Input() team$!: Observable<Team | null>;
-  @Input() teamMembers$!: Observable<TeamMember | null>;
   @ViewChild(MatTabGroup) tabGroup!: MatTabGroup;
   public membersCount!: number;
   public teamMembersCountSubscription!: Subscription;
@@ -42,7 +40,7 @@ export class MenuMemberComponent {
               .getTeamByTeamName(team.name)
               .subscribe((newteam) => {
                 if (newteam) {
-                  this.membersCount = newteam.numberOfMemberInTeam;
+                  this.membersCount = newteam.teamMembersCount;
                 }
               });
           }

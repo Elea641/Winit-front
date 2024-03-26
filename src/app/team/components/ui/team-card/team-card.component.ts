@@ -19,7 +19,7 @@ export class TeamCardComponent {
   constructor(private teamService: TeamService, private router: Router) {}
 
   onSelectTeam(team: Team): void {
-    this.teamService.setSelectTeam(team);
+    // this.teamService.setSelectTeam(team);
     this.router.navigate([`teams-details/${team.name}`]);
   }
 }
