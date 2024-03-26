@@ -1,20 +1,23 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.team-list-card {
+li {
   width: 15rem;
-  margin: 2rem;
-  background-color: $background-card-team-list-color;
-  color: $text-card-team-list-color;
+  margin: 2rem 1rem;
 
-  .team-list-card-subtitle {
-    color: $number-card-team-list-color;
-    margin-top: 1rem;
-  }
+  ::ng-deep .mat-mdc-card {
+    background-color: $background-card-team-list-color;
+    color: $text-card-team-list-color;
 
-  .team-list-card-actions {
-    button {
-      width: 100%;
+    ::ng-deep .mat-mdc-card-subtitle {
+      color: $number-card-team-list-color;
+      margin-top: 1rem;
+    }
+
+    ::ng-deep .mdc-card__actions {
+      button {
+        width: 100%;
+      }
     }
   }
 }

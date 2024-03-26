@@ -1,7 +1,7 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.list-team-container {
+section {
   padding: 1rem 0;
 
   h1 {
@@ -15,7 +15,7 @@
     border-top-color: $secondary-color;
   }
 
-  .list-team-cards-container {
+  ul {
     @include flex-column-center;
     @include media-large-screen {
       display: flex;
@@ -29,7 +29,7 @@
     }
   }
 
-  .list-team-container-button {
+  header {
     display: flex;
     justify-content: flex-end;
     padding: 0 1rem;

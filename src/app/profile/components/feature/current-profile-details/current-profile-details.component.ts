@@ -5,7 +5,6 @@ import { ProfileService } from 'src/app/profile/shared/profile.service';
 import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
 import { Observable } from 'rxjs';
 import { ListResultatsComponent } from '../list-resultats/list-resultats.component';
-import { ListTeamMembersComponent } from '../list-team-members/list-team-members.component';
 import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
 import { User } from '../../../../auth/models/user.model';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -20,7 +19,6 @@ import * as fr from '@angular/common/locales/fr';
     CommonModule,
     CardCurrentProfileComponent,
     ListResultatsComponent,
-    ListTeamMembersComponent,
     MatTabsModule,
     CreateTeamComponent,
     ListTeamComponent,
