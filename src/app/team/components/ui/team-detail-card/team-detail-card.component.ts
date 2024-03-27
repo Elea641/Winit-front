@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 import { MatIconModule } from '@angular/material/icon';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { MemberService } from 'src/app/team/shared/member.service';
 
 @Component({
@@ -25,8 +25,27 @@ import { MemberService } from 'src/app/team/shared/member.service';
 })
 export class TeamDetailCardComponent {
   @Input() team$!: Observable<Team | null>;
+  private teamSubscription!: Subscription;
 
-  constructor(private teamService: TeamService, public dialog: MatDialog) {}
+  constructor(
+    private teamService: TeamService,
+    public dialog: MatDialog,
+    private memberService: MemberService
+  ) {}
+
+  ngOnDestroy(): void {
+    if (this.teamSubscription) {
+      this.teamSubscription.unsubscribe();
+    }
+  }
+
+  ngOnInit(): void {
+    this.teamSubscription = this.memberService.team$.subscribe((team) => {
+      if (team) {
+        this.team$ = of(team);
+      }
+    });
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(DeleteModalComponent);

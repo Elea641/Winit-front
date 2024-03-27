@@ -1,4 +1,4 @@
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Team } from '../../models/team.model';
 import { CreatedTeam } from '../../models/created-team.model';
 
@@ -9,5 +9,5 @@ export interface ITeamService {
 
   addTeam(team: CreatedTeam): void;
 
-  deleteTeam(teamName: string): Subscription;
+  deleteTeam(teamName: string): void;
 }

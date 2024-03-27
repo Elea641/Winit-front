@@ -4,75 +4,59 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/shared/toast.service';
 import { Member } from '../models/member.model';
-import { TeamService } from './team.service';
 import { Team } from '../models/team.model';
+import { IMemberService } from './interfaces/IMember.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MemberService {
-  private membersSubject: BehaviorSubject<Member | null> =
-    new BehaviorSubject<Member | null>(null);
-  public member$: Observable<Member | null> =
-    this.membersSubject.asObservable();
-  private teamMembersCountSubject: BehaviorSubject<number> =
-    new BehaviorSubject<number>(0);
-  public teamMembersCount$: Observable<number> =
-    this.teamMembersCountSubject.asObservable();
-  private team!: Team;
+export class MemberService implements IMemberService {
+  private teamSubject: BehaviorSubject<Team | null> =
+    new BehaviorSubject<Team | null>(null);
+  public team$: Observable<Team | null> = this.teamSubject.asObservable();
 
-  constructor(
-    public http: HttpClient,
-    private toastService: ToastService,
-    private teamService: TeamService
-  ) {}
+  constructor(public http: HttpClient, private toastService: ToastService) {}
 
   addMember(teamName: string, member: Member): void {
-    // this.http
-    //   .post<any>(`${environment.urlApi}/teams/${teamName}/members`, member)
-    //   .subscribe(
-    //     (response) => {
-    //       if (response) {
-    //         this.toastService.showSuccess(
-    //           'Bravo félicitations',
-    //           "Ajout de votre membre à l'équipe"
-    //         );
-    //         this.membersSubject.next(member);
-    //         this.teamMembersCountSubject.next(1);
-    //       }
-    //     },
-    //     (error) => {
-    //       if (error.error) {
-    //         this.toastService.showError(error.error, 'Une erreur est survenue');
-    //       }
-    //     }
-    //   );
+    this.http
+      .post<any>(`${environment.urlApi}/members/${teamName}`, member)
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.toastService.showSuccess(
+              'Bravo félicitations',
+              "Ajout de votre membre à l'équipe"
+            );
+            this.teamSubject.next(response);
+          }
+        },
+        (error) => {
+          if (error.error) {
+            this.toastService.showError(error.error, 'Une erreur est survenue');
+          }
+        }
+      );
   }
 
-  // deleteMemberByName(
-  //   teamName: string,
-  //   memberName: string
-  // ): Observable<TeamMember> {
-  //   return this.http
-  //     .delete<any>(
-  //       `${environment.urlApi}/teams/${teamName}/members/${memberName}`
-  //     )
-  //     .pipe(
-  //       switchMap(() => this.getAllMembersByTeam(teamName)),
-  //       tap(() => {
-  //         this.toastService.showSuccess(
-  //           'Membre supprimé avec succès',
-  //           "Le membre a été supprimé de l'équipe"
-  //         );
-  //         this.teamMembersCountSubject.next(-1);
-  //       }),
-  //       catchError((error) => {
-  //         this.toastService.showError(
-  //           error.error,
-  //           'Une erreur est survenue lors de la suppression du membre'
-  //         );
-  //         throw error;
-  //       })
-  //     );
-  // }
+  deleteMemberByName(teamName: string, member: Member): void {
+    const memberId = member.id;
+    this.http
+      .delete<any>(`${environment.urlApi}/members/${teamName}/${memberId}`)
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.toastService.showSuccess(
+              'Membre supprimé avec succès',
+              "Le membre a été supprimé de l'équipe"
+            );
+            this.teamSubject.next(response);
+          }
+        },
+        (error) => {
+          if (error.error) {
+            this.toastService.showError(error.error, 'Une erreur est survenue');
+          }
+        }
+      );
+  }
 }

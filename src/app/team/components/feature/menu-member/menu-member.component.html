@@ -10,7 +10,10 @@
         <app-list-member [team$]="team$"></app-list-member>
       </ul>
     </mat-tab>
-    <mat-tab *ngIf="membersCount < team.totalPlayers" label="AJOUT D'UN MEMBRE">
+    <mat-tab
+      *ngIf="team.teamMembersCount < team.totalPlayers"
+      label="AJOUT D'UN MEMBRE"
+    >
       <app-create-member
         (cancelClicked)="handleCancelClick()"
       ></app-create-member>

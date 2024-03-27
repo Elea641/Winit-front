@@ -8,8 +8,6 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Observable, Subscription } from 'rxjs';
 import { Team } from 'src/app/team/models/team.model';
-import { UserService } from 'src/app/auth/shared/user.service';
-import { CurrentUser } from 'src/app/auth/models/current-user.model';
 
 @Component({
   selector: 'app-list-member',
@@ -25,57 +23,43 @@ import { CurrentUser } from 'src/app/auth/models/current-user.model';
 })
 export class ListMemberComponent {
   @Input() team$!: Observable<Team | null>;
+  private teamSubscription!: Subscription;
   members: Member[] = [];
-  leaderTeamName: string = '';
-  private memberSubscription!: Subscription;
-  users$!: Observable<CurrentUser[]>;
 
-  constructor(
-    private memberService: MemberService,
-    public dialog: MatDialog,
-    private userService: UserService
-  ) {}
+  constructor(private memberService: MemberService, public dialog: MatDialog) {}
 
   ngOnDestroy(): void {
-    if (this.memberSubscription) {
-      this.memberSubscription.unsubscribe();
+    if (this.teamSubscription) {
+      this.teamSubscription.unsubscribe();
     }
   }
 
   ngOnInit(): void {
-    this.memberSubscription = this.memberService.member$.subscribe((member) => {
-      if (member) {
-        this.members.push(member);
+    this.team$.subscribe((team) => {
+      if (team) {
+        this.members = team?.members;
       }
     });
 
-    this.users$ = this.userService.getAllUsers();
+    this.teamSubscription = this.memberService.team$.subscribe((team) => {
+      if (team) {
+        this.members = team.members;
+      }
+    });
   }
 
-  openDialog(memberName: string) {
-    // const dialogRef = this.dialog.open(DeleteModalComponent);
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result === true) {
-    //     this.team$.subscribe((team) => {
-    //       if (team) {
-    //         this.users$.subscribe((users) => {
-    //           const user = users.find((u) => u.firstName === memberName);
-    //           if (user) {
-    //             const memberEmail = user.email;
-    //             if (memberEmail) {
-    //               this.memberService
-    //                 .deleteMemberByName(team.name, memberEmail)
-    //                 .subscribe((members) => {
-    //                   this.members = members.members;
-    //                 });
-    //             }
-    //           } else {
-    //             console.error('Utilisateur introuvable');
-    //           }
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
+  openDialog(member: Member) {
+    const dialogRef = this.dialog.open(DeleteModalComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.team$.subscribe((team) => {
+          if (team) {
+            this.memberService.deleteMemberByName(team.name, member);
+          } else {
+            console.error('Utilisateur introuvable');
+          }
+        });
+      }
+    });
   }
 }

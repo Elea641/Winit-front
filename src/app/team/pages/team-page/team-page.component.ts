@@ -22,12 +22,8 @@ export class TeamPageComponent {
     this.team$ = this.route.data.pipe(
       concatMap((data) => {
         if (data && data['team']) {
-          console.log(data['team']);
-
           return of(data['team']);
         } else {
-          console.log(data['team']);
-
           return of(null);
         }
       })

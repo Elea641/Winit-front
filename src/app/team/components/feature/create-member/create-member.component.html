@@ -11,7 +11,8 @@
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option
           *ngFor="let user of users$ | async"
-          [value]="user.firstName"
+          [value]="user.firstName + ' ' + user.lastName"
+          (click)="selectUser(user)"
         >
           {{ user.firstName | titlecase }} {{ user.lastName | titlecase }}
         </mat-option>

@@ -17,7 +17,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { UserService } from 'src/app/auth/shared/user.service';
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-member',
@@ -57,7 +57,7 @@ export class CreateMemberComponent {
       name: new FormControl('', [
         Validators.required,
         Validators.pattern(
-          `[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*`
+          `^[a-zA-Z0-9!éïîèà@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/? ]*$`
         ),
       ]),
     });
@@ -69,33 +69,38 @@ export class CreateMemberComponent {
     return this.memberForm.get('name')!;
   }
 
+  selectUser(user: CurrentUser) {
+    const fullName = user.firstName + ' ' + user.lastName;
+    this.memberForm.get('name')!.setValue(fullName);
+  }
+
   onSubmit() {
     if (this.memberForm.valid) {
-      const selectedUserName = this.memberForm.get('name')!.value;
-      this.users$
-        .pipe(
-          map((users) =>
-            users.find((user) => user.firstName === selectedUserName)
-          )
-        )
-        .subscribe((selectedUser) => {
-          if (selectedUser && selectedUser.firstName) {
-            // this.member = new Member(
-            //   selectedUser.firstName.toLowerCase(),
+      const selectedUserName = this.memberForm.get('name')!.value.trim();
+      const [selectedUserFirstName, selectedUserLastName] =
+        selectedUserName.split(' ');
 
-            // );
-            if (this.teamName) {
-              this.memberService.addMember(this.teamName, this.member);
-              this.cancelClicked.emit();
-              this.memberForm.reset();
-            }
-          } else {
-            this.toastService.showError(
-              'Erreur',
-              "L'utilisateur sélectionné n'a pas d'adresse e-mail valide"
-            );
+      this.users$.subscribe((users) => {
+        const selectedUser = users.find(
+          (user) =>
+            user.firstName === selectedUserFirstName &&
+            user.lastName === selectedUserLastName
+        );
+        if (selectedUser) {
+          const { id, firstName, lastName } = selectedUser;
+          if (id && firstName && lastName) {
+            this.member = new Member(id, firstName, lastName);
+            this.memberService.addMember(this.teamName, this.member);
+            this.cancelClicked.emit();
+            this.memberForm.reset();
           }
-        });
+        } else {
+          this.toastService.showError(
+            'Erreur',
+            "L'utilisateur sélectionné n'a pas été trouvé"
+          );
+        }
+      });
     } else {
       this.toastService.showError(
         'Erreur',
