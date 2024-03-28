@@ -86,7 +86,8 @@
 
     .filter-button-container {
       height: 3.5rem;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
+      z-index: 0;
     }
 
     .mat-mdc-raised-button:not(:disabled) {

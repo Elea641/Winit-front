@@ -25,10 +25,6 @@
 
       .all-tournaments-cards {
         @include flex-wrap-center;
-
-        .tournament-list {
-          margin: 1.5rem 1rem 1.5rem 0;
-        }
       }
     }
   }
