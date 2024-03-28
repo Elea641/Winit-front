@@ -2,8 +2,8 @@
 @import "../../../../../assets/style/mixins.scss";
 
 .card-result-tournament {
-  background-color: $background-card-result-tournament-color;
-  @include flex;
+  background-color: $primary-background-color;
+  display: flex;
   margin-top: 1rem;
   padding: 0.5rem;
   position: relative;
@@ -19,7 +19,7 @@
     }
 
     p {
-      color: $text-card-result-tournament-color;
+      color: $secondary-color-text;
       font-size: 1.2rem;
       position: absolute;
       top: 54%;
@@ -29,7 +29,7 @@
   }
 
   .line {
-    border: 1px solid $line-card-result-tournament-color;
+    border: 1px solid $secondary-color-line;
     margin: 0.5rem 0 0.5rem 0.5rem;
   }
 
@@ -37,13 +37,13 @@
     @include flex-column-center-align-justify;
     width: 40%;
     p {
-      color: $number-card-result-tournament-color;
+      color: $important-color-text;
       font-size: 1.8rem;
     }
 
     .card-result-tournament-info-text {
       font-size: 1rem;
-      color: $text-card-result-tournament-color;
+      color: $secondary-color-text;
       padding: 0.5rem 0 0 0.5rem;
       text-align: center;
     }

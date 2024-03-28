@@ -6,11 +6,11 @@ li {
   margin: 2rem 1rem;
 
   ::ng-deep .mat-mdc-card {
-    background-color: $background-card-team-list-color;
-    color: $text-card-team-list-color;
+    background-color: $primary-background-color;
+    color: $secondary-color-text;
 
     ::ng-deep .mat-mdc-card-subtitle {
-      color: $number-card-team-list-color;
+      color: $important-color-text;
       margin-top: 1rem;
     }
 

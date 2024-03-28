@@ -4,16 +4,16 @@ app-sidebar {
     top: 0;
     left: 0;
     z-index: 1;
-    background-color: $background-sidebar-color;
+    background-color: $primary-color;
     top: 0.2rem;
     overflow-y: auto;
     height: calc(100vh + 3.5rem);
     margin-top: 3.3rem;
 
     .container-sidebar-menu {
-      background-color: $background-sidebar-color;
+      background-color: $primary-color;
       width: 15rem;
-      border-right: 1px solid $border-sidebar-color;
+      border-right: 1px solid $secondary-color-border;
 
       .container-sidebar-menu-input {
         padding: 0.5rem;
@@ -25,7 +25,7 @@ app-sidebar {
       }
 
       .line {
-        border: 1px solid $line-sidebar-color;
+        border: 1px solid $primary-color-line;
         margin: 0 0.5rem 1rem 0.5rem;
       }
 
@@ -33,7 +33,7 @@ app-sidebar {
         margin: 0;
         padding: 0.5rem;
         width: 15rem;
-        background-color: $background-sidebar-color;
+        background-color: $primary-color;
         box-shadow: none;
       }
     }
@@ -49,9 +49,9 @@ app-sidebar {
       width: 100vw;
       height: auto;
       z-index: 1;
-      background-color: $background-navbar-color;
-      box-shadow: 0 2px 2px $box-shadow-navbar-color;
-      @include flex-space-around;
+      background-color: $primary-color;
+      box-shadow: 0 2px 2px $primary-color-shadow;
+      @include flex-justify-space-around;
 
       .filter-button-container {
         height: 3.5rem;
@@ -59,12 +59,12 @@ app-sidebar {
       }
 
       .mat-mdc-raised-button:not(:disabled) {
-        color: $button-navbar-color-text;
+        color: $secondary-color-text;
       }
 
       .mat-mdc-raised-button:hover,
       .mat-mdc-raised-button:focus {
-        color: $button-navbar-color-focus;
+        color: $primary-color-focus;
       }
     }
     display: none;
@@ -75,7 +75,7 @@ app-sidebar {
   }
 
   ::ng-deep .mat-mdc-menu-content {
-    background-color: $background-navbar-color;
+    background-color: $primary-color;
   }
 
   .mdc-button__label {

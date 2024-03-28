@@ -5,8 +5,8 @@
   @include flex-column-center;
   z-index: 2;
   position: relative;
-  background-color: $background-footer-color;
-  border-top: 1px solid $border-footer-color;
+  background-color: $primary-color;
+  border-top: 1px solid $primary-color-border;
   min-height: 40vh;
 
   img {
@@ -28,7 +28,7 @@
     @include media-large-screen {
       display: block;
       height: 1px;
-      border-top: 1px solid $line-footer-color;
+      border-top: 1px solid $primary-color-border;
       margin: 2rem;
       width: 12rem;
     }

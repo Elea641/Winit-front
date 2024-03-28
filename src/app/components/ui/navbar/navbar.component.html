@@ -4,16 +4,18 @@
   </button>
   <mat-menu #menu="matMenu" class="navbar-custom-menu">
     <button mat-menu-item routerLink="/tournament" (click)="toggleLogoButton()">
-      PLANNING
+      <mat-icon>calendar_today</mat-icon> PLANNING
     </button>
-    <button mat-menu-item (click)="toggleLogoButton()">CLASSEMENT</button>
+    <button mat-menu-item (click)="toggleLogoButton()">
+      <mat-icon>trending_up</mat-icon> CLASSEMENT
+    </button>
     <button
       *ngIf="!isUserEmpty(currentUser | async)"
       mat-menu-item
       routerLink="/tournament/create"
       (click)="toggleLogoButton()"
     >
-      CRÉER UN TOURNOI
+      <mat-icon>create</mat-icon> CRÉER UN TOURNOI
     </button>
   </mat-menu>
   <a class="navbar-button-logo" routerLink="/home" (click)="toggleLogo()">
@@ -66,7 +68,7 @@
       (click)="goToDisconnected('')"
     >
       <mat-icon>logout</mat-icon>
-      <span>Sign out</span>
+      <span>Déconnexion</span>
     </a>
   </mat-menu>
 </mat-toolbar>

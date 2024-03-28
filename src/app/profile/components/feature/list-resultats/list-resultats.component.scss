@@ -9,7 +9,7 @@
       @include flex-justify-align-center;
 
       .list-resultats-container-items {
-        @include flex;
+        display: flex;
       }
     }
   }

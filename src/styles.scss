@@ -36,7 +36,7 @@ $WinIt-Front-theme: mat.define-dark-theme(
 
 /* You can add global styles to this file, and also import other style files */
 
-@import "./assets/style/variables.scss";
+@import "./assets/style/global.scss";
 
 * {
   margin: 0;
@@ -47,7 +47,7 @@ $WinIt-Front-theme: mat.define-dark-theme(
 
 body {
   font-family: "Roboto", "Helvetica Neue", sans-serif;
-  background-color: $background-color;
+  background-color: $primary-color;
   list-style: none;
   text-decoration: none;
 }
@@ -55,5 +55,3 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
-
-@import "./assets/style/global.scss";

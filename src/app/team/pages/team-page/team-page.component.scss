@@ -1,4 +1,5 @@
+@import "../../../../assets/style/mixins.scss";
+
 ng-container {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
 }

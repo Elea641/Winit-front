@@ -9,7 +9,7 @@
 
     .list-tournament-tree-container-details {
       h2 {
-        color: $text-list-tournament-tree-color;
+        color: $secondary-color-button;
       }
 
       .list-tournament-tree-container-cards {
@@ -31,7 +31,7 @@
       padding: 0 2rem 0 0;
 
       h2 {
-        color: $text-list-tournament-tree-color;
+        color: $secondary-color-button;
         width: 15vw;
         height: 5rem;
         display: flex;
@@ -40,7 +40,7 @@
       }
 
       .list-tournament-tree-container-cards {
-        color: $text-list-tournament-tree-color;
+        color: $secondary-color-button;
         margin-top: auto;
         margin-bottom: auto;
       }

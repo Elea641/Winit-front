@@ -21,6 +21,12 @@
           PARTICIPER
         </button>
       </div>
+      <div
+        *ngIf="remainingTime === 'Inscription terminée'"
+        class="card-details-tournament-container-header-inscription"
+      >
+        <p>{{ remainingTime }}</p>
+      </div>
     </div>
     <div class="card-details-tournament-container-other-info">
       <div class="card-details-tournament-container-other-info-details">

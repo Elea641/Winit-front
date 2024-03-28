@@ -2,7 +2,7 @@
 @import "../../../../../assets/style/mixins.scss";
 
 .card-details-tournament-container {
-  color: $text-card-details-tournament-color-primary;
+  color: $secondary-color-text;
   display: flex;
 
   img {
@@ -15,7 +15,7 @@
 
     .card-details-tournament-container-header {
       h3 {
-        color: $text-card-details-tournament-colo-secondary;
+        color: $important-color-text;
         padding-top: 1rem;
       }
 
@@ -49,13 +49,13 @@
     }
 
     .mat-mdc-raised-button:not(:disabled) {
-      color: $button-card-current-profile-color-text;
+      color: $secondary-color-text;
       z-index: 0;
     }
 
     .mat-mdc-raised-button:hover,
     .mat-mdc-raised-button:focus {
-      color: $button-card-current-profile-color-focus;
+      color: $primary-color-focus;
     }
   }
 }
