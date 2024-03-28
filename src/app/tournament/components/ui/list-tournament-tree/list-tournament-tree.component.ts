@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CardTournamentMatchComponent } from '../card-tournament-match/card-tournament-match.component';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
 import { HelperTournamentService } from 'src/app/tournament/shared/helpers/helper-tournament.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-tournament-tree',
@@ -12,6 +13,7 @@ import { HelperTournamentService } from 'src/app/tournament/shared/helpers/helpe
   styleUrls: ['./list-tournament-tree.component.scss'],
 })
 export class ListTournamentTreeComponent {
+  @Input() tournament$!: Observable<TournamentDetails>;
   @Input() tournamentDetails!: TournamentDetails;
   convertedSelection: string | undefined;
   tournamentPhase!: any;

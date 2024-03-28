@@ -13,10 +13,12 @@ import { SportComponent } from './sport/pages/sport/sport.component';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
 import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
-import { memberResolver } from './team/shared/resolvers/member-resolver';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { CreateTeamPageComponent } from './team/pages/create-team-page/create-team-page.component';
 import { teamResolver } from './team/shared/resolvers/team-resolver';
+import { tournamentResolver } from './tournament/shared/resolvers/tournament-resolver';
+import { SelectTeamPageComponent } from './tournament/pages/select-team-page/select-team-page.component';
+import { teamsResolver } from './tournament/shared/resolvers/teams.resolver';
 
 export const routes: Routes = [
   {
@@ -35,7 +37,20 @@ export const routes: Routes = [
     component: TournamentPageComponent,
   },
   { path: 'tournament/create', component: TournamentFormComponent },
-  { path: 'tournament/:id([0-9]+)', component: TournamentDetailsPageComponent },
+  {
+    path: 'tournament/:id',
+    component: TournamentDetailsPageComponent,
+    resolve: {
+      tournament: tournamentResolver,
+    },
+  },
+  {
+    path: 'tournament/:id/teams',
+    component: SelectTeamPageComponent,
+    resolve: {
+      teams: teamsResolver,
+    },
+  },
   {
     path: 'back-office',
     component: BackOfficePageComponent,
@@ -47,7 +62,6 @@ export const routes: Routes = [
     component: TeamPageComponent,
     canActivate: [UserGuard],
     resolve: {
-      member: memberResolver,
       team: teamResolver,
     },
   },

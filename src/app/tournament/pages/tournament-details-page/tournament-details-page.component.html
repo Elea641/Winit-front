@@ -1,1 +1,6 @@
-<app-tournament-details></app-tournament-details>
+<div class="tournament-details-page-container">
+  <app-card-details-tournament
+    [tournament$]="tournament$"
+  ></app-card-details-tournament>
+  <app-menu-tournament [tournament$]="tournament$"></app-menu-tournament>
+</div>

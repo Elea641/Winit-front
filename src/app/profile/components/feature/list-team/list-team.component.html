@@ -1,5 +1,5 @@
-<section class="list-team-container">
-  <div class="list-team-container-button">
+<section>
+  <header>
     <button
       (click)="onClick()"
       mat-raised-button
@@ -9,13 +9,13 @@
     >
       CRÉATION DE VOTRE ÉQUIPE
     </button>
-  </div>
+  </header>
   <h1>LISTE DE VOS ÉQUIPES</h1>
   <mat-divider></mat-divider>
-  <div class="list-team-cards-container">
+  <ul>
     <app-team-card
       *ngFor="let team of teams$ | async"
       [team]="team"
     ></app-team-card>
-  </div>
+  </ul>
 </section>

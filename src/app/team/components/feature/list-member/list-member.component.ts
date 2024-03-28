@@ -7,7 +7,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Observable, Subscription } from 'rxjs';
-import { TeamMember } from 'src/app/team/models/team-member.model';
 import { Team } from 'src/app/team/models/team.model';
 
 @Component({
@@ -24,45 +23,40 @@ import { Team } from 'src/app/team/models/team.model';
 })
 export class ListMemberComponent {
   @Input() team$!: Observable<Team | null>;
-  @Input() teamMembers$!: Observable<TeamMember | null>;
+  private teamSubscription!: Subscription;
   members: Member[] = [];
-  leadTeamName: string = '';
-  private memberSubscription!: Subscription;
 
   constructor(private memberService: MemberService, public dialog: MatDialog) {}
 
   ngOnDestroy(): void {
-    if (this.memberSubscription) {
-      this.memberSubscription.unsubscribe();
+    if (this.teamSubscription) {
+      this.teamSubscription.unsubscribe();
     }
   }
 
   ngOnInit(): void {
-    this.memberSubscription = this.memberService.member$.subscribe((member) => {
-      if (member) {
-        this.members.push(member);
+    this.team$.subscribe((team) => {
+      if (team) {
+        this.members = team?.members;
       }
     });
 
-    this.teamMembers$.subscribe((teamMember) => {
-      if (teamMember) {
-        this.leadTeamName = teamMember?.leadTeamName;
-        this.members = teamMember?.members;
+    this.teamSubscription = this.memberService.team$.subscribe((team) => {
+      if (team) {
+        this.members = team.members;
       }
     });
   }
 
-  openDialog(member: string) {
+  openDialog(member: Member) {
     const dialogRef = this.dialog.open(DeleteModalComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.team$.subscribe((team) => {
           if (team) {
-            this.memberService
-              .deleteMemberByName(team.name, member)
-              .subscribe((members) => {
-                this.members = members.members;
-              });
+            this.memberService.deleteMemberByName(team.name, member);
+          } else {
+            console.error('Utilisateur introuvable');
           }
         });
       }

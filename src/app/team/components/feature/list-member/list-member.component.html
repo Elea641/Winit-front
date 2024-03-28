@@ -1,11 +1,13 @@
-<div *ngFor="let member of members" class="list-members-container">
-  <app-member-card [member]="member"></app-member-card>
-  <button
-    *ngIf="member.name !== leadTeamName"
-    mat-button
-    color="warn"
-    (click)="openDialog(member.name)"
-  >
-    SUPPRIMER
-  </button>
-</div>
+<li *ngIf="team$ | async as team">
+  <div *ngFor="let member of members">
+    <app-member-card [member]="member"></app-member-card>
+    <button
+      *ngIf="member.firstName !== team.leaderName"
+      mat-button
+      color="warn"
+      (click)="openDialog(member)"
+    >
+      SUPPRIMER
+    </button>
+  </div>
+</li>

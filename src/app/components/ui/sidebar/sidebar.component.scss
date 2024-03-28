@@ -6,7 +6,7 @@
 
   & button {
     margin-top: 16px;
-    color: #fff;
+    color: $secondary-color-text;
   }
 }
 
@@ -15,7 +15,7 @@
 }
 
 .selected {
-  color: $card-background-color;
+  color: $primary-background-color-card;
 }
 
 .sidebar-select-sport {

@@ -1,9 +1,4 @@
 .carousel-container {
-  max-width: 90vw;
-  margin: auto;
+  max-width: calc(100vw - 4rem);
   padding: 0.5rem;
-
-  .slide {
-    margin-right: 1rem;
-  }
 }

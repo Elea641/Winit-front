@@ -5,10 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { BehaviorSubject, Observable, filter } from 'rxjs';
+import { filter } from 'rxjs';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { TokenService } from 'src/app/auth/shared/token.service';
-import { TeamService } from 'src/app/team/shared/team.service';
 
 @Component({
   selector: 'app-navbar',
@@ -28,15 +27,11 @@ export class NavbarComponent implements OnInit {
   currentUser!: any;
   isMobile: boolean | undefined = false;
   logoUrl: string = '../../../assets/pictures/logo-white.png';
-  private currentUserSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
-    null
-  );
 
   constructor(
     private router: Router,
     private breakpointService: BreakpointService,
-    private tokenService: TokenService,
-    private teamService: TeamService
+    private tokenService: TokenService
   ) {
     this.isMobile = this.breakpointService.isMobileDevice();
     this.breakpointService.deviceChanged['isMobile'].subscribe(
@@ -54,11 +49,8 @@ export class NavbarComponent implements OnInit {
       .subscribe(() => {
         window.scrollTo(0, 0);
       });
-    this.currentUser = this.tokenService._getTokenDetailsSubject$();
-  }
 
-  getCurrentUser(): Observable<any> {
-    return this.currentUserSubject.asObservable();
+    this.currentUser = this.tokenService._getTokenDetailsSubject$();
   }
 
   isUserEmpty(user: any): boolean {
@@ -78,9 +70,5 @@ export class NavbarComponent implements OnInit {
 
   toggleLogoButton() {
     this.logoUrl = '../../../assets/pictures/logo-white.png';
-  }
-
-  unsubscribeFromSelectedTeam(): void {
-    this.teamService.unselectTeam();
   }
 }

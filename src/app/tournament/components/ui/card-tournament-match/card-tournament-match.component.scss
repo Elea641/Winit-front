@@ -2,40 +2,40 @@
 @import "../../../../../assets/style/mixins.scss";
 
 @include media-mobile-tablet-screen {
-.card-tournament-match-container {
-    @include flex;
+  .card-tournament-match-container {
+    display: flex;
     position: relative;
     height: 3rem;
-    background-color: $background-card-tournament-match-color;
-    color: $text-card-tournament-match-color;
+    background-color: $primary-background-color;
+    color: $secondary-color-text;
     width: calc(50vw - 2rem);
     margin: 0.45rem 0;
-  
+
     .card-tournament-match-container-details {
       width: 100%;
       padding: 0.5rem;
-      @include flex-space-between;
+      @include flex-justify-space-around;
     }
   }
-  
+
   .even {
     .line {
       display: block;
       position: absolute;
       z-index: 1;
       left: 100%;
-      border-right: 2px solid $line-card-tournament-match-color;
+      border-right: 2px solid $important-color-line;
       height: 2.5rem;
       width: 0;
     }
   }
-  
+
   .odd {
     .card-tournament-match-container-details {
       position: relative;
       flex-direction: row-reverse;
       justify-content: space-between;
-  
+
       .score-match-card {
         display: block;
         position: absolute;
@@ -47,16 +47,16 @@
 
 @include media-large-screen {
   .card-tournament-match-container {
-    @include flex;
+    display: flex;
     height: 3rem;
-    background-color: $background-card-tournament-match-color;
-    color: $text-card-tournament-match-color;
+    background-color: $primary-background-color;
+    color: $secondary-color-text;
     width: 15vw;
     margin: 0;
     position: relative;
 
     .card-tournament-match-container-details {
-      @include flex;
+      display: flex;
       width: 100%;
       position: relative;
       padding-left: 1rem;
@@ -78,21 +78,21 @@
     }
   }
 
-    .line {
-      display: block;
-      position: absolute;
-      z-index: 1;
-      right: 98.5%;
-      border-left: 2px solid $line-card-tournament-match-color;
-      height: 3rem;
-      width: 0;
-    }
+  .line {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    right: 98.5%;
+    border-left: 2px solid $important-color-line;
+    height: 3rem;
+    width: 0;
+  }
 
   .odd {
     margin-bottom: 3rem;
 
     .card-tournament-match-container-details {
-      border-top: 2px solid $line-secondary-card-result-tournament-color;
+      border-top: 2px solid $secondary-color-line;
     }
 
     .line {

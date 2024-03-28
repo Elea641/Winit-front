@@ -6,8 +6,8 @@
   top: 0;
   left: 0;
   z-index: 2;
-  background-color: $background-navbar-color;
-  box-shadow: 0 2px 2px $box-shadow-navbar-color;
+  background-color: $primary-color;
+  box-shadow: 0 2px 2px $primary-color-shadow;
 
   .navbar-button-logo {
     img {
@@ -24,12 +24,12 @@
   }
 
   .mat-mdc-raised-button:not(:disabled) {
-    color: $button-navbar-color-text;
+    color: $secondary-color-text;
   }
 
   .mat-mdc-raised-button:hover,
   .mat-mdc-raised-button:focus {
-    color: $button-navbar-color-focus;
+    color: $primary-color-focus;
   }
 }
 
@@ -38,5 +38,9 @@
 }
 
 ::ng-deep .mat-mdc-menu-content {
-  background-color: $background-navbar-color;
+  background-color: $primary-color;
+  width: 12rem;
+  .mat-mdc-menu-item {
+    padding: 0 0 0 1rem;
+  }
 }

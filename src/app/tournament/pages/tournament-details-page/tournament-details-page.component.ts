@@ -1,18 +1,46 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TournamentDetailsComponent } from '../../components/feature/tournament-details/tournament-details.component';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, catchError, concatMap, of } from 'rxjs';
+import { TournamentDetails } from '../../models/tournament-details.model';
+import { TournamentService } from '../../shared/tournament.service';
+import { MenuTournamentComponent } from '../../components/feature/menu-tournament/menu-tournament.component';
+import { CardDetailsTournamentComponent } from '../../components/ui/card-details-tournament/card-details-tournament.component';
 
 @Component({
   selector: 'app-tournament-details-page',
   standalone: true,
-  imports: [CommonModule, TournamentDetailsComponent],
+  imports: [
+    CommonModule,
+    CardDetailsTournamentComponent,
+    MenuTournamentComponent,
+  ],
   templateUrl: './tournament-details-page.component.html',
   styleUrls: ['./tournament-details-page.component.scss'],
 })
 export class TournamentDetailsPageComponent implements OnInit {
-  @Input() public id!: number;
+  tournament$!: Observable<TournamentDetails>;
+  teamId!: string;
+  constructor(
+    private route: ActivatedRoute,
+    private tournamentService: TournamentService
+  ) {}
 
   ngOnInit(): void {
-    console.log(this.id);
+    this.route.params.subscribe((params) => {
+      this.teamId = params['id'];
+    });
+
+    this.tournament$ = this.route.data.pipe(
+      concatMap((data) => {
+        if (data && data['tournament']) {
+          return of(data['tournament']);
+        } else {
+          return this.tournamentService
+            .getTournamentById(Number(this.teamId))
+            .pipe(catchError(() => of(null)));
+        }
+      })
+    );
   }
 }

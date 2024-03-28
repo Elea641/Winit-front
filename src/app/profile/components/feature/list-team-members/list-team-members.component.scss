@@ -1,7 +1,0 @@
-@import "../../../../../assets/style/variables.scss";
-@import "../../../../../assets/style/mixins.scss";
-
-.list-team-members-container {
-  width: 100%;
-  @include flex-justify-content-center;
-}

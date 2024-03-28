@@ -2,12 +2,12 @@
 @import "../../../../../assets/style/mixins.scss";
 
 .list-next-tournaments-container {
-  color: $text-list-last-tournaments-played-color;
+  color: $secondary-color-text;
   margin-top: 1rem;
 
   .list-next-tournaments-container-header {
     @include flex-align-center;
-    background-color: $hearder-list-last-tournaments-played-color;
+    background-color: $secondary-background-color;
     height: 3.5rem;
     padding: 1rem;
     border-radius: 4px 4px 0 0;
@@ -20,7 +20,7 @@
 
   .list-next-tournaments-container-body {
     @include flex-column-center;
-    background-color: $background-list-last-tournaments-played-color;
+    background-color: $primary-background-color;
     border-radius: 0 0 4px 4px;
     min-height: 15rem;
 
@@ -65,19 +65,19 @@
     }
 
     .mat-mdc-raised-button:not(:disabled) {
-      color: $button-list-last-tournaments-playede-color-focus;
+      color: $secondary-color-button;
       z-index: 0;
     }
 
     .mat-mdc-raised-button:hover,
     .mat-mdc-raised-button:focus {
-      color: $button-list-last-tournaments-playede-color-focus;
+      color: $secondary-color-button;
     }
 
     ::ng-deep .mat-mdc-raised-button:not(:disabled) {
-      background-color: $background-list-last-tournaments-played-color;
+      background-color: $primary-background-color;
       box-shadow: none;
-      border: 1px solid $button-list-last-tournaments-playede-color-focus;
+      border: 1px solid $secondary-color-button;
     }
   }
 

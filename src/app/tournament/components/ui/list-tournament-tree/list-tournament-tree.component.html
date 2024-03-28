@@ -1,4 +1,7 @@
-<li class="list-tournament-tree-container">
+<div *ngIf="!totalPhase" class="list-tournament-tree-container">
+  <p>Tournoi en cours de création</p>
+</div>
+<div *ngIf="totalPhase" class="list-tournament-tree-container">
   <div
     class="list-tournament-tree-container-details"
     *ngIf="totalPhase.randomMatchs"
@@ -53,4 +56,4 @@
       </div>
     </div>
   </div>
-</li>
+</div>

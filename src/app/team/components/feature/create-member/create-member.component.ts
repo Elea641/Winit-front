@@ -37,7 +37,7 @@ import { Observable } from 'rxjs';
 export class CreateMemberComponent {
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
   memberForm!: FormGroup;
-  member: Member = new Member('');
+  member: Member = new Member(0, '', '');
   users$!: Observable<CurrentUser[]>;
   teamName: string = '';
 
@@ -57,7 +57,7 @@ export class CreateMemberComponent {
       name: new FormControl('', [
         Validators.required,
         Validators.pattern(
-          `[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*`
+          `^[a-zA-Z0-9!éïîèà@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/? ]*$`
         ),
       ]),
     });
@@ -69,14 +69,38 @@ export class CreateMemberComponent {
     return this.memberForm.get('name')!;
   }
 
+  selectUser(user: CurrentUser) {
+    const fullName = user.firstName + ' ' + user.lastName;
+    this.memberForm.get('name')!.setValue(fullName);
+  }
+
   onSubmit() {
     if (this.memberForm.valid) {
-      this.member = new Member(this.name.value.toLowerCase());
-      if (this.teamName) {
-        this.memberService.addMember(this.teamName, this.member);
-        this.cancelClicked.emit();
-        this.memberForm.reset();
-      }
+      const selectedUserName = this.memberForm.get('name')!.value.trim();
+      const [selectedUserFirstName, selectedUserLastName] =
+        selectedUserName.split(' ');
+
+      this.users$.subscribe((users) => {
+        const selectedUser = users.find(
+          (user) =>
+            user.firstName === selectedUserFirstName &&
+            user.lastName === selectedUserLastName
+        );
+        if (selectedUser) {
+          const { id, firstName, lastName } = selectedUser;
+          if (id && firstName && lastName) {
+            this.member = new Member(id, firstName, lastName);
+            this.memberService.addMember(this.teamName, this.member);
+            this.cancelClicked.emit();
+            this.memberForm.reset();
+          }
+        } else {
+          this.toastService.showError(
+            'Erreur',
+            "L'utilisateur sélectionné n'a pas été trouvé"
+          );
+        }
+      });
     } else {
       this.toastService.showError(
         'Erreur',

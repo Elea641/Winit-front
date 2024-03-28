@@ -1,25 +1,22 @@
-<div class="menu-member-container" *ngIf="team$ | async as team">
-  <div class="menu-member-container">
-    <mat-tab-group
-      mat-stretch-tabs="false"
-      mat-align-tabs="start"
-      class="mat-tabs"
-      #tabGroup
+<nav *ngIf="team$ | async as team">
+  <mat-tab-group
+    mat-stretch-tabs="false"
+    mat-align-tabs="start"
+    class="mat-tabs"
+    #tabGroup
+  >
+    <mat-tab label="LISTE DES MEMBRES">
+      <ul>
+        <app-list-member [team$]="team$"></app-list-member>
+      </ul>
+    </mat-tab>
+    <mat-tab
+      *ngIf="team.teamMembersCount < team.totalPlayers"
+      label="AJOUT D'UN MEMBRE"
     >
-      <mat-tab label="LISTE DES MEMBRES">
-        <app-list-member
-          [team$]="team$"
-          [teamMembers$]="teamMembers$"
-        ></app-list-member>
-      </mat-tab>
-      <mat-tab
-        *ngIf="membersCount < team.numberOfPlayers"
-        label="AJOUT D'UN MEMBRE"
-      >
-        <app-create-member
-          (cancelClicked)="handleCancelClick()"
-        ></app-create-member>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
-</div>
+      <app-create-member
+        (cancelClicked)="handleCancelClick()"
+      ></app-create-member>
+    </mat-tab>
+  </mat-tab-group>
+</nav>

@@ -1,29 +1,44 @@
 @import "../../../../auth/components/feature/register/register.component.scss";
 
-.wi-tournament-form-field-big {
-  width: 100%;
-}
+.register-form-page-container {
+  margin: 2rem;
+  .wi-tournament-form-field-big {
+    width: 100%;
+  }
 
-@keyframes slideaway {
-  from { display: block; }
-  to { transform: translateY(40px); opacity: 0; }
-}
+  @keyframes slideaway {
+    from {
+      display: block;
+    }
+    to {
+      transform: translateY(40px);
+      opacity: 0;
+    }
+  }
 
-@keyframes slidein {
-  from { transform: translateY(40px); opacity: 0; display: block; }
-  to { transform: translateY(0px); opacity: 1; }
-}
+  @keyframes slidein {
+    from {
+      transform: translateY(40px);
+      opacity: 0;
+      display: block;
+    }
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
 
-.wi-displayLimitInscriptionDate {
-  animation: slideaway 300ms;
-  display: none;
-}
+  .wi-displayLimitInscriptionDate {
+    animation: slideaway 300ms;
+    display: none;
+  }
 
-.wi-hideLimitInscriptionDate {
-  animation: slidein 300ms;
-  display: block;
-}
+  .wi-hideLimitInscriptionDate {
+    animation: slidein 300ms;
+    display: block;
+  }
 
-.wi-displayWrapper {
-  display: none;
+  .wi-displayWrapper {
+    display: none;
+  }
 }

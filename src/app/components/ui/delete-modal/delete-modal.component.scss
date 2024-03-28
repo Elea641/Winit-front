@@ -2,7 +2,7 @@
 @import "../../../../assets/style/mixins.scss";
 
 .delete-modal-container {
-  background-color: $background-color;
+  background-color: $primary-color;
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {

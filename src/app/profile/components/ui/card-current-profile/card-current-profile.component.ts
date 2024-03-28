@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {RouterLink} from "@angular/router";
@@ -14,6 +13,5 @@ import {User} from "../../../../auth/models/user.model";
   styleUrls: ['./card-current-profile.component.scss'],
 })
 export class CardCurrentProfileComponent {
-  @Input() currentProfile!: CurrentProfile | null;
   @Input() currentUser!: User | null;
 }

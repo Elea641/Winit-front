@@ -18,7 +18,6 @@ import { TournamentCard } from '../models/tournament-card.model';
   providedIn: 'root',
 })
 export class TournamentService {
-  //private tournamentDataUrl = '../assets/list-tournament.model.json';
   private tournamentDataUrl = `${environment.urlApi}/tournaments/`;
   private apiUrl = `${environment.urlApi}` + '/tournaments/create';
   private tournamentByIdDataUrl = '../assets/tournament-details.model.json';
@@ -68,7 +67,7 @@ export class TournamentService {
       );
   }
 
-  getTournamentById(): Observable<TournamentDetails> {
-    return this.http.get<TournamentDetails>(this.tournamentByIdDataUrl);
+  getTournamentById(id: number): Observable<TournamentDetails> {
+    return this.http.get<TournamentDetails>(this.tournamentDataUrl + id);
   }
 }

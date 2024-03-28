@@ -1,113 +1,34 @@
-/* Background-color */
-$background-color: #191a2c;
+/* DARK MODE */
+/* MAIN COLORS */
+$primary-color: #191a2c;
 $secondary-color: #fff;
 
-/* navbar-color */
-$background-navbar-color: #191a2c;
-$box-shadow-navbar-color: #000;
-$button-navbar-color-text: #fff;
-$button-navbar-color-focus: #e3e3e3;
+/* ELEMENTS */
+$primary-background-color: #050c1f;
+$secondary-background-color: #31abc758;
+$primary-background-color-card: #76b7c5;
+$secondary-background-color-card: #000;
 
-/* input-search-color */
-$background-input-search-color: #191a2c;
+/* TEXT COLORS */
+$primary-color-text: #000;
+$secondary-color-text: #fff;
+$important-color-text: #e88223;
 
-/* sidebar-color */
-$background-sidebar-color: #191a2c;
-$border-sidebar-color: #000;
-$line-sidebar-color: #fff;
+/* BUTTONS */
+$primary-color-button: #76b7c5;
+$secondary-color-button: #31acc7;
 
-/* footer-color */
-$background-footer-color: #191a2c;
-$border-footer-color: #000;
-$line-footer-color: #fff;
+/* BORDER COLORS */
+$primary-color-border: #000;
+$secondary-color-border: #fff;
 
-/* contact-page-color */
-$color-contact: #fff;
+/* LINE COLORS */
+$primary-color-line: #fff;
+$secondary-color-line: #31acc7;
+$important-color-line: #e88223;
 
-/* contact-card-color */
-$background-contact-card-color: #fff;
-$color-contact-card-color: #191a2c;
+/* SHADOW COLORS */
+$primary-color-shadow: #000;
 
-/* dialog-overview-color */
-$background-dialog-overview-color: #191a2c;
-
-/* current-profile-card-color */
-$button-card-current-profile-color-text: #fff;
-$button-card-current-profile-color-focus: #e3e3e3;
-$text-card-current-profile-color: #fff;
-
-/* menu-infos-profile-color */
-$background-menu-infos-profile-color: #191a2c;
-$button-menu-infos-profile-color-text: #fff;
-$button-menu-infos-profile-color-focus: #31acc7;
-$text-menu-infos-profile-color: #fff;
-
-/* card-result-total-color */
-$background-card-result-total-color: #050c1f;
-$text-card-result-total-color: #fff;
-$number-card-result-total-color: #e88223;
-$line-card-result-total-color: #31acc7;
-
-/* card-result-tournament-color */
-$background-card-result-tournament-color: #050c1f;
-$text-card-result-tournament-color: #fff;
-$number-card-result-tournament-color: #e88223;
-$line-card-result-tournament-color: #31acc7;
-
-/* card-color */
-$card-background-color: #76b7c5;
-
-/* list-last-tournaments-played-color */
-$background-list-last-tournaments-played-color: #050c1f;
-$text-list-last-tournaments-played-color: #fff;
-$hearder-list-last-tournaments-played-color: #31abc758;
-$button-list-last-tournaments-played-color-text: #fff;
-$button-list-last-tournaments-playede-color-focus: #31acc7;
-$background-button-list-last-tournaments-played-color: #31abc758;
-
-/* list-team-members-color */
-$background-list-team-members-color: #050c1f;
-$text-list-team-members-color: #fff;
-$background-button-list-team-members-color: #31abc758;
-
-/* card-details-tournament-color */
-$text-card-details-tournament-color-primary: #fff;
-$text-card-details-tournament-colo-secondary: #e88223;
-$button-card-details-tournament-color: #31acc7;
-
-/* menu-infos-tournament-color */
-$background-menu-infos-tournament-color: #191a2c;
-$button-menu-infos-tournament-color-text: #fff;
-$button-menu-infos-tournament-color-focus: #31acc7;
-$text-menu-infos-tournament-color: #fff;
-
-/* list-teams-tournament-color */
-$background-list-teams-tournament-color: #191a2c;
-$button-list-teams-tournament-color-text: #fff;
-$button-list-teams-tournament-color-focus: #31acc7;
-$text-list-teams-tournament-color: #fff;
-
-/* list-tournament-tree-color */
-$background-list-tournament-tree-color: #050c1f;
-$button-list-tournament-tree-color-text: #fff;
-$button-list-tournament-tree-color-focus: #31acc7;
-$text-list-tournament-tree-color: #fff;
-
-/* card-tournament-match-color */
-$background-card-tournament-match-color: #050c1f;
-$text-card-tournament-match-color: #fff;
-$number-card-tournament-match-color: #e88223;
-$line-card-tournament-match-color: #e88223;
-$line-secondary-card-result-tournament-color: #31acc7;
-
-/* card-team-list-color */
-$background-card-team-list-color: #050c1f;
-$text-card-team-list-color: #fff;
-$number-card-team-list-color: #e88223;
-$line-card-team-list-color: #31acc7;
-
-/* card-team-detail-color */
-$background-card-team-detail-color: #050c1f;
-$text-card-team-detail-color: #fff;
-$number-card-team-detail-color: #e88223;
-$line-card-team-detail-color: #31acc7;
+/* FOCUS COLORS */
+$primary-color-focus: #e3e3e3;

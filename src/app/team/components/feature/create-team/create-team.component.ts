@@ -53,7 +53,7 @@ export class CreateTeamComponent {
       name: new FormControl('', [
         Validators.required,
         Validators.pattern(
-          `[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*`
+          `^[a-zA-Z0-9@#!éïîèà@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/? ]*$`
         ),
       ]),
       sport: new FormControl('', [

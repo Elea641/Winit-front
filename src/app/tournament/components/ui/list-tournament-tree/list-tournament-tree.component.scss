@@ -3,10 +3,13 @@
 
 @include media-mobile-tablet-screen {
   .list-tournament-tree-container {
+    color: $secondary-color;
     width: 100%;
+    margin-top: 2rem;
+
     .list-tournament-tree-container-details {
       h2 {
-        color: $text-list-tournament-tree-color;
+        color: $secondary-color-button;
       }
 
       .list-tournament-tree-container-cards {
@@ -20,13 +23,15 @@
 @include media-large-screen {
   .list-tournament-tree-container {
     @include flex-wrap-align-center;
+    color: $secondary-color;
     width: 100%;
+    margin-top: 2rem;
 
     .list-tournament-tree-container-details {
       padding: 0 2rem 0 0;
 
       h2 {
-        color: $text-list-tournament-tree-color;
+        color: $secondary-color-button;
         width: 15vw;
         height: 5rem;
         display: flex;
@@ -35,7 +40,7 @@
       }
 
       .list-tournament-tree-container-cards {
-        color: $text-list-tournament-tree-color;
+        color: $secondary-color-button;
         margin-top: auto;
         margin-bottom: auto;
       }

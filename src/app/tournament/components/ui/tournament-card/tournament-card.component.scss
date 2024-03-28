@@ -1,9 +1,10 @@
 @import "../../../../../styles.scss";
 
 mat-card {
-  width: 18rem;
+  width: 17.5rem;
   height: 350px;
   position: relative;
+  margin: 0.5rem;
 }
 
 mat-card > img {
