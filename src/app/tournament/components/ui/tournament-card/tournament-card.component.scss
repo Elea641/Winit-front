@@ -31,7 +31,10 @@ mat-card > img {
   color: white;
 }
 
-mat-card-content,
+mat-card-header mat-card-content mat-card-actions {
+  padding: 0 1rem;
+}
+
 p {
   padding-top: 8px;
   padding-bottom: 8px;
