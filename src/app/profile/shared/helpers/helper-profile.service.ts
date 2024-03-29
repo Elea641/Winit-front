@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConvertWinEnum } from '../models/enum/convertWinEnum';
+import { ConvertWinEnum } from '../../models/enum/convertWinEnum';
 
 @Injectable({
   providedIn: 'root',

@@ -13,11 +13,12 @@ import { Tournament } from '../models/tournament.model';
 import { ToastService } from 'src/app/shared/toast.service';
 import { TournamentMappers } from './mappers/TournamentMappers';
 import { TournamentCard } from '../models/tournament-card.model';
+import { ITournamentService } from './interfaces/ITournament.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TournamentService {
+export class TournamentService implements ITournamentService {
   private tournamentDataUrl = `${environment.urlApi}/tournaments/`;
   private apiUrl = `${environment.urlApi}` + '/tournaments/create';
   private tournamentByIdDataUrl = '../assets/tournament-details.model.json';
