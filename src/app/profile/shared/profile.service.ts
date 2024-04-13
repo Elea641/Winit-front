@@ -30,11 +30,11 @@ export class ProfileService implements IProfileService {
     return this.http.get<User>(`${environment.urlApi}/users/myself`);
   }
 
-  updateProfile(userId: number, user: User): Observable<User> {
+  updateProfile(userId: string, user: User): Observable<User> {
     return this.http.put<User>(`${environment.urlApi}/users/${userId}`, user);
   }
 
-  deleteProfile(userId: number): Observable<any> {
+  deleteProfile(userId: string): Observable<any> {
     return this.http.delete(`${environment.urlApi}/users/${userId}`);
   }
 }

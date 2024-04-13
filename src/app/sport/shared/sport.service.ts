@@ -11,6 +11,8 @@ export class SportService {
   constructor(private http: HttpClient) {}
 
   getAllSports(): Observable<Sport[]> {
+    console.log('test');
+
     return this.http.get<Sport[]>(`${environment.urlApi}/sports/`);
   }
 }

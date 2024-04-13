@@ -32,6 +32,8 @@ export class AuthService {
   ) {}
 
   postRegister(user: User): void {
+    console.log(user);
+
     this.http.post<User>(`${environment.urlApi}/auth/register`, user).subscribe(
       (response) => {
         if (response) {

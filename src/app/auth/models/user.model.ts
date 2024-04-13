@@ -1,7 +1,6 @@
 import { Sport } from './sport.model';
 
 export class User {
-  id?: number;
   firstName?: string;
   lastName?: string;
   city?: string;

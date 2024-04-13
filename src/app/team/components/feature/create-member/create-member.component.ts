@@ -37,7 +37,7 @@ import { Observable } from 'rxjs';
 export class CreateMemberComponent {
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
   memberForm!: FormGroup;
-  member: Member = new Member(0, '', '');
+  member: Member = new Member('', '', '');
   users$!: Observable<CurrentUser[]>;
   teamName: string = '';
 
