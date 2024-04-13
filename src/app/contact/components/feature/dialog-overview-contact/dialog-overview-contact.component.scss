@@ -1,5 +1,9 @@
 @import "../../../../../assets/style/variables.scss";
 
 .container-dialog-overview {
-  background-color: $background-dialog-overview-color;
+  background-color: $primary-color;
+
+  h3 {
+    color: $important-color-text;
+  }
 }

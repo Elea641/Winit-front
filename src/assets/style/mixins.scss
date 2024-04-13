@@ -1,8 +1,4 @@
-/* Flexbox utility */
-
-@mixin flex {
-  display: flex;
-}
+/* Utility */
 
 @mixin flex-align-center {
   display: flex;
@@ -47,39 +43,33 @@
 @mixin flex-wrap {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
-@mixin flex-wrap-left {
+@mixin flex-wrap-center {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 @mixin flex-wrap-align-center {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
 }
 
-@mixin flex-space-around {
+@mixin flex-justify-space-around {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-@mixin flex-space-between {
+@mixin flex-justify-space-between {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Media */
-@mixin media-large-screen {
-  @media screen and (min-width: 1024px) and (max-width: 2000px) {
-    @content;
-  }
-}
-
+/* Media Screen*/
 @mixin media-mobile-screen {
   @media screen and (max-width: 767px) {
     @content;
@@ -94,6 +84,12 @@
 
 @mixin media-mobile-tablet-screen {
   @media screen and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin media-large-screen {
+  @media screen and (min-width: 1024px) and (max-width: 2000px) {
     @content;
   }
 }

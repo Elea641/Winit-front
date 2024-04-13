@@ -8,7 +8,7 @@
         (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)"
       ></app-input-search>
     </div>
-    <h2>Filtres</h2>
+    <h2>FILTRES</h2>
     <div class="line"></div>
 
     <div class="container-sidebar-menu-button sidebar-select-sport">
@@ -89,7 +89,7 @@
     </app-input-search>
   </div>
   <button class="filter-button-container" mat-button [matMenuTriggerFor]="menu">
-    Filtres
+    FILTRES
   </button>
   <mat-menu #menu="matMenu" class="sidebar-custom-menu">
     <div class="sidebar-select-sport-mobile" mat-menu-item>
@@ -121,8 +121,8 @@
       (click)="sendChronologicalFilterChangeToParent()"
       (click)="$event.stopPropagation()"
     >
-      <span [ngClass]="{ selected: !chronologicalFilter }">Alphabétique</span> /
-      <span [ngClass]="{ selected: chronologicalFilter }">chronologique</span>
+      <span [ngClass]="{ selected: !chronologicalFilter }">Nom</span> /
+      <span [ngClass]="{ selected: chronologicalFilter }">Date</span>
     </button>
     <button
       mat-menu-item

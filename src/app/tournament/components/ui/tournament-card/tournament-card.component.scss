@@ -1,9 +1,8 @@
-@import "../../../../../styles.scss";
-
 mat-card {
-  width: 18rem;
+  width: 17.5rem;
   height: 350px;
   position: relative;
+  margin: 0.5rem;
 }
 
 mat-card > img {
@@ -30,7 +29,10 @@ mat-card > img {
   color: white;
 }
 
-mat-card-content,
+mat-card-header mat-card-content mat-card-actions {
+  padding: 0 1rem;
+}
+
 p {
   padding-top: 8px;
   padding-bottom: 8px;

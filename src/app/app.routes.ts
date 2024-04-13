@@ -1,22 +1,26 @@
-import { Routes } from '@angular/router';
-import { LoginFormComponent } from './auth/components/feature/login-form/login-form.component';
-import { RegisterComponent } from './auth/components/feature/register/register.component';
 import { AdminGuard } from './auth/core/admin.guard';
-import { UserGuard } from './auth/core/user.guard';
 import { AuthPageComponent } from './auth/pages/auth-page/auth-page.component';
 import { BackOfficePageComponent } from './back-office/pages/back-office-page/back-office-page.component';
 import { ContactPageComponent } from './contact/pages/contact-page/contact-page.component';
-import { HomePageComponent } from './home/pages/home-page/home-page.component';
-import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.component';
-import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
-import { SportComponent } from './sport/pages/sport/sport.component';
-import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
-import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
-import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
-import { memberResolver } from './team/shared/resolvers/member-resolver';
-import { TeamPageComponent } from './team/pages/team-page/team-page.component';
+import { contactResolver } from './contact/shared/resolvers/contact-resolver';
 import { CreateTeamPageComponent } from './team/pages/create-team-page/create-team-page.component';
+import { HomePageComponent } from './home/pages/home-page/home-page.component';
+import { LoginFormComponent } from './auth/components/feature/login-form/login-form.component';
+import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.component';
+import { RegisterComponent } from './auth/components/feature/register/register.component';
+import { Routes } from '@angular/router';
+import { SelectTeamPageComponent } from './tournament/pages/select-team-page/select-team-page.component';
+import { SportComponent } from './sport/pages/sport/sport.component';
+import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { teamResolver } from './team/shared/resolvers/team-resolver';
+import { teamsResolver } from './team/shared/resolvers/teams.resolver';
+import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
+import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
+import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
+import { tournamentResolver } from './tournament/shared/resolvers/tournament-resolver';
+import { tournamentsResolver } from './tournament/shared/resolvers/tournaments-resolver';
+import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
+import { UserGuard } from './auth/core/user.guard';
 
 export const routes: Routes = [
   {
@@ -29,13 +33,35 @@ export const routes: Routes = [
     component: UpdateProfilePageComponent,
     canActivate: [UserGuard],
   },
-  { path: 'contact', component: ContactPageComponent },
+  {
+    path: 'contact',
+    component: ContactPageComponent,
+    resolve: {
+      contact: contactResolver,
+    },
+  },
   {
     path: 'tournament',
     component: TournamentPageComponent,
+    resolve: {
+      tournaments: tournamentsResolver,
+    },
   },
   { path: 'tournament/create', component: TournamentFormComponent },
-  { path: 'tournament/:id([0-9]+)', component: TournamentDetailsPageComponent },
+  {
+    path: 'tournament/:id',
+    component: TournamentDetailsPageComponent,
+    resolve: {
+      tournament: tournamentResolver,
+    },
+  },
+  {
+    path: 'tournament/:id/teams',
+    component: SelectTeamPageComponent,
+    resolve: {
+      teams: teamsResolver,
+    },
+  },
   {
     path: 'back-office',
     component: BackOfficePageComponent,
@@ -47,7 +73,6 @@ export const routes: Routes = [
     component: TeamPageComponent,
     canActivate: [UserGuard],
     resolve: {
-      member: memberResolver,
       team: teamResolver,
     },
   },

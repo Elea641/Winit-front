@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Tournament } from '../models/tournament.model';
 import { TournamentCard } from '../models/tournament-card.model';
+import { ITournamentListFilterService } from './interfaces/ITournamentListFilter.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TournamentListFilterService {
+export class TournamentListFilterService
+  implements ITournamentListFilterService
+{
   constructor() {}
 
   filterTournamentListBySearchTerm(

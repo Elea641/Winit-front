@@ -3,7 +3,7 @@
 
 .container-contact-page {
   @include flex-column-center;
-  color: $color-contact;
+  color: $secondary-color;
   margin: 5rem 0 5rem 0;
 
   h1 {
@@ -15,7 +15,7 @@
   .line {
     width: 12rem;
     height: 1px;
-    border-top: 1px solid $line-footer-color;
+    border-top: 1px solid $primary-color-border;
     margin-top: 3rem;
   }
 
@@ -30,29 +30,29 @@
 
       img {
         margin: 1rem;
-        width: 4rem;
-        height: 4rem;
+        width: 3rem;
+        height: 3rem;
         border-radius: 50%;
         object-fit: cover;
       }
     }
   }
 
-  // @media only screen and (min-width: 1024px) {
-  //   h1 {
-  //     font-size: 2rem;
-  //   }
+  @media only screen and (min-width: 1024px) {
+    h1 {
+      font-size: 2rem;
+    }
 
-  //   .line {
-  //     width: 24rem;
-  //   }
+    .line {
+      width: 24rem;
+    }
 
-  //   .container-contact-page-actions {
-  //     .container-contact-page-actions-item {
-  //       img {
-  //         width: 8rem;
-  //       }
-  //     }
-  //   }
-  // }
+    .container-contact-page-actions {
+      .container-contact-page-actions-item {
+        img {
+          width: 4rem;
+        }
+      }
+    }
+  }
 }

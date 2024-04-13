@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Contact } from '../models/contact.model';
 import { ContactDetails } from '../models/contact.details.model';
+import { IContactService } from './interfaces/IContact.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ContactService {
+export class ContactService implements IContactService {
   private contactDataUrl = '../assets/list-contact.model.json';
   private contactDetailsDataUrl = '../assets/list-contact-details.model.json';
 
