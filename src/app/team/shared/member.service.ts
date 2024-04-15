@@ -59,4 +59,8 @@ export class MemberService implements IMemberService {
         }
       );
   }
+
+  resetTeam(): void {
+    this.teamSubject.next(null);
+  }
 }

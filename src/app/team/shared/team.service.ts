@@ -3,19 +3,21 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Team } from '../models/team.model';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
 import { CreatedTeam } from '../models/created-team.model';
 import { ITeamService } from './interfaces/ITeam.service';
+import { MemberService } from './member.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeamService implements ITeamService {
   constructor(
-    public http: HttpClient,
+    private http: HttpClient,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private memberService: MemberService
   ) {}
 
   getAllTeamsByUser(): Observable<Team[]> {
@@ -54,6 +56,7 @@ export class TeamService implements ITeamService {
             "L'équipe supprimé avec succès"
           );
           this.router.navigate(['/profile']);
+          this.memberService.resetTeam();
         }
       },
       (error) => {
