@@ -13,7 +13,6 @@ import { SelectTeamPageComponent } from './tournament/pages/select-team-page/sel
 import { SportComponent } from './sport/pages/sport/sport.component';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { teamResolver } from './team/shared/resolvers/team-resolver';
-import { teamsResolver } from './team/shared/resolvers/teams.resolver';
 import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';

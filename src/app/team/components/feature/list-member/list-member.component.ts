@@ -8,8 +8,6 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Observable, Subscription } from 'rxjs';
 import { Team } from 'src/app/team/models/team.model';
-import { ActivatedRoute } from '@angular/router';
-import { TeamService } from 'src/app/team/shared/team.service';
 
 @Component({
   selector: 'app-list-member',
@@ -29,12 +27,7 @@ export class ListMemberComponent {
   members: Member[] = [];
   teamName: string = '';
 
-  constructor(
-    private memberService: MemberService,
-    public dialog: MatDialog,
-    private route: ActivatedRoute,
-    private teamService: TeamService
-  ) {}
+  constructor(private memberService: MemberService, public dialog: MatDialog) {}
 
   ngOnDestroy(): void {
     if (this.teamSubscription) {
@@ -49,20 +42,9 @@ export class ListMemberComponent {
       }
     });
 
-    this.route.params.subscribe((params) => {
-      const teamName = params['teamName'];
-      if (teamName) {
-        this.teamName = teamName;
-      }
-    });
-
     this.teamSubscription = this.memberService.team$.subscribe((team) => {
-      if (team && team.name === this.teamName) {
+      if (team) {
         this.members = team.members;
-      } else {
-        this.members = this.teamService.currentTeam
-          ? this.teamService.currentTeam.members
-          : [];
       }
     });
   }

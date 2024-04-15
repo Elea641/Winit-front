@@ -12,27 +12,19 @@ import { ITeamService } from './interfaces/ITeam.service';
   providedIn: 'root',
 })
 export class TeamService implements ITeamService {
-  private _currentTeam: Team | null = null;
-
   constructor(
     private http: HttpClient,
     private router: Router,
     private toastService: ToastService
   ) {}
 
-  get currentTeam(): Team | null {
-    return this._currentTeam;
-  }
-
-  set currentTeam(team: Team | null) {
-    this._currentTeam = team;
-  }
-
   getAllTeamsByUser(): Observable<Team[]> {
     return this.http.get<Team[]>(`${environment.urlApi}/teams`);
   }
 
   getAllTeamsByUserForTournament(sport: string): Observable<Team[]> {
+    console.log(sport);
+
     return this.http.get<Team[]>(`${environment.urlApi}/teams/sport/${sport}`);
   }
 
