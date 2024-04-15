@@ -7,21 +7,33 @@ import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
 import { CreatedTeam } from '../models/created-team.model';
 import { ITeamService } from './interfaces/ITeam.service';
-import { MemberService } from './member.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeamService implements ITeamService {
+  private _currentTeam: Team | null = null;
+
   constructor(
     private http: HttpClient,
     private router: Router,
-    private toastService: ToastService,
-    private memberService: MemberService
+    private toastService: ToastService
   ) {}
+
+  get currentTeam(): Team | null {
+    return this._currentTeam;
+  }
+
+  set currentTeam(team: Team | null) {
+    this._currentTeam = team;
+  }
 
   getAllTeamsByUser(): Observable<Team[]> {
     return this.http.get<Team[]>(`${environment.urlApi}/teams`);
+  }
+
+  getAllTeamsByUserForTournament(sport: string): Observable<Team[]> {
+    return this.http.get<Team[]>(`${environment.urlApi}/teams/sport/${sport}`);
   }
 
   getTeamByTeamName(teamName: string): Observable<Team> {
@@ -56,7 +68,6 @@ export class TeamService implements ITeamService {
             "L'équipe supprimé avec succès"
           );
           this.router.navigate(['/profile']);
-          this.memberService.resetTeam();
         }
       },
       (error) => {

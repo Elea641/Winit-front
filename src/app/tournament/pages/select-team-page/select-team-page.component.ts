@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Team } from 'src/app/team/models/team.model';
 import { Observable, concatMap, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { ListTeamComponent } from 'src/app/profile/components/feature/list-team/list-team.component';
 
 @Component({
   selector: 'app-select-team-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ListTeamComponent],
   templateUrl: './select-team-page.component.html',
   styleUrls: ['./select-team-page.component.scss'],
 })
@@ -17,13 +18,9 @@ export class SelectTeamPageComponent {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    console.log('test');
-
     this.teams$ = this.route.data.pipe(
       concatMap((data) => {
-        console.log(data['teams']);
-
-        return of(data['teams']);
+        return of(data['teamsForTournament']);
       })
     );
     this.teams$.subscribe((e) => console.log(e));

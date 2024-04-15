@@ -29,7 +29,7 @@ export class TeamDetailCardComponent {
 
   constructor(
     private teamService: TeamService,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private memberService: MemberService
   ) {}
 
