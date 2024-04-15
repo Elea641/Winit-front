@@ -14,7 +14,6 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { UserAuth } from 'src/app/auth/models/user-auth.model';
 import { AuthService } from 'src/app/auth/shared/auth.service';
-import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
 
 @Component({
   selector: 'app-login-form',
@@ -37,10 +36,7 @@ export class LoginFormComponent implements OnInit {
   userAuth: UserAuth = new UserAuth('', '');
   isBadCredentials: boolean = false;
 
-  constructor(
-    public authService: AuthService,
-    private localService: LocalStorageService
-  ) {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -60,7 +56,6 @@ export class LoginFormComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       this.userAuth = new UserAuth(this.email.value, this.password.value);
-      this.localService.clearToken();
       this.authService.signIn(this.userAuth);
     }
   }

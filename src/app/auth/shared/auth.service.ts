@@ -8,11 +8,9 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
 import { environment } from 'src/environments/environment';
-import { TokenResponse } from '../models/token.model';
 import { UserAuth } from '../models/user-auth.model';
 import { User } from '../models/user.model';
-import { LocalStorageService } from './local-storage.service';
-import { TokenService } from './token.service';
+import { CookieService } from './cookie.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,10 +23,9 @@ export class AuthService {
 
   constructor(
     public http: HttpClient,
-    private tokenService: TokenService,
+    private cookieService: CookieService,
     private router: Router,
-    private toastService: ToastService,
-    private localStorageService: LocalStorageService
+    private toastService: ToastService
   ) {}
 
   postRegister(user: User): void {
@@ -37,7 +34,7 @@ export class AuthService {
     this.http.post<User>(`${environment.urlApi}/auth/register`, user).subscribe(
       (response) => {
         if (response) {
-          this.localStorageService.clearToken();
+          // this.localStorageService.clearToken();
           this.router.navigate(['/auth/login']);
           this.toastService.showSuccess(
             'Vous pouvez vous connecter',
@@ -58,12 +55,12 @@ export class AuthService {
 
   // Je me connecte : j'envoie mon objet UserAuth et je m'abonne à la réponse de mon serveur. Lorsque je la reçois, je reçois le token que je stock en localStorage.
   signIn(userAuth: UserAuth): void {
-    this.tokenService.resetToken();
+    // this.tokenService.resetToken();
 
     this.http.post<any>(`${environment.urlApi}/auth/login`, userAuth).subscribe(
-      (tokenFromDB: TokenResponse) => {
-        if (tokenFromDB) {
-          this.tokenService.updateToken(tokenFromDB);
+      (cookie) => {
+        if (cookie) {
+          this.cookieService.setCookieValue(cookie.headers);
           this.router.navigate(['/']);
           this.toastService.showSuccess(
             'bravo félicitations',
@@ -80,6 +77,10 @@ export class AuthService {
         }
       }
     );
+  }
+
+  checkAuthentication(): Observable<any> {
+    return this.http.get(`${environment.urlApi}/auth/check-auth`);
   }
 
   getHttpErrorSubject$(): Observable<HttpErrorResponse> {
