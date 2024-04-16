@@ -20,7 +20,6 @@ import { tournamentResolver } from './tournament/shared/resolvers/tournament-res
 import { tournamentsResolver } from './tournament/shared/resolvers/tournaments-resolver';
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { UserGuard } from './auth/core/user.guard';
-import { teamsForTournamentResolver } from './team/shared/resolvers/teamsForTournament.resolver';
 
 export const routes: Routes = [
   {
@@ -59,7 +58,7 @@ export const routes: Routes = [
     path: 'tournament/:id/teams',
     component: SelectTeamPageComponent,
     resolve: {
-      teamsForTournament: teamsForTournamentResolver,
+      tournament: tournamentResolver,
     },
   },
   {

@@ -1,15 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Observable, throwError } from 'rxjs';
-
 import { environment } from 'src/environments/environment';
-
 import { TournamentCreationDto } from '../models/tournament-creation-dto.model';
 import { TournamentDetails } from '../models/tournament-details.model';
 import { Tournament } from '../models/tournament.model';
-
 import { ToastService } from 'src/app/shared/toast.service';
 import { TournamentMappers } from './mappers/TournamentMappers';
 import { TournamentCard } from '../models/tournament-card.model';
@@ -21,7 +17,6 @@ import { ITournamentService } from './interfaces/ITournament.service';
 export class TournamentService implements ITournamentService {
   private tournamentDataUrl = `${environment.urlApi}/tournaments/`;
   private apiUrl = `${environment.urlApi}` + '/tournaments/create';
-  private tournamentByIdDataUrl = '../assets/tournament-details.model.json';
 
   constructor(
     private http: HttpClient,

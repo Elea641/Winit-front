@@ -24,7 +24,6 @@ export class TeamService implements ITeamService {
 
   getAllTeamsByUserForTournament(sport: string): Observable<Team[]> {
     console.log(sport);
-
     return this.http.get<Team[]>(`${environment.urlApi}/teams/sport/${sport}`);
   }
 

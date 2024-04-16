@@ -1,3 +1,5 @@
-<section>
-  <app-list-team></app-list-team>
+<section *ngIf="teams$ | async as teams">
+  <h1>LISTE DE VOS ÉQUIPES</h1>
+  <mat-divider></mat-divider>
+  <app-list-team-by-sport [teams]="teams"></app-list-team-by-sport>
 </section>
