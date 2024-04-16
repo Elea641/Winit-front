@@ -12,6 +12,6 @@ export class TournamentDetails {
     public format: string,
     public imageUrl: string,
     public privacy: string,
-    public teams: { team: string; result: number; url: string }[]
+    public teams: { name: string; result: number; url: string }[]
   ) {}
 }

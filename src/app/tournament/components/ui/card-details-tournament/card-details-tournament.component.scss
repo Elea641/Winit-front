@@ -3,7 +3,7 @@
 
 .card-details-tournament-container {
   color: $secondary-color-text;
-  display: flex;
+  @include flex-column;
 
   img {
     max-width: 20rem;
@@ -57,5 +57,15 @@
     .mat-mdc-raised-button:focus {
       color: $primary-color-focus;
     }
+  }
+
+  @include media-tablet-screen {
+    display: flex;
+    flex-direction: row;
+  }
+
+  @include media-large-screen {
+    display: flex;
+    flex-direction: row;
   }
 }

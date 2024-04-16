@@ -13,10 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class ListTeamsTournamentComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
-  @Input() tournamentDetails!: TournamentDetails;
-  totalinscription!: number;
 
   ngOnInit(): void {
-    this.totalinscription = this.tournamentDetails.teams.length;
+    this.tournament$.subscribe((e) => console.log(e));
   }
 }

@@ -1,21 +1,23 @@
-<div *ngIf="tournamentDetails" class="list-teams-tounament">
+<div *ngIf="tournament$ | async as tournament" class="list-teams-tounament">
   <div class="list-teams-tounament-header">
     <h3>Équipes inscrites</h3>
     <div class="list-teams-tounament-total-members">
       <mat-icon>people</mat-icon>
-      <p>{{ totalinscription }}/{{ tournamentDetails.participants }}</p>
+      <p>
+        {{ tournament.currentNumberOfParticipants }}/{{
+          tournament.maxNumberOfTeams
+        }}
+      </p>
     </div>
   </div>
   <ul
-    *ngFor="let team of tournamentDetails.teams; let i = index"
+    *ngFor="let team of tournament.teams; let i = index"
     class="list-teams-tounament-body"
   >
     <li>
-      <img src="{{ team.url }}" alt="logo team" />
-      <div>
-        <h3>Équipe n°{{ i + 1 }}</h3>
-        <p class="list-teams-tounament-body-text">{{ team.team }}</p>
-      </div>
+      <img src="../../../../../assets/pictures/award.png" alt="logo team" />
+      <h3>Équipe n°{{ i + 1 }} :</h3>
+      <p class="list-teams-tounament-body-text">{{ team?.name | uppercase }}</p>
     </li>
   </ul>
 </div>

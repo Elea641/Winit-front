@@ -14,15 +14,18 @@
   }
 
   .list-teams-tounament-body {
-    @include flex-align-center;
-    padding: 0.5rem 0;
-    img {
-      width: 4rem;
-      padding-right: 1rem;
-    }
+    li {
+      @include flex-align-center;
+      padding: 0.5rem 0;
+      img {
+        width: 4rem;
+        padding-right: 1rem;
+      }
 
-    .list-teams-tounament-body-text {
-      font-size: 1rem;
+      .list-teams-tounament-body-text {
+        font-size: 1rem;
+        padding: 0.8rem;
+      }
     }
   }
 }
