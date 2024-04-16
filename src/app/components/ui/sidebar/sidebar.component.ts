@@ -51,6 +51,7 @@ export class SidebarComponent implements OnInit {
   @Output() newShowNonFullTournaments = new EventEmitter<boolean>();
   @Output() newResetFilter = new EventEmitter<any>();
   @Output() newSportFilter = new EventEmitter<string>();
+  @Output() newApplyFilters = new EventEmitter<any>();
   chronologicalFilter: boolean = false;
   showOnlyUpcomingTournaments: boolean = false;
   showNonFullTournaments: boolean = false;
@@ -121,6 +122,10 @@ export class SidebarComponent implements OnInit {
     if (value.length < 1) {
       this.selectedSport = '';
     }
+  }
+
+  sendApplyFilters() {
+    this.newApplyFilters.emit();
   }
 
   sendChronologicalFilterChangeToParent() {

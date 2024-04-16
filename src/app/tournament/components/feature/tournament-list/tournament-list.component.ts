@@ -50,6 +50,12 @@ export class TournamentListComponent implements OnInit {
     this.isOpen = isDrawerOpened ? 'open' : 'close';
   }
 
+  onReceiveApplyFilters(event: any) {
+    console.log('recu');
+
+    this.applyFilters();
+  }
+
   onReceiveSearchValueFromSidebar(value: string) {
     this.searchValue = value;
     this.applyFilters();
@@ -57,24 +63,20 @@ export class TournamentListComponent implements OnInit {
 
   onReceiveChronologicalFilterChange(value: boolean) {
     this.chronologicalFilter = value;
-    this.applyFilters();
   }
 
   onReceiveShowOnlyUpcomingTournaments(value: boolean) {
     this.showOnlyUpcomingTournaments = value;
-    this.applyFilters();
   }
 
   onReceiveShowNonFullTournaments(value: boolean) {
     this.showNonFullTournaments = value;
-    this.applyFilters();
   }
 
   onReceiveSportFilter(value: string) {
     this.selectedSport = value;
     this.showNonFullTournaments = false;
     this.showOnlyUpcomingTournaments = false;
-    this.applyFilters();
   }
 
   applyFilters() {

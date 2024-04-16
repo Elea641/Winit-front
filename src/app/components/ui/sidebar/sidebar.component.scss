@@ -1,13 +1,21 @@
 @import "../../../../assets/style/variables.scss";
 
-.reset-filters-button {
+.filters-button {
   display: flex;
   justify-content: space-around;
 
   & button {
+    font-family: "Roboto";
     margin-top: 16px;
-    color: #fff;
   }
+}
+
+.apply-filters {
+  color: $secondary-color;
+}
+
+.reset-filters {
+  color: $secondary-color-button;
 }
 
 ::ng-deep .mat-mdc-menu-content {
