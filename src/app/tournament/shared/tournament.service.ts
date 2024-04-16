@@ -71,23 +71,25 @@ export class TournamentService implements ITournamentService {
   addTeamToTournament(chosenTeam: ChosenTeam): void {
     console.log(chosenTeam);
 
-    this.http.post<ChosenTeam>(`${environment.urlApi}/`, chosenTeam).subscribe(
-      (response) => {
-        if (response) {
-          this.toastService.showSuccess(
-            'Bravo félicitations',
-            "L'ajout de votre équipe au tournoi a bien été prise en compte"
-          );
+    this.http
+      .post<ChosenTeam>(`${environment.urlApi}/tournament/teams`, chosenTeam)
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.toastService.showSuccess(
+              'Bravo félicitations',
+              "L'ajout de votre équipe au tournoi a bien été prise en compte"
+            );
+          }
+        },
+        (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              "Une erreur est survenue lors de l'enregistrement"
+            );
+          }
         }
-      },
-      (error) => {
-        if (error.error) {
-          this.toastService.showError(
-            error.error,
-            "Une erreur est survenue lors de l'enregistrement"
-          );
-        }
-      }
-    );
+      );
   }
 }

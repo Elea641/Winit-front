@@ -1,4 +1,6 @@
 <section *ngIf="teams$ | async as teams">
+  <h1 *ngIf="tournament$ | async as tournament">CHOISSISSEZ VOTRE ÉQUIPE</h1>
+  <mat-divider></mat-divider>
   <app-inscription-form-tournament
     [teams]="teams"
   ></app-inscription-form-tournament>

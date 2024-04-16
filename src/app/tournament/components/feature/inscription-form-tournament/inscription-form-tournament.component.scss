@@ -2,8 +2,8 @@
 @import "../../../../../assets/style/mixins.scss";
 
 section {
+  @include flex-column-center-align-justify;
   form {
-    @include flex-column-center-align-justify;
     .mat-mdc-form-field {
       width: 100%;
       margin: 1rem 0;
@@ -13,12 +13,21 @@ section {
       width: 100%;
       margin-bottom: 1rem;
     }
+  }
 
-    @include media-tablet-screen {
-      @include flex-wrap;
+  @include media-tablet-screen {
+    form {
+      @include flex-column-center-align-justify;
+      width: 60%;
+      margin: 1rem 0;
     }
-    @include media-large-screen {
-      @include flex-wrap;
+  }
+
+  @include media-large-screen {
+    form {
+      @include flex-column-center-align-justify;
+      width: 60%;
+      margin: 1rem 0;
     }
   }
 }
