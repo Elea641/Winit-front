@@ -51,8 +51,6 @@ export class TournamentListComponent implements OnInit {
   }
 
   onReceiveApplyFilters(event: any) {
-    console.log('recu');
-
     this.applyFilters();
   }
 

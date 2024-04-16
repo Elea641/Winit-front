@@ -8,7 +8,6 @@ import { ITournamentListFilterService } from './interfaces/ITournamentListFilter
 @Injectable({
   providedIn: 'root',
 })
-
 export class TournamentListFilterService
   implements ITournamentListFilterService
 {
