@@ -3,10 +3,12 @@ import { Component, Input } from '@angular/core';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import * as fr from '@angular/common/locales/fr';
 import { GetImageService } from 'src/app/shared/get-image.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { getRemainingTime } from 'src/app/tournament/shared/utils/convertTime.util';
+import { TimeService } from 'src/app/tournament/shared/time.service';
 @Component({
   selector: 'app-card-details-tournament',
   standalone: true,
@@ -24,13 +26,14 @@ export class CardDetailsTournamentComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
   public image: any;
   public tournamentDate!: Date;
-  public currentDate: Date = new Date();
+  public currenDate: Date = new Date();
   public remainingTime: string = '';
   public tournamentId!: number;
 
   constructor(
     private getImageService: GetImageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private timeService: TimeService
   ) {
     registerLocaleData(fr.default);
   }
@@ -46,46 +49,19 @@ export class CardDetailsTournamentComponent {
       this.getImageService.getImage(tournament.imageUrl).subscribe((data) => {
         this.image = data;
         this.tournamentDate = new Date(tournament.date);
-        this.remainingTime = this.getRemainingTime(tournament.date);
+        this.remainingTime = getRemainingTime(
+          this.tournamentDate,
+          this.timeService,
+          this.currenDate
+        );
       });
     });
   }
 
   private updateCurrentDate() {
     setTimeout(() => {
-      this.currentDate = new Date();
+      this.currenDate = new Date();
       this.updateCurrentDate();
     }, 60000);
-  }
-
-  getRemainingTime(tournamentDate: Date): string {
-    const tournamentDateIso = new Date(tournamentDate);
-
-    if (
-      !(tournamentDateIso instanceof Date) ||
-      isNaN(tournamentDateIso.getTime())
-    ) {
-      return 'Date invalide';
-    }
-
-    const timeDifference =
-      tournamentDateIso.getTime() - this.currentDate.getTime();
-    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hoursDifference = Math.floor(
-      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutesDifference = Math.floor(
-      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-    );
-
-    if (daysDifference > 1) {
-      return `Inscription disponible pendant : ${daysDifference} jours`;
-    } else if (hoursDifference > 1) {
-      return `Inscription disponible pendant : ${hoursDifference} heures`;
-    } else if (minutesDifference > 1) {
-      return `Inscription disponible pendant : ${minutesDifference} minutes`;
-    } else {
-      return 'Inscription terminée';
-    }
   }
 }

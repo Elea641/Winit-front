@@ -59,4 +59,7 @@
 
 ::ng-depp .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
   width: auto;
+  @include media-mobile-screen {
+    width: 100%;
+  }
 }

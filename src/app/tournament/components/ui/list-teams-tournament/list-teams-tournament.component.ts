@@ -13,8 +13,4 @@ import { Observable } from 'rxjs';
 })
 export class ListTeamsTournamentComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
-
-  ngOnInit(): void {
-    this.tournament$.subscribe((e) => console.log(e));
-  }
 }
