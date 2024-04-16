@@ -1,6 +1,24 @@
 @import "../../../../assets/style/variables.scss";
 @import "../../../../assets/style/mixins.scss";
 
+.filters-button {
+  display: flex;
+  justify-content: space-around;
+
+  & button {
+    font-family: "Roboto";
+    margin-top: 16px;
+  }
+}
+
+.apply-filters {
+  color: $secondary-color;
+}
+
+.reset-filters {
+  color: $secondary-color-button;
+}
+
 .container-sidebar-desktop {
   position: fixed;
   top: 0;

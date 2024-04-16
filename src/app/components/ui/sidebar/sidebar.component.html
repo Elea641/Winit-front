@@ -23,10 +23,10 @@
         >
         <mat-option
           *ngFor="let sport of sports"
-          value="{{ sport.name }}"
+          value="{{ sport }}"
           (click)="$event.stopPropagation()"
           (click)="sendSportFilter(selectedSport)"
-          >{{ sport.name }}</mat-option
+          >{{ sport }}</mat-option
         >
       </mat-select>
     </div>
@@ -62,8 +62,23 @@
     </button>
 
     <mat-divider></mat-divider>
-    <div class="reset-filters-button">
-      <button mat-raised-button color="primary" (click)="sendResetFilters()">
+    <div class="filters-button">
+      <button
+        mat-raised-button
+        color="primary"
+        class="apply-filters"
+        (click)="sendApplyFilters()"
+      >
+        Appliquer
+      </button>
+    </div>
+    <div class="filters-button">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="reset-filters"
+        (click)="sendResetFilters()"
+      >
         Réinitialiser les filtres
       </button>
     </div>
@@ -108,10 +123,10 @@
         >
         <mat-option
           *ngFor="let sport of sports"
-          value="{{ sport.name }}"
+          value="{{ sport }}"
           (click)="$event.stopPropagation()"
           (click)="sendSportFilter(selectedSport)"
-          >{{ sport.name }}</mat-option
+          >{{ sport }}</mat-option
         >
       </mat-select>
     </div>
@@ -141,14 +156,26 @@
       Non complet
     </button>
     <mat-divider></mat-divider>
-    <button
-      mat-button
-      color="primary"
-      (click)="sendResetFilters()"
-      (click)="$event.stopPropagation()"
-      class="mobile-reset-filters-button"
-    >
-      Réinitialiser les filtres
-    </button>
+    <div class="filters-button">
+      <button
+        mat-raised-button
+        color="primary"
+        class="apply-filters"
+        (click)="sendApplyFilters()"
+      >
+        Appliquer
+      </button>
+    </div>
+    <div class="filters-button">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="reset-filters"
+        (click)="sendResetFilters()"
+        (click)="$event.stopPropagation()"
+      >
+        Réinitialiser les filtres
+      </button>
+    </div>
   </mat-menu>
 </mat-toolbar>

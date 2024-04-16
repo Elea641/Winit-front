@@ -9,6 +9,7 @@
     (newShowNonFullTournaments)="onReceiveShowNonFullTournaments($event)"
     (newSportFilter)="onReceiveSportFilter($event)"
     (newResetFilter)="onReceiveResetFilters($event)"
+    (newApplyFilters)="onReceiveApplyFilters($event)"
   ></app-sidebar>
   <div
     class="tournament-container"
@@ -24,14 +25,7 @@
         'transition.s': 0.3
       }"
     >
-      <ng-template #elseBlock>
-        <h2 class="no-tournament-to-show">
-          Aucun tournoi ne correspond à vos critères de recherche
-        </h2>
-      </ng-template>
-      <ng-container
-        *ngIf="(filteredTournaments$ | async)?.length; else elseBlock"
-      >
+      <ng-container *ngIf="(filteredTournaments$ | async)?.length">
         <h1>TOUS LES TOURNOIS</h1>
         <mat-divider></mat-divider>
 

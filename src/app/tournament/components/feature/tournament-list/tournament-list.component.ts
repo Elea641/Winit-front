@@ -23,7 +23,6 @@ import { TournamentCard } from 'src/app/tournament/models/tournament-card.model'
   styleUrls: ['./tournament-list.component.scss'],
 })
 export class TournamentListComponent implements OnInit {
-  tournaments$!: Observable<TournamentCard[]>;
   filteredTournaments$!: Observable<TournamentCard[]>;
   isDrawerOpened: boolean = false;
   isOpen: string = '';
@@ -39,10 +38,7 @@ export class TournamentListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tournaments$ = this.tournamentService
-      .getAllTournaments()
-      .pipe(map((data) => data));
-    this.filteredTournaments$ = this.tournaments$;
+    this.applyFilters();
 
     if (this.isDrawerOpened === true) {
       this.isOpen = 'open';
@@ -54,90 +50,49 @@ export class TournamentListComponent implements OnInit {
     this.isOpen = isDrawerOpened ? 'open' : 'close';
   }
 
-  onReceiveSearchValueFromSidebar(value: string) {
-    this.searchValue = value;
-    this.filterTournamentListBySearchTerm(value);
+  onReceiveApplyFilters(event: any) {
+    console.log('recu');
+
+    this.applyFilters();
   }
 
-  filterTournamentListBySearchTerm(searchValue: string) {
-    this.filteredTournaments$ =
-      this.tournamentListFilterService.filterTournamentListBySearchTerm(
-        searchValue,
-        this.tournaments$
-      );
+  onReceiveSearchValueFromSidebar(value: string) {
+    this.searchValue = value;
+    this.applyFilters();
   }
 
   onReceiveChronologicalFilterChange(value: boolean) {
     this.chronologicalFilter = value;
-
-    if (this.chronologicalFilter === true) {
-      this.filteredTournaments$ =
-        this.tournamentListFilterService.filterTournamentListByChronologicalOrder(
-          this.filteredTournaments$
-        );
-    } else {
-      this.filteredTournaments$ =
-        this.tournamentListFilterService.filterTournamentByAlphabeticalOrder(
-          this.filteredTournaments$
-        );
-    }
   }
 
   onReceiveShowOnlyUpcomingTournaments(value: boolean) {
     this.showOnlyUpcomingTournaments = value;
-    this.updateFilteredTournaments();
   }
 
   onReceiveShowNonFullTournaments(value: boolean) {
     this.showNonFullTournaments = value;
-    this.updateFilteredTournaments();
-  }
-
-  updateFilteredTournaments() {
-    this.filteredTournaments$ = this.filteredTournaments$.pipe(
-      map((tournaments) => {
-        return tournaments.filter((tournament) => {
-          let passesShowOnlyUpcomingTournaments =
-            !this.showOnlyUpcomingTournaments ||
-            this.tournamentListFilterService.checkIfTournamentIsUpcoming(
-              tournament
-            );
-          let passesShowNonFullTournaments =
-            !this.showNonFullTournaments ||
-            this.tournamentListFilterService.checkIfTournamentIsNotFull(
-              tournament
-            );
-          return (
-            passesShowOnlyUpcomingTournaments && passesShowNonFullTournaments
-          );
-        });
-      })
-    );
   }
 
   onReceiveSportFilter(value: string) {
     this.selectedSport = value;
-    if (this.selectedSport === '') {
-      this.filteredTournaments$ =
-        this.tournamentListFilterService.filterTournamentListBySearchTerm(
-          this.searchValue,
-          this.tournaments$
-        );
-    } else {
-      this.filteredTournaments$ = this.tournaments$;
-      this.filteredTournaments$ =
-        this.tournamentListFilterService.filterTournamentBySport(
-          this.filteredTournaments$,
-          this.selectedSport
-        );
-    }
-
     this.showNonFullTournaments = false;
     this.showOnlyUpcomingTournaments = false;
   }
 
+  applyFilters() {
+    this.filteredTournaments$ = this.tournamentListFilterService
+      .filterTournaments(
+        this.searchValue,
+        this.chronologicalFilter,
+        this.selectedSport,
+        this.showOnlyUpcomingTournaments,
+        this.showNonFullTournaments
+      )
+      .pipe(map((data) => data));
+  }
+
   onReceiveResetFilters(event: any) {
-    this.filteredTournaments$ = this.tournaments$;
+    this.filteredTournaments$ = this.tournamentService.getAllTournaments();
     this.chronologicalFilter = false;
     this.showOnlyUpcomingTournaments = false;
     this.showNonFullTournaments = false;
