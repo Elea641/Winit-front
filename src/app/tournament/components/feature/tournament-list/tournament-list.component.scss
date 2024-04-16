@@ -24,11 +24,7 @@
       }
 
       .all-tournaments-cards {
-        @include flex-wrap;
-
-        .tournament-list {
-          margin: 1.5rem 1rem;
-        }
+        @include flex-wrap-center;
       }
     }
   }

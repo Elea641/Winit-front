@@ -1,4 +1,5 @@
-.team-page-container {
-  display: flex;
-  flex-direction: column;
+@import "../../../../assets/style/mixins.scss";
+
+ng-container {
+  @include flex-column;
 }

@@ -1,29 +1,52 @@
 @import "../../../../auth/components/feature/register/register.component.scss";
+@import "../../../../../assets/style/mixins.scss";
 
-.wi-tournament-form-field-big {
-  width: 100%;
-}
+.register-form-page-container {
+  @include flex-column-center;
+  margin: 2rem 0 1rem 0;
+  padding: 2rem;
 
-@keyframes slideaway {
-  from { display: block; }
-  to { transform: translateY(40px); opacity: 0; }
-}
+  .register-block {
+    margin: 0;
+    padding: 0;
+    .wi-tournament-form-field-big {
+      width: 100%;
+    }
 
-@keyframes slidein {
-  from { transform: translateY(40px); opacity: 0; display: block; }
-  to { transform: translateY(0px); opacity: 1; }
-}
+    @keyframes slideaway {
+      from {
+        display: block;
+      }
+      to {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+    }
 
-.wi-displayLimitInscriptionDate {
-  animation: slideaway 300ms;
-  display: none;
-}
+    @keyframes slidein {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+        display: block;
+      }
+      to {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
 
-.wi-hideLimitInscriptionDate {
-  animation: slidein 300ms;
-  display: block;
-}
+    .wi-displayLimitInscriptionDate {
+      animation: slideaway 300ms;
+      display: none;
+    }
 
-.wi-displayWrapper {
-  display: none;
+    .wi-hideLimitInscriptionDate {
+      animation: slidein 300ms;
+      display: block;
+    }
+
+    .wi-displayWrapper {
+      display: none;
+    }
+  }
 }

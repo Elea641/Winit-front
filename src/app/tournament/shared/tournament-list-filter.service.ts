@@ -3,11 +3,15 @@ import { Observable, map } from 'rxjs';
 import { TournamentCard } from '../models/tournament-card.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ITournamentListFilterService } from './interfaces/ITournamentListFilter.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TournamentListFilterService {
+
+export class TournamentListFilterService
+  implements ITournamentListFilterService
+{
   constructor(private http: HttpClient) {}
 
   public baseUrl: string = `${environment.urlApi}/tournaments/filter`;
