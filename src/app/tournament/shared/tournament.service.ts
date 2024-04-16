@@ -10,6 +10,7 @@ import { ToastService } from 'src/app/shared/toast.service';
 import { TournamentMappers } from './mappers/TournamentMappers';
 import { TournamentCard } from '../models/tournament-card.model';
 import { ITournamentService } from './interfaces/ITournament.service';
+import { ChosenTeam } from '../models/chosenTeam.model';
 
 @Injectable({
   providedIn: 'root',
@@ -65,5 +66,28 @@ export class TournamentService implements ITournamentService {
 
   getTournamentById(id: number): Observable<TournamentDetails> {
     return this.http.get<TournamentDetails>(this.tournamentDataUrl + id);
+  }
+
+  addTeamToTournament(chosenTeam: ChosenTeam): void {
+    console.log(chosenTeam);
+
+    this.http.post<ChosenTeam>(`${environment.urlApi}/`, chosenTeam).subscribe(
+      (response) => {
+        if (response) {
+          this.toastService.showSuccess(
+            'Bravo félicitations',
+            "L'ajout de votre équipe au tournoi a bien été prise en compte"
+          );
+        }
+      },
+      (error) => {
+        if (error.error) {
+          this.toastService.showError(
+            error.error,
+            "Une erreur est survenue lors de l'enregistrement"
+          );
+        }
+      }
+    );
   }
 }

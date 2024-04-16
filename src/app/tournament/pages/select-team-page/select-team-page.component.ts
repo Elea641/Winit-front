@@ -7,10 +7,16 @@ import { ListTeamBySportComponent } from '../../components/feature/list-team-by-
 import { MatDividerModule } from '@angular/material/divider';
 import { TournamentDetails } from '../../models/tournament-details.model';
 import { TeamService } from 'src/app/team/shared/team.service';
+import { InscriptionFormTournamentComponent } from '../../components/feature/inscription-form-tournament/inscription-form-tournament.component';
 @Component({
   selector: 'app-select-team-page',
   standalone: true,
-  imports: [CommonModule, ListTeamBySportComponent, MatDividerModule],
+  imports: [
+    CommonModule,
+    ListTeamBySportComponent,
+    MatDividerModule,
+    InscriptionFormTournamentComponent,
+  ],
   templateUrl: './select-team-page.component.html',
   styleUrls: ['./select-team-page.component.scss'],
 })
