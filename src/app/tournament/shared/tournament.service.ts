@@ -29,6 +29,10 @@ export class TournamentService implements ITournamentService {
     url: string;
   }> = this.teamInscriptionSubject.asObservable();
 
+  private inscriptionSubject: Subject<boolean> = new Subject<boolean>();
+  public inscription$: Observable<boolean> =
+    this.inscriptionSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -78,32 +82,39 @@ export class TournamentService implements ITournamentService {
     return this.http.get<TournamentDetails>(this.tournamentDataUrl + id);
   }
 
-  addTeamToTournament(chosenTeam: ChosenTeam): void {
-    this.http
-      .post<ChosenTeam>(`${environment.urlApi}/tournament/teams`, chosenTeam)
-      .subscribe(
-        (response) => {
-          if (response) {
-            this.teamInscriptionSubject.next({
-              name: chosenTeam.teamName,
-              result: 0,
-              url: '',
-            });
-            this.toastService.showSuccess(
-              'Bravo félicitations',
-              "L'ajout de votre équipe au tournoi a bien été prise en compte"
-            );
+  addTeamToTournament(chosenTeam: ChosenTeam): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+      this.http
+        .post<ChosenTeam>(`${environment.urlApi}/tournament/teams`, chosenTeam)
+        .subscribe(
+          (response) => {
+            if (response) {
+              this.teamInscriptionSubject.next({
+                name: chosenTeam.teamName,
+                result: 0,
+                url: '',
+              });
+              this.inscriptionSubject.next(true);
+              observer.next(true);
+              observer.complete();
+              this.toastService.showSuccess(
+                'Bravo félicitations',
+                "L'ajout de votre équipe au tournoi a bien été prise en compte"
+              );
+            }
+          },
+          (error) => {
+            if (error.error) {
+              this.toastService.showError(
+                error.error,
+                "Une erreur est survenue lors de l'enregistrement"
+              );
+              observer.next(false);
+              observer.complete();
+            }
           }
-        },
-        (error) => {
-          if (error.error) {
-            this.toastService.showError(
-              error.error,
-              "Une erreur est survenue lors de l'enregistrement"
-            );
-          }
-        }
-      );
+        );
+    });
   }
 
   deleteTeamToTournament(
@@ -122,6 +133,7 @@ export class TournamentService implements ITournamentService {
                 'Suppression',
                 "L'équipe a été supprimée avec succès"
               );
+              this.inscriptionSubject.next(false);
               observer.next(true);
               observer.complete();
             }

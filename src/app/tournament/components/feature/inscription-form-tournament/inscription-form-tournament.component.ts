@@ -70,8 +70,13 @@ export class InscriptionFormTournamentComponent {
         this.selectedTeam.name,
         this.tournamentId
       );
-      this.tournamentService.addTeamToTournament(this.chosenTeam);
-      this.router.navigate([`/tournament/${this.tournamentId}`]);
+      this.tournamentService
+        .addTeamToTournament(this.chosenTeam)
+        .subscribe((response) => {
+          if (response === true) {
+            this.router.navigate([`/tournament/${this.tournamentId}`]);
+          }
+        });
     } else {
       this.toastService.showError(
         'Erreur',

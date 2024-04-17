@@ -9,7 +9,6 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { TimeService } from 'src/app/tournament/shared/time.service';
 import { ActivatedRoute } from '@angular/router';
-import { TeamService } from 'src/app/team/shared/team.service';
 
 @Component({
   selector: 'app-list-teams-tournament',
@@ -31,8 +30,7 @@ export class ListTeamsTournamentComponent {
     private dialog: MatDialog,
     private tournamentService: TournamentService,
     private timeService: TimeService,
-    private route: ActivatedRoute,
-    private teamService: TeamService
+    private route: ActivatedRoute
   ) {}
 
   ngOnDestroy(): void {
@@ -80,7 +78,6 @@ export class ListTeamsTournamentComponent {
             (success) => {
               if (success) {
                 this.teams = this.teams.filter((t) => t.name !== team.name);
-                console.log(this.teams);
                 this.currentNumberOfParticipants--;
               }
             },

@@ -47,7 +47,11 @@ export const routes: Routes = [
       tournaments: tournamentsResolver,
     },
   },
-  { path: 'tournament/create', component: TournamentFormComponent },
+  {
+    path: 'tournament/create',
+    component: TournamentFormComponent,
+    canActivate: [UserGuard],
+  },
   {
     path: 'tournament/:id',
     component: TournamentDetailsPageComponent,
@@ -58,6 +62,7 @@ export const routes: Routes = [
   {
     path: 'tournament/:id/teams',
     component: SelectTeamPageComponent,
+    canActivate: [UserGuard],
     resolve: {
       tournament: tournamentResolver,
     },
@@ -67,7 +72,11 @@ export const routes: Routes = [
     component: BackOfficePageComponent,
     canActivate: [AdminGuard],
   },
-  { path: 'form-team/:mode', component: TeamFormComponent },
+  {
+    path: 'form-team/:mode',
+    component: TeamFormComponent,
+    canActivate: [UserGuard],
+  },
   {
     path: 'teams-details/:teamName',
     component: TeamPageComponent,
