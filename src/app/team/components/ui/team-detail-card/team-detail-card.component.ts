@@ -9,6 +9,7 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
 import { MatIconModule } from '@angular/material/icon';
 import { Observable, Subscription, of } from 'rxjs';
 import { MemberService } from 'src/app/team/shared/member.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-team-detail-card',
@@ -30,7 +31,8 @@ export class TeamDetailCardComponent {
   constructor(
     private teamService: TeamService,
     private dialog: MatDialog,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private router: Router
   ) {}
 
   ngOnDestroy(): void {
@@ -58,5 +60,10 @@ export class TeamDetailCardComponent {
         });
       }
     });
+  }
+
+  updateTeam(team: Team) {
+    this.teamService.setTeam(team);
+    this.router.navigate(['/form-team/:update']);
   }
 }

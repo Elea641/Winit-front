@@ -20,6 +20,7 @@ import { tournamentResolver } from './tournament/shared/resolvers/tournament-res
 import { tournamentsResolver } from './tournament/shared/resolvers/tournaments-resolver';
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { UserGuard } from './auth/core/user.guard';
+import { TeamFormComponent } from './team/components/feature/team-form/team-form.component';
 
 export const routes: Routes = [
   {
@@ -66,7 +67,7 @@ export const routes: Routes = [
     component: BackOfficePageComponent,
     canActivate: [AdminGuard],
   },
-  { path: 'new-team', component: CreateTeamPageComponent },
+  { path: 'form-team/:mode', component: TeamFormComponent },
   {
     path: 'teams-details/:teamName',
     component: TeamPageComponent,

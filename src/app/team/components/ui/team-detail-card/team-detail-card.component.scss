@@ -43,9 +43,25 @@
       @include flex-column-center;
     }
 
-    ::ng-deep .mat-mdc-button:not(:disabled) {
-      width: 10rem;
+    button:first-of-type {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 3;
       justify-self: end;
+      width: 10rem;
+      color: $secondary-color-text;
+      @include flex-column-center;
+    }
+
+    button:last-child {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 3;
+      grid-row-end: 4;
+      justify-self: end;
+      width: 10rem;
+      @include flex-column-center;
     }
   }
 }
