@@ -9,6 +9,7 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { TimeService } from 'src/app/tournament/shared/time.service';
 import { ActivatedRoute } from '@angular/router';
+import { TeamService } from 'src/app/team/shared/team.service';
 
 @Component({
   selector: 'app-list-teams-tournament',
@@ -30,12 +31,16 @@ export class ListTeamsTournamentComponent {
     private dialog: MatDialog,
     private tournamentService: TournamentService,
     private timeService: TimeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private teamService: TeamService
   ) {}
 
   ngOnDestroy(): void {
     if (this.teamSubscription) {
       this.teamSubscription.unsubscribe();
+    }
+    if (this.limitInscriptionTime) {
+      this.limitInscriptionTime.unsubscribe();
     }
   }
 
@@ -58,12 +63,8 @@ export class ListTeamsTournamentComponent {
     this.teamSubscription = this.tournamentService.teamInscription$.subscribe(
       (team) => {
         if (team) {
-          this.teams = [team];
-          if (team.name) {
-            this.currentNumberOfParticipants++;
-          } else {
-            this.currentNumberOfParticipants--;
-          }
+          this.teams = [...this.teams, team];
+          this.currentNumberOfParticipants++;
         }
       }
     );
@@ -73,7 +74,23 @@ export class ListTeamsTournamentComponent {
     const dialogRef = this.dialog.open(DeleteModalComponent);
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
-        this.tournamentService.deleteTeamToTournament(this.tournamentId, team);
+        this.tournamentService
+          .deleteTeamToTournament(this.tournamentId, team)
+          .subscribe(
+            (success) => {
+              if (success) {
+                this.teams = this.teams.filter((t) => t.name !== team.name);
+                console.log(this.teams);
+                this.currentNumberOfParticipants--;
+              }
+            },
+            (error) => {
+              console.error(
+                'Une erreur est survenue lors de la suppression :',
+                error
+              );
+            }
+          );
       }
     });
   }
