@@ -4,20 +4,23 @@
     <div class="list-teams-tounament-total-members">
       <mat-icon>people</mat-icon>
       <p>
-        {{ tournament.currentNumberOfParticipants }}/{{
+        {{ tournament.currentNumberOfParticipants ?? 0 }}/{{
           tournament.maxNumberOfTeams
         }}
       </p>
     </div>
   </div>
   <ul
-    *ngFor="let team of tournament.teams; let i = index"
+    *ngFor="let team of teams; let i = index"
     class="list-teams-tounament-body"
   >
     <li>
       <img src="../../../../../assets/pictures/award.png" alt="logo team" />
       <h3>Équipe n°{{ i + 1 }} :</h3>
       <p class="list-teams-tounament-body-text">{{ team?.name | uppercase }}</p>
+      <button mat-button color="warn" (click)="openDialog(tournament)">
+        SUPPRIMER
+      </button>
     </li>
   </ul>
 </div>

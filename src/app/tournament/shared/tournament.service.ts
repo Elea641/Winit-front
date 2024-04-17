@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TournamentCreationDto } from '../models/tournament-creation-dto.model';
 import { TournamentDetails } from '../models/tournament-details.model';
@@ -18,6 +18,16 @@ import { ChosenTeam } from '../models/chosenTeam.model';
 export class TournamentService implements ITournamentService {
   private tournamentDataUrl = `${environment.urlApi}/tournaments/`;
   private apiUrl = `${environment.urlApi}` + '/tournaments/create';
+  private teamInscriptionSubject: Subject<{
+    name: string;
+    result: number;
+    url: string;
+  }> = new Subject<{ name: string; result: number; url: string }>();
+  public teamInscription$: Observable<{
+    name: string;
+    result: number;
+    url: string;
+  }> = this.teamInscriptionSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -69,13 +79,16 @@ export class TournamentService implements ITournamentService {
   }
 
   addTeamToTournament(chosenTeam: ChosenTeam): void {
-    console.log(chosenTeam);
-
     this.http
       .post<ChosenTeam>(`${environment.urlApi}/tournament/teams`, chosenTeam)
       .subscribe(
         (response) => {
           if (response) {
+            this.teamInscriptionSubject.next({
+              name: chosenTeam.teamName,
+              result: 0,
+              url: '',
+            });
             this.toastService.showSuccess(
               'Bravo félicitations',
               "L'ajout de votre équipe au tournoi a bien été prise en compte"

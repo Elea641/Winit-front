@@ -71,6 +71,7 @@ export class InscriptionFormTournamentComponent {
         this.tournamentId
       );
       this.tournamentService.addTeamToTournament(this.chosenTeam);
+      this.router.navigate([`/tournament/${this.tournamentId}`]);
     } else {
       this.toastService.showError(
         'Erreur',
