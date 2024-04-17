@@ -7,9 +7,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
-import { TournamentMappers } from 'src/app/tournament/shared/mappers/TournamentMappers';
-import { Team } from 'src/app/team/models/team.model';
-import { ChosenTeam } from 'src/app/tournament/models/chosenTeam.model';
+import { TimeService } from 'src/app/tournament/shared/time.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-teams-tournament',
@@ -20,12 +19,18 @@ import { ChosenTeam } from 'src/app/tournament/models/chosenTeam.model';
 })
 export class ListTeamsTournamentComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
+  tournamentId!: number;
   teamSubscription!: Subscription;
+  currentNumberOfParticipants!: number;
   teams!: { name: string; result: number; url: string }[];
+  limitInscriptionTime!: Subscription;
+  limitInscriptionValue: number | undefined;
 
   constructor(
     private dialog: MatDialog,
-    private tournamentService: TournamentService
+    private tournamentService: TournamentService,
+    private timeService: TimeService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnDestroy(): void {
@@ -37,22 +42,38 @@ export class ListTeamsTournamentComponent {
   ngOnInit() {
     this.tournament$.subscribe((result) => {
       this.teams = result.teams;
+      this.currentNumberOfParticipants =
+        result.currentNumberOfParticipants ?? 0;
     });
+
+    this.route.params.subscribe((params) => {
+      this.tournamentId = params['id'];
+    });
+
+    this.limitInscriptionTime =
+      this.timeService.limitTimeInscription$.subscribe((limit: number) => {
+        this.limitInscriptionValue = limit;
+      });
 
     this.teamSubscription = this.tournamentService.teamInscription$.subscribe(
       (team) => {
         if (team) {
           this.teams = [team];
+          if (team.name) {
+            this.currentNumberOfParticipants++;
+          } else {
+            this.currentNumberOfParticipants--;
+          }
         }
       }
     );
   }
 
-  openDialog(team: TournamentDetails) {
+  openDialog(team: { name: string; result: number; url: string }) {
     const dialogRef = this.dialog.open(DeleteModalComponent);
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
-        console.log('delete');
+        this.tournamentService.deleteTeamToTournament(this.tournamentId, team);
       }
     });
   }

@@ -105,4 +105,41 @@ export class TournamentService implements ITournamentService {
         }
       );
   }
+
+  deleteTeamToTournament(
+    tournamentId: number,
+    team: {
+      name: string;
+      result: number;
+      url: string;
+    }
+  ): void {
+    this.http
+      .delete<any>(
+        `${environment.urlApi}/tournament/teams/${tournamentId}/${team.name}`
+      )
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.toastService.showSuccess(
+              'Suppression',
+              "L'équipe supprimé avec succès"
+            );
+            this.teamInscriptionSubject.next({
+              name: '',
+              result: 0,
+              url: '',
+            });
+          }
+        },
+        (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              'Une erreur est survenue lors de la suppression'
+            );
+          }
+        }
+      );
+  }
 }
