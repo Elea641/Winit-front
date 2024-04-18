@@ -27,9 +27,7 @@
       }
 
       .card-details-tournament-container-header-inscription {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        @include flex-justify-content-space-between;
         padding: 1rem 0;
       }
     }
@@ -74,4 +72,8 @@
     display: flex;
     flex-direction: row;
   }
+}
+
+::ng-deep .mat-mdc-raised-button[_ngcontent-ng-c4252081880]:not(:disabled) {
+  width: 10rem;
 }

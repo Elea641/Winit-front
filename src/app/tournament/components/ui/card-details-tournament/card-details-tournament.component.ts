@@ -10,6 +10,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { getRemainingTime } from 'src/app/tournament/shared/utils/convertTime.util';
 import { TimeService } from 'src/app/tournament/shared/time.service';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 @Component({
   selector: 'app-card-details-tournament',
   standalone: true,
@@ -19,6 +21,7 @@ import { TournamentService } from 'src/app/tournament/shared/tournament.service'
     MatButtonModule,
     DatePipe,
     RouterModule,
+    MatDialogModule,
   ],
   templateUrl: './card-details-tournament.component.html',
   styleUrls: ['./card-details-tournament.component.scss'],
@@ -31,13 +34,15 @@ export class CardDetailsTournamentComponent {
   public remainingTime: string = '';
   public tournamentId!: number;
   public currentNumberOfParticipants!: number;
+  public maxNumberOfTeams!: number;
   public teamInscriptionSubscription!: Subscription;
 
   constructor(
     private getImageService: GetImageService,
     private route: ActivatedRoute,
     private timeService: TimeService,
-    private tournamentService: TournamentService
+    private tournamentService: TournamentService,
+    private dialog: MatDialog
   ) {
     registerLocaleData(fr.default);
   }
@@ -50,6 +55,7 @@ export class CardDetailsTournamentComponent {
     this.updateCurrentDate();
 
     this.tournament$.subscribe((tournament) => {
+      this.maxNumberOfTeams = tournament.maxNumberOfTeams;
       this.currentNumberOfParticipants =
         tournament.currentNumberOfParticipants ?? 0;
       this.getImageService.getImage(tournament.imageUrl).subscribe((data) => {
@@ -79,4 +85,15 @@ export class CardDetailsTournamentComponent {
       this.updateCurrentDate();
     }, 60000);
   }
+
+  // openDialog(tournamentDetails: TournamentDetails) {
+  //   const dialogRef = this.dialog.open(DeleteModalComponent);
+  //   dialogRef.afterClosed().subscribe((response) => {
+  //     if (response === true) {
+  //       this.tournamentService.deleteTournament(tournamentDetails);
+  //     } else {
+  //       console.error('Le tournoi est introuvable');
+  //     }
+  //   });
+  // }
 }

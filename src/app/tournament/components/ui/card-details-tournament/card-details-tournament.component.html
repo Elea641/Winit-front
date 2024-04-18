@@ -14,8 +14,7 @@
         <p>{{ remainingTime }}</p>
         <button
           *ngIf="
-            tournamentDetails.currentNumberOfParticipants !==
-            tournamentDetails.maxNumberOfTeams
+            currentNumberOfParticipants !== tournamentDetails.maxNumberOfTeams
           "
           mat-raised-button
           color="primary"
@@ -47,6 +46,9 @@
         <p>{{ tournamentDetails.format }}</p>
         <p>{{ tournamentDetails.privacy }}</p>
       </div>
+      <!-- <button mat-button color="warn" (click)="openDialog(tournamentDetails)">
+        SUPPRIMER
+      </button> -->
     </div>
   </div>
 </div>

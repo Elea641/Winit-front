@@ -151,4 +151,32 @@ export class TournamentService implements ITournamentService {
         );
     });
   }
+
+  deleteTournament(tournamentDetails: TournamentDetails): void {
+    console.log(tournamentDetails.name);
+
+    this.http
+      .delete<any>(
+        `${environment.urlApi}/tournaments/${tournamentDetails.name}`
+      )
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.toastService.showSuccess(
+              'Suppression',
+              'Le tournoi a été supprimée avec succès'
+            );
+            this.router.navigate(['/']);
+          }
+        },
+        (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              'Une erreur est survenue lors de la suppression du tournoi'
+            );
+          }
+        }
+      );
+  }
 }

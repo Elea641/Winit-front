@@ -17,4 +17,6 @@ export interface ITournamentService {
     tournamentId: number,
     team: { name: string; result: number; url: string }
   ): Observable<boolean>;
+
+  deleteTournament(tournamentDetails: TournamentDetails): void;
 }
