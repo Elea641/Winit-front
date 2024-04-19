@@ -1,0 +1,17 @@
+<div class="back-office-container">
+  <div *ngIf="sport">
+    <div class="back-office-detail-title">
+      <h1>Espace administrateur</h1>
+      <h2>{{ sport.name }}</h2>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="button-container">
+      <button mat-raised-button class="edit-button"><mat-icon>edit</mat-icon>Modifier</button>
+      <button mat-stroked-button color="warn"><mat-icon>delete</mat-icon>Supprimer</button>
+    </div>
+    <p>Lien de l'image : {{ sport.imageUrl }}</p>
+    <p>Nombre de joueurs : {{ sport.numberOfPlayers }}</p>
+    <p>Nombre de tournois : {{ sport.numberOfTournaments }}</p>
+    <p>Nombre d'équipes : {{ sport.numberOfTeams }}</p>
+  </div>
+</div>
