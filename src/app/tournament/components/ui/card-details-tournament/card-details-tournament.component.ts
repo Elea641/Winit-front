@@ -86,14 +86,14 @@ export class CardDetailsTournamentComponent {
     }, 60000);
   }
 
-  // openDialog(tournamentDetails: TournamentDetails) {
-  //   const dialogRef = this.dialog.open(DeleteModalComponent);
-  //   dialogRef.afterClosed().subscribe((response) => {
-  //     if (response === true) {
-  //       this.tournamentService.deleteTournament(tournamentDetails);
-  //     } else {
-  //       console.error('Le tournoi est introuvable');
-  //     }
-  //   });
-  // }
+  openDialog(tournamentDetails: TournamentDetails) {
+    const dialogRef = this.dialog.open(DeleteModalComponent);
+    dialogRef.afterClosed().subscribe((response) => {
+      if (response === true) {
+        this.tournamentService.deleteTournament(tournamentDetails);
+      } else {
+        console.error('Le tournoi est introuvable');
+      }
+    });
+  }
 }

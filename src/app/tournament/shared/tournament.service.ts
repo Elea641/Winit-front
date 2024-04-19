@@ -85,7 +85,7 @@ export class TournamentService implements ITournamentService {
   addTeamToTournament(chosenTeam: ChosenTeam): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       this.http
-        .post<ChosenTeam>(`${environment.urlApi}/tournament/teams`, chosenTeam)
+        .post<ChosenTeam>(`${environment.urlApi}/tournaments/teams`, chosenTeam)
         .subscribe(
           (response) => {
             if (response) {
@@ -124,7 +124,7 @@ export class TournamentService implements ITournamentService {
     return new Observable<boolean>((observer) => {
       this.http
         .delete<any>(
-          `${environment.urlApi}/tournament/teams/${tournamentId}/${team.name}`
+          `${environment.urlApi}/tournaments/teams/${tournamentId}/${team.name}`
         )
         .subscribe(
           (response) => {
