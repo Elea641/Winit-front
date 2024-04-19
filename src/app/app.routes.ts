@@ -13,7 +13,6 @@ import { SelectTeamPageComponent } from './tournament/pages/select-team-page/sel
 import { SportComponent } from './sport/pages/sport/sport.component';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { teamResolver } from './team/shared/resolvers/team-resolver';
-import { teamsResolver } from './team/shared/resolvers/teams.resolver';
 import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
 import { TournamentFormComponent } from './tournament/components/feature/tournament-form/tournament-form.component';
 import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
@@ -21,6 +20,7 @@ import { tournamentResolver } from './tournament/shared/resolvers/tournament-res
 import { tournamentsResolver } from './tournament/shared/resolvers/tournaments-resolver';
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { UserGuard } from './auth/core/user.guard';
+import { TeamFormComponent } from './team/components/feature/team-form/team-form.component';
 
 export const routes: Routes = [
   {
@@ -47,7 +47,11 @@ export const routes: Routes = [
       tournaments: tournamentsResolver,
     },
   },
-  { path: 'tournament/create', component: TournamentFormComponent },
+  {
+    path: 'tournament/create',
+    component: TournamentFormComponent,
+    canActivate: [UserGuard],
+  },
   {
     path: 'tournament/:id',
     component: TournamentDetailsPageComponent,
@@ -58,8 +62,9 @@ export const routes: Routes = [
   {
     path: 'tournament/:id/teams',
     component: SelectTeamPageComponent,
+    canActivate: [UserGuard],
     resolve: {
-      teams: teamsResolver,
+      tournament: tournamentResolver,
     },
   },
   {
@@ -67,7 +72,11 @@ export const routes: Routes = [
     component: BackOfficePageComponent,
     canActivate: [AdminGuard],
   },
-  { path: 'new-team', component: CreateTeamPageComponent },
+  {
+    path: 'form-team/:mode',
+    component: TeamFormComponent,
+    canActivate: [UserGuard],
+  },
   {
     path: 'teams-details/:teamName',
     component: TeamPageComponent,

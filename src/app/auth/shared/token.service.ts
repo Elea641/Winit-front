@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { TokenResponse } from '../models/token.model';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
-
   // Le BehaviorSubject est initialisé avec une valeur par défaut, ici : this.getTokenFromLocalStorageAndDecode()
   // Cela signifie que la valeur par défaut de _tokenDetailsSubject$ sera celle du Token décodé présent en LocalStorage (s'il y en a un).
   // Sinon ça sera null.
 
-  private readonly _tokenDetailsSubject$: BehaviorSubject<any> = new BehaviorSubject<any>(this.getTokenFromLocalStorageAndDecode());
+  private readonly _tokenDetailsSubject$: BehaviorSubject<any> =
+    new BehaviorSubject<any>(this.getTokenFromLocalStorageAndDecode());
 
-  constructor(private lsService: LocalStorageService) { }
+  constructor(private lsService: LocalStorageService) {}
 
   // Mise à jour du token
   updateToken(tokenFromDB: TokenResponse) {
-    
     // Remise à zéro du localStorage puis ajout du nouveau Token reçu du serveur
     this._clearLocalStorageAndThenPutNewToken(tokenFromDB);
     // Décoder le Token pour accéder à son corps (où les Claims sont accessibles, notamment le ROLE du user)
@@ -32,9 +31,9 @@ export class TokenService {
     // On récupère le token stocké en localStorage
     const tokenId = this.lsService.getToken();
     // S'il y en a un
-    if(tokenId) {
+    if (tokenId) {
       // Je retourne la valeur décodée du token (le corps du token)
-      return this._decodeToken({token: tokenId});
+      return this._decodeToken({ token: tokenId });
     } else {
       // Sinon je retourne null
       return null;
@@ -46,9 +45,11 @@ export class TokenService {
   }
 
   // Je réinitialise mon localStorage puis j'y place mon nouveau Token
-  private _clearLocalStorageAndThenPutNewToken(tokenFromDB: TokenResponse): void {
+  private _clearLocalStorageAndThenPutNewToken(
+    tokenFromDB: TokenResponse
+  ): void {
     this.lsService.clearToken();
-    this.lsService.setToken(tokenFromDB)
+    this.lsService.setToken(tokenFromDB);
   }
 
   // Je décode mon token (comme le fait jwt.io) afin d'en extraire le CORPS et y récupérer les CLAIMS (rôle de l'utilisateur, son email, expiration...)

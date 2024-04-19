@@ -6,7 +6,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { Observable, Subscription } from 'rxjs';
 import * as fr from '@angular/common/locales/fr';
 import { GetImageService } from 'src/app/shared/get-image.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { getRemainingTime } from 'src/app/tournament/shared/utils/convertTime.util';
+import { TimeService } from 'src/app/tournament/shared/time.service';
+import { TournamentService } from 'src/app/tournament/shared/tournament.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 @Component({
   selector: 'app-card-details-tournament',
   standalone: true,
@@ -16,6 +21,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
     MatButtonModule,
     DatePipe,
     RouterModule,
+    MatDialogModule,
   ],
   templateUrl: './card-details-tournament.component.html',
   styleUrls: ['./card-details-tournament.component.scss'],
@@ -24,13 +30,19 @@ export class CardDetailsTournamentComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
   public image: any;
   public tournamentDate!: Date;
-  public currentDate: Date = new Date();
+  public currenDate: Date = new Date();
   public remainingTime: string = '';
   public tournamentId!: number;
+  public currentNumberOfParticipants!: number;
+  public maxNumberOfTeams!: number;
+  public teamInscriptionSubscription!: Subscription;
 
   constructor(
     private getImageService: GetImageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private timeService: TimeService,
+    private tournamentService: TournamentService,
+    private dialog: MatDialog
   ) {
     registerLocaleData(fr.default);
   }
@@ -43,49 +55,45 @@ export class CardDetailsTournamentComponent {
     this.updateCurrentDate();
 
     this.tournament$.subscribe((tournament) => {
+      this.maxNumberOfTeams = tournament.maxNumberOfTeams;
+      this.currentNumberOfParticipants =
+        tournament.currentNumberOfParticipants ?? 0;
       this.getImageService.getImage(tournament.imageUrl).subscribe((data) => {
         this.image = data;
         this.tournamentDate = new Date(tournament.date);
-        this.remainingTime = this.getRemainingTime(tournament.date);
+        this.remainingTime = getRemainingTime(
+          this.tournamentDate,
+          this.timeService,
+          this.currenDate
+        );
       });
     });
+
+    this.teamInscriptionSubscription =
+      this.tournamentService.inscription$.subscribe((result) => {
+        if (result === true) {
+          this.currentNumberOfParticipants++;
+        } else if (result === false) {
+          this.currentNumberOfParticipants--;
+        }
+      });
   }
 
   private updateCurrentDate() {
     setTimeout(() => {
-      this.currentDate = new Date();
+      this.currenDate = new Date();
       this.updateCurrentDate();
     }, 60000);
   }
 
-  getRemainingTime(tournamentDate: Date): string {
-    const tournamentDateIso = new Date(tournamentDate);
-
-    if (
-      !(tournamentDateIso instanceof Date) ||
-      isNaN(tournamentDateIso.getTime())
-    ) {
-      return 'Date invalide';
-    }
-
-    const timeDifference =
-      tournamentDateIso.getTime() - this.currentDate.getTime();
-    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hoursDifference = Math.floor(
-      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutesDifference = Math.floor(
-      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-    );
-
-    if (daysDifference > 1) {
-      return `Inscription disponible pendant : ${daysDifference} jours`;
-    } else if (hoursDifference > 1) {
-      return `Inscription disponible pendant : ${hoursDifference} heures`;
-    } else if (minutesDifference > 1) {
-      return `Inscription disponible pendant : ${minutesDifference} minutes`;
-    } else {
-      return 'Inscription terminée';
-    }
-  }
+  // openDialog(tournamentDetails: TournamentDetails) {
+  //   const dialogRef = this.dialog.open(DeleteModalComponent);
+  //   dialogRef.afterClosed().subscribe((response) => {
+  //     if (response === true) {
+  //       this.tournamentService.deleteTournament(tournamentDetails);
+  //     } else {
+  //       console.error('Le tournoi est introuvable');
+  //     }
+  //   });
+  // }
 }

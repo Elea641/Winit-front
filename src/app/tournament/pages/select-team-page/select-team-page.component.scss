@@ -1,0 +1,16 @@
+@import "../../../../assets/style/variables.scss";
+
+section {
+  padding: 1rem 2rem;
+
+  h1 {
+    color: $secondary-color;
+    font-weight: normal;
+    margin: 1rem 0;
+  }
+
+  mat-divider {
+    margin: 0.5rem;
+    border-top-color: $secondary-color;
+  }
+}

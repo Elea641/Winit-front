@@ -1,5 +1,7 @@
-<div *ngIf="!totalPhase" class="list-tournament-tree-container">
-  <p>Tournoi en cours de création</p>
+<div *ngIf="limitInscriptionValue === 0">
+  <button mat-raised-button color="primary" type="submit">
+    GÉNÉRER LE TOURNOI
+  </button>
 </div>
 <div *ngIf="totalPhase" class="list-tournament-tree-container">
   <div

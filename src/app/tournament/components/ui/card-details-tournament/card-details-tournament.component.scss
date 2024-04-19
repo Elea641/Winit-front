@@ -3,13 +3,16 @@
 
 .card-details-tournament-container {
   color: $secondary-color-text;
-  display: flex;
+  @include flex-column;
 
   img {
     max-width: 20rem;
   }
 
   .card-details-tournament-container-body {
+    @include media-mobile-screen {
+      padding-left: 0;
+    }
     padding-left: 2rem;
     @include flex-column;
 
@@ -24,9 +27,7 @@
       }
 
       .card-details-tournament-container-header-inscription {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        @include flex-justify-content-space-between;
         padding: 1rem 0;
       }
     }
@@ -50,6 +51,9 @@
 
     .mat-mdc-raised-button:not(:disabled) {
       color: $secondary-color-text;
+      @include media-mobile-screen {
+        width: 15rem;
+      }
       z-index: 0;
     }
 
@@ -58,4 +62,18 @@
       color: $primary-color-focus;
     }
   }
+
+  @include media-tablet-screen {
+    display: flex;
+    flex-direction: row;
+  }
+
+  @include media-large-screen {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+::ng-deep .mat-mdc-raised-button[_ngcontent-ng-c4252081880]:not(:disabled) {
+  width: 10rem;
 }

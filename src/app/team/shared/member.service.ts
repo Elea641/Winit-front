@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/shared/toast.service';
@@ -11,8 +11,7 @@ import { IMemberService } from './interfaces/IMember.service';
   providedIn: 'root',
 })
 export class MemberService implements IMemberService {
-  private teamSubject: BehaviorSubject<Team | null> =
-    new BehaviorSubject<Team | null>(null);
+  private teamSubject: Subject<Team | null> = new Subject<Team | null>();
   public team$: Observable<Team | null> = this.teamSubject.asObservable();
 
   constructor(public http: HttpClient, private toastService: ToastService) {}
