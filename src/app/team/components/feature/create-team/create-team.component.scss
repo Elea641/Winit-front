@@ -57,9 +57,3 @@ section {
     }
   }
 }
-
-::ng-deep
-  .cdk-overlay-pane:not(.mat-mdc-select-panel-above)
-  div.mat-mdc-select-panel {
-  background-color: $primary-background-color;
-}

@@ -50,16 +50,3 @@
     }
   }
 }
-
-::ng-deep
-  .cdk-overlay-pane:not(.mat-mdc-select-panel-above)
-  div.mat-mdc-select-panel {
-  background-color: $primary-background-color;
-}
-
-::ng-depp .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
-  width: auto;
-  @include media-mobile-screen {
-    width: 100%;
-  }
-}

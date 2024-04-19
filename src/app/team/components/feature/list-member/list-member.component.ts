@@ -25,12 +25,8 @@ export class ListMemberComponent {
   @Input() team$!: Observable<Team | null>;
   private teamSubscription!: Subscription;
   members: Member[] = [];
-  teamName: string = '';
 
-  constructor(
-    private memberService: MemberService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private memberService: MemberService, public dialog: MatDialog) {}
 
   ngOnDestroy(): void {
     if (this.teamSubscription) {
@@ -54,8 +50,8 @@ export class ListMemberComponent {
 
   openDialog(member: Member) {
     const dialogRef = this.dialog.open(DeleteModalComponent);
-    dialogRef.afterClosed().subscribe((response) => {
-      if (response === true) {
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
         this.team$.subscribe((team) => {
           if (team) {
             this.memberService.deleteMemberByName(team.name, member);

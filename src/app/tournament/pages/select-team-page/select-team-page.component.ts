@@ -3,50 +3,29 @@ import { CommonModule } from '@angular/common';
 import { Team } from 'src/app/team/models/team.model';
 import { Observable, concatMap, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { ListTeamBySportComponent } from '../../components/feature/list-team-by-sport/list-team-by-sport.component';
-import { MatDividerModule } from '@angular/material/divider';
-import { TournamentDetails } from '../../models/tournament-details.model';
-import { TeamService } from 'src/app/team/shared/team.service';
-import { InscriptionFormTournamentComponent } from '../../components/feature/inscription-form-tournament/inscription-form-tournament.component';
+
 @Component({
   selector: 'app-select-team-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    ListTeamBySportComponent,
-    MatDividerModule,
-    InscriptionFormTournamentComponent,
-  ],
+  imports: [CommonModule],
   templateUrl: './select-team-page.component.html',
   styleUrls: ['./select-team-page.component.scss'],
 })
 export class SelectTeamPageComponent {
-  tournament$!: Observable<TournamentDetails | null>;
   teams$!: Observable<Team[] | null>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private teamService: TeamService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.tournament$ = this.route.data.pipe(
+    console.log('test');
+
+    this.teams$ = this.route.data.pipe(
       concatMap((data) => {
-        return of(data['tournament']);
+        console.log(data['teams']);
+
+        return of(data['teams']);
       })
     );
-    this.tournament$.subscribe((tournament) => {
-      if (tournament) {
-        this.teamService
-          .getAllTeamsByUserForTournament(tournament?.sport)
-          .subscribe((teams) => {
-            if (teams) {
-              this.teams$ = of(teams);
-            } else {
-              this.teams$ = of([]);
-            }
-          });
-      }
-    });
+    this.teams$.subscribe((e) => console.log(e));
   }
 }
