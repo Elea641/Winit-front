@@ -51,11 +51,19 @@ a {
 }
 
 .actions-cell > a {
-  padding-right: 1rem;
+  padding-right: 0.5rem;
   display: flex;
   align-items: center;
 }
 
-.delete-link {
+.view-link:hover {
+  color: $back-office-view-color;
+}
+
+.edit-link:hover {
+  color: $back-office-edit-color;
+}
+
+.delete-link:hover {
   color: $back-office-delete-color;
 }

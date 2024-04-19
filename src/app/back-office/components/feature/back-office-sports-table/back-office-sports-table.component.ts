@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
@@ -7,8 +7,9 @@ import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
-import {Sport} from "../../../../sport/models/sport.model";
-import {SportService} from "../../../../sport/shared/sport.service";
+import {Router, RouterLink} from "@angular/router";
+import {BackOfficeSportService} from "../../../shared/back-office-sport.service";
+import {AdminSport} from "../../../models/admin-sport.model";
 
 @Component({
   selector: 'app-back-office-sports-table',
@@ -21,14 +22,15 @@ import {SportService} from "../../../../sport/shared/sport.service";
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterLink
   ],
   templateUrl: './back-office-sports-table.component.html',
   styleUrls: ['./back-office-sports-table.component.scss']
 })
 export class BackOfficeSportsTableComponent implements AfterViewInit {
-  dataSource!: MatTableDataSource<Sport>;
-  displayedColumns = ["position", "name", "imageUrl", "numberOfPlayers", "actions"];
+  dataSource!: MatTableDataSource<AdminSport>;
+  displayedColumns = ["position", "name", "imageUrl", "numberOfPlayers", "numberOfTournaments", "numberOfTeams", "actions"];
   positionColumnData: number = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -39,17 +41,18 @@ export class BackOfficeSportsTableComponent implements AfterViewInit {
   }
 
   constructor(
-    private sportService: SportService
+    private backOfficeSportService: BackOfficeSportService,
+    private router: Router
   ) {
   }
 
   fetchSports() {
-    this.sportService.getAllSports().subscribe(
-      (sports: Sport[]) => {
+    this.backOfficeSportService.getAllSports().subscribe(
+      (sports: AdminSport[]) => {
         sports.forEach((sport, index) => {
           sport.position = ++this.positionColumnData;
         });
-        this.dataSource = new MatTableDataSource<Sport>(sports);
+        this.dataSource = new MatTableDataSource<AdminSport>(sports);
       },
       (error) => {
         console.error("Error fetching sports:", error);
@@ -60,5 +63,13 @@ export class BackOfficeSportsTableComponent implements AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  viewSportDetails(sportId: number) {
+    this.router.navigate(['/back-office/sport', sportId]);
+  }
+
+  viewEditPage(sportId: number) {
+    this.router.navigate(['/back-office/sport/edit', sportId]);
   }
 }
