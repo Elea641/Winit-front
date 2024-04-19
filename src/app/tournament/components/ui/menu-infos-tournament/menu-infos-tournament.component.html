@@ -1,0 +1,15 @@
+<mat-toolbar
+  [ngClass]="{
+    'default-style-focus': isDefaultStyleFocus,
+  }"
+  class="menu-infos-tournament-container"
+>
+  <button
+    mat-raised-button
+    [ngClass]="{ active: isDefaultStyleFocus }"
+    (click)="onButtonClick('matchs')"
+  >
+    MATCHS
+  </button>
+  <button mat-raised-button (click)="onButtonClick('teams')">EQUIPES</button>
+</mat-toolbar>

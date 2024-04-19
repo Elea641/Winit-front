@@ -1,16 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardTournamentMatchComponent } from '../card-tournament-match/card-tournament-match.component';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
 import { HelperTournamentService } from 'src/app/tournament/shared/helpers/helper-tournament.service';
-import { Observable, Subscription } from 'rxjs';
-import { TimeService } from 'src/app/tournament/shared/time.service';
-import { MatButtonModule } from '@angular/material/button';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-tournament-tree',
   standalone: true,
-  imports: [CommonModule, CardTournamentMatchComponent, MatButtonModule],
+  imports: [CommonModule, CardTournamentMatchComponent],
   templateUrl: './list-tournament-tree.component.html',
   styleUrls: ['./list-tournament-tree.component.scss'],
 })
@@ -23,48 +21,34 @@ export class ListTournamentTreeComponent {
   namesTeamList: any;
   namesTeamListPhase: any;
   namesTeamListRandom: any;
-  limitInscriptionTime!: Subscription;
-  limitInscriptionValue: number | undefined;
 
-  constructor(
-    private helperTournamentService: HelperTournamentService,
-    private timeService: TimeService
-  ) {}
-
-  ngOnDestroy(): void {
-    this.limitInscriptionTime.unsubscribe();
-  }
+  constructor(private helperTournamentService: HelperTournamentService) {}
 
   ngOnInit(): void {
-    this.limitInscriptionTime =
-      this.timeService.limitTimeInscription$.subscribe((limit: number) => {
-        this.limitInscriptionValue = limit;
-      });
+    this.totalPhase = this.helperTournamentService.calculPhase(
+      this.tournamentDetails.participants
+    );
 
-    // this.totalPhase = this.helperTournamentService.calculPhase(
-    //   this.tournamentDetails.participants
-    // );
+    this.tournamentPhase =
+      this.helperTournamentService.convertToTournamentPhase(this.totalPhase);
 
-    // this.tournamentPhase =
-    //   this.helperTournamentService.convertToTournamentPhase(this.totalPhase);
+    this.namesTeamList = this.helperTournamentService.randomizeTeams(
+      this.tournamentDetails.teams
+    );
 
-    // this.namesTeamList = this.helperTournamentService.randomizeTeams(
-    //   this.tournamentDetails.teams
-    // );
+    const { randomTeams, remainingTeams } =
+      this.helperTournamentService.divideTeamsForPhases(
+        this.namesTeamList,
+        this.totalPhase.randomMatchs
+      );
 
-    // const { randomTeams, remainingTeams } =
-    //   this.helperTournamentService.divideTeamsForPhases(
-    //     this.namesTeamList,
-    //     this.totalPhase.randomMatchs
-    //   );
+    this.namesTeamListPhase = {
+      remainingTeams,
+    };
 
-    // this.namesTeamListPhase = {
-    //   remainingTeams,
-    // };
-
-    // this.namesTeamListRandom = {
-    //   randomTeams,
-    // };
+    this.namesTeamListRandom = {
+      randomTeams,
+    };
   }
 
   getObjectKeys(obj: any): any[] {

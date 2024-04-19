@@ -1,0 +1,28 @@
+@import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
+
+.menu-infos-tournament-container {
+  padding: 0;
+  display: flex;
+  background-color: $primary-color;
+
+  .mat-mdc-raised-button:not(:disabled).active {
+    background-color: $primary-color;
+    color: $button-menu-infos-tournament-color-focus;
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $button-menu-infos-tournament-color-text;
+    z-index: 0;
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $button-menu-infos-tournament-color-focus;
+  }
+
+  ::ng-deep .mat-mdc-raised-button:not(:disabled) {
+    background-color: $primary-color;
+    box-shadow: none;
+  }
+}

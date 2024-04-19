@@ -1,12 +1,1 @@
-<section *ngIf="teams$ | async as teams">
-  <h1 *ngIf="tournament$ | async as tournament">CHOISSISSEZ VOTRE ÉQUIPE</h1>
-  <mat-divider></mat-divider>
-  <app-inscription-form-tournament
-    [teams]="teams"
-  ></app-inscription-form-tournament>
-  <h1 *ngIf="tournament$ | async as tournament">
-    LISTE DE VOS ÉQUIPES DE {{ tournament.sport | uppercase }}
-  </h1>
-  <mat-divider></mat-divider>
-  <app-list-team-by-sport [teams]="teams"></app-list-team-by-sport>
-</section>
+<p>select-team-page works!</p>
