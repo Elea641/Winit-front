@@ -1,0 +1,77 @@
+@import "../../../../../assets/style/variables.scss";
+
+.mat-mdc-table {
+  background-color: $back-office-table-background-color;
+  overflow: hidden !important;
+  border-radius: 4px;
+}
+
+.mat-mdc-header-row {
+  background-color: $back-office-table-header-color;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+
+.mat-mdc-paginator {
+  background-color: transparent;
+}
+
+.mat-column-position {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.toggle-on {
+  color: $back-office-view-color;
+}
+
+.toggle-off {
+  color: $back-office-toggle-off-color;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: white;
+}
+
+.mat-mdc-raised-button:hover,
+.mat-mdc-raised-button:focus {
+  color: $background-color;
+}
+
+.actions-cell{
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.actions-cell > a {
+  padding-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.view-link:hover {
+  color: $back-office-view-color;
+}
+
+.edit-link:hover {
+  color: $back-office-edit-color;
+}
+
+.delete-link:hover {
+  color: $back-office-delete-color;
+}
