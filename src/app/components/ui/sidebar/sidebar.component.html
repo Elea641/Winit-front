@@ -8,7 +8,7 @@
         (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)"
       ></app-input-search>
     </div>
-    <h2>Filtres</h2>
+    <h2>FILTRES</h2>
     <div class="line"></div>
 
     <div class="container-sidebar-menu-button sidebar-select-sport">
@@ -23,10 +23,10 @@
         >
         <mat-option
           *ngFor="let sport of sports"
-          value="{{ sport.name }}"
+          value="{{ sport }}"
           (click)="$event.stopPropagation()"
           (click)="sendSportFilter(selectedSport)"
-          >{{ sport.name }}</mat-option
+          >{{ sport }}</mat-option
         >
       </mat-select>
     </div>
@@ -62,8 +62,23 @@
     </button>
 
     <mat-divider></mat-divider>
-    <div class="reset-filters-button">
-      <button mat-raised-button color="primary" (click)="sendResetFilters()">
+    <div class="filters-button">
+      <button
+        mat-raised-button
+        color="primary"
+        class="apply-filters"
+        (click)="sendApplyFilters()"
+      >
+        Appliquer
+      </button>
+    </div>
+    <div class="filters-button">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="reset-filters"
+        (click)="sendResetFilters()"
+      >
         Réinitialiser les filtres
       </button>
     </div>
@@ -89,7 +104,7 @@
     </app-input-search>
   </div>
   <button class="filter-button-container" mat-button [matMenuTriggerFor]="menu">
-    Filtres
+    FILTRES
   </button>
   <mat-menu #menu="matMenu" class="sidebar-custom-menu">
     <div class="sidebar-select-sport-mobile" mat-menu-item>
@@ -108,10 +123,10 @@
         >
         <mat-option
           *ngFor="let sport of sports"
-          value="{{ sport.name }}"
+          value="{{ sport }}"
           (click)="$event.stopPropagation()"
           (click)="sendSportFilter(selectedSport)"
-          >{{ sport.name }}</mat-option
+          >{{ sport }}</mat-option
         >
       </mat-select>
     </div>
@@ -121,8 +136,8 @@
       (click)="sendChronologicalFilterChangeToParent()"
       (click)="$event.stopPropagation()"
     >
-      <span [ngClass]="{ selected: !chronologicalFilter }">Alphabétique</span> /
-      <span [ngClass]="{ selected: chronologicalFilter }">chronologique</span>
+      <span [ngClass]="{ selected: !chronologicalFilter }">Nom</span> /
+      <span [ngClass]="{ selected: chronologicalFilter }">Date</span>
     </button>
     <button
       mat-menu-item
@@ -141,14 +156,26 @@
       Non complet
     </button>
     <mat-divider></mat-divider>
-    <button
-      mat-button
-      color="primary"
-      (click)="sendResetFilters()"
-      (click)="$event.stopPropagation()"
-      class="mobile-reset-filters-button"
-    >
-      Réinitialiser les filtres
-    </button>
+    <div class="filters-button">
+      <button
+        mat-raised-button
+        color="primary"
+        class="apply-filters"
+        (click)="sendApplyFilters()"
+      >
+        Appliquer
+      </button>
+    </div>
+    <div class="filters-button">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="reset-filters"
+        (click)="sendResetFilters()"
+        (click)="$event.stopPropagation()"
+      >
+        Réinitialiser les filtres
+      </button>
+    </div>
   </mat-menu>
 </mat-toolbar>

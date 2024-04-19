@@ -1,0 +1,21 @@
+<section>
+  <header>
+    <button
+      (click)="onClick()"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="team-button"
+    >
+      CRÉATION DE VOTRE ÉQUIPE
+    </button>
+  </header>
+  <h1>LISTE DE VOS ÉQUIPES</h1>
+  <mat-divider></mat-divider>
+  <ul>
+    <app-team-card
+      *ngFor="let team of teams$ | async"
+      [team]="team"
+    ></app-team-card>
+  </ul>
+</section>

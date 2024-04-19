@@ -13,4 +13,8 @@ export class SportService {
   getAllSports(): Observable<Sport[]> {
     return this.http.get<Sport[]>(`${environment.urlApi}/sports/`);
   }
+
+  getAllSportsNames(): Observable<string[]> {
+    return this.http.get<string[]>(`${environment.urlApi}/sports/names`);
+  }
 }

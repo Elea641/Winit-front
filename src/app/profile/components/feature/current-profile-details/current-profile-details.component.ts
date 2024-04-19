@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { CardCurrentProfileComponent } from '../../ui/card-current-profile/card-current-profile.component';
 import { ProfileService } from 'src/app/profile/shared/profile.service';
 import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
 import { Observable } from 'rxjs';
 import { ListResultatsComponent } from '../list-resultats/list-resultats.component';
-import { ListTeamMembersComponent } from '../list-team-members/list-team-members.component';
 import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
-import { MenuButtonsComponent } from 'src/app/components/ui/menu-buttons/menu-buttons.component';
 import { User } from '../../../../auth/models/user.model';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CreateTeamComponent } from 'src/app/team/components/feature/create-team/create-team.component';
-import { ListTeamComponent } from 'src/app/team/components/feature/list-team/list-team.component';
+import { ListTeamComponent } from 'src/app/profile/components/feature/list-team/list-team.component';
+import * as fr from '@angular/common/locales/fr';
 
 @Component({
   selector: 'app-current-profile-details',
@@ -19,9 +18,7 @@ import { ListTeamComponent } from 'src/app/team/components/feature/list-team/lis
   imports: [
     CommonModule,
     CardCurrentProfileComponent,
-    MenuButtonsComponent,
     ListResultatsComponent,
-    ListTeamMembersComponent,
     MatTabsModule,
     CreateTeamComponent,
     ListTeamComponent,
@@ -34,7 +31,9 @@ export class CurrentProfileDetailsComponent {
   currentUser$!: Observable<User>;
   teamMembers$!: Observable<TeamMembers>;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService) {
+    registerLocaleData(fr.default);
+  }
 
   ngOnInit(): void {
     this.currentProfile$ = this.profileService.getCurrentProfile();

@@ -1,8 +1,17 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.list-members-container {
-  @include flex-align-center;
-  justify-content: space-evenly;
+li {
+  display: flex;
+  flex-direction: column;
   padding: 0 2rem;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+
+    .mat-mdc-button:not(:disabled) {
+      width: 12rem;
+    }
+  }
 }

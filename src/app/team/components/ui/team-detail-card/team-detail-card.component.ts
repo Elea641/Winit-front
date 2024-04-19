@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Team } from 'src/app/team/models/team.model';
 import { TeamService } from 'src/app/team/shared/team.service';
 import { MatDividerModule } from '@angular/material/divider';
-import { MemberDetailComponent } from '../../feature/member-detail/member-detail.component';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
+import { MatIconModule } from '@angular/material/icon';
+import { Observable, Subscription, of } from 'rxjs';
+import { MemberService } from 'src/app/team/shared/member.service';
 
 @Component({
   selector: 'app-team-detail-card',
@@ -15,40 +16,46 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
   imports: [
     CommonModule,
     MatDividerModule,
-    MemberDetailComponent,
-    RouterOutlet,
     MatButtonModule,
     MatDialogModule,
+    MatIconModule,
   ],
   templateUrl: './team-detail-card.component.html',
   styleUrls: ['./team-detail-card.component.scss'],
 })
 export class TeamDetailCardComponent {
-  selectedTeam: Team | null = null;
-  teamName: string = '';
+  @Input() team$!: Observable<Team | null>;
+  private teamSubscription!: Subscription;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private teamService: TeamService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private memberService: MemberService
   ) {}
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.teamName = params['teamName'];
+  ngOnDestroy(): void {
+    if (this.teamSubscription) {
+      this.teamSubscription.unsubscribe();
+    }
+  }
 
-      this.teamService.getTeamByTeamName(this.teamName).subscribe((team) => {
-        this.selectedTeam = team;
-      });
+  ngOnInit(): void {
+    this.teamSubscription = this.memberService.team$.subscribe((team) => {
+      if (team) {
+        this.team$ = of(team);
+      }
     });
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(DeleteModalComponent);
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        this.teamService.deleteTeamByName(this.teamName);
+        this.team$.subscribe((team) => {
+          if (team) {
+            this.teamService.deleteTeam(team.name);
+          }
+        });
       }
     });
   }

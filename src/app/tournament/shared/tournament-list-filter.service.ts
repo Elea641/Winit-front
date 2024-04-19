@@ -1,77 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Tournament } from '../models/tournament.model';
 import { TournamentCard } from '../models/tournament-card.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ITournamentListFilterService } from './interfaces/ITournamentListFilter.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TournamentListFilterService {
-  constructor() {}
+export class TournamentListFilterService
+  implements ITournamentListFilterService
+{
+  constructor(private http: HttpClient) {}
 
-  filterTournamentListBySearchTerm(
+  public baseUrl: string = `${environment.urlApi}/tournaments/filter`;
+
+  filterTournaments(
     searchValue: string,
-    tournaments$: Observable<TournamentCard[]>
+    chronologicalFilter: boolean,
+    selectedSport: string,
+    showOnlyUpcomingTournaments: boolean,
+    showNonFullTournaments: boolean
   ) {
-    return tournaments$.pipe(
-      map((tournaments: TournamentCard[]) => {
-        return tournaments.filter(
-          (tournament: TournamentCard) =>
-            tournament.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-            tournament.place
-              .toLowerCase()
-              .includes(searchValue.toLowerCase()) ||
-            tournament.sport.toLowerCase().includes(searchValue.toLowerCase())
-        );
-      })
-    );
-  }
-
-  filterTournamentByAlphabeticalOrder(
-    filteredTournaments$: Observable<TournamentCard[]>
-  ) {
-    return filteredTournaments$.pipe(
-      map((tournaments) =>
-        tournaments.sort((a, b) => a.name.localeCompare(b.name))
-      )
-    );
-  }
-
-  filterTournamentListByChronologicalOrder(
-    filteredTournaments$: Observable<TournamentCard[]>
-  ) {
-    return filteredTournaments$.pipe(
-      map((tournaments) =>
-        tournaments.sort(
-          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-        )
-      )
-    );
-  }
-
-  checkIfTournamentIsUpcoming(tournament: TournamentCard): boolean {
-    return (
-      new Date(tournament.date).setHours(0, 0, 0, 0) >=
-      new Date().setHours(0, 0, 0, 0)
-    );
-  }
-
-  checkIfTournamentIsNotFull(tournament: TournamentCard): boolean {
-    return (
-      tournament.currentNumberOfParticipants! < tournament.maxNumberOfTeams
-    );
-  }
-
-  filterTournamentBySport(
-    filteredTournaments$: Observable<TournamentCard[]>,
-    selectedSport: string
-  ) {
-    return filteredTournaments$.pipe(
-      map((tournaments: TournamentCard[]) => {
-        return tournaments.filter(
-          (tournament: TournamentCard) => tournament.sport === selectedSport
-        );
-      })
-    );
+    const queryParams: string = `?searchValue=${searchValue}&chronologicalFilter=${chronologicalFilter}&selectedSport=${selectedSport}&showOnlyUpcomingTournaments=${showOnlyUpcomingTournaments}&showNonFullTournaments=${showNonFullTournaments}`;
+    return this.http.get<any>(this.baseUrl + queryParams);
   }
 }

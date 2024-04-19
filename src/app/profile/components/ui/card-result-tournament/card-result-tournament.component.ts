@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConvertWinEnum } from 'src/app/profile/models/enum/convertWinEnum';
-import { HelperProfileService } from 'src/app/profile/shared/helper-profile.service';
+import { HelperProfileService } from 'src/app/profile/shared/helpers/helper-profile.service';
 
 @Component({
   selector: 'app-card-result-tournament',

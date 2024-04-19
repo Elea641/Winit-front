@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Member } from 'src/app/team/models/member.model';
-import { TeamService } from 'src/app/team/shared/team.service';
 import { MemberCardComponent } from '../../ui/member-card/member-card.component';
 import { MatButtonModule } from '@angular/material/button';
-import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
+import { MemberService } from 'src/app/team/shared/member.service';
+import { Observable, Subscription } from 'rxjs';
+import { Team } from 'src/app/team/models/team.model';
 
 @Component({
   selector: 'app-list-member',
@@ -21,61 +21,44 @@ import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-
   templateUrl: './list-member.component.html',
   styleUrls: ['./list-member.component.scss'],
 })
-export class ListMemberComponent implements OnInit {
+export class ListMemberComponent {
+  @Input() team$!: Observable<Team | null>;
+  private teamSubscription!: Subscription;
   members: Member[] = [];
-  teamName: string = '';
-  memberAddedSubscription: Subscription | undefined;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private teamService: TeamService,
-    public dialog: MatDialog
-  ) {}
-
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.teamName = params['teamName'];
-    });
-
-    this.refreshMembers();
-
-    this.memberAddedSubscription = this.teamService
-      .getMemberAddedSubject()
-      .subscribe(() => {
-        this.refreshMembers();
-      });
-  }
+  constructor(private memberService: MemberService, public dialog: MatDialog) {}
 
   ngOnDestroy(): void {
-    if (this.memberAddedSubscription) {
-      this.memberAddedSubscription.unsubscribe();
+    if (this.teamSubscription) {
+      this.teamSubscription.unsubscribe();
     }
   }
 
-  refreshMembers() {
-    this.teamService.getAllMembersByTeam(this.teamName).subscribe(
-      (members) => {
-        this.members = members;
-      },
-      (error) => {
-        console.error(error);
+  ngOnInit(): void {
+    this.team$.subscribe((team) => {
+      if (team) {
+        this.members = team?.members;
       }
-    );
+    });
+
+    this.teamSubscription = this.memberService.team$.subscribe((team) => {
+      if (team) {
+        this.members = team.members;
+      }
+    });
   }
 
-  openDialog(member: string) {
+  openDialog(member: Member) {
     const dialogRef = this.dialog.open(DeleteModalComponent);
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        this.teamService.deleteMemberByName(this.teamName, member).subscribe(
-          () => {
-            this.refreshMembers();
-          },
-          (error) => {
-            console.error(error);
+        this.team$.subscribe((team) => {
+          if (team) {
+            this.memberService.deleteMemberByName(team.name, member);
+          } else {
+            console.error('Utilisateur introuvable');
           }
-        );
+        });
       }
     });
   }

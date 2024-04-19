@@ -4,10 +4,10 @@
 .menu-infos-tournament-container {
   padding: 0;
   display: flex;
-  background-color: $background-menu-infos-tournament-color;
+  background-color: $primary-color;
 
   .mat-mdc-raised-button:not(:disabled).active {
-    background-color: $background-menu-infos-tournament-color;
+    background-color: $primary-color;
     color: $button-menu-infos-tournament-color-focus;
   }
 
@@ -22,7 +22,7 @@
   }
 
   ::ng-deep .mat-mdc-raised-button:not(:disabled) {
-    background-color: $background-menu-infos-tournament-color;
+    background-color: $primary-color;
     box-shadow: none;
   }
 }

@@ -1,72 +1,58 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.created-team-container {
-  @include flex-column-center-align-justify;
-  .team-block {
-    margin-top: 2vh;
+section {
+  margin-top: 2vh;
+  padding: 2rem;
+  width: 100%;
+
+  h1 {
+    color: $secondary-color;
+    font-weight: normal;
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  .mat-divider {
+    border-top-color: $secondary-color;
     width: 100%;
+  }
 
-    h1 {
-      color: $secondary-color;
-      font-weight: normal;
-      margin: 1rem 0.5rem;
-    }
+  form {
+    @include flex-column-center-align-justify;
 
-    mat-divider {
-      margin: 0.5rem;
-      border-top-color: $secondary-color;
-    }
-
-    .team-form-field {
-      width: 50%;
-      padding: 8px;
+    .mat-mdc-form-field {
+      margin-top: 2rem;
+      width: 100%;
     }
 
     .error-message-size {
       font-size: small;
     }
 
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    button {
       width: 100%;
-      margin-top: 16px;
+      margin-top: 2rem;
     }
+  }
 
-    .team-button,
-    .login-button {
-      width: 50%;
-      margin-bottom: 16px;
-    }
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $secondary-color;
+  }
 
-    .mat-mdc-raised-button:not(:disabled) {
-      color: white;
-    }
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $primary-color;
+  }
 
-    .mat-mdc-raised-button:hover,
-    .mat-mdc-raised-button:focus {
-      color: $background-color;
-    }
-
-    @media screen and (max-width: 768px) {
-      .team-form-field {
-        width: 100%;
+  @media screen and (min-width: 768px) {
+    form {
+      .mat-mdc-form-field {
+        width: 50vw;
       }
 
-      .team-title {
-        font-size: large;
-      }
-
-      .team-button,
-      .login-button {
-        width: 100%;
-      }
-
-      .team-block {
-        margin-bottom: 5vh;
+      button {
+        width: 50vw;
       }
     }
   }

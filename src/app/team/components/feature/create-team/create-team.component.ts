@@ -12,7 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast.service';
 import { Sport } from 'src/app/sport/models/sport.model';
 import { SportService } from 'src/app/sport/shared/sport.service';
@@ -44,7 +44,8 @@ export class CreateTeamComponent {
   constructor(
     public teamService: TeamService,
     private sportService: SportService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +53,7 @@ export class CreateTeamComponent {
       name: new FormControl('', [
         Validators.required,
         Validators.pattern(
-          `[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*`
+          `^[a-zA-Z0-9@#!éïîèà@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/? ]*$`
         ),
       ]),
       sport: new FormControl('', [
@@ -84,5 +85,9 @@ export class CreateTeamComponent {
         'Veuillez remplir tous les champs obligatoires'
       );
     }
+  }
+
+  onClick() {
+    this.router.navigate(['/profile']);
   }
 }

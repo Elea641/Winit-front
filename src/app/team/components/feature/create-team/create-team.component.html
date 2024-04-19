@@ -1,48 +1,35 @@
-<section class="created-team-container">
-  <div class="team-block">
-    <h1>CRÉATION DE VOTRE ÉQUIPE</h1>
-    <mat-divider></mat-divider>
+<section>
+  <h1>CRÉATION DE VOTRE ÉQUIPE</h1>
+  <mat-divider></mat-divider>
+  <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="team-form-field">
+      <mat-label>Nom</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <mat-error
+        *ngIf="name?.errors && !name?.pristine"
+        class="error-message-size"
+      >
+        Nom
+      </mat-error>
+    </mat-form-field>
 
-    <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline" class="team-form-field">
-        <mat-label>Nom</mat-label>
-        <input matInput type="text" formControlName="name" class="test" />
-        <mat-error
-          *ngIf="name?.errors && !name?.pristine"
-          class="error-message-size"
-        >
-          Nom
-        </mat-error>
-      </mat-form-field>
+    <mat-form-field appearance="outline" class="team-form-field">
+      <mat-label>Sports</mat-label>
+      <mat-select formControlName="sport">
+        <mat-option *ngFor="let sport of sports" [value]="sport.name">{{
+          sport.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-      <mat-form-field appearance="outline" class="team-form-field">
-        <mat-label>Sports</mat-label>
-        <mat-select formControlName="sport">
-          <mat-option *ngFor="let sport of sports" [value]="sport.name">{{
-            sport.name
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div class="button-container">
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          class="team-button"
-        >
-          VALIDER
-        </button>
-        <button
-          mat-stroked-button
-          color="primary"
-          class="team-button"
-          type="button"
-          [routerLink]="['/']"
-        >
-          ANNULER
-        </button>
-      </div>
-    </form>
-  </div>
+    <button mat-raised-button color="primary" type="submit">VALIDER</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      type="button"
+      (click)="onClick()"
+    >
+      ANNULER
+    </button>
+  </form>
 </section>
