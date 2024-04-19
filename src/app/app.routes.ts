@@ -16,6 +16,15 @@ import { TournamentDetailsPageComponent } from './tournament/pages/tournament-de
 import { TournamentPageComponent } from './tournament/pages/tournament-page/tournament-page.component';
 import { memberResolver } from './team/shared/resolvers/member-resolver';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
+import {
+  BackOfficeCreateSportComponent
+} from "./back-office/components/feature/back-office-create-sport/back-office-create-sport.component";
+import {
+  BackOfficeSportDetailComponent
+} from "./back-office/components/feature/back-office-sport-detail/back-office-sport-detail.component";
+import {
+  BackOfficeSportPageComponent
+} from "./back-office/pages/back-office-sport-page/back-office-sport-page.component";
 
 export const routes: Routes = [
   {
@@ -29,16 +38,23 @@ export const routes: Routes = [
     canActivate: [UserGuard],
   },
   { path: 'contact', component: ContactPageComponent },
-  { 
-    path: 'tournament', 
+  {
+    path: 'tournament',
     component: TournamentPageComponent,
   },
   { path: 'tournament/create', component: TournamentFormComponent },
   { path: 'tournament/:id([0-9]+)', component: TournamentDetailsPageComponent },
   {
-    path: 'back-office',
-    component: BackOfficePageComponent,
+    path: 'back-office', component: BackOfficePageComponent, canActivate: [AdminGuard],
+  },
+  {
+    path: 'back-office/sport',
+    component: BackOfficeSportPageComponent,
     canActivate: [AdminGuard],
+    children: [
+      { path: 'create', component: BackOfficeCreateSportComponent },
+      { path: ':id([0-9]+)', component: BackOfficeSportDetailComponent },
+    ]
   },
   {
     path: 'teams-details',
