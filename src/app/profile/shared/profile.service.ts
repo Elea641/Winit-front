@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CurrentProfile } from '../models/current-profile.model';
 import { TeamMembers } from '../models/teamMembers.model';
-import { User } from '../../auth/models/user.model';
 import { environment } from '../../../environments/environment';
 import { IProfileService } from './interfaces/IProfile.service';
+import { CurrentUser } from 'src/app/auth/models/current-user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,12 +26,11 @@ export class ProfileService implements IProfileService {
     return this.http.get<TeamMembers>(this.teamMembersDataUrl);
   }
 
-  getCurrentUser(): Observable<User> {
-    return this.http.get<User>(`${environment.urlApi}/users/myself`);
-  }
-
-  updateProfile(userId: number, user: User): Observable<User> {
-    return this.http.put<User>(`${environment.urlApi}/users/${userId}`, user);
+  updateProfile(userId: number, user: CurrentUser): Observable<CurrentUser> {
+    return this.http.put<CurrentUser>(
+      `${environment.urlApi}/users/${userId}`,
+      user
+    );
   }
 
   deleteProfile(userId: number): Observable<any> {

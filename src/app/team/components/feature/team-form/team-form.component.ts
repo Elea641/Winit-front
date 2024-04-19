@@ -18,7 +18,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Team } from 'src/app/team/models/team.model';
 import { Subscription } from 'rxjs';
 import { TeamMapperService } from 'src/app/team/shared/mappers/team-mapper.service';
 
@@ -67,7 +66,7 @@ export class TeamFormComponent {
     });
 
     this.currentTeamSubscription = this.teamService.team$.subscribe((team) => {
-      if (team) {
+      if (team && this.mode === 'update') {
         this.teamToUpdate = this.teamMapperService.mapToCreatedTeam(team);
       }
     });

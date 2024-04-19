@@ -72,4 +72,13 @@ export class TokenService {
   _getTokenDetailsSubject$(): Observable<any> {
     return this._tokenDetailsSubject$.asObservable();
   }
+
+  getTokenExpiration(): Date | null {
+    const tokenDetails = this._tokenDetailsSubject$.getValue();
+    if (tokenDetails && tokenDetails.exp) {
+      return new Date(tokenDetails.exp * 1000);
+    } else {
+      return null;
+    }
+  }
 }

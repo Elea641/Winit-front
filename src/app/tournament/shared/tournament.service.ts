@@ -55,9 +55,7 @@ export class TournamentService implements ITournamentService {
       .post<Tournament>(this.apiUrl, tournamentCreationDto, { headers })
       .subscribe(
         (response) => {
-          console.warn('Response: ', response);
           if (response) {
-            console.log('success');
             this.router.navigate(['/tournament/' + response]);
             this.toastService.showSuccess(
               'Votre tournoi est prêt !',
@@ -66,11 +64,10 @@ export class TournamentService implements ITournamentService {
           }
         },
         (error) => {
-          console.error('Error: ', error);
           const errorMessage =
             error?.error?.error_message || 'Une erreur est survenue';
           this.toastService.showError(
-            errorMessage,
+            error.error,
             'Erreur lors de la création du tournoi'
           );
           return throwError(() => new Error(error));
@@ -79,7 +76,9 @@ export class TournamentService implements ITournamentService {
   }
 
   getTournamentById(id: number): Observable<TournamentDetails> {
-    return this.http.get<TournamentDetails>(this.tournamentDataUrl + id);
+    return this.http.get<TournamentDetails>(
+      `${environment.urlApi}/tournaments/` + id
+    );
   }
 
   addTeamToTournament(chosenTeam: ChosenTeam): Observable<boolean> {

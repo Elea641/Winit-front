@@ -30,12 +30,13 @@ export class CardDetailsTournamentComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
   public image: any;
   public tournamentDate!: Date;
-  public currenDate: Date = new Date();
+  public currentDate: Date = new Date();
   public remainingTime: string = '';
   public tournamentId!: number;
   public currentNumberOfParticipants!: number;
   public maxNumberOfTeams!: number;
   public teamInscriptionSubscription!: Subscription;
+  currentUser!: Boolean;
 
   constructor(
     private getImageService: GetImageService,
@@ -52,6 +53,7 @@ export class CardDetailsTournamentComponent {
       this.tournamentId = Number(params['id']);
     });
 
+    this.getCurrentUser();
     this.updateCurrentDate();
 
     this.tournament$.subscribe((tournament) => {
@@ -64,7 +66,7 @@ export class CardDetailsTournamentComponent {
         this.remainingTime = getRemainingTime(
           this.tournamentDate,
           this.timeService,
-          this.currenDate
+          this.currentDate
         );
       });
     });
@@ -81,7 +83,7 @@ export class CardDetailsTournamentComponent {
 
   private updateCurrentDate() {
     setTimeout(() => {
-      this.currenDate = new Date();
+      this.currentDate = new Date();
       this.updateCurrentDate();
     }, 60000);
   }
@@ -95,5 +97,13 @@ export class CardDetailsTournamentComponent {
         console.error('Le tournoi est introuvable');
       }
     });
+  }
+
+  getCurrentUser(): boolean {
+    const token = localStorage.getItem('tokenId');
+    if (token) {
+      return (this.currentUser = true);
+    }
+    return false;
   }
 }

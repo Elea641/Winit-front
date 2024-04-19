@@ -20,7 +20,7 @@ import { DropzoneMaterialModule } from '@ngx-dropzone/material';
 import { TournamentForm } from 'src/app/tournament/models/tournament-form.model';
 import { Sport } from 'src/app/sport/models/sport.model';
 
-import { FileUploadComponent } from "../../../../components/feature/file-upload/file-upload.component";
+import { FileUploadComponent } from '../../../../components/feature/file-upload/file-upload.component';
 import { TournamentMappers } from 'src/app/tournament/shared/mappers/TournamentMappers';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { SportService } from 'src/app/sport/shared/sport.service';
@@ -54,7 +54,7 @@ import { TournamentCreationDto } from 'src/app/tournament/models/tournament-crea
   ],
 })
 export class TournamentFormComponent implements OnInit, OnDestroy {
-  tournamentForm!: TournamentForm["form"];
+  tournamentForm!: TournamentForm['form'];
 
   sports$!: Observable<Sport[]>;
   tournamentPrivacies: string[] = Object.values(TournamentPrivacyEnum);
@@ -77,26 +77,35 @@ export class TournamentFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.destroy$ = new Subject<void>();
 
-    this.tournamentForm = new TournamentForm(this.fb, this.sportService)["form"];
+    this.tournamentForm = new TournamentForm(this.fb, this.sportService)[
+      'form'
+    ];
 
     this.sports$ = this.sportService.getAllSports();
   }
 
   toggleInscriptionLimitDate() {
-    this.isDisplayedInscriptionLimitDate = !this.isDisplayedInscriptionLimitDate;
-    
-    if (this.isDisplayedInscriptionLimitDate)
-    {
-      this.tournamentForm.controls["inscriptionLimitDate"].addValidators(Validators.required);
-      this.tournamentForm.controls["inscriptionLimitDate"].addValidators([minimumDate()]);
+    this.isDisplayedInscriptionLimitDate =
+      !this.isDisplayedInscriptionLimitDate;
+
+    if (this.isDisplayedInscriptionLimitDate) {
+      this.tournamentForm.controls['inscriptionLimitDate'].addValidators(
+        Validators.required
+      );
+      this.tournamentForm.controls['inscriptionLimitDate'].addValidators([
+        minimumDate(),
+      ]);
     } else {
-      this.tournamentForm.controls["inscriptionLimitDate"].removeValidators(Validators.required);
+      this.tournamentForm.controls['inscriptionLimitDate'].removeValidators(
+        Validators.required
+      );
     }
   }
 
   onSubmit() {
     if (this.tournamentForm.valid) {
-      const newTournament: TournamentCreationDto = this.tournamentEntityMappers.ToCreationDto(this.tournamentForm);
+      const newTournament: TournamentCreationDto =
+        this.tournamentEntityMappers.ToCreationDto(this.tournamentForm);
       this.tournamentService.createTournament(newTournament);
     } else {
       console.log('Error submitting form');
