@@ -42,9 +42,19 @@ export class TeamDetailCardComponent {
   }
 
   ngOnInit(): void {
-    this.teamSubscription = this.memberService.team$.subscribe((team) => {
-      if (team) {
-        this.team$ = of(team);
+    this.teamSubscription = this.memberService.member$.subscribe((member) => {
+      if (member) {
+        this.team$.subscribe((team) => {
+          if (team) {
+            team.teamMembersCount++;
+          }
+        });
+      } else {
+        this.team$.subscribe((team) => {
+          if (team) {
+            team.teamMembersCount--;
+          }
+        });
       }
     });
   }

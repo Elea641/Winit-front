@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Team } from 'src/app/team/models/team.model';
 import { Observable, concatMap, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ListTeamBySportComponent } from '../../components/feature/list-team-by-sport/list-team-by-sport.component';
@@ -8,6 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { TournamentDetails } from '../../models/tournament-details.model';
 import { TeamService } from 'src/app/team/shared/team.service';
 import { InscriptionFormTournamentComponent } from '../../components/feature/inscription-form-tournament/inscription-form-tournament.component';
+import { Team } from 'src/app/team/models/team.model';
 @Component({
   selector: 'app-select-team-page',
   standalone: true,

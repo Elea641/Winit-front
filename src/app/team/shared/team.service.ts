@@ -53,7 +53,7 @@ export class TeamService implements ITeamService {
         }
       },
       (error) => {
-        if (error.error === "Le nom de l'équipe est déjà pris") {
+        if (error.error === "Erreur : Le nom de l'équipe est déjà pris.") {
           this.toastService.showError(error.error, 'Une erreur est survenue');
         }
       }
@@ -79,7 +79,7 @@ export class TeamService implements ITeamService {
               }
             },
             (error) => {
-              if (error.error === "Le nom de l'équipe est déjà pris") {
+              if (error.error) {
                 this.toastService.showError(
                   error.error,
                   'Une erreur est survenue'
