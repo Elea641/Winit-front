@@ -19,7 +19,7 @@
         </p>
       </div>
       <button
-        *ngIf="limitInscriptionValue !== 0"
+        *ngIf="limitInscriptionValue !== 0 && tournament.isGenerated"
         mat-button
         color="warn"
         (click)="openDialog({ name: team.name, result: 0, url: '' })"

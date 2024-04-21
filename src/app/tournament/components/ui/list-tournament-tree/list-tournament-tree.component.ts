@@ -8,7 +8,8 @@ import { TimeService } from 'src/app/tournament/shared/time.service';
 import { MatButtonModule } from '@angular/material/button';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ConfirmModalComponent } from 'src/app/components/ui/confirm-modal/confirm-modal.component';
+import { ToastService } from 'src/app/shared/toast.service';
+import { ValidationModalComponent } from '../validation-modal/validation-modal.component';
 
 @Component({
   selector: 'app-list-tournament-tree',
@@ -38,7 +39,8 @@ export class ListTournamentTreeComponent {
     private helperTournamentService: HelperTournamentService,
     private timeService: TimeService,
     private tournamentService: TournamentService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastService: ToastService
   ) {}
 
   ngOnDestroy(): void {
@@ -112,7 +114,7 @@ export class ListTournamentTreeComponent {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(ConfirmModalComponent);
+    const dialogRef = this.dialog.open(ValidationModalComponent);
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
         this.tournament$.subscribe((tournament) => {
@@ -121,7 +123,10 @@ export class ListTournamentTreeComponent {
           }
         });
       } else {
-        console.error('Le tournoi est introuvable');
+        this.toastService.showError(
+          'Erreur',
+          'Veuillez remplir tous les champs obligatoires'
+        );
       }
     });
   }
