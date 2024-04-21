@@ -1,0 +1,15 @@
+@import "../../../../assets/style/variables.scss";
+@import "../../../../assets/style/mixins.scss";
+
+.delete-modal-container {
+  background-color: $primary-color;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
+  color: $secondary-color;
+  font-size: large;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__content {
+  color: $secondary-color;
+}

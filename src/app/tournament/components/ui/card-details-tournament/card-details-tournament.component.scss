@@ -72,8 +72,8 @@
     display: flex;
     flex-direction: row;
   }
-}
 
-::ng-deep .mat-mdc-raised-button[_ngcontent-ng-c4252081880]:not(:disabled) {
-  width: 10rem;
+  ::ng-deep .mat-mdc-button:not(:disabled) {
+    width: 12rem;
+  }
 }

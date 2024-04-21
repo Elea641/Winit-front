@@ -49,11 +49,12 @@ export class CardDetailsTournamentComponent {
   }
 
   ngOnInit() {
+    this.tournament$.subscribe((e) => console.log(e));
+
     this.route.params.subscribe((params) => {
       this.tournamentId = Number(params['id']);
     });
 
-    this.getCurrentUser();
     this.updateCurrentDate();
 
     this.tournament$.subscribe((tournament) => {
@@ -62,6 +63,7 @@ export class CardDetailsTournamentComponent {
         tournament.currentNumberOfParticipants ?? 0;
       this.getImageService.getImage(tournament.imageUrl).subscribe((data) => {
         this.image = data;
+        this.currentUser = tournament.isOwner;
         this.tournamentDate = new Date(tournament.date);
         this.remainingTime = getRemainingTime(
           this.tournamentDate,
@@ -97,13 +99,5 @@ export class CardDetailsTournamentComponent {
         console.error('Le tournoi est introuvable');
       }
     });
-  }
-
-  getCurrentUser(): boolean {
-    const token = localStorage.getItem('tokenId');
-    if (token) {
-      return (this.currentUser = true);
-    }
-    return false;
   }
 }

@@ -1,0 +1,15 @@
+<div class="delete-modal-container">
+  <h1 mat-dialog-title>Confirmation</h1>
+  <div mat-dialog-content>
+    Êtes-vous sûr de vouloir ajouter cette équipe au tournoi? L'équipe ne pourra
+    ni être supprimée, ni modifiée par la suite.
+  </div>
+  <div mat-dialog-actions>
+    <button mat-flat-button color="warn" (click)="dialogRef.close(true)">
+      Confirmer
+    </button>
+    <button mat-button color="primary" (click)="dialogRef.close(false)">
+      Annuler
+    </button>
+  </div>
+</div>

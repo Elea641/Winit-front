@@ -6,11 +6,19 @@ import { HelperTournamentService } from 'src/app/tournament/shared/helpers/helpe
 import { Observable, Subscription } from 'rxjs';
 import { TimeService } from 'src/app/tournament/shared/time.service';
 import { MatButtonModule } from '@angular/material/button';
+import { TournamentService } from 'src/app/tournament/shared/tournament.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmModalComponent } from 'src/app/components/ui/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-list-tournament-tree',
   standalone: true,
-  imports: [CommonModule, CardTournamentMatchComponent, MatButtonModule],
+  imports: [
+    CommonModule,
+    CardTournamentMatchComponent,
+    MatButtonModule,
+    MatDialogModule,
+  ],
   templateUrl: './list-tournament-tree.component.html',
   styleUrls: ['./list-tournament-tree.component.scss'],
 })
@@ -28,7 +36,9 @@ export class ListTournamentTreeComponent {
 
   constructor(
     private helperTournamentService: HelperTournamentService,
-    private timeService: TimeService
+    private timeService: TimeService,
+    private tournamentService: TournamentService,
+    private dialog: MatDialog
   ) {}
 
   ngOnDestroy(): void {
@@ -99,5 +109,20 @@ export class ListTournamentTreeComponent {
     }
 
     return result;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ConfirmModalComponent);
+    dialogRef.afterClosed().subscribe((response) => {
+      if (response === true) {
+        this.tournament$.subscribe((tournament) => {
+          if (tournament) {
+            this.tournamentService.updateTournament(tournament.id);
+          }
+        });
+      } else {
+        console.error('Le tournoi est introuvable');
+      }
+    });
   }
 }

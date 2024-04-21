@@ -11,13 +11,13 @@ import { TournamentMappers } from './mappers/TournamentMappers';
 import { TournamentCard } from '../models/tournament-card.model';
 import { ITournamentService } from './interfaces/ITournament.service';
 import { ChosenTeam } from '../models/chosenTeam.model';
+import { TournamentUpdate } from '../models/tournamentUpdate.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TournamentService implements ITournamentService {
   private tournamentDataUrl = `${environment.urlApi}/tournaments/`;
-  private apiUrl = `${environment.urlApi}` + '/tournaments/create';
   private teamInscriptionSubject: Subject<{
     name: string;
     result: number;
@@ -44,6 +44,12 @@ export class TournamentService implements ITournamentService {
     return this.http.get<any>(this.tournamentDataUrl);
   }
 
+  getTournamentById(id: number): Observable<TournamentDetails> {
+    return this.http.get<TournamentDetails>(
+      `${environment.urlApi}/tournaments/` + id
+    );
+  }
+
   createTournament(newTournament: TournamentCreationDto): void {
     const tournamentCreationDto =
       this.tournamentMappers.ToFormData(newTournament);
@@ -52,7 +58,11 @@ export class TournamentService implements ITournamentService {
     headers.append('Content-type', 'multipart/form-data');
 
     this.http
-      .post<Tournament>(this.apiUrl, tournamentCreationDto, { headers })
+      .post<Tournament>(
+        `${environment.urlApi}/tournaments`,
+        tournamentCreationDto,
+        { headers }
+      )
       .subscribe(
         (response) => {
           if (response) {
@@ -73,12 +83,6 @@ export class TournamentService implements ITournamentService {
           return throwError(() => new Error(error));
         }
       );
-  }
-
-  getTournamentById(id: number): Observable<TournamentDetails> {
-    return this.http.get<TournamentDetails>(
-      `${environment.urlApi}/tournaments/` + id
-    );
   }
 
   addTeamToTournament(chosenTeam: ChosenTeam): Observable<boolean> {
@@ -151,9 +155,41 @@ export class TournamentService implements ITournamentService {
     });
   }
 
-  deleteTournament(tournamentDetails: TournamentDetails): void {
-    console.log(tournamentDetails.name);
+  updateTournament(tournamentId: number) {
+    const isGenerated: TournamentUpdate = {
+      isGenerated: true,
+    };
 
+    this.http
+      .put<TournamentUpdate>(
+        `${environment.urlApi}/tournaments/${tournamentId}`,
+        {
+          isGenerated: true,
+        }
+      )
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.router.navigate(['/tournament/' + tournamentId]);
+            this.toastService.showSuccess(
+              'Votre tournoi est prêt !',
+              'Tournoi généré avec succès'
+            );
+          }
+        },
+        (error) => {
+          const errorMessage =
+            error?.error?.error_message || 'Une erreur est survenue';
+          this.toastService.showError(
+            error.error,
+            'Erreur lors de la création du tournoi'
+          );
+          return throwError(() => new Error(error));
+        }
+      );
+  }
+
+  deleteTournament(tournamentDetails: TournamentDetails): void {
     this.http
       .delete<any>(
         `${environment.urlApi}/tournaments/${tournamentDetails.name}`

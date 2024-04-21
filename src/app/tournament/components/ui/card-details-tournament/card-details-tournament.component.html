@@ -14,8 +14,7 @@
         <p>{{ remainingTime }}</p>
         <button
           *ngIf="
-            currentNumberOfParticipants !==
-              tournamentDetails.maxNumberOfTeams && currentUser === true
+            currentNumberOfParticipants !== tournamentDetails.maxNumberOfTeams
           "
           mat-raised-button
           color="primary"
