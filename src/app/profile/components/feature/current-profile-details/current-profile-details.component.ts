@@ -6,11 +6,13 @@ import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
 import { Observable } from 'rxjs';
 import { ListResultatsComponent } from '../list-resultats/list-resultats.component';
 import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
-import { User } from '../../../../auth/models/user.model';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CreateTeamComponent } from 'src/app/team/components/feature/create-team/create-team.component';
 import { ListTeamComponent } from 'src/app/profile/components/feature/list-team/list-team.component';
 import * as fr from '@angular/common/locales/fr';
+import { TeamFormComponent } from 'src/app/team/components/feature/team-form/team-form.component';
+import { CurrentUser } from 'src/app/auth/models/current-user.model';
+import { UserService } from 'src/app/auth/shared/user.service';
 
 @Component({
   selector: 'app-current-profile-details',
@@ -28,16 +30,19 @@ import * as fr from '@angular/common/locales/fr';
 })
 export class CurrentProfileDetailsComponent {
   currentProfile$!: Observable<CurrentProfile>;
-  currentUser$!: Observable<User>;
+  currentUser$!: Observable<CurrentUser>;
   teamMembers$!: Observable<TeamMembers>;
 
-  constructor(private profileService: ProfileService) {
+  constructor(
+    private profileService: ProfileService,
+    private userService: UserService
+  ) {
     registerLocaleData(fr.default);
   }
 
   ngOnInit(): void {
     this.currentProfile$ = this.profileService.getCurrentProfile();
-    this.currentUser$ = this.profileService.getCurrentUser();
+    this.currentUser$ = this.userService.getCurrentUser();
     this.teamMembers$ = this.profileService.getTeamMembers();
   }
 }

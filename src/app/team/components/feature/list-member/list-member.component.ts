@@ -25,6 +25,8 @@ export class ListMemberComponent {
   @Input() team$!: Observable<Team | null>;
   private teamSubscription!: Subscription;
   members: Member[] = [];
+  teamName: string = '';
+  memberDelete!: Member;
 
   constructor(private memberService: MemberService, public dialog: MatDialog) {}
 
@@ -41,9 +43,13 @@ export class ListMemberComponent {
       }
     });
 
-    this.teamSubscription = this.memberService.team$.subscribe((team) => {
-      if (team) {
-        this.members = team.members;
+    this.teamSubscription = this.memberService.member$.subscribe((member) => {
+      if (member) {
+        this.members.push(member);
+      } else {
+        this.members = this.members.filter(
+          (member) => member !== this.memberDelete
+        );
       }
     });
   }
@@ -54,7 +60,8 @@ export class ListMemberComponent {
       if (result === true) {
         this.team$.subscribe((team) => {
           if (team) {
-            this.memberService.deleteMemberByName(team.name, member);
+            this.memberService.deleteMemberByTeamName(team.name, member);
+            this.memberDelete = member;
           } else {
             console.error('Utilisateur introuvable');
           }

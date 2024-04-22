@@ -3,12 +3,23 @@ import { CommonModule } from '@angular/common';
 import { CardTournamentMatchComponent } from '../card-tournament-match/card-tournament-match.component';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
 import { HelperTournamentService } from 'src/app/tournament/shared/helpers/helper-tournament.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { TimeService } from 'src/app/tournament/shared/time.service';
+import { MatButtonModule } from '@angular/material/button';
+import { TournamentService } from 'src/app/tournament/shared/tournament.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ToastService } from 'src/app/shared/toast.service';
+import { ValidationModalComponent } from '../validation-modal/validation-modal.component';
 
 @Component({
   selector: 'app-list-tournament-tree',
   standalone: true,
-  imports: [CommonModule, CardTournamentMatchComponent],
+  imports: [
+    CommonModule,
+    CardTournamentMatchComponent,
+    MatButtonModule,
+    MatDialogModule,
+  ],
   templateUrl: './list-tournament-tree.component.html',
   styleUrls: ['./list-tournament-tree.component.scss'],
 })
@@ -22,7 +33,17 @@ export class ListTournamentTreeComponent {
   namesTeamListPhase: any;
   namesTeamListRandom: any;
 
-  constructor(private helperTournamentService: HelperTournamentService) {}
+  constructor(
+    private helperTournamentService: HelperTournamentService,
+    private timeService: TimeService,
+    private tournamentService: TournamentService,
+    private dialog: MatDialog,
+    private toastService: ToastService
+  ) {}
+
+  ngOnDestroy(): void {
+    this.limitInscriptionTime.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.totalPhase = this.helperTournamentService.calculPhase(
@@ -83,5 +104,23 @@ export class ListTournamentTreeComponent {
     }
 
     return result;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ValidationModalComponent);
+    dialogRef.afterClosed().subscribe((response) => {
+      if (response === true) {
+        this.tournament$.subscribe((tournament) => {
+          if (tournament) {
+            this.tournamentService.updateTournament(tournament.id);
+          }
+        });
+      } else {
+        this.toastService.showError(
+          'Erreur',
+          'Veuillez remplir tous les champs obligatoires'
+        );
+      }
+    });
   }
 }

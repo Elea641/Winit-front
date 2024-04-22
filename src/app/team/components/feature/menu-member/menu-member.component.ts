@@ -37,11 +37,11 @@ export class MenuMemberComponent {
   }
 
   ngOnInit() {
-    this.teamSubscription = this.memberService.team$.subscribe((team) => {
-      if (team) {
-        this.team$ = of(team);
-      }
-    });
+    // this.teamSubscription = this.memberService.team$.subscribe((team) => {
+    //   if (team) {
+    //     this.team$ = of(team);
+    //   }
+    // });
   }
 
   handleCancelClick() {

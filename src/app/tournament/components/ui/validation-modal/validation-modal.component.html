@@ -1,0 +1,15 @@
+<div class="confirm-modal-container">
+  <h1 mat-dialog-title>Confirmation</h1>
+  <div mat-dialog-content>
+    Êtes-vous sûr de vouloir générer le tournoi ? Vous ne pourrez plus le
+    supprimer par la suite.
+  </div>
+  <div mat-dialog-actions>
+    <button mat-flat-button color="warn" (click)="dialogRef.close(true)">
+      Confirmer
+    </button>
+    <button mat-button color="primary" (click)="dialogRef.close(false)">
+      Annuler
+    </button>
+  </div>
+</div>
