@@ -16,7 +16,7 @@ export class TeamService implements ITeamService {
   public team$: Observable<Team | null> = this.teamSubject.asObservable();
 
   constructor(
-    public http: HttpClient,
+    private http: HttpClient,
     private router: Router,
     private toastService: ToastService
   ) {}
@@ -31,6 +31,10 @@ export class TeamService implements ITeamService {
 
   getAllTeamsByUser(): Observable<Team[]> {
     return this.http.get<Team[]>(`${environment.urlApi}/teams`);
+  }
+
+  getAllTeamsByUserForTournament(sport: string): Observable<Team[]> {
+    return this.http.get<Team[]>(`${environment.urlApi}/teams/sport/${sport}`);
   }
 
   getTeamByTeamName(teamName: string): Observable<Team> {

@@ -11,7 +11,12 @@ import { Team } from 'src/app/team/models/team.model';
 @Component({
   selector: 'app-select-team-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    ListTeamBySportComponent,
+    MatDividerModule,
+    InscriptionFormTournamentComponent,
+  ],
   templateUrl: './select-team-page.component.html',
   styleUrls: ['./select-team-page.component.scss'],
 })

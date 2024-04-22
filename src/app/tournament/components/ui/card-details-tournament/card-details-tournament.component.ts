@@ -7,11 +7,11 @@ import { Observable, Subscription } from 'rxjs';
 import * as fr from '@angular/common/locales/fr';
 import { GetImageService } from 'src/app/shared/get-image.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { getRemainingTime } from 'src/app/tournament/shared/utils/convertTime.util';
-import { TimeService } from 'src/app/tournament/shared/time.service';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
+import { TimeService } from 'src/app/tournament/shared/time-service.service';
+import { getRemainingTime } from 'src/app/tournament/shared/utils/convertTime.util';
 @Component({
   selector: 'app-card-details-tournament',
   standalone: true,

@@ -2,7 +2,10 @@
   class="card-tournament-match-container"
   [ngClass]="isEven"
   [ngStyle]="{
-    'margin-bottom.rem': (isDesktop || isLargeDesktop) && !isLastIteration && isEven === 'odd' ? margin : 0
+    'margin-bottom.rem':
+      (isDesktop || isLargeDesktop) && !isLastIteration && isEven === 'odd'
+        ? margin
+        : 0
   }"
 >
   <div

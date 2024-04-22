@@ -14,11 +14,11 @@ import { MatInputModule } from '@angular/material/input';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Team } from 'src/app/team/models/team.model';
-import { ChosenTeam } from 'src/app/tournament/models/chosenTeam.model';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmModalComponent } from 'src/app/components/ui/confirm-modal/confirm-modal.component';
 import { MatSelectModule } from '@angular/material/select';
+import { SelectTeam } from 'src/app/tournament/models/selectTeam.model';
 
 @Component({
   selector: 'app-inscription-form-tournament',
@@ -40,7 +40,7 @@ import { MatSelectModule } from '@angular/material/select';
 export class InscriptionFormTournamentComponent {
   @Input() teams!: Team[] | null;
   inscriptionForm!: FormGroup;
-  chosenTeam!: ChosenTeam;
+  selectTeam!: SelectTeam;
   tournamentId!: number;
 
   constructor(
@@ -70,12 +70,12 @@ export class InscriptionFormTournamentComponent {
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
         if (this.inscriptionForm.valid) {
-          this.chosenTeam = new ChosenTeam(
+          this.selectTeam = new SelectTeam(
             this.inscriptionForm.value.teamName,
             this.tournamentId
           );
           this.tournamentService
-            .addTeamToTournament(this.chosenTeam)
+            .addTeamToTournament(this.selectTeam)
             .subscribe((response) => {
               if (response === true) {
                 this.router.navigate([`/tournament/${this.tournamentId}`]);

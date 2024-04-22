@@ -13,6 +13,9 @@
       >
         <p>{{ remainingTime }}</p>
         <button
+          *ngIf="
+            currentNumberOfParticipants !== tournamentDetails.maxNumberOfTeams
+          "
           mat-raised-button
           color="primary"
           type="button"
@@ -36,11 +39,9 @@
         <p>{{ tournamentDetails.date | date : "dd MMMM yyyy" | titlecase }}</p>
         <p>
           Équipes inscrites :
-          {{
-            tournamentDetails.currentNumberOfParticipants !== null
-              ? tournamentDetails.currentNumberOfParticipants
-              : "0"
-          }}/{{ tournamentDetails.maxNumberOfTeams }}
+          {{ currentNumberOfParticipants }}/{{
+            tournamentDetails.maxNumberOfTeams
+          }}
         </p>
         <p>{{ tournamentDetails.format }}</p>
         <p>{{ tournamentDetails.privacy }}</p>

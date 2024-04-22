@@ -1,21 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Observable, Subject, throwError } from 'rxjs';
-
 import { environment } from 'src/environments/environment';
-
 import { TournamentCreationDto } from '../models/tournament-creation-dto.model';
 import { TournamentDetails } from '../models/tournament-details.model';
 import { Tournament } from '../models/tournament.model';
-
 import { ToastService } from 'src/app/shared/toast.service';
 import { TournamentMappers } from './mappers/TournamentMappers';
 import { TournamentCard } from '../models/tournament-card.model';
 import { ITournamentService } from './interfaces/ITournament.service';
-import { ChosenTeam } from '../models/chosenTeam.model';
+
 import { TournamentUpdate } from '../models/tournamentUpdate.model';
+import { SelectTeam } from '../models/selectTeam.model';
 
 @Injectable({
   providedIn: 'root',
@@ -89,15 +86,15 @@ export class TournamentService implements ITournamentService {
       );
   }
 
-  addTeamToTournament(chosenTeam: ChosenTeam): Observable<boolean> {
+  addTeamToTournament(selectTeam: SelectTeam): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       this.http
-        .post<ChosenTeam>(`${environment.urlApi}/tournaments/teams`, chosenTeam)
+        .post<SelectTeam>(`${environment.urlApi}/tournaments/teams`, selectTeam)
         .subscribe(
           (response) => {
             if (response) {
               this.teamInscriptionSubject.next({
-                name: chosenTeam.teamName,
+                name: selectTeam.teamName,
                 result: 0,
                 url: '',
               });
