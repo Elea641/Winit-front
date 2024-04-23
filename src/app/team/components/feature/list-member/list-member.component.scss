@@ -2,8 +2,7 @@
 @import "../../../../../assets/style/mixins.scss";
 
 li {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   padding: 0 2rem;
 
   div {

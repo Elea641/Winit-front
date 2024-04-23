@@ -10,7 +10,6 @@
     </div>
     <h2>FILTRES</h2>
     <div class="line"></div>
-
     <div class="container-sidebar-menu-button sidebar-select-sport">
       <mat-label>Trier par sport</mat-label>
       <mat-select [(value)]="selectedSport" class="selected">
@@ -30,7 +29,6 @@
         >
       </mat-select>
     </div>
-
     <button
       (click)="showFiller = !showFiller"
       mat-raised-button
@@ -83,7 +81,6 @@
       </button>
     </div>
   </mat-drawer>
-
   <div class="sidenav-button">
     <button mat-icon-button (click)="toggleDrawer()">
       <mat-icon>{{
@@ -92,7 +89,6 @@
     </button>
   </div>
 </mat-drawer-container>
-
 <mat-toolbar
   class="container-sidebar-mobile"
   *ngIf="!isDesktop || !isLargeDesktop"
@@ -130,7 +126,6 @@
         >
       </mat-select>
     </div>
-
     <button
       mat-menu-item
       (click)="sendChronologicalFilterChangeToParent()"

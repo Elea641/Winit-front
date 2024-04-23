@@ -1,14 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardTournamentMatchComponent } from '../card-tournament-match/card-tournament-match.component';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
 import { HelperTournamentService } from 'src/app/tournament/shared/helpers/helper-tournament.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
+import { TournamentService } from 'src/app/tournament/shared/tournament.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ToastService } from 'src/app/shared/toast.service';
+import { ValidationModalComponent } from '../validation-modal/validation-modal.component';
+import { TimeService } from 'src/app/tournament/shared/time-service.service';
 
 @Component({
   selector: 'app-list-tournament-tree',
   standalone: true,
-  imports: [CommonModule, CardTournamentMatchComponent],
+  imports: [
+    CommonModule,
+    CardTournamentMatchComponent,
+    MatButtonModule,
+    MatDialogModule,
+  ],
   templateUrl: './list-tournament-tree.component.html',
   styleUrls: ['./list-tournament-tree.component.scss'],
 })
@@ -21,34 +32,51 @@ export class ListTournamentTreeComponent {
   namesTeamList: any;
   namesTeamListPhase: any;
   namesTeamListRandom: any;
+  limitInscriptionTime!: Subscription;
+  limitInscriptionValue: number | undefined;
 
-  constructor(private helperTournamentService: HelperTournamentService) {}
+  constructor(
+    private helperTournamentService: HelperTournamentService,
+    private timeService: TimeService,
+    private tournamentService: TournamentService,
+    private dialog: MatDialog,
+    private toastService: ToastService
+  ) {}
+
+  ngOnDestroy(): void {
+    this.limitInscriptionTime.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.totalPhase = this.helperTournamentService.calculPhase(
-      this.tournamentDetails.participants
-    );
+    this.limitInscriptionTime =
+      this.timeService.limitTimeInscription$.subscribe((limit: number) => {
+        this.limitInscriptionValue = limit;
+      });
 
-    this.tournamentPhase =
-      this.helperTournamentService.convertToTournamentPhase(this.totalPhase);
+    // this.totalPhase = this.helperTournamentService.calculPhase(
+    //   this.tournamentDetails.participants
+    // );
 
-    this.namesTeamList = this.helperTournamentService.randomizeTeams(
-      this.tournamentDetails.teams
-    );
+    // this.tournamentPhase =
+    //   this.helperTournamentService.convertToTournamentPhase(this.totalPhase);
 
-    const { randomTeams, remainingTeams } =
-      this.helperTournamentService.divideTeamsForPhases(
-        this.namesTeamList,
-        this.totalPhase.randomMatchs
-      );
+    // this.namesTeamList = this.helperTournamentService.randomizeTeams(
+    //   this.tournamentDetails.teams
+    // );
 
-    this.namesTeamListPhase = {
-      remainingTeams,
-    };
+    // const { randomTeams, remainingTeams } =
+    //   this.helperTournamentService.divideTeamsForPhases(
+    //     this.namesTeamList,
+    //     this.totalPhase.randomMatchs
+    //   );
 
-    this.namesTeamListRandom = {
-      randomTeams,
-    };
+    // this.namesTeamListPhase = {
+    //   remainingTeams,
+    // };
+
+    // this.namesTeamListRandom = {
+    //   randomTeams,
+    // };
   }
 
   getObjectKeys(obj: any): any[] {
@@ -83,5 +111,23 @@ export class ListTournamentTreeComponent {
     }
 
     return result;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ValidationModalComponent);
+    dialogRef.afterClosed().subscribe((response) => {
+      if (response === true) {
+        this.tournament$.subscribe((tournament) => {
+          if (tournament) {
+            this.tournamentService.updateTournament(tournament.id);
+          }
+        });
+      } else {
+        this.toastService.showError(
+          'Erreur',
+          'Veuillez remplir tous les champs obligatoires'
+        );
+      }
+    });
   }
 }

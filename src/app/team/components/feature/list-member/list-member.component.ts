@@ -25,8 +25,13 @@ export class ListMemberComponent {
   @Input() team$!: Observable<Team | null>;
   private teamSubscription!: Subscription;
   members: Member[] = [];
+  teamName: string = '';
+  memberDelete!: Member;
 
-  constructor(private memberService: MemberService, public dialog: MatDialog) {}
+  constructor(
+    private memberService: MemberService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnDestroy(): void {
     if (this.teamSubscription) {
@@ -41,20 +46,25 @@ export class ListMemberComponent {
       }
     });
 
-    this.teamSubscription = this.memberService.team$.subscribe((team) => {
-      if (team) {
-        this.members = team.members;
+    this.teamSubscription = this.memberService.member$.subscribe((member) => {
+      if (member) {
+        this.members.push(member);
+      } else {
+        this.members = this.members.filter(
+          (member) => member !== this.memberDelete
+        );
       }
     });
   }
 
   openDialog(member: Member) {
     const dialogRef = this.dialog.open(DeleteModalComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
+    dialogRef.afterClosed().subscribe((response) => {
+      if (response === true) {
         this.team$.subscribe((team) => {
           if (team) {
-            this.memberService.deleteMemberByName(team.name, member);
+            this.memberService.deleteMemberByTeamName(team.name, member);
+            this.memberDelete = member;
           } else {
             console.error('Utilisateur introuvable');
           }

@@ -1,0 +1,14 @@
+@import "../../../../../assets/style/mixins.scss";
+
+ul {
+  @include media-mobile-screen {
+    @include flex-column-center;
+  }
+
+  @include media-tablet-screen {
+    @include flex-wrap;
+  }
+  @include media-large-screen {
+    @include flex-wrap;
+  }
+}

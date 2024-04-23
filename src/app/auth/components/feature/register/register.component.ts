@@ -15,9 +15,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
-import { User } from '../../../models/user.model';
 import { AuthService } from '../../../shared/auth.service';
 import { checkPasswordMatch } from '../../../shared/password-match';
+import { CurrentUser } from 'src/app/auth/models/current-user.model';
 
 @Component({
   selector: 'app-register',
@@ -39,9 +39,8 @@ import { checkPasswordMatch } from '../../../shared/password-match';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-
   registerForm!: FormGroup;
-  user: User = {
+  user: CurrentUser = {
     firstName: '',
     lastName: '',
     email: '',
@@ -120,7 +119,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const newUser: User = {
+      const newUser: CurrentUser = {
         firstName: this.firstName.value,
         lastName: this.lastName.value,
         city: this.city.value,

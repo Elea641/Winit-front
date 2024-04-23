@@ -1,5 +1,6 @@
 export class TournamentDetails {
   constructor(
+    public id: number,
     public sport: string,
     public place: string,
     public participants: number,
@@ -12,6 +13,8 @@ export class TournamentDetails {
     public format: string,
     public imageUrl: string,
     public privacy: string,
-    public teams: { team: string; result: number; url: string }[]
+    public teams: { name: string; result: number; url: string }[],
+    public isOwner: boolean,
+    public isGenerated: boolean
   ) {}
 }
