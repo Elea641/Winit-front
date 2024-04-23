@@ -25,6 +25,9 @@
         'transition.s': 0.3
       }"
     >
+      <ng-container *ngIf="(filteredTournaments$ | async)?.length === 0">
+        <h1>AUCUN TOURNOI CORRESPONDANT À VOTRE RECHERCHE</h1>
+      </ng-container>
       <ng-container *ngIf="(filteredTournaments$ | async)?.length">
         <h1>TOUS LES TOURNOIS</h1>
         <mat-divider></mat-divider>
