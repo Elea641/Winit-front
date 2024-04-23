@@ -11,7 +11,4 @@ import { Team } from 'src/app/team/models/team.model';
 })
 export class ListTeamBySportComponent {
   @Input() teams!: Team[] | null;
-  ngOninit() {
-    console.log(this.teams);
-  }
 }

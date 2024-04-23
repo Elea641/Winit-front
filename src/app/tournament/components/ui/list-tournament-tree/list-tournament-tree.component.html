@@ -1,5 +1,11 @@
 <ng-container *ngIf="tournament$ | async as tournamentDetails">
-  <div *ngIf="limitInscriptionValue === 0">
+  <div
+    *ngIf="
+      limitInscriptionValue === 0 ||
+      tournamentDetails.currentNumberOfParticipants ===
+        tournamentDetails.maxNumberOfTeams
+    "
+  >
     <button
       mat-raised-button
       color="primary"
