@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  OnDestroy,
   OnInit,
   Output,
   ViewChild,
@@ -96,17 +95,14 @@ export class SidebarComponent implements OnInit {
   toggleIcon() {
     this.showFiller = !this.showFiller;
   }
-
   toggleDrawer() {
     this.drawer.toggle();
     this.isDrawerOpened = this.drawer.opened;
     this.isDrawerOpenedChange.emit(this.isDrawerOpened);
   }
-
   private addClickOutsideListener() {
     document.addEventListener('click', (event) => {
       const clickedElement = event.target as HTMLElement;
-
       if (this.isDesktop) {
         if (!this.el.nativeElement.contains(clickedElement)) {
           this.drawer.close();
@@ -116,7 +112,6 @@ export class SidebarComponent implements OnInit {
       }
     });
   }
-
   onReceiveSearchValueFromInput(value: string) {
     this.newSearchValueEventFromSidebar.emit(value);
     if (value.length < 1) {
@@ -132,23 +127,19 @@ export class SidebarComponent implements OnInit {
     this.chronologicalFilter = !this.chronologicalFilter;
     this.newChronologicalFilterChange.emit(this.chronologicalFilter);
   }
-
   sendShowOnlyUpcomingTournamentsToParent() {
     this.showOnlyUpcomingTournaments = !this.showOnlyUpcomingTournaments;
     this.newShowOnlyUpcomingTournaments.emit(this.showOnlyUpcomingTournaments);
   }
-
   sendShowNonFullTournaments() {
     this.showNonFullTournaments = !this.showNonFullTournaments;
     this.newShowNonFullTournaments.emit(this.showNonFullTournaments);
   }
-
   sendSportFilter(value: string) {
     this.newSportFilter.emit(value);
     this.showNonFullTournaments = false;
     this.showOnlyUpcomingTournaments = false;
   }
-
   sendResetFilters() {
     this.newResetFilter.emit();
     this.chronologicalFilter = false;
