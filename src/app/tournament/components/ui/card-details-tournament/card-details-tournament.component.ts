@@ -9,9 +9,10 @@ import { GetImageService } from 'src/app/shared/get-image.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
 import { getRemainingTime } from 'src/app/tournament/shared/utils/convertTime.util';
+import { ModalContent } from 'src/app/components/models/modal-content.model';
+import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 @Component({
   selector: 'app-card-details-tournament',
   standalone: true,
@@ -49,8 +50,6 @@ export class CardDetailsTournamentComponent {
   }
 
   ngOnInit() {
-    this.tournament$.subscribe((e) => console.log(e));
-
     this.route.params.subscribe((params) => {
       this.tournamentId = Number(params['id']);
     });
@@ -91,7 +90,14 @@ export class CardDetailsTournamentComponent {
   }
 
   openDialog(tournamentDetails: TournamentDetails) {
-    const dialogRef = this.dialog.open(DeleteModalComponent);
+    const modalData: ModalContent = {
+      title: 'Confirmation',
+      content: `Êtes-vous sûr de vouloir confirmer la suppression de ce tournoi?`,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: new ModalContent(modalData),
+    });
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
         this.tournamentService.deleteTournament(tournamentDetails);

@@ -35,7 +35,6 @@ export class DeleteProfileDialogComponent implements OnInit {
     if (this.currentUser.id) {
       this.profileService.deleteProfile(this.currentUser.id).subscribe(
         (response) => {
-          console.log('Profile successfully deleted: ', response);
           this.goToDisconnected('/');
           this.toastService.showSuccess(
             'Votre profil a bien été supprimé.',

@@ -5,10 +5,11 @@ import { TournamentDetails } from 'src/app/tournament/models/tournament-details.
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { ActivatedRoute } from '@angular/router';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
+import { ModalContent } from 'src/app/components/models/modal-content.model';
+import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 
 @Component({
   selector: 'app-list-teams-tournament',
@@ -69,7 +70,14 @@ export class ListTeamsTournamentComponent {
   }
 
   openDialog(team: { name: string; result: number; url: string }) {
-    const dialogRef = this.dialog.open(DeleteModalComponent);
+    const modalData: ModalContent = {
+      title: 'Confirmation',
+      content: `Êtes-vous sûr de vouloir supprimer cette équipe du tournoi?`,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: new ModalContent(modalData),
+    });
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
         this.tournamentService

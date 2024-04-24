@@ -8,8 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ToastService } from 'src/app/shared/toast.service';
-import { ValidationModalComponent } from '../validation-modal/validation-modal.component';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
+import { ModalContent } from 'src/app/components/models/modal-content.model';
+import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 
 @Component({
   selector: 'app-list-tournament-tree',
@@ -114,7 +115,15 @@ export class ListTournamentTreeComponent {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(ValidationModalComponent);
+    const modalData: ModalContent = {
+      title: 'Confirmation',
+      content: `Êtes-vous sûr de vouloir générer le tournoi ? Vous ne pourrez plus le
+      supprimer par la suite.`,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: new ModalContent(modalData),
+    });
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
         this.tournament$.subscribe((tournament) => {

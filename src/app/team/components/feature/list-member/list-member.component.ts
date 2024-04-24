@@ -4,10 +4,11 @@ import { Member } from 'src/app/team/models/member.model';
 import { MemberCardComponent } from '../../ui/member-card/member-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Observable, Subscription } from 'rxjs';
 import { Team } from 'src/app/team/models/team.model';
+import { ModalContent } from 'src/app/components/models/modal-content.model';
+import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 
 @Component({
   selector: 'app-list-member',
@@ -58,7 +59,14 @@ export class ListMemberComponent {
   }
 
   openDialog(member: Member) {
-    const dialogRef = this.dialog.open(DeleteModalComponent);
+    const modalData: ModalContent = {
+      title: 'Confirmation',
+      content: `Êtes-vous sûr de vouloir supprimer le membre.`,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: new ModalContent(modalData),
+    });
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
         this.team$.subscribe((team) => {

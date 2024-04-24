@@ -5,11 +5,12 @@ import { TeamService } from 'src/app/team/shared/team.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DeleteModalComponent } from 'src/app/components/ui/delete-modal/delete-modal.component';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable, Subscription, of } from 'rxjs';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Router } from '@angular/router';
+import { ModalContent } from 'src/app/components/models/modal-content.model';
+import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 
 @Component({
   selector: 'app-team-detail-card',
@@ -60,7 +61,14 @@ export class TeamDetailCardComponent {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DeleteModalComponent);
+    const modalData: ModalContent = {
+      title: 'Confirmation',
+      content: `Êtes-vous sûr de vouloir surrpimer cette équipe?`,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: new ModalContent(modalData),
+    });
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.team$.subscribe((team) => {
