@@ -16,9 +16,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Team } from 'src/app/team/models/team.model';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ConfirmModalComponent } from 'src/app/components/ui/confirm-modal/confirm-modal.component';
 import { MatSelectModule } from '@angular/material/select';
 import { SelectTeam } from 'src/app/tournament/models/selectTeam.model';
+import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
+import { ModalContent } from 'src/app/components/models/modal-content.model';
 
 @Component({
   selector: 'app-inscription-form-tournament',
@@ -66,7 +67,16 @@ export class InscriptionFormTournamentComponent {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(ConfirmModalComponent);
+    const modalData: ModalContent = {
+      title: 'Confirmation',
+      content: `Êtes-vous sûr de vouloir ajouter cette équipe au tournoi? L'équipe ne pourra
+      ni être supprimée, ni modifiée par la suite.`,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: new ModalContent(modalData),
+    });
+
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
         if (this.inscriptionForm.valid) {

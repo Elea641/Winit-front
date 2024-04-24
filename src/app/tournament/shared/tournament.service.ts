@@ -75,8 +75,7 @@ export class TournamentService implements ITournamentService {
           }
         },
         (error) => {
-          const errorMessage =
-            error?.error?.error_message || 'Une erreur est survenue';
+          const errorMessage = error?.error?.error_message;
           this.toastService.showError(
             error.error,
             'Erreur lors de la création du tournoi'

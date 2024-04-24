@@ -40,8 +40,6 @@ export class SelectTeamPageComponent {
         this.teamService
           .getAllTeamsByUserForTournament(tournament?.sport)
           .subscribe((teams) => {
-            console.log(teams);
-
             if (teams) {
               this.teams$ = of(teams);
             } else {

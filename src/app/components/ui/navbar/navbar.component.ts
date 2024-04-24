@@ -26,7 +26,7 @@ import { TokenService } from 'src/app/auth/shared/token.service';
 export class NavbarComponent implements OnInit {
   currentUser!: any;
   isMobile: boolean | undefined = false;
-  logoUrl: string = '../../../assets/pictures/logo-white.png';
+  logoUrl: string = '';
 
   constructor(
     private router: Router,
@@ -46,7 +46,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.logoUrl =
+            event?.url === '/' || event?.url === '/home'
+              ? '../../../../assets/pictures/logo-orange.png'
+              : '../../../../assets/pictures/logo-white.png';
+        }
         window.scrollTo(0, 0);
       });
 
@@ -62,13 +68,5 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([url]).then(() => {
       window.location.reload();
     });
-  }
-
-  toggleLogo() {
-    this.logoUrl = '../../../assets/pictures/logo-orange.png';
-  }
-
-  toggleLogoButton() {
-    this.logoUrl = '../../../assets/pictures/logo-white.png';
   }
 }
