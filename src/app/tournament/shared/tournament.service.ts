@@ -69,8 +69,8 @@ export class TournamentService implements ITournamentService {
           if (response) {
             this.router.navigate(['/tournament/' + response]);
             this.toastService.showSuccess(
-              'Votre tournoi est prêt !',
-              'Tournoi créé avec succès'
+              'Tournoi créé avec succès',
+              'Votre tournoi est prêt !'
             );
           }
         },
@@ -101,8 +101,8 @@ export class TournamentService implements ITournamentService {
               observer.next(true);
               observer.complete();
               this.toastService.showSuccess(
-                'Bravo félicitations',
-                "L'ajout de votre équipe au tournoi a bien été prise en compte"
+                "L'ajout de votre équipe au tournoi a bien été prise en compte",
+                'Bravo félicitations'
               );
             }
           },
@@ -133,8 +133,8 @@ export class TournamentService implements ITournamentService {
           (response) => {
             if (response) {
               this.toastService.showSuccess(
-                'Suppression',
-                "L'équipe a été supprimée avec succès"
+                "L'équipe a été supprimée avec succès",
+                'Suppression'
               );
               this.inscriptionSubject.next(false);
               observer.next(true);
@@ -156,10 +156,6 @@ export class TournamentService implements ITournamentService {
   }
 
   updateTournament(tournamentId: number) {
-    const isGenerated: TournamentUpdate = {
-      isGenerated: true,
-    };
-
     this.http
       .put<TournamentUpdate>(
         `${environment.urlApi}/tournaments/${tournamentId}`,
@@ -172,8 +168,8 @@ export class TournamentService implements ITournamentService {
           if (response) {
             this.router.navigate(['/tournament/' + tournamentId]);
             this.toastService.showSuccess(
-              'Votre tournoi est prêt !',
-              'Tournoi généré avec succès'
+              'Tournoi généré avec succès',
+              'Votre tournoi est prêt !'
             );
           }
         },
@@ -198,8 +194,8 @@ export class TournamentService implements ITournamentService {
         (response) => {
           if (response) {
             this.toastService.showSuccess(
-              'Suppression',
-              'Le tournoi a été supprimée avec succès'
+              'Le tournoi a été supprimée avec succès',
+              'Suppression'
             );
             this.router.navigate(['/']);
           }

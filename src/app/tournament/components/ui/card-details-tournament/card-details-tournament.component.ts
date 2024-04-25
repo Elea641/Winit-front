@@ -63,7 +63,7 @@ export class CardDetailsTournamentComponent {
       this.getImageService.getImage(tournament.imageUrl).subscribe((data) => {
         this.image = data;
         this.currentUser = tournament.isOwner;
-        this.tournamentDate = new Date(tournament.date);
+        this.tournamentDate = new Date(tournament.inscriptionLimitDate);
         this.remainingTime = getRemainingTime(
           this.tournamentDate,
           this.timeService,

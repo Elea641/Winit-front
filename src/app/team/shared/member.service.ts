@@ -22,8 +22,8 @@ export class MemberService implements IMemberService {
         (response) => {
           if (response) {
             this.toastService.showSuccess(
-              'Bravo félicitations',
-              "Ajout de votre membre à l'équipe"
+              "Ajout de votre membre à l'équipe",
+              'Bravo félicitations'
             );
             this.memberSubject.next(member);
           }
@@ -44,8 +44,8 @@ export class MemberService implements IMemberService {
         (response) => {
           if (response) {
             this.toastService.showSuccess(
-              'Membre supprimé avec succès',
-              "Le membre a été supprimé de l'équipe"
+              "Le membre a été supprimé de l'équipe",
+              'Membre supprimé avec succès'
             );
             this.memberSubject.next(null);
           }

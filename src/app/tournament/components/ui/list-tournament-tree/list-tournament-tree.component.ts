@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardTournamentMatchComponent } from '../card-tournament-match/card-tournament-match.component';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
@@ -27,6 +27,7 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 export class ListTournamentTreeComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
   @Input() tournamentDetails!: TournamentDetails;
+  @Output() generatedTournament: EventEmitter<boolean> = new EventEmitter();
   convertedSelection: string | undefined;
   tournamentPhase!: any;
   totalPhase: any;
@@ -114,6 +115,10 @@ export class ListTournamentTreeComponent {
     return result;
   }
 
+  getGenerated(event: boolean): void {
+    this.generatedTournament.emit(true);
+  }
+
   openDialog() {
     const modalData: ModalContent = {
       title: 'Confirmation',
@@ -128,6 +133,7 @@ export class ListTournamentTreeComponent {
       if (response === true) {
         this.tournament$.subscribe((tournament) => {
           if (tournament) {
+            this.getGenerated(true);
             this.tournamentService.updateTournament(tournament.id);
           }
         });

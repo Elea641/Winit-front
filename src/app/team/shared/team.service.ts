@@ -47,8 +47,8 @@ export class TeamService implements ITeamService {
         if (response) {
           this.router.navigate([`/teams-details/${team.name}`]);
           this.toastService.showSuccess(
-            'Bravo félicitations',
-            'Création de votre équipe'
+            'Création de votre équipe',
+            'Bravo félicitations'
           );
         }
       },
@@ -73,8 +73,8 @@ export class TeamService implements ITeamService {
               if (response) {
                 this.router.navigate([`/teams-details/${team.name}`]);
                 this.toastService.showSuccess(
-                  'Bravo félicitations',
-                  'Mise à jour de votre équipe'
+                  'Mise à jour de votre équipe',
+                  'Bravo félicitations'
                 );
               }
             },
@@ -96,8 +96,8 @@ export class TeamService implements ITeamService {
       (response) => {
         if (response) {
           this.toastService.showSuccess(
-            'Suppression',
-            "L'équipe supprimé avec succès"
+            "L'équipe supprimé avec succès",
+            'Suppression'
           );
           this.router.navigate(['/profile']);
         }

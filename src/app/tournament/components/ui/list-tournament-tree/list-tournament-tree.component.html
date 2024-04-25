@@ -10,7 +10,10 @@
       mat-raised-button
       color="primary"
       (click)="openDialog()"
-      *ngIf="!tournamentDetails.isGenerated && tournamentDetails.isOwner"
+      *ngIf="
+        limitInscriptionValue === 0 &&
+        !tournamentDetails.isGenerated && tournamentDetails.isOwner
+      "
     >
       GÉNÉRER LE TOURNOI
     </button>

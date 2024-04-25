@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
@@ -19,6 +19,7 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
   styleUrls: ['./list-teams-tournament.component.scss'],
 })
 export class ListTeamsTournamentComponent {
+  @Input() generatedTournament!: boolean;
   @Input() tournament$!: Observable<TournamentDetails>;
   tournamentId!: number;
   teamSubscription!: Subscription;

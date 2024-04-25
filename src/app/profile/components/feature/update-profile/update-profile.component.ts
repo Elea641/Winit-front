@@ -111,10 +111,6 @@ export class UpdateProfileComponent implements OnInit {
         .updateProfile(this.currentUser.id, this.updateProfileForm.value)
         .subscribe(
           (response) => {
-            console.log(
-              'Profile has been successfully updated: ',
-              this.updateProfileForm.value
-            );
             this.toastService.showSuccess(
               'Votre profil a bien été modifié.',
               'Succès !'
@@ -122,7 +118,6 @@ export class UpdateProfileComponent implements OnInit {
             this.router.navigate(['/profile']);
           },
           (error) => {
-            console.error('Profile could not be updated: ', error);
             this.toastService.showError(
               "Votre profil n'a pas pu être mis à jour, veuillez réessayer ultérieurement.",
               'Une erreur est apparue'
