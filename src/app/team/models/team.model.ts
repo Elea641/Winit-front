@@ -8,6 +8,7 @@ export class Team {
     public sport: string,
     public teamMembersCount: number,
     public totalPlayers: number,
-    public validated: boolean
+    public validated: boolean,
+    public ownerId: number
   ) {}
 }

@@ -13,7 +13,13 @@ export class TournamentDetails {
     public format: string,
     public imageUrl: string,
     public privacy: string,
-    public teams: { name: string; result: number; url: string }[],
+    public teams: {
+      name: string;
+      result: number;
+      url: string;
+      ownerId: number;
+      currentUser: number;
+    }[],
     public isOwner: boolean,
     public isGenerated: boolean
   ) {}

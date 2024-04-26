@@ -24,7 +24,13 @@ export class ListTeamsTournamentComponent {
   tournamentId!: number;
   teamSubscription!: Subscription;
   currentNumberOfParticipants!: number;
-  teams!: { name: string; result: number; url: string }[];
+  teams!: {
+    name: string;
+    result: number;
+    url: string;
+    currentUser: number;
+    ownerId: number;
+  }[];
   limitInscriptionTime!: Subscription;
   limitInscriptionValue: number | undefined;
 

@@ -23,11 +23,21 @@ export class TournamentService implements ITournamentService {
     name: string;
     result: number;
     url: string;
-  }> = new Subject<{ name: string; result: number; url: string }>();
+    currentUser: number;
+    ownerId: number;
+  }> = new Subject<{
+    name: string;
+    result: number;
+    url: string;
+    currentUser: number;
+    ownerId: number;
+  }>();
   public teamInscription$: Observable<{
     name: string;
     result: number;
     url: string;
+    currentUser: number;
+    ownerId: number;
   }> = this.teamInscriptionSubject.asObservable();
 
   private inscriptionSubject: Subject<boolean> = new Subject<boolean>();
@@ -96,6 +106,8 @@ export class TournamentService implements ITournamentService {
                 name: selectTeam.teamName,
                 result: 0,
                 url: '',
+                currentUser: 0,
+                ownerId: 0,
               });
               this.inscriptionSubject.next(true);
               observer.next(true);

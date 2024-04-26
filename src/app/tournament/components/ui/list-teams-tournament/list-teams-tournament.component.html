@@ -19,7 +19,11 @@
         </p>
       </div>
       <button
-        *ngIf="!tournament.isGenerated && !generatedTournament"
+        *ngIf="
+          !tournament.isGenerated &&
+          !generatedTournament &&
+          team.currentUser === team.ownerId
+        "
         mat-button
         color="warn"
         (click)="openDialog({ name: team.name, result: 0, url: '' })"

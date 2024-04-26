@@ -19,7 +19,6 @@ import { RouterModule } from '@angular/router';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { InputSearchComponent } from '../../feature/input-search/input-search.component';
 import { SportService } from 'src/app/sport/shared/sport.service';
-import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -127,19 +126,23 @@ export class SidebarComponent implements OnInit {
     this.chronologicalFilter = !this.chronologicalFilter;
     this.newChronologicalFilterChange.emit(this.chronologicalFilter);
   }
+
   sendShowOnlyUpcomingTournamentsToParent() {
     this.showOnlyUpcomingTournaments = !this.showOnlyUpcomingTournaments;
     this.newShowOnlyUpcomingTournaments.emit(this.showOnlyUpcomingTournaments);
   }
+
   sendShowNonFullTournaments() {
     this.showNonFullTournaments = !this.showNonFullTournaments;
     this.newShowNonFullTournaments.emit(this.showNonFullTournaments);
   }
+
   sendSportFilter(value: string) {
     this.newSportFilter.emit(value);
     this.showNonFullTournaments = false;
     this.showOnlyUpcomingTournaments = false;
   }
+
   sendResetFilters() {
     this.newResetFilter.emit();
     this.chronologicalFilter = false;
