@@ -3,9 +3,11 @@
     <mat-form-field appearance="outline">
       <mat-label>Nom de votre équipe</mat-label>
       <mat-select formControlName="teamName">
-        <mat-option *ngFor="let team of teams" [value]="team.name">{{
-          team.name
-        }}</mat-option>
+        <mat-option
+          *ngFor="let team of getTeamsWithMoreThanSixMembers()"
+          [value]="team.name"
+          >{{ team.name }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
 

@@ -100,7 +100,7 @@ export class TeamFormComponent {
   onSubmit() {
     if (this.teamForm.valid) {
       const teamData = {
-        name: this.name.value,
+        name: this.name.value.trim(),
         sport: this.sport.value,
       };
 

@@ -66,6 +66,12 @@ export class InscriptionFormTournamentComponent {
     return this.inscriptionForm.get('teamName')!;
   }
 
+  getTeamsWithMoreThanSixMembers() {
+    return this.teams?.filter(
+      (team) => team.members.length === team.totalPlayers
+    );
+  }
+
   openDialog() {
     const modalData: ModalContent = {
       title: 'Confirmation',
