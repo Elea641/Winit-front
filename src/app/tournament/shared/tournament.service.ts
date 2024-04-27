@@ -65,6 +65,9 @@ export class TournamentService implements ITournamentService {
     const tournamentCreationDto =
       this.tournamentMappers.ToFormData(newTournament);
 
+    console.log(newTournament);
+    console.log(tournamentCreationDto);
+
     const headers = new HttpHeaders();
     headers.append('Content-type', 'multipart/form-data');
 

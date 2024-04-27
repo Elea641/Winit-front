@@ -24,7 +24,7 @@
       }
 
       .all-tournaments-cards {
-        @include flex-wrap-center;
+        @include flex-wrap;
       }
     }
   }
