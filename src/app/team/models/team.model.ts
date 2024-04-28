@@ -2,6 +2,7 @@ import { Member } from './member.model';
 
 export class Team {
   constructor(
+    public id: number,
     public leaderName: string,
     public members: Member[],
     public name: string,

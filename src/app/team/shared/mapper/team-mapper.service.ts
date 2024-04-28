@@ -7,6 +7,6 @@ import { CreatedTeam } from '../../models/created-team.model';
 })
 export class TeamMapperService {
   mapToCreatedTeam(team: Team): CreatedTeam {
-    return new CreatedTeam(team.name, team.sport);
+    return new CreatedTeam(team.name, team.sport, team.id);
   }
 }

@@ -69,6 +69,17 @@ export class TeamFormComponent {
     if (!this.teamToUpdate && this.teamName && this.mode === 'update') {
       this.teamService.getTeamByTeamName(this.teamName).subscribe((team) => {
         this.teamToUpdate = this.teamMapperService.mapToCreatedTeam(team);
+        this.teamForm = new FormGroup({
+          name: new FormControl(team.name, [
+            Validators.required,
+            Validators.pattern(`^[a-zA-Z0-9 ]*`),
+            Validators.maxLength(255),
+          ]),
+          sport: new FormControl(team.sport, [
+            Validators.required,
+            Validators.pattern('[a-zA-Z]*'),
+          ]),
+        });
       });
     }
 
@@ -108,14 +119,11 @@ export class TeamFormComponent {
       const teamData = {
         name: this.name.value.trim(),
         sport: this.sport.value,
+        id: this.teamToUpdate?.id,
       };
-
       if (this.mode === 'create') {
         this.teamService.addTeam(teamData as CreatedTeam);
       } else if (this.mode === 'update' && this.teamToUpdate) {
-        console.log(this.teamToUpdate);
-        console.log(teamData);
-
         if (
           teamData.name !== this.teamToUpdate.name ||
           teamData.sport !== this.teamToUpdate.sport
