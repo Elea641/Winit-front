@@ -79,7 +79,7 @@ export class TeamService implements ITeamService {
               }
             },
             error: (error) => {
-              if (error.error.bad_credentials === 'true') {
+              if (error) {
                 this.toastService.showError(
                   error.error,
                   'Une erreur est survenue'

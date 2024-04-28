@@ -18,9 +18,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { TeamMapperService } from 'src/app/team/shared/mapper/team-mapper.service';
-import { Team } from 'src/app/team/models/team.model';
 
 @Component({
   selector: 'app-team-form',
@@ -67,17 +66,17 @@ export class TeamFormComponent {
       this.teamName = params.get('teamName');
     });
 
-    this.currentTeamSubscription = this.teamService.team$.subscribe((team) => {
-      if (team && this.mode === 'update') {
-        this.teamToUpdate = this.teamMapperService.mapToCreatedTeam(team);
-      }
-    });
-
     if (!this.teamToUpdate && this.teamName && this.mode === 'update') {
       this.teamService.getTeamByTeamName(this.teamName).subscribe((team) => {
         this.teamToUpdate = this.teamMapperService.mapToCreatedTeam(team);
       });
     }
+
+    this.currentTeamSubscription = this.teamService.team$.subscribe((team) => {
+      if (team && this.mode === 'update') {
+        this.teamToUpdate = this.teamMapperService.mapToCreatedTeam(team);
+      }
+    });
 
     this.teamForm = new FormGroup({
       name: new FormControl(this.teamToUpdate ? this.teamToUpdate.name : '', [
@@ -115,6 +114,8 @@ export class TeamFormComponent {
         this.teamService.addTeam(teamData as CreatedTeam);
       } else if (this.mode === 'update' && this.teamToUpdate) {
         console.log(this.teamToUpdate);
+        console.log(teamData);
+
         if (
           teamData.name !== this.teamToUpdate.name ||
           teamData.sport !== this.teamToUpdate.sport
