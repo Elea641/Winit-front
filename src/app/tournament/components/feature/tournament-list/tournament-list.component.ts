@@ -8,6 +8,7 @@ import { CarouselComponent } from '../../../../components/ui/carousel/carousel.c
 import { SidebarComponent } from '../../../../components/ui/sidebar/sidebar.component';
 import { TournamentCardComponent } from '../../ui/tournament-card/tournament-card.component';
 import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
+import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.component';
 
 @Component({
   selector: 'app-tournament-list',
@@ -18,6 +19,7 @@ import { TournamentCard } from 'src/app/tournament/models/tournament-card.model'
     CarouselComponent,
     SidebarComponent,
     MatDividerModule,
+    SpinnerComponent,
   ],
   templateUrl: './tournament-list.component.html',
   styleUrls: ['./tournament-list.component.scss'],
@@ -31,6 +33,7 @@ export class TournamentListComponent implements OnInit {
   showOnlyUpcomingTournaments: boolean = false;
   showNonFullTournaments: boolean = false;
   selectedSport: string = '';
+  loading: boolean = true;
 
   constructor(
     private tournamentService: TournamentService,
@@ -39,6 +42,7 @@ export class TournamentListComponent implements OnInit {
 
   ngOnInit(): void {
     this.filteredTournaments$ = this.tournamentService.getAllTournaments();
+    this.filteredTournaments$.subscribe(() => (this.loading = false));
 
     if (this.isDrawerOpened === true) {
       this.isOpen = 'open';
