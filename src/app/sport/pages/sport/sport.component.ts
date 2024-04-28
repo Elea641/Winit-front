@@ -64,23 +64,9 @@ export class SportComponent {
       formData.set('name', this.newSport.name);
       formData.set('numberOfPlayers', this.newSport.numberOfPlayers.toString());
       formData.set('newFile', this.newFile);
-      this.http
-        .post<any>('http://localhost:8080/api/sports/new', formData, {
-          headers,
-        })
-        .subscribe(
-          (response) => {
-            console.log(response);
-            console.log(this.newSport);
-            console.log(this.newFile, 'newfile');
-          },
-          (error) => {
-            console.error(error);
-            console.log(formData, 'formData');
-            console.log(this.newSport, 'newSport');
-            console.log(this.newFile, 'newFile');
-          }
-        );
+      this.http.post<any>('http://localhost:8080/api/sports/new', formData, {
+        headers,
+      });
     }
   }
 }

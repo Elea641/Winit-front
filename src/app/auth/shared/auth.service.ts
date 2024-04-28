@@ -34,8 +34,8 @@ export class AuthService {
   postRegister(user: CurrentUser): void {
     this.http
       .post<CurrentUser>(`${environment.urlApi}/auth/register`, user)
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response) => {
           if (response) {
             this.localStorageService.clearToken();
             this.router.navigate(['/auth/login']);
@@ -45,41 +45,41 @@ export class AuthService {
             );
           }
         },
-        (error) => {
+        error: (error) => {
           if (error.error.error_message === 'Email already taken.') {
             this.toastService.showError(
               'Un compte avec cette adresse mail existe déjà.',
               'Inscription impossible'
             );
           }
-        }
-      );
+        },
+      });
   }
 
   // Je me connecte : j'envoie mon objet UserAuth et je m'abonne à la réponse de mon serveur. Lorsque je la reçois, je reçois le token que je stock en localStorage.
   signIn(userAuth: UserAuth): void {
     this.tokenService.resetToken();
 
-    this.http.post<any>(`${environment.urlApi}/auth/login`, userAuth).subscribe(
-      (tokenFromDB: TokenResponse) => {
-        if (tokenFromDB) {
+    this.http
+      .post<any>(`${environment.urlApi}/auth/login`, userAuth)
+      .subscribe({
+        next: (tokenFromDB) => {
           this.tokenService.updateToken(tokenFromDB);
           this.router.navigate(['/']);
           this.toastService.showSuccess(
             'bravo félicitations',
             'Connexion réussie'
           );
-        }
-      },
-      (error) => {
-        if (error.error.bad_credentials === 'true') {
-          this.toastService.showError(
-            'La combinaison email / mot de passe est incorrecte.',
-            'Connexion impossible'
-          );
-        }
-      }
-    );
+        },
+        error: (error) => {
+          if (error.error.bad_credentials === 'true') {
+            this.toastService.showError(
+              'La combinaison email / mot de passe est incorrecte.',
+              'Connexion impossible'
+            );
+          }
+        },
+      });
   }
 
   getHttpErrorSubject$(): Observable<HttpErrorResponse> {

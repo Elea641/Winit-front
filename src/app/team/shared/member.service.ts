@@ -18,8 +18,8 @@ export class MemberService implements IMemberService {
   addMember(teamName: string, member: Member): void {
     this.http
       .post<any>(`${environment.urlApi}/members/${teamName}`, member)
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response) => {
           if (response) {
             this.toastService.showSuccess(
               "Ajout de votre membre à l'équipe",
@@ -28,20 +28,20 @@ export class MemberService implements IMemberService {
             this.memberSubject.next(member);
           }
         },
-        (error) => {
-          if (error.error) {
+        error: (error) => {
+          if (error.error.bad_credentials === 'true') {
             this.toastService.showError(error.error, 'Une erreur est survenue');
           }
-        }
-      );
+        },
+      });
   }
 
   deleteMemberByTeamName(teamName: string, member: Member): void {
     const memberId = member.id;
     this.http
       .delete<any>(`${environment.urlApi}/members/${teamName}/${memberId}`)
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response) => {
           if (response) {
             this.toastService.showSuccess(
               "Le membre a été supprimé de l'équipe",
@@ -50,11 +50,11 @@ export class MemberService implements IMemberService {
             this.memberSubject.next(null);
           }
         },
-        (error) => {
-          if (error.error) {
+        error: (error) => {
+          if (error.error.bad_credentials === 'true') {
             this.toastService.showError(error.error, 'Une erreur est survenue');
           }
-        }
-      );
+        },
+      });
   }
 }

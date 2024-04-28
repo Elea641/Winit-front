@@ -33,22 +33,23 @@ export class DeleteProfileDialogComponent implements OnInit {
 
   deleteProfile() {
     if (this.currentUser.id) {
-      this.profileService.deleteProfile(this.currentUser.id).subscribe(
-        (response) => {
+      this.profileService.deleteProfile(this.currentUser.id).subscribe({
+        next: () => {
           this.goToDisconnected('/');
           this.toastService.showSuccess(
             'Votre profil a bien été supprimé.',
             'Succès !'
           );
         },
-        (error) => {
-          console.error('Profile could not be deleted: ', error);
-          this.toastService.showError(
-            "Votre profil n'a pas pu être supprimé, veuillez réessayer ultérieurement.",
-            'Une erreur est survenue'
-          );
-        }
-      );
+        error: (error) => {
+          if (error.error.bad_credentials === 'true') {
+            this.toastService.showError(
+              "Votre profil n'a pas pu être supprimé, veuillez réessayer ultérieurement.",
+              'Une erreur est survenue'
+            );
+          }
+        },
+      });
     }
   }
 

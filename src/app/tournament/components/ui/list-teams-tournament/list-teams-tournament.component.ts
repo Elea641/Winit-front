@@ -89,20 +89,22 @@ export class ListTeamsTournamentComponent {
       if (response === true) {
         this.tournamentService
           .deleteTeamToTournament(this.tournamentId, team)
-          .subscribe(
-            (success) => {
+          .subscribe({
+            next: (success) => {
               if (success) {
                 this.teams = this.teams.filter((t) => t.name !== team.name);
                 this.currentNumberOfParticipants--;
               }
             },
-            (error) => {
-              console.error(
-                'Une erreur est survenue lors de la suppression :',
-                error
-              );
-            }
-          );
+            error: (error) => {
+              if (error.error.bad_credentials === 'true') {
+                console.error(
+                  'Une erreur est survenue lors de la suppression :',
+                  error
+                );
+              }
+            },
+          });
       }
     });
   }
