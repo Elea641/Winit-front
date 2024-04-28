@@ -42,8 +42,8 @@ export class TeamService implements ITeamService {
   }
 
   addTeam(team: CreatedTeam): void {
-    this.http.post<CreatedTeam>(`${environment.urlApi}/teams`, team).subscribe(
-      (response) => {
+    this.http.post<CreatedTeam>(`${environment.urlApi}/teams`, team).subscribe({
+      next: (response) => {
         if (response) {
           this.router.navigate([`/teams-details/${team.name}`]);
           this.toastService.showSuccess(
@@ -52,12 +52,12 @@ export class TeamService implements ITeamService {
           );
         }
       },
-      (error) => {
-        if (error.error) {
+      error: (error) => {
+        if (error.error.bad_credentials === 'true') {
           this.toastService.showError(error.error, 'Une erreur est survenue');
         }
-      }
-    );
+      },
+    });
   }
 
   updateTeam(team: CreatedTeam) {
@@ -68,8 +68,8 @@ export class TeamService implements ITeamService {
             `${environment.urlApi}/teams/${currentTeam.name}`,
             team
           )
-          .subscribe(
-            (response) => {
+          .subscribe({
+            next: (response) => {
               if (response) {
                 this.router.navigate([`/teams-details/${team.name}`]);
                 this.toastService.showSuccess(
@@ -78,22 +78,22 @@ export class TeamService implements ITeamService {
                 );
               }
             },
-            (error) => {
-              if (error.error) {
+            error: (error) => {
+              if (error) {
                 this.toastService.showError(
                   error.error,
                   'Une erreur est survenue'
                 );
               }
-            }
-          );
+            },
+          });
       }
     });
   }
 
   deleteTeam(teamName: string): void {
-    this.http.delete<any>(`${environment.urlApi}/teams/${teamName}`).subscribe(
-      (response) => {
+    this.http.delete<any>(`${environment.urlApi}/teams/${teamName}`).subscribe({
+      next: (response) => {
         if (response) {
           this.toastService.showSuccess(
             "L'équipe supprimé avec succès",
@@ -102,14 +102,14 @@ export class TeamService implements ITeamService {
           this.router.navigate(['/profile']);
         }
       },
-      (error) => {
-        if (error.error) {
+      error: (error) => {
+        if (error.error.bad_credentials === 'true') {
           this.toastService.showError(
             error.error,
             "Une erreur est survenue lors de la suppression de l'équipe"
           );
         }
-      }
-    );
+      },
+    });
   }
 }

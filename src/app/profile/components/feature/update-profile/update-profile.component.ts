@@ -53,8 +53,8 @@ export class UpdateProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe(
-      (currentUser) => {
+    this.userService.getCurrentUser().subscribe({
+      next: (currentUser) => {
         this.currentUser = currentUser;
         this.updateProfileForm.patchValue({
           firstName: this.currentUser.firstName,
@@ -63,15 +63,16 @@ export class UpdateProfileComponent implements OnInit {
           email: this.currentUser.email,
         });
       },
-      (error) => {
-        console.error('Profile could not be updated: ', error);
-        this.router.navigate(['/auth/login']);
-        this.toastService.showError(
-          'Veuillez vous connecter pour mettre à jour votre profil.',
-          'Accès refusé'
-        );
-      }
-    );
+      error: (error) => {
+        if (error.error.bad_credentials === 'true') {
+          this.router.navigate(['/auth/login']);
+          this.toastService.showError(
+            'Veuillez vous connecter pour mettre à jour votre profil.',
+            'Accès refusé'
+          );
+        }
+      },
+    });
 
     this.updateProfileForm = new FormGroup({
       firstName: new FormControl('', [
@@ -110,21 +111,23 @@ export class UpdateProfileComponent implements OnInit {
     if (this.updateProfileForm.valid && this.currentUser.id) {
       this.profileService
         .updateProfile(this.currentUser.id, this.updateProfileForm.value)
-        .subscribe(
-          (response) => {
+        .subscribe({
+          next: () => {
             this.toastService.showSuccess(
               'Votre profil a bien été modifié.',
               'Succès !'
             );
             this.router.navigate(['/profile']);
           },
-          (error) => {
-            this.toastService.showError(
-              "Votre profil n'a pas pu être mis à jour, veuillez réessayer ultérieurement.",
-              'Une erreur est apparue'
-            );
-          }
-        );
+          error: (error) => {
+            if (error.error.bad_credentials === 'true') {
+              this.toastService.showError(
+                "Votre profil n'a pas pu être mis à jour, veuillez réessayer ultérieurement.",
+                'Une erreur est apparue'
+              );
+            }
+          },
+        });
     }
   }
 

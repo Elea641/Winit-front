@@ -69,6 +69,7 @@ export class TeamDetailCardComponent {
     const dialogRef = this.dialog.open(ModalComponent, {
       data: new ModalContent(modalData),
     });
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
         this.team$.subscribe((team) => {

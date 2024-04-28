@@ -74,8 +74,8 @@ export class TournamentService implements ITournamentService {
         tournamentCreationDto,
         { headers }
       )
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response) => {
           if (response) {
             this.router.navigate(['/tournament/' + response]);
             this.toastService.showSuccess(
@@ -84,23 +84,23 @@ export class TournamentService implements ITournamentService {
             );
           }
         },
-        (error) => {
-          const errorMessage = error?.error?.error_message;
-          this.toastService.showError(
-            error.error,
-            'Erreur lors de la création du tournoi'
-          );
-          return throwError(() => new Error(error));
-        }
-      );
+        error: (error) => {
+          if (error.error.bad_credentials === 'true') {
+            this.toastService.showError(
+              error.error,
+              'Erreur lors de la création du tournoi'
+            );
+          }
+        },
+      });
   }
 
   addTeamToTournament(selectTeam: SelectTeam): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       this.http
         .post<SelectTeam>(`${environment.urlApi}/tournaments/teams`, selectTeam)
-        .subscribe(
-          (response) => {
+        .subscribe({
+          next: (response) => {
             if (response) {
               this.teamInscriptionSubject.next({
                 name: selectTeam.teamName,
@@ -118,8 +118,8 @@ export class TournamentService implements ITournamentService {
               );
             }
           },
-          (error) => {
-            if (error.error) {
+          error: (error) => {
+            if (error.error.bad_credentials === 'true') {
               this.toastService.showError(
                 error.error,
                 "Une erreur est survenue lors de l'enregistrement"
@@ -127,8 +127,8 @@ export class TournamentService implements ITournamentService {
               observer.next(false);
               observer.complete();
             }
-          }
-        );
+          },
+        });
     });
   }
 
@@ -141,8 +141,8 @@ export class TournamentService implements ITournamentService {
         .delete<any>(
           `${environment.urlApi}/tournaments/teams/${tournamentId}/${team.name}`
         )
-        .subscribe(
-          (response) => {
+        .subscribe({
+          next: (response) => {
             if (response) {
               this.toastService.showSuccess(
                 "L'équipe a été supprimée avec succès",
@@ -153,17 +153,15 @@ export class TournamentService implements ITournamentService {
               observer.complete();
             }
           },
-          (error) => {
-            if (error.error) {
+          error: (error) => {
+            if (error.error.bad_credentials === 'true') {
               this.toastService.showError(
                 error.error,
                 'Une erreur est survenue lors de la suppression'
               );
             }
-            observer.next(false);
-            observer.complete();
-          }
-        );
+          },
+        });
     });
   }
 
@@ -175,8 +173,8 @@ export class TournamentService implements ITournamentService {
           isGenerated: true,
         }
       )
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response) => {
           if (response) {
             this.router.navigate(['/tournament/' + tournamentId]);
             this.toastService.showSuccess(
@@ -185,16 +183,15 @@ export class TournamentService implements ITournamentService {
             );
           }
         },
-        (error) => {
-          const errorMessage =
-            error?.error?.error_message || 'Une erreur est survenue';
-          this.toastService.showError(
-            error.error,
-            'Erreur lors de la création du tournoi'
-          );
-          return throwError(() => new Error(error));
-        }
-      );
+        error: (error) => {
+          if (error.error.bad_credentials === 'true') {
+            this.toastService.showError(
+              error.error,
+              'Erreur lors de la création du tournoi'
+            );
+          }
+        },
+      });
   }
 
   deleteTournament(tournamentDetails: TournamentDetails): void {
@@ -202,8 +199,8 @@ export class TournamentService implements ITournamentService {
       .delete<any>(
         `${environment.urlApi}/tournaments/${tournamentDetails.name}`
       )
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response) => {
           if (response) {
             this.toastService.showSuccess(
               'Le tournoi a été supprimée avec succès',
@@ -212,14 +209,14 @@ export class TournamentService implements ITournamentService {
             this.router.navigate(['/']);
           }
         },
-        (error) => {
-          if (error.error) {
+        error: (error) => {
+          if (error.error.bad_credentials === 'true') {
             this.toastService.showError(
               error.error,
               'Une erreur est survenue lors de la suppression du tournoi'
             );
           }
-        }
-      );
+        },
+      });
   }
 }
