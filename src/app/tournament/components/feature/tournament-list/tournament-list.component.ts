@@ -38,7 +38,7 @@ export class TournamentListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.applyFilters();
+    this.filteredTournaments$ = this.tournamentService.getAllTournaments();
 
     if (this.isDrawerOpened === true) {
       this.isOpen = 'open';

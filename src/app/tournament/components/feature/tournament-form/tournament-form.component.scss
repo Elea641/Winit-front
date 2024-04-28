@@ -5,6 +5,7 @@
   @include flex-column-center;
   margin: 2rem 0 1rem 0;
   padding: 2rem;
+  width: 100vw;
 
   .register-block {
     margin: 0;
@@ -59,6 +60,14 @@
 
 ::ng-depp .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
   width: auto;
+  @include media-mobile-screen {
+    width: 100%;
+  }
+}
+
+.tournament-banner-container {
+  width: 100%;
+
   @include media-mobile-screen {
     width: 100%;
   }

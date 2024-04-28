@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Observable, map } from 'rxjs';
 import { Tournament } from 'src/app/tournament/models/tournament.model';
@@ -14,16 +14,8 @@ import { TournamentCard } from 'src/app/tournament/models/tournament-card.model'
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
 })
-export class CarouselComponent implements OnInit {
-  tournaments$!: Observable<TournamentCard[]>;
-
-  constructor(private tournamentService: TournamentService) {}
-
-  ngOnInit(): void {
-    this.tournaments$ = this.tournamentService
-      .getAllTournaments()
-      .pipe(map((data) => data));
-  }
+export class CarouselComponent {
+  @Input() tournaments$!: Observable<TournamentCard[]>;
 
   slideConfig = {
     variableWidth: true,

@@ -7,14 +7,19 @@
       }"
     >
       <div class="ongoing-tournaments">
+        <h1>DERNIERS TOURNOIS CRÉÉS</h1>
+        <mat-divider></mat-divider>
+        <app-carousel [tournaments$]="tournaments$"></app-carousel>
+      </div>
+      <div class="open-tournaments">
         <h1>TOURNOIS EN COURS</h1>
         <mat-divider></mat-divider>
-        <app-carousel></app-carousel>
+        <app-carousel [tournaments$]="generatedTournaments$"></app-carousel>
       </div>
       <div class="open-tournaments">
         <h1>TOURNOIS OUVERTS À L'INSCRIPTION</h1>
         <mat-divider></mat-divider>
-        <app-carousel></app-carousel>
+        <app-carousel [tournaments$]="currentTournaments$"></app-carousel>
       </div>
     </section>
   </div>
