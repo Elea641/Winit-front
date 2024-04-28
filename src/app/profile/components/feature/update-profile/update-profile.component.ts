@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -41,6 +41,7 @@ import { CurrentUser } from 'src/app/auth/models/current-user.model';
   styleUrls: ['./update-profile.component.scss'],
 })
 export class UpdateProfileComponent implements OnInit {
+  @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
   updateProfileForm!: FormGroup;
   currentUser!: CurrentUser;
 
@@ -125,5 +126,9 @@ export class UpdateProfileComponent implements OnInit {
           }
         );
     }
+  }
+
+  onClick() {
+    this.router.navigate(['/profile']);
   }
 }
