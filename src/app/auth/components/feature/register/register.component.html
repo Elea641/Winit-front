@@ -27,9 +27,11 @@
 
       <mat-form-field appearance="outline" class="register-form-field">
         <mat-label>Ville</mat-label>
-        <input matInput type="text" formControlName="city">
-        <mat-error *ngIf="city?.errors && !city?.pristine"
-                   class="error-message-size">
+        <input matInput type="text" formControlName="city" />
+        <mat-error
+          *ngIf="city?.errors && !city?.pristine"
+          class="error-message-size"
+        >
           Ville invalide
         </mat-error>
       </mat-form-field>
@@ -52,7 +54,7 @@
           *ngIf="password?.errors && !password?.pristine"
           class="error-message-size"
         >
-          Le mot de passe doit contenir au moins 8 caractères
+          Le mot de passe n'est pas conforme.
         </mat-error>
       </mat-form-field>
 
@@ -69,6 +71,15 @@
           >Les mots de passe ne correspondent pas.</mat-error
         >
       </mat-form-field>
+
+      <ul>
+        * Le mot de passe doit être composé :
+        <li>- Minimum 8 caractères</li>
+        <li>- Une majuscule</li>
+        <li>- Une minuscule</li>
+        <li>- Un chiffre</li>
+        <li>- Un caractère spécial</li>
+      </ul>
 
       <mat-checkbox formControlName="acceptTerms">
         <mat-label>J'accepte les conditions d'utilisation de WinIt.</mat-label>

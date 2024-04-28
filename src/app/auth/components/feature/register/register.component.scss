@@ -8,7 +8,7 @@
 }
 
 .register-block {
-  margin-top: 10vh;
+  margin-top: 5vh;
   padding: 16px;
   min-width: 200px;
   max-width: 800px;
@@ -16,8 +16,22 @@
 }
 
 h1 {
-  color: white;
+  color: $secondary-color-text;
   font-weight: normal;
+}
+
+ul {
+  margin: 0 0 16px 0;
+  padding: 8px;
+  color: $secondary-color-text;
+  font-size: small;
+
+  li:first-child {
+    padding-top: 0.5rem;
+  }
+  li {
+    padding: 0.1rem 1.5rem;
+  }
 }
 
 mat-divider {

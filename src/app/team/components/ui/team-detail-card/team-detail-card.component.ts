@@ -82,6 +82,6 @@ export class TeamDetailCardComponent {
 
   updateTeam(team: Team) {
     this.teamService.setTeam(team);
-    this.router.navigate(['/form-team/:update']);
+    this.router.navigate([`/${team.name}/form-team/update`]);
   }
 }
