@@ -11,6 +11,8 @@
     (newResetFilter)="onReceiveResetFilters($event)"
     (newApplyFilters)="onReceiveApplyFilters($event)"
   ></app-sidebar>
+  <app-spinner *ngIf="loading"></app-spinner>
+
   <div
     class="tournament-container"
     [ngStyle]="{

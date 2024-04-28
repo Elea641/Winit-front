@@ -145,11 +145,13 @@
       </mat-form-field>
 
       <!-- Tournament Banner -->
-      <app-file-upload
-        [groupParent]="tournamentForm"
-        formControlNameValue="tournamentBanner"
-        labelValue="Bannière du tournoi"
-      ></app-file-upload>
+      <div class="tournament-banner-container">
+        <app-file-upload
+          [groupParent]="tournamentForm"
+          formControlNameValue="tournamentBanner"
+          labelValue="Bannière du tournoi"
+        ></app-file-upload>
+      </div>
 
       <div class="button-container">
         <button

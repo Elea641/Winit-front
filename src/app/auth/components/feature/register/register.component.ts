@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../shared/auth.service';
 import { checkPasswordMatch } from '../../../shared/password-match';
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
+import { passwordValidator } from 'src/app/auth/core/password.validator';
 
 @Component({
   selector: 'app-register',
@@ -56,15 +57,15 @@ export class RegisterComponent implements OnInit {
       {
         firstName: new FormControl(this.user.firstName, [
           Validators.required,
-          Validators.maxLength(25),
+          Validators.maxLength(255),
         ]),
         lastName: new FormControl(this.user.lastName, [
           Validators.required,
-          Validators.maxLength(25),
+          Validators.maxLength(255),
         ]),
         city: new FormControl('', [
           Validators.required,
-          Validators.maxLength(25),
+          Validators.maxLength(255),
         ]),
         email: new FormControl(this.user.email, [
           Validators.required,
@@ -73,8 +74,12 @@ export class RegisterComponent implements OnInit {
         password: new FormControl(this.user.password, [
           Validators.required,
           Validators.minLength(8),
+          passwordValidator,
         ]),
-        confirmPassword: new FormControl('', [Validators.required]),
+        confirmPassword: new FormControl('', [
+          Validators.required,
+          passwordValidator,
+        ]),
         acceptTerms: new FormControl(false, [
           Validators.required,
           Validators.requiredTrue,
@@ -120,14 +125,13 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     if (this.registerForm.valid) {
       const newUser: CurrentUser = {
-        firstName: this.firstName.value,
-        lastName: this.lastName.value,
-        city: this.city.value,
-        email: this.email.value,
-        password: this.password.value,
+        firstName: this.firstName.value.trim(),
+        lastName: this.lastName.value.trim(),
+        city: this.city.value.trim(),
+        email: this.email.value.trim(),
+        password: this.password.value.trim(),
         requiredRole: 'ROLE_USER',
         createdAt: new Date(),
-        enabled: true,
       };
 
       this.authService.postRegister(newUser);

@@ -18,8 +18,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { TeamMapperService } from 'src/app/team/shared/mapper/team-mapper.service';
+import { Team } from 'src/app/team/models/team.model';
 
 @Component({
   selector: 'app-team-form',
@@ -44,6 +45,7 @@ export class TeamFormComponent {
   currentTeamSubscription!: Subscription;
   teamForm!: FormGroup;
   sports: Sport[] = [];
+  teamName!: string | null;
 
   constructor(
     public teamService: TeamService,
@@ -61,8 +63,8 @@ export class TeamFormComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const modeParam = params.get('mode');
-      const sliceParam = modeParam ? modeParam.slice(1) : '';
-      this.mode = sliceParam === 'update' ? 'update' : 'create';
+      this.mode = modeParam === 'update' ? 'update' : 'create';
+      this.teamName = params.get('teamName');
     });
 
     this.currentTeamSubscription = this.teamService.team$.subscribe((team) => {
@@ -71,12 +73,17 @@ export class TeamFormComponent {
       }
     });
 
+    if (!this.teamToUpdate && this.teamName && this.mode === 'update') {
+      this.teamService.getTeamByTeamName(this.teamName).subscribe((team) => {
+        this.teamToUpdate = this.teamMapperService.mapToCreatedTeam(team);
+      });
+    }
+
     this.teamForm = new FormGroup({
       name: new FormControl(this.teamToUpdate ? this.teamToUpdate.name : '', [
         Validators.required,
-        Validators.pattern(
-          `^[a-zA-Z0-9@#!éïîèà@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/? ]*$`
-        ),
+        Validators.pattern(`^[a-zA-Z0-9 ]*`),
+        Validators.maxLength(255),
       ]),
       sport: new FormControl(this.teamToUpdate ? this.teamToUpdate.sport : '', [
         Validators.required,
@@ -100,19 +107,30 @@ export class TeamFormComponent {
   onSubmit() {
     if (this.teamForm.valid) {
       const teamData = {
-        name: this.name.value,
+        name: this.name.value.trim(),
         sport: this.sport.value,
       };
 
       if (this.mode === 'create') {
         this.teamService.addTeam(teamData as CreatedTeam);
       } else if (this.mode === 'update' && this.teamToUpdate) {
-        this.teamService.updateTeam(teamData as CreatedTeam);
+        console.log(this.teamToUpdate);
+        if (
+          teamData.name !== this.teamToUpdate.name ||
+          teamData.sport !== this.teamToUpdate.sport
+        ) {
+          this.teamService.updateTeam(teamData as CreatedTeam);
+        } else {
+          this.toastService.showError(
+            'Veuillez changer au minimum une information avant de mettre à jour votre équipe',
+            'Erreur'
+          );
+        }
       }
     } else {
       this.toastService.showError(
-        'Erreur',
-        'Veuillez remplir tous les champs obligatoires'
+        'Veuillez remplir tous les champs obligatoires',
+        'Erreur'
       );
     }
   }
