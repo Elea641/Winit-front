@@ -63,7 +63,11 @@ export class TeamFormComponent {
     this.route.paramMap.subscribe((params) => {
       const modeParam = params.get('mode');
       this.mode = modeParam === 'update' ? 'update' : 'create';
-      this.teamName = params.get('teamName');
+    });
+
+    this.route.queryParams.subscribe((params) => {
+      this.teamName = params['teamName'];
+      console.log(params);
     });
 
     if (!this.teamToUpdate && this.teamName && this.mode === 'update') {

@@ -72,7 +72,7 @@ export const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
-    path: ':teamName/form-team/:mode',
+    path: 'form-team/:mode',
     component: TeamFormComponent,
     canActivate: [UserGuard],
   },
