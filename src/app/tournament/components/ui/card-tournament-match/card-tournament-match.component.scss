@@ -2,7 +2,7 @@
 @import "../../../../../assets/style/mixins.scss";
 
 @include media-mobile-tablet-screen {
-  .card-tournament-match-container {
+  article {
     display: flex;
     position: relative;
     height: 3rem;
@@ -46,7 +46,7 @@
 }
 
 @include media-large-screen {
-  .card-tournament-match-container {
+  article {
     display: flex;
     height: 3rem;
     background-color: $primary-background-color;

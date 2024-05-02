@@ -1,4 +1,4 @@
-<div class="list-last-tournaments-played-container">
+<section>
   <div class="list-last-tournaments-played-container-header">
     <h2>DERNIERS TOURNOIS</h2>
   </div>
@@ -10,12 +10,12 @@
           alt="sport detail image"
         />
         <div>
-          <p>{{
-            currentProfile.lastTournamentsPlayed[0].lastTournament | titlecase
-            }}</p>
-          <h3>
-            Rencontres Inter-Entreprises
-          </h3>
+          <p>
+            {{
+              currentProfile.lastTournamentsPlayed[0].lastTournament | titlecase
+            }}
+          </p>
+          <h3>Rencontres Inter-Entreprises</h3>
         </div>
       </div>
       <button mat-raised-button>RÉSULTATS</button>
@@ -57,4 +57,4 @@
       <button mat-raised-button>RÉSULTATS</button>
     </div>
   </div>
-</div>
+</section>

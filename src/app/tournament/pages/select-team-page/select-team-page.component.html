@@ -1,4 +1,4 @@
-<section *ngIf="teams$ | async as teams">
+<main *ngIf="teams$ | async as teams">
   <h1>INSCRIPTION DE VOTRE ÉQUIPE AU TOURNOI</h1>
   <mat-divider></mat-divider>
   <app-inscription-form-tournament
@@ -7,4 +7,4 @@
   <h1>LISTE DE VOS ÉQUIPES</h1>
   <mat-divider></mat-divider>
   <app-list-team-by-sport [teams]="teams"></app-list-team-by-sport>
-</section>
+</main>

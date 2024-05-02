@@ -67,7 +67,6 @@ export class TeamFormComponent {
 
     this.route.queryParams.subscribe((params) => {
       this.teamName = params['teamName'];
-      console.log(params);
     });
 
     if (!this.teamToUpdate && this.teamName && this.mode === 'update') {

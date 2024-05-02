@@ -85,7 +85,7 @@ export class TournamentService implements ITournamentService {
           }
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             this.toastService.showError(
               error.error,
               'Erreur lors de la création du tournoi'
@@ -119,7 +119,7 @@ export class TournamentService implements ITournamentService {
             }
           },
           error: (error) => {
-            if (error.error.bad_credentials === 'true') {
+            if (error.error) {
               this.toastService.showError(
                 error.error,
                 "Une erreur est survenue lors de l'enregistrement"
@@ -154,7 +154,7 @@ export class TournamentService implements ITournamentService {
             }
           },
           error: (error) => {
-            if (error.error.bad_credentials === 'true') {
+            if (error.error) {
               this.toastService.showError(
                 error.error,
                 'Une erreur est survenue lors de la suppression'
@@ -184,7 +184,7 @@ export class TournamentService implements ITournamentService {
           }
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             this.toastService.showError(
               error.error,
               'Erreur lors de la création du tournoi'
@@ -210,7 +210,7 @@ export class TournamentService implements ITournamentService {
           }
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             this.toastService.showError(
               error.error,
               'Une erreur est survenue lors de la suppression du tournoi'

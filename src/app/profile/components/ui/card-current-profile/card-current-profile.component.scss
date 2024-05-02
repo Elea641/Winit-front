@@ -1,7 +1,7 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.profile-card-container {
+article {
   @include flex-column;
   .profile-card-container-button {
     @include flex-justify-space-between;

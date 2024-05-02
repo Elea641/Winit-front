@@ -1,7 +1,4 @@
-<div
-  *ngIf="tournament$ | async as tournamentDetails"
-  class="card-details-tournament-container"
->
+<article *ngIf="tournament$ | async as tournamentDetails">
   <img src="{{ image }}" alt="" />
   <div class="card-details-tournament-container-body">
     <div class="card-details-tournament-container-header">
@@ -61,4 +58,4 @@
       </button>
     </div>
   </div>
-</div>
+</article>

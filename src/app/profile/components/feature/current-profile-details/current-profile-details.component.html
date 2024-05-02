@@ -1,19 +1,24 @@
-<div class="current-profile-container">
+<main>
   <app-card-current-profile
     *ngIf="currentUser$ | async as currentUser"
     [currentUser]="currentUser"
   ></app-card-current-profile>
-  <div class="profile-tabs">
+  <ng-container>
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-      <mat-tab label="TOURNOIS">
+      <mat-tab label="CLASSEMENT">
         <app-list-resultats
           *ngIf="currentProfile$ | async as currentProfile"
           [currentProfile]="currentProfile"
         ></app-list-resultats>
       </mat-tab>
+      <mat-tab label="TOURNOIS">
+        <app-list-tournament
+          *ngIf="currentProfile$ | async as currentProfile"
+        ></app-list-tournament>
+      </mat-tab>
       <mat-tab label="ÉQUIPES">
         <app-list-team></app-list-team>
       </mat-tab>
     </mat-tab-group>
-  </div>
-</div>
+  </ng-container>
+</main>

@@ -1,14 +1,14 @@
 <div class="confirm-modal-container">
   <h1 mat-dialog-title>{{ content.title }}</h1>
-  <div mat-dialog-content>
+  <mat-dialog-content>
     {{ content.content }}
-  </div>
-  <div mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
     <button mat-raised-button color="primary" (click)="dialogRef.close(true)">
       Confirmer
     </button>
     <button mat-stroked-button color="primary" (click)="dialogRef.close(false)">
       Annuler
     </button>
-  </div>
+  </mat-dialog-actions>
 </div>

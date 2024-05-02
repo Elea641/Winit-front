@@ -53,7 +53,7 @@ export class TeamService implements ITeamService {
         }
       },
       error: (error) => {
-        if (error.error.bad_credentials === 'true') {
+        if (error.error) {
           this.toastService.showError(error.error, 'Une erreur est survenue');
         }
       },
@@ -103,7 +103,7 @@ export class TeamService implements ITeamService {
         }
       },
       error: (error) => {
-        if (error.error.bad_credentials === 'true') {
+        if (error.error) {
           this.toastService.showError(
             error.error,
             "Une erreur est survenue lors de la suppression de l'équipe"

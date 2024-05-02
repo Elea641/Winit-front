@@ -1,7 +1,7 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.card-details-tournament-container {
+article {
   color: $secondary-color-text;
   @include flex-column;
 

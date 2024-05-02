@@ -1,7 +1,7 @@
 @import "../../../../../assets/style/mixins.scss";
 @import "../../../../../assets/style/variables.scss";
 
-.container-tournament {
+main {
   @include flex-column-center;
   width: 100vw;
 

@@ -29,7 +29,7 @@ export class MemberService implements IMemberService {
           }
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             this.toastService.showError(error.error, 'Une erreur est survenue');
           }
         },
@@ -51,7 +51,7 @@ export class MemberService implements IMemberService {
           }
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             this.toastService.showError(error.error, 'Une erreur est survenue');
           }
         },
