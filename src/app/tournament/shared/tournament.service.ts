@@ -169,35 +169,33 @@ export class TournamentService implements ITournamentService {
     tournamentId: number,
     generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
   ) {
-    console.log(generatedTree);
-
-    // this.http
-    //   .put<TournamentUpdate>(
-    //     `${environment.urlApi}/tournaments/${tournamentId}`,
-    //     {
-    //       isGenerated: true,
-    //       matches: generatedTree,
-    //     }
-    //   )
-    //   .subscribe({
-    //     next: (response) => {
-    //       if (response) {
-    //         this.router.navigate(['/tournament/' + tournamentId]);
-    //         this.toastService.showSuccess(
-    //           'Tournoi généré avec succès',
-    //           'Votre tournoi est prêt !'
-    //         );
-    //       }
-    //     },
-    //     error: (error) => {
-    //       if (error.error) {
-    //         this.toastService.showError(
-    //           error.error,
-    //           'Erreur lors de la création du tournoi'
-    //         );
-    //       }
-    //     },
-    //   });
+    this.http
+      .put<TournamentUpdate>(
+        `${environment.urlApi}/tournaments/${tournamentId}`,
+        {
+          isGenerated: true,
+          matches: generatedTree,
+        }
+      )
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.router.navigate(['/tournament/' + tournamentId]);
+            this.toastService.showSuccess(
+              'Tournoi généré avec succès',
+              'Votre tournoi est prêt !'
+            );
+          }
+        },
+        error: (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              'Erreur lors de la création du tournoi'
+            );
+          }
+        },
+      });
   }
 
   deleteTournament(tournamentDetails: TournamentDetails): void {

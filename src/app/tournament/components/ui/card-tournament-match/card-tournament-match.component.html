@@ -1,4 +1,14 @@
-<article
+<article *ngIf="match">
+  <section>
+    <h2>{{ match.team1 }}</h2>
+    <p></p>
+  </section>
+  <section>
+    <h2>{{ match.team2 }}</h2>
+    <p></p>
+  </section>
+</article>
+<!-- <article
   [ngClass]="isEven"
   [ngStyle]="{
     'margin-bottom.rem':
@@ -29,4 +39,4 @@
     <p class="score-match-card">0</p>
     <div class="line"></div>
   </div>
-</article>
+</article> -->

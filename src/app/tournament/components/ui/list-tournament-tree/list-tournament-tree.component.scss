@@ -1,67 +1,67 @@
-@import "../../../../../assets/style/variables.scss";
-@import "../../../../../assets/style/mixins.scss";
+// @import "../../../../../assets/style/variables.scss";
+// @import "../../../../../assets/style/mixins.scss";
 
-@include media-mobile-tablet-screen {
-  button {
-    margin-top: 2rem;
-    color: $secondary-color;
-  }
+// @include media-mobile-tablet-screen {
+//   button {
+//     margin-top: 2rem;
+//     color: $secondary-color;
+//   }
 
-  .list-tournament-tree-container {
-    color: $secondary-color;
-    width: 100%;
-    margin-top: 2rem;
+//   .list-tournament-tree-container {
+//     color: $secondary-color;
+//     width: 100%;
+//     margin-top: 2rem;
 
-    .list-tournament-tree-container-details {
-      h2 {
-        color: $secondary-color-button;
-      }
+//     .list-tournament-tree-container-details {
+//       h2 {
+//         color: $secondary-color-button;
+//       }
 
-      .list-tournament-tree-container-cards {
-        margin: 1rem 0;
-        @include flex-wrap-align-center;
-      }
-    }
-  }
-}
+//       .list-tournament-tree-container-cards {
+//         margin: 1rem 0;
+//         @include flex-wrap-align-center;
+//       }
+//     }
+//   }
+// }
 
-@include media-large-screen {
-  button {
-    margin-top: 2rem;
-    color: $secondary-color;
-  }
-  .list-tournament-tree-container {
-    @include flex-wrap-align-center;
-    color: $secondary-color;
-    width: 100%;
-    margin-top: 2rem;
+// @include media-large-screen {
+//   button {
+//     margin-top: 2rem;
+//     color: $secondary-color;
+//   }
+//   .list-tournament-tree-container {
+//     @include flex-wrap-align-center;
+//     color: $secondary-color;
+//     width: 100%;
+//     margin-top: 2rem;
 
-    .list-tournament-tree-container-details {
-      padding: 0 2rem 0 0;
+//     .list-tournament-tree-container-details {
+//       padding: 0 2rem 0 0;
 
-      h2 {
-        color: $secondary-color-button;
-        width: 15vw;
-        height: 5rem;
-        display: flex;
-        align-items: flex-end;
-        padding-bottom: 1rem;
-      }
+//       h2 {
+//         color: $secondary-color-button;
+//         width: 15vw;
+//         height: 5rem;
+//         display: flex;
+//         align-items: flex-end;
+//         padding-bottom: 1rem;
+//       }
 
-      .list-tournament-tree-container-cards {
-        color: $secondary-color-button;
-        margin-top: auto;
-        margin-bottom: auto;
-      }
-    }
-  }
-}
+//       .list-tournament-tree-container-cards {
+//         color: $secondary-color-button;
+//         margin-top: auto;
+//         margin-bottom: auto;
+//       }
+//     }
+//   }
+// }
 
-.mat-mdc-raised-button:not(:disabled) {
-  color: $secondary-color;
-}
+// .mat-mdc-raised-button:not(:disabled) {
+//   color: $secondary-color;
+// }
 
-.mat-mdc-raised-button:hover,
-.mat-mdc-raised-button:focus {
-  color: $primary-color;
-}
+// .mat-mdc-raised-button:hover,
+// .mat-mdc-raised-button:focus {
+//   color: $primary-color;
+// }

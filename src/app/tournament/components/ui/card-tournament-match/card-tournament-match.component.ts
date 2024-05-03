@@ -10,51 +10,54 @@ import { BreakpointService } from 'src/app/shared/breakpoint.service';
   styleUrls: ['./card-tournament-match.component.scss'],
 })
 export class CardTournamentMatchComponent implements OnInit {
-  @Input() namesTeamList: any;
-  @Input() indexRemainingTeams: any;
-  @Input() indexRandomTeams: any;
-  @Input() randomMatchs: any;
-  @Input() totalPhaseMatchs: any;
-  @Input() isLastIteration: boolean = false;
-  isDesktop: boolean | undefined = false;
-  isLargeDesktop: boolean | undefined = false;
-  margin: number = 0;
-  isEven: string = '';
-  marginCalcul!: number;
+  @Input() match: any;
+  // @Input() namesTeamList: any;
+  // @Input() indexRemainingTeams: any;
+  // @Input() indexRandomTeams: any;
+  // @Input() randomMatchs: any;
+  // @Input() totalPhaseMatchs: any;
+  // @Input() isLastIteration: boolean = false;
+  // isDesktop: boolean | undefined = false;
+  // isLargeDesktop: boolean | undefined = false;
+  // margin: number = 0;
+  // isEven: string = '';
+  // marginCalcul!: number;
 
   constructor(private breakpointService: BreakpointService) {}
 
   ngOnInit(): void {
-    if (this.namesTeamList.isEven === true) {
-      this.isEven = 'even';
-    } else {
-      this.isEven = 'odd';
-    }
+    console.log(this.match);
 
-    this.marginCalculator(this.indexRemainingTeams, this.indexRandomTeams);
+    // if (this.namesTeamList.isEven === true) {
+    //   this.isEven = 'even';
+    // } else {
+    //   this.isEven = 'odd';
+    // }
 
-    this.isDesktop = this.breakpointService.isDesktopDevice();
-    this.breakpointService.deviceChanged['isDesktop'].subscribe(
-      (isDesktop: boolean) => {
-        this.isDesktop = isDesktop;
-      }
-    );
+    // this.marginCalculator(this.indexRemainingTeams, this.indexRandomTeams);
 
-    this.isLargeDesktop = this.breakpointService.isLargeDesktopDevice();
-    this.breakpointService.deviceChanged['isLargeDesktop'].subscribe(
-      (isLargeDesktop: boolean) => {
-        this.isLargeDesktop = isLargeDesktop;
-      }
-    );
+    // this.isDesktop = this.breakpointService.isDesktopDevice();
+    // this.breakpointService.deviceChanged['isDesktop'].subscribe(
+    //   (isDesktop: boolean) => {
+    //     this.isDesktop = isDesktop;
+    //   }
+    // );
+
+    // this.isLargeDesktop = this.breakpointService.isLargeDesktopDevice();
+    // this.breakpointService.deviceChanged['isLargeDesktop'].subscribe(
+    //   (isLargeDesktop: boolean) => {
+    //     this.isLargeDesktop = isLargeDesktop;
+    //   }
+    // );
   }
 
-  marginCalculator(indexRemainingTeams: number, indexRandomTeams: number) {
-    if (indexRemainingTeams === 0) {
-      this.margin = 2 ** (indexRemainingTeams + 2.6) - 2;
-    } else if (indexRemainingTeams > 0) {
-      this.margin = 2 ** (indexRemainingTeams + 3) - 2;
-    } else if (indexRandomTeams) {
-      this.margin = 2;
-    }
-  }
+  // marginCalculator(indexRemainingTeams: number, indexRandomTeams: number) {
+  //   if (indexRemainingTeams === 0) {
+  //     this.margin = 2 ** (indexRemainingTeams + 2.6) - 2;
+  //   } else if (indexRemainingTeams > 0) {
+  //     this.margin = 2 ** (indexRemainingTeams + 3) - 2;
+  //   } else if (indexRandomTeams) {
+  //     this.margin = 2;
+  //   }
+  // }
 }

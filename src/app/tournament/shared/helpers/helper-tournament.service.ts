@@ -113,7 +113,7 @@ export class HelperTournamentService {
 
     let matchesByPhase: any[] = [];
     phases.forEach((phaseObj: any) => {
-      for (let j = 0; j < phaseObj.number; j++) {
+      for (let j = 0; j < phaseObj.number / 2; j++) {
         const match = {
           team1: 'En attente',
           team2: 'En attente',
@@ -160,7 +160,7 @@ export class HelperTournamentService {
       defineMatches.remainingPhaseMatches.push(match);
     }
 
-    if (defineMatches.remainingPhaseMatches.length < totalPhaseMatchs) {
+    if (defineMatches.remainingPhaseMatches.length < totalPhaseMatchs / 2) {
       const match = {
         team1: 'En attente',
         team2: 'En attente',
@@ -180,6 +180,8 @@ export class HelperTournamentService {
       restResult,
       result.totalPhase.totalPhaseMatchs
     );
+
+    console.log(defineMatches);
 
     return defineMatches;
   }

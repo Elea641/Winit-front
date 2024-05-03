@@ -18,6 +18,7 @@ export class TournamentDetails {
       currentUser: number;
     }[],
     public isOwner: boolean,
-    public isGenerated: boolean
+    public isGenerated: boolean,
+    public matches?: any
   ) {}
 }

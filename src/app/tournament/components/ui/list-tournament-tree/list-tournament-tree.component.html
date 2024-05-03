@@ -19,30 +19,25 @@
       GÉNÉRER LE TOURNOI
     </button>
   </div>
-  <!-- <div
+  <div
     *ngIf="tournamentDetails.isGenerated"
     class="list-tournament-tree-container"
   >
-    <div
-      class="list-tournament-tree-container-details"
-      *ngIf="totalPhase.randomMatchs"
-    >
+    <div class="list-tournament-tree-container-details" *ngIf="lastPhase">
       <h2>Phase de présélection</h2>
-      <div class="list-tournament-tree-container-cards">
+      <div *ngIf="matchesByPhase" class="list-tournament-tree-container-cards">
         <div
           *ngFor="
-            let match of getNumberArray(totalPhase.randomMatchs);
-            let j = index
+            let match of getPhaseArray(matchesByPhase, 'Phase préliminaire')
           "
         >
           <app-card-tournament-match
-            [namesTeamList]="getTeamName(j, 'randomMatchs')"
-            [indexRandomTeams]="j"
+            [match]="match"
           ></app-card-tournament-match>
         </div>
       </div>
     </div>
-    <div
+    <!-- <div
       *ngFor="
         let phaseKey of getObjectKeys(tournamentPhase.result).reverse();
         let index = index
@@ -75,7 +70,7 @@
             ></app-card-tournament-match>
           </div>
         </div>
-      </div>
-        </div>
-    </div> -->
+                </div>
+      </div> -->
+  </div>
 </ng-container>

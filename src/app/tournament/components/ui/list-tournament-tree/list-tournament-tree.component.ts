@@ -7,7 +7,6 @@ import { Observable, Subscription } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ToastService } from 'src/app/shared/toast.service';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
 import { ModalContent } from 'src/app/components/models/modal-content.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
@@ -37,13 +36,14 @@ export class ListTournamentTreeComponent {
   // namesTeamListRandom: any;
   limitInscriptionTime!: Subscription;
   limitInscriptionValue: number | undefined;
+  lastPhase: boolean = false;
+  matchesByPhase: { [phase: string]: any[] } = {};
 
   constructor(
     private helperTournamentService: HelperTournamentService,
     private timeService: TimeService,
     private tournamentService: TournamentService,
-    private dialog: MatDialog,
-    private toastService: ToastService
+    private dialog: MatDialog
   ) {}
 
   ngOnDestroy(): void {
@@ -56,71 +56,46 @@ export class ListTournamentTreeComponent {
         this.limitInscriptionValue = limit;
       });
 
-    this.tournament$.subscribe(
-      (tournament) => (this.tournamentDetails = tournament)
-    );
-
-    // if (this.tournamentDetails.currentNumberOfParticipants) {
-    //   this.totalPhase = this.helperTournamentService.calculPhase(
-    //     this.tournamentDetails.currentNumberOfParticipants
-    //   );
-    // }
-
-    // this.tournamentPhase =
-    //   this.helperTournamentService.convertToTournamentPhase(this.totalPhase);
-
-    // this.namesTeamList = this.helperTournamentService.randomizeTeams(
-    //   this.tournamentDetails.teams
-    // );
-
-    // const { randomTeams, remainingTeams } =
-    //   this.helperTournamentService.divideTeamsForPhases(
-    //     this.namesTeamList,
-    //     this.totalPhase.randomMatchs
-    //   );
-
-    // this.namesTeamListPhase = {
-    //   remainingTeams,
-    // };
-
-    // this.namesTeamListRandom = {
-    //   randomTeams,
-    // };
+    this.tournament$.subscribe((tournament) => {
+      this.tournamentDetails = tournament;
+      this.groupMatchesByPhase(tournament.matches);
+    });
   }
 
-  // getObjectKeys(obj: any): any[] {
-  //   return Object.keys(obj);
-  // }
+  groupMatchesByPhase(matches: any[]) {
+    const matchesByPhase: { [phase: string]: any[] } = {};
 
-  // getNumberArray(length: number): number[] {
-  //   return new Array(length).fill(0).map((_, index) => index);
-  // }
+    matches.forEach((match) => {
+      const phase = match.phase;
+      if (!matchesByPhase[phase]) {
+        matchesByPhase[phase] = [];
+      }
+      matchesByPhase[phase].push(match);
+      if (
+        phase === 'Phase préliminaire' ||
+        phase === 'Phase de préqualification'
+      ) {
+        this.lastPhase = true;
+      }
+    });
 
-  // getTeamName(
-  //   index: number,
-  //   phaseKey?: string
-  // ): { teamName: string; isEven: boolean } {
-  //   const result = { teamName: '', isEven: false };
+    this.matchesByPhase = matchesByPhase;
+  }
 
-  //   if (index >= 0) {
-  //     if (phaseKey === 'randomMatchs') {
-  //       result.teamName = this.namesTeamListRandom.randomTeams[index];
-  //     } else {
-  //       const difference = index - this.totalPhase.count;
+  getPhaseArray(
+    matchesByPhase: { [phase: string]: any[] },
+    phaseToRetrieve: string
+  ): any[] {
+    if (matchesByPhase.hasOwnProperty(phaseToRetrieve)) {
+      return matchesByPhase[phaseToRetrieve];
+    } else {
+      return [];
+    }
+  }
 
-  //       if (difference >= 0 && difference < this.totalPhase.count) {
-  //         result.teamName = '';
-  //       } else {
-  //         result.teamName =
-  //           this.namesTeamListPhase.remainingTeams[index] ?? 'Name';
-  //       }
-  //     }
-
-  //     result.isEven = index % 2 === 0;
-  //   }
-
-  //   return result;
-  // }
+  getTeamName(match: any): any {
+    console.log(match);
+  }
 
   getGenerated(event: boolean): void {
     this.generatedTournament.emit(event);
@@ -133,8 +108,7 @@ export class ListTournamentTreeComponent {
         this.tournamentDetails.teams
       );
     }
-
-    //    this.tournamentDetails.isGenerated = true;
+    this.tournamentDetails.isGenerated = true;
   }
 
   openDialog() {
@@ -159,11 +133,6 @@ export class ListTournamentTreeComponent {
             );
           }
         });
-      } else {
-        this.toastService.showError(
-          'Erreur',
-          'Veuillez remplir tous les champs obligatoires'
-        );
       }
     });
   }
