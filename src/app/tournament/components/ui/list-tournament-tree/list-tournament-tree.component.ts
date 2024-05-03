@@ -26,14 +26,15 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 })
 export class ListTournamentTreeComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
-  @Input() tournamentDetails!: TournamentDetails;
   @Output() generatedTournament: EventEmitter<boolean> = new EventEmitter();
-  convertedSelection: string | undefined;
-  tournamentPhase!: any;
-  totalPhase: any;
-  namesTeamList: any;
-  namesTeamListPhase: any;
-  namesTeamListRandom: any;
+  tournamentDetails!: TournamentDetails;
+  generatedTree: any;
+  // convertedSelection: string | undefined;
+  // tournamentPhase!: any;
+  // totalPhase: any;
+  // namesTeamList: any;
+  // namesTeamListPhase: any;
+  // namesTeamListRandom: any;
   limitInscriptionTime!: Subscription;
   limitInscriptionValue: number | undefined;
 
@@ -55,9 +56,15 @@ export class ListTournamentTreeComponent {
         this.limitInscriptionValue = limit;
       });
 
-    // this.totalPhase = this.helperTournamentService.calculPhase(
-    //   this.tournamentDetails.participants
-    // );
+    this.tournament$.subscribe(
+      (tournament) => (this.tournamentDetails = tournament)
+    );
+
+    // if (this.tournamentDetails.currentNumberOfParticipants) {
+    //   this.totalPhase = this.helperTournamentService.calculPhase(
+    //     this.tournamentDetails.currentNumberOfParticipants
+    //   );
+    // }
 
     // this.tournamentPhase =
     //   this.helperTournamentService.convertToTournamentPhase(this.totalPhase);
@@ -81,42 +88,53 @@ export class ListTournamentTreeComponent {
     // };
   }
 
-  getObjectKeys(obj: any): any[] {
-    return Object.keys(obj);
-  }
+  // getObjectKeys(obj: any): any[] {
+  //   return Object.keys(obj);
+  // }
 
-  getNumberArray(length: number): number[] {
-    return new Array(length).fill(0).map((_, index) => index);
-  }
+  // getNumberArray(length: number): number[] {
+  //   return new Array(length).fill(0).map((_, index) => index);
+  // }
 
-  getTeamName(
-    index: number,
-    phaseKey?: string
-  ): { teamName: string; isEven: boolean } {
-    const result = { teamName: '', isEven: false };
+  // getTeamName(
+  //   index: number,
+  //   phaseKey?: string
+  // ): { teamName: string; isEven: boolean } {
+  //   const result = { teamName: '', isEven: false };
 
-    if (index >= 0) {
-      if (phaseKey === 'randomMatchs') {
-        result.teamName = this.namesTeamListRandom.randomTeams[index];
-      } else {
-        const difference = index - this.totalPhase.count;
+  //   if (index >= 0) {
+  //     if (phaseKey === 'randomMatchs') {
+  //       result.teamName = this.namesTeamListRandom.randomTeams[index];
+  //     } else {
+  //       const difference = index - this.totalPhase.count;
 
-        if (difference >= 0 && difference < this.totalPhase.count) {
-          result.teamName = '';
-        } else {
-          result.teamName =
-            this.namesTeamListPhase.remainingTeams[index] ?? 'Name';
-        }
-      }
+  //       if (difference >= 0 && difference < this.totalPhase.count) {
+  //         result.teamName = '';
+  //       } else {
+  //         result.teamName =
+  //           this.namesTeamListPhase.remainingTeams[index] ?? 'Name';
+  //       }
+  //     }
 
-      result.isEven = index % 2 === 0;
-    }
+  //     result.isEven = index % 2 === 0;
+  //   }
 
-    return result;
-  }
+  //   return result;
+  // }
 
   getGenerated(event: boolean): void {
-    this.generatedTournament.emit(true);
+    this.generatedTournament.emit(event);
+    if (
+      this.tournamentDetails.currentNumberOfParticipants &&
+      this.tournamentDetails.teams
+    ) {
+      this.generatedTree = this.helperTournamentService.generatedTree(
+        this.tournamentDetails.currentNumberOfParticipants,
+        this.tournamentDetails.teams
+      );
+    }
+
+    //    this.tournamentDetails.isGenerated = true;
   }
 
   openDialog() {
@@ -129,12 +147,16 @@ export class ListTournamentTreeComponent {
     const dialogRef = this.dialog.open(ModalComponent, {
       data: new ModalContent(modalData),
     });
+
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
         this.tournament$.subscribe((tournament) => {
           if (tournament) {
             this.getGenerated(true);
-            this.tournamentService.updateTournament(tournament.id);
+            this.tournamentService.updateTournament(
+              tournament.id,
+              this.generatedTree
+            );
           }
         });
       } else {

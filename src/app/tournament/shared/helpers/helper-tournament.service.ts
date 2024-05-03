@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { IGeneratedTreeResult } from '../interfaces/IGeneratedTreeResult.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HelperTournamentService {
-  calculPhase(totalTeams: number) {
+  private calculPhase(totalTeams: number) {
     let count = 1;
     let randomMatchs = 0;
     let totalMatchesWithoutRandoms = 0;
@@ -18,7 +19,7 @@ export class HelperTournamentService {
     return { count, randomMatchs, totalMatchesWithoutRandoms };
   }
 
-  convertToTournamentPhase(totalPhase: any): object {
+  private convertToTournamentPhase(totalPhase: any): object {
     let numRounds = 0;
     let teamsRemaining = totalPhase.count;
 
@@ -60,16 +61,18 @@ export class HelperTournamentService {
     return { result, totalPhaseMatchs };
   }
 
-  randomizeTeams(teams: any): object {
+  private randomizeTeams(teams: any): object {
     if (teams.length === 0) {
       return [];
     }
 
     const shuffledTeams = [...teams];
+    let randomizedTeamNames: string[] = [];
 
     this.shuffleArray(shuffledTeams);
-
-    const randomizedTeamNames = shuffledTeams.map((team) => team.team);
+    shuffledTeams.map((team) => {
+      randomizedTeamNames.push(team.name);
+    });
 
     return randomizedTeamNames;
   }
@@ -81,12 +84,117 @@ export class HelperTournamentService {
     }
   }
 
-  divideTeamsForPhases(
-    teams: any[],
+  private divideTeamsForPhases(
+    teams: any,
     randomMatchs: number
   ): { randomTeams: any[]; remainingTeams: any[] } {
     const randomTeams = teams.slice(0, randomMatchs);
     const remainingTeams = teams.slice(randomMatchs);
     return { randomTeams, remainingTeams };
+  }
+
+  private namePhaseAndNumberMatches(result: any, totalPhaseMatchs: any): any[] {
+    let nameAndNumberByPhase: any[] = [];
+    for (let phase in result) {
+      let valeurTotalMatchs = totalPhaseMatchs[phase];
+      nameAndNumberByPhase.push({
+        phase: result[phase],
+        number: valeurTotalMatchs,
+      });
+    }
+    return nameAndNumberByPhase;
+  }
+
+  private defineOtherMatches(result: any, totalPhaseMatchs: any): any {
+    let phases: any[] = this.namePhaseAndNumberMatches(
+      result,
+      totalPhaseMatchs
+    );
+
+    let matchesByPhase: any[] = [];
+    phases.forEach((phaseObj: any) => {
+      for (let j = 0; j < phaseObj.number; j++) {
+        const match = {
+          team1: 'En attente',
+          team2: 'En attente',
+          phase: phaseObj.phase,
+        };
+        matchesByPhase.push(match);
+      }
+    });
+
+    return matchesByPhase;
+  }
+
+  private definePhaseMatches(result: any): {} {
+    let defineMatches: any = {};
+
+    defineMatches.randomPhaseMatches = [];
+    for (let i = 0; i < result.matchsPhase.randomTeams.length; i += 2) {
+      const match = {
+        team1: result.matchsPhase.randomTeams[i],
+        team2: result.matchsPhase.randomTeams[i + 1],
+        phase: 'Phase préliminaire',
+      };
+      defineMatches.randomPhaseMatches.push(match);
+    }
+    const values = Object.values(result.totalPhase.result);
+    const phase = values[values.length - 1];
+    const phaseNumber = Object.keys(result.totalPhase.result)[
+      Object.keys(result.totalPhase.result).length - 1
+    ];
+
+    const totalPhaseMatchs = result.totalPhase.totalPhaseMatchs[phaseNumber];
+
+    defineMatches.remainingPhaseMatches = [];
+    for (let i = 0; i < result.matchsPhase.remainingTeams.length; i += 2) {
+      const team2 =
+        result.matchsPhase.remainingTeams[i + 1] === undefined
+          ? 'En attente'
+          : result.matchsPhase.remainingTeams[i + 1];
+      const match = {
+        team1: result.matchsPhase.remainingTeams[i],
+        team2: team2,
+        phase: phase,
+      };
+      defineMatches.remainingPhaseMatches.push(match);
+    }
+
+    if (defineMatches.remainingPhaseMatches.length < totalPhaseMatchs) {
+      const match = {
+        team1: 'En attente',
+        team2: 'En attente',
+        phase: phase,
+      };
+      defineMatches.remainingPhaseMatches.push(match);
+    }
+
+    const keysResult = Object.keys(result.totalPhase.result);
+    const lastKeyResult = keysResult[keysResult.length - 1];
+
+    const { [lastKeyResult]: phaseResult, ...restResult } =
+      result.totalPhase.result;
+
+    defineMatches.otherMatches;
+    defineMatches.otherMatches = this.defineOtherMatches(
+      restResult,
+      result.totalPhase.totalPhaseMatchs
+    );
+
+    return defineMatches;
+  }
+
+  generatedTree(totalTeams: number, teams: any) {
+    let result: IGeneratedTreeResult = {
+      calculPhase: this.calculPhase(totalTeams),
+      totalPhase: this.convertToTournamentPhase(this.calculPhase(totalTeams)),
+      randomizeTeams: this.randomizeTeams(teams),
+      matchsPhase: this.divideTeamsForPhases(
+        this.randomizeTeams(teams),
+        this.calculPhase(totalTeams).randomMatchs
+      ),
+    };
+
+    return this.definePhaseMatches(result);
   }
 }

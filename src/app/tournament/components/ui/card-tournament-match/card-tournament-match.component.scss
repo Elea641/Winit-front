@@ -14,7 +14,7 @@
     .card-tournament-match-container-details {
       width: 100%;
       padding: 0.5rem;
-      @include flex-justify-space-around;
+      @include flex-justify-content-space-between;
     }
   }
 
@@ -64,8 +64,7 @@
       p {
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 25%;
+        width: 60%;
       }
 
       .score-match-card {
