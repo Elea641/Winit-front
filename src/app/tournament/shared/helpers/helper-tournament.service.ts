@@ -6,22 +6,22 @@ import { IGeneratedTreeResult } from '../interfaces/IGeneratedTreeResult.service
 })
 export class HelperTournamentService {
   private calculPhase(totalTeams: number) {
-    let count = 1;
+    let phase = 1;
     let randomMatchs = 0;
     let totalMatchesWithoutRandoms = 0;
-    while (Math.floor(totalTeams / (count * 2))) {
-      count *= 2;
-      randomMatchs = (totalTeams % count) * 2;
+    while (Math.floor(totalTeams / (phase * 2))) {
+      phase *= 2;
+      randomMatchs = (totalTeams % phase) * 2;
     }
 
     totalMatchesWithoutRandoms = totalTeams - randomMatchs;
 
-    return { count, randomMatchs, totalMatchesWithoutRandoms };
+    return { phase, randomMatchs, totalMatchesWithoutRandoms };
   }
 
   private convertToTournamentPhase(totalPhase: any): object {
     let numRounds = 0;
-    let teamsRemaining = totalPhase.count;
+    let teamsRemaining = totalPhase.phase;
 
     while (teamsRemaining > 1) {
       teamsRemaining /= 2;
@@ -90,6 +90,7 @@ export class HelperTournamentService {
   ): { randomTeams: any[]; remainingTeams: any[] } {
     const randomTeams = teams.slice(0, randomMatchs);
     const remainingTeams = teams.slice(randomMatchs);
+
     return { randomTeams, remainingTeams };
   }
 
@@ -102,6 +103,7 @@ export class HelperTournamentService {
         number: valeurTotalMatchs,
       });
     }
+
     return nameAndNumberByPhase;
   }
 
@@ -161,12 +163,18 @@ export class HelperTournamentService {
     }
 
     if (defineMatches.remainingPhaseMatches.length < totalPhaseMatchs / 2) {
-      const match = {
-        team1: 'En attente',
-        team2: 'En attente',
-        phase: phase,
-      };
-      defineMatches.remainingPhaseMatches.push(match);
+      for (
+        let i = defineMatches.remainingPhaseMatches.length;
+        i < totalPhaseMatchs / 2;
+        i++
+      ) {
+        const match = {
+          team1: 'En attente',
+          team2: 'En attente',
+          phase: phase,
+        };
+        defineMatches.remainingPhaseMatches.push(match);
+      }
     }
 
     const keysResult = Object.keys(result.totalPhase.result);
@@ -180,8 +188,6 @@ export class HelperTournamentService {
       restResult,
       result.totalPhase.totalPhaseMatchs
     );
-
-    console.log(defineMatches);
 
     return defineMatches;
   }

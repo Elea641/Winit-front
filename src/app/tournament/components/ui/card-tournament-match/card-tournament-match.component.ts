@@ -26,23 +26,18 @@ export class CardTournamentMatchComponent implements OnInit {
   constructor(private breakpointService: BreakpointService) {}
 
   ngOnInit(): void {
-    console.log(this.match);
-
     // if (this.namesTeamList.isEven === true) {
     //   this.isEven = 'even';
     // } else {
     //   this.isEven = 'odd';
     // }
-
     // this.marginCalculator(this.indexRemainingTeams, this.indexRandomTeams);
-
     // this.isDesktop = this.breakpointService.isDesktopDevice();
     // this.breakpointService.deviceChanged['isDesktop'].subscribe(
     //   (isDesktop: boolean) => {
     //     this.isDesktop = isDesktop;
     //   }
     // );
-
     // this.isLargeDesktop = this.breakpointService.isLargeDesktopDevice();
     // this.breakpointService.deviceChanged['isLargeDesktop'].subscribe(
     //   (isLargeDesktop: boolean) => {

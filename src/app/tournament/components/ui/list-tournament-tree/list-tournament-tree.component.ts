@@ -93,9 +93,7 @@ export class ListTournamentTreeComponent {
     }
   }
 
-  getTeamName(match: any): any {
-    console.log(match);
-  }
+  getTeamName(match: any): any {}
 
   getGenerated(event: boolean): void {
     this.generatedTournament.emit(event);
