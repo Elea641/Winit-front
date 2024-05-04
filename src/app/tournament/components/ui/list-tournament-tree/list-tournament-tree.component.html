@@ -23,54 +23,36 @@
     *ngIf="tournamentDetails.isGenerated"
     class="list-tournament-tree-container"
   >
-    <div class="list-tournament-tree-container-details" *ngIf="lastPhase">
-      <h2>Phase de présélection</h2>
+    <div class="list-tournament-tree-container-details">
       <div *ngIf="matchesByPhase" class="list-tournament-tree-container-cards">
-        <div
-          *ngFor="
-            let match of getPhaseArray(matchesByPhase, 'Phase préliminaire')
-          "
-        >
-          <app-card-tournament-match
-            [match]="match"
-          ></app-card-tournament-match>
+        <div *ngFor="let phaseKey of phaseKeys">
+          <div *ngIf="phaseKey === 'Phase préliminaire'">
+            <h2>{{ phaseKey }}</h2>
+            <div *ngFor="let match of matchesByPhase[phaseKey]">
+              <app-card-tournament-match
+                [match]="match"
+                [matchesByPhase]="matchesByPhase"
+                [phaseKey]="phaseKey"
+              ></app-card-tournament-match>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- <div
-      *ngFor="
-        let phaseKey of getObjectKeys(tournamentPhase.result).reverse();
-        let index = index
-      "
-    >
-      <div
-        class="list-tournament-tree-container-details"
-        *ngIf="
-          tournamentPhase.result[phaseKey] !== 'Phase de présélection' &&
-          totalPhase
-        "
-      >
-        <h2>{{ tournamentPhase.result[phaseKey] }}</h2>
-        <div class="list-tournament-tree-container-cards">
-          <div
-            *ngFor="
-              let match of getNumberArray(
-                tournamentPhase.totalPhaseMatchs[phaseKey]
-              );
-              let i = index;
-              let last = last
-            "
-          >
-            <app-card-tournament-match
-              [namesTeamList]="getTeamName(i)"
-              [indexRemainingTeams]="index"
-              [randomMatchs]="totalPhase.randomMatchs"
-              [totalPhaseMatchs]="tournamentPhase"
-              [isLastIteration]="last"
-            ></app-card-tournament-match>
+
+    <div class="list-tournament-tree-container-details">
+      <div *ngIf="matchesByPhase" class="list-tournament-tree-container-cards">
+        <div *ngFor="let phaseKey of sortPhaseKeysByMatchCount(phaseKeys)">
+          <div *ngIf="phaseKey !== 'Phase préliminaire'">
+            <h2>{{ phaseKey }}</h2>
+            <div *ngFor="let match of matchesByPhase[phaseKey]">
+              <app-card-tournament-match
+                [match]="match"
+              ></app-card-tournament-match>
+            </div>
           </div>
         </div>
-                </div>
-      </div> -->
+      </div>
+    </div>
   </div>
 </ng-container>

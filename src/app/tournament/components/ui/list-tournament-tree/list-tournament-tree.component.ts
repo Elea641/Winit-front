@@ -28,16 +28,10 @@ export class ListTournamentTreeComponent {
   @Output() generatedTournament: EventEmitter<boolean> = new EventEmitter();
   tournamentDetails!: TournamentDetails;
   generatedTree: any;
-  // convertedSelection: string | undefined;
-  // tournamentPhase!: any;
-  // totalPhase: any;
-  // namesTeamList: any;
-  // namesTeamListPhase: any;
-  // namesTeamListRandom: any;
   limitInscriptionTime!: Subscription;
   limitInscriptionValue: number | undefined;
-  lastPhase: boolean = false;
   matchesByPhase: { [phase: string]: any[] } = {};
+  phaseKeys: string[] = [];
 
   constructor(
     private helperTournamentService: HelperTournamentService,
@@ -58,42 +52,23 @@ export class ListTournamentTreeComponent {
 
     this.tournament$.subscribe((tournament) => {
       this.tournamentDetails = tournament;
-      this.groupMatchesByPhase(tournament.matches);
+      this.tournamentDetails.matches.forEach((match: any) => {
+        if (!this.matchesByPhase[match.phase]) {
+          this.matchesByPhase[match.phase] = [];
+        }
+        this.matchesByPhase[match.phase].push(match);
+      });
+    });
+    this.phaseKeys = Object.keys(this.matchesByPhase);
+  }
+
+  sortPhaseKeysByMatchCount(phaseKeys: string[]): string[] {
+    return phaseKeys.sort((a, b) => {
+      const matchCountA = this.matchesByPhase[a].length;
+      const matchCountB = this.matchesByPhase[b].length;
+      return matchCountB - matchCountA;
     });
   }
-
-  groupMatchesByPhase(matches: any[]) {
-    const matchesByPhase: { [phase: string]: any[] } = {};
-
-    matches.forEach((match) => {
-      const phase = match.phase;
-      if (!matchesByPhase[phase]) {
-        matchesByPhase[phase] = [];
-      }
-      matchesByPhase[phase].push(match);
-      if (
-        phase === 'Phase préliminaire' ||
-        phase === 'Phase de préqualification'
-      ) {
-        this.lastPhase = true;
-      }
-    });
-
-    this.matchesByPhase = matchesByPhase;
-  }
-
-  getPhaseArray(
-    matchesByPhase: { [phase: string]: any[] },
-    phaseToRetrieve: string
-  ): any[] {
-    if (matchesByPhase.hasOwnProperty(phaseToRetrieve)) {
-      return matchesByPhase[phaseToRetrieve];
-    } else {
-      return [];
-    }
-  }
-
-  getTeamName(match: any): any {}
 
   getGenerated(event: boolean): void {
     this.generatedTournament.emit(event);

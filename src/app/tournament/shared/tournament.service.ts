@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject, throwError } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TournamentCreationDto } from '../models/tournament-creation-dto.model';
 import { TournamentDetails } from '../models/tournament-details.model';
@@ -169,33 +169,33 @@ export class TournamentService implements ITournamentService {
     tournamentId: number,
     generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
   ) {
-    // this.http
-    //   .put<TournamentUpdate>(
-    //     `${environment.urlApi}/tournaments/${tournamentId}`,
-    //     {
-    //       isGenerated: true,
-    //       matches: generatedTree,
-    //     }
-    //   )
-    //   .subscribe({
-    //     next: (response) => {
-    //       if (response) {
-    //         this.router.navigate(['/tournament/' + tournamentId]);
-    //         this.toastService.showSuccess(
-    //           'Tournoi généré avec succès',
-    //           'Votre tournoi est prêt !'
-    //         );
-    //       }
-    //     },
-    //     error: (error) => {
-    //       if (error.error) {
-    //         this.toastService.showError(
-    //           error.error,
-    //           'Erreur lors de la création du tournoi'
-    //         );
-    //       }
-    //     },
-    //   });
+    this.http
+      .put<TournamentUpdate>(
+        `${environment.urlApi}/tournaments/${tournamentId}`,
+        {
+          isGenerated: true,
+          matches: generatedTree,
+        }
+      )
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.router.navigate(['/tournament/' + tournamentId]);
+            this.toastService.showSuccess(
+              'Tournoi généré avec succès',
+              'Votre tournoi est prêt !'
+            );
+          }
+        },
+        error: (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              'Erreur lors de la création du tournoi'
+            );
+          }
+        },
+      });
   }
 
   deleteTournament(tournamentDetails: TournamentDetails): void {

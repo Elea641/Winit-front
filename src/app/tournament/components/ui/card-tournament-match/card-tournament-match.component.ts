@@ -1,58 +1,147 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BreakpointService } from 'src/app/shared/breakpoint.service';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatchService } from 'src/app/tournament/shared/match.service';
+import { MatchUpdate } from 'src/app/tournament/models/matchUpdate.model';
 
 @Component({
   selector: 'app-card-tournament-match',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   templateUrl: './card-tournament-match.component.html',
   styleUrls: ['./card-tournament-match.component.scss'],
 })
-export class CardTournamentMatchComponent implements OnInit {
+export class CardTournamentMatchComponent {
   @Input() match: any;
-  // @Input() namesTeamList: any;
-  // @Input() indexRemainingTeams: any;
-  // @Input() indexRandomTeams: any;
-  // @Input() randomMatchs: any;
-  // @Input() totalPhaseMatchs: any;
-  // @Input() isLastIteration: boolean = false;
-  // isDesktop: boolean | undefined = false;
-  // isLargeDesktop: boolean | undefined = false;
-  // margin: number = 0;
-  // isEven: string = '';
-  // marginCalcul!: number;
+  @Input() matchesByPhase: any;
+  @Input() phaseKey: string = '';
+  scoreForm!: FormGroup;
+  nextPhase!: string | null;
 
-  constructor(private breakpointService: BreakpointService) {}
+  constructor(private matchService: MatchService) {}
 
-  ngOnInit(): void {
-    // if (this.namesTeamList.isEven === true) {
-    //   this.isEven = 'even';
-    // } else {
-    //   this.isEven = 'odd';
-    // }
-    // this.marginCalculator(this.indexRemainingTeams, this.indexRandomTeams);
-    // this.isDesktop = this.breakpointService.isDesktopDevice();
-    // this.breakpointService.deviceChanged['isDesktop'].subscribe(
-    //   (isDesktop: boolean) => {
-    //     this.isDesktop = isDesktop;
-    //   }
-    // );
-    // this.isLargeDesktop = this.breakpointService.isLargeDesktopDevice();
-    // this.breakpointService.deviceChanged['isLargeDesktop'].subscribe(
-    //   (isLargeDesktop: boolean) => {
-    //     this.isLargeDesktop = isLargeDesktop;
-    //   }
-    // );
+  ngOnInit() {
+    this.scoreForm = new FormGroup({
+      scoreTeam1: new FormControl(this.match.scoreTeam1, [
+        Validators.required,
+        Validators.pattern(`^[0-9]*`),
+      ]),
+      scoreTeam2: new FormControl(this.match.scoreTeam2, [
+        Validators.required,
+        Validators.pattern(`^[0-9]*`),
+      ]),
+    });
+
+    this.scoreForm.valueChanges.subscribe(() => {
+      this.onSubmit();
+    });
+
+    this.findNextPhase(this.phaseKey, this.matchesByPhase);
   }
 
-  // marginCalculator(indexRemainingTeams: number, indexRandomTeams: number) {
-  //   if (indexRemainingTeams === 0) {
-  //     this.margin = 2 ** (indexRemainingTeams + 2.6) - 2;
-  //   } else if (indexRemainingTeams > 0) {
-  //     this.margin = 2 ** (indexRemainingTeams + 3) - 2;
-  //   } else if (indexRandomTeams) {
-  //     this.margin = 2;
-  //   }
-  // }
+  findNextPhase(phaseKey: string, matchesByPhase: any): string | null {
+    if (phaseKey && matchesByPhase) {
+      let maxMatchCount = 0;
+
+      if (
+        phaseKey === 'Phase préliminaire' &&
+        Object.keys(matchesByPhase).length > 1
+      ) {
+        for (const phase in matchesByPhase) {
+          if (
+            Object.prototype.hasOwnProperty.call(matchesByPhase, phase) &&
+            phase !== 'Phase préliminaire'
+          ) {
+            const matchCount = matchesByPhase[phase].length;
+            if (matchCount > maxMatchCount) {
+              maxMatchCount = matchCount;
+              this.nextPhase = phase;
+            }
+          }
+        }
+
+        return this.nextPhase;
+      } else {
+        const currentPhaseMatchCount = matchesByPhase[phaseKey]?.length || 0;
+
+        const filteredPhases = Object.keys(matchesByPhase).filter(
+          (phase) =>
+            phase !== phaseKey &&
+            phase !== 'Phase préliminaire' &&
+            (matchesByPhase[phase].length || 0) > currentPhaseMatchCount
+        );
+
+        for (const phase of filteredPhases) {
+          const matchCount = matchesByPhase[phase].length;
+          if (matchCount > maxMatchCount) {
+            maxMatchCount = matchCount;
+            this.nextPhase = phase;
+          }
+        }
+        return this.nextPhase;
+      }
+    }
+    return null;
+  }
+
+  findMatchWithStatus(
+    phase: string,
+    matchesByPhase: any
+  ): { id: number; team: string } | null {
+    if (phase && matchesByPhase) {
+      const matches = matchesByPhase[phase];
+
+      const matchWithStatus = matches.find(
+        (match: any) =>
+          match.team1 === 'En attente' || match.team2 === 'En attente'
+      );
+
+      if (matchWithStatus) {
+        const team =
+          matchWithStatus.team1 === 'En attente'
+            ? matchWithStatus.team1
+            : matchWithStatus.team2;
+
+        return {
+          id: matchWithStatus.id,
+          team: team === matchWithStatus.team1 ? 'team1' : 'team2',
+        };
+      }
+    }
+    return null;
+  }
+
+  onSubmit() {
+    if (this.nextPhase) {
+      const nextTeamInfo = this.findMatchWithStatus(
+        this.nextPhase,
+        this.matchesByPhase
+      );
+
+      if (this.scoreForm.valid) {
+        const data: MatchUpdate = {
+          id: this.match.id,
+          scoreTeam1: this.scoreForm.value.scoreTeam1,
+          scoreTeam2: this.scoreForm.value.scoreTeam2,
+          nextTeamInfo: { id: nextTeamInfo?.id, team: nextTeamInfo?.team },
+        };
+
+        this.matchService.updateMatch(data);
+      }
+    }
+  }
 }

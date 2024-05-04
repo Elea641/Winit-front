@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { IGeneratedTreeResult } from '../interfaces/IGeneratedTreeResult.service';
+import { IHelperTournamentService } from '../interfaces/IHelperTournament.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HelperTournamentService {
+export class HelperTournamentService implements IHelperTournamentService {
   private calculPhase(totalTeams: number) {
     let phase = 1;
     let randomMatchs = 0;
@@ -192,7 +193,7 @@ export class HelperTournamentService {
     return defineMatches;
   }
 
-  generatedTree(totalTeams: number, teams: any) {
+  generatedTree(totalTeams: number, teams: any): any {
     let result: IGeneratedTreeResult = {
       calculPhase: this.calculPhase(totalTeams),
       totalPhase: this.convertToTournamentPhase(this.calculPhase(totalTeams)),
