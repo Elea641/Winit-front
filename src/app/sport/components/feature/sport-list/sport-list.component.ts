@@ -21,7 +21,7 @@ export class SportListComponent {
         this.sports$ = data;
       },
       error: (error) => {
-        console.log(error);
+        console.error(error);
       },
     });
   }

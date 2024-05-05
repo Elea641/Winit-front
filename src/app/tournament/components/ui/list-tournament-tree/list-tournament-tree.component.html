@@ -45,7 +45,6 @@
         <div *ngFor="let phaseKey of sortPhaseKeysByMatchCount(phaseKeys)">
           <div *ngIf="phaseKey !== 'Phase préliminaire'">
             <h2>{{ phaseKey }}</h2>
-
             <div *ngFor="let match of matchesByPhase[phaseKey]">
               <app-card-tournament-match
                 [match]="match"

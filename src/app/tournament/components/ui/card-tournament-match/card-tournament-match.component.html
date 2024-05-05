@@ -21,12 +21,10 @@
     mat-raised-button
     color="primary"
     (click)="openDialog()"
-    *ngIf="!isCompleted"
+    *ngIf="
+      !isCompleted && match.winnerTeamId === null && match.loserTeamId === null
+    "
   >
     Score
   </button>
 </article>
-
-<!-- *ngIf="
-!isCompleted && match.winnerTeamId === null && match.loserTeamId === null
-" -->

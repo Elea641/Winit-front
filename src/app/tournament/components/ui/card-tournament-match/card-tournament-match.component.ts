@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatchUpdate } from 'src/app/tournament/models/matchUpdate.model';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ScoreModalComponent } from '../../feature/score-modal/score-modal.component';
 import { ScoreModalContent } from 'src/app/tournament/models/ScoreModal.model';
@@ -24,7 +23,6 @@ export class CardTournamentMatchComponent {
 
   ngOnInit() {
     this.findNextPhase(this.phaseKey, this.matchesByPhase);
-    console.log(this.match);
   }
 
   findNextPhase(phaseKey: string, matchesByPhase: any): string | null {
@@ -66,6 +64,7 @@ export class CardTournamentMatchComponent {
             this.nextPhase = phase;
           }
         }
+
         return this.nextPhase;
       }
     }
@@ -118,7 +117,6 @@ export class CardTournamentMatchComponent {
         });
         dialogRef.afterClosed().subscribe((response) => {
           if (response === true) {
-            console.log(response);
           }
         });
       }
