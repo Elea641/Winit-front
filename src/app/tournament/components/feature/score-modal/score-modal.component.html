@@ -1,0 +1,74 @@
+<div class="confirm-modal-container">
+  <h1 mat-dialog-title>Valider les scores</h1>
+  <mat-dialog-content>
+    Êtes-vous certain de vouloir confirmer les scores ?
+  </mat-dialog-content>
+  <form [formGroup]="scoreForm" (ngSubmit)="onSubmit()">
+    <section>
+      <h2>
+        {{ content.match.team1 }}
+      </h2>
+      <input
+        *ngIf="
+          content.match.team1 !== 'En attente' &&
+          content.match.team2 !== 'En attente'
+        "
+        matInput
+        type="text"
+        formControlName="scoreTeam1"
+        [value]="content.match.scoreTeam1"
+      />
+      <div
+        *ngIf="scoreForm.get('scoreTeam2')?.errors?.['required'] && scoreForm.get('scoreTeam2')?.touched && content.match.team1 !== 'En attente' && content.match.team2 !== 'En attente'"
+        class="error-message"
+      >
+        Le score de l'équipe 2 est requis.
+      </div>
+      <div
+        *ngIf="scoreForm.get('scoreTeam2')?.errors?.['pattern'] && scoreForm.get('scoreTeam2')?.touched && content.match.team1 !== 'En attente' && content.match.team2 !== 'En attente'"
+        class="error-message"
+      >
+        Le score de l'équipe 2 doit être un nombre.
+      </div>
+    </section>
+    <section>
+      <h2>
+        {{ content.match.team2 }}
+      </h2>
+      <input
+        *ngIf="
+          content.match.team1 !== 'En attente' &&
+          content.match.team2 !== 'En attente'
+        "
+        matInput
+        type="text"
+        formControlName="scoreTeam2"
+        [value]="content.match.scoreTeam2"
+      />
+      <div
+        *ngIf="scoreForm.get('scoreTeam2')?.errors?.['required'] && scoreForm.get('scoreTeam2')?.touched && content.match.team1 !== 'En attente' && content.match.team2 !== 'En attente'"
+        class="error-message"
+      >
+        Le score de l'équipe 2 est requis.
+      </div>
+      <div
+        *ngIf="scoreForm.get('scoreTeam2')?.errors?.['pattern'] && scoreForm.get('scoreTeam2')?.touched && content.match.team1 !== 'En attente' && content.match.team2 !== 'En attente'"
+        class="error-message"
+      >
+        Le score de l'équipe 2 doit être un nombre.
+      </div>
+    </section>
+  </form>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="dialogRef.close(onSubmit())"
+    >
+      Confirmer
+    </button>
+    <button mat-stroked-button color="primary" (click)="dialogRef.close(false)">
+      Annuler
+    </button>
+  </mat-dialog-actions>
+</div>

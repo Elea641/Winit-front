@@ -70,6 +70,12 @@ export class ListTournamentTreeComponent {
     });
   }
 
+  isPhaseIncomplete(matches: any[]): boolean {
+    return matches.some(
+      (match) => match.team1 === 'En attente' || match.team2 === 'En attente'
+    );
+  }
+
   getGenerated(event: boolean): void {
     this.generatedTournament.emit(event);
     if (

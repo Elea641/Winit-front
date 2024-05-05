@@ -1,27 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatchService } from 'src/app/tournament/shared/match.service';
 import { MatchUpdate } from 'src/app/tournament/models/matchUpdate.model';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ScoreModalComponent } from '../../feature/score-modal/score-modal.component';
+import { ScoreModalContent } from 'src/app/tournament/models/ScoreModal.model';
 
 @Component({
   selector: 'app-card-tournament-match',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-  ],
+  imports: [CommonModule, MatButtonModule, MatDialogModule],
   templateUrl: './card-tournament-match.component.html',
   styleUrls: ['./card-tournament-match.component.scss'],
 })
@@ -29,28 +17,14 @@ export class CardTournamentMatchComponent {
   @Input() match: any;
   @Input() matchesByPhase: any;
   @Input() phaseKey: string = '';
-  scoreForm!: FormGroup;
+  @Input() isCompleted!: boolean;
   nextPhase!: string | null;
 
-  constructor(private matchService: MatchService) {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.scoreForm = new FormGroup({
-      scoreTeam1: new FormControl(this.match.scoreTeam1, [
-        Validators.required,
-        Validators.pattern(`^[0-9]*`),
-      ]),
-      scoreTeam2: new FormControl(this.match.scoreTeam2, [
-        Validators.required,
-        Validators.pattern(`^[0-9]*`),
-      ]),
-    });
-
-    this.scoreForm.valueChanges.subscribe(() => {
-      this.onSubmit();
-    });
-
     this.findNextPhase(this.phaseKey, this.matchesByPhase);
+    console.log(this.match);
   }
 
   findNextPhase(phaseKey: string, matchesByPhase: any): string | null {
@@ -125,22 +99,28 @@ export class CardTournamentMatchComponent {
     return null;
   }
 
-  onSubmit() {
+  openDialog() {
     if (this.nextPhase) {
       const nextTeamInfo = this.findMatchWithStatus(
         this.nextPhase,
         this.matchesByPhase
       );
 
-      if (this.scoreForm.valid) {
-        const data: MatchUpdate = {
-          id: this.match.id,
-          scoreTeam1: this.scoreForm.value.scoreTeam1,
-          scoreTeam2: this.scoreForm.value.scoreTeam2,
-          nextTeamInfo: { id: nextTeamInfo?.id, team: nextTeamInfo?.team },
+      if (this.nextPhase) {
+        const modalData: ScoreModalContent = {
+          match: this.match,
+          nextPhase: this.nextPhase,
+          nextTeamInfo: nextTeamInfo,
         };
 
-        this.matchService.updateMatch(data);
+        const dialogRef = this.dialog.open(ScoreModalComponent, {
+          data: new ScoreModalContent(modalData),
+        });
+        dialogRef.afterClosed().subscribe((response) => {
+          if (response === true) {
+            console.log(response);
+          }
+        });
       }
     }
   }

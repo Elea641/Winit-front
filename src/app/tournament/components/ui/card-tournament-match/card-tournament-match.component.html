@@ -1,54 +1,32 @@
 <article>
-  <form [formGroup]="scoreForm" (ngSubmit)="onSubmit()">
-    <section>
-      <h2>{{ match.team1 }}</h2>
-      <input
-        *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'"
-        matInput
-        type="text"
-        formControlName="scoreTeam1"
-        [value]="match.scoreTeam1"
-      />
-      <div
-        *ngIf="scoreForm.get('scoreTeam1')?.errors?.['required'] && scoreForm.get('scoreTeam1')?.touched && match.team1 !== 'En attente' && match.team2 !== 'En attente'"
-        class="error-message"
-      >
-        Le score de l'équipe 1 est requis.
-      </div>
-      <div
-        *ngIf="scoreForm.get('scoreTeam1')?.errors?.['pattern'] && scoreForm.get('scoreTeam1')?.touched && match.team1 !== 'En attente' && match.team2 !== 'En attente'"
-        class="error-message"
-      >
-        Le score de l'équipe 1 doit être un nombre.
-      </div>
-      <p *ngIf="match.team1 === 'En attente' || match.team2 === 'En attente'">
-        {{ match.scoreTeam1 }}
-      </p>
-    </section>
-    <section>
-      <h2>{{ match.team2 }}</h2>
-      <input
-        *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'"
-        matInput
-        type="text"
-        formControlName="scoreTeam2"
-        [value]="match.scoreTeam2"
-      />
-      <div
-        *ngIf="scoreForm.get('scoreTeam2')?.errors?.['required'] && scoreForm.get('scoreTeam2')?.touched && match.team1 !== 'En attente' && match.team2 !== 'En attente'"
-        class="error-message"
-      >
-        Le score de l'équipe 2 est requis.
-      </div>
-      <div
-        *ngIf="scoreForm.get('scoreTeam2')?.errors?.['pattern'] && scoreForm.get('scoreTeam2')?.touched && match.team1 !== 'En attente' && match.team2 !== 'En attente'"
-        class="error-message"
-      >
-        Le score de l'équipe 2 doit être un nombre.
-      </div>
-      <p *ngIf="match.team1 === 'En attente' || match.team2 === 'En attente'">
-        {{ match.scoreTeam2 }}
-      </p>
-    </section>
-  </form>
+  <section>
+    <h2>{{ match.team1 }}</h2>
+    <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
+      {{ match.scoreTeam1 }}
+    </p>
+    <p *ngIf="match.team1 === 'En attente' || match.team2 === 'En attente'">
+      {{ match.scoreTeam1 }}
+    </p>
+  </section>
+  <section>
+    <h2>{{ match.team2 }}</h2>
+    <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
+      {{ match.scoreTeam2 }}
+    </p>
+    <p *ngIf="match.team1 === 'En attente' || match.team2 === 'En attente'">
+      {{ match.scoreTeam2 }}
+    </p>
+  </section>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openDialog()"
+    *ngIf="!isCompleted"
+  >
+    Score
+  </button>
 </article>
+
+<!-- *ngIf="
+!isCompleted && match.winnerTeamId === null && match.loserTeamId === null
+" -->
