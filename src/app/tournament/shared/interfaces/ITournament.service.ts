@@ -16,7 +16,7 @@ export interface ITournamentService {
   updateTournament(
     tournamentId: number,
     generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
-  ): void;
+  ): Observable<TournamentDetails>;
 
   deleteTeamToTournament(
     tournamentId: number,

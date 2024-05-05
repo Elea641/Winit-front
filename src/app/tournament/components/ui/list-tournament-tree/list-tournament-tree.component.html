@@ -48,6 +48,8 @@
             <div *ngFor="let match of matchesByPhase[phaseKey]">
               <app-card-tournament-match
                 [match]="match"
+                [matchesByPhase]="matchesByPhase"
+                [phaseKey]="phaseKey"
                 [isCompleted]="isPhaseIncomplete(matchesByPhase[phaseKey])"
               ></app-card-tournament-match>
             </div>

@@ -168,34 +168,36 @@ export class TournamentService implements ITournamentService {
   updateTournament(
     tournamentId: number,
     generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
-  ) {
-    this.http
-      .put<TournamentUpdate>(
-        `${environment.urlApi}/tournaments/${tournamentId}`,
-        {
-          isGenerated: true,
-          matches: generatedTree,
-        }
-      )
-      .subscribe({
-        next: (response) => {
-          if (response) {
-            this.router.navigate(['/tournament/' + tournamentId]);
-            this.toastService.showSuccess(
-              'Tournoi généré avec succès',
-              'Votre tournoi est prêt !'
-            );
+  ): Observable<TournamentDetails> {
+    return new Observable<TournamentDetails>((observer) => {
+      this.http
+        .put<TournamentUpdate>(
+          `${environment.urlApi}/tournaments/${tournamentId}`,
+          {
+            isGenerated: true,
+            matches: generatedTree,
           }
-        },
-        error: (error) => {
-          if (error.error) {
-            this.toastService.showError(
-              error.error,
-              'Erreur lors de la création du tournoi'
-            );
-          }
-        },
-      });
+        )
+        .subscribe({
+          next: (response) => {
+            if (response) {
+              this.router.navigate(['/tournament/' + tournamentId]);
+              this.toastService.showSuccess(
+                'Tournoi généré avec succès',
+                'Votre tournoi est prêt !'
+              );
+            }
+          },
+          error: (error) => {
+            if (error.error) {
+              this.toastService.showError(
+                error.error,
+                'Erreur lors de la création du tournoi'
+              );
+            }
+          },
+        });
+    });
   }
 
   deleteTournament(tournamentDetails: TournamentDetails): void {

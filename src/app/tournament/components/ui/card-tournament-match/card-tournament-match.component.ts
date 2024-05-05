@@ -51,16 +51,13 @@ export class CardTournamentMatchComponent {
         const currentPhaseMatchCount = matchesByPhase[phaseKey]?.length || 0;
 
         const filteredPhases = Object.keys(matchesByPhase).filter(
-          (phase) =>
-            phase !== phaseKey &&
-            phase !== 'Phase préliminaire' &&
-            (matchesByPhase[phase].length || 0) > currentPhaseMatchCount
+          (phase) => phase !== phaseKey && phase !== 'Phase préliminaire'
         );
 
         for (const phase of filteredPhases) {
           const matchCount = matchesByPhase[phase].length;
-          if (matchCount > maxMatchCount) {
-            maxMatchCount = matchCount;
+
+          if (matchCount === currentPhaseMatchCount / 2) {
             this.nextPhase = phase;
           }
         }
@@ -99,6 +96,8 @@ export class CardTournamentMatchComponent {
   }
 
   openDialog() {
+    console.log(this.nextPhase);
+
     if (this.nextPhase) {
       const nextTeamInfo = this.findMatchWithStatus(
         this.nextPhase,
@@ -120,6 +119,20 @@ export class CardTournamentMatchComponent {
           }
         });
       }
+    } else {
+      const modalData: ScoreModalContent = {
+        match: this.match,
+        nextPhase: 'Aucune',
+        nextTeamInfo: {},
+      };
+
+      const dialogRef = this.dialog.open(ScoreModalComponent, {
+        data: new ScoreModalContent(modalData),
+      });
+      dialogRef.afterClosed().subscribe((response) => {
+        if (response === true) {
+        }
+      });
     }
   }
 }

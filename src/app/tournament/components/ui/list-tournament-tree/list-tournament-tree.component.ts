@@ -106,7 +106,7 @@ export class ListTournamentTreeComponent {
         this.tournament$.subscribe((tournament) => {
           if (tournament) {
             this.getGenerated(true);
-            this.tournamentService.updateTournament(
+            this.tournament$ = this.tournamentService.updateTournament(
               tournament.id,
               this.generatedTree
             );
