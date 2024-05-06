@@ -19,18 +19,25 @@ export class CardTournamentMatchComponent {
   @Input() matchesByPhase: any;
   @Input() phaseKey: string = '';
   @Input() isCompleted!: boolean;
-  @Input() indexRemainingTeams: any;
-  @Input() indexRandomTeams: any;
+  @Input() indexPhasesOther: any;
+  @Input() indexPhasePreliminary: any;
   @Input() isLastIteration: boolean = false;
+  @Input() namesTeamList: any;
   nextPhase!: string | null;
   margin: number = 0;
-
+  isEven: string = '';
   constructor(private dialog: MatDialog) {}
 
   ngOnInit() {
     this.findNextPhase(this.phaseKey, this.matchesByPhase);
 
-    this.marginCalculator(this.indexRemainingTeams, this.indexRandomTeams);
+    this.marginCalculator(this.indexPhasesOther, this.indexPhasePreliminary);
+
+    if (this.namesTeamList.isEven === true) {
+      this.isEven = 'even';
+    } else {
+      this.isEven = 'odd';
+    }
   }
 
   truncateName(text: string): string {
@@ -140,14 +147,12 @@ export class CardTournamentMatchComponent {
     }
   }
 
-  marginCalculator(indexRemainingTeams: number, indexRandomTeams: number) {
-    console.log(indexRandomTeams, indexRemainingTeams);
-
-    if (indexRemainingTeams === 0) {
-      this.margin = 2 ** (indexRemainingTeams + 2.6) - 2;
-    } else if (indexRemainingTeams > 0) {
-      this.margin = 2 ** (indexRemainingTeams + 3) - 2;
-    } else if (indexRandomTeams) {
+  marginCalculator(indexPhasesOther: number, indexPhasePreliminary: number) {
+    if (indexPhasesOther === 0) {
+      this.margin = 2 ** (indexPhasesOther + 2.6) - 2;
+    } else if (indexPhasesOther > 0) {
+      this.margin = 2 ** (indexPhasesOther + 3) - 2;
+    } else if (indexPhasePreliminary) {
       this.margin = 2;
     }
   }

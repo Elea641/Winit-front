@@ -58,8 +58,8 @@
     flex-direction: column;
     background-color: $primary-background-color;
     width: 15rem;
-    margin-right: 2rem;
     color: $secondary-color-text;
+    margin-right: 2rem;
 
     section {
       margin: 0;
@@ -79,6 +79,10 @@
 
     section:last-child {
       border-top: 1px solid $secondary-color-line;
+    }
+
+    .odd {
+      margin-bottom: 3rem;
     }
   }
   section {

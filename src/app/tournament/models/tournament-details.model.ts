@@ -8,7 +8,7 @@ export class TournamentDetails {
     public date: Date,
     public inscriptionLimitDate: Date,
     public createdAt: Date,
-    public currentNumberOfParticipants: number | null,
+    public currentNumberOfParticipants: number,
     public imageUrl: string,
     public teams: {
       name: string;

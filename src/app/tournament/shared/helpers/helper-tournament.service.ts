@@ -6,7 +6,7 @@ import { IHelperTournamentService } from '../interfaces/IHelperTournament.servic
   providedIn: 'root',
 })
 export class HelperTournamentService implements IHelperTournamentService {
-  private calculPhase(totalTeams: number) {
+  public calculPhase(totalTeams: number) {
     let phase = 1;
     let randomMatchs = 0;
     let totalMatchesWithoutRandoms = 0;
