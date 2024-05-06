@@ -19,12 +19,22 @@ export class CardTournamentMatchComponent {
   @Input() matchesByPhase: any;
   @Input() phaseKey: string = '';
   @Input() isCompleted!: boolean;
+  @Input() indexRemainingTeams: any;
+  @Input() indexRandomTeams: any;
+  @Input() isLastIteration: boolean = false;
   nextPhase!: string | null;
+  margin: number = 0;
 
   constructor(private dialog: MatDialog) {}
 
   ngOnInit() {
     this.findNextPhase(this.phaseKey, this.matchesByPhase);
+
+    this.marginCalculator(this.indexRemainingTeams, this.indexRandomTeams);
+  }
+
+  truncateName(text: string): string {
+    return text.length > 10 ? text.substring(0, 10) + '...' : text;
   }
 
   findNextPhase(phaseKey: string, matchesByPhase: any): string | null {
@@ -112,13 +122,9 @@ export class CardTournamentMatchComponent {
           tournamentId: this.tournamentDetails.id,
         };
 
-        const dialogRef = this.dialog.open(ScoreModalComponent, {
+        this.dialog.open(ScoreModalComponent, {
           data: new ScoreModalContent(modalData),
         });
-        // dialogRef.afterClosed().subscribe((response) => {
-        //   if (response === true) {
-        //   }
-        // });
       }
     } else {
       const modalData: ScoreModalContent = {
@@ -128,13 +134,21 @@ export class CardTournamentMatchComponent {
         nextTeamInfo: {},
       };
 
-      const dialogRef = this.dialog.open(ScoreModalComponent, {
+      this.dialog.open(ScoreModalComponent, {
         data: new ScoreModalContent(modalData),
       });
-      // dialogRef.afterClosed().subscribe((response) => {
-      //   if (response === true) {
-      //   }
-      // });
+    }
+  }
+
+  marginCalculator(indexRemainingTeams: number, indexRandomTeams: number) {
+    console.log(indexRandomTeams, indexRemainingTeams);
+
+    if (indexRemainingTeams === 0) {
+      this.margin = 2 ** (indexRemainingTeams + 2.6) - 2;
+    } else if (indexRemainingTeams > 0) {
+      this.margin = 2 ** (indexRemainingTeams + 3) - 2;
+    } else if (indexRandomTeams) {
+      this.margin = 2;
     }
   }
 }

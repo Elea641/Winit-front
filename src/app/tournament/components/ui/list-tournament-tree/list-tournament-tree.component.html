@@ -24,9 +24,15 @@
     class="list-tournament-tree-container"
   >
     <div class="list-tournament-tree-container-details">
-      <div *ngIf="matchesByPhase" class="list-tournament-tree-container-cards">
-        <div *ngFor="let phaseKey of phaseKeys">
-          <div *ngIf="phaseKey === 'Phase préliminaire'">
+      <div
+        *ngIf="matchesByPhase"
+        class="list-tournament-tree-container-cards-preliminary"
+      >
+        <div *ngFor="let phaseKey of phaseKeys; let j = index">
+          <div
+            *ngIf="phaseKey === 'Phase préliminaire'"
+            class="list-tournament-tree-container-cards-preliminary-cards"
+          >
             <h2>{{ phaseKey }}</h2>
             <div *ngFor="let match of matchesByPhase[phaseKey]">
               <app-card-tournament-match
@@ -34,6 +40,7 @@
                 [matchesByPhase]="matchesByPhase"
                 [phaseKey]="phaseKey"
                 [tournamentDetails]="tournamentDetails"
+                [indexRandomTeams]="j"
               ></app-card-tournament-match>
             </div>
           </div>
@@ -42,17 +49,36 @@
     </div>
 
     <div class="list-tournament-tree-container-details">
-      <div *ngIf="matchesByPhase" class="list-tournament-tree-container-cards">
-        <div *ngFor="let phaseKey of sortPhaseKeysByMatchCount(phaseKeys)">
-          <div *ngIf="phaseKey !== 'Phase préliminaire'">
+      <div
+        *ngIf="matchesByPhase"
+        class="list-tournament-tree-container-cards-phases"
+      >
+        <div
+          *ngFor="
+            let phaseKey of sortPhaseKeysByMatchCount(phaseKeys);
+            let index = index
+          "
+        >
+          <div
+            *ngIf="phaseKey !== 'Phase préliminaire'"
+            class="list-tournament-tree-container-cards-phases-cards"
+          >
             <h2>{{ phaseKey }}</h2>
-            <div *ngFor="let match of matchesByPhase[phaseKey]">
+            <div
+              *ngFor="
+                let match of matchesByPhase[phaseKey];
+                let i = index;
+                let last = last
+              "
+            >
               <app-card-tournament-match
                 [match]="match"
                 [matchesByPhase]="matchesByPhase"
                 [phaseKey]="phaseKey"
                 [tournamentDetails]="tournamentDetails"
                 [isCompleted]="isPhaseIncomplete(matchesByPhase[phaseKey])"
+                [indexRemainingTeams]="index"
+                [isLastIteration]="last"
               ></app-card-tournament-match>
             </div>
           </div>

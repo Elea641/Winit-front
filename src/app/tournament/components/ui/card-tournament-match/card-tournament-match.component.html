@@ -1,6 +1,10 @@
-<article>
+<article
+  [ngStyle]="{
+    'margin-bottom.rem': !isLastIteration ? margin : 0
+  }"
+>
   <section>
-    <h2>{{ match.team1 }}</h2>
+    <h3>{{ truncateName(match.team1) }}</h3>
     <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
       {{ match.scoreTeam1 }}
     </p>
@@ -9,7 +13,7 @@
     </p>
   </section>
   <section>
-    <h2>{{ match.team2 }}</h2>
+    <h3>{{ truncateName(match.team2) }}</h3>
     <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
       {{ match.scoreTeam2 }}
     </p>
@@ -17,6 +21,8 @@
       {{ match.scoreTeam2 }}
     </p>
   </section>
+</article>
+<section>
   <button
     mat-raised-button
     color="primary"
@@ -27,4 +33,4 @@
   >
     Score
   </button>
-</article>
+</section>
