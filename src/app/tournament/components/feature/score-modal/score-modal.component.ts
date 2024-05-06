@@ -15,6 +15,8 @@ import {
 import { MatchService } from 'src/app/tournament/shared/match.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatchUpdate } from 'src/app/tournament/models/matchUpdate.model';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-score-modal',
@@ -24,6 +26,8 @@ import { MatchUpdate } from 'src/app/tournament/models/matchUpdate.model';
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   templateUrl: './score-modal.component.html',
   styleUrls: ['./score-modal.component.scss'],
@@ -56,6 +60,14 @@ export class ScoreModalComponent {
         Validators.pattern(`^[0-9]*`),
       ]),
     });
+  }
+
+  get scoreTeam1() {
+    return this.scoreForm.get('scoreTeam1')!;
+  }
+
+  get scoreTeam2() {
+    return this.scoreForm.get('scoreTeam2')!;
   }
 
   onSubmit() {
