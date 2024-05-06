@@ -30,6 +30,7 @@ export class ListTournamentTreeComponent {
   generatedTree: any;
   limitInscriptionTime!: Subscription;
   limitInscriptionValue: number | undefined;
+  tournamentSubscription!: Subscription;
   matchesByPhase: { [phase: string]: any[] } = {};
   phaseKeys: string[] = [];
 
@@ -42,6 +43,7 @@ export class ListTournamentTreeComponent {
 
   ngOnDestroy(): void {
     this.limitInscriptionTime.unsubscribe();
+    this.tournamentSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -59,7 +61,22 @@ export class ListTournamentTreeComponent {
         this.matchesByPhase[match.phase].push(match);
       });
     });
+
     this.phaseKeys = Object.keys(this.matchesByPhase);
+
+    this.tournamentSubscription = this.tournamentService.tournament$.subscribe(
+      (tournament) => {
+        this.matchesByPhase = {};
+        this.tournamentDetails = tournament;
+        this.tournamentDetails.matches.forEach((match: any) => {
+          if (!this.matchesByPhase[match.phase]) {
+            this.matchesByPhase[match.phase] = [];
+          }
+          this.matchesByPhase[match.phase].push(match);
+        });
+        this.phaseKeys = Object.keys(this.matchesByPhase);
+      }
+    );
   }
 
   sortPhaseKeysByMatchCount(phaseKeys: string[]): string[] {
@@ -103,15 +120,11 @@ export class ListTournamentTreeComponent {
 
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
-        this.tournament$.subscribe((tournament) => {
-          if (tournament) {
-            this.getGenerated(true);
-            this.tournament$ = this.tournamentService.updateTournament(
-              tournament.id,
-              this.generatedTree
-            );
-          }
-        });
+        this.getGenerated(true);
+        this.tournamentService.updateTournament(
+          this.tournamentDetails.id,
+          this.generatedTree
+        );
       }
     });
   }

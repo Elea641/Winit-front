@@ -33,6 +33,7 @@ export class ScoreModalComponent {
     match: {},
     nextPhase: '',
     nextTeamInfo: {},
+    tournamentId: 0,
   });
   scoreForm!: FormGroup;
 
@@ -61,6 +62,7 @@ export class ScoreModalComponent {
     if (this.scoreForm.valid) {
       const data: MatchUpdate = {
         id: this.content.match.id,
+        tournamentId: this.content.tournamentId,
         scoreTeam1: parseInt(this.scoreForm.value.scoreTeam1, 10),
         scoreTeam2: parseInt(this.scoreForm.value.scoreTeam2, 10),
         nextTeamInfo: {

@@ -3,26 +3,36 @@ import { Injectable } from '@angular/core';
 import { MatchUpdate } from '../models/matchUpdate.model';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/shared/toast.service';
+import { TournamentService } from './tournament.service';
+import { TournamentDetails } from '../models/tournament-details.model';
+import { IMatchService } from './interfaces/IMatch.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MatchService {
-  constructor(private http: HttpClient, private toastService: ToastService) {}
+export class MatchService implements IMatchService {
+  constructor(
+    private http: HttpClient,
+    private tournamentService: TournamentService,
+    private toastService: ToastService
+  ) {}
 
   updateMatch(matchUpdate: MatchUpdate) {
     this.http
-      .put<MatchUpdate>(
+      .put<TournamentDetails>(
         `${environment.urlApi}/matches/${matchUpdate.id}`,
         matchUpdate
       )
       .subscribe({
         next: (response) => {
           if (response) {
-            this.toastService.showSuccess(
-              'Le score est mis à jour',
-              'Validation du match'
-            );
+            this.tournamentService.tournamentSubject.next(response);
+            if (response) {
+              this.toastService.showSuccess(
+                'Le score est mis à jour',
+                'Validation du match'
+              );
+            }
           }
         },
         error: (error) => {

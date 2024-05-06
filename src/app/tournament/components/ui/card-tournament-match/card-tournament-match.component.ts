@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ScoreModalComponent } from '../../feature/score-modal/score-modal.component';
 import { ScoreModalContent } from 'src/app/tournament/models/ScoreModal.model';
+import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
 
 @Component({
   selector: 'app-card-tournament-match',
@@ -13,6 +14,7 @@ import { ScoreModalContent } from 'src/app/tournament/models/ScoreModal.model';
   styleUrls: ['./card-tournament-match.component.scss'],
 })
 export class CardTournamentMatchComponent {
+  @Input() tournamentDetails!: TournamentDetails;
   @Input() match: any;
   @Input() matchesByPhase: any;
   @Input() phaseKey: string = '';
@@ -96,8 +98,6 @@ export class CardTournamentMatchComponent {
   }
 
   openDialog() {
-    console.log(this.nextPhase);
-
     if (this.nextPhase) {
       const nextTeamInfo = this.findMatchWithStatus(
         this.nextPhase,
@@ -109,19 +109,21 @@ export class CardTournamentMatchComponent {
           match: this.match,
           nextPhase: this.nextPhase,
           nextTeamInfo: nextTeamInfo,
+          tournamentId: this.tournamentDetails.id,
         };
 
         const dialogRef = this.dialog.open(ScoreModalComponent, {
           data: new ScoreModalContent(modalData),
         });
-        dialogRef.afterClosed().subscribe((response) => {
-          if (response === true) {
-          }
-        });
+        // dialogRef.afterClosed().subscribe((response) => {
+        //   if (response === true) {
+        //   }
+        // });
       }
     } else {
       const modalData: ScoreModalContent = {
         match: this.match,
+        tournamentId: this.tournamentDetails.id,
         nextPhase: 'Aucune',
         nextTeamInfo: {},
       };
@@ -129,10 +131,10 @@ export class CardTournamentMatchComponent {
       const dialogRef = this.dialog.open(ScoreModalComponent, {
         data: new ScoreModalContent(modalData),
       });
-      dialogRef.afterClosed().subscribe((response) => {
-        if (response === true) {
-        }
-      });
+      // dialogRef.afterClosed().subscribe((response) => {
+      //   if (response === true) {
+      //   }
+      // });
     }
   }
 }

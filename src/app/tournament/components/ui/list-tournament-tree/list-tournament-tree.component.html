@@ -1,4 +1,4 @@
-<ng-container *ngIf="tournament$ | async as tournamentDetails">
+<ng-container *ngIf="tournament$ | async">
   <div
     *ngIf="
       limitInscriptionValue === 0 ||
@@ -33,6 +33,7 @@
                 [match]="match"
                 [matchesByPhase]="matchesByPhase"
                 [phaseKey]="phaseKey"
+                [tournamentDetails]="tournamentDetails"
               ></app-card-tournament-match>
             </div>
           </div>
@@ -50,6 +51,7 @@
                 [match]="match"
                 [matchesByPhase]="matchesByPhase"
                 [phaseKey]="phaseKey"
+                [tournamentDetails]="tournamentDetails"
                 [isCompleted]="isPhaseIncomplete(matchesByPhase[phaseKey])"
               ></app-card-tournament-match>
             </div>

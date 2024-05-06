@@ -10,8 +10,6 @@ import { ToastService } from 'src/app/shared/toast.service';
 import { TournamentMappers } from './mappers/TournamentMappers';
 import { TournamentCard } from '../models/tournament-card.model';
 import { ITournamentService } from './interfaces/ITournament.service';
-
-import { TournamentUpdate } from '../models/tournamentUpdate.model';
 import { SelectTeam } from '../models/selectTeam.model';
 
 @Injectable({
@@ -43,6 +41,11 @@ export class TournamentService implements ITournamentService {
   private inscriptionSubject: Subject<boolean> = new Subject<boolean>();
   public inscription$: Observable<boolean> =
     this.inscriptionSubject.asObservable();
+
+  public tournamentSubject: Subject<TournamentDetails> =
+    new Subject<TournamentDetails>();
+  public tournament$: Observable<TournamentDetails> =
+    this.tournamentSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -168,36 +171,35 @@ export class TournamentService implements ITournamentService {
   updateTournament(
     tournamentId: number,
     generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
-  ): Observable<TournamentDetails> {
-    return new Observable<TournamentDetails>((observer) => {
-      this.http
-        .put<TournamentUpdate>(
-          `${environment.urlApi}/tournaments/${tournamentId}`,
-          {
-            isGenerated: true,
-            matches: generatedTree,
+  ) {
+    this.http
+      .put<TournamentDetails>(
+        `${environment.urlApi}/tournaments/${tournamentId}`,
+        {
+          isGenerated: true,
+          matches: generatedTree,
+        }
+      )
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.tournamentSubject.next(response);
+            this.router.navigate(['/tournament/' + tournamentId]);
+            this.toastService.showSuccess(
+              'Tournoi généré avec succès',
+              'Votre tournoi est prêt !'
+            );
           }
-        )
-        .subscribe({
-          next: (response) => {
-            if (response) {
-              this.router.navigate(['/tournament/' + tournamentId]);
-              this.toastService.showSuccess(
-                'Tournoi généré avec succès',
-                'Votre tournoi est prêt !'
-              );
-            }
-          },
-          error: (error) => {
-            if (error.error) {
-              this.toastService.showError(
-                error.error,
-                'Erreur lors de la création du tournoi'
-              );
-            }
-          },
-        });
-    });
+        },
+        error: (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              'Erreur lors de la création du tournoi'
+            );
+          }
+        },
+      });
   }
 
   deleteTournament(tournamentDetails: TournamentDetails): void {
