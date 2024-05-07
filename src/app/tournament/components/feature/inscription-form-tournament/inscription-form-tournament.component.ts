@@ -104,12 +104,8 @@ export class InscriptionFormTournamentComponent {
           );
         }
       } else {
-        console.error('Le tournoi est introuvable');
+        this.router.navigate([`/tournament/${this.tournamentId}`]);
       }
     });
-  }
-
-  onClick() {
-    this.router.navigate([`/tournament/${this.tournamentId}`]);
   }
 }

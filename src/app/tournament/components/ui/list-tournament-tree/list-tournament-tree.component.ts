@@ -77,6 +77,10 @@ export class ListTournamentTreeComponent {
           this.matchesByPhase[match.phase].push(match);
         });
         this.phaseKeys = Object.keys(this.matchesByPhase);
+        this.getTotalPhaseWithoutPreliminary(this.matchesByPhase);
+        this.phaseWithoutPreliminary = Object.keys(
+          this.matchesByPhaseWithoutPreliminary
+        );
       }
     );
 
