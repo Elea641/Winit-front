@@ -202,6 +202,37 @@ export class TournamentService implements ITournamentService {
       });
   }
 
+  canceledTournament(tournamentId: number, canceled: boolean) {
+    this.http
+      .put<TournamentDetails>(
+        `${environment.urlApi}/tournaments/${tournamentId}`,
+        {
+          isGenerated: true,
+          isCanceled: canceled,
+        }
+      )
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.tournamentSubject.next(response);
+            this.router.navigate(['/tournament/' + tournamentId]);
+            this.toastService.showSuccess(
+              'Annulé avec succès',
+              'Votre tournoi'
+            );
+          }
+        },
+        error: (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              'Erreur lors de la création du tournoi'
+            );
+          }
+        },
+      });
+  }
+
   deleteTournament(tournamentDetails: TournamentDetails): void {
     this.http
       .delete<any>(

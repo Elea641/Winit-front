@@ -13,11 +13,34 @@
       *ngIf="
         limitInscriptionValue === 0 &&
         !tournamentDetails.isGenerated &&
-        tournamentDetails.isOwner
+        tournamentDetails.isOwner &&
+        tournamentDetails.currentNumberOfParticipants > 1
       "
     >
       GÉNÉRER LE TOURNOI
     </button>
+    <h2
+      *ngIf="
+        tournamentDetails.currentNumberOfParticipants === 1 &&
+        !isCanceled &&
+        !tournamentDetails.isCanceled
+      "
+    >
+      Le nombre de participant inscrit ne permet pas de générer le tournoi
+    </h2>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="openDialogCancelTournament()"
+      *ngIf="
+        tournamentDetails.currentNumberOfParticipants === 1 &&
+        !isCanceled &&
+        !tournamentDetails.isCanceled
+      "
+    >
+      ANNULER LE TOURNOI
+    </button>
+    <h2 *ngIf="isCanceled || tournamentDetails.isCanceled">TOURNOI ANNULÉ</h2>
   </div>
   <div
     *ngIf="tournamentDetails.isGenerated"

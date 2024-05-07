@@ -19,6 +19,7 @@ export class TournamentDetails {
     }[],
     public isOwner: boolean,
     public isGenerated: boolean,
+    public isCanceled: boolean,
     public matches?: any
   ) {}
 }

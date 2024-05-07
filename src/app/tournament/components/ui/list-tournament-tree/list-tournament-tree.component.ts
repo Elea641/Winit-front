@@ -35,6 +35,7 @@ export class ListTournamentTreeComponent {
   matchesByPhaseWithoutPreliminary: { [phase: string]: any[] } = {};
   phaseKeys: string[] = [];
   phaseWithoutPreliminary: string[] = [];
+  isCanceled: boolean = false;
 
   constructor(
     private helperTournamentService: HelperTournamentService,
@@ -54,8 +55,12 @@ export class ListTournamentTreeComponent {
         this.limitInscriptionValue = limit;
       });
 
+    console.log(this.isCanceled);
+
     this.tournament$.subscribe((tournament) => {
       this.tournamentDetails = tournament;
+      console.log(tournament);
+
       this.tournamentDetails.matches.forEach((match: any) => {
         if (!this.matchesByPhase[match.phase]) {
           this.matchesByPhase[match.phase] = [];
@@ -167,6 +172,28 @@ export class ListTournamentTreeComponent {
         this.tournamentService.updateTournament(
           this.tournamentDetails.id,
           this.generatedTree
+        );
+      }
+    });
+  }
+
+  openDialogCancelTournament() {
+    const modalData: ModalContent = {
+      title: 'Confirmation',
+      content: `Êtes-vous sûr de vouloir annuler le tournoi ?`,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: new ModalContent(modalData),
+    });
+
+    dialogRef.afterClosed().subscribe((response) => {
+      if (response === true) {
+        this.getGenerated(true);
+        this.isCanceled = true;
+        this.tournamentService.canceledTournament(
+          this.tournamentDetails.id,
+          true
         );
       }
     });

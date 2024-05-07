@@ -18,6 +18,8 @@ export interface ITournamentService {
     generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
   ): void;
 
+  canceledTournament(tournamentId: number, cancel: boolean): void;
+
   deleteTeamToTournament(
     tournamentId: number,
     team: { name: string; result: number; url: string }

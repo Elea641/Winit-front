@@ -7,6 +7,12 @@
     color: $secondary-color;
   }
 
+  h2 {
+    color: $secondary-color;
+    font-weight: 400;
+    margin-top: 2rem;
+  }
+
   .list-tournament-tree-container {
     color: $secondary-color;
     width: 100%;
@@ -32,6 +38,12 @@
     margin-top: 2rem;
     color: $secondary-color;
   }
+  h2 {
+    color: $secondary-color;
+    font-weight: 400;
+    margin-top: 2rem;
+  }
+
   .list-tournament-tree-container {
     @include flex-wrap;
     color: $secondary-color;
