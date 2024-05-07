@@ -55,11 +55,8 @@ export class ListTournamentTreeComponent {
         this.limitInscriptionValue = limit;
       });
 
-    console.log(this.isCanceled);
-
     this.tournament$.subscribe((tournament) => {
       this.tournamentDetails = tournament;
-      console.log(tournament);
 
       this.tournamentDetails.matches.forEach((match: any) => {
         if (!this.matchesByPhase[match.phase]) {
@@ -113,11 +110,11 @@ export class ListTournamentTreeComponent {
     let margin = 0;
 
     if (index === 0) {
-      margin = 0.5;
+      margin = 1;
     } else if (index === 1) {
-      margin = 1.85;
+      margin = 2.3;
     } else if (index === 2) {
-      margin = 4.55;
+      margin = 5;
     } else if (index === 3) {
       margin = 10;
     }

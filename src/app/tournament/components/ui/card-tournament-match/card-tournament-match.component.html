@@ -1,7 +1,10 @@
 <article
   [ngStyle]="{
-    'margin-top.rem': margin * 3.5,
-    'margin-bottom.rem': margin * 3.5
+    'margin-top.rem': isDesktop || isLargeDesktop ? margin * 3.5 : 0,
+    'margin-bottom.rem':
+      (isDesktop || isLargeDesktop) && index !== 0 && !last
+        ? margin * 3.5 * 1.5
+        : 1
   }"
 >
   <section>
@@ -22,16 +25,27 @@
       {{ match.scoreTeam2 }}
     </p>
   </section>
-</article>
-<section>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="openDialog()"
-    *ngIf="
-      !isCompleted && match.winnerTeamId === null && match.loserTeamId === null
-    "
+  <section
+    [ngStyle]="{
+      display:
+        !isCompleted &&
+        match.winnerTeamId === null &&
+        match.loserTeamId === null
+          ? 'block'
+          : 'none'
+    }"
   >
-    Score
-  </button>
-</section>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="openDialog()"
+      *ngIf="
+        !isCompleted &&
+        match.winnerTeamId === null &&
+        match.loserTeamId === null
+      "
+    >
+      Score
+    </button>
+  </section>
+</article>

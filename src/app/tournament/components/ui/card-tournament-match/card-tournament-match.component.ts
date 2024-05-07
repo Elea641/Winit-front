@@ -5,6 +5,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ScoreModalComponent } from '../../feature/score-modal/score-modal.component';
 import { ScoreModalContent } from 'src/app/tournament/models/ScoreModal.model';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
+import { BreakpointService } from 'src/app/shared/breakpoint.service';
 
 @Component({
   selector: 'app-card-tournament-match',
@@ -21,11 +22,31 @@ export class CardTournamentMatchComponent {
   @Input() isCompleted!: boolean;
   @Input() margin!: number;
   @Input() index!: number;
+  @Input() last!: boolean;
+  isDesktop: boolean | undefined = false;
+  isLargeDesktop: boolean | undefined = false;
   nextPhase!: string | null;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private breakpointService: BreakpointService
+  ) {}
 
   ngOnInit() {
+    this.isDesktop = this.breakpointService.isDesktopDevice();
+    this.breakpointService.deviceChanged['isDesktop'].subscribe(
+      (isDesktop: boolean) => {
+        this.isDesktop = isDesktop;
+      }
+    );
+
+    this.isLargeDesktop = this.breakpointService.isLargeDesktopDevice();
+    this.breakpointService.deviceChanged['isLargeDesktop'].subscribe(
+      (isLargeDesktop: boolean) => {
+        this.isLargeDesktop = isLargeDesktop;
+      }
+    );
+
     this.findNextPhase(this.phaseKey, this.matchesByPhase);
   }
 

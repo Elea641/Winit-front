@@ -3,10 +3,9 @@
 
 @include media-mobile-tablet-screen {
   article {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: $primary-background-color;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     width: calc(100vw - 4rem);
     margin: 0.5rem 0 0 0;
     color: $secondary-color-text;
@@ -18,6 +17,7 @@
       height: 3.5rem;
       margin: 0;
       padding: 0 0.4rem;
+
       p {
         font-size: 1.5rem;
       }
@@ -25,29 +25,32 @@
 
     section:first-child {
       border-right: 1px solid $important-color-line;
+      background-color: $primary-background-color;
 
       h3 {
         margin-right: 2rem;
       }
     }
 
-    section:last-child {
+    section:nth-child(2) {
       flex-direction: row-reverse;
       border-left: 1px solid $important-color-line;
+      background-color: $primary-background-color;
 
       h3 {
         margin-left: 2rem;
       }
     }
-  }
-  section {
-    width: calc(100vw - 4rem);
-    margin: 1rem 0 0 0;
-    display: flex;
-    justify-content: center;
 
-    button {
-      margin: 0.5rem 0;
+    section:last-child {
+      display: flex;
+      justify-content: center;
+      grid-column-start: 1;
+      grid-column-end: 3;
+
+      button {
+        margin: 1rem 0;
+      }
     }
   }
 }
@@ -77,18 +80,21 @@
       border-bottom: 1px solid $secondary-color-line;
     }
 
-    section:last-child {
+    section:nth-child(2) {
       border-top: 1px solid $secondary-color-line;
     }
-  }
-  section {
-    width: 15rem;
-    margin: 1rem 0 0 0;
-    display: flex;
-    justify-content: center;
 
-    button {
-      margin: 0.5rem 0;
+    section:last-child {
+      width: 15rem;
+      padding: 1rem 0 0 0;
+      display: flex;
+      justify-content: center;
+      border-left: none;
+      background-color: $primary-color;
+
+      button {
+        margin: 0.5rem 0;
+      }
     }
   }
 }
