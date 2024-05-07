@@ -1,10 +1,9 @@
 <article
-  [ngClass]="isEven"
   [ngStyle]="{
-    'margin-bottom.rem': !isLastIteration && isEven === 'odd' ? margin : 0
+    'margin-top.rem': margin * 3.5,
+    'margin-bottom.rem': margin * 3.5
   }"
 >
-  <p>{{ margin }}</p>
   <section>
     <h3>{{ truncateName(match.team1) }}</h3>
     <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">

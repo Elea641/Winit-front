@@ -32,7 +32,9 @@ export class ListTournamentTreeComponent {
   limitInscriptionValue: number | undefined;
   tournamentSubscription!: Subscription;
   matchesByPhase: { [phase: string]: any[] } = {};
+  matchesByPhaseWithoutPreliminary: { [phase: string]: any[] } = {};
   phaseKeys: string[] = [];
+  phaseWithoutPreliminary: string[] = [];
 
   constructor(
     private helperTournamentService: HelperTournamentService,
@@ -77,6 +79,11 @@ export class ListTournamentTreeComponent {
         this.phaseKeys = Object.keys(this.matchesByPhase);
       }
     );
+
+    this.getTotalPhaseWithoutPreliminary(this.matchesByPhase);
+    this.phaseWithoutPreliminary = Object.keys(
+      this.matchesByPhaseWithoutPreliminary
+    );
   }
 
   sortPhaseKeysByMatchCount(phaseKeys: string[]): string[] {
@@ -91,6 +98,38 @@ export class ListTournamentTreeComponent {
     return matches.some(
       (match) => match.team1 === 'En attente' || match.team2 === 'En attente'
     );
+  }
+
+  marginCalculator(index: number): number {
+    let margin = 0;
+
+    if (index === 0) {
+      margin = 0.5;
+    } else if (index === 1) {
+      margin = 1.85;
+    } else if (index === 2) {
+      margin = 4.55;
+    } else if (index === 3) {
+      margin = 10;
+    }
+    return margin;
+  }
+
+  getTotalPhaseWithoutPreliminary(matchesByPhase: {
+    [phase: string]: any[];
+  }): void {
+    const phasesWithoutPreliminary: { [phase: string]: any[] } = {};
+    const keys = Object.keys(matchesByPhase);
+
+    const nonPreliminaryKeys = keys.filter(
+      (key) => key !== 'Phase préliminaire'
+    );
+
+    nonPreliminaryKeys.forEach((key) => {
+      phasesWithoutPreliminary[key] = matchesByPhase[key];
+    });
+
+    this.matchesByPhaseWithoutPreliminary = phasesWithoutPreliminary;
   }
 
   getGenerated(event: boolean): void {

@@ -23,7 +23,7 @@
     *ngIf="tournamentDetails.isGenerated"
     class="list-tournament-tree-container"
   >
-    <div class="list-tournament-tree-container-details">
+    <!-- <div class="list-tournament-tree-container-details">
       <div
         *ngIf="matchesByPhase"
         class="list-tournament-tree-container-cards-preliminary"
@@ -40,13 +40,12 @@
                 [matchesByPhase]="matchesByPhase"
                 [phaseKey]="phaseKey"
                 [tournamentDetails]="tournamentDetails"
-                [indexPhasePreliminary]="j"
               ></app-card-tournament-match>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="list-tournament-tree-container-details">
       <div
@@ -55,7 +54,7 @@
       >
         <div
           *ngFor="
-            let phaseKey of sortPhaseKeysByMatchCount(phaseKeys);
+            let phaseKey of sortPhaseKeysByMatchCount(phaseWithoutPreliminary);
             let index = index
           "
         >
@@ -64,23 +63,24 @@
             class="list-tournament-tree-container-cards-phases-cards"
           >
             <h2>{{ phaseKey }}</h2>
-            <div
+            <ng-container
               *ngFor="
-                let match of matchesByPhase[phaseKey];
-                let i = index;
-                let last = last
+                let match of matchesByPhaseWithoutPreliminary[phaseKey];
+                let i = index
               "
             >
               <app-card-tournament-match
                 [match]="match"
-                [matchesByPhase]="matchesByPhase"
+                [matchesByPhase]="matchesByPhaseWithoutPreliminary"
                 [phaseKey]="phaseKey"
                 [tournamentDetails]="tournamentDetails"
-                [isCompleted]="isPhaseIncomplete(matchesByPhase[phaseKey])"
-                [indexPhasesOther]="index"
-                [isLastIteration]="last"
+                [isCompleted]="
+                  isPhaseIncomplete(matchesByPhaseWithoutPreliminary[phaseKey])
+                "
+                [index]="index"
+                [margin]="marginCalculator(index)"
               ></app-card-tournament-match>
-            </div>
+            </ng-container>
           </div>
         </div>
       </div>
