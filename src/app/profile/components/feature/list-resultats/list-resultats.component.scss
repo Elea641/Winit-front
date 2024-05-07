@@ -2,7 +2,7 @@
 @import "../../../../../assets/style/mixins.scss";
 
 @include media-large-screen {
-  .list-resultats-container {
+  section {
     @include flex-column-center;
 
     .list-resultats-container-resultats-desktop {

@@ -3,16 +3,13 @@ export class TournamentDetails {
     public id: number,
     public sport: string,
     public place: string,
-    public participants: number,
     public maxNumberOfTeams: number,
     public name: string,
     public date: Date,
     public inscriptionLimitDate: Date,
     public createdAt: Date,
-    public currentNumberOfParticipants: number | null,
-    public format: string,
+    public currentNumberOfParticipants: number,
     public imageUrl: string,
-    public privacy: string,
     public teams: {
       name: string;
       result: number;
@@ -21,6 +18,8 @@ export class TournamentDetails {
       currentUser: number;
     }[],
     public isOwner: boolean,
-    public isGenerated: boolean
+    public isGenerated: boolean,
+    public isCanceled: boolean,
+    public matches?: any
   ) {}
 }

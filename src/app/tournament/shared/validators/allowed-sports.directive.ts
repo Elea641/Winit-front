@@ -33,7 +33,7 @@ export function allowedSports(sportService: SportService): ValidatorFn {
           subscription.unsubscribe();
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             subscription.unsubscribe();
           }
         },

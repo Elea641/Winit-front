@@ -20,6 +20,7 @@ import { tournamentsResolver } from './tournament/shared/resolvers/tournaments-r
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { UserGuard } from './auth/core/user.guard';
 import { TeamFormComponent } from './team/components/feature/team-form/team-form.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
   {
@@ -72,7 +73,7 @@ export const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
-    path: ':teamName/form-team/:mode',
+    path: 'form-team/:mode',
     component: TeamFormComponent,
     canActivate: [UserGuard],
   },
@@ -94,5 +95,5 @@ export const routes: Routes = [
   },
   { path: 'sport', component: SportComponent },
   { path: '', component: HomePageComponent },
-  { path: '**', redirectTo: '' },
+  { path: '**', component: NotFoundPageComponent },
 ];

@@ -97,7 +97,7 @@ export class ListTeamsTournamentComponent {
               }
             },
             error: (error) => {
-              if (error.error.bad_credentials === 'true') {
+              if (error.error) {
                 console.error(
                   'Une erreur est survenue lors de la suppression :',
                   error

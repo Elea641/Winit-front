@@ -13,6 +13,13 @@ export interface ITournamentService {
 
   addTeamToTournament(selectTeam: SelectTeam): Observable<boolean>;
 
+  updateTournament(
+    tournamentId: number,
+    generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
+  ): void;
+
+  canceledTournament(tournamentId: number, cancel: boolean): void;
+
   deleteTeamToTournament(
     tournamentId: number,
     team: { name: string; result: number; url: string }

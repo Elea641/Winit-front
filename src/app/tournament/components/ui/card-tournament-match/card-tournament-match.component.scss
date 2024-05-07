@@ -2,101 +2,93 @@
 @import "../../../../../assets/style/mixins.scss";
 
 @include media-mobile-tablet-screen {
-  .card-tournament-match-container {
+  article {
     display: flex;
-    position: relative;
-    height: 3rem;
+    justify-content: space-between;
+    align-items: center;
     background-color: $primary-background-color;
+    width: calc(100vw - 4rem);
+    margin: 0.5rem 0 0 0;
     color: $secondary-color-text;
-    width: calc(50vw - 2rem);
-    margin: 0.45rem 0;
 
-    .card-tournament-match-container-details {
-      width: 100%;
-      padding: 0.5rem;
-      @include flex-justify-space-around;
-    }
-  }
-
-  .even {
-    .line {
-      display: block;
-      position: absolute;
-      z-index: 1;
-      left: 100%;
-      border-right: 2px solid $important-color-line;
-      height: 2.5rem;
-      width: 0;
-    }
-  }
-
-  .odd {
-    .card-tournament-match-container-details {
-      position: relative;
-      flex-direction: row-reverse;
+    section {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-
-      .score-match-card {
-        display: block;
-        position: absolute;
-        right: calc(100% - 1.2rem);
+      height: 3.5rem;
+      margin: 0;
+      padding: 0 0.4rem;
+      p {
+        font-size: 1.5rem;
       }
+    }
+
+    section:first-child {
+      border-right: 1px solid $important-color-line;
+
+      h3 {
+        margin-right: 2rem;
+      }
+    }
+
+    section:last-child {
+      flex-direction: row-reverse;
+      border-left: 1px solid $important-color-line;
+
+      h3 {
+        margin-left: 2rem;
+      }
+    }
+  }
+  section {
+    width: calc(100vw - 4rem);
+    margin: 1rem 0 0 0;
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin: 0.5rem 0;
     }
   }
 }
 
 @include media-large-screen {
-  .card-tournament-match-container {
+  article {
     display: flex;
-    height: 3rem;
+    flex-direction: column;
     background-color: $primary-background-color;
+    width: 15rem;
     color: $secondary-color-text;
-    width: 15vw;
-    margin: 0;
-    position: relative;
+    margin-right: 2rem;
 
-    .card-tournament-match-container-details {
-      display: flex;
+    section {
+      margin: 0;
       width: 100%;
-      position: relative;
-      padding-left: 1rem;
-
-      p {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 25%;
-      }
-
-      .score-match-card {
-        display: block;
-        position: absolute;
-        top: 30%;
-        right: 0;
-        width: 15%;
-      }
-    }
-  }
-
-  .line {
-    display: block;
-    position: absolute;
-    z-index: 1;
-    right: 98.5%;
-    border-left: 2px solid $important-color-line;
-    height: 3rem;
-    width: 0;
-  }
-
-  .odd {
-    margin-bottom: 3rem;
-
-    .card-tournament-match-container-details {
-      border-top: 2px solid $secondary-color-line;
+      height: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.4rem;
+      border-left: 1px solid $important-color-line;
+      width: 15rem;
     }
 
-    .line {
-      height: 2.85rem;
+    section:first-child {
+      border-bottom: 1px solid $secondary-color-line;
+    }
+
+    section:last-child {
+      border-top: 1px solid $secondary-color-line;
+    }
+  }
+  section {
+    width: 15rem;
+    margin: 1rem 0 0 0;
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin: 0.5rem 0;
     }
   }
 }

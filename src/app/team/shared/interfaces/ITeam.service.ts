@@ -15,7 +15,7 @@ export interface ITeamService {
 
   addTeam(team: CreatedTeam): void;
 
-  updateTeam(team: CreatedTeam): void;
+  updateTeam(teamName: string, team: CreatedTeam): void;
 
   deleteTeam(teamName: string): void;
 }

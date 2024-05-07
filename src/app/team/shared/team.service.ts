@@ -53,42 +53,37 @@ export class TeamService implements ITeamService {
         }
       },
       error: (error) => {
-        if (error.error.bad_credentials === 'true') {
+        if (error.error) {
           this.toastService.showError(error.error, 'Une erreur est survenue');
         }
       },
     });
   }
 
-  updateTeam(team: CreatedTeam) {
-    this.team$.subscribe((currentTeam) => {
-      if (currentTeam) {
-        this.http
-          .put<CreatedTeam>(
-            `${environment.urlApi}/teams/${currentTeam.name}`,
-            team
-          )
-          .subscribe({
-            next: (response) => {
-              if (response) {
-                this.router.navigate([`/teams-details/${team.name}`]);
-                this.toastService.showSuccess(
-                  'Mise à jour de votre équipe',
-                  'Bravo félicitations'
-                );
-              }
-            },
-            error: (error) => {
-              if (error) {
-                this.toastService.showError(
-                  error.error,
-                  'Une erreur est survenue'
-                );
-              }
-            },
-          });
-      }
-    });
+  updateTeam(teamName: string, team: CreatedTeam) {
+    if (teamName) {
+      this.http
+        .put<CreatedTeam>(`${environment.urlApi}/teams/${teamName}`, team)
+        .subscribe({
+          next: (response) => {
+            if (response) {
+              this.router.navigate([`/teams-details/${team.name}`]);
+              this.toastService.showSuccess(
+                'Mise à jour de votre équipe',
+                'Bravo félicitations'
+              );
+            }
+          },
+          error: (error) => {
+            if (error) {
+              this.toastService.showError(
+                error.error,
+                'Une erreur est survenue'
+              );
+            }
+          },
+        });
+    }
   }
 
   deleteTeam(teamName: string): void {
@@ -103,7 +98,7 @@ export class TeamService implements ITeamService {
         }
       },
       error: (error) => {
-        if (error.error.bad_credentials === 'true') {
+        if (error.error) {
           this.toastService.showError(
             error.error,
             "Une erreur est survenue lors de la suppression de l'équipe"

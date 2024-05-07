@@ -1,4 +1,4 @@
-<ng-container *ngIf="tournament$ | async as tournamentDetails">
+<ng-container *ngIf="tournament$ | async">
   <div
     *ngIf="
       limitInscriptionValue === 0 ||
@@ -12,64 +12,98 @@
       (click)="openDialog()"
       *ngIf="
         limitInscriptionValue === 0 &&
-        !tournamentDetails.isGenerated && tournamentDetails.isOwner
+        !tournamentDetails.isGenerated &&
+        tournamentDetails.isOwner &&
+        tournamentDetails.currentNumberOfParticipants > 1
       "
     >
       GÉNÉRER LE TOURNOI
     </button>
-    <p>{{ tournamentDetails.isGenerated }}</p>
-  </div>
-  <div *ngIf="totalPhase" class="list-tournament-tree-container">
-    <div
-      class="list-tournament-tree-container-details"
-      *ngIf="totalPhase.randomMatchs"
+    <h2
+      *ngIf="
+        tournamentDetails.currentNumberOfParticipants === 1 &&
+        !isCanceled &&
+        !tournamentDetails.isCanceled
+      "
     >
-      <h2>Phase de présélection</h2>
-      <div class="list-tournament-tree-container-cards">
-        <div
-          *ngFor="
-            let match of getNumberArray(totalPhase.randomMatchs);
-            let j = index
-          "
-        >
-          <app-card-tournament-match
-            [namesTeamList]="getTeamName(j, 'randomMatchs')"
-            [indexRandomTeams]="j"
-          ></app-card-tournament-match>
+      Le nombre de participant inscrit ne permet pas de générer le tournoi
+    </h2>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="openDialogCancelTournament()"
+      *ngIf="
+        tournamentDetails.currentNumberOfParticipants === 1 &&
+        !isCanceled &&
+        !tournamentDetails.isCanceled
+      "
+    >
+      ANNULER LE TOURNOI
+    </button>
+    <h2 *ngIf="isCanceled || tournamentDetails.isCanceled">TOURNOI ANNULÉ</h2>
+  </div>
+  <div
+    *ngIf="tournamentDetails.isGenerated"
+    class="list-tournament-tree-container"
+  >
+    <div class="list-tournament-tree-container-details">
+      <div
+        *ngIf="matchesByPhase"
+        class="list-tournament-tree-container-cards-preliminary"
+      >
+        <div *ngFor="let phaseKey of phaseKeys; let j = index">
+          <div
+            *ngIf="phaseKey === 'Phase préliminaire'"
+            class="list-tournament-tree-container-cards-preliminary-cards"
+          >
+            <h2>{{ phaseKey }}</h2>
+            <div *ngFor="let match of matchesByPhase[phaseKey]">
+              <app-card-tournament-match
+                [match]="match"
+                [matchesByPhase]="matchesByPhase"
+                [phaseKey]="phaseKey"
+                [tournamentDetails]="tournamentDetails"
+              ></app-card-tournament-match>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div
-      *ngFor="
-        let phaseKey of getObjectKeys(tournamentPhase.result).reverse();
-        let index = index
-      "
-    >
+
+    <div class="list-tournament-tree-container-details">
       <div
-        class="list-tournament-tree-container-details"
-        *ngIf="
-          tournamentPhase.result[phaseKey] !== 'Phase de présélection' &&
-          totalPhase
-        "
+        *ngIf="matchesByPhase"
+        class="list-tournament-tree-container-cards-phases"
       >
-        <h2>{{ tournamentPhase.result[phaseKey] }}</h2>
-        <div class="list-tournament-tree-container-cards">
+        <div
+          *ngFor="
+            let phaseKey of sortPhaseKeysByMatchCount(phaseWithoutPreliminary);
+            let index = index
+          "
+        >
           <div
-            *ngFor="
-              let match of getNumberArray(
-                tournamentPhase.totalPhaseMatchs[phaseKey]
-              );
-              let i = index;
-              let last = last
-            "
+            *ngIf="phaseKey !== 'Phase préliminaire'"
+            class="list-tournament-tree-container-cards-phases-cards"
           >
-            <app-card-tournament-match
-              [namesTeamList]="getTeamName(i)"
-              [indexRemainingTeams]="index"
-              [randomMatchs]="totalPhase.randomMatchs"
-              [totalPhaseMatchs]="tournamentPhase"
-              [isLastIteration]="last"
-            ></app-card-tournament-match>
+            <h2>{{ phaseKey }}</h2>
+            <ng-container
+              *ngFor="
+                let match of matchesByPhaseWithoutPreliminary[phaseKey];
+                let i = index
+              "
+            >
+              <app-card-tournament-match
+                [match]="match"
+                [matchesByPhase]="matchesByPhaseWithoutPreliminary"
+                [phaseKey]="phaseKey"
+                [tournamentDetails]="tournamentDetails"
+                [isCompleted]="
+                  isPhaseIncomplete(matchesByPhaseWithoutPreliminary[phaseKey])
+                "
+                [index]="index"
+                [margin]="marginCalculator(index)"
+              ></app-card-tournament-match>
+            </ng-container>
           </div>
         </div>
       </div>

@@ -64,7 +64,7 @@ export class UpdateProfileComponent implements OnInit {
         });
       },
       error: (error) => {
-        if (error.error.bad_credentials === 'true') {
+        if (error.error) {
           this.router.navigate(['/auth/login']);
           this.toastService.showError(
             'Veuillez vous connecter pour mettre à jour votre profil.',
@@ -120,7 +120,7 @@ export class UpdateProfileComponent implements OnInit {
             this.router.navigate(['/profile']);
           },
           error: (error) => {
-            if (error.error.bad_credentials === 'true') {
+            if (error.error) {
               this.toastService.showError(
                 "Votre profil n'a pas pu être mis à jour, veuillez réessayer ultérieurement.",
                 'Une erreur est apparue'

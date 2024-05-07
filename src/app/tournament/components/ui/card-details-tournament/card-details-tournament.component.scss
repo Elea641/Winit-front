@@ -1,7 +1,7 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.card-details-tournament-container {
+article {
   color: $secondary-color-text;
   @include flex-column;
 
@@ -71,6 +71,33 @@
   @include media-large-screen {
     display: flex;
     flex-direction: row;
+
+    .card-details-tournament-container-body {
+      padding: 5rem;
+
+      .card-details-tournament-container-header {
+        h3 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 2.4rem;
+        }
+
+        .card-details-tournament-container-header-inscription {
+          @include flex-justify-content-space-between;
+          padding: 1rem 0;
+        }
+
+        .card-details-tournament-container-other-info {
+          .card-details-tournament-container-other-info-details {
+            p {
+              font-size: 1.8rem;
+            }
+          }
+        }
+      }
+    }
   }
 
   ::ng-deep .mat-mdc-button:not(:disabled) {

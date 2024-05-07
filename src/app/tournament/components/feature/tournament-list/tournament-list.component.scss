@@ -1,7 +1,7 @@
 @import "../../../../../assets/style/mixins.scss";
 @import "../../../../../assets/style/variables.scss";
 
-.container-tournament {
+main {
   @include flex-column-center;
   width: 100vw;
 
@@ -23,8 +23,16 @@
         border-top-color: $secondary-color;
       }
 
-      .all-tournaments-cards {
-        @include flex-wrap;
+      @include media-mobile-screen {
+        .all-tournaments-cards {
+          @include flex-column-center;
+        }
+      }
+
+      @include media-tablet-screen {
+        .all-tournaments-cards {
+          @include flex-wrap;
+        }
       }
     }
   }

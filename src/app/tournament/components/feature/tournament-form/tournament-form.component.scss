@@ -1,7 +1,7 @@
 @import "../../../../auth/components/feature/register/register.component.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.register-form-page-container {
+section {
   @include flex-column-center;
   margin: 2rem 0 1rem 0;
   padding: 2rem;

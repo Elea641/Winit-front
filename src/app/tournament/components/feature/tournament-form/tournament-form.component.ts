@@ -76,7 +76,7 @@ export class TournamentFormComponent implements OnInit, OnDestroy {
         this.tournamentEntityMappers.ToCreationDto(this.tournamentForm);
       this.tournamentService.createTournament(newTournament);
     } else {
-      console.log('Error submitting form');
+      console.error('Error submitting form');
     }
   }
 

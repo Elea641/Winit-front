@@ -101,8 +101,6 @@ export class CardDetailsTournamentComponent {
     dialogRef.afterClosed().subscribe((response) => {
       if (response === true) {
         this.tournamentService.deleteTournament(tournamentDetails);
-      } else {
-        console.error('Le tournoi est introuvable');
       }
     });
   }

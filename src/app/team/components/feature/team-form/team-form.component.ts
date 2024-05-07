@@ -63,7 +63,10 @@ export class TeamFormComponent {
     this.route.paramMap.subscribe((params) => {
       const modeParam = params.get('mode');
       this.mode = modeParam === 'update' ? 'update' : 'create';
-      this.teamName = params.get('teamName');
+    });
+
+    this.route.queryParams.subscribe((params) => {
+      this.teamName = params['teamName'];
     });
 
     if (!this.teamToUpdate && this.teamName && this.mode === 'update') {
@@ -128,7 +131,9 @@ export class TeamFormComponent {
           teamData.name !== this.teamToUpdate.name ||
           teamData.sport !== this.teamToUpdate.sport
         ) {
-          this.teamService.updateTeam(teamData as CreatedTeam);
+          if (this.teamName) {
+            this.teamService.updateTeam(this.teamName, teamData as CreatedTeam);
+          }
         } else {
           this.toastService.showError(
             'Veuillez changer au minimum une information avant de mettre à jour votre équipe',

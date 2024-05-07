@@ -15,13 +15,13 @@ import * as fr from '@angular/common/locales/fr';
   styleUrls: ['./tournament-card.component.scss'],
 })
 export class TournamentCardComponent {
-  constructor(private getImageService: GetImageService) {
-    registerLocaleData(fr.default);
-  }
-
   @Input()
   public tournament!: TournamentCard;
   public image: any;
+
+  constructor(private getImageService: GetImageService) {
+    registerLocaleData(fr.default);
+  }
 
   ngOnInit() {
     this.getImageService

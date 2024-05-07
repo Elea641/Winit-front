@@ -42,7 +42,7 @@ export class DeleteProfileDialogComponent implements OnInit {
           );
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             this.toastService.showError(
               "Votre profil n'a pas pu être supprimé, veuillez réessayer ultérieurement.",
               'Une erreur est survenue'

@@ -72,7 +72,7 @@ export class AuthService {
           );
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             this.toastService.showError(
               'La combinaison email / mot de passe est incorrecte.',
               'Connexion impossible'

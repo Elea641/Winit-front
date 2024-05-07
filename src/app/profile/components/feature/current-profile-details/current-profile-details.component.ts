@@ -12,6 +12,7 @@ import * as fr from '@angular/common/locales/fr';
 import { TeamFormComponent } from 'src/app/team/components/feature/team-form/team-form.component';
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
 import { UserService } from 'src/app/auth/shared/user.service';
+import { ListTournamentComponent } from '../list-tournament/list-tournament.component';
 
 @Component({
   selector: 'app-current-profile-details',
@@ -23,6 +24,7 @@ import { UserService } from 'src/app/auth/shared/user.service';
     MatTabsModule,
     TeamFormComponent,
     ListTeamComponent,
+    ListTournamentComponent,
   ],
   templateUrl: './current-profile-details.component.html',
   styleUrls: ['./current-profile-details.component.scss'],

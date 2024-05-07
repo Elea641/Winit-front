@@ -1,33 +1,37 @@
-<div
-  class="card-tournament-match-container"
-  [ngClass]="isEven"
+<article
   [ngStyle]="{
-    'margin-bottom.rem':
-      (isDesktop || isLargeDesktop) && !isLastIteration && isEven === 'odd'
-        ? margin
-        : 0
+    'margin-top.rem': margin * 3.5,
+    'margin-bottom.rem': margin * 3.5
   }"
 >
-  <div
-    class="card-tournament-match-container-details"
-    *ngIf="indexRemainingTeams === 0"
+  <section>
+    <h3>{{ truncateName(match.team1) }}</h3>
+    <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
+      {{ match.scoreTeam1 }}
+    </p>
+    <p *ngIf="match.team1 === 'En attente' || match.team2 === 'En attente'">
+      {{ match.scoreTeam1 }}
+    </p>
+  </section>
+  <section>
+    <h3>{{ truncateName(match.team2) }}</h3>
+    <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
+      {{ match.scoreTeam2 }}
+    </p>
+    <p *ngIf="match.team1 === 'En attente' || match.team2 === 'En attente'">
+      {{ match.scoreTeam2 }}
+    </p>
+  </section>
+</article>
+<section>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openDialog()"
+    *ngIf="
+      !isCompleted && match.winnerTeamId === null && match.loserTeamId === null
+    "
   >
-    <p>{{ namesTeamList.teamName }}</p>
-    <p class="score-match-card">0</p>
-    <div class="line"></div>
-  </div>
-  <div class="card-tournament-match-container-details" *ngIf="!randomMatchs">
-    <p>{{ namesTeamList.teamName }}</p>
-    <p class="score-match-card">0</p>
-    <div class="line"></div>
-  </div>
-
-  <div
-    class="card-tournament-match-container-details"
-    *ngIf="indexRemainingTeams > 0"
-  >
-    <p>Name</p>
-    <p class="score-match-card">0</p>
-    <div class="line"></div>
-  </div>
-</div>
+    Score
+  </button>
+</section>

@@ -1,7 +1,4 @@
-<div
-  *ngIf="tournament$ | async as tournamentDetails"
-  class="card-details-tournament-container"
->
+<article *ngIf="tournament$ | async as tournamentDetails">
   <img src="{{ image }}" alt="" />
   <div class="card-details-tournament-container-body">
     <div class="card-details-tournament-container-header">
@@ -48,8 +45,6 @@
             tournamentDetails.maxNumberOfTeams
           }}
         </p>
-        <p>{{ tournamentDetails.format }}</p>
-        <p>{{ tournamentDetails.privacy }}</p>
       </div>
       <button
         mat-button
@@ -61,4 +56,4 @@
       </button>
     </div>
   </div>
-</div>
+</article>

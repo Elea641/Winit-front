@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject, throwError } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TournamentCreationDto } from '../models/tournament-creation-dto.model';
 import { TournamentDetails } from '../models/tournament-details.model';
@@ -10,8 +10,6 @@ import { ToastService } from 'src/app/shared/toast.service';
 import { TournamentMappers } from './mappers/TournamentMappers';
 import { TournamentCard } from '../models/tournament-card.model';
 import { ITournamentService } from './interfaces/ITournament.service';
-
-import { TournamentUpdate } from '../models/tournamentUpdate.model';
 import { SelectTeam } from '../models/selectTeam.model';
 
 @Injectable({
@@ -43,6 +41,11 @@ export class TournamentService implements ITournamentService {
   private inscriptionSubject: Subject<boolean> = new Subject<boolean>();
   public inscription$: Observable<boolean> =
     this.inscriptionSubject.asObservable();
+
+  public tournamentSubject: Subject<TournamentDetails> =
+    new Subject<TournamentDetails>();
+  public tournament$: Observable<TournamentDetails> =
+    this.tournamentSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -85,7 +88,7 @@ export class TournamentService implements ITournamentService {
           }
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             this.toastService.showError(
               error.error,
               'Erreur lors de la création du tournoi'
@@ -119,7 +122,7 @@ export class TournamentService implements ITournamentService {
             }
           },
           error: (error) => {
-            if (error.error.bad_credentials === 'true') {
+            if (error.error) {
               this.toastService.showError(
                 error.error,
                 "Une erreur est survenue lors de l'enregistrement"
@@ -154,7 +157,7 @@ export class TournamentService implements ITournamentService {
             }
           },
           error: (error) => {
-            if (error.error.bad_credentials === 'true') {
+            if (error.error) {
               this.toastService.showError(
                 error.error,
                 'Une erreur est survenue lors de la suppression'
@@ -165,17 +168,22 @@ export class TournamentService implements ITournamentService {
     });
   }
 
-  updateTournament(tournamentId: number) {
+  updateTournament(
+    tournamentId: number,
+    generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
+  ) {
     this.http
-      .put<TournamentUpdate>(
+      .put<TournamentDetails>(
         `${environment.urlApi}/tournaments/${tournamentId}`,
         {
           isGenerated: true,
+          matches: generatedTree,
         }
       )
       .subscribe({
         next: (response) => {
           if (response) {
+            this.tournamentSubject.next(response);
             this.router.navigate(['/tournament/' + tournamentId]);
             this.toastService.showSuccess(
               'Tournoi généré avec succès',
@@ -184,7 +192,38 @@ export class TournamentService implements ITournamentService {
           }
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              'Erreur lors de la création du tournoi'
+            );
+          }
+        },
+      });
+  }
+
+  canceledTournament(tournamentId: number, canceled: boolean) {
+    this.http
+      .put<TournamentDetails>(
+        `${environment.urlApi}/tournaments/${tournamentId}`,
+        {
+          isGenerated: true,
+          isCanceled: canceled,
+        }
+      )
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.tournamentSubject.next(response);
+            this.router.navigate(['/tournament/' + tournamentId]);
+            this.toastService.showSuccess(
+              'Annulé avec succès',
+              'Votre tournoi'
+            );
+          }
+        },
+        error: (error) => {
+          if (error.error) {
             this.toastService.showError(
               error.error,
               'Erreur lors de la création du tournoi'
@@ -210,7 +249,7 @@ export class TournamentService implements ITournamentService {
           }
         },
         error: (error) => {
-          if (error.error.bad_credentials === 'true') {
+          if (error.error) {
             this.toastService.showError(
               error.error,
               'Une erreur est survenue lors de la suppression du tournoi'
