@@ -11,5 +11,5 @@ import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
   styleUrls: ['./list-last-tounaments-played.component.scss'],
 })
 export class ListLastTounamentsPlayedComponent {
-  @Input() userStatistics!: UserStatistics;
+  @Input() userStatistics!: UserStatistics | null;
 }

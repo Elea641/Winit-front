@@ -1,14 +1,15 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule} from "@angular/material/button";
+import { MatButtonModule } from '@angular/material/button';
+import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
 
 @Component({
   selector: 'app-list-next-tournaments',
   standalone: true,
-    imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './list-next-tournaments.component.html',
-  styleUrls: ['./list-next-tournaments.component.scss']
+  styleUrls: ['./list-next-tournaments.component.scss'],
 })
 export class ListNextTournamentsComponent {
-  @Input() currentProfile!: any;
+  @Input() userStatistics!: UserStatistics | null;
 }

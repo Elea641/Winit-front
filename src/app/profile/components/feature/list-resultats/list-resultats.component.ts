@@ -25,7 +25,11 @@ export class ListResultatsComponent {
 
   getObjectEntries(obj: any): [string, any][] {
     return Object.entries(obj).filter(
-      ([key, _]) => key !== 'podium' && key !== 'participation'
+      ([key, _]) =>
+        key !== 'podium' &&
+        key !== 'participation' &&
+        key !== 'lastTournaments' &&
+        key !== 'nextTournaments'
     );
   }
 }

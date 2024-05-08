@@ -4,6 +4,8 @@ export class UserStatistics {
     public secondPlace: number,
     public thirdPlace: number,
     public participation: number,
-    public podium: number
+    public podium: number,
+    public lastTournaments: any,
+    public nextTournaments: any
   ) {}
 }
