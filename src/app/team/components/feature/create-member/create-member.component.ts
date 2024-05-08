@@ -75,6 +75,7 @@ export class CreateMemberComponent {
   onSubmit() {
     if (this.memberForm.valid) {
       const selectedUserName = this.memberForm.get('name')!.value.trim();
+
       const [selectedUserFirstName, selectedUserLastName] =
         selectedUserName.split(' ');
 

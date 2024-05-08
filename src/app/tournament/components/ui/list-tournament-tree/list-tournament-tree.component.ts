@@ -110,13 +110,15 @@ export class ListTournamentTreeComponent {
     let margin = 0;
 
     if (index === 0) {
-      margin = 1;
+      margin = 0.5;
     } else if (index === 1) {
-      margin = 2.3;
+      margin = 1.5;
     } else if (index === 2) {
-      margin = 5;
+      margin = 3.5;
     } else if (index === 3) {
-      margin = 10;
+      margin = 7.5;
+    } else if (index === 4) {
+      margin = 15.5;
     }
     return margin;
   }

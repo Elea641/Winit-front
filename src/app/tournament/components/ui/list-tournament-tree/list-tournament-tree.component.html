@@ -90,7 +90,8 @@
               *ngFor="
                 let match of matchesByPhaseWithoutPreliminary[phaseKey];
                 let i = index;
-                let last = last
+                let last = last;
+                let first = first
               "
             >
               <app-card-tournament-match
@@ -102,6 +103,7 @@
                   isPhaseIncomplete(matchesByPhaseWithoutPreliminary[phaseKey])
                 "
                 [index]="index"
+                [first]="first"
                 [last]="last"
                 [margin]="marginCalculator(index)"
               ></app-card-tournament-match>

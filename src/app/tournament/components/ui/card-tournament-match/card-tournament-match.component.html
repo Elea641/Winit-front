@@ -1,13 +1,15 @@
 <article
   [ngStyle]="{
-    'margin-top.rem': isDesktop || isLargeDesktop ? margin * 3.5 : 0,
-    'margin-bottom.rem':
-      (isDesktop || isLargeDesktop) && index !== 0 && !last
-        ? margin * 3.5 * 1.5
-        : 1
+    'margin-top.rem':
+      (isDesktop || isLargeDesktop) && !first ? margin * 6 * 2 : margin * 6,
+    'margin-bottom.rem': (isDesktop || isLargeDesktop) && last && 0
   }"
 >
-  <section>
+  <section
+    [ngStyle]="{
+    'height.rem': isDesktop || isLargeDesktop ? height: 0,
+  }"
+  >
     <h3>{{ truncateName(match.team1) }}</h3>
     <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
       {{ match.scoreTeam1 }}
@@ -16,7 +18,11 @@
       {{ match.scoreTeam1 }}
     </p>
   </section>
-  <section>
+  <section
+    [ngStyle]="{
+    'height.rem': isDesktop || isLargeDesktop ? height: 0,
+  }"
+  >
     <h3>{{ truncateName(match.team2) }}</h3>
     <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
       {{ match.scoreTeam2 }}

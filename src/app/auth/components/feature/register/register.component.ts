@@ -125,9 +125,9 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     if (this.registerForm.valid) {
       const newUser: CurrentUser = {
-        firstName: this.firstName.value.trim(),
-        lastName: this.lastName.value.trim(),
-        city: this.city.value.trim(),
+        firstName: this.firstName.value.trim().toLowerCase(),
+        lastName: this.lastName.value.trim().toLowerCase(),
+        city: this.city.value.trim().toLowerCase(),
         email: this.email.value.trim(),
         password: this.password.value.trim(),
         requiredRole: 'ROLE_USER',

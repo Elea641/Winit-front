@@ -23,9 +23,11 @@ export class CardTournamentMatchComponent {
   @Input() margin!: number;
   @Input() index!: number;
   @Input() last!: boolean;
+  @Input() first!: boolean;
   isDesktop: boolean | undefined = false;
   isLargeDesktop: boolean | undefined = false;
   nextPhase!: string | null;
+  height: number = 3;
 
   constructor(
     private dialog: MatDialog,

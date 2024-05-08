@@ -59,7 +59,10 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.userAuth = new UserAuth(this.email.value, this.password.value);
+      this.userAuth = new UserAuth(
+        this.email.value.trim(),
+        this.password.value
+      );
       this.localService.clearToken();
       this.authService.signIn(this.userAuth);
     }
