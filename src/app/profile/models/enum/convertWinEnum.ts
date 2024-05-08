@@ -1,5 +1,5 @@
 export enum ConvertWinEnum {
-  'One' = 'win',
-  'Two' = 'second',
-  'Three' = 'third',
+  'One' = 'firstPlace',
+  'Two' = 'secondPlace',
+  'Three' = 'thirdPlace',
 }

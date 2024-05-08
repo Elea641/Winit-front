@@ -15,6 +15,12 @@ section {
     border-top-color: $secondary-color;
   }
 
+  h2 {
+    color: $secondary-color;
+    font-weight: normal;
+    margin: 1rem 0.5rem;
+  }
+
   ul {
     @include flex-column-center;
     @include media-large-screen {

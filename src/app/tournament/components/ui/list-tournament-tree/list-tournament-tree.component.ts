@@ -107,20 +107,8 @@ export class ListTournamentTreeComponent {
   }
 
   marginCalculator(index: number): number {
-    let margin = 0;
-
-    if (index === 0) {
-      margin = 0.5;
-    } else if (index === 1) {
-      margin = 1.5;
-    } else if (index === 2) {
-      margin = 3.5;
-    } else if (index === 3) {
-      margin = 7.5;
-    } else if (index === 4) {
-      margin = 15.5;
-    }
-    return margin;
+    let margin = [0.5, 1.5, 3.5, 7.5];
+    return margin[index];
   }
 
   getTotalPhaseWithoutPreliminary(matchesByPhase: {

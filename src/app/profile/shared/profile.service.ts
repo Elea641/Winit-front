@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 import { IProfileService } from './interfaces/IProfile.service';
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
 import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
+import { UserStatistics } from '../models/user-statistics.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,12 @@ export class ProfileService implements IProfileService {
 
   getCurrentProfile(): Observable<CurrentProfile> {
     return this.http.get<CurrentProfile>(this.currentProfiletDataUrl);
+  }
+
+  getUserStatistics(): Observable<UserStatistics> {
+    return this.http.get<UserStatistics>(
+      `${environment.urlApi}/users/statistics`
+    );
   }
 
   getListTournaments(): Observable<TournamentCard[]> {
