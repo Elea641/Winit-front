@@ -127,35 +127,41 @@ export class CardTournamentMatchComponent {
   }
 
   openDialog() {
-    if (this.nextPhase) {
-      const nextTeamInfo = this.findMatchWithStatus(
-        this.nextPhase,
-        this.matchesByPhase
-      );
-
+    if (
+      this.match.winnerTeamId === null &&
+      this.match.loserTeamId === null &&
+      !this.isCompleted
+    ) {
       if (this.nextPhase) {
+        const nextTeamInfo = this.findMatchWithStatus(
+          this.nextPhase,
+          this.matchesByPhase
+        );
+
+        if (this.nextPhase) {
+          const modalData: ScoreModalContent = {
+            match: this.match,
+            nextPhase: this.nextPhase,
+            nextTeamInfo: nextTeamInfo,
+            tournamentId: this.tournamentDetails.id,
+          };
+
+          this.dialog.open(ScoreModalComponent, {
+            data: new ScoreModalContent(modalData),
+          });
+        }
+      } else {
         const modalData: ScoreModalContent = {
           match: this.match,
-          nextPhase: this.nextPhase,
-          nextTeamInfo: nextTeamInfo,
           tournamentId: this.tournamentDetails.id,
+          nextPhase: 'Aucune',
+          nextTeamInfo: {},
         };
 
         this.dialog.open(ScoreModalComponent, {
           data: new ScoreModalContent(modalData),
         });
       }
-    } else {
-      const modalData: ScoreModalContent = {
-        match: this.match,
-        tournamentId: this.tournamentDetails.id,
-        nextPhase: 'Aucune',
-        nextTeamInfo: {},
-      };
-
-      this.dialog.open(ScoreModalComponent, {
-        data: new ScoreModalContent(modalData),
-      });
     }
   }
 }
