@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="this.userStatistics?.nextTournaments.length !== 0">
   <div class="list-next-tournaments-container-header">
     <h2>PROCHAINS TOURNOIS</h2>
   </div>
@@ -11,12 +11,17 @@
         />
         <div>
           <p>
-            {{ userStatistics?.nextTournaments[0].name | titlecase }}
+            {{ userStatistics?.nextTournaments[0]?.name | titlecase }}
           </p>
-          <h3>{{ userStatistics?.nextTournaments[0].place | titlecase }}</h3>
+          <h3>{{ userStatistics?.nextTournaments[0]?.place | titlecase }}</h3>
         </div>
       </div>
-      <button mat-raised-button>VOIR PLUS</button>
+      <button
+        mat-raised-button
+        (click)="onClick(userStatistics?.nextTournaments[0])"
+      >
+        VOIR PLUS
+      </button>
     </div>
     <div class="list-next-tournaments-container-body-details">
       <div class="list-next-tournaments-container-body-detail">
@@ -26,12 +31,17 @@
         />
         <div>
           <p>
-            {{ userStatistics?.nextTournaments[1].name | titlecase }}
+            {{ userStatistics?.nextTournaments[1]?.name | titlecase }}
           </p>
-          <h3>{{ userStatistics?.nextTournaments[1].place | titlecase }}</h3>
+          <h3>{{ userStatistics?.nextTournaments[1]?.place | titlecase }}</h3>
         </div>
       </div>
-      <button mat-raised-button>VOIR PLUS</button>
+      <button
+        mat-raised-button
+        (click)="onClick(userStatistics?.nextTournaments[1])"
+      >
+        VOIR PLUS
+      </button>
     </div>
     <div class="list-next-tournaments-container-body-details">
       <div class="list-next-tournaments-container-body-detail">
@@ -41,12 +51,17 @@
         />
         <div>
           <p>
-            {{ userStatistics?.nextTournaments[2].name | titlecase }}
+            {{ userStatistics?.nextTournaments[2]?.name | titlecase }}
           </p>
-          <h3>{{ userStatistics?.nextTournaments[2].place | titlecase }}</h3>
+          <h3>{{ userStatistics?.nextTournaments[2]?.place | titlecase }}</h3>
         </div>
       </div>
-      <button mat-raised-button>VOIR PLUS</button>
+      <button
+        mat-raised-button
+        (click)="onClick(userStatistics?.nextTournaments[2])"
+      >
+        VOIR PLUS
+      </button>
     </div>
     <div
       *ngIf="!userStatistics?.nextTournaments[2]"

@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="this.userStatistics?.lastTournaments.length !== 0">
   <div class="list-last-tournaments-played-container-header">
     <h2>DERNIERS TOURNOIS</h2>
   </div>
@@ -11,12 +11,17 @@
         />
         <div>
           <p>
-            {{ userStatistics?.lastTournaments[0].name | titlecase }}
+            {{ userStatistics?.lastTournaments[0]?.name | titlecase }}
           </p>
-          <h3>{{ userStatistics?.lastTournaments[0].place | titlecase }}</h3>
+          <h3>{{ userStatistics?.lastTournaments[0]?.place | titlecase }}</h3>
         </div>
       </div>
-      <button mat-raised-button>RÉSULTATS</button>
+      <button
+        mat-raised-button
+        (click)="onClick(userStatistics?.lastTournaments[0])"
+      >
+        RÉSULTATS
+      </button>
     </div>
     <div class="list-last-tournaments-played-container-body-details">
       <div class="list-last-tournaments-played-container-body-detail">
@@ -26,12 +31,17 @@
         />
         <div>
           <p>
-            {{ userStatistics?.lastTournaments[1].name | titlecase }}
+            {{ userStatistics?.lastTournaments[1]?.name | titlecase }}
           </p>
-          <h3>{{ userStatistics?.lastTournaments[1].place | titlecase }}</h3>
+          <h3>{{ userStatistics?.lastTournaments[1]?.place | titlecase }}</h3>
         </div>
       </div>
-      <button mat-raised-button>RÉSULTATS</button>
+      <button
+        mat-raised-button
+        (click)="onClick(userStatistics?.lastTournaments[1])"
+      >
+        RÉSULTATS
+      </button>
     </div>
     <div class="list-last-tournaments-played-container-body-details">
       <div class="list-last-tournaments-played-container-body-detail">
@@ -41,12 +51,17 @@
         />
         <div>
           <p>
-            {{ userStatistics?.lastTournaments[2].name | titlecase }}
+            {{ userStatistics?.lastTournaments[2]?.name | titlecase }}
           </p>
-          <h3>{{ userStatistics?.lastTournaments[2].place | titlecase }}</h3>
+          <h3>{{ userStatistics?.lastTournaments[2]?.place | titlecase }}</h3>
         </div>
       </div>
-      <button mat-raised-button>RÉSULTATS</button>
+      <button
+        mat-raised-button
+        (click)="onClick(userStatistics?.lastTournaments[2])"
+      >
+        RÉSULTATS
+      </button>
     </div>
   </div>
 </section>

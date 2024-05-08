@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-last-tounaments-played',
@@ -12,4 +13,10 @@ import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
 })
 export class ListLastTounamentsPlayedComponent {
   @Input() userStatistics!: UserStatistics | null;
+
+  constructor(private router: Router) {}
+
+  onClick(tournament: any) {
+    this.router.navigate([`/tournament/${tournament.id}`]);
+  }
 }

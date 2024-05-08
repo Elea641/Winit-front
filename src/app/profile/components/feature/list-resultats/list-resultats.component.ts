@@ -6,6 +6,7 @@ import { CardResultTournamentComponent } from '../../ui/card-result-tournament/c
 import { ListLastTounamentsPlayedComponent } from '../../ui/list-last-tounaments-played/list-last-tounaments-played.component';
 import { ListNextTournamentsComponent } from '../../ui/list-next-tournaments/list-next-tournaments.component';
 import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
+import { CurrentUser } from 'src/app/auth/models/current-user.model';
 
 @Component({
   selector: 'app-list-resultats',
