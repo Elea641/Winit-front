@@ -1,0 +1,9 @@
+<section>
+  <h2>{{ this.title | uppercase }}</h2>
+  <div *ngFor="let result of userStatistics[1]">
+    <app-card-tournament-inscription
+      [result]="result"
+      [title]="this.title"
+    ></app-card-tournament-inscription>
+  </div>
+</section>
