@@ -15,7 +15,9 @@ export class MemberService implements IMemberService {
 
   constructor(public http: HttpClient, private toastService: ToastService) {}
 
-  addMember(teamName: string, member: Member): void {
+  addMember(teamName: string, member: {}): void {
+    console.log(member);
+
     this.http
       .post<any>(`${environment.urlApi}/members/${teamName}`, member)
       .subscribe({
@@ -25,7 +27,7 @@ export class MemberService implements IMemberService {
               "Ajout de votre membre à l'équipe",
               'Bravo félicitations'
             );
-            this.memberSubject.next(member);
+            this.memberSubject.next(response);
           }
         },
         error: (error) => {

@@ -109,8 +109,14 @@ export class UpdateProfileComponent implements OnInit {
 
   onSubmit() {
     if (this.updateProfileForm.valid && this.currentUser.id) {
+      const formData = { ...this.updateProfileForm.value };
+      formData.firstName = formData.firstName.toLowerCase();
+      formData.lastName = formData.lastName.toLowerCase();
+      formData.city = formData.city.toLowerCase();
+      formData.email = formData.email;
+
       this.profileService
-        .updateProfile(this.currentUser.id, this.updateProfileForm.value)
+        .updateProfile(this.currentUser.id, formData)
         .subscribe({
           next: () => {
             this.toastService.showSuccess(

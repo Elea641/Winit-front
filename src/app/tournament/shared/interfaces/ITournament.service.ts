@@ -7,11 +7,16 @@ import { SelectTeam } from '../../models/selectTeam.model';
 export interface ITournamentService {
   getAllTournaments(): Observable<TournamentCard[]>;
 
-  createTournament(newTournament: TournamentCreationDto): void;
-
   getTournamentById(id: number): Observable<TournamentDetails>;
 
+  createTournament(newTournament: TournamentCreationDto): void;
+
   addTeamToTournament(selectTeam: SelectTeam): Observable<boolean>;
+
+  deleteTeamToTournament(
+    tournamentId: number,
+    team: { name: string; result: number; url: string }
+  ): Observable<boolean>;
 
   updateTournament(
     tournamentId: number,
@@ -19,11 +24,6 @@ export interface ITournamentService {
   ): void;
 
   canceledTournament(tournamentId: number, cancel: boolean): void;
-
-  deleteTeamToTournament(
-    tournamentId: number,
-    team: { name: string; result: number; url: string }
-  ): Observable<boolean>;
 
   deleteTournament(tournamentDetails: TournamentDetails): void;
 }
