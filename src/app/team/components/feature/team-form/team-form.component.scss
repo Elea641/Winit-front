@@ -37,12 +37,12 @@ section {
   }
 
   .mat-mdc-raised-button:not(:disabled) {
-    color: $secondary-color;
+    color: $primary-color-button-text;
   }
 
   .mat-mdc-raised-button:hover,
   .mat-mdc-raised-button:focus {
-    color: $primary-color;
+    color: $primary-color-button-text;
   }
 
   @media screen and (min-width: 768px) {

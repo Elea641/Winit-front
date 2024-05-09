@@ -11,7 +11,7 @@ article {
 
   section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
 
     img {
@@ -24,7 +24,7 @@ article {
 
     h3,
     p {
-      padding-left: 0.2rem;
+      padding-left: 1rem;
     }
 
     p {

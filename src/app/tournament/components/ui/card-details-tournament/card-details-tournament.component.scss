@@ -50,7 +50,7 @@ article {
     }
 
     .mat-mdc-raised-button:not(:disabled) {
-      color: $secondary-color-text;
+      color: $primary-color-button-text;
       @include media-mobile-screen {
         width: 15rem;
       }

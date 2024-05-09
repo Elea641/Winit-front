@@ -58,12 +58,12 @@ button {
 }
 
 .mat-mdc-raised-button:not(:disabled) {
-  color: white;
+  color: $primary-color-button-text;
 }
 
 .mat-mdc-raised-button:hover,
 .mat-mdc-raised-button:focus {
-  color: $primary-color;
+  color: $primary-color-button-text;
 }
 
 @media screen and (max-width: 768px) {
