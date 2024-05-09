@@ -5,6 +5,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ScoreModalComponent } from '../../feature/score-modal/score-modal.component';
 import { ScoreModalContent } from 'src/app/tournament/models/ScoreModal.model';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
+import { BreakpointService } from 'src/app/shared/breakpoint.service';
 
 @Component({
   selector: 'app-card-tournament-match',
@@ -21,11 +22,33 @@ export class CardTournamentMatchComponent {
   @Input() isCompleted!: boolean;
   @Input() margin!: number;
   @Input() index!: number;
+  @Input() last!: boolean;
+  @Input() first!: boolean;
+  isDesktop: boolean | undefined = false;
+  isLargeDesktop: boolean | undefined = false;
   nextPhase!: string | null;
+  height: number = 3;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private breakpointService: BreakpointService
+  ) {}
 
   ngOnInit() {
+    this.isDesktop = this.breakpointService.isDesktopDevice();
+    this.breakpointService.deviceChanged['isDesktop'].subscribe(
+      (isDesktop: boolean) => {
+        this.isDesktop = isDesktop;
+      }
+    );
+
+    this.isLargeDesktop = this.breakpointService.isLargeDesktopDevice();
+    this.breakpointService.deviceChanged['isLargeDesktop'].subscribe(
+      (isLargeDesktop: boolean) => {
+        this.isLargeDesktop = isLargeDesktop;
+      }
+    );
+
     this.findNextPhase(this.phaseKey, this.matchesByPhase);
   }
 
@@ -104,35 +127,41 @@ export class CardTournamentMatchComponent {
   }
 
   openDialog() {
-    if (this.nextPhase) {
-      const nextTeamInfo = this.findMatchWithStatus(
-        this.nextPhase,
-        this.matchesByPhase
-      );
-
+    if (
+      this.match.winnerTeamId === null &&
+      this.match.loserTeamId === null &&
+      !this.isCompleted
+    ) {
       if (this.nextPhase) {
+        const nextTeamInfo = this.findMatchWithStatus(
+          this.nextPhase,
+          this.matchesByPhase
+        );
+
+        if (this.nextPhase) {
+          const modalData: ScoreModalContent = {
+            match: this.match,
+            nextPhase: this.nextPhase,
+            nextTeamInfo: nextTeamInfo,
+            tournamentId: this.tournamentDetails.id,
+          };
+
+          this.dialog.open(ScoreModalComponent, {
+            data: new ScoreModalContent(modalData),
+          });
+        }
+      } else {
         const modalData: ScoreModalContent = {
           match: this.match,
-          nextPhase: this.nextPhase,
-          nextTeamInfo: nextTeamInfo,
           tournamentId: this.tournamentDetails.id,
+          nextPhase: 'Aucune',
+          nextTeamInfo: {},
         };
 
         this.dialog.open(ScoreModalComponent, {
           data: new ScoreModalContent(modalData),
         });
       }
-    } else {
-      const modalData: ScoreModalContent = {
-        match: this.match,
-        tournamentId: this.tournamentDetails.id,
-        nextPhase: 'Aucune',
-        nextTeamInfo: {},
-      };
-
-      this.dialog.open(ScoreModalComponent, {
-        data: new ScoreModalContent(modalData),
-      });
     }
   }
 }

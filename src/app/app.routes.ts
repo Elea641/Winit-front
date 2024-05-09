@@ -21,12 +21,16 @@ import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/
 import { UserGuard } from './auth/core/user.guard';
 import { TeamFormComponent } from './team/components/feature/team-form/team-form.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { userStatisticsResolver } from './profile/shared/resolvers/user-statistics-resolver';
 
 export const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent,
     canActivate: [UserGuard],
+    resolve: {
+      statistics: userStatisticsResolver,
+    },
   },
   {
     path: 'profile/update',

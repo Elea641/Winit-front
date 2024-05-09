@@ -1,14 +1,14 @@
 <section>
   <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
-      <mat-label>Nom</mat-label>
-      <input matInput type="text" formControlName="name" />
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
 
       <mat-error
-        *ngIf="name?.errors && !name?.pristine"
+        *ngIf="email?.errors && !email?.pristine"
         class="error-message-size"
       >
-        Le nom ne peut contenir que des lettres et des chiffres.
+        Le format de l'email est inconnu.
       </mat-error>
     </mat-form-field>
 

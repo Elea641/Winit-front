@@ -7,8 +7,8 @@
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="CLASSEMENT">
         <app-list-resultats
-          *ngIf="currentProfile$ | async as currentProfile"
-          [currentProfile]="currentProfile"
+          *ngIf="userStatistics$ | async as userStatistics"
+          [userStatistics]="userStatistics"
         ></app-list-resultats>
       </mat-tab>
       <mat-tab label="TOURNOIS">

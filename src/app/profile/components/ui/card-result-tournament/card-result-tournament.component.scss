@@ -34,6 +34,10 @@ article {
   }
 
   .card-result-tournament-infos {
+    @include media-mobile-tablet-screen {
+      width: 80%;
+    }
+
     @include flex-column-center-align-justify;
     width: 40%;
     p {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { CardCurrentProfileComponent } from '../../ui/card-current-profile/card-current-profile.component';
 import { ProfileService } from 'src/app/profile/shared/profile.service';
@@ -13,6 +13,7 @@ import { TeamFormComponent } from 'src/app/team/components/feature/team-form/tea
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
 import { UserService } from 'src/app/auth/shared/user.service';
 import { ListTournamentComponent } from '../list-tournament/list-tournament.component';
+import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
 
 @Component({
   selector: 'app-current-profile-details',
@@ -30,6 +31,7 @@ import { ListTournamentComponent } from '../list-tournament/list-tournament.comp
   styleUrls: ['./current-profile-details.component.scss'],
 })
 export class CurrentProfileDetailsComponent {
+  @Input() userStatistics$!: Observable<UserStatistics>;
   currentProfile$!: Observable<CurrentProfile>;
   currentUser$!: Observable<CurrentUser>;
   teamMembers$!: Observable<TeamMembers>;

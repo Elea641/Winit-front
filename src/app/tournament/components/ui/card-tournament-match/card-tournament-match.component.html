@@ -1,10 +1,21 @@
 <article
   [ngStyle]="{
-    'margin-top.rem': margin * 3.5,
-    'margin-bottom.rem': margin * 3.5
+    'margin-top.rem':
+      (isDesktop || isLargeDesktop) && !first
+        ? margin * 6 * 2
+        : isDesktop || isLargeDesktop
+        ? margin * 6
+        : 1.5,
+
+    'margin-bottom.rem': (isDesktop || isLargeDesktop) && last && 0
   }"
+  (click)="openDialog()"
 >
-  <section>
+  <section
+    [ngStyle]="{
+    'height.rem': isDesktop || isLargeDesktop ? height: 3.5,
+  }"
+  >
     <h3>{{ truncateName(match.team1) }}</h3>
     <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
       {{ match.scoreTeam1 }}
@@ -13,7 +24,11 @@
       {{ match.scoreTeam1 }}
     </p>
   </section>
-  <section>
+  <section
+    [ngStyle]="{
+    'height.rem': isDesktop || isLargeDesktop ? height: 3.5,
+  }"
+  >
     <h3>{{ truncateName(match.team2) }}</h3>
     <p *ngIf="match.team1 !== 'En attente' && match.team2 !== 'En attente'">
       {{ match.scoreTeam2 }}
@@ -23,15 +38,3 @@
     </p>
   </section>
 </article>
-<section>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="openDialog()"
-    *ngIf="
-      !isCompleted && match.winnerTeamId === null && match.loserTeamId === null
-    "
-  >
-    Score
-  </button>
-</section>

@@ -124,6 +124,7 @@ export class TeamFormComponent {
         sport: this.sport.value,
         id: this.teamToUpdate?.id,
       };
+
       if (this.mode === 'create') {
         this.teamService.addTeam(teamData as CreatedTeam);
       } else if (this.mode === 'update' && this.teamToUpdate) {

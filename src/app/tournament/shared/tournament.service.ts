@@ -177,6 +177,7 @@ export class TournamentService implements ITournamentService {
         `${environment.urlApi}/tournaments/${tournamentId}`,
         {
           isGenerated: true,
+          isCanceled: false,
           matches: generatedTree,
         }
       )
