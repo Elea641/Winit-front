@@ -55,8 +55,6 @@ export class TokenInterceptor implements HttpInterceptor {
       // J'intercepte les requêtes que mon serveur me renvoit en statut 400 (Statut : erreur)
       catchError((err: HttpErrorResponse) => {
         this.authS.setHttpErrorSubject$(err);
-        console.log(err);
-
         if (
           err.error.is_token_expired == 'true' ||
           err.error.bad_credentials === 'true' ||

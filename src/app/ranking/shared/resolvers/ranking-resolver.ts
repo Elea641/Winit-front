@@ -2,9 +2,10 @@ import { ResolveFn } from '@angular/router';
 import { Observable } from 'rxjs';
 import { inject } from '@angular/core';
 import { RankingService } from '../ranking.service';
+import { Ranking } from '../../models/ranking.model';
 
-export const rankingResolver: ResolveFn<any | null> = (): Observable<
-  any | null
-> => {
+export const rankingResolver: ResolveFn<
+  Ranking | null
+> = (): Observable<Ranking | null> => {
   return inject(RankingService).getAllRanking();
 };

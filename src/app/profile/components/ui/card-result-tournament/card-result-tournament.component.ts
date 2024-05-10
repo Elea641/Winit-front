@@ -1,7 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConvertWinEnum } from 'src/app/profile/models/enum/convertWinEnum';
 import { HelperProfileService } from 'src/app/profile/shared/helpers/helper-profile.service';
+import {
+  StatesEnumType,
+  StatesType,
+} from 'src/app/profile/models/types/state-type.model';
 
 @Component({
   selector: 'app-card-result-tournament',
@@ -11,7 +14,7 @@ import { HelperProfileService } from 'src/app/profile/shared/helpers/helper-prof
   styleUrls: ['./card-result-tournament.component.scss'],
 })
 export class CardResultTournamentComponent {
-  @Input() result!: any;
+  @Input() result!: StatesEnumType | StatesType;
   convertedResult: string | number | undefined;
   convertedResultToString: string | undefined;
 

@@ -8,16 +8,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastService } from 'src/app/shared/toast.service';
-import { Member } from 'src/app/team/models/member.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MemberService } from 'src/app/team/shared/member.service';
-import { UserService } from 'src/app/auth/shared/user.service';
-import { CurrentUser } from 'src/app/auth/models/current-user.model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-member',

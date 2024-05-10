@@ -4,6 +4,7 @@ import { Observable, concatMap, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 import { RankingListComponent } from '../../components/feature/ranking-list/ranking-list.component';
+import { Ranking } from '../../models/ranking.model';
 
 @Component({
   selector: 'app-ranking-page',
@@ -13,7 +14,7 @@ import { RankingListComponent } from '../../components/feature/ranking-list/rank
   styleUrls: ['./ranking-page.component.scss'],
 })
 export class RankingPageComponent {
-  ranking$!: Observable<any | null>;
+  ranking$!: Observable<Ranking | null>;
 
   constructor(private route: ActivatedRoute) {}
 

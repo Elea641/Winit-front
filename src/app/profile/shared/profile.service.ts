@@ -47,7 +47,7 @@ export class ProfileService implements IProfileService {
     );
   }
 
-  deleteProfile(userId: number): Observable<any> {
+  deleteProfile(userId: number): Observable<Object> {
     return this.http.delete(`${environment.urlApi}/users/${userId}`);
   }
 }
