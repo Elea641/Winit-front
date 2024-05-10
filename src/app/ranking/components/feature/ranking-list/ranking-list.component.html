@@ -1,1 +1,25 @@
-<p>ranking-list works!</p>
+<nav *ngIf="ranking$ | async">
+  <mat-tab-group
+    mat-stretch-tabs="false"
+    mat-align-tabs="start"
+    class="mat-tabs"
+    #tabGroup
+  >
+    <mat-tab label="TOP ÉQUIPES">
+      <ul>
+        <ng-container *ngIf="topWinnerTeamCountDtos">
+          <app-ranking-card
+            [topWinnerTeamCountDtos]="topWinnerTeamCountDtos"
+          ></app-ranking-card>
+        </ng-container>
+      </ul>
+    </mat-tab>
+    <mat-tab label="DERNIÈRES VICTOIRES">
+      <ng-container *ngIf="topWinnerTeamCountDtos">
+        <app-ranking-card
+          [topWinnerTeamDtos]="topWinnerTeamDtos"
+        ></app-ranking-card>
+      </ng-container>
+    </mat-tab>
+  </mat-tab-group>
+</nav>
