@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
 import { environment } from 'src/environments/environment';
-import { TokenResponse } from '../models/token.model';
 import { UserAuth } from '../models/user-auth.model';
 import { LocalStorageService } from './local-storage.service';
 import { TokenService } from './token.service';
