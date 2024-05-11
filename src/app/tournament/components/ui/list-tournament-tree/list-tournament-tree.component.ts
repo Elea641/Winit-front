@@ -10,6 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
 import { ModalContent } from 'src/app/components/models/modal-content.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
+import { Match } from 'src/app/tournament/models/match.model';
 
 @Component({
   selector: 'app-list-tournament-tree',
@@ -27,12 +28,12 @@ export class ListTournamentTreeComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
   @Output() generatedTournament: EventEmitter<boolean> = new EventEmitter();
   tournamentDetails!: TournamentDetails;
-  generatedTree: any;
+  generatedTree!: { randomPhaseMatches: {}; remainingPhaseMatches: {} };
   limitInscriptionTime!: Subscription;
   limitInscriptionValue: number | undefined;
   tournamentSubscription!: Subscription;
-  matchesByPhase: { [phase: string]: any[] } = {};
-  matchesByPhaseWithoutPreliminary: { [phase: string]: any[] } = {};
+  matchesByPhase: { [phase: string]: Match[] } = {};
+  matchesByPhaseWithoutPreliminary: { [phase: string]: Match[] } = {};
   phaseKeys: string[] = [];
   phaseWithoutPreliminary: string[] = [];
   isCanceled: boolean = false;
@@ -58,12 +59,14 @@ export class ListTournamentTreeComponent {
     this.tournament$.subscribe((tournament) => {
       this.tournamentDetails = tournament;
 
-      this.tournamentDetails.matches.forEach((match: any) => {
-        if (!this.matchesByPhase[match.phase]) {
-          this.matchesByPhase[match.phase] = [];
-        }
-        this.matchesByPhase[match.phase].push(match);
-      });
+      if (this.tournamentDetails.matches) {
+        this.tournamentDetails.matches.forEach((match: Match) => {
+          if (!this.matchesByPhase[match.phase]) {
+            this.matchesByPhase[match.phase] = [];
+          }
+          this.matchesByPhase[match.phase].push(match);
+        });
+      }
     });
 
     this.phaseKeys = Object.keys(this.matchesByPhase);
@@ -72,12 +75,14 @@ export class ListTournamentTreeComponent {
       (tournament) => {
         this.matchesByPhase = {};
         this.tournamentDetails = tournament;
-        this.tournamentDetails.matches.forEach((match: any) => {
-          if (!this.matchesByPhase[match.phase]) {
-            this.matchesByPhase[match.phase] = [];
-          }
-          this.matchesByPhase[match.phase].push(match);
-        });
+        if (this.tournamentDetails.matches) {
+          this.tournamentDetails.matches.forEach((match: Match) => {
+            if (!this.matchesByPhase[match.phase]) {
+              this.matchesByPhase[match.phase] = [];
+            }
+            this.matchesByPhase[match.phase].push(match);
+          });
+        }
         this.phaseKeys = Object.keys(this.matchesByPhase);
         this.getTotalPhaseWithoutPreliminary(this.matchesByPhase);
         this.phaseWithoutPreliminary = Object.keys(
@@ -100,7 +105,7 @@ export class ListTournamentTreeComponent {
     });
   }
 
-  isPhaseIncomplete(matches: any[]): boolean {
+  isPhaseIncomplete(matches: Match[]): boolean {
     return matches.some(
       (match) => match.team1 === 'En attente' || match.team2 === 'En attente'
     );
@@ -112,9 +117,9 @@ export class ListTournamentTreeComponent {
   }
 
   getTotalPhaseWithoutPreliminary(matchesByPhase: {
-    [phase: string]: any[];
+    [phase: string]: Match[];
   }): void {
-    const phasesWithoutPreliminary: { [phase: string]: any[] } = {};
+    const phasesWithoutPreliminary: { [phase: string]: Match[] } = {};
     const keys = Object.keys(matchesByPhase);
 
     const nonPreliminaryKeys = keys.filter(

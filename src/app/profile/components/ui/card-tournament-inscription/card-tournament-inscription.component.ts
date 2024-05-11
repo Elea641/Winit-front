@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
 
 @Component({
   selector: 'app-card-tournament-inscription',
@@ -11,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./card-tournament-inscription.component.scss'],
 })
 export class CardTournamentInscriptionComponent {
-  @Input() result: any;
+  @Input() result!: TournamentDetails;
   @Input() title: string = '';
   buttonValue: string = '';
 
@@ -25,7 +26,7 @@ export class CardTournamentInscriptionComponent {
     }
   }
 
-  onClick(tournament: any) {
-    this.router.navigate([`/tournament/${this.result.id}`]);
+  onClick(tournament: number) {
+    this.router.navigate([`/tournament/${tournament}`]);
   }
 }

@@ -11,13 +11,15 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 import { LocalStorageService } from '../shared/local-storage.service';
 import { Router } from '@angular/router';
+import { TokenService } from '../shared/token.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
     private authS: AuthService,
     private lsService: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) {}
 
   intercept(
@@ -53,10 +55,14 @@ export class TokenInterceptor implements HttpInterceptor {
       // J'intercepte les requêtes que mon serveur me renvoit en statut 400 (Statut : erreur)
       catchError((err: HttpErrorResponse) => {
         this.authS.setHttpErrorSubject$(err);
-
-        if (err.error.is_token_expired == 'true') {
+        if (
+          err.error.is_token_expired == 'true' ||
+          err.error.bad_credentials === 'true' ||
+          err.error.error_message === 'No JWT provided.'
+        ) {
           this.lsService.clearToken();
           this.router.navigate(['/auth/login']);
+          this.tokenService.resetToken();
         }
         return throwError(() => err);
       })

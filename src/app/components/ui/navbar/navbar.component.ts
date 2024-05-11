@@ -5,9 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { filter } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { TokenService } from 'src/app/auth/shared/token.service';
+import { TokenDetails } from 'src/app/auth/models/TokenDetails.model';
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +25,7 @@ import { TokenService } from 'src/app/auth/shared/token.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  currentUser!: any;
+  token: TokenDetails | null = null;
   isMobile: boolean | undefined = false;
   logoUrl: string = '';
 
@@ -56,11 +57,15 @@ export class NavbarComponent implements OnInit {
         window.scrollTo(0, 0);
       });
 
-    this.currentUser = this.tokenService._getTokenDetailsSubject$();
+    this.tokenService._getTokenDetailsSubject$().subscribe({
+      next: (tokenDetails: TokenDetails) => {
+        this.token = tokenDetails;
+      },
+    });
   }
 
-  isUserEmpty(user: any): boolean {
-    return !user || Object.keys(user).length === 0;
+  isTokenEmpty(token: TokenDetails): boolean {
+    return !token || Object.keys(token).length === 0;
   }
 
   goToDisconnected(url: string) {

@@ -16,10 +16,8 @@ export class MemberService implements IMemberService {
   constructor(public http: HttpClient, private toastService: ToastService) {}
 
   addMember(teamName: string, member: {}): void {
-    console.log(member);
-
     this.http
-      .post<any>(`${environment.urlApi}/members/${teamName}`, member)
+      .post<Member>(`${environment.urlApi}/members/${teamName}`, member)
       .subscribe({
         next: (response) => {
           if (response) {
@@ -41,7 +39,7 @@ export class MemberService implements IMemberService {
   deleteMemberByTeamName(teamName: string, member: Member): void {
     const memberId = member.id;
     this.http
-      .delete<any>(`${environment.urlApi}/members/${teamName}/${memberId}`)
+      .delete<Member>(`${environment.urlApi}/members/${teamName}/${memberId}`)
       .subscribe({
         next: (response) => {
           if (response) {

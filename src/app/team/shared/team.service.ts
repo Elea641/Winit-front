@@ -87,24 +87,26 @@ export class TeamService implements ITeamService {
   }
 
   deleteTeam(teamName: string): void {
-    this.http.delete<any>(`${environment.urlApi}/teams/${teamName}`).subscribe({
-      next: (response) => {
-        if (response) {
-          this.toastService.showSuccess(
-            "L'équipe supprimé avec succès",
-            'Suppression'
-          );
-          this.router.navigate(['/profile']);
-        }
-      },
-      error: (error) => {
-        if (error.error) {
-          this.toastService.showError(
-            error.error,
-            "Une erreur est survenue lors de la suppression de l'équipe"
-          );
-        }
-      },
-    });
+    this.http
+      .delete<string>(`${environment.urlApi}/teams/${teamName}`)
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.toastService.showSuccess(
+              "L'équipe supprimé avec succès",
+              'Suppression'
+            );
+            this.router.navigate(['/profile']);
+          }
+        },
+        error: (error) => {
+          if (error.error) {
+            this.toastService.showError(
+              error.error,
+              "Une erreur est survenue lors de la suppression de l'équipe"
+            );
+          }
+        },
+      });
   }
 }

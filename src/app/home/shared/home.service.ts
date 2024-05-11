@@ -11,11 +11,15 @@ export class HomeService {
   constructor(private http: HttpClient) {}
 
   getAllTournaments(): Observable<TournamentCard[]> {
-    return this.http.get<any>(`${environment.urlApi}/tournaments/`);
+    return this.http.get<TournamentCard[]>(
+      `${environment.urlApi}/tournaments/`
+    );
   }
 
   getAllGeneratedTournaments(): Observable<TournamentCard[]> {
-    return this.http.get<any>(`${environment.urlApi}/tournaments/generated`);
+    return this.http.get<TournamentCard[]>(
+      `${environment.urlApi}/tournaments/generated`
+    );
   }
 
   getAllCUrrentTournaments(): Observable<TournamentCard[]> {

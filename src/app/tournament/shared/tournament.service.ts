@@ -55,7 +55,7 @@ export class TournamentService implements ITournamentService {
   ) {}
 
   getAllTournaments(): Observable<TournamentCard[]> {
-    return this.http.get<any>(this.tournamentDataUrl);
+    return this.http.get<TournamentCard[]>(this.tournamentDataUrl);
   }
 
   getTournamentById(id: number): Observable<TournamentDetails> {
@@ -141,7 +141,7 @@ export class TournamentService implements ITournamentService {
   ): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       this.http
-        .delete<any>(
+        .delete<Observable<boolean>>(
           `${environment.urlApi}/tournaments/teams/${tournamentId}/${team.name}`
         )
         .subscribe({
@@ -236,7 +236,7 @@ export class TournamentService implements ITournamentService {
 
   deleteTournament(tournamentDetails: TournamentDetails): void {
     this.http
-      .delete<any>(
+      .delete<string>(
         `${environment.urlApi}/tournaments/${tournamentDetails.name}`
       )
       .subscribe({

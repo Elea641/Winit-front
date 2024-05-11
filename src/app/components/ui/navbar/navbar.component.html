@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="token">
   <mat-toolbar>
     <button mat-button [matMenuTriggerFor]="menu" *ngIf="isMobile">
       <mat-icon>menu</mat-icon>
@@ -7,9 +7,11 @@
       <button mat-menu-item routerLink="/tournament">
         <mat-icon>calendar_today</mat-icon> PLANNING
       </button>
-      <button mat-menu-item><mat-icon>trending_up</mat-icon> CLASSEMENT</button>
+      <button mat-menu-item routerLink="/ranking">
+        <mat-icon>trending_up</mat-icon> CLASSEMENT
+      </button>
       <button
-        *ngIf="!isUserEmpty(currentUser | async)"
+        *ngIf="!isTokenEmpty(token)"
         mat-menu-item
         routerLink="/tournament/create"
       >
@@ -21,9 +23,9 @@
     </a>
     <div class="container-buttons-navbar-left" *ngIf="!isMobile">
       <button mat-button routerLink="/tournament">PLANNING</button>
-      <button mat-button>CLASSEMENT</button>
+      <button mat-button routerLink="/ranking">CLASSEMENT</button>
       <button
-        *ngIf="!isUserEmpty(currentUser | async)"
+        *ngIf="!isTokenEmpty(token)"
         mat-button
         routerLink="/tournament/create"
       >
@@ -33,14 +35,14 @@
     <span class="navbar-spacer"></span>
     <button
       mat-raised-button
-      *ngIf="isUserEmpty(currentUser | async)"
+      *ngIf="isTokenEmpty(token)"
       color="primary"
       routerLink="/auth/login"
     >
       CONNEXION
     </button>
     <button
-      *ngIf="!isUserEmpty(currentUser | async)"
+      *ngIf="!isTokenEmpty(token)"
       mat-icon-button
       aria-label="icon-button with account icon"
       [matMenuTriggerFor]="profil"
@@ -48,16 +50,12 @@
       <mat-icon>person</mat-icon>
     </button>
     <mat-menu #profil="matMenu" class="navbar-custom-menu">
-      <a
-        *ngIf="!isUserEmpty(currentUser | async)"
-        mat-menu-item
-        routerLink="/profile"
-      >
+      <a *ngIf="!isTokenEmpty(token)" mat-menu-item routerLink="/profile">
         <mat-icon>person</mat-icon>
         <span>Profil</span>
       </a>
       <a
-        *ngIf="!isUserEmpty(currentUser | async)"
+        *ngIf="!isTokenEmpty(token)"
         mat-menu-item
         (click)="goToDisconnected('')"
       >
