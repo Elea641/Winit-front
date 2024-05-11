@@ -54,7 +54,7 @@ export class TournamentListComponent implements OnInit {
     this.isOpen = isDrawerOpened ? 'open' : 'close';
   }
 
-  onReceiveApplyFilters(event: any) {
+  onReceiveApplyFilters(event: CustomEvent) {
     this.applyFilters();
   }
 
@@ -93,7 +93,7 @@ export class TournamentListComponent implements OnInit {
       .pipe(map((data) => data));
   }
 
-  onReceiveResetFilters(event: any) {
+  onReceiveResetFilters(event: CustomEvent) {
     this.filteredTournaments$ = this.tournamentService.getAllTournaments();
     this.chronologicalFilter = false;
     this.showOnlyUpcomingTournaments = false;

@@ -6,6 +6,7 @@ import { ScoreModalComponent } from '../../feature/score-modal/score-modal.compo
 import { ScoreModalContent } from 'src/app/tournament/models/ScoreModal.model';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
 import { BreakpointService } from 'src/app/shared/breakpoint.service';
+import { Match } from 'src/app/tournament/models/match.model';
 
 @Component({
   selector: 'app-card-tournament-match',
@@ -16,8 +17,8 @@ import { BreakpointService } from 'src/app/shared/breakpoint.service';
 })
 export class CardTournamentMatchComponent {
   @Input() tournamentDetails!: TournamentDetails;
-  @Input() match: any;
-  @Input() matchesByPhase: any;
+  @Input() match!: Match;
+  @Input() matchesByPhase: { [phase: string]: Match[] } = {};
   @Input() phaseKey: string = '';
   @Input() isCompleted!: boolean;
   @Input() margin!: number;
@@ -56,7 +57,10 @@ export class CardTournamentMatchComponent {
     return text.length > 10 ? text.substring(0, 10) + '...' : text;
   }
 
-  findNextPhase(phaseKey: string, matchesByPhase: any): string | null {
+  findNextPhase(
+    phaseKey: string,
+    matchesByPhase: { [phase: string]: Match[] } = {}
+  ): string | null {
     if (phaseKey && matchesByPhase) {
       let maxMatchCount = 0;
 
@@ -101,13 +105,13 @@ export class CardTournamentMatchComponent {
 
   findMatchWithStatus(
     phase: string,
-    matchesByPhase: any
+    matchesByPhase: { [phase: string]: Match[] } = {}
   ): { id: number; team: string } | null {
     if (phase && matchesByPhase) {
       const matches = matchesByPhase[phase];
 
       const matchWithStatus = matches.find(
-        (match: any) =>
+        (match: Match) =>
           match.team1 === 'En attente' || match.team2 === 'En attente'
       );
 

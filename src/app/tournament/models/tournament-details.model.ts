@@ -1,3 +1,5 @@
+import { Match } from './match.model';
+
 export class TournamentDetails {
   constructor(
     public id: number,
@@ -20,6 +22,6 @@ export class TournamentDetails {
     public isOwner: boolean,
     public isGenerated: boolean,
     public isCanceled: boolean,
-    public matches?: any
+    public matches?: Match[]
   ) {}
 }

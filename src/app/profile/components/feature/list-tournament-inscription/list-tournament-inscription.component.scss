@@ -4,7 +4,7 @@
 section {
   color: $secondary-color-text;
   border-radius: 4px 4px 0 0;
-  margin-top: 1rem;
+  margin: 1rem 0;
   width: calc(100vw - 4rem);
 
   @include media-large-screen {

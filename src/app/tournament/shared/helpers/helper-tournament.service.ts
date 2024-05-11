@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IGeneratedTreeResult } from '../interfaces/IGeneratedTreeResult.service';
 import { IHelperTournamentService } from '../interfaces/IHelperTournament.service';
+import { Phases } from '../../models/interfaces/phase.interface';
+import { TeamHelper } from '../../models/interfaces/team-helper.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +22,11 @@ export class HelperTournamentService implements IHelperTournamentService {
     return { phase, randomMatchs, totalMatchesWithoutRandoms };
   }
 
-  private convertToTournamentPhase(totalPhase: any): object {
+  private convertToTournamentPhase(totalPhase: {
+    phase: number;
+    randomMatchs: {};
+    totalMatchesWithoutRandoms: {};
+  }): object {
     let numRounds = 0;
     let teamsRemaining = totalPhase.phase;
 
@@ -29,7 +35,7 @@ export class HelperTournamentService implements IHelperTournamentService {
       numRounds++;
     }
 
-    const phases: any = {
+    const phases: Phases = {
       phase1: 'Finale',
       phase2: 'Demi-finale',
       phase3: 'Quart de finale',
@@ -49,7 +55,7 @@ export class HelperTournamentService implements IHelperTournamentService {
       phase7: 128,
     };
 
-    const result: any = {};
+    const result: Phases = {};
 
     for (let i = 1; i <= numRounds; i++) {
       result[`phase${i}`] = phases[`phase${i}`];
@@ -62,7 +68,7 @@ export class HelperTournamentService implements IHelperTournamentService {
     return { result, totalPhaseMatchs };
   }
 
-  private randomizeTeams(teams: any): object {
+  private randomizeTeams(teams: TeamHelper[]): string[] {
     if (teams.length === 0) {
       return [];
     }
@@ -78,7 +84,7 @@ export class HelperTournamentService implements IHelperTournamentService {
     return randomizedTeamNames;
   }
 
-  private shuffleArray(array: any[]): void {
+  private shuffleArray(array: TeamHelper[]): void {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -86,17 +92,21 @@ export class HelperTournamentService implements IHelperTournamentService {
   }
 
   private divideTeamsForPhases(
-    teams: any,
+    teams: string[],
     randomMatchs: number
-  ): { randomTeams: any[]; remainingTeams: any[] } {
+  ): { randomTeams: string[]; remainingTeams: string[] } {
     const randomTeams = teams.slice(0, randomMatchs);
     const remainingTeams = teams.slice(randomMatchs);
 
     return { randomTeams, remainingTeams };
   }
 
-  private namePhaseAndNumberMatches(result: any, totalPhaseMatchs: any): any[] {
-    let nameAndNumberByPhase: any[] = [];
+  private namePhaseAndNumberMatches(
+    result: Phases,
+    totalPhaseMatchs: Phases
+  ): Phases[] {
+    let nameAndNumberByPhase: Phases[] = [];
+
     for (let phase in result) {
       let valeurTotalMatchs = totalPhaseMatchs[phase];
       nameAndNumberByPhase.push({
@@ -108,13 +118,17 @@ export class HelperTournamentService implements IHelperTournamentService {
     return nameAndNumberByPhase;
   }
 
-  private defineOtherMatches(result: any, totalPhaseMatchs: any): any {
-    let phases: any[] = this.namePhaseAndNumberMatches(
+  private defineOtherMatches(
+    result: Phases,
+    totalPhaseMatchs: Phases
+  ): Phases[] {
+    let phases: Phases[] = this.namePhaseAndNumberMatches(
       result,
       totalPhaseMatchs
     );
 
-    let matchesByPhase: any[] = [];
+    let matchesByPhase: Phases[] = [];
+
     phases.forEach((phaseObj: any) => {
       for (let j = 0; j < phaseObj.number / 2; j++) {
         const match = {
@@ -131,8 +145,8 @@ export class HelperTournamentService implements IHelperTournamentService {
 
   private definePhaseMatches(result: any): {} {
     let defineMatches: any = {};
-
     defineMatches.randomPhaseMatches = [];
+
     for (let i = 0; i < result.matchsPhase.randomTeams.length; i += 2) {
       const match = {
         team1: result.matchsPhase.randomTeams[i],
@@ -141,6 +155,7 @@ export class HelperTournamentService implements IHelperTournamentService {
       };
       defineMatches.randomPhaseMatches.push(match);
     }
+
     const values = Object.values(result.totalPhase.result);
     const phase = values[values.length - 1];
     const phaseNumber = Object.keys(result.totalPhase.result)[

@@ -6,7 +6,7 @@
     @include flex-column-center;
 
     .list-resultats-container-resultats-desktop {
-      @include flex-justify-align-center;
+      display: flex;
 
       .list-resultats-container-items {
         display: flex;
