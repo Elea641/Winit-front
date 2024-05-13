@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { Observable, filter } from 'rxjs';
+import { filter } from 'rxjs';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { TokenService } from 'src/app/auth/shared/token.service';
 import { TokenDetails } from 'src/app/auth/models/TokenDetails.model';
@@ -60,6 +60,7 @@ export class NavbarComponent implements OnInit {
     this.tokenService._getTokenDetailsSubject$().subscribe({
       next: (tokenDetails: TokenDetails) => {
         this.token = tokenDetails;
+        console.log(this.token);
       },
     });
   }
