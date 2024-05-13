@@ -21,6 +21,22 @@ import { tournamentResolver } from './tournament/shared/resolvers/tournament-res
 import { tournamentsResolver } from './tournament/shared/resolvers/tournaments-resolver';
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { UserGuard } from './auth/core/user.guard';
+import {
+  BackOfficeSportPageComponent
+} from "./back-office/pages/back-office-sport-page/back-office-sport-page.component";
+import {
+  BackOfficeCreateSportComponent
+} from "./back-office/components/feature/back-office-create-sport/back-office-create-sport.component";
+import {
+  BackOfficeSportDetailComponent
+} from "./back-office/components/feature/back-office-sport-detail/back-office-sport-detail.component";
+import {BackOfficeUserPageComponent} from "./back-office/pages/back-office-user-page/back-office-user-page.component";
+import {
+  BackOfficeUserDetailComponent
+} from "./back-office/components/feature/back-office-user-detail/back-office-user-detail.component";
+import {
+  BackOfficeUserEditComponent
+} from "./back-office/components/feature/back-office-user-edit/back-office-user-edit.component";
 
 export const routes: Routes = [
   {
@@ -63,9 +79,25 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'back-office',
-    component: BackOfficePageComponent,
+    path: 'back-office', component: BackOfficePageComponent, canActivate: [AdminGuard],
+  },
+  {
+    path: 'back-office/sport',
+    component: BackOfficeSportPageComponent,
     canActivate: [AdminGuard],
+    children: [
+      { path: 'create', component: BackOfficeCreateSportComponent },
+      { path: ':id([0-9]+)', component: BackOfficeSportDetailComponent },
+    ]
+  },
+  {
+    path: 'back-office/user',
+    component: BackOfficeUserPageComponent,
+    canActivate: [AdminGuard],
+    children: [
+      { path: 'edit/:id([0-9]+)', component: BackOfficeUserEditComponent },
+      { path: ':id([0-9]+)', component: BackOfficeUserDetailComponent }
+    ]
   },
   { path: 'new-team', component: CreateTeamPageComponent },
   {
