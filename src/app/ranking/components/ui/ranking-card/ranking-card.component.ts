@@ -22,8 +22,6 @@ export class RankingCardComponent {
   >;
 
   ngOnInit() {
-    console.log(this.topWinnerTeamDtos);
-
     if (this.topWinnerTeamCountDtos) {
       this.dataSource = new MatTableDataSource<TopWinnerTeamDtoType>(
         this.topWinnerTeamCountDtos
