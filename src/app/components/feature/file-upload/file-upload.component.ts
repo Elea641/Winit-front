@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 import { DropzoneMaterialModule } from '@ngx-dropzone/material';
-import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-file-upload',
@@ -22,19 +26,20 @@ import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
     DropzoneMaterialModule,
   ],
   templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.scss']
+  styleUrls: ['./file-upload.component.scss'],
 })
 export class FileUploadComponent {
   @Input() groupParent!: FormGroup;
   @Input() formControlNameValue!: string;
   @Input() labelValue!: string;
 
-  constructor(
-  ) {  }
+  constructor() {}
 
   clearUploadFile() {
     this.groupParent.controls[this.formControlNameValue].setValue(null);
-    this.groupParent.controls[this.formControlNameValue].updateValueAndValidity();
+    this.groupParent.controls[
+      this.formControlNameValue
+    ].updateValueAndValidity();
   }
 
   getControlErrors(control: AbstractControl) {
@@ -45,13 +50,12 @@ export class FileUploadComponent {
           errors.push(this.getErrorMessage(errorKey, control.errors[errorKey]));
         }
       }
-      console.log(errors);
+      console.error(errors);
     }
     return errors;
   }
 
   getErrorMessage(errorKey: any, errorValue: any) {
-
     if (errorKey === 'required') {
       return 'This field is required.';
     } else if (errorKey === 'minlength') {

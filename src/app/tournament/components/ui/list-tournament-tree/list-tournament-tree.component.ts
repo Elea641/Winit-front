@@ -1,87 +1,193 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardTournamentMatchComponent } from '../card-tournament-match/card-tournament-match.component';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
 import { HelperTournamentService } from 'src/app/tournament/shared/helpers/helper-tournament.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
+import { TournamentService } from 'src/app/tournament/shared/tournament.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { TimeService } from 'src/app/tournament/shared/time-service.service';
+import { ModalContent } from 'src/app/components/models/modal-content.model';
+import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
+import { Match } from 'src/app/tournament/models/match.model';
 
 @Component({
   selector: 'app-list-tournament-tree',
   standalone: true,
-  imports: [CommonModule, CardTournamentMatchComponent],
+  imports: [
+    CommonModule,
+    CardTournamentMatchComponent,
+    MatButtonModule,
+    MatDialogModule,
+  ],
   templateUrl: './list-tournament-tree.component.html',
   styleUrls: ['./list-tournament-tree.component.scss'],
 })
 export class ListTournamentTreeComponent {
   @Input() tournament$!: Observable<TournamentDetails>;
-  @Input() tournamentDetails!: TournamentDetails;
-  convertedSelection: string | undefined;
-  tournamentPhase!: any;
-  totalPhase: any;
-  namesTeamList: any;
-  namesTeamListPhase: any;
-  namesTeamListRandom: any;
+  @Output() generatedTournament: EventEmitter<boolean> = new EventEmitter();
+  tournamentDetails!: TournamentDetails;
+  generatedTree!: { randomPhaseMatches: {}; remainingPhaseMatches: {} };
+  limitInscriptionTime!: Subscription;
+  limitInscriptionValue: number | undefined;
+  tournamentSubscription!: Subscription;
+  matchesByPhase: { [phase: string]: Match[] } = {};
+  matchesByPhaseWithoutPreliminary: { [phase: string]: Match[] } = {};
+  phaseKeys: string[] = [];
+  phaseWithoutPreliminary: string[] = [];
+  isCanceled: boolean = false;
 
-  constructor(private helperTournamentService: HelperTournamentService) {}
+  constructor(
+    private helperTournamentService: HelperTournamentService,
+    private timeService: TimeService,
+    private tournamentService: TournamentService,
+    private dialog: MatDialog
+  ) {}
+
+  ngOnDestroy(): void {
+    this.limitInscriptionTime.unsubscribe();
+    this.tournamentSubscription.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.totalPhase = this.helperTournamentService.calculPhase(
-      this.tournamentDetails.participants
-    );
+    this.limitInscriptionTime =
+      this.timeService.limitTimeInscription$.subscribe((limit: number) => {
+        this.limitInscriptionValue = limit;
+      });
 
-    this.tournamentPhase =
-      this.helperTournamentService.convertToTournamentPhase(this.totalPhase);
+    this.tournament$.subscribe((tournament) => {
+      this.tournamentDetails = tournament;
 
-    this.namesTeamList = this.helperTournamentService.randomizeTeams(
-      this.tournamentDetails.teams
-    );
-
-    const { randomTeams, remainingTeams } =
-      this.helperTournamentService.divideTeamsForPhases(
-        this.namesTeamList,
-        this.totalPhase.randomMatchs
-      );
-
-    this.namesTeamListPhase = {
-      remainingTeams,
-    };
-
-    this.namesTeamListRandom = {
-      randomTeams,
-    };
-  }
-
-  getObjectKeys(obj: any): any[] {
-    return Object.keys(obj);
-  }
-
-  getNumberArray(length: number): number[] {
-    return new Array(length).fill(0).map((_, index) => index);
-  }
-
-  getTeamName(
-    index: number,
-    phaseKey?: string
-  ): { teamName: string; isEven: boolean } {
-    const result = { teamName: '', isEven: false };
-
-    if (index >= 0) {
-      if (phaseKey === 'randomMatchs') {
-        result.teamName = this.namesTeamListRandom.randomTeams[index];
-      } else {
-        const difference = index - this.totalPhase.count;
-
-        if (difference >= 0 && difference < this.totalPhase.count) {
-          result.teamName = '';
-        } else {
-          result.teamName =
-            this.namesTeamListPhase.remainingTeams[index] ?? 'Name';
-        }
+      if (this.tournamentDetails.matches) {
+        this.tournamentDetails.matches.forEach((match: Match) => {
+          if (!this.matchesByPhase[match.phase]) {
+            this.matchesByPhase[match.phase] = [];
+          }
+          this.matchesByPhase[match.phase].push(match);
+        });
       }
+    });
 
-      result.isEven = index % 2 === 0;
+    this.phaseKeys = Object.keys(this.matchesByPhase);
+
+    this.tournamentSubscription = this.tournamentService.tournament$.subscribe(
+      (tournament) => {
+        this.matchesByPhase = {};
+        this.tournamentDetails = tournament;
+        if (this.tournamentDetails.matches) {
+          this.tournamentDetails.matches.forEach((match: Match) => {
+            if (!this.matchesByPhase[match.phase]) {
+              this.matchesByPhase[match.phase] = [];
+            }
+            this.matchesByPhase[match.phase].push(match);
+          });
+        }
+        this.phaseKeys = Object.keys(this.matchesByPhase);
+        this.getTotalPhaseWithoutPreliminary(this.matchesByPhase);
+        this.phaseWithoutPreliminary = Object.keys(
+          this.matchesByPhaseWithoutPreliminary
+        );
+      }
+    );
+
+    this.getTotalPhaseWithoutPreliminary(this.matchesByPhase);
+    this.phaseWithoutPreliminary = Object.keys(
+      this.matchesByPhaseWithoutPreliminary
+    );
+  }
+
+  sortPhaseKeysByMatchCount(phaseKeys: string[]): string[] {
+    return phaseKeys.sort((a, b) => {
+      const matchCountA = this.matchesByPhase[a].length;
+      const matchCountB = this.matchesByPhase[b].length;
+      return matchCountB - matchCountA;
+    });
+  }
+
+  isPhaseIncomplete(matches: Match[]): boolean {
+    return matches.some(
+      (match) => match.team1 === 'En attente' || match.team2 === 'En attente'
+    );
+  }
+
+  marginCalculator(index: number): number {
+    let margin = [0.5, 1.5, 3.5, 7.5];
+    return margin[index];
+  }
+
+  getTotalPhaseWithoutPreliminary(matchesByPhase: {
+    [phase: string]: Match[];
+  }): void {
+    const phasesWithoutPreliminary: { [phase: string]: Match[] } = {};
+    const keys = Object.keys(matchesByPhase);
+
+    const nonPreliminaryKeys = keys.filter(
+      (key) => key !== 'Phase préliminaire'
+    );
+
+    nonPreliminaryKeys.forEach((key) => {
+      phasesWithoutPreliminary[key] = matchesByPhase[key];
+    });
+
+    this.matchesByPhaseWithoutPreliminary = phasesWithoutPreliminary;
+  }
+
+  getGenerated(event: boolean): void {
+    this.generatedTournament.emit(event);
+    if (
+      this.tournamentDetails.currentNumberOfParticipants &&
+      this.tournamentDetails.teams
+    ) {
+      this.generatedTree = this.helperTournamentService.generatedTree(
+        this.tournamentDetails.currentNumberOfParticipants,
+        this.tournamentDetails.teams
+      );
     }
+    this.tournamentDetails.isGenerated = true;
+  }
 
-    return result;
+  openDialog() {
+    const modalData: ModalContent = {
+      title: 'Confirmation',
+      content: `Êtes-vous sûr de vouloir générer le tournoi ? Vous ne pourrez plus le
+      supprimer par la suite.`,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: new ModalContent(modalData),
+    });
+
+    dialogRef.afterClosed().subscribe((response) => {
+      if (response === true) {
+        this.getGenerated(true);
+        this.tournamentService.updateTournament(
+          this.tournamentDetails.id,
+          this.generatedTree
+        );
+      }
+    });
+  }
+
+  openDialogCancelTournament() {
+    const modalData: ModalContent = {
+      title: 'Confirmation',
+      content: `Êtes-vous sûr de vouloir annuler le tournoi ?`,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: new ModalContent(modalData),
+    });
+
+    dialogRef.afterClosed().subscribe((response) => {
+      if (response === true) {
+        this.getGenerated(true);
+        this.isCanceled = true;
+        this.tournamentService.canceledTournament(
+          this.tournamentDetails.id,
+          true
+        );
+      }
+    });
   }
 }

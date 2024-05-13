@@ -24,12 +24,12 @@
   }
 
   .mat-mdc-raised-button:not(:disabled) {
-    color: $secondary-color-text;
+    color: $primary-color-button-text;
   }
 
   .mat-mdc-raised-button:hover,
   .mat-mdc-raised-button:focus {
-    color: $primary-color-focus;
+    color: $primary-color-button-text;
   }
 }
 

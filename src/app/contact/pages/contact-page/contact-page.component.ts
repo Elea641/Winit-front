@@ -38,12 +38,8 @@ export class ContactPageComponent {
   }
 
   openDialog(contactDetails: ContactDetails) {
-    const dialogRef = this.dialog.open(DialogOverviewContactComponent, {
+    this.dialog.open(DialogOverviewContactComponent, {
       data: contactDetails,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 }

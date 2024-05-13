@@ -8,6 +8,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { TokenService } from 'src/app/auth/shared/token.service';
+import { TokenDetails } from 'src/app/auth/models/TokenDetails.model';
 
 @Component({
   selector: 'app-navbar',
@@ -24,9 +25,9 @@ import { TokenService } from 'src/app/auth/shared/token.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  currentUser!: any;
+  token: TokenDetails | null = null;
   isMobile: boolean | undefined = false;
-  logoUrl: string = '../../../assets/pictures/logo-white.png';
+  logoUrl: string = '';
 
   constructor(
     private router: Router,
@@ -46,15 +47,25 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.logoUrl =
+            event?.url === '/' || event?.url === '/home'
+              ? '../../../../assets/pictures/logo-orange.png'
+              : '../../../../assets/pictures/logo-white.png';
+        }
         window.scrollTo(0, 0);
       });
 
-    this.currentUser = this.tokenService._getTokenDetailsSubject$();
+    this.tokenService._getTokenDetailsSubject$().subscribe({
+      next: (tokenDetails: TokenDetails) => {
+        this.token = tokenDetails;
+      },
+    });
   }
 
-  isUserEmpty(user: any): boolean {
-    return !user || Object.keys(user).length === 0;
+  isTokenEmpty(token: TokenDetails): boolean {
+    return !token || Object.keys(token).length === 0;
   }
 
   goToDisconnected(url: string) {
@@ -62,13 +73,5 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([url]).then(() => {
       window.location.reload();
     });
-  }
-
-  toggleLogo() {
-    this.logoUrl = '../../../assets/pictures/logo-orange.png';
-  }
-
-  toggleLogoButton() {
-    this.logoUrl = '../../../assets/pictures/logo-white.png';
   }
 }

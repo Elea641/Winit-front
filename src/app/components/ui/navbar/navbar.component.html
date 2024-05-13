@@ -1,74 +1,71 @@
-<mat-toolbar>
-  <button mat-button [matMenuTriggerFor]="menu" *ngIf="isMobile">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu" class="navbar-custom-menu">
-    <button mat-menu-item routerLink="/tournament" (click)="toggleLogoButton()">
-      <mat-icon>calendar_today</mat-icon> PLANNING
+<nav>
+  <mat-toolbar>
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="isMobile">
+      <mat-icon>menu</mat-icon>
     </button>
-    <button mat-menu-item (click)="toggleLogoButton()">
-      <mat-icon>trending_up</mat-icon> CLASSEMENT
+    <mat-menu #menu="matMenu" class="navbar-custom-menu">
+      <button mat-menu-item routerLink="/tournament">
+        <mat-icon>calendar_today</mat-icon> PLANNING
+      </button>
+      <button mat-menu-item routerLink="/ranking">
+        <mat-icon>trending_up</mat-icon> CLASSEMENT
+      </button>
+      <button
+        *ngIf="token && !isTokenEmpty(token)"
+        mat-menu-item
+        routerLink="/tournament/create"
+      >
+        <mat-icon>create</mat-icon> CRÉER UN TOURNOI
+      </button>
+    </mat-menu>
+    <a class="navbar-button-logo" routerLink="">
+      <img [src]="logoUrl" alt="logo_WinIt" />
+    </a>
+    <div class="container-buttons-navbar-left" *ngIf="!isMobile">
+      <button mat-button routerLink="/tournament">PLANNING</button>
+      <button mat-button routerLink="/ranking">CLASSEMENT</button>
+      <button
+        *ngIf="token && !isTokenEmpty(token)"
+        mat-button
+        routerLink="/tournament/create"
+      >
+        CRÉER UN TOURNOI
+      </button>
+    </div>
+    <span class="navbar-spacer"></span>
+    <button
+      mat-raised-button
+      *ngIf="!token"
+      color="primary"
+      routerLink="/auth/login"
+    >
+      CONNEXION
     </button>
     <button
-      *ngIf="!isUserEmpty(currentUser | async)"
-      mat-menu-item
-      routerLink="/tournament/create"
-      (click)="toggleLogoButton()"
-    >
-      <mat-icon>create</mat-icon> CRÉER UN TOURNOI
-    </button>
-  </mat-menu>
-  <a class="navbar-button-logo" routerLink="/home" (click)="toggleLogo()">
-    <img [src]="logoUrl" alt="logo_WinIt" />
-  </a>
-  <div class="container-buttons-navbar-left" *ngIf="!isMobile">
-    <button mat-button routerLink="/tournament" (click)="toggleLogoButton()">
-      PLANNING
-    </button>
-    <button mat-button (click)="toggleLogoButton()">CLASSEMENT</button>
-    <button
-      *ngIf="!isUserEmpty(currentUser | async)"
-      mat-button
-      routerLink="/tournament/create"
-      (click)="toggleLogoButton()"
-    >
-      CRÉER UN TOURNOI
-    </button>
-  </div>
-  <span class="navbar-spacer"></span>
-  <button
-    mat-raised-button
-    *ngIf="isUserEmpty(currentUser | async)"
-    color="primary"
-    routerLink="/auth/login"
-  >
-    CONNEXION
-  </button>
-  <button
-    *ngIf="!isUserEmpty(currentUser | async)"
-    mat-icon-button
-    aria-label="icon-button with account icon"
-    [matMenuTriggerFor]="profil"
-    (click)="toggleLogoButton()"
-  >
-    <mat-icon>person</mat-icon>
-  </button>
-  <mat-menu #profil="matMenu" class="navbar-custom-menu">
-    <a
-      *ngIf="!isUserEmpty(currentUser | async)"
-      mat-menu-item
-      routerLink="/profile"
+      *ngIf="token && !isTokenEmpty(token)"
+      mat-icon-button
+      aria-label="icon-button with account icon"
+      [matMenuTriggerFor]="profil"
     >
       <mat-icon>person</mat-icon>
-      <span>Profil</span>
-    </a>
-    <a
-      *ngIf="!isUserEmpty(currentUser | async)"
-      mat-menu-item
-      (click)="goToDisconnected('')"
-    >
-      <mat-icon>logout</mat-icon>
-      <span>Déconnexion</span>
-    </a>
-  </mat-menu>
-</mat-toolbar>
+    </button>
+    <mat-menu #profil="matMenu" class="navbar-custom-menu">
+      <a
+        *ngIf="token && !isTokenEmpty(token)"
+        mat-menu-item
+        routerLink="/profile"
+      >
+        <mat-icon>person</mat-icon>
+        <span>Profil</span>
+      </a>
+      <a
+        *ngIf="token && !isTokenEmpty(token)"
+        mat-menu-item
+        (click)="goToDisconnected('')"
+      >
+        <mat-icon>logout</mat-icon>
+        <span>Déconnexion</span>
+      </a>
+    </mat-menu>
+  </mat-toolbar>
+</nav>

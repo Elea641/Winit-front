@@ -4,9 +4,7 @@ import { Team } from 'src/app/team/models/team.model';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { ListMemberComponent } from '../list-member/list-member.component';
 import { CreateMemberComponent } from '../create-member/create-member.component';
-import { Observable, Subscription, of } from 'rxjs';
-import { TeamService } from 'src/app/team/shared/team.service';
-import { MemberService } from 'src/app/team/shared/member.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu-member',
@@ -25,23 +23,10 @@ export class MenuMemberComponent {
   @ViewChild(MatTabGroup) tabGroup!: MatTabGroup;
   private teamSubscription!: Subscription;
 
-  constructor(
-    private teamService: TeamService,
-    private memberService: MemberService
-  ) {}
-
   ngOnDestroy(): void {
     if (this.teamSubscription) {
       this.teamSubscription.unsubscribe();
     }
-  }
-
-  ngOnInit() {
-    this.teamSubscription = this.memberService.team$.subscribe((team) => {
-      if (team) {
-        this.team$ = of(team);
-      }
-    });
   }
 
   handleCancelClick() {

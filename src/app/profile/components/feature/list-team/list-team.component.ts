@@ -24,6 +24,6 @@ export class ListTeamComponent {
   }
 
   onClick() {
-    this.router.navigate(['/new-team']);
+    this.router.navigate(['/form-team/create']);
   }
 }

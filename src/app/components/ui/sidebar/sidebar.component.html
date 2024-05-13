@@ -10,7 +10,6 @@
     </div>
     <h2>FILTRES</h2>
     <div class="line"></div>
-
     <div class="container-sidebar-menu-button sidebar-select-sport">
       <mat-label>Trier par sport</mat-label>
       <mat-select [(value)]="selectedSport" class="selected">
@@ -30,7 +29,6 @@
         >
       </mat-select>
     </div>
-
     <button
       (click)="showFiller = !showFiller"
       mat-raised-button
@@ -64,12 +62,11 @@
     <mat-divider></mat-divider>
     <div class="filters-button">
       <button
-        mat-raised-button
         color="primary"
         class="apply-filters"
         (click)="sendApplyFilters()"
       >
-        Appliquer
+        APPLIQUER
       </button>
     </div>
     <div class="filters-button">
@@ -79,11 +76,10 @@
         class="reset-filters"
         (click)="sendResetFilters()"
       >
-        Réinitialiser les filtres
+        RÉINITIALISER LES FILTRES
       </button>
     </div>
   </mat-drawer>
-
   <div class="sidenav-button">
     <button mat-icon-button (click)="toggleDrawer()">
       <mat-icon>{{
@@ -92,7 +88,6 @@
     </button>
   </div>
 </mat-drawer-container>
-
 <mat-toolbar
   class="container-sidebar-mobile"
   *ngIf="!isDesktop || !isLargeDesktop"
@@ -130,7 +125,6 @@
         >
       </mat-select>
     </div>
-
     <button
       mat-menu-item
       (click)="sendChronologicalFilterChangeToParent()"
@@ -157,16 +151,9 @@
     </button>
     <mat-divider></mat-divider>
     <div class="filters-button">
-      <button
-        mat-raised-button
-        color="primary"
-        class="apply-filters"
-        (click)="sendApplyFilters()"
-      >
-        Appliquer
+      <button class="apply-filters" (click)="sendApplyFilters()">
+        APPLIQUER
       </button>
-    </div>
-    <div class="filters-button">
       <button
         mat-stroked-button
         color="primary"
@@ -174,7 +161,7 @@
         (click)="sendResetFilters()"
         (click)="$event.stopPropagation()"
       >
-        Réinitialiser les filtres
+        RÉINITIALISER LES FILTRES
       </button>
     </div>
   </mat-menu>

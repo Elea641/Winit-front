@@ -38,7 +38,7 @@ export class AdminGuard implements CanActivate {
       return true;
     } else {
       // Je suis dans le cas d'un USER_ROLE
-      this.router.navigate(['']);
+      this.router.navigate(['/auth/login']);
       return false;
     }
   }

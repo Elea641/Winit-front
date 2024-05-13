@@ -1,10 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardResultTotalComponent } from '../../ui/card-result-total/card-result-total.component';
-import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
 import { CardResultTournamentComponent } from '../../ui/card-result-tournament/card-result-tournament.component';
-import { ListLastTounamentsPlayedComponent } from '../../ui/list-last-tounaments-played/list-last-tounaments-played.component';
-import {ListNextTournamentsComponent} from "../../ui/list-next-tournaments/list-next-tournaments.component";
+import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
+import { ListTournamentInscriptionComponent } from '../list-tournament-inscription/list-tournament-inscription.component';
+import {
+  StatesEnumType,
+  StatesType,
+} from 'src/app/profile/models/types/state-type.model';
 
 @Component({
   selector: 'app-list-resultats',
@@ -13,16 +16,33 @@ import {ListNextTournamentsComponent} from "../../ui/list-next-tournaments/list-
     CommonModule,
     CardResultTotalComponent,
     CardResultTournamentComponent,
-    ListLastTounamentsPlayedComponent,
-    ListNextTournamentsComponent,
+    ListTournamentInscriptionComponent,
   ],
   templateUrl: './list-resultats.component.html',
   styleUrls: ['./list-resultats.component.scss'],
 })
 export class ListResultatsComponent {
-  @Input() currentProfile!: CurrentProfile | null;
+  @Input() userStatistics!: UserStatistics | null;
 
-  getObjectEntries(obj: any): [string, any][] {
-    return Object.entries(obj);
+  getObjectEntriesResult(states: UserStatistics | null): StatesEnumType[] {
+    if (states) {
+      return Object.entries(states).filter(
+        ([key, _]) =>
+          key !== 'podium' &&
+          key !== 'participation' &&
+          key !== 'lastTournaments' &&
+          key !== 'nextTournaments'
+      );
+    }
+    return [];
+  }
+
+  getObjectEntriesInscription(states: UserStatistics | null): StatesType[] {
+    if (states) {
+      return Object.entries(states).filter(
+        ([key, _]) => key === 'lastTournaments' || key === 'nextTournaments'
+      );
+    }
+    return [];
   }
 }

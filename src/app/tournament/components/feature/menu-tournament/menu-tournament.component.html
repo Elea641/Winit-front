@@ -1,14 +1,20 @@
-<div class="menu-tournament-container">
+<nav>
   <mat-tab-group
     mat-stretch-tabs="false"
     mat-align-tabs="start"
     class="mat-tabs"
   >
     <mat-tab label="MATCH">
-      <!-- <app-list-tournament-tree></app-list-tournament-tree> -->
+      <app-list-tournament-tree
+        [tournament$]="tournament$"
+        (generatedTournament)="getGenerated($event)"
+      ></app-list-tournament-tree>
     </mat-tab>
     <mat-tab label="ÉQUIPE">
-      <!-- <app-list-teams-tournament></app-list-teams-tournament> -->
+      <app-list-teams-tournament
+        [tournament$]="tournament$"
+        [generatedTournament]="generatedTournament"
+      ></app-list-teams-tournament>
     </mat-tab>
   </mat-tab-group>
-</div>
+</nav>

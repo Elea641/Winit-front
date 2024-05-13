@@ -1,7 +1,7 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
 
-.profile-card-container {
+article {
   @include flex-column;
   .profile-card-container-button {
     @include flex-justify-space-between;
@@ -33,13 +33,13 @@
   }
 
   .mat-mdc-raised-button:not(:disabled) {
-    color: $secondary-color-text;
+    color: $primary-color-button-text;
     z-index: 0;
   }
 
   .mat-mdc-raised-button:hover,
   .mat-mdc-raised-button:focus {
-    color: $primary-color-focus;
+    color: $primary-color-button-text;
   }
 
   @include media-tablet-screen {

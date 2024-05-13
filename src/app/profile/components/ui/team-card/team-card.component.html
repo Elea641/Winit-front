@@ -1,4 +1,10 @@
-<li>
+<li
+  *ngIf="
+    currentUrl === '/tournament/' + tournamentId + '/teams'
+      ? team.members.length === team.totalPlayers
+      : team
+  "
+>
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ team.name | uppercase }}</mat-card-title>

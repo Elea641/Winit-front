@@ -1,28 +1,14 @@
 <section>
   <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
-      <mat-label>Nom</mat-label>
-      <input
-        matInput
-        type="text"
-        formControlName="name"
-        [matAutocomplete]="auto"
-      />
-      <mat-autocomplete class="custom-autocomplete" #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let user of users$ | async"
-          [value]="user.firstName + ' ' + user.lastName"
-          (click)="selectUser(user)"
-        >
-          {{ user.firstName | titlecase }} {{ user.lastName | titlecase }}
-        </mat-option>
-      </mat-autocomplete>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
 
       <mat-error
-        *ngIf="name?.errors && !name?.pristine"
+        *ngIf="email?.errors && !email?.pristine"
         class="error-message-size"
       >
-        Nom
+        Le format de l'email est inconnu.
       </mat-error>
     </mat-form-field>
 

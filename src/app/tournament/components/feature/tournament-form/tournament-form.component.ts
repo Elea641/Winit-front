@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,15 +20,10 @@ import { DropzoneMaterialModule } from '@ngx-dropzone/material';
 import { TournamentForm } from 'src/app/tournament/models/tournament-form.model';
 import { Sport } from 'src/app/sport/models/sport.model';
 
-import { FileUploadComponent } from "../../../../components/feature/file-upload/file-upload.component";
+import { FileUploadComponent } from '../../../../components/feature/file-upload/file-upload.component';
 import { TournamentMappers } from 'src/app/tournament/shared/mappers/TournamentMappers';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { SportService } from 'src/app/sport/shared/sport.service';
-import { minimumDate } from 'src/app/tournament/shared/validators/minimum-date.directive';
-
-import { TournamentPrivacyEnum } from 'src/app/tournament/models/enum/tournamentPrivacyEnum';
-import { PlayerCategoryEnum } from 'src/app/tournament/models/enum/playerCategoryEnum';
-import { TournamentFormatEnum } from 'src/app/tournament/models/enum/tournamentFormatEnum';
 import { TournamentCreationDto } from 'src/app/tournament/models/tournament-creation-dto.model';
 
 @Component({
@@ -54,52 +49,34 @@ import { TournamentCreationDto } from 'src/app/tournament/models/tournament-crea
   ],
 })
 export class TournamentFormComponent implements OnInit, OnDestroy {
-  tournamentForm!: TournamentForm["form"];
-
+  tournamentForm!: TournamentForm['form'];
   sports$!: Observable<Sport[]>;
-  tournamentPrivacies: string[] = Object.values(TournamentPrivacyEnum);
-  playerCategories: string[] = Object.values(PlayerCategoryEnum);
-  tournamentFormats: string[] = Object.values(TournamentFormatEnum);
-
   private destroy$!: Subject<void>;
-
-  isDisplayedInscriptionLimitDate: boolean;
 
   constructor(
     private fb: FormBuilder,
     private tournamentEntityMappers: TournamentMappers,
     private tournamentService: TournamentService,
     private sportService: SportService
-  ) {
-    this.isDisplayedInscriptionLimitDate = false;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.destroy$ = new Subject<void>();
 
-    this.tournamentForm = new TournamentForm(this.fb, this.sportService)["form"];
+    this.tournamentForm = new TournamentForm(this.fb, this.sportService)[
+      'form'
+    ];
 
     this.sports$ = this.sportService.getAllSports();
   }
 
-  toggleInscriptionLimitDate() {
-    this.isDisplayedInscriptionLimitDate = !this.isDisplayedInscriptionLimitDate;
-    
-    if (this.isDisplayedInscriptionLimitDate)
-    {
-      this.tournamentForm.controls["inscriptionLimitDate"].addValidators(Validators.required);
-      this.tournamentForm.controls["inscriptionLimitDate"].addValidators([minimumDate()]);
-    } else {
-      this.tournamentForm.controls["inscriptionLimitDate"].removeValidators(Validators.required);
-    }
-  }
-
   onSubmit() {
     if (this.tournamentForm.valid) {
-      const newTournament: TournamentCreationDto = this.tournamentEntityMappers.ToCreationDto(this.tournamentForm);
+      const newTournament: TournamentCreationDto =
+        this.tournamentEntityMappers.ToCreationDto(this.tournamentForm);
       this.tournamentService.createTournament(newTournament);
     } else {
-      console.log('Error submitting form');
+      console.error('Error submitting form');
     }
   }
 

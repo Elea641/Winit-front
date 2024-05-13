@@ -10,10 +10,8 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getOneUser(email: string): Observable<CurrentUser> {
-    return this.http.get<CurrentUser>(
-      `${environment.urlApi}/users/email/${email}`
-    );
+  getCurrentUser(): Observable<CurrentUser> {
+    return this.http.get<CurrentUser>(`${environment.urlApi}/users/myself`);
   }
 
   getAllUsers(): Observable<CurrentUser[]> {
