@@ -16,11 +16,13 @@ export class SportListComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get('http://localhost:8080/api/sports/').subscribe(
-      (data) => {
+    this.http.get('http://localhost:8080/api/sports/').subscribe({
+      next: (data) => {
         this.sports$ = data;
       },
-      (error) => console.log(error)
-    );
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }

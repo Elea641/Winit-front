@@ -2,6 +2,17 @@
 @import "../../../../../assets/style/mixins.scss";
 
 @include media-mobile-tablet-screen {
+  button {
+    margin-top: 2rem;
+    color: $secondary-color;
+  }
+
+  h2 {
+    color: $secondary-color;
+    font-weight: 400;
+    margin-top: 2rem;
+  }
+
   .list-tournament-tree-container {
     color: $secondary-color;
     width: 100%;
@@ -9,7 +20,9 @@
 
     .list-tournament-tree-container-details {
       h2 {
-        color: $secondary-color-button;
+        color: $secondary-color-text;
+        margin: 1.5rem 0;
+        font-weight: 400;
       }
 
       .list-tournament-tree-container-cards {
@@ -21,29 +34,60 @@
 }
 
 @include media-large-screen {
+  button {
+    margin-top: 2rem;
+    color: $secondary-color;
+  }
+  h2 {
+    color: $secondary-color;
+    font-weight: 400;
+    margin-top: 2rem;
+  }
+
   .list-tournament-tree-container {
-    @include flex-wrap-align-center;
+    @include flex-wrap;
     color: $secondary-color;
     width: 100%;
     margin-top: 2rem;
 
     .list-tournament-tree-container-details {
-      padding: 0 2rem 0 0;
+      margin-top: auto;
+      margin-bottom: auto;
 
-      h2 {
-        color: $secondary-color-button;
-        width: 15vw;
-        height: 5rem;
+      .list-tournament-tree-container-cards-preliminary {
         display: flex;
-        align-items: flex-end;
-        padding-bottom: 1rem;
+
+        .list-tournament-tree-container-cards-preliminary-cards {
+          display: flex;
+          flex-wrap: wrap;
+
+          h2 {
+            width: 100vw;
+            color: $secondary-color-text;
+            margin: 1rem 0 1.5rem 0;
+            font-weight: 400;
+          }
+        }
       }
 
-      .list-tournament-tree-container-cards {
-        color: $secondary-color-button;
-        margin-top: auto;
-        margin-bottom: auto;
+      .list-tournament-tree-container-cards-phases {
+        display: flex;
+
+        h2 {
+          color: $secondary-color-text;
+          margin: 0.5rem 0;
+          font-weight: 400;
+        }
       }
     }
   }
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: $primary-color-button-text;
+}
+
+.mat-mdc-raised-button:hover,
+.mat-mdc-raised-button:focus {
+  color: $primary-color-button-text;
 }

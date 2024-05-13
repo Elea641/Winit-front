@@ -1,4 +1,4 @@
 <p>sport-list works!</p>
-<div *ngFor="let sport of sports$">
+<ng-container *ngFor="let sport of sports$">
   <app-sport-detail [sport]="sport"></app-sport-detail>
-</div>
+</ng-container>

@@ -2,11 +2,12 @@
 @import "../../../../../assets/style/mixins.scss";
 
 @include media-large-screen {
-  .list-resultats-container {
+  section {
     @include flex-column-center;
 
     .list-resultats-container-resultats-desktop {
-      @include flex-justify-align-center;
+      display: flex;
+      width: 100%;
 
       .list-resultats-container-items {
         display: flex;

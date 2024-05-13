@@ -1,16 +1,17 @@
-import { Observable } from "rxjs";
-import { CurrentProfile } from "../../models/current-profile.model";
-import { TeamMembers } from "../../models/teamMembers.model";
-import { User } from "src/app/auth/models/user.model";
+import { Observable } from 'rxjs';
+import { CurrentProfile } from '../../models/current-profile.model';
+import { TeamMembers } from '../../models/teamMembers.model';
+import { CurrentUser } from 'src/app/auth/models/current-user.model';
+import { UserStatistics } from '../../models/user-statistics.model';
 
 export interface IProfileService {
-    getCurrentProfile(): Observable<CurrentProfile>
-    
-      getTeamMembers(): Observable<TeamMembers>
-    
-      getCurrentUser(): Observable<User>
-    
-      updateProfile(userId: number, user: User): Observable<User>
-    
-      deleteProfile(userId: number): Observable<any>
+  getCurrentProfile(): Observable<CurrentProfile>;
+
+  getUserStatistics(): Observable<UserStatistics>;
+
+  getTeamMembers(): Observable<TeamMembers>;
+
+  updateProfile(userId: number, user: CurrentUser): Observable<CurrentUser>;
+
+  deleteProfile(userId: number): Observable<Object>;
 }

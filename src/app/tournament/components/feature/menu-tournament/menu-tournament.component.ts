@@ -21,5 +21,10 @@ import { TournamentDetails } from 'src/app/tournament/models/tournament-details.
   styleUrls: ['./menu-tournament.component.scss'],
 })
 export class MenuTournamentComponent {
+  @Input() generatedTournament: boolean = false;
   @Input() tournament$!: Observable<TournamentDetails>;
+
+  getGenerated(event: boolean): void {
+    this.generatedTournament = event;
+  }
 }

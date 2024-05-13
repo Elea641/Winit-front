@@ -1,10 +1,8 @@
 @import "../../../../../assets/style/variables.scss";
+@import "../../../../../assets/style/mixins.scss";
 
-.update-profile-page-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+main {
+  @include flex-column-center-align-justify;
 }
 
 .update-block {
@@ -36,7 +34,16 @@ mat-divider {
 }
 
 button {
-  margin: 0.5rem 0.5rem 0 0.5rem;
+  margin: 1rem 0.5rem 0 0.5rem;
+  width: 100%;
+
+  @include media-mobile-tablet-screen {
+    width: 70vw;
+  }
+
+  @include media-large-screen {
+    width: 50vw;
+  }
 }
 
 .delete-button-container {
@@ -46,13 +53,17 @@ button {
   padding: 0 1rem;
 }
 
+.update-profile-buttons {
+  @include flex-column-center;
+}
+
 .mat-mdc-raised-button:not(:disabled) {
-  color: white;
+  color: $primary-color-button-text;
 }
 
 .mat-mdc-raised-button:hover,
 .mat-mdc-raised-button:focus {
-  color: $primary-color;
+  color: $primary-color-button-text;
 }
 
 @media screen and (max-width: 768px) {

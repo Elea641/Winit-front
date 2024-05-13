@@ -1,21 +1,33 @@
-<div class="container-home">
+<main class="container-home">
   <div class="tournament-container-home">
-    <section
-      class="tournaments"
-      [ngStyle]="{
-        'transition.s': 0.3
-      }"
-    >
-      <div class="ongoing-tournaments">
+    <section [ngStyle]="{ 'transition.s': 0.3 }">
+      <ng-container>
+        <h1>DERNIERS TOURNOIS CRÉÉS</h1>
+        <mat-divider></mat-divider>
+        <app-spinner *ngIf="loadingTournaments"></app-spinner>
+        <app-carousel
+          *ngIf="!loadingTournaments"
+          [tournaments$]="tournaments$"
+        ></app-carousel>
+      </ng-container>
+      <ng-container>
         <h1>TOURNOIS EN COURS</h1>
         <mat-divider></mat-divider>
-        <app-carousel></app-carousel>
-      </div>
-      <div class="open-tournaments">
+        <app-spinner *ngIf="loadingGeneratedTournaments"></app-spinner>
+        <app-carousel
+          *ngIf="!loadingGeneratedTournaments"
+          [tournaments$]="generatedTournaments$"
+        ></app-carousel>
+      </ng-container>
+      <ng-container>
         <h1>TOURNOIS OUVERTS À L'INSCRIPTION</h1>
         <mat-divider></mat-divider>
-        <app-carousel></app-carousel>
-      </div>
+        <app-spinner *ngIf="loadingCurrentTournaments"></app-spinner>
+        <app-carousel
+          *ngIf="!loadingCurrentTournaments"
+          [tournaments$]="currentTournaments$"
+        ></app-carousel>
+      </ng-container>
     </section>
   </div>
-</div>
+</main>

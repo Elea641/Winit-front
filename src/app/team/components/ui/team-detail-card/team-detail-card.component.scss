@@ -1,5 +1,6 @@
 @import "../../../../../assets/style/variables.scss";
 @import "../../../../../assets/style/mixins.scss";
+
 .team-list-card-container {
   padding: 1rem 2rem 0 2rem;
 
@@ -43,9 +44,25 @@
       @include flex-column-center;
     }
 
-    ::ng-deep .mat-mdc-button:not(:disabled) {
-      width: 10rem;
+    button:first-of-type {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 3;
       justify-self: end;
+      width: 10rem;
+      color: $primary-color-button-text;
+      @include flex-column-center;
+    }
+
+    button:last-child {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 3;
+      grid-row-end: 4;
+      justify-self: end;
+      width: 10rem;
+      @include flex-column-center;
     }
   }
 }

@@ -12,6 +12,9 @@
   </header>
   <h1>LISTE DE VOS ÉQUIPES</h1>
   <mat-divider></mat-divider>
+  <h2 *ngIf="(teams$ | async)?.length === 0">
+    Vous ne possèdez pas encore d'équipe
+  </h2>
   <ul>
     <app-team-card
       *ngFor="let team of teams$ | async"

@@ -1,7 +1,7 @@
 @import "../../../../assets/style/mixins.scss";
 @import "../../../../assets/style/variables.scss";
 
-.container-contact-page {
+section {
   @include flex-column-center;
   color: $secondary-color;
   margin: 5rem 0 5rem 0;
