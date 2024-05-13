@@ -3,11 +3,33 @@
 
 .filters-button {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
 
   & button {
     font-family: "Roboto";
     margin-top: 16px;
+    width: 10rem;
+  }
+
+  .apply-filters {
+    width: 10rem;
+    border-radius: 0.2rem;
+    height: 2.2rem;
+    border: none;
+    background-color: $secondary-color-button;
+    color: $primary-color-text;
+    margin-top: 1rem;
+    cursor: pointer;
+
+    @include media-large-screen {
+      margin-top: 2rem;
+    }
+  }
+
+  .apply-filters:hover {
+    background-color: #2d97ae;
+    color: $primary-color-text;
   }
 }
 

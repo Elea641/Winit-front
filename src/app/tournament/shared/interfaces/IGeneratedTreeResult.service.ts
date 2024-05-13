@@ -1,4 +1,4 @@
-export interface IGeneratedTreeResult {
+export interface IGeneratedTreeResultService {
   calculPhase: {};
   totalPhase: {};
   randomizeTeams: {};

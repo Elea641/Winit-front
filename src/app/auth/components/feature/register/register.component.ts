@@ -131,6 +131,7 @@ export class RegisterComponent implements OnInit {
         email: this.email.value.trim(),
         password: this.password.value.trim(),
         requiredRole: 'ROLE_USER',
+        enabled: true,
         createdAt: new Date(),
       };
 

@@ -62,12 +62,11 @@
     <mat-divider></mat-divider>
     <div class="filters-button">
       <button
-        mat-raised-button
         color="primary"
         class="apply-filters"
         (click)="sendApplyFilters()"
       >
-        Appliquer
+        APPLIQUER
       </button>
     </div>
     <div class="filters-button">
@@ -77,7 +76,7 @@
         class="reset-filters"
         (click)="sendResetFilters()"
       >
-        Réinitialiser les filtres
+        RÉINITIALISER LES FILTRES
       </button>
     </div>
   </mat-drawer>
@@ -152,13 +151,8 @@
     </button>
     <mat-divider></mat-divider>
     <div class="filters-button">
-      <button
-        mat-raised-button
-        color="primary"
-        class="apply-filters"
-        (click)="sendApplyFilters()"
-      >
-        Appliquer
+      <button class="apply-filters" (click)="sendApplyFilters()">
+        APPLIQUER
       </button>
       <button
         mat-stroked-button
@@ -167,7 +161,7 @@
         (click)="sendResetFilters()"
         (click)="$event.stopPropagation()"
       >
-        Réinitialiser les filtres
+        RÉINITIALISER LES FILTRES
       </button>
     </div>
   </mat-menu>
