@@ -22,6 +22,8 @@ export class RankingCardComponent {
   >;
 
   ngOnInit() {
+    console.log(this.topWinnerTeamDtos);
+
     if (this.topWinnerTeamCountDtos) {
       this.dataSource = new MatTableDataSource<TopWinnerTeamDtoType>(
         this.topWinnerTeamCountDtos
@@ -33,7 +35,7 @@ export class RankingCardComponent {
       this.dataSource = new MatTableDataSource<TopWinnerTeamDtoType>(
         this.topWinnerTeamDtos
       );
-      this.displayedColumns = ['number', 'name', 'sport'];
+      this.displayedColumns = ['number', 'name', 'sport', 'tounamentName'];
     }
   }
 }

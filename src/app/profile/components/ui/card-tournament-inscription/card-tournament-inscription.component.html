@@ -5,9 +5,9 @@
       alt="sport detail image"
     />
     <h3>
-      {{ result?.name | titlecase }}
+      {{ result.name | titlecase }}
     </h3>
-    <p>{{ result?.place | titlecase }}</p>
+    <p>{{ result.place | titlecase }}</p>
   </section>
   <footer>
     <button mat-raised-button (click)="onClick(result.id)">

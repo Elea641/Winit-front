@@ -8,9 +8,10 @@ export class TopWinnerTeamCountDto extends TopWinnerTeamDto {
     name: string,
     sportId: string,
     ownerId: number,
+    tournamentName: string,
     count: number
   ) {
-    super(id, name, sportId, ownerId);
+    super(id, name, sportId, ownerId, tournamentName);
     this.count = count;
   }
 }

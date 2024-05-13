@@ -60,7 +60,6 @@ export class NavbarComponent implements OnInit {
     this.tokenService._getTokenDetailsSubject$().subscribe({
       next: (tokenDetails: TokenDetails) => {
         this.token = tokenDetails;
-        console.log(this.token);
       },
     });
   }
