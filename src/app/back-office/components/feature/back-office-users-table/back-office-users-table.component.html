@@ -26,11 +26,6 @@
     <td mat-cell *matCellDef="let user"> {{user["firstName"]}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="dateOfBirth">
-    <th mat-header-cell *matHeaderCellDef>Date de naissance</th>
-    <td mat-cell *matCellDef="let user"> {{ user["dateOfBirth"] | date: 'dd-MM-yyyy' }} </td>
-  </ng-container>
-
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef>Email</th>
     <td mat-cell *matCellDef="let user"> {{user["email"]}} </td>
@@ -70,10 +65,10 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
-    <td mat-cell *matCellDef>
+    <td mat-cell *matCellDef="let user">
       <div class="actions-cell">
-        <a class="view-link" href="/"><mat-icon>remove_red_eye</mat-icon></a>
-        <a class="edit-link" href="/"><mat-icon>edit</mat-icon></a>
+        <a class="view-link" (click)="viewUserDetails(user.id)"><mat-icon>remove_red_eye</mat-icon></a>
+        <a class="edit-link" (click)="viewEditUser(user.id)"><mat-icon>edit</mat-icon></a>
         <a class="delete-link" href="/"><mat-icon>delete</mat-icon></a>
       </div>
     </td>

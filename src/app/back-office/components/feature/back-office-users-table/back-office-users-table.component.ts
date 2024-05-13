@@ -4,7 +4,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {AdminUser} from "../../../models/admin-user.model";
@@ -21,7 +21,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 export class BackOfficeUsersTableComponent implements AfterViewInit{
 
   dataSource!: MatTableDataSource<AdminUser>;
-  displayedColumns = ["position", "lastName", "firstName", "dateOfBirth", "email", "city", "role", "createdAt", "updatedAt", "isEnabled", "actions"];
+  displayedColumns = ["position", "lastName", "firstName", "email", "city", "role", "createdAt", "updatedAt", "isEnabled", "actions"];
   positionColumnData: number = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -32,7 +32,8 @@ export class BackOfficeUsersTableComponent implements AfterViewInit{
   }
 
   constructor(
-    private backOfficeUserService: BackOfficeUserService
+    private backOfficeUserService: BackOfficeUserService,
+    private router: Router
   ) {
   }
 
@@ -60,4 +61,11 @@ export class BackOfficeUsersTableComponent implements AfterViewInit{
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  viewUserDetails(userId: number) {
+    this.router.navigate(['/back-office/user', userId]);
+  }
+
+  viewEditUser(userId: number) {
+    this.router.navigate(['/back-office/user/edit', userId]);
+  }
 }
