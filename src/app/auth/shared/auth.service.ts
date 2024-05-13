@@ -13,6 +13,7 @@ import { UserAuth } from '../models/user-auth.model';
 import { User } from '../models/user.model';
 import { LocalStorageService } from './local-storage.service';
 import { TokenService } from './token.service';
+import { NewPassword } from '../models/newPassword.class';
 
 @Injectable({
   providedIn: 'root',
@@ -78,6 +79,47 @@ export class AuthService {
         }
       }
     );
+  }
+
+  passwordForgotten(email: string) {
+    this.http
+      .post<{ message: string }>(
+        `${environment.urlApi}/auth/password-forgotten/${email}`,
+        null
+      )
+      .subscribe({
+        next: (response) => {
+          if (response.message) {
+            console.log(response);
+            this.router.navigate(['/auth/login']);
+            this.toastService.showSuccess(response.message, '');
+          }
+        },
+      });
+  }
+
+  newPassword(token: string, newPassword: NewPassword) {
+    this.http
+      .post<{ message: string }>(
+        `${environment.urlApi}/auth/new-password/${token}`,
+        newPassword
+      )
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.router.navigate(['/auth/login']);
+            this.toastService.showSuccess(response.message, '');
+          }
+        },
+        error: (error) => {
+          if (error) {
+            this.toastService.showError(
+              error.error,
+              "Une erreur s'est produite"
+            );
+          }
+        },
+      });
   }
 
   getHttpErrorSubject$(): Observable<HttpErrorResponse> {

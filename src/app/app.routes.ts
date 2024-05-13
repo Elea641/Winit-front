@@ -21,6 +21,8 @@ import { tournamentResolver } from './tournament/shared/resolvers/tournament-res
 import { tournamentsResolver } from './tournament/shared/resolvers/tournaments-resolver';
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { UserGuard } from './auth/core/user.guard';
+import { PasswordForgottenComponent } from './auth/components/feature/password-forgotten/password-forgotten.component';
+import { NewPasswordComponent } from './auth/components/feature/new-password/new-password.component';
 
 export const routes: Routes = [
   {
@@ -82,6 +84,8 @@ export const routes: Routes = [
     children: [
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginFormComponent },
+      { path: 'forgotten-password', component: PasswordForgottenComponent },
+      { path: 'new-password/:token', component: NewPasswordComponent },
     ],
   },
   { path: 'sport', component: SportComponent },
