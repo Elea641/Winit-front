@@ -1,17 +1,42 @@
 <div class="back-office-container">
   <div *ngIf="sport">
-    <div class="back-office-detail-title">
-      <h1>Espace administrateur</h1>
-      <h2>{{ sport.name }}</h2>
-    </div>
+    <h1>Espace administrateur</h1>
     <mat-divider></mat-divider>
-    <div class="button-container">
-      <button mat-raised-button class="edit-button"><mat-icon>edit</mat-icon>Modifier</button>
-      <button mat-stroked-button color="warn"><mat-icon>delete</mat-icon>Supprimer</button>
+    <div class="back-office-detail-header">
+      <h2>{{ sport.name }}</h2>
+      <div class="button-container">
+        <button mat-raised-button class="edit-button" color="primary"><mat-icon>edit</mat-icon>MODIFIER</button>
+        <button mat-stroked-button color="warn"><mat-icon>delete</mat-icon>SUPPRIMER</button>
+      </div>
     </div>
-    <p>Lien de l'image : {{ sport.imageUrl }}</p>
-    <p>Nombre de joueurs : {{ sport.numberOfPlayers }}</p>
-    <p>Nombre de tournois : {{ sport.numberOfTournaments }}</p>
-    <p>Nombre d'équipes : {{ sport.numberOfTeams }}</p>
+    <div class="back-office-detail-text-container">
+      <div class="back-office-detail-params">
+        <h3>Données du sport</h3>
+        <mat-list>
+          <mat-list-item>
+            <span matListItemTitle>Nombre de joueurs</span>
+            <span matListItemLine>{{ sport.numberOfPlayers }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Lien vers l'image</span>
+            <span matListItemLine>{{ sport.imageUrl }}</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="back-office-detail-stats">
+        <h3>Statistiques sur le sport</h3>
+        <mat-list>
+          <mat-list-item>
+            <span matListItemTitle>Nombre de tournois</span>
+            <span matListItemLine>{{ sport.numberOfTournaments }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Nombre d'équipes</span>
+            <span matListItemLine>{{ sport.numberOfTeams }}</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+    </div>
   </div>
 </div>

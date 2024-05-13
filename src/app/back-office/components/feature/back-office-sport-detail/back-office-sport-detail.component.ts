@@ -6,11 +6,12 @@ import {AdminSport} from "../../../models/admin-sport.model";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {MatListModule} from "@angular/material/list";
 
 @Component({
   selector: 'app-back-office-sport-detail',
   standalone: true,
-  imports: [CommonModule, MatDividerModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatDividerModule, MatButtonModule, MatIconModule, MatListModule],
   templateUrl: './back-office-sport-detail.component.html',
   styleUrls: ['./back-office-sport-detail.component.scss']
 })

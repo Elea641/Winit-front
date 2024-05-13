@@ -1,13 +1,13 @@
 @import "../../../../../assets/style/variables.scss";
 
 .mat-mdc-table {
-  background-color: $back-office-table-background-color;
+  background-color: $primary-background-color;
   overflow: hidden !important;
   border-radius: 4px;
 }
 
 .mat-mdc-header-row {
-  background-color: $back-office-table-header-color;
+  background-color: $secondary-background-color;
 }
 
 .mat-mdc-form-field {
@@ -38,7 +38,7 @@
 
 .mat-mdc-raised-button:hover,
 .mat-mdc-raised-button:focus {
-  color: $background-color;
+  color: $primary-background-color;
 }
 
 .actions-cell{
@@ -57,13 +57,16 @@ a {
 }
 
 .view-link:hover {
-  color: $back-office-view-color;
+  color: $primary-background-color-card;
+  cursor: pointer;
 }
 
 .edit-link:hover {
-  color: $back-office-edit-color;
+  color: $important-color-text;
+  cursor: pointer;
 }
 
 .delete-link:hover {
-  color: $back-office-delete-color;
+  color: $warn-color-button;
+  cursor: pointer;
 }
