@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { NewPassword } from 'src/app/auth/models/newPassword.class';
 import { ActivatedRoute } from '@angular/router';
+import { passwordValidator } from 'src/app/auth/core/password.validator';
 
 @Component({
   selector: 'app-new-password',
@@ -39,8 +40,14 @@ export class NewPasswordComponent {
 
   ngOnInit(): void {
     this.newPasswordForm = new FormGroup({
-      plainPassword: new FormControl('', [Validators.required]),
-      plainPasswordVerification: new FormControl('', [Validators.required]),
+      plainPassword: new FormControl('', [
+        Validators.required,
+        passwordValidator,
+      ]),
+      plainPasswordVerification: new FormControl('', [
+        Validators.required,
+        passwordValidator,
+      ]),
     });
   }
 
@@ -53,11 +60,15 @@ export class NewPasswordComponent {
   }
 
   onSubmit() {
-    const newPassword: NewPassword = {
-      plainPassword: this.plainPassword?.value,
-      plainPasswordVerification: this.plainPasswordVerification?.value,
-    };
-
-    this.authService.newPassword(this.token, newPassword);
+    if (this.plainPassword.value !== this.plainPasswordVerification.value) {
+      this.doPasswordsMatch = false;
+    } else {
+      this.doPasswordsMatch = true;
+      const newPassword: NewPassword = {
+        plainPassword: this.plainPassword.value,
+        plainPasswordVerification: this.plainPasswordVerification.value,
+      };
+      this.authService.newPassword(this.token, newPassword);
+    }
   }
 }

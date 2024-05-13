@@ -90,7 +90,6 @@ export class AuthService {
       .subscribe({
         next: (response) => {
           if (response.message) {
-            console.log(response);
             this.router.navigate(['/auth/login']);
             this.toastService.showSuccess(response.message, '');
           }
