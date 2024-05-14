@@ -1,5 +1,5 @@
 <article *ngIf="tournament$ | async as tournamentDetails">
-  <img src="{{ image }}" alt="" />
+  <img src="{{ image }}" alt="{{ tournamentDetails.name }}" />
   <div class="card-details-tournament-container-body">
     <div class="card-details-tournament-container-header">
       <h3>{{ tournamentDetails.sport }}</h3>

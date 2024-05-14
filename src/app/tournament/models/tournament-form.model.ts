@@ -36,7 +36,7 @@ export class TournamentForm {
         inscriptionLimitDate: [''],
         sport: ['', [Validators.required, allowedSports(this.sportService)]],
         maxTeams: ['', Validators.required],
-        tournamentBanner: [null, forbiddenFileFormat()],
+        tournamentBanner: [null, [forbiddenFileFormat(), Validators.required]],
       },
       { validators: maximumDate }
     );
