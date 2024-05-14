@@ -22,8 +22,8 @@ export class MemberService implements IMemberService {
         next: (response) => {
           if (response) {
             this.toastService.showSuccess(
-              "Ajout de votre membre à l'équipe",
-              'Bravo félicitations'
+              "Le membre a été ajouté à l'équipe",
+              'Opération effectuée avec succès'
             );
             this.memberSubject.next(response);
           }

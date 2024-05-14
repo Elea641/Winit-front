@@ -66,10 +66,7 @@ export class AuthService {
         next: (tokenFromDB) => {
           this.tokenService.updateToken(tokenFromDB);
           this.router.navigate(['/']);
-          this.toastService.showSuccess(
-            'bravo félicitations',
-            'Connexion réussie'
-          );
+          this.toastService.showSuccess('Bienvenue', 'Connexion réussie');
         },
         error: (error) => {
           if (error.error) {

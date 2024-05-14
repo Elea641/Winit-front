@@ -117,7 +117,7 @@ export class TournamentService implements ITournamentService {
               observer.complete();
               this.toastService.showSuccess(
                 "L'ajout de votre équipe au tournoi a bien été prise en compte",
-                'Bravo félicitations'
+                'Opération effectuée avec succès'
               );
             }
           },

@@ -47,8 +47,8 @@ export class TeamService implements ITeamService {
         if (response) {
           this.router.navigate([`/teams-details/${team.name}`]);
           this.toastService.showSuccess(
-            'Création de votre équipe',
-            'Bravo félicitations'
+            'Votre équipe a été créée',
+            'Opération effectuée avec succès'
           );
         }
       },
@@ -69,8 +69,8 @@ export class TeamService implements ITeamService {
             if (response) {
               this.router.navigate([`/teams-details/${team.name}`]);
               this.toastService.showSuccess(
-                'Mise à jour de votre équipe',
-                'Bravo félicitations'
+                'Votre équipe a été mise à jour',
+                'Opération effectuée avec succès'
               );
             }
           },
