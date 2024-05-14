@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { TournamentCard } from '../models/tournament-card.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ITournamentListFilterService } from './interfaces/ITournamentListFilter.service';
@@ -13,7 +11,7 @@ export class TournamentListFilterService
 {
   constructor(private http: HttpClient) {}
 
-  public baseUrl: string = `${environment.urlApi}/tournaments/filter`;
+  public baseUrl = `${environment.urlApi}/tournaments/filter`;
 
   filterTournaments(
     searchValue: string,
@@ -22,7 +20,7 @@ export class TournamentListFilterService
     showOnlyUpcomingTournaments: boolean,
     showNonFullTournaments: boolean
   ) {
-    const queryParams: string = `?searchValue=${searchValue}&chronologicalFilter=${chronologicalFilter}&selectedSport=${selectedSport}&showOnlyUpcomingTournaments=${showOnlyUpcomingTournaments}&showNonFullTournaments=${showNonFullTournaments}`;
+    const queryParams = `?searchValue=${searchValue}&chronologicalFilter=${chronologicalFilter}&selectedSport=${selectedSport}&showOnlyUpcomingTournaments=${showOnlyUpcomingTournaments}&showNonFullTournaments=${showNonFullTournaments}`;
     return this.http.get<any>(this.baseUrl + queryParams);
   }
 }

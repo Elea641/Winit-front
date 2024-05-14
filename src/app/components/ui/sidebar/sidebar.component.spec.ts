@@ -8,7 +8,7 @@ describe('SidebarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SidebarComponent]
+      imports: [SidebarComponent],
     });
     fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;

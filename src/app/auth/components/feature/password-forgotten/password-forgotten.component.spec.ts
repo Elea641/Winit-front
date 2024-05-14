@@ -8,7 +8,7 @@ describe('PasswordForgottenComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PasswordForgottenComponent]
+      imports: [PasswordForgottenComponent],
     });
     fixture = TestBed.createComponent(PasswordForgottenComponent);
     component = fixture.componentInstance;

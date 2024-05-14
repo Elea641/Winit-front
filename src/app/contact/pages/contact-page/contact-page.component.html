@@ -5,8 +5,7 @@
   <div class="container-contact-page-actions">
     <div
       *ngFor="let contactDetails of contactDetails$ | async"
-      class="container-contact-page-actions-item"
-    >
+      class="container-contact-page-actions-item">
       <button class="button-contact" (click)="openDialog(contactDetails)">
         <img src="{{ contactDetails.url_picture }}" alt="logo_instagram" />
       </button>

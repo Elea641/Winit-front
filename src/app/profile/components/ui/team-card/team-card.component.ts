@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Team } from 'src/app/team/models/team.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,16 +12,19 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './team-card.component.html',
   styleUrls: ['./team-card.component.scss'],
 })
-export class TeamCardComponent {
+export class TeamCardComponent implements OnInit {
   @Input() team!: Team;
-  currentUrl: string = '';
+  currentUrl = '';
   tournamentId: string | null = '';
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.currentUrl = this.router.url;
 
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe(params => {
       this.tournamentId = params.get('id');
     });
   }

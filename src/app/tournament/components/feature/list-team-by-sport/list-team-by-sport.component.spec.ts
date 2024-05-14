@@ -8,7 +8,7 @@ describe('ListTeamBySportComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ListTeamBySportComponent]
+      imports: [ListTeamBySportComponent],
     });
     fixture = TestBed.createComponent(ListTeamBySportComponent);
     component = fixture.componentInstance;

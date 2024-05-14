@@ -26,7 +26,7 @@ export class DeleteProfileDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe((currentUser) => {
+    this.userService.getCurrentUser().subscribe(currentUser => {
       this.currentUser = currentUser;
     });
   }
@@ -41,7 +41,7 @@ export class DeleteProfileDialogComponent implements OnInit {
             'Succès !'
           );
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             this.toastService.showError(
               "Votre profil n'a pas pu être supprimé, veuillez réessayer ultérieurement.",

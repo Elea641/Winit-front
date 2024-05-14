@@ -95,41 +95,41 @@ export class RegisterComponent implements OnInit {
   }
 
   get firstName() {
-    return this.registerForm.get('firstName')!;
+    return this.registerForm.get('firstName');
   }
 
   get lastName() {
-    return this.registerForm.get('lastName')!;
+    return this.registerForm.get('lastName');
   }
 
   get city() {
-    return this.registerForm.get('city')!;
+    return this.registerForm.get('city');
   }
 
   get email() {
-    return this.registerForm.get('email')!;
+    return this.registerForm.get('email');
   }
 
   get password() {
-    return this.registerForm.get('password')!;
+    return this.registerForm.get('password');
   }
 
   get confirmPassword() {
-    return this.registerForm.get('confirmPassword')!;
+    return this.registerForm.get('confirmPassword');
   }
 
   get acceptTerms() {
-    return this.registerForm.get('acceptTerms')!;
+    return this.registerForm.get('acceptTerms');
   }
 
   onSubmit() {
     if (this.registerForm.valid) {
       const newUser: CurrentUser = {
-        firstName: this.firstName.value.trim().toLowerCase(),
-        lastName: this.lastName.value.trim().toLowerCase(),
-        city: this.city.value.trim().toLowerCase(),
-        email: this.email.value.trim(),
-        password: this.password.value.trim(),
+        firstName: this.firstName?.value.trim().toLowerCase(),
+        lastName: this.lastName?.value.trim().toLowerCase(),
+        city: this.city?.value.trim().toLowerCase(),
+        email: this.email?.value.trim(),
+        password: this.password?.value.trim(),
         requiredRole: 'ROLE_USER',
         enabled: true,
         createdAt: new Date(),

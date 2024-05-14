@@ -8,7 +8,7 @@ describe('SelectTeamPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SelectTeamPageComponent]
+      imports: [SelectTeamPageComponent],
     });
     fixture = TestBed.createComponent(SelectTeamPageComponent);
     component = fixture.componentInstance;

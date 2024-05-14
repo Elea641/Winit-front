@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -39,7 +39,7 @@ import { Sport } from '../../models/sport.model';
   templateUrl: './sport.component.html',
   styleUrls: ['./sport.component.scss'],
 })
-export class SportComponent {
+export class SportComponent implements OnInit {
   sportForm!: FormGroup;
   newSport: Sport = new Sport('', 0);
   newFile: any;
@@ -55,10 +55,10 @@ export class SportComponent {
 
   onSubmit() {
     if (this.sportForm.valid) {
-      this.newSport.name = this.sportForm.get('name')!.value;
+      this.newSport.name = this.sportForm.get('name')?.value;
       this.newSport.numberOfPlayers =
-        this.sportForm.get('numberOfPlayers')!.value;
-      this.newFile = this.sportForm.get('image')!.value;
+        this.sportForm.get('numberOfPlayers')?.value;
+      this.newFile = this.sportForm.get('image')?.value;
       const headers = new HttpHeaders({ enctype: 'multipart/form-data' });
       const formData = new FormData();
       formData.set('name', this.newSport.name);

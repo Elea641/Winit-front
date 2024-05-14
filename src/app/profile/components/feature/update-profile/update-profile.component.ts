@@ -54,7 +54,7 @@ export class UpdateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe({
-      next: (currentUser) => {
+      next: currentUser => {
         this.currentUser = currentUser;
         this.updateProfileForm.patchValue({
           firstName: this.currentUser.firstName,
@@ -63,7 +63,7 @@ export class UpdateProfileComponent implements OnInit {
           email: this.currentUser.email,
         });
       },
-      error: (error) => {
+      error: error => {
         if (error.error) {
           this.router.navigate(['/auth/login']);
           this.toastService.showError(
@@ -92,19 +92,19 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   get firstName() {
-    return this.updateProfileForm.get('firstName')!;
+    return this.updateProfileForm.get('firstName');
   }
 
   get lastName() {
-    return this.updateProfileForm.get('lastName')!;
+    return this.updateProfileForm.get('lastName');
   }
 
   get city() {
-    return this.updateProfileForm.get('city')!;
+    return this.updateProfileForm.get('city');
   }
 
   get email() {
-    return this.updateProfileForm.get('email')!;
+    return this.updateProfileForm.get('email');
   }
 
   onSubmit() {
@@ -113,7 +113,7 @@ export class UpdateProfileComponent implements OnInit {
       formData.firstName = formData.firstName.toLowerCase();
       formData.lastName = formData.lastName.toLowerCase();
       formData.city = formData.city.toLowerCase();
-      formData.email = formData.email;
+      formData.email;
 
       this.profileService
         .updateProfile(this.currentUser.id, formData)
@@ -125,7 +125,7 @@ export class UpdateProfileComponent implements OnInit {
             );
             this.router.navigate(['/profile']);
           },
-          error: (error) => {
+          error: error => {
             if (error.error) {
               this.toastService.showError(
                 "Votre profil n'a pas pu être mis à jour, veuillez réessayer ultérieurement.",

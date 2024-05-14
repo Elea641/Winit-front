@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -15,11 +15,11 @@ import { Match } from 'src/app/tournament/models/match.model';
   templateUrl: './card-tournament-match.component.html',
   styleUrls: ['./card-tournament-match.component.scss'],
 })
-export class CardTournamentMatchComponent {
+export class CardTournamentMatchComponent implements OnInit {
   @Input() tournamentDetails!: TournamentDetails;
   @Input() match!: Match;
   @Input() matchesByPhase: { [phase: string]: Match[] } = {};
-  @Input() phaseKey: string = '';
+  @Input() phaseKey = '';
   @Input() isCompleted!: boolean;
   @Input() margin!: number;
   @Input() index!: number;
@@ -28,7 +28,7 @@ export class CardTournamentMatchComponent {
   isDesktop: boolean | undefined = false;
   isLargeDesktop: boolean | undefined = false;
   nextPhase!: string | null;
-  height: number = 3;
+  height = 3;
 
   constructor(
     private dialog: MatDialog,
@@ -86,7 +86,7 @@ export class CardTournamentMatchComponent {
         const currentPhaseMatchCount = matchesByPhase[phaseKey]?.length || 0;
 
         const filteredPhases = Object.keys(matchesByPhase).filter(
-          (phase) => phase !== phaseKey && phase !== 'Phase préliminaire'
+          phase => phase !== phaseKey && phase !== 'Phase préliminaire'
         );
 
         for (const phase of filteredPhases) {

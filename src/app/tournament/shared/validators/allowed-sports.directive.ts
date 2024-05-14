@@ -8,9 +8,8 @@ import { SportService } from 'src/app/sport/shared/sport.service';
 export function allowedSports(sportService: SportService): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     let knownSports: Sport[];
-    let subscription: Subscription;
 
-    subscription = sportService
+    const subscription: Subscription = sportService
       .getAllSports()
       .pipe(
         tap((sports: Sport[]) => {
@@ -18,7 +17,7 @@ export function allowedSports(sportService: SportService): ValidatorFn {
         }),
         map(() => {
           const isValueInKnownSports = knownSports.some(
-            (sport) => sport.name === control.value
+            sport => sport.name === control.value
           );
 
           if (!isValueInKnownSports) {
@@ -32,7 +31,7 @@ export function allowedSports(sportService: SportService): ValidatorFn {
         next: () => {
           subscription.unsubscribe();
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             subscription.unsubscribe();
           }

@@ -2,15 +2,13 @@
   <form
     [formGroup]="tournamentForm"
     (ngSubmit)="onSubmit()"
-    enctype="multipart/form-data"
-  >
+    enctype="multipart/form-data">
     <h1 class="registration-title">CRÉATION D'UN TOURNOI</h1>
     <mat-divider class="register-divider"></mat-divider>
     <!-- Name -->
     <mat-form-field
       appearance="outline"
-      class="wi-tournament-form-field-big register-form-field"
-    >
+      class="wi-tournament-form-field-big register-form-field">
       <mat-label for="name">Nom du tournoi</mat-label>
       <input id="name" type="text" formControlName="name" matInput />
       <mat-error
@@ -19,8 +17,7 @@
           (tournamentForm.controls['name']?.dirty ||
             tournamentForm.controls['name']?.touched)
         "
-        class="error-message-size"
-      >
+        class="error-message-size">
         <small
           class="error"
           *ngIf="tournamentForm.controls['name'].hasError('required')"
@@ -48,8 +45,7 @@
           tournamentForm.controls['place']?.invalid &&
           (tournamentForm.controls['place']?.dirty ||
             tournamentForm.controls['place']?.touched)
-        "
-      >
+        ">
         <small
           class="error"
           *ngIf="tournamentForm.controls['place'].hasError('required')"
@@ -77,8 +73,7 @@
           tournamentForm.controls['date']?.invalid &&
           (tournamentForm.controls['date']?.dirty ||
             tournamentForm.controls['date']?.touched)
-        "
-      >
+        ">
         <small
           class="error"
           *ngIf="tournamentForm.controls['date'].hasError('required')"
@@ -105,8 +100,7 @@
           tournamentForm.controls['sport']?.invalid &&
           (tournamentForm.controls['sport']?.dirty ||
             tournamentForm.controls['sport']?.touched)
-        "
-      >
+        ">
         <small
           class="error"
           *ngIf="tournamentForm.controls['sport'].hasError('required')"
@@ -124,8 +118,7 @@
           tournamentForm.controls['maxTeams']?.invalid &&
           (tournamentForm.controls['maxTeams']?.dirty ||
             tournamentForm.controls['maxTeams']?.touched)
-        "
-      >
+        ">
         <small
           class="error"
           *ngIf="tournamentForm.controls['maxTeams'].hasError('required')"
@@ -139,16 +132,14 @@
       <app-file-upload
         [groupParent]="tournamentForm"
         formControlNameValue="tournamentBanner"
-        labelValue="Bannière du tournoi*"
-      ></app-file-upload>
+        labelValue="Bannière du tournoi*"></app-file-upload>
     </div>
     <button
       mat-raised-button
       color="primary"
       type="submit"
       class="register-button"
-      [disabled]="tournamentForm.invalid"
-    >
+      [disabled]="tournamentForm.invalid">
       CREER LE TOURNOI
     </button>
   </form>

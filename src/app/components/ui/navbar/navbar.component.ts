@@ -27,7 +27,7 @@ import { TokenDetails } from 'src/app/auth/models/TokenDetails.model';
 export class NavbarComponent implements OnInit {
   token: TokenDetails | null = null;
   isMobile: boolean | undefined = false;
-  logoUrl: string = '';
+  logoUrl = '';
 
   constructor(
     private router: Router,
@@ -46,8 +46,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event) => {
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.logoUrl =
             event?.url === '/' || event?.url === '/home'

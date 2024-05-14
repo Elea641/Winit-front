@@ -33,7 +33,7 @@ export class ProfileService implements IProfileService {
   getListTournaments(): Observable<TournamentCard[]> {
     return this.http
       .get<TournamentCard[]>(`${environment.urlApi}/tournaments/user`)
-      .pipe(map((tournaments) => tournaments));
+      .pipe(map(tournaments => tournaments));
   }
 
   getTeamMembers(): Observable<TeamMembers> {
@@ -47,7 +47,7 @@ export class ProfileService implements IProfileService {
     );
   }
 
-  deleteProfile(userId: number): Observable<Object> {
+  deleteProfile(userId: number): Observable<any> {
     return this.http.delete(`${environment.urlApi}/users/${userId}`);
   }
 }

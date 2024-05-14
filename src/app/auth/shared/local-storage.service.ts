@@ -6,7 +6,6 @@ import { TokenResponse } from '../models/token.model';
 })
 export class LocalStorageService {
   // Ce service contient toute la logique où j'interagis avec le LocalStorage
-  constructor() {}
 
   // Je récupère le token stocké en LocalStorage
   getToken(): string | null {

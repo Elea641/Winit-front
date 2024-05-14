@@ -8,7 +8,7 @@ describe('AuthPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AuthPageComponent]
+      imports: [AuthPageComponent],
     });
     fixture = TestBed.createComponent(AuthPageComponent);
     component = fixture.componentInstance;

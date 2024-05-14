@@ -51,16 +51,16 @@ export class SidebarComponent implements OnInit {
   @Output() newResetFilter = new EventEmitter<any>();
   @Output() newSportFilter = new EventEmitter<string>();
   @Output() newApplyFilters = new EventEmitter<any>();
-  chronologicalFilter: boolean = false;
-  showOnlyUpcomingTournaments: boolean = false;
-  showNonFullTournaments: boolean = false;
+  chronologicalFilter = false;
+  showOnlyUpcomingTournaments = false;
+  showNonFullTournaments = false;
   isDesktop: boolean | undefined = false;
   isLargeDesktop: boolean | undefined = false;
-  showFiller: boolean = false;
-  isDrawerOpened: boolean = false;
+  showFiller = false;
+  isDrawerOpened = false;
 
   sports: string[] = [];
-  selectedSport: string = '';
+  selectedSport = '';
 
   constructor(
     private breakpointService: BreakpointService,
@@ -95,7 +95,7 @@ export class SidebarComponent implements OnInit {
   getSportsNames() {
     this.sportService
       .getAllSportsNames()
-      .subscribe((sports) => (this.sports = sports));
+      .subscribe(sports => (this.sports = sports));
   }
 
   toggleIcon() {
@@ -108,7 +108,7 @@ export class SidebarComponent implements OnInit {
     this.sidebarService.isOpenSubject.next(this.isDrawerOpened);
   }
   private addClickOutsideListener() {
-    document.addEventListener('click', (event) => {
+    document.addEventListener('click', event => {
       const clickedElement = event.target as HTMLElement;
       if (this.isDesktop) {
         if (!this.el.nativeElement.contains(clickedElement)) {

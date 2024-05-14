@@ -42,12 +42,12 @@ export class PasswordForgottenComponent implements OnInit {
   }
 
   get email() {
-    return this.forgottenPasswordForm.get('email')!;
+    return this.forgottenPasswordForm.get('email');
   }
 
   onSubmit() {
     if (this.forgottenPasswordForm.valid) {
-      this.authService.passwordForgotten(this.email.value);
+      this.authService.passwordForgotten(this.email?.value);
     }
   }
 }

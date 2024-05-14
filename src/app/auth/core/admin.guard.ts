@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { CanActivate, Router, UrlTree } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { TokenService } from '../shared/token.service';
 
@@ -15,7 +9,10 @@ import { TokenService } from '../shared/token.service';
 export class AdminGuard implements CanActivate {
   role!: 'ROLE_USER' | 'ROLE_ADMIN';
 
-  constructor(private router: Router, private tokenS: TokenService) {
+  constructor(
+    private router: Router,
+    private tokenS: TokenService
+  ) {
     // Lorsque se construit ma classe (1 seule fois), je récupère mon JWT (opération asynchrone donc je dois la lancer le plus tôt possible)
     // Ma méthode canActivate() se déclenchera plus tard
     this.tokenS
@@ -26,10 +23,7 @@ export class AdminGuard implements CanActivate {
       });
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
+  canActivate():
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
