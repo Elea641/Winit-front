@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { UserAuth } from '../models/user-auth.model';
 import { LocalStorageService } from './local-storage.service';
 import { TokenService } from './token.service';
+import { NewPassword } from '../models/newPassword.class';
 import { CurrentUser } from '../models/current-user.model';
 
 @Injectable({
@@ -75,6 +76,46 @@ export class AuthService {
             this.toastService.showError(
               'La combinaison email / mot de passe est incorrecte.',
               'Connexion impossible'
+            );
+          }
+        },
+      });
+  }
+
+  passwordForgotten(email: string) {
+    this.http
+      .post<{ message: string }>(
+        `${environment.urlApi}/auth/password-forgotten/${email}`,
+        null
+      )
+      .subscribe({
+        next: (response) => {
+          if (response.message) {
+            this.router.navigate(['/auth/login']);
+            this.toastService.showSuccess(response.message, '');
+          }
+        },
+      });
+  }
+
+  newPassword(token: string, newPassword: NewPassword) {
+    this.http
+      .post<{ message: string }>(
+        `${environment.urlApi}/auth/new-password/${token}`,
+        newPassword
+      )
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.router.navigate(['/auth/login']);
+            this.toastService.showSuccess(response.message, '');
+          }
+        },
+        error: (error) => {
+          if (error) {
+            this.toastService.showError(
+              error.error,
+              "Une erreur s'est produite"
             );
           }
         },
