@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -31,12 +31,15 @@ import { passwordValidator } from 'src/app/auth/core/password.validator';
   templateUrl: './new-password.component.html',
   styleUrls: ['./new-password.component.scss'],
 })
-export class NewPasswordComponent {
+export class NewPasswordComponent implements OnInit {
   newPasswordForm!: FormGroup;
-  doPasswordsMatch: boolean = true;
-  token: string = String(this.route.snapshot.paramMap.get('token'));
+  doPasswordsMatch = true;
+  token = String(this.route.snapshot.paramMap.get('token'));
 
-  constructor(public authService: AuthService, public route: ActivatedRoute) {}
+  constructor(
+    public authService: AuthService,
+    public route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.newPasswordForm = new FormGroup({
@@ -52,21 +55,21 @@ export class NewPasswordComponent {
   }
 
   get plainPassword() {
-    return this.newPasswordForm.get('plainPassword')!;
+    return this.newPasswordForm.get('plainPassword');
   }
 
   get plainPasswordVerification() {
-    return this.newPasswordForm.get('plainPasswordVerification')!;
+    return this.newPasswordForm.get('plainPasswordVerification');
   }
 
   onSubmit() {
-    if (this.plainPassword.value !== this.plainPasswordVerification.value) {
+    if (this.plainPassword?.value !== this.plainPasswordVerification?.value) {
       this.doPasswordsMatch = false;
     } else {
       this.doPasswordsMatch = true;
       const newPassword: NewPassword = {
-        plainPassword: this.plainPassword.value,
-        plainPasswordVerification: this.plainPasswordVerification.value,
+        plainPassword: this.plainPassword?.value,
+        plainPasswordVerification: this.plainPasswordVerification?.value,
       };
       this.authService.newPassword(this.token, newPassword);
     }

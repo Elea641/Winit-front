@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,10 +11,10 @@ import { TournamentDetails } from 'src/app/tournament/models/tournament-details.
   templateUrl: './card-tournament-inscription.component.html',
   styleUrls: ['./card-tournament-inscription.component.scss'],
 })
-export class CardTournamentInscriptionComponent {
+export class CardTournamentInscriptionComponent implements OnInit {
   @Input() result!: TournamentDetails;
-  @Input() title: string = '';
-  buttonValue: string = '';
+  @Input() title = '';
+  buttonValue = '';
 
   constructor(private router: Router) {}
 

@@ -1,0 +1,2 @@
+ng lint
+npm run prettier

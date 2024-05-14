@@ -8,8 +8,7 @@
   <div class="all-tournaments-cards">
     <div
       *ngFor="let tournament of tournaments$ | async"
-      class="tournament-list"
-    >
+      class="tournament-list">
       <app-tournament-card [tournament]="tournament"></app-tournament-card>
     </div>
   </div>

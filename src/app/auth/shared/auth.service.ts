@@ -35,7 +35,7 @@ export class AuthService {
     this.http
       .post<CurrentUser>(`${environment.urlApi}/auth/register`, user)
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response) {
             this.localStorageService.clearToken();
             this.router.navigate(['/auth/login']);
@@ -45,7 +45,7 @@ export class AuthService {
             );
           }
         },
-        error: (error) => {
+        error: error => {
           if (error.error.error_message === 'Email already taken.') {
             this.toastService.showError(
               'Un compte avec cette adresse mail existe déjà.',
@@ -63,12 +63,12 @@ export class AuthService {
     this.http
       .post<any>(`${environment.urlApi}/auth/login`, userAuth)
       .subscribe({
-        next: (tokenFromDB) => {
+        next: tokenFromDB => {
           this.tokenService.updateToken(tokenFromDB);
           this.router.navigate(['/']);
           this.toastService.showSuccess('Bienvenue', 'Connexion réussie');
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             this.toastService.showError(
               'La combinaison email / mot de passe est incorrecte.',
@@ -81,12 +81,11 @@ export class AuthService {
 
   passwordForgotten(email: string) {
     this.http
-      .post<{ message: string }>(
-        `${environment.urlApi}/auth/password-forgotten/${email}`,
-        null
-      )
+      .post<{
+        message: string;
+      }>(`${environment.urlApi}/auth/password-forgotten/${email}`, null)
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response.message) {
             this.router.navigate(['/auth/login']);
             this.toastService.showSuccess(response.message, '');
@@ -97,18 +96,17 @@ export class AuthService {
 
   newPassword(token: string, newPassword: NewPassword) {
     this.http
-      .post<{ message: string }>(
-        `${environment.urlApi}/auth/new-password/${token}`,
-        newPassword
-      )
+      .post<{
+        message: string;
+      }>(`${environment.urlApi}/auth/new-password/${token}`, newPassword)
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response) {
             this.router.navigate(['/auth/login']);
             this.toastService.showSuccess(response.message, '');
           }
         },
-        error: (error) => {
+        error: error => {
           if (error) {
             this.toastService.showError(
               error.error,

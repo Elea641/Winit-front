@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TeamDetailCardComponent } from '../../components/ui/team-detail-card/team-detail-card.component';
@@ -13,14 +13,14 @@ import { Team } from '../../models/team.model';
   templateUrl: './team-page.component.html',
   styleUrls: ['./team-page.component.scss'],
 })
-export class TeamPageComponent {
+export class TeamPageComponent implements OnInit {
   team$!: Observable<Team | null>;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.team$ = this.route.data.pipe(
-      concatMap((data) => {
+      concatMap(data => {
         if (data && data['team']) {
           return of(data['team']);
         } else {

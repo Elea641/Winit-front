@@ -13,12 +13,10 @@
         matInput
         type="text"
         formControlName="name"
-        [value]="teamToUpdate?.name"
-      />
+        [value]="teamToUpdate?.name" />
       <mat-error
         *ngIf="name?.errors && !name?.pristine"
-        class="error-message-size"
-      >
+        class="error-message-size">
         Le nom ne peut contenir que des lettres et des chiffres et 55 caractères
         maximum.
       </mat-error>
@@ -38,8 +36,7 @@
       mat-stroked-button
       color="primary"
       type="button"
-      (click)="onClick()"
-    >
+      (click)="onClick()">
       ANNULER
     </button>
   </form>

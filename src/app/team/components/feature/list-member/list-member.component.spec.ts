@@ -8,7 +8,7 @@ describe('ListMemberComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ListMemberComponent]
+      imports: [ListMemberComponent],
     });
     fixture = TestBed.createComponent(ListMemberComponent);
     component = fixture.componentInstance;

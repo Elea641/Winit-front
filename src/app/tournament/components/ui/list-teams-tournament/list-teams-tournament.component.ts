@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
@@ -18,7 +18,7 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
   templateUrl: './list-teams-tournament.component.html',
   styleUrls: ['./list-teams-tournament.component.scss'],
 })
-export class ListTeamsTournamentComponent {
+export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
   @Input() generatedTournament!: boolean;
   @Input() tournament$!: Observable<TournamentDetails>;
   tournamentId!: number;
@@ -51,13 +51,13 @@ export class ListTeamsTournamentComponent {
   }
 
   ngOnInit() {
-    this.tournament$.subscribe((result) => {
+    this.tournament$.subscribe(result => {
       this.teams = result.teams;
       this.currentNumberOfParticipants =
         result.currentNumberOfParticipants ?? 0;
     });
 
-    this.route.params.subscribe((params) => {
+    this.route.params.subscribe(params => {
       this.tournamentId = params['id'];
     });
 
@@ -67,7 +67,7 @@ export class ListTeamsTournamentComponent {
       });
 
     this.teamSubscription = this.tournamentService.teamInscription$.subscribe(
-      (team) => {
+      team => {
         if (team) {
           this.teams = [...this.teams, team];
           this.currentNumberOfParticipants++;
@@ -85,18 +85,18 @@ export class ListTeamsTournamentComponent {
     const dialogRef = this.dialog.open(ModalComponent, {
       data: new ModalContent(modalData),
     });
-    dialogRef.afterClosed().subscribe((response) => {
+    dialogRef.afterClosed().subscribe(response => {
       if (response === true) {
         this.tournamentService
           .deleteTeamToTournament(this.tournamentId, team)
           .subscribe({
-            next: (success) => {
+            next: success => {
               if (success) {
-                this.teams = this.teams.filter((t) => t.name !== team.name);
+                this.teams = this.teams.filter(t => t.name !== team.name);
                 this.currentNumberOfParticipants--;
               }
             },
-            error: (error) => {
+            error: error => {
               if (error.error) {
                 console.error(
                   'Une erreur est survenue lors de la suppression :',

@@ -9,7 +9,10 @@ import { maximumDate } from '../shared/validators/maximum-date.directive';
 export class TournamentForm {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private sportService: SportService) {
+  constructor(
+    private fb: FormBuilder,
+    private sportService: SportService
+  ) {
     this.form = this.createForm();
   }
 

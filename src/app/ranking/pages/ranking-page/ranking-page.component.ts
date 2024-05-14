@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, concatMap, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -13,14 +13,14 @@ import { Ranking } from '../../models/ranking.model';
   templateUrl: './ranking-page.component.html',
   styleUrls: ['./ranking-page.component.scss'],
 })
-export class RankingPageComponent {
+export class RankingPageComponent implements OnInit {
   ranking$!: Observable<Ranking | null>;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.ranking$ = this.route.data.pipe(
-      concatMap((data) => {
+      concatMap(data => {
         if (data && data['ranking']) {
           return of(data['ranking']);
         } else {

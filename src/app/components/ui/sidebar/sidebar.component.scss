@@ -1,5 +1,5 @@
-@import "../../../../assets/style/variables.scss";
-@import "../../../../assets/style/mixins.scss";
+@import '../../../../assets/style/variables.scss';
+@import '../../../../assets/style/mixins.scss';
 
 .filters-button {
   display: flex;
@@ -7,7 +7,7 @@
   align-items: center;
 
   & button {
-    font-family: "Roboto";
+    font-family: 'Roboto';
     margin-top: 16px;
     width: 10rem;
   }

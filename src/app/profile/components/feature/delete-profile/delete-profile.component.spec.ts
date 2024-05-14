@@ -8,7 +8,7 @@ describe('DeleteProfileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [DeleteProfileComponent]
+      imports: [DeleteProfileComponent],
     });
     fixture = TestBed.createComponent(DeleteProfileComponent);
     component = fixture.componentInstance;

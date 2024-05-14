@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactListComponent } from '../../components/feature/contact-list/contact-list.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -20,14 +20,17 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './contact-page.component.html',
   styleUrls: ['./contact-page.component.scss'],
 })
-export class ContactPageComponent {
+export class ContactPageComponent implements OnInit {
   contactDetails$!: Observable<ContactDetails[]>;
 
-  constructor(public dialog: MatDialog, private route: ActivatedRoute) {}
+  constructor(
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.contactDetails$ = this.route.data.pipe(
-      concatMap((data) => {
+      concatMap(data => {
         if (data && data['contact']) {
           return of(data['contact']);
         } else {

@@ -8,7 +8,7 @@ describe('CardResultTotalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CardResultTotalComponent]
+      imports: [CardResultTotalComponent],
     });
     fixture = TestBed.createComponent(CardResultTotalComponent);
     component = fixture.componentInstance;

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { Observable, of } from 'rxjs';
 import { CarouselComponent } from 'src/app/components/ui/carousel/carousel.component';
@@ -21,7 +21,7 @@ import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.componen
     SpinnerComponent,
   ],
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   tournaments$!: Observable<TournamentCard[]>;
   generatedTournaments$!: Observable<TournamentCard[]>;
   currentTournaments$!: Observable<TournamentCard[]>;
@@ -32,21 +32,21 @@ export class HomePageComponent {
   constructor(private homeService: HomeService) {}
 
   ngOnInit() {
-    this.homeService.getAllTournaments().subscribe((tournaments) => {
+    this.homeService.getAllTournaments().subscribe(tournaments => {
       this.tournaments$ = of(tournaments);
       this.loadingTournaments = false;
     });
 
     this.homeService
       .getAllGeneratedTournaments()
-      .subscribe((generatedTournaments) => {
+      .subscribe(generatedTournaments => {
         this.generatedTournaments$ = of(generatedTournaments);
         this.loadingGeneratedTournaments = false;
       });
 
     this.homeService
       .getAllCUrrentTournaments()
-      .subscribe((currentTournaments) => {
+      .subscribe(currentTournaments => {
         this.currentTournaments$ = of(currentTournaments);
         this.loadingCurrentTournaments = false;
       });

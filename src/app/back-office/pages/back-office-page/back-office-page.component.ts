@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './back-office-page.component.html',
-  styleUrls: ['./back-office-page.component.scss']
+  styleUrls: ['./back-office-page.component.scss'],
 })
-export class BackOfficePageComponent {
-
-}
+export class BackOfficePageComponent {}

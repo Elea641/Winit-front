@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { Observable, map } from 'rxjs';
-import { Tournament } from 'src/app/tournament/models/tournament.model';
-import { TournamentService } from 'src/app/tournament/shared/tournament.service';
+import { Observable } from 'rxjs';
 import { TournamentCardComponent } from '../../../tournament/components/ui/tournament-card/tournament-card.component';
 import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
 

@@ -1,4 +1,7 @@
 export class Sport {
   imageUrl?: string;
-  constructor(public name: string, public numberOfPlayers: number) {}
+  constructor(
+    public name: string,
+    public numberOfPlayers: number
+  ) {}
 }

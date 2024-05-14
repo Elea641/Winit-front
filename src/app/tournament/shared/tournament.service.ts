@@ -78,7 +78,7 @@ export class TournamentService implements ITournamentService {
         { headers }
       )
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response) {
             this.router.navigate(['/tournament/' + response]);
             this.toastService.showSuccess(
@@ -87,7 +87,7 @@ export class TournamentService implements ITournamentService {
             );
           }
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             this.toastService.showError(
               error.error,
@@ -99,11 +99,11 @@ export class TournamentService implements ITournamentService {
   }
 
   addTeamToTournament(selectTeam: SelectTeam): Observable<boolean> {
-    return new Observable<boolean>((observer) => {
+    return new Observable<boolean>(observer => {
       this.http
         .post<SelectTeam>(`${environment.urlApi}/tournaments/teams`, selectTeam)
         .subscribe({
-          next: (response) => {
+          next: response => {
             if (response) {
               this.teamInscriptionSubject.next({
                 name: selectTeam.teamName,
@@ -121,7 +121,7 @@ export class TournamentService implements ITournamentService {
               );
             }
           },
-          error: (error) => {
+          error: error => {
             if (error.error) {
               this.toastService.showError(
                 error.error,
@@ -139,13 +139,13 @@ export class TournamentService implements ITournamentService {
     tournamentId: number,
     team: { name: string; result: number; url: string }
   ): Observable<boolean> {
-    return new Observable<boolean>((observer) => {
+    return new Observable<boolean>(observer => {
       this.http
-        .delete<Observable<boolean>>(
-          `${environment.urlApi}/tournaments/teams/${tournamentId}/${team.name}`
-        )
+        .delete<
+          Observable<boolean>
+        >(`${environment.urlApi}/tournaments/teams/${tournamentId}/${team.name}`)
         .subscribe({
-          next: (response) => {
+          next: response => {
             if (response) {
               this.toastService.showSuccess(
                 "L'équipe a été supprimée avec succès",
@@ -156,7 +156,7 @@ export class TournamentService implements ITournamentService {
               observer.complete();
             }
           },
-          error: (error) => {
+          error: error => {
             if (error.error) {
               this.toastService.showError(
                 error.error,
@@ -170,7 +170,7 @@ export class TournamentService implements ITournamentService {
 
   updateTournament(
     tournamentId: number,
-    generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
+    generatedTree: { randomPhaseMatches: object; remainingPhaseMatches: object }
   ) {
     this.http
       .put<TournamentDetails>(
@@ -182,7 +182,7 @@ export class TournamentService implements ITournamentService {
         }
       )
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response) {
             this.tournamentSubject.next(response);
             this.router.navigate(['/tournament/' + tournamentId]);
@@ -192,7 +192,7 @@ export class TournamentService implements ITournamentService {
             );
           }
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             this.toastService.showError(
               error.error,
@@ -213,7 +213,7 @@ export class TournamentService implements ITournamentService {
         }
       )
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response) {
             this.tournamentSubject.next(response);
             this.router.navigate(['/tournament/' + tournamentId]);
@@ -223,7 +223,7 @@ export class TournamentService implements ITournamentService {
             );
           }
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             this.toastService.showError(
               error.error,
@@ -240,7 +240,7 @@ export class TournamentService implements ITournamentService {
         `${environment.urlApi}/tournaments/${tournamentDetails.name}`
       )
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response) {
             this.toastService.showSuccess(
               'Le tournoi a été supprimée avec succès',
@@ -249,7 +249,7 @@ export class TournamentService implements ITournamentService {
             this.router.navigate(['/']);
           }
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             this.toastService.showError(
               error.error,

@@ -1,3 +1,6 @@
 export class NewPassword {
-  constructor(plainPassword: string, plainPasswordVerification: string) {}
+  constructor(
+    public plainPassword: string,
+    public plainPasswordVerification: string
+  ) {}
 }

@@ -24,7 +24,7 @@ export class MatchService implements IMatchService {
         matchUpdate
       )
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response) {
             this.tournamentService.tournamentSubject.next(response);
             if (response) {
@@ -35,7 +35,7 @@ export class MatchService implements IMatchService {
             }
           }
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             this.toastService.showError(
               error.error,

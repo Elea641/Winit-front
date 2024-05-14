@@ -8,8 +8,7 @@
   </div>
   <ul
     *ngFor="let team of teams; let i = index"
-    class="list-teams-tounament-body"
-  >
+    class="list-teams-tounament-body">
     <li *ngIf="team.name">
       <div>
         <img src="../../../../../assets/pictures/award.png" alt="logo team" />
@@ -26,8 +25,7 @@
         "
         mat-button
         color="warn"
-        (click)="openDialog({ name: team.name, result: 0, url: '' })"
-      >
+        (click)="openDialog({ name: team.name, result: 0, url: '' })">
         SUPPRIMER
       </button>
     </li>

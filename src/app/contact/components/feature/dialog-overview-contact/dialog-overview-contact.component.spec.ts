@@ -8,7 +8,7 @@ describe('DialogOverviewContactComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [DialogOverviewContactComponent]
+      imports: [DialogOverviewContactComponent],
     });
     fixture = TestBed.createComponent(DialogOverviewContactComponent);
     component = fixture.componentInstance;

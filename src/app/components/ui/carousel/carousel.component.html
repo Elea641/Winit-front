@@ -2,13 +2,11 @@
   <ngx-slick-carousel
     class="carousel"
     #slickModal="slick-carousel"
-    [config]="slideConfig"
-  >
+    [config]="slideConfig">
     <div ngxSlickItem *ngFor="let slide of tournaments$ | async" class="slide">
       <app-tournament-card
         [tournament]="slide"
-        class="app-tournament-card"
-      ></app-tournament-card>
+        class="app-tournament-card"></app-tournament-card>
     </div>
   </ngx-slick-carousel>
 </div>

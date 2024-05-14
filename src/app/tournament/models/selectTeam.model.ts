@@ -1,3 +1,6 @@
 export class SelectTeam {
-  constructor(public teamName: string, public tournamentId: number) {}
+  constructor(
+    public teamName: string,
+    public tournamentId: number
+  ) {}
 }

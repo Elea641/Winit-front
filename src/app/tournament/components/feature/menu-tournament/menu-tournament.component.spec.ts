@@ -8,7 +8,7 @@ describe('MenuTournamentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MenuTournamentComponent]
+      imports: [MenuTournamentComponent],
     });
     fixture = TestBed.createComponent(MenuTournamentComponent);
     component = fixture.componentInstance;

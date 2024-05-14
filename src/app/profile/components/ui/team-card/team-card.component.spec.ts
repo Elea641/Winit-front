@@ -8,7 +8,7 @@ describe('TeamCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TeamCardComponent]
+      imports: [TeamCardComponent],
     });
     fixture = TestBed.createComponent(TeamCardComponent);
     component = fixture.componentInstance;

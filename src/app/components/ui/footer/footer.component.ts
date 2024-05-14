@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,13 +19,13 @@ import { SidebarService } from 'src/app/shared/sidebar.service';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent {
-  isOpen: string = '';
+export class FooterComponent implements OnInit {
+  isOpen = '';
 
   constructor(private sidebarService: SidebarService) {}
 
   ngOnInit() {
-    this.sidebarService.isOpen$.subscribe((open) => {
+    this.sidebarService.isOpen$.subscribe(open => {
       if (open) {
         this.isOpen = 'open';
       } else {

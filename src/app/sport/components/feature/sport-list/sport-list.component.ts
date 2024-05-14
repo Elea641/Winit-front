@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SportDetailComponent } from '../sport-detail/sport-detail.component';
 
 @Component({
@@ -10,17 +10,17 @@ import { SportDetailComponent } from '../sport-detail/sport-detail.component';
   templateUrl: './sport-list.component.html',
   styleUrls: ['./sport-list.component.scss'],
 })
-export class SportListComponent {
+export class SportListComponent implements OnInit {
   sports$: any;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.http.get('http://localhost:8080/api/sports/').subscribe({
-      next: (data) => {
+      next: data => {
         this.sports$ = data;
       },
-      error: (error) => {
+      error: error => {
         console.error(error);
       },
     });
