@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TournamentCardComponent } from './tournament-card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 describe('TournamentCardComponent', () => {
   let component: TournamentCardComponent;
@@ -8,7 +10,19 @@ describe('TournamentCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TournamentCardComponent],
+      imports: [TournamentCardComponent, HttpClientModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => '',
+              },
+            },
+          },
+        },
+      ],
     });
     fixture = TestBed.createComponent(TournamentCardComponent);
     component = fixture.componentInstance;

@@ -30,23 +30,28 @@ export class SelectTeamPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.tournament$ = this.route.data.pipe(
-      concatMap(data => {
-        return of(data['tournament']);
-      })
-    );
-    this.tournament$.subscribe(tournament => {
-      if (tournament) {
-        this.teamService
-          .getAllTeamsByUserForTournament(tournament?.sport)
-          .subscribe(teams => {
-            if (teams) {
-              this.teams$ = of(teams);
-            } else {
-              this.teams$ = of([]);
-            }
-          });
-      }
-    });
+    if (this.route.data) {
+      this.tournament$ = this.route.data.pipe(
+        concatMap(data => {
+          return of(data['tournament']);
+        })
+      );
+    }
+
+    if (this.tournament$) {
+      this.tournament$.subscribe(tournament => {
+        if (tournament) {
+          this.teamService
+            .getAllTeamsByUserForTournament(tournament?.sport)
+            .subscribe(teams => {
+              if (teams) {
+                this.teams$ = of(teams);
+              } else {
+                this.teams$ = of([]);
+              }
+            });
+        }
+      });
+    }
   }
 }

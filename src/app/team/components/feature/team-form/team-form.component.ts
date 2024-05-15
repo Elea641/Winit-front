@@ -60,14 +60,18 @@ export class TeamFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const modeParam = params.get('mode');
-      this.mode = modeParam === 'update' ? 'update' : 'create';
-    });
+    if (this.route.paramMap) {
+      this.route.paramMap.subscribe(params => {
+        const modeParam = params.get('mode');
+        this.mode = modeParam === 'update' ? 'update' : 'create';
+      });
+    }
 
-    this.route.queryParams.subscribe(params => {
-      this.teamName = params['teamName'];
-    });
+    if (this.route.queryParams) {
+      this.route.queryParams.subscribe(params => {
+        this.teamName = params['teamName'];
+      });
+    }
 
     if (!this.teamToUpdate && this.teamName && this.mode === 'update') {
       this.teamService.getTeamByTeamName(this.teamName).subscribe(team => {

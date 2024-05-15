@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
 import { RankingService } from './ranking.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('RankingService', () => {
   let service: RankingService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ imports: [HttpClientModule] });
     service = TestBed.inject(RankingService);
   });
 

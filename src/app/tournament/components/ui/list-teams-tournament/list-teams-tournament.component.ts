@@ -51,15 +51,19 @@ export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.tournament$.subscribe(result => {
-      this.teams = result.teams;
-      this.currentNumberOfParticipants =
-        result.currentNumberOfParticipants ?? 0;
-    });
+    if (this.tournament$) {
+      this.tournament$.subscribe(result => {
+        this.teams = result.teams;
+        this.currentNumberOfParticipants =
+          result.currentNumberOfParticipants ?? 0;
+      });
+    }
 
-    this.route.params.subscribe(params => {
-      this.tournamentId = params['id'];
-    });
+    if (this.route.params) {
+      this.route.params.subscribe(params => {
+        this.tournamentId = params['id'];
+      });
+    }
 
     this.limitInscriptionTime =
       this.timeService.limitTimeInscription$.subscribe((limit: number) => {

@@ -14,19 +14,21 @@ import { Ranking } from '../../models/ranking.model';
   styleUrls: ['./ranking-page.component.scss'],
 })
 export class RankingPageComponent implements OnInit {
-  ranking$: Observable<Ranking | null> = of(null);
+  ranking$!: Observable<Ranking | null>;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.ranking$ = this.route.data.pipe(
-      concatMap(data => {
-        if (data && data['ranking']) {
-          return of(data['ranking']);
-        } else {
-          return of(null);
-        }
-      })
-    );
+    if (this.route.data) {
+      this.ranking$ = this.route.data.pipe(
+        concatMap(data => {
+          if (data && data['ranking']) {
+            return of(data['ranking']);
+          } else {
+            return of(null);
+          }
+        })
+      );
+    }
   }
 }

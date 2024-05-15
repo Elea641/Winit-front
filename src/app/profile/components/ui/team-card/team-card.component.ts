@@ -23,10 +23,7 @@ export class TeamCardComponent implements OnInit {
 
   ngOnInit() {
     this.currentUrl = this.router.url;
-
-    this.route.paramMap.subscribe(params => {
-      this.tournamentId = params.get('id');
-    });
+    this.tournamentId = this.route.snapshot.paramMap.get('id');
   }
 
   onSelectTeam(team: Team): void {

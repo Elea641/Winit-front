@@ -19,14 +19,16 @@ export class TeamPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.team$ = this.route.data.pipe(
-      concatMap(data => {
-        if (data && data['team']) {
-          return of(data['team']);
-        } else {
-          return of(null);
-        }
-      })
-    );
+    if (this.route.data) {
+      this.team$ = this.route.data.pipe(
+        concatMap(data => {
+          if (data && data['team']) {
+            return of(data['team']);
+          } else {
+            return of(null);
+          }
+        })
+      );
+    }
   }
 }

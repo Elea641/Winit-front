@@ -41,11 +41,13 @@ export class ListMemberComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.team$.subscribe(team => {
-      if (team) {
-        this.members = team?.members;
-      }
-    });
+    if (this.team$) {
+      this.team$.subscribe(team => {
+        if (team) {
+          this.members = team?.members;
+        }
+      });
+    }
 
     this.teamSubscription = this.memberService.member$.subscribe(member => {
       if (member) {
