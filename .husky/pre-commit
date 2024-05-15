@@ -1,2 +1,2 @@
-ng lint
 npm run prettier
+ng lint
