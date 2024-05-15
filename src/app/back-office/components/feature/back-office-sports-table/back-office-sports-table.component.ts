@@ -10,6 +10,8 @@ import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {Router, RouterLink} from "@angular/router";
 import {BackOfficeSportService} from "../../../shared/back-office-sport.service";
 import {AdminSport} from "../../../models/admin-sport.model";
+import {BackOfficeSportDeleteComponent} from "../back-office-sport-delete/back-office-sport-delete.component";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-back-office-sports-table',
@@ -23,7 +25,8 @@ import {AdminSport} from "../../../models/admin-sport.model";
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
-    RouterLink
+    RouterLink,
+    MatDialogModule
   ],
   templateUrl: './back-office-sports-table.component.html',
   styleUrls: ['./back-office-sports-table.component.scss']
@@ -42,7 +45,8 @@ export class BackOfficeSportsTableComponent implements AfterViewInit {
 
   constructor(
     private backOfficeSportService: BackOfficeSportService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
   }
 
@@ -71,5 +75,13 @@ export class BackOfficeSportsTableComponent implements AfterViewInit {
 
   viewEditPage(sportId: number) {
     this.router.navigate(['/back-office/sport/edit', sportId]);
+  }
+
+  openDeleteDialog(sportId: any) {
+    this.dialog.open(BackOfficeSportDeleteComponent, {
+      data: {
+        sportId: sportId,
+      },
+    });
   }
 }

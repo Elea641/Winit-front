@@ -47,7 +47,7 @@
       <div class="actions-cell">
         <a class="view-link" (click)="viewSportDetails(sport.id)"><mat-icon>remove_red_eye</mat-icon></a>
         <a class="edit-link" (click)="viewEditPage(sport.id)"><mat-icon>edit</mat-icon></a>
-        <a class="delete-link"><mat-icon>delete</mat-icon></a>
+        <a class="delete-link" (click)="openDeleteDialog(sport.id)"><mat-icon>delete</mat-icon></a>
       </div>
     </td>
   </ng-container>
