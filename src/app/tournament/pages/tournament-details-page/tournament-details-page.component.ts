@@ -27,20 +27,24 @@ export class TournamentDetailsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.teamId = params['id'];
-    });
+    if (this.route.params) {
+      this.route.params.subscribe(params => {
+        this.teamId = params['id'];
+      });
+    }
 
-    this.tournament$ = this.route.data.pipe(
-      concatMap(data => {
-        if (data && data['tournament']) {
-          return of(data['tournament']);
-        } else {
-          return this.tournamentService
-            .getTournamentById(Number(this.teamId))
-            .pipe(catchError(() => of(null)));
-        }
-      })
-    );
+    if (this.route.data) {
+      this.tournament$ = this.route.data.pipe(
+        concatMap(data => {
+          if (data && data['tournament']) {
+            return of(data['tournament']);
+          } else {
+            return this.tournamentService
+              .getTournamentById(Number(this.teamId))
+              .pipe(catchError(() => of(null)));
+          }
+        })
+      );
+    }
   }
 }

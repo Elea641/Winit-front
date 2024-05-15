@@ -20,17 +20,19 @@ export class RankingListComponent implements OnInit {
   topWinnerTeamDtos: TopWinnerTeamDto[] = [];
 
   ngOnInit() {
-    this.ranking$.subscribe(ranking => {
-      if (ranking) {
-        const keys = Object.keys(ranking);
+    if (this.ranking$) {
+      this.ranking$.subscribe(ranking => {
+        if (ranking) {
+          const keys = Object.keys(ranking);
 
-        if (keys.length > 0) {
-          const value = (ranking as any)[keys[0]];
+          if (keys.length > 0) {
+            const value = (ranking as any)[keys[0]];
 
-          this.topWinnerTeamCountDtos = value['topWinnerTeamCountDtos'];
-          this.topWinnerTeamDtos = value['topWinnerTeamDtos'];
+            this.topWinnerTeamCountDtos = value['topWinnerTeamCountDtos'];
+            this.topWinnerTeamDtos = value['topWinnerTeamDtos'];
+          }
         }
-      }
-    });
+      });
+    }
   }
 }

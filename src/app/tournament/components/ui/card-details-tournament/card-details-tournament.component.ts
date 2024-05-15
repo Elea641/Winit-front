@@ -50,27 +50,31 @@ export class CardDetailsTournamentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.tournamentId = Number(params['id']);
-    });
+    if (this.route.params) {
+      this.route.params.subscribe(params => {
+        this.tournamentId = Number(params['id']);
+      });
+    }
 
     this.updateCurrentDate();
 
-    this.tournament$.subscribe(tournament => {
-      this.maxNumberOfTeams = tournament.maxNumberOfTeams;
-      this.currentNumberOfParticipants =
-        tournament.currentNumberOfParticipants ?? 0;
-      this.getImageService.getImage(tournament.imageUrl).subscribe(data => {
-        this.image = data;
-        this.currentUser = tournament.isOwner;
-        this.tournamentDate = new Date(tournament.inscriptionLimitDate);
-        this.remainingTime = getRemainingTime(
-          this.tournamentDate,
-          this.timeService,
-          this.currentDate
-        );
+    if (this.tournament$) {
+      this.tournament$.subscribe(tournament => {
+        this.maxNumberOfTeams = tournament.maxNumberOfTeams;
+        this.currentNumberOfParticipants =
+          tournament.currentNumberOfParticipants ?? 0;
+        this.getImageService.getImage(tournament.imageUrl).subscribe(data => {
+          this.image = data;
+          this.currentUser = tournament.isOwner;
+          this.tournamentDate = new Date(tournament.inscriptionLimitDate);
+          this.remainingTime = getRemainingTime(
+            this.tournamentDate,
+            this.timeService,
+            this.currentDate
+          );
+        });
       });
-    });
+    }
 
     this.teamInscriptionSubscription =
       this.tournamentService.inscription$.subscribe(result => {

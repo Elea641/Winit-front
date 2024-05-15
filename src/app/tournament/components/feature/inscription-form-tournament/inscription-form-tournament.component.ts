@@ -53,9 +53,11 @@ export class InscriptionFormTournamentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.tournamentId = params['id'];
-    });
+    if (this.route.params) {
+      this.route.params.subscribe(params => {
+        this.tournamentId = params['id'];
+      });
+    }
 
     this.inscriptionForm = new FormGroup({
       teamName: new FormControl('', [Validators.required]),

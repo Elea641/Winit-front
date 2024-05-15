@@ -53,8 +53,12 @@ export class ListTournamentTreeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
-    this.limitInscriptionTime.unsubscribe();
-    this.tournamentSubscription.unsubscribe();
+    if (this.limitInscriptionTime) {
+      this.limitInscriptionTime.unsubscribe();
+    }
+    if (this.tournamentSubscription) {
+      this.tournamentSubscription.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
@@ -63,18 +67,20 @@ export class ListTournamentTreeComponent implements OnInit, OnDestroy {
         this.limitInscriptionValue = limit;
       });
 
-    this.tournament$.subscribe(tournament => {
-      this.tournamentDetails = tournament;
+    if (this.tournament$) {
+      this.tournament$.subscribe(tournament => {
+        this.tournamentDetails = tournament;
 
-      if (this.tournamentDetails.matches) {
-        this.tournamentDetails.matches.forEach((match: Match) => {
-          if (!this.matchesByPhase[match.phase]) {
-            this.matchesByPhase[match.phase] = [];
-          }
-          this.matchesByPhase[match.phase].push(match);
-        });
-      }
-    });
+        if (this.tournamentDetails.matches) {
+          this.tournamentDetails.matches.forEach((match: Match) => {
+            if (!this.matchesByPhase[match.phase]) {
+              this.matchesByPhase[match.phase] = [];
+            }
+            this.matchesByPhase[match.phase].push(match);
+          });
+        }
+      });
+    }
 
     this.phaseKeys = Object.keys(this.matchesByPhase);
 

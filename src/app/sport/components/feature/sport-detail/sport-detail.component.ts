@@ -16,7 +16,7 @@ export class SportDetailComponent implements OnInit {
   constructor(private getImageService: GetImageService) {}
 
   ngOnInit() {
-    this.getImageService.getImage(this.sport.imageUrl).subscribe(data => {
+    this.getImageService.getImage(this.sport?.imageUrl).subscribe(data => {
       this.image = data;
     });
   }

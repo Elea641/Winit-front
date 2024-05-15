@@ -19,14 +19,16 @@ export class RankingPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.ranking$ = this.route.data.pipe(
-      concatMap(data => {
-        if (data && data['ranking']) {
-          return of(data['ranking']);
-        } else {
-          return of(null);
-        }
-      })
-    );
+    if (this.route.data) {
+      this.ranking$ = this.route.data.pipe(
+        concatMap(data => {
+          if (data && data['ranking']) {
+            return of(data['ranking']);
+          } else {
+            return of(null);
+          }
+        })
+      );
+    }
   }
 }

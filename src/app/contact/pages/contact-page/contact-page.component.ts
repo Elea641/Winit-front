@@ -29,15 +29,17 @@ export class ContactPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.contactDetails$ = this.route.data.pipe(
-      concatMap(data => {
-        if (data && data['contact']) {
-          return of(data['contact']);
-        } else {
-          return of(null);
-        }
-      })
-    );
+    if (this.route.data) {
+      this.contactDetails$ = this.route.data.pipe(
+        concatMap(data => {
+          if (data && data['contact']) {
+            return of(data['contact']);
+          } else {
+            return of(null);
+          }
+        })
+      );
+    }
   }
 
   openDialog(contactDetails: ContactDetails) {

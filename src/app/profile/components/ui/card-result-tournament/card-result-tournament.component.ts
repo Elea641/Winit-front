@@ -21,7 +21,7 @@ export class CardResultTournamentComponent implements OnInit {
   constructor(private helperProfileService: HelperProfileService) {}
 
   ngOnInit(): void {
-    if (this.result && this.result[0]) {
+    if (this.result && this.result.length > 0) {
       this.convertedResult = this.helperProfileService.resultatsToNumber(
         this.result[0]
       );

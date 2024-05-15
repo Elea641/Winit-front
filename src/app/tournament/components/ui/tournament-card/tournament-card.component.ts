@@ -15,8 +15,7 @@ import * as fr from '@angular/common/locales/fr';
   styleUrls: ['./tournament-card.component.scss'],
 })
 export class TournamentCardComponent implements OnInit {
-  @Input()
-  public tournament!: TournamentCard;
+  @Input() tournament!: TournamentCard;
   public image: any;
 
   constructor(private getImageService: GetImageService) {
@@ -24,8 +23,12 @@ export class TournamentCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getImageService.getImage(this.tournament.imageUrl).subscribe(data => {
-      this.image = data;
-    });
+    if (this.tournament && this.tournament.imageUrl) {
+      this.getImageService
+        .getImage(this.tournament.imageUrl)
+        .subscribe(data => {
+          this.image = data;
+        });
+    }
   }
 }

@@ -18,14 +18,16 @@ export class ProfilePageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.userStatistics$ = this.route.data.pipe(
-      concatMap(data => {
-        if (data && data['statistics']) {
-          return of(data['statistics']);
-        } else {
-          return of(null);
-        }
-      })
-    );
+    if (this.route.data) {
+      this.userStatistics$ = this.route.data.pipe(
+        concatMap(data => {
+          if (data && data['statistics']) {
+            return of(data['statistics']);
+          } else {
+            return of(null);
+          }
+        })
+      );
+    }
   }
 }

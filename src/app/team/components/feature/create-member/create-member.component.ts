@@ -42,9 +42,11 @@ export class CreateMemberComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.teamName = params['teamName'];
-    });
+    if (this.route.params) {
+      this.route.params.subscribe(params => {
+        this.teamName = params['teamName'];
+      });
+    }
 
     this.memberForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
