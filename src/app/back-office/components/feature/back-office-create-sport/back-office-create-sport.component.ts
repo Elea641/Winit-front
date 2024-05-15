@@ -6,11 +6,12 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {Sport} from "../../../../sport/models/sport.model";
-import {SportService} from "../../../../sport/shared/sport.service";
 import {FileUploadComponent} from "../../../../components/feature/file-upload/file-upload.component";
 import {forbiddenFileFormat} from "../../../../tournament/shared/validators/forbidden-file-format.directive";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {BackOfficeSportService} from "../../../shared/back-office-sport.service";
+import {AdminSport} from "../../../models/admin-sport.model";
+import {ToastService} from "../../../../shared/toast.service";
 
 @Component({
   selector: 'app-back-office-create-sport',
@@ -22,12 +23,13 @@ import {RouterLink} from "@angular/router";
 export class BackOfficeCreateSportComponent implements OnInit {
 
   createSportForm! : FormGroup;
-  sport: Sport = {
-    name: '',
-    numberOfPlayers: 0,
-  }
+  sport: AdminSport = {}
 
-  constructor(private sportService: SportService) {
+  constructor(
+    private sportService: BackOfficeSportService,
+    private router: Router,
+    private toastService: ToastService
+  ) {
   }
 
   ngOnInit() {
@@ -38,9 +40,10 @@ export class BackOfficeCreateSportComponent implements OnInit {
           Validators.maxLength(25),
         ]),
         numberOfPlayers: new FormControl(this.sport.numberOfPlayers, [
-          Validators.required
+          Validators.required,
+          Validators.min(1)
         ]),
-        imageUrl: new FormControl(this.sport.imageUrl, [
+        imageFile: new FormControl(this.sport.imageFile, [
           forbiddenFileFormat()
         ])
       }
@@ -55,19 +58,33 @@ export class BackOfficeCreateSportComponent implements OnInit {
     return this.createSportForm.get('numberOfPlayers')!;
   }
 
-  get imageUrl() {
-    return this.createSportForm.get('imageUrl')!;
+  get imageFile() {
+    return this.createSportForm.get('imageFile')!;
   }
 
   onSubmit() {
     if (this.createSportForm.valid) {
-      const newSport: Sport = {
-        name: this.name.value,
-        numberOfPlayers: this.numberOfPlayers.value,
-        imageUrl: this.imageUrl.value
-      };
-      console.log(newSport);
-      //this.sportService.createSport(newSport);
+      const formData = new FormData();
+      formData.append('name', this.name.value);
+      formData.append('numberOfPlayers', this.numberOfPlayers.value.toString());
+      formData.append('imageFile', this.imageFile.value);
+      this.sportService.createSport(formData).subscribe({
+        next: (response) => {
+          if (response) {
+            this.router.navigate(['/back-office']);
+            this.toastService.showSuccess(
+              'Le sport a bien été créé',
+              'Succès !'
+            );
+          }
+        },
+        error: (error) => {
+            this.toastService.showError(
+              'Impossible de créer ce sport.',
+              'Une erreur est survenue'
+            );
+        },
+      });
     }
   }
 }
