@@ -51,12 +51,20 @@
     </button>
     <mat-menu #profil="matMenu" class="navbar-custom-menu">
       <a
-        *ngIf="token && !isTokenEmpty(token)"
+        *ngIf="token && !isTokenEmpty(token) && token.role !== 'ROLE_ADMIN'"
         mat-menu-item
         routerLink="/profile"
       >
         <mat-icon>person</mat-icon>
         <span>Profil</span>
+      </a>
+      <a
+        *ngIf="token && !isTokenEmpty(token) && token.role == 'ROLE_ADMIN'"
+        mat-menu-item
+        routerLink="/back-office"
+      >
+        <mat-icon>settings</mat-icon>
+        <span>Administration</span>
       </a>
       <a
         *ngIf="token && !isTokenEmpty(token)"
