@@ -10,18 +10,20 @@ import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {AdminUser} from "../../../models/admin-user.model";
 import {BackOfficeUserService} from "../../../shared/back-office-user.service";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {BackOfficeUserDeleteComponent} from "../back-office-user-delete/back-office-user-delete.component";
 
 @Component({
   selector: 'app-back-office-users-table',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, RouterLink, MatTableModule, MatPaginatorModule, MatSlideToggleModule],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, RouterLink, MatTableModule, MatPaginatorModule, MatSlideToggleModule],
   templateUrl: './back-office-users-table.component.html',
   styleUrls: ['./back-office-users-table.component.scss']
 })
 export class BackOfficeUsersTableComponent implements AfterViewInit{
 
   dataSource!: MatTableDataSource<AdminUser>;
-  displayedColumns = ["position", "lastName", "firstName", "email", "city", "role", "createdAt", "updatedAt", "isEnabled", "actions"];
+  displayedColumns = ["position", "lastName", "firstName", "email", "city", "requiredRole", "enabled", "createdAt", "updatedAt", "actions"];
   positionColumnData: number = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -33,7 +35,8 @@ export class BackOfficeUsersTableComponent implements AfterViewInit{
 
   constructor(
     private backOfficeUserService: BackOfficeUserService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
   }
 
@@ -42,10 +45,10 @@ export class BackOfficeUsersTableComponent implements AfterViewInit{
       (adminUsers: AdminUser[]) => {
         adminUsers.forEach((user, index) => {
         user.position = ++this.positionColumnData;
-          if (user.role === "ROLE_USER") {
-            user.role = "Utilisateur";
+          if (user.requiredRole === "ROLE_ADMIN") {
+            user.requiredRole = "Administrateur";
           } else {
-            user.role = "Administrateur";
+            user.requiredRole = "Utilisateur";
           }
         });
         this.dataSource = new MatTableDataSource<AdminUser>(adminUsers);
@@ -67,5 +70,13 @@ export class BackOfficeUsersTableComponent implements AfterViewInit{
 
   viewEditUser(userId: number) {
     this.router.navigate(['/back-office/user/edit', userId]);
+  }
+
+  openDeleteDialog(userId: number) {
+    this.dialog.open(BackOfficeUserDeleteComponent, {
+      data: {
+        userId: userId,
+      },
+    });
   }
 }

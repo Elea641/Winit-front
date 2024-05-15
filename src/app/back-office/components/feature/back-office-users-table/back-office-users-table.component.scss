@@ -7,7 +7,7 @@
 }
 
 .mat-mdc-header-row {
-  background-color: $secondary-background-color;
+  background-color: $important-color-shadow;
 }
 
 .mat-mdc-form-field {
@@ -27,11 +27,11 @@
 }
 
 .toggle-on {
-  color: $primary-background-color-card;
+  color: $important-color-line;
 }
 
 .toggle-off {
-  color: $secondary-background-color;
+  color: var(--mdc-outlined-text-field-label-text-color);;
 }
 
 .actions-container {
@@ -65,13 +65,16 @@ a {
 }
 
 .view-link:hover {
-  color: $primary-background-color-card;
+  color: $secondary-color-button;
+  cursor: pointer;
 }
 
 .edit-link:hover {
   color: $important-color-text;
+  cursor: pointer;
 }
 
 .delete-link:hover {
   color: $warn-color-button;
+  cursor: pointer;
 }

@@ -1,17 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {BackOfficeUserService} from "../../../shared/back-office-user.service";
 import {AdminUser} from "../../../models/admin-user.model";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
 import {MatListModule} from "@angular/material/list";
+import {BackOfficeUserDeleteComponent} from "../back-office-user-delete/back-office-user-delete.component";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-back-office-user-detail',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatListModule],
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatListModule, RouterLink, MatDialogModule],
   templateUrl: './back-office-user-detail.component.html',
   styleUrls: ['./back-office-user-detail.component.scss']
 })
@@ -21,7 +23,8 @@ export class BackOfficeUserDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: BackOfficeUserService
+    private userService: BackOfficeUserService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -36,15 +39,23 @@ export class BackOfficeUserDetailComponent implements OnInit {
     this.userService.getUserById(id).subscribe(
       (user: AdminUser) => {
         this.user = user;
-        if (user.role === "ROLE_USER") {
-          user.role = "Utilisateur";
+        if (user.requiredRole === "ROLE_ADMIN") {
+          user.requiredRole = "Administrateur";
         } else {
-          user.role = "Administrateur";
+          user.requiredRole = "Utilisateur";
         }
       },
       (error) => {
         console.error("Error fetching user with id " + id + ": ", error);
       }
     )
+  }
+
+  openDeleteDialog(userId: any) {
+    this.dialog.open(BackOfficeUserDeleteComponent, {
+      data: {
+        userId: userId,
+      },
+    });
   }
 }

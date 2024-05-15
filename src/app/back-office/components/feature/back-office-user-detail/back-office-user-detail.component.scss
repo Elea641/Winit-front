@@ -8,7 +8,7 @@
   display: inline-flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 1rem;
+  padding: 1rem;
 }
 
 h1 {
@@ -27,6 +27,12 @@ h2 {
 mat-divider {
   margin-bottom: 1rem;
   border-top-color: $secondary-color;
+}
+
+.info-text {
+  color: var(--mdc-outlined-text-field-label-text-color);
+  padding: 8px 8px 24px 8px;
+  font-size: small;
 }
 
 .button-container {
@@ -50,11 +56,6 @@ mat-divider {
 
 .back-office-detail-text-container {
   color: white;
-  margin-top: 2rem;
+  margin: 1rem 0 0 2rem;
   display: flex;
-}
-
-.back-office-detail-params,
-.back-office-detail-stats {
-  width: 50%;
 }

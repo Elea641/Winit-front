@@ -3,7 +3,7 @@
     <mat-label>Rechercher...</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Georges">
   </mat-form-field>
-  <button mat-raised-button color="primary" [routerLink]="['/']">
+  <button mat-raised-button color="primary" [routerLink]="['/back-office/user/create']">
     CREER
     <mat-icon>add</mat-icon>
   </button>
@@ -36,9 +36,21 @@
     <td mat-cell *matCellDef="let user"> {{user["city"]}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="role">
+  <ng-container matColumnDef="requiredRole">
     <th mat-header-cell *matHeaderCellDef>Rôle</th>
-    <td mat-cell *matCellDef="let user"> {{user.role}} </td>
+    <td mat-cell *matCellDef="let user"> {{user.requiredRole}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="enabled">
+    <th mat-header-cell *matHeaderCellDef>Actif</th>
+    <td mat-cell *matCellDef="let user">
+      <ng-container *ngIf="user.enabled">
+        <i class="material-icons toggle-on">toggle_on</i>
+      </ng-container>
+      <ng-container *ngIf="!user.enabled">
+        <i class="material-icons toggle-off">toggle_off</i>
+      </ng-container>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="createdAt">
@@ -51,25 +63,13 @@
     <td mat-cell *matCellDef="let user"> {{ user["updatedAt"] | date: 'dd-MM-yyyy' }} </td>
   </ng-container>
 
-  <ng-container matColumnDef="isEnabled">
-    <th mat-header-cell *matHeaderCellDef>Actif</th>
-    <td mat-cell *matCellDef="let user">
-      <ng-container *ngIf="user.isEnabled">
-        <i class="material-icons toggle-on">toggle_on</i>
-      </ng-container>
-      <ng-container *ngIf="!user.isEnabled">
-        <i class="material-icons toggle-off">toggle_off</i>
-      </ng-container>
-    </td>
-  </ng-container>
-
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let user">
       <div class="actions-cell">
         <a class="view-link" (click)="viewUserDetails(user.id)"><mat-icon>remove_red_eye</mat-icon></a>
         <a class="edit-link" (click)="viewEditUser(user.id)"><mat-icon>edit</mat-icon></a>
-        <a class="delete-link" href="/"><mat-icon>delete</mat-icon></a>
+        <a class="delete-link" (click)="openDeleteDialog(user.id)"><mat-icon>delete</mat-icon></a>
       </div>
     </td>
   </ng-container>
