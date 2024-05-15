@@ -14,7 +14,7 @@ import { Ranking } from '../../models/ranking.model';
   styleUrls: ['./ranking-page.component.scss'],
 })
 export class RankingPageComponent implements OnInit {
-  ranking$!: Observable<Ranking | null>;
+  ranking$: Observable<Ranking | null> = of(null);
 
   constructor(private route: ActivatedRoute) {}
 
