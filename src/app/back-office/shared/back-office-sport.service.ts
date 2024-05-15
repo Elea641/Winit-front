@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {ToastService} from "../../shared/toast.service";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {AdminSport} from "../models/admin-sport.model";
@@ -21,5 +19,17 @@ export class BackOfficeSportService {
 
   getSportById(id: number): Observable<AdminSport> {
     return this.http.get<AdminSport>(`${environment.urlApi}/admin/sports/` + id);
+  }
+
+  createSport(sport: FormData): Observable<Object> {
+    return this.http.post<AdminSport>(`${environment.urlApi}/admin/sports/`, sport);
+  }
+
+  editSport(id: number, sport: FormData): Observable<Object> {
+    return this.http.put<FormData>(`${environment.urlApi}/admin/sports/${id}`, sport)
+  }
+
+  deleteSport(id: number): Observable<Object> {
+    return this.http.delete(`${environment.urlApi}/admin/sports/${id}`);
   }
 }
