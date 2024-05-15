@@ -5,9 +5,9 @@ export class AdminUser {
   lastName?: string;
   email?: string;
   city?: string;
-  isEnabled?: boolean;
-  role?: string;
+  enabled?: boolean;
+  requiredRole?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  isActive?: string;
+  password?: string;
 }

@@ -4,6 +4,7 @@ export class AdminSport {
   name?: string;
   numberOfPlayers?: number;
   imageUrl?: string;
+  imageFile?: File;
   numberOfTeams?: number;
   numberOfTournaments?: number;
 }
