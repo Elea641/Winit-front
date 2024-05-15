@@ -27,12 +27,12 @@ export class TournamentDetailsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.subscribe(params => {
       this.teamId = params['id'];
     });
 
     this.tournament$ = this.route.data.pipe(
-      concatMap((data) => {
+      concatMap(data => {
         if (data && data['tournament']) {
           return of(data['tournament']);
         } else {

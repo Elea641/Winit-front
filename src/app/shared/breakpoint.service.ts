@@ -33,7 +33,7 @@ export class BreakpointService {
       { key: 'isLargeDesktop', mediaQuery: '(min-width: 1200px)' },
     ];
 
-    breakpoints.forEach((config) => {
+    breakpoints.forEach(config => {
       this.breakpointObserver
         .observe([config.mediaQuery])
         .subscribe((state: BreakpointState) => {

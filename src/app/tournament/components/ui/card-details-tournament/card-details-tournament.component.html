@@ -1,13 +1,12 @@
 <article *ngIf="tournament$ | async as tournamentDetails">
-  <img src="{{ image }}" alt="" />
+  <img src="{{ image }}" alt="{{ tournamentDetails.name }}" />
   <div class="card-details-tournament-container-body">
     <div class="card-details-tournament-container-header">
       <h3>{{ tournamentDetails.sport }}</h3>
       <h2>{{ tournamentDetails.name }}</h2>
       <div
         *ngIf="remainingTime !== 'Inscription terminée'"
-        class="card-details-tournament-container-header-inscription"
-      >
+        class="card-details-tournament-container-header-inscription">
         <p *ngIf="tournamentDetails.isGenerated">Inscription terminée</p>
         <p *ngIf="!tournamentDetails.isGenerated">
           {{ remainingTime }}
@@ -19,15 +18,13 @@
           mat-raised-button
           color="primary"
           type="button"
-          [routerLink]="['/tournament', tournamentId, 'teams']"
-        >
+          [routerLink]="['/tournament', tournamentId, 'teams']">
           PARTICIPER
         </button>
       </div>
       <div
         *ngIf="remainingTime === 'Inscription terminée'"
-        class="card-details-tournament-container-header-inscription"
-      >
+        class="card-details-tournament-container-header-inscription">
         <p>{{ remainingTime }}</p>
       </div>
     </div>
@@ -37,7 +34,7 @@
         <p>{{ tournamentDetails.place }}</p>
         <mat-icon>date_range</mat-icon>
         <p>
-          {{ tournamentDetails.date | date : "dd MMMM yyyy" | titlecase }}
+          {{ tournamentDetails.date | date: 'dd MMMM yyyy' | titlecase }}
         </p>
         <p>
           Équipes inscrites :
@@ -50,8 +47,7 @@
         mat-button
         color="warn"
         (click)="openDialog(tournamentDetails)"
-        *ngIf="currentUser === true"
-      >
+        *ngIf="currentUser === true">
         SUPPRIMER
       </button>
     </div>

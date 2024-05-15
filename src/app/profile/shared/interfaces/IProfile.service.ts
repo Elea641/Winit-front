@@ -13,5 +13,5 @@ export interface IProfileService {
 
   updateProfile(userId: number, user: CurrentUser): Observable<CurrentUser>;
 
-  deleteProfile(userId: number): Observable<Object>;
+  deleteProfile(userId: number): Observable<any>;
 }

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardTournamentMatchComponent } from '../card-tournament-match/card-tournament-match.component';
 import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
@@ -24,11 +31,11 @@ import { Match } from 'src/app/tournament/models/match.model';
   templateUrl: './list-tournament-tree.component.html',
   styleUrls: ['./list-tournament-tree.component.scss'],
 })
-export class ListTournamentTreeComponent {
+export class ListTournamentTreeComponent implements OnInit, OnDestroy {
   @Input() tournament$!: Observable<TournamentDetails>;
   @Output() generatedTournament: EventEmitter<boolean> = new EventEmitter();
   tournamentDetails!: TournamentDetails;
-  generatedTree!: { randomPhaseMatches: {}; remainingPhaseMatches: {} };
+  generatedTree!: { randomPhaseMatches: object; remainingPhaseMatches: object };
   limitInscriptionTime!: Subscription;
   limitInscriptionValue: number | undefined;
   tournamentSubscription!: Subscription;
@@ -36,7 +43,7 @@ export class ListTournamentTreeComponent {
   matchesByPhaseWithoutPreliminary: { [phase: string]: Match[] } = {};
   phaseKeys: string[] = [];
   phaseWithoutPreliminary: string[] = [];
-  isCanceled: boolean = false;
+  isCanceled = false;
 
   constructor(
     private helperTournamentService: HelperTournamentService,
@@ -56,7 +63,7 @@ export class ListTournamentTreeComponent {
         this.limitInscriptionValue = limit;
       });
 
-    this.tournament$.subscribe((tournament) => {
+    this.tournament$.subscribe(tournament => {
       this.tournamentDetails = tournament;
 
       if (this.tournamentDetails.matches) {
@@ -72,7 +79,7 @@ export class ListTournamentTreeComponent {
     this.phaseKeys = Object.keys(this.matchesByPhase);
 
     this.tournamentSubscription = this.tournamentService.tournament$.subscribe(
-      (tournament) => {
+      tournament => {
         this.matchesByPhase = {};
         this.tournamentDetails = tournament;
         if (this.tournamentDetails.matches) {
@@ -107,12 +114,12 @@ export class ListTournamentTreeComponent {
 
   isPhaseIncomplete(matches: Match[]): boolean {
     return matches.some(
-      (match) => match.team1 === 'En attente' || match.team2 === 'En attente'
+      match => match.team1 === 'En attente' || match.team2 === 'En attente'
     );
   }
 
   marginCalculator(index: number): number {
-    let margin = [0.5, 1.5, 3.5, 7.5];
+    const margin = [0.5, 1.5, 3.5, 7.5];
     return margin[index];
   }
 
@@ -122,11 +129,9 @@ export class ListTournamentTreeComponent {
     const phasesWithoutPreliminary: { [phase: string]: Match[] } = {};
     const keys = Object.keys(matchesByPhase);
 
-    const nonPreliminaryKeys = keys.filter(
-      (key) => key !== 'Phase préliminaire'
-    );
+    const nonPreliminaryKeys = keys.filter(key => key !== 'Phase préliminaire');
 
-    nonPreliminaryKeys.forEach((key) => {
+    nonPreliminaryKeys.forEach(key => {
       phasesWithoutPreliminary[key] = matchesByPhase[key];
     });
 
@@ -158,7 +163,7 @@ export class ListTournamentTreeComponent {
       data: new ModalContent(modalData),
     });
 
-    dialogRef.afterClosed().subscribe((response) => {
+    dialogRef.afterClosed().subscribe(response => {
       if (response === true) {
         this.getGenerated(true);
         this.tournamentService.updateTournament(
@@ -179,7 +184,7 @@ export class ListTournamentTreeComponent {
       data: new ModalContent(modalData),
     });
 
-    dialogRef.afterClosed().subscribe((response) => {
+    dialogRef.afterClosed().subscribe(response => {
       if (response === true) {
         this.getGenerated(true);
         this.isCanceled = true;

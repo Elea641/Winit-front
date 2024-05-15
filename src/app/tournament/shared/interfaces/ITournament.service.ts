@@ -20,7 +20,7 @@ export interface ITournamentService {
 
   updateTournament(
     tournamentId: number,
-    generatedTree: { randomPhaseMatches: {}; remainingPhaseMatches: {} }
+    generatedTree: { randomPhaseMatches: object; remainingPhaseMatches: object }
   ): void;
 
   canceledTournament(tournamentId: number, cancel: boolean): void;

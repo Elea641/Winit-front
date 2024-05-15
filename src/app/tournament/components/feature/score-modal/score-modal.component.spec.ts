@@ -8,7 +8,7 @@ describe('ScoreModalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ScoreModalComponent]
+      imports: [ScoreModalComponent],
     });
     fixture = TestBed.createComponent(ScoreModalComponent);
     component = fixture.componentInstance;

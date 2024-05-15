@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, map } from 'rxjs';
 import { Contact } from 'src/app/contact/models/contact.model';
@@ -12,7 +12,7 @@ import { ContactCardComponent } from '../../ui/contact-card/contact-card.compone
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss'],
 })
-export class ContactListComponent {
+export class ContactListComponent implements OnInit {
   contacts$!: Observable<Contact[]>;
 
   constructor(private contactService: ContactService) {}
@@ -20,6 +20,6 @@ export class ContactListComponent {
   ngOnInit(): void {
     this.contacts$ = this.contactService
       .getAllContacts()
-      .pipe(map((data) => data));
+      .pipe(map(data => data));
   }
 }

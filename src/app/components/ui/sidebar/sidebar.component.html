@@ -1,12 +1,12 @@
 <mat-drawer-container
   class="container-sidebar-desktop"
-  *ngIf="isDesktop || isLargeDesktop"
->
+  *ngIf="isDesktop || isLargeDesktop">
   <mat-drawer #drawer mode="side" class="container-sidebar-menu">
     <div class="container-sidebar-menu-input">
       <app-input-search
-        (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)"
-      ></app-input-search>
+        (newSearchValueEventFromInput)="
+          onReceiveSearchValueFromInput($event)
+        "></app-input-search>
     </div>
     <h2>FILTRES</h2>
     <div class="line"></div>
@@ -33,8 +33,7 @@
       (click)="showFiller = !showFiller"
       mat-raised-button
       class="container-sidebar-menu-button"
-      (click)="sendChronologicalFilterChangeToParent()"
-    >
+      (click)="sendChronologicalFilterChangeToParent()">
       Trier par :
       <span [ngClass]="{ selected: !chronologicalFilter }">Nom</span> /
       <span [ngClass]="{ selected: chronologicalFilter }">Date</span>
@@ -45,8 +44,7 @@
       (click)="sendShowOnlyUpcomingTournamentsToParent()"
       mat-raised-button
       class="container-sidebar-menu-button"
-      [ngClass]="{ selected: showOnlyUpcomingTournaments }"
-    >
+      [ngClass]="{ selected: showOnlyUpcomingTournaments }">
       A venir
     </button>
     <button
@@ -54,8 +52,7 @@
       mat-raised-button
       class="container-sidebar-menu-button"
       (click)="sendShowNonFullTournaments()"
-      [ngClass]="{ selected: showNonFullTournaments }"
-    >
+      [ngClass]="{ selected: showNonFullTournaments }">
       Non complet
     </button>
 
@@ -64,8 +61,7 @@
       <button
         color="primary"
         class="apply-filters"
-        (click)="sendApplyFilters()"
-      >
+        (click)="sendApplyFilters()">
         APPLIQUER
       </button>
     </div>
@@ -74,8 +70,7 @@
         mat-stroked-button
         color="primary"
         class="reset-filters"
-        (click)="sendResetFilters()"
-      >
+        (click)="sendResetFilters()">
         RÉINITIALISER LES FILTRES
       </button>
     </div>
@@ -83,19 +78,17 @@
   <div class="sidenav-button">
     <button mat-icon-button (click)="toggleDrawer()">
       <mat-icon>{{
-        isDrawerOpened ? "arrow_back_ios" : "arrow_forward_ios"
+        isDrawerOpened ? 'arrow_back_ios' : 'arrow_forward_ios'
       }}</mat-icon>
     </button>
   </div>
 </mat-drawer-container>
 <mat-toolbar
   class="container-sidebar-mobile"
-  *ngIf="!isDesktop || !isLargeDesktop"
->
+  *ngIf="!isDesktop || !isLargeDesktop">
   <div class="container-sidebar-menu-input">
     <app-input-search
-      (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)"
-    >
+      (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)">
     </app-input-search>
   </div>
   <button class="filter-button-container" mat-button [matMenuTriggerFor]="menu">
@@ -107,8 +100,7 @@
       <mat-select
         [(value)]="selectedSport"
         class="selected"
-        (click)="$event.stopPropagation()"
-      >
+        (click)="$event.stopPropagation()">
         <mat-option
           selected="selected"
           value=""
@@ -128,8 +120,7 @@
     <button
       mat-menu-item
       (click)="sendChronologicalFilterChangeToParent()"
-      (click)="$event.stopPropagation()"
-    >
+      (click)="$event.stopPropagation()">
       <span [ngClass]="{ selected: !chronologicalFilter }">Nom</span> /
       <span [ngClass]="{ selected: chronologicalFilter }">Date</span>
     </button>
@@ -137,16 +128,14 @@
       mat-menu-item
       (click)="sendShowOnlyUpcomingTournamentsToParent()"
       (click)="$event.stopPropagation()"
-      [ngClass]="{ selected: showOnlyUpcomingTournaments }"
-    >
+      [ngClass]="{ selected: showOnlyUpcomingTournaments }">
       A venir
     </button>
     <button
       mat-menu-item
       (click)="sendShowNonFullTournaments()"
       (click)="$event.stopPropagation()"
-      [ngClass]="{ selected: showNonFullTournaments }"
-    >
+      [ngClass]="{ selected: showNonFullTournaments }">
       Non complet
     </button>
     <mat-divider></mat-divider>
@@ -159,8 +148,7 @@
         color="primary"
         class="reset-filters"
         (click)="sendResetFilters()"
-        (click)="$event.stopPropagation()"
-      >
+        (click)="$event.stopPropagation()">
         RÉINITIALISER LES FILTRES
       </button>
     </div>

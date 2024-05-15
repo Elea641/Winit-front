@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HelperProfileService } from 'src/app/profile/shared/helpers/helper-profile.service';
 import {
@@ -13,7 +13,7 @@ import {
   templateUrl: './card-result-tournament.component.html',
   styleUrls: ['./card-result-tournament.component.scss'],
 })
-export class CardResultTournamentComponent {
+export class CardResultTournamentComponent implements OnInit {
   @Input() result!: StatesEnumType | StatesType;
   convertedResult: string | number | undefined;
   convertedResultToString: string | undefined;

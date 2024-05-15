@@ -33,8 +33,6 @@ export class FileUploadComponent {
   @Input() formControlNameValue!: string;
   @Input() labelValue!: string;
 
-  constructor() {}
-
   clearUploadFile() {
     this.groupParent.controls[this.formControlNameValue].setValue(null);
     this.groupParent.controls[
@@ -46,11 +44,10 @@ export class FileUploadComponent {
     const errors = [];
     if (control.errors) {
       for (const errorKey in control.errors) {
-        if (control.errors.hasOwnProperty(errorKey)) {
+        if (Object.prototype.hasOwnProperty.call(control.errors, errorKey)) {
           errors.push(this.getErrorMessage(errorKey, control.errors[errorKey]));
         }
       }
-      console.error(errors);
     }
     return errors;
   }
