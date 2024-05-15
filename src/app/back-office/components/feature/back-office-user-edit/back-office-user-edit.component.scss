@@ -63,3 +63,22 @@ h2 {
 .error-message-size {
   font-size: small;
 }
+
+.custom-fields-container {
+  display: flex;
+}
+
+.slide-toggle,
+.radio-button {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 8px;
+  color: white;
+}
+
+.slide-toggle>mat-label,
+.radio-button>mat-label {
+  color: var(--mdc-outlined-text-field-label-text-color);
+  padding-bottom: 8px;
+}

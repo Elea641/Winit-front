@@ -9,7 +9,7 @@
           <button mat-raised-button class="confirm-button" color="primary" type="submit">
             VALIDER
           </button>
-          <button mat-stroked-button color="primary">
+          <button mat-stroked-button color="primary" [routerLink]="['/back-office']">
             ANNULER
           </button>
         </div>
@@ -51,23 +51,21 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="edit-user-form-field">
-          <mat-label>Statut</mat-label>
-          <input matInput type="email" formControlName="isEnabled">
-          <mat-error *ngIf="isEnabled?.errors && !isEnabled?.pristine"
-                     class="error-message-size">
-            Statut invalide
-          </mat-error>
-        </mat-form-field>
+        <div class="custom-fields-container">
+          <div class="radio-button">
+            <mat-label>Statut</mat-label>
+            <mat-radio-group formControlName="requiredRole">
+              <mat-radio-button value="ROLE_USER" [checked]="user.requiredRole !== 'ROLE_ADMIN'">Utilisateur</mat-radio-button>
+              <mat-radio-button value="ROLE_ADMIN" [checked]="user.requiredRole === 'ROLE_ADMIN'">Administrateur</mat-radio-button>
+            </mat-radio-group>
+          </div>
 
-        <mat-form-field appearance="outline" class="edit-user-form-field">
-          <mat-label>Rôle</mat-label>
-          <input matInput type="text" formControlName="role">
-          <mat-error *ngIf="role?.errors && !role?.pristine"
-                     class="error-message-size">
-            Rôle invalide
-          </mat-error>
-        </mat-form-field>
+          <div class="slide-toggle">
+            <mat-label>Activation du compte</mat-label>
+            <mat-slide-toggle formControlName="enabled">
+            </mat-slide-toggle>
+          </div>
+        </div>
       </div>
     </form>
   </div>

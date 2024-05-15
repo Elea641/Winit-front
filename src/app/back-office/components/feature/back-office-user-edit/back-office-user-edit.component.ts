@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDividerModule} from "@angular/material/divider";
 import {AdminUser} from "../../../models/admin-user.model";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {BackOfficeUserService} from "../../../shared/back-office-user.service";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -11,11 +11,12 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatRadioModule} from "@angular/material/radio";
 import {ToastService} from "../../../../shared/toast.service";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-back-office-user-edit',
   standalone: true,
-  imports: [CommonModule, MatDividerModule, MatButtonModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatRadioModule],
+  imports: [CommonModule, MatDividerModule, MatButtonModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatRadioModule, RouterLink, MatSlideToggleModule],
   templateUrl: './back-office-user-edit.component.html',
   styleUrls: ['./back-office-user-edit.component.scss']
 })
@@ -54,10 +55,10 @@ export class BackOfficeUserEditComponent implements OnInit {
           Validators.required,
           Validators.email,
         ]),
-        isEnabled: new FormControl('', [
+        enabled: new FormControl('', [
           Validators.required,
         ]),
-        role: new FormControl('', [
+        requiredRole: new FormControl('', [
           Validators.required,
         ])
       },
@@ -68,11 +69,6 @@ export class BackOfficeUserEditComponent implements OnInit {
     this.userService.getUserById(id).subscribe(
       (user: AdminUser) => {
         this.user = user;
-        if (user.role === "ROLE_USER") {
-          user.role = "Utilisateur";
-        } else {
-          user.role = "Administrateur";
-        }
         this.patchValues(user);
       },
       (error) => {
@@ -87,8 +83,8 @@ export class BackOfficeUserEditComponent implements OnInit {
       lastName: user.lastName,
       city: user.city,
       email: user.email,
-      isEnabled: user.isEnabled,
-      role: user.role
+      enabled: user.enabled,
+      requiredRole: user.requiredRole
     })
   }
 
@@ -108,12 +104,12 @@ export class BackOfficeUserEditComponent implements OnInit {
     return this.editUserForm.get('email')!;
   }
 
-  get isEnabled() {
-    return this.editUserForm.get('isEnabled')!;
+  get enabled() {
+    return this.editUserForm.get('enabled')!;
   }
 
-  get role() {
-    return this.editUserForm.get('role')!;
+  get requiredRole() {
+    return this.editUserForm.get('requiredRole')!;
   }
 
   onSubmit() {
@@ -133,7 +129,7 @@ export class BackOfficeUserEditComponent implements OnInit {
             console.error('User could not be edited: ', error);
             this.toastService.showError(
               'L\'utilisateur n\'a pas pu être mis à jour, veuillez réessayer ultérieurement.',
-              'Une erreur est apparue'
+              'Une erreur est survenue'
             );
           });
       });
