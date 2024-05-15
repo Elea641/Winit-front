@@ -40,6 +40,15 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { userStatisticsResolver } from './profile/shared/resolvers/user-statistics-resolver';
 import { RankingPageComponent } from './ranking/pages/ranking-page/ranking-page.component';
 import { rankingResolver } from './ranking/shared/resolvers/ranking-resolver';
+import {
+  BackOfficeUserCreateComponent
+} from "./back-office/components/feature/back-office-user-create/back-office-user-create.component";
+import {
+  BackOfficeUserDeleteComponent
+} from "./back-office/components/feature/back-office-user-delete/back-office-user-delete.component";
+import {
+  BackOfficeSportEditComponent
+} from "./back-office/components/feature/back-office-sport-edit/back-office-sport-edit.component";
 
 export const routes: Routes = [
   {
@@ -105,6 +114,7 @@ export const routes: Routes = [
     canActivate: [AdminGuard],
     children: [
       { path: 'create', component: BackOfficeCreateSportComponent },
+      { path: 'edit/:id([0-9]+)', component: BackOfficeSportEditComponent },
       { path: ':id([0-9]+)', component: BackOfficeSportDetailComponent },
     ]
   },
@@ -113,6 +123,7 @@ export const routes: Routes = [
     component: BackOfficeUserPageComponent,
     canActivate: [AdminGuard],
     children: [
+      { path: 'create', component: BackOfficeUserCreateComponent},
       { path: 'edit/:id([0-9]+)', component: BackOfficeUserEditComponent },
       { path: ':id([0-9]+)', component: BackOfficeUserDetailComponent }
     ]
