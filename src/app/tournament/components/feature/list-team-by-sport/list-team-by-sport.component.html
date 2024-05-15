@@ -1,3 +1,7 @@
-<ul *ngIf="teams">
-  <app-team-card *ngFor="let team of teams" [team]="team"></app-team-card>
+<ul *ngIf="validTeams?.length; else elseBlock">
+  <app-team-card *ngFor="let team of validTeams" [team]="team"></app-team-card>
 </ul>
+
+<ng-template #elseBlock>
+  <h2>Aucune de vos équipes ne correspond à ce sport.</h2>
+</ng-template>

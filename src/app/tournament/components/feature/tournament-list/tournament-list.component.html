@@ -8,8 +8,8 @@
     "
     (newShowNonFullTournaments)="onReceiveShowNonFullTournaments($event)"
     (newSportFilter)="onReceiveSportFilter($event)"
-    (newResetFilter)="onReceiveResetFilters($event)"
-    (newApplyFilters)="onReceiveApplyFilters($event)"></app-sidebar>
+    (newResetFilter)="onReceiveResetFilters()"
+    (newApplyFilters)="onReceiveApplyFilters()"></app-sidebar>
   <app-spinner *ngIf="loading"></app-spinner>
 
   <div

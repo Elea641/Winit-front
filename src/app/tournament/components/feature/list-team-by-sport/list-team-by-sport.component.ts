@@ -11,4 +11,12 @@ import { Team } from 'src/app/team/models/team.model';
 })
 export class ListTeamBySportComponent {
   @Input() teams!: Team[] | null;
+  
+  validTeams!: Team[] | undefined;
+
+  ngOnInit() {
+    this.validTeams = this.teams?.filter(
+      team => team.teamMembersCount === team.totalPlayers
+    )
+  }
 }
