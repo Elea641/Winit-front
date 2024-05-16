@@ -1,0 +1,79 @@
+<div class="actions-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Rechercher...</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Baseball" />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="['/back-office/sport/create']">
+    CREER
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>N°</th>
+    <td mat-cell *matCellDef="let sport">{{ sport.position }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Nom du sport</th>
+    <td mat-cell *matCellDef="let sport">{{ sport.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="imageUrl">
+    <th mat-header-cell *matHeaderCellDef>Lien de l'image</th>
+    <td mat-cell *matCellDef="let sport">
+      <a href="{{ sport.imageUrl }}">{{ sport.imageUrl }}</a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberOfPlayers">
+    <th mat-header-cell *matHeaderCellDef>Nombre de joueurs</th>
+    <td mat-cell *matCellDef="let sport">{{ sport.numberOfPlayers }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberOfTournaments">
+    <th mat-header-cell *matHeaderCellDef>Nombre de tournois</th>
+    <td mat-cell *matCellDef="let sport">{{ sport.numberOfTournaments }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberOfTeams">
+    <th mat-header-cell *matHeaderCellDef>Nombre d'équipes</th>
+    <td mat-cell *matCellDef="let sport">{{ sport.numberOfTeams }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let sport">
+      <div class="actions-cell">
+        <a
+          tabindex="0"
+          class="view-link"
+          (click)="viewSportDetails(sport.id)"
+          (keyup.enter)="viewSportDetails(sport.id)"
+          ><mat-icon>remove_red_eye</mat-icon></a
+        >
+        <a
+          tabindex="1"
+          class="edit-link"
+          (click)="viewEditPage(sport.id)"
+          (keyup.enter)="viewEditPage(sport.id)"
+          ><mat-icon>edit</mat-icon></a
+        >
+        <a
+          tabindex="2"
+          class="delete-link"
+          (click)="openDeleteDialog(sport.id)"
+          (keyup.enter)="openDeleteDialog(sport.id)"
+          ><mat-icon>delete</mat-icon></a
+        >
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

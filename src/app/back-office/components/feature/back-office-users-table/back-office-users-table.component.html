@@ -1,0 +1,103 @@
+<div class="actions-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Rechercher...</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Georges" />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="['/back-office/user/create']">
+    CREER
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>N°</th>
+    <td mat-cell *matCellDef="let user">{{ user.position }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef>Nom</th>
+    <td mat-cell *matCellDef="let user">{{ user['lastName'] }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef>Prénom</th>
+    <td mat-cell *matCellDef="let user">{{ user['firstName'] }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let user">{{ user['email'] }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef>Ville</th>
+    <td mat-cell *matCellDef="let user">{{ user['city'] }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="requiredRole">
+    <th mat-header-cell *matHeaderCellDef>Rôle</th>
+    <td mat-cell *matCellDef="let user">{{ user.requiredRole }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="enabled">
+    <th mat-header-cell *matHeaderCellDef>Actif</th>
+    <td mat-cell *matCellDef="let user">
+      <ng-container *ngIf="user.enabled">
+        <i class="material-icons toggle-on">toggle_on</i>
+      </ng-container>
+      <ng-container *ngIf="!user.enabled">
+        <i class="material-icons toggle-off">toggle_off</i>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef>Créé le</th>
+    <td mat-cell *matCellDef="let user">
+      {{ user['createdAt'] | date: 'dd-MM-yyyy' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="updatedAt">
+    <th mat-header-cell *matHeaderCellDef>Modifié le</th>
+    <td mat-cell *matCellDef="let user">
+      {{ user['updatedAt'] | date: 'dd-MM-yyyy' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let user">
+      <div class="actions-cell">
+        <a
+          tabindex="0"
+          class="view-link"
+          (click)="viewUserDetails(user.id)"
+          (keyup.enter)="viewUserDetails(user.id)"
+          ><mat-icon>remove_red_eye</mat-icon></a
+        >
+        <a
+          tabindex="1"
+          class="edit-link"
+          (click)="viewEditUser(user.id)"
+          (keyup.enter)="viewEditUser(user.id)"
+          ><mat-icon>edit</mat-icon></a
+        >
+        <a
+          tabindex="2"
+          class="delete-link"
+          (click)="openDeleteDialog(user.id)"
+          (keyup.enter)="openDeleteDialog(user.id)"
+          ><mat-icon>delete</mat-icon></a
+        >
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

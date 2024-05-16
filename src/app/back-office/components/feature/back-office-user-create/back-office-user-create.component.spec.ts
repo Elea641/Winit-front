@@ -1,22 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BackOfficePageComponent } from './back-office-page.component';
+import { BackOfficeUserCreateComponent } from './back-office-user-create.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastService } from '../../../../shared/toast.service';
 import { ActivatedRoute } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('BackOfficePageComponent', () => {
-  let component: BackOfficePageComponent;
-  let fixture: ComponentFixture<BackOfficePageComponent>;
+describe('BackOfficeUserCreateComponent', () => {
+  let component: BackOfficeUserCreateComponent;
+  let fixture: ComponentFixture<BackOfficeUserCreateComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        BackOfficePageComponent,
+        BackOfficeUserCreateComponent,
         HttpClientModule,
+        ToastrModule.forRoot(),
         BrowserAnimationsModule,
       ],
       providers: [
+        ToastService,
+        ToastrService,
         {
           provide: ActivatedRoute,
           useValue: {
@@ -29,7 +34,7 @@ describe('BackOfficePageComponent', () => {
         },
       ],
     });
-    fixture = TestBed.createComponent(BackOfficePageComponent);
+    fixture = TestBed.createComponent(BackOfficeUserCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

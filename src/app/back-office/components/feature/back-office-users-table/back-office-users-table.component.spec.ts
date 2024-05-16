@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BackOfficePageComponent } from './back-office-page.component';
+import { BackOfficeUsersTableComponent } from './back-office-users-table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('BackOfficePageComponent', () => {
-  let component: BackOfficePageComponent;
-  let fixture: ComponentFixture<BackOfficePageComponent>;
+describe('BackOfficeUsersTableComponent', () => {
+  let component: BackOfficeUsersTableComponent;
+  let fixture: ComponentFixture<BackOfficeUsersTableComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        BackOfficePageComponent,
+        BackOfficeUsersTableComponent,
         HttpClientModule,
         BrowserAnimationsModule,
       ],
@@ -29,7 +29,7 @@ describe('BackOfficePageComponent', () => {
         },
       ],
     });
-    fixture = TestBed.createComponent(BackOfficePageComponent);
+    fixture = TestBed.createComponent(BackOfficeUsersTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

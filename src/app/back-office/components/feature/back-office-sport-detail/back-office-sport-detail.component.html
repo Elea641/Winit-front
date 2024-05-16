@@ -1,0 +1,55 @@
+<div class="back-office-container">
+  <div *ngIf="sport">
+    <h1>Espace administrateur</h1>
+    <mat-divider></mat-divider>
+    <div>
+      <p class="info-text">
+        Ici, vous pouvez consulter les données et les statistiques d'un sport.
+        Vous pouvez également modifier ses paramètres, mais vous ne pourrez pas
+        le supprimer s'il est déjà associé à des tournois ou des équipes.
+        Attention, toutes vos modifications auront un impact sur le bon
+        fonctionnement de l'application, veuillez vous assurer d'avoir les
+        autorisations nécessaires avant de les effectuer.
+      </p>
+    </div>
+    <div class="back-office-detail-header">
+      <h2>SPORT</h2>
+      <div class="button-container">
+        <button
+          mat-raised-button
+          class="edit-button"
+          color="primary"
+          [routerLink]="['/back-office/sport/edit', sport.id]">
+          <mat-icon>edit</mat-icon>
+          MODIFIER
+        </button>
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="openDeleteDialog(sport.id)">
+          <mat-icon>delete</mat-icon>
+          SUPPRIMER
+        </button>
+      </div>
+    </div>
+    <div class="back-office-detail-text-container">
+      <mat-list>
+        <mat-list-item>
+          <span matListItemTitle>Nom du sport</span>
+          <span matListItemLine>{{ sport.name }}</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>Nombre de joueurs</span>
+          <span matListItemLine>{{ sport.numberOfPlayers }}</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemTitle>Nom de l'image</span>
+          <span matListItemLine>{{ sport.imageUrl }}</span>
+        </mat-list-item>
+        <mat-card>
+          <img mat-card-image [src]="image" alt="" />
+        </mat-card>
+      </mat-list>
+    </div>
+  </div>
+</div>
