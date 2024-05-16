@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { CardCurrentProfileComponent } from '../../ui/card-current-profile/card-current-profile.component';
 import { ProfileService } from 'src/app/profile/shared/profile.service';
@@ -30,7 +30,7 @@ import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
   templateUrl: './current-profile-details.component.html',
   styleUrls: ['./current-profile-details.component.scss'],
 })
-export class CurrentProfileDetailsComponent {
+export class CurrentProfileDetailsComponent implements OnInit {
   @Input() userStatistics$!: Observable<UserStatistics>;
   currentProfile$!: Observable<CurrentProfile>;
   currentUser$!: Observable<CurrentUser>;

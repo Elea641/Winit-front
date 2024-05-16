@@ -13,22 +13,25 @@ export class MemberService implements IMemberService {
   private memberSubject: Subject<Member | null> = new Subject<Member | null>();
   public member$: Observable<Member | null> = this.memberSubject.asObservable();
 
-  constructor(public http: HttpClient, private toastService: ToastService) {}
+  constructor(
+    public http: HttpClient,
+    private toastService: ToastService
+  ) {}
 
-  addMember(teamName: string, member: {}): void {
+  addMember(teamName: string, member: object): void {
     this.http
       .post<Member>(`${environment.urlApi}/members/${teamName}`, member)
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response) {
             this.toastService.showSuccess(
-              "Ajout de votre membre à l'équipe",
-              'Bravo félicitations'
+              "Le membre a été ajouté à l'équipe",
+              'Opération effectuée avec succès'
             );
             this.memberSubject.next(response);
           }
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             this.toastService.showError(error.error, 'Une erreur est survenue');
           }
@@ -41,7 +44,7 @@ export class MemberService implements IMemberService {
     this.http
       .delete<Member>(`${environment.urlApi}/members/${teamName}/${memberId}`)
       .subscribe({
-        next: (response) => {
+        next: response => {
           if (response) {
             this.toastService.showSuccess(
               "Le membre a été supprimé de l'équipe",
@@ -50,7 +53,7 @@ export class MemberService implements IMemberService {
             this.memberSubject.next(null);
           }
         },
-        error: (error) => {
+        error: error => {
           if (error.error) {
             this.toastService.showError(error.error, 'Une erreur est survenue');
           }

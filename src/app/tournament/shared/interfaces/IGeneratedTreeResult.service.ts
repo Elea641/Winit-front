@@ -1,6 +1,6 @@
-export interface IGeneratedTreeResult {
-  calculPhase: {};
-  totalPhase: {};
-  randomizeTeams: {};
-  matchsPhase: {};
+export interface IGeneratedTreeResultService {
+  calculPhase: object;
+  totalPhase: object;
+  randomizeTeams: object;
+  matchsPhase: object;
 }

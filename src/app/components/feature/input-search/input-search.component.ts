@@ -21,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./input-search.component.scss'],
 })
 export class InputSearchComponent {
-  searchValue: string = '';
+  searchValue = '';
   @Output() newSearchValueEventFromInput = new EventEmitter<string>();
 
   sendSearchValueToParent() {

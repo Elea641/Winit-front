@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Member } from 'src/app/team/models/member.model';
 import { MemberCardComponent } from '../../ui/member-card/member-card.component';
@@ -22,11 +22,11 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
   templateUrl: './list-member.component.html',
   styleUrls: ['./list-member.component.scss'],
 })
-export class ListMemberComponent {
+export class ListMemberComponent implements OnInit, OnDestroy {
   @Input() team$!: Observable<Team | null>;
   private teamSubscription!: Subscription;
   members: Member[] = [];
-  teamName: string = '';
+  teamName = '';
   memberDelete!: Member;
 
   constructor(
@@ -41,18 +41,20 @@ export class ListMemberComponent {
   }
 
   ngOnInit(): void {
-    this.team$.subscribe((team) => {
-      if (team) {
-        this.members = team?.members;
-      }
-    });
+    if (this.team$) {
+      this.team$.subscribe(team => {
+        if (team) {
+          this.members = team?.members;
+        }
+      });
+    }
 
-    this.teamSubscription = this.memberService.member$.subscribe((member) => {
+    this.teamSubscription = this.memberService.member$.subscribe(member => {
       if (member) {
         this.members.push(member);
       } else {
         this.members = this.members.filter(
-          (member) => member !== this.memberDelete
+          member => member !== this.memberDelete
         );
       }
     });
@@ -67,9 +69,9 @@ export class ListMemberComponent {
     const dialogRef = this.dialog.open(ModalComponent, {
       data: new ModalContent(modalData),
     });
-    dialogRef.afterClosed().subscribe((response) => {
+    dialogRef.afterClosed().subscribe(response => {
       if (response === true) {
-        this.team$.subscribe((team) => {
+        this.team$.subscribe(team => {
           if (team) {
             this.memberService.deleteMemberByTeamName(team.name, member);
             this.memberDelete = member;

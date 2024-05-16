@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -30,10 +30,10 @@ import { MemberService } from 'src/app/team/shared/member.service';
   templateUrl: './create-member.component.html',
   styleUrls: ['./create-member.component.scss'],
 })
-export class CreateMemberComponent {
+export class CreateMemberComponent implements OnInit {
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
   memberForm!: FormGroup;
-  teamName: string = '';
+  teamName = '';
 
   constructor(
     public memberService: MemberService,
@@ -42,9 +42,11 @@ export class CreateMemberComponent {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.teamName = params['teamName'];
-    });
+    if (this.route.params) {
+      this.route.params.subscribe(params => {
+        this.teamName = params['teamName'];
+      });
+    }
 
     this.memberForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -52,13 +54,13 @@ export class CreateMemberComponent {
   }
 
   get email() {
-    return this.memberForm.get('email')!;
+    return this.memberForm.get('email');
   }
 
   onSubmit() {
     if (this.memberForm.valid) {
       const memberData = {
-        email: this.email.value.trim(),
+        email: this.email?.value.trim(),
       };
       this.memberService.addMember(this.teamName, memberData);
       this.cancelClicked.emit();

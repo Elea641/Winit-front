@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { InputSearchComponent } from '../../feature/input-search/input-search.component';
 import { SportService } from 'src/app/sport/shared/sport.service';
+import { SidebarService } from 'src/app/shared/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -50,21 +51,22 @@ export class SidebarComponent implements OnInit {
   @Output() newResetFilter = new EventEmitter<any>();
   @Output() newSportFilter = new EventEmitter<string>();
   @Output() newApplyFilters = new EventEmitter<any>();
-  chronologicalFilter: boolean = false;
-  showOnlyUpcomingTournaments: boolean = false;
-  showNonFullTournaments: boolean = false;
+  chronologicalFilter = false;
+  showOnlyUpcomingTournaments = false;
+  showNonFullTournaments = false;
   isDesktop: boolean | undefined = false;
   isLargeDesktop: boolean | undefined = false;
   showFiller = false;
   isDrawerOpened = false;
 
   sports: string[] = [];
-  selectedSport: string = '';
+  selectedSport = '';
 
   constructor(
     private breakpointService: BreakpointService,
     private el: ElementRef,
-    private sportService: SportService
+    private sportService: SportService,
+    private sidebarService: SidebarService
   ) {}
 
   ngOnInit(): void {
@@ -77,18 +79,23 @@ export class SidebarComponent implements OnInit {
         this.isDesktop = isDesktop;
       }
     );
+
     this.isLargeDesktop = this.breakpointService.isLargeDesktopDevice();
     this.breakpointService.deviceChanged['isLargeDesktop'].subscribe(
       (isLargeDesktop: boolean) => {
         this.isLargeDesktop = isLargeDesktop;
       }
     );
+
+    this.sidebarService.isOpen$.subscribe((isOpen: boolean) => {
+      this.isDrawerOpened = isOpen;
+    });
   }
 
   getSportsNames() {
     this.sportService
       .getAllSportsNames()
-      .subscribe((sports) => (this.sports = sports));
+      .subscribe(sports => (this.sports = sports));
   }
 
   toggleIcon() {
@@ -98,9 +105,10 @@ export class SidebarComponent implements OnInit {
     this.drawer.toggle();
     this.isDrawerOpened = this.drawer.opened;
     this.isDrawerOpenedChange.emit(this.isDrawerOpened);
+    this.sidebarService.isOpenSubject.next(this.isDrawerOpened);
   }
   private addClickOutsideListener() {
-    document.addEventListener('click', (event) => {
+    document.addEventListener('click', event => {
       const clickedElement = event.target as HTMLElement;
       if (this.isDesktop) {
         if (!this.el.nativeElement.contains(clickedElement)) {

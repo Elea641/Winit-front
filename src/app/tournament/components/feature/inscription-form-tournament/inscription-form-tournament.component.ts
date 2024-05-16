@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -38,7 +38,7 @@ import { ModalContent } from 'src/app/components/models/modal-content.model';
   templateUrl: './inscription-form-tournament.component.html',
   styleUrls: ['./inscription-form-tournament.component.scss'],
 })
-export class InscriptionFormTournamentComponent {
+export class InscriptionFormTournamentComponent implements OnInit {
   @Input() teams!: Team[] | null;
   inscriptionForm!: FormGroup;
   selectTeam!: SelectTeam;
@@ -53,9 +53,11 @@ export class InscriptionFormTournamentComponent {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.tournamentId = params['id'];
-    });
+    if (this.route.params) {
+      this.route.params.subscribe(params => {
+        this.tournamentId = params['id'];
+      });
+    }
 
     this.inscriptionForm = new FormGroup({
       teamName: new FormControl('', [Validators.required]),
@@ -63,12 +65,12 @@ export class InscriptionFormTournamentComponent {
   }
 
   get teamName() {
-    return this.inscriptionForm.get('teamName')!;
+    return this.inscriptionForm.get('teamName');
   }
 
   getTeamsWithMoreThanSixMembers() {
     return this.teams?.filter(
-      (team) => team.members.length === team.totalPlayers
+      team => team.members.length === team.totalPlayers
     );
   }
 
@@ -83,7 +85,7 @@ export class InscriptionFormTournamentComponent {
       data: new ModalContent(modalData),
     });
 
-    dialogRef.afterClosed().subscribe((response) => {
+    dialogRef.afterClosed().subscribe(response => {
       if (response === true) {
         if (this.inscriptionForm.valid) {
           this.selectTeam = new SelectTeam(
@@ -92,7 +94,7 @@ export class InscriptionFormTournamentComponent {
           );
           this.tournamentService
             .addTeamToTournament(this.selectTeam)
-            .subscribe((response) => {
+            .subscribe(response => {
               if (response === true) {
                 this.router.navigate([`/tournament/${this.tournamentId}`]);
               }

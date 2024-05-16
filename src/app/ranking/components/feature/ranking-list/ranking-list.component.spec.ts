@@ -8,7 +8,7 @@ describe('RankingListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RankingListComponent]
+      imports: [RankingListComponent],
     });
     fixture = TestBed.createComponent(RankingListComponent);
     component = fixture.componentInstance;

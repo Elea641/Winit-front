@@ -13,8 +13,7 @@
       <button
         *ngIf="token && !isTokenEmpty(token)"
         mat-menu-item
-        routerLink="/tournament/create"
-      >
+        routerLink="/tournament/create">
         <mat-icon>create</mat-icon> CRÉER UN TOURNOI
       </button>
     </mat-menu>
@@ -27,8 +26,7 @@
       <button
         *ngIf="token && !isTokenEmpty(token)"
         mat-button
-        routerLink="/tournament/create"
-      >
+        routerLink="/tournament/create">
         CRÉER UN TOURNOI
       </button>
     </div>
@@ -37,24 +35,21 @@
       mat-raised-button
       *ngIf="!token"
       color="primary"
-      routerLink="/auth/login"
-    >
+      routerLink="/auth/login">
       CONNEXION
     </button>
     <button
       *ngIf="token && !isTokenEmpty(token)"
       mat-icon-button
       aria-label="icon-button with account icon"
-      [matMenuTriggerFor]="profil"
-    >
+      [matMenuTriggerFor]="profil">
       <mat-icon>person</mat-icon>
     </button>
     <mat-menu #profil="matMenu" class="navbar-custom-menu">
       <a
         *ngIf="token && !isTokenEmpty(token) && token.role !== 'ROLE_ADMIN'"
         mat-menu-item
-        routerLink="/profile"
-      >
+        routerLink="/profile">
         <mat-icon>person</mat-icon>
         <span>Profil</span>
       </a>
@@ -68,9 +63,10 @@
       </a>
       <a
         *ngIf="token && !isTokenEmpty(token)"
+        tabindex="0"
         mat-menu-item
         (click)="goToDisconnected('')"
-      >
+        (keyup.enter)="goToDisconnected('')">
         <mat-icon>logout</mat-icon>
         <span>Déconnexion</span>
       </a>

@@ -7,8 +7,7 @@
     <button
       mat-raised-button
       color="primary"
-      [routerLink]="['/profile/update']"
-    >
+      [routerLink]="['/profile/update']">
       MODIFIER<mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </div>
@@ -19,7 +18,7 @@
     </div>
     <div class="profile-card-container-other-info">
       <mat-icon>check_circle_outline</mat-icon>
-      <p>Membre depuis le {{ currentUser?.createdAt | date : "dd-MM-yyyy" }}</p>
+      <p>Membre depuis le {{ currentUser?.createdAt | date: 'dd-MM-yyyy' }}</p>
     </div>
   </div>
 </article>

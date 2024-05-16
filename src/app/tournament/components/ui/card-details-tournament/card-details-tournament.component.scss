@@ -1,5 +1,5 @@
-@import "../../../../../assets/style/variables.scss";
-@import "../../../../../assets/style/mixins.scss";
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
 
 article {
   color: $secondary-color-text;
@@ -60,6 +60,12 @@ article {
     .mat-mdc-raised-button:hover,
     .mat-mdc-raised-button:focus {
       color: $primary-color-focus;
+    }
+
+    .button-wrapper {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 2rem;
     }
   }
 

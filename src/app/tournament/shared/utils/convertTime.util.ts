@@ -1,5 +1,4 @@
-import { TimeService } from "../time-service.service";
-
+import { TimeService } from '../time-service.service';
 
 export function getRemainingTime(
   tournamentDate: Date,

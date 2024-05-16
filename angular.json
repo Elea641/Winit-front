@@ -97,13 +97,21 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/slick-carousel/slick/slick.min.js"
-            ]
+            ],
+            "browsers": "ChromeHeadless"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": "bf9bff61-5c1d-4ad7-b53d-0f9e3d48d7d7"
+    "analytics": "bf9bff61-5c1d-4ad7-b53d-0f9e3d48d7d7",
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

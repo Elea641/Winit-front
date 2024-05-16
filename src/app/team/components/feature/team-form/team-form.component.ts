@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormGroup,
@@ -38,7 +38,7 @@ import { TeamMapperService } from 'src/app/team/shared/mapper/team-mapper.servic
   templateUrl: './team-form.component.html',
   styleUrls: ['./team-form.component.scss'],
 })
-export class TeamFormComponent {
+export class TeamFormComponent implements OnInit, OnDestroy {
   mode: 'create' | 'update' = 'create';
   teamToUpdate?: CreatedTeam;
   currentTeamSubscription!: Subscription;
@@ -60,17 +60,21 @@ export class TeamFormComponent {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      const modeParam = params.get('mode');
-      this.mode = modeParam === 'update' ? 'update' : 'create';
-    });
+    if (this.route.paramMap) {
+      this.route.paramMap.subscribe(params => {
+        const modeParam = params.get('mode');
+        this.mode = modeParam === 'update' ? 'update' : 'create';
+      });
+    }
 
-    this.route.queryParams.subscribe((params) => {
-      this.teamName = params['teamName'];
-    });
+    if (this.route.queryParams) {
+      this.route.queryParams.subscribe(params => {
+        this.teamName = params['teamName'];
+      });
+    }
 
     if (!this.teamToUpdate && this.teamName && this.mode === 'update') {
-      this.teamService.getTeamByTeamName(this.teamName).subscribe((team) => {
+      this.teamService.getTeamByTeamName(this.teamName).subscribe(team => {
         this.teamToUpdate = this.teamMapperService.mapToCreatedTeam(team);
         this.teamForm = new FormGroup({
           name: new FormControl(team.name, [
@@ -86,7 +90,7 @@ export class TeamFormComponent {
       });
     }
 
-    this.currentTeamSubscription = this.teamService.team$.subscribe((team) => {
+    this.currentTeamSubscription = this.teamService.team$.subscribe(team => {
       if (team && this.mode === 'update') {
         this.teamToUpdate = this.teamMapperService.mapToCreatedTeam(team);
       }
@@ -104,24 +108,24 @@ export class TeamFormComponent {
       ]),
     });
 
-    this.sportService.getAllSports().subscribe((sports) => {
+    this.sportService.getAllSports().subscribe(sports => {
       this.sports = sports;
     });
   }
 
   get name() {
-    return this.teamForm.get('name')!;
+    return this.teamForm.get('name');
   }
 
   get sport() {
-    return this.teamForm.get('sport')!;
+    return this.teamForm.get('sport');
   }
 
   onSubmit() {
     if (this.teamForm.valid) {
       const teamData = {
-        name: this.name.value.trim(),
-        sport: this.sport.value,
+        name: this.name?.value.trim(),
+        sport: this.sport?.value,
         id: this.teamToUpdate?.id,
       };
 

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Team } from 'src/app/team/models/team.model';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
@@ -18,7 +18,7 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './menu-member.component.html',
   styleUrls: ['./menu-member.component.scss'],
 })
-export class MenuMemberComponent {
+export class MenuMemberComponent implements OnDestroy {
   @Input() team$!: Observable<Team | null>;
   @ViewChild(MatTabGroup) tabGroup!: MatTabGroup;
   private teamSubscription!: Subscription;

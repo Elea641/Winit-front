@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Ranking } from 'src/app/ranking/models/ranking.model';
@@ -14,23 +14,25 @@ import { MatTabsModule } from '@angular/material/tabs';
   templateUrl: './ranking-list.component.html',
   styleUrls: ['./ranking-list.component.scss'],
 })
-export class RankingListComponent {
+export class RankingListComponent implements OnInit {
   @Input() ranking$!: Observable<Ranking | null>;
   topWinnerTeamCountDtos: TopWinnerTeamCountDto[] = [];
   topWinnerTeamDtos: TopWinnerTeamDto[] = [];
 
   ngOnInit() {
-    this.ranking$.subscribe((ranking) => {
-      if (ranking) {
-        const keys = Object.keys(ranking);
+    if (this.ranking$) {
+      this.ranking$.subscribe(ranking => {
+        if (ranking) {
+          const keys = Object.keys(ranking);
 
-        if (keys.length > 0) {
-          const value = (ranking as any)[keys[0]];
+          if (keys.length > 0) {
+            const value = (ranking as any)[keys[0]];
 
-          this.topWinnerTeamCountDtos = value['topWinnerTeamCountDtos'];
-          this.topWinnerTeamDtos = value['topWinnerTeamDtos'];
+            this.topWinnerTeamCountDtos = value['topWinnerTeamCountDtos'];
+            this.topWinnerTeamDtos = value['topWinnerTeamDtos'];
+          }
         }
-      }
-    });
+      });
+    }
   }
 }

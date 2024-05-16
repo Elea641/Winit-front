@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListTournamentComponent } from './list-tournament.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ListTournamentComponent', () => {
   let component: ListTournamentComponent;
@@ -8,7 +9,7 @@ describe('ListTournamentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ListTournamentComponent]
+      imports: [ListTournamentComponent, HttpClientModule],
     });
     fixture = TestBed.createComponent(ListTournamentComponent);
     component = fixture.componentInstance;

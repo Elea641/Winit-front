@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TopWinnerTeamCountDto } from 'src/app/ranking/models/topWinnerTeamCountDto.model';
 import { TopWinnerTeamDto } from 'src/app/ranking/models/topWinnerTeamDto.model';
@@ -12,7 +12,7 @@ import { TopWinnerTeamDtoType } from 'src/app/ranking/models/topWinnerTeamDtoTyp
   templateUrl: './ranking-card.component.html',
   styleUrls: ['./ranking-card.component.scss'],
 })
-export class RankingCardComponent {
+export class RankingCardComponent implements OnInit {
   @Input() topWinnerTeamCountDtos!: TopWinnerTeamCountDto[] | null;
   @Input() topWinnerTeamDtos!: TopWinnerTeamDto[] | null;
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Team } from 'src/app/team/models/team.model';
 import { TeamService } from 'src/app/team/shared/team.service';
@@ -6,7 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Router } from '@angular/router';
 import { ModalContent } from 'src/app/components/models/modal-content.model';
@@ -25,7 +25,7 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
   templateUrl: './team-detail-card.component.html',
   styleUrls: ['./team-detail-card.component.scss'],
 })
-export class TeamDetailCardComponent {
+export class TeamDetailCardComponent implements OnInit, OnDestroy {
   @Input() team$!: Observable<Team | null>;
   private teamSubscription!: Subscription;
 
@@ -43,15 +43,15 @@ export class TeamDetailCardComponent {
   }
 
   ngOnInit(): void {
-    this.teamSubscription = this.memberService.member$.subscribe((member) => {
+    this.teamSubscription = this.memberService.member$.subscribe(member => {
       if (member) {
-        this.team$.subscribe((team) => {
+        this.team$.subscribe(team => {
           if (team) {
             team.teamMembersCount++;
           }
         });
       } else {
-        this.team$.subscribe((team) => {
+        this.team$.subscribe(team => {
           if (team) {
             team.teamMembersCount--;
           }
@@ -70,9 +70,9 @@ export class TeamDetailCardComponent {
       data: new ModalContent(modalData),
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.team$.subscribe((team) => {
+        this.team$.subscribe(team => {
           if (team) {
             this.teamService.deleteTeam(team.name);
           }

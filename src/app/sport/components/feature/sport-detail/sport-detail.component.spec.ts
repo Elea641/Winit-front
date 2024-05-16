@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SportDetailComponent } from './sport-detail.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('SportDetailComponent', () => {
   let component: SportDetailComponent;
@@ -8,7 +9,7 @@ describe('SportDetailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SportDetailComponent]
+      imports: [SportDetailComponent, HttpClientModule],
     });
     fixture = TestBed.createComponent(SportDetailComponent);
     component = fixture.componentInstance;

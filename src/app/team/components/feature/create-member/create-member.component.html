@@ -6,8 +6,7 @@
 
       <mat-error
         *ngIf="email?.errors && !email?.pristine"
-        class="error-message-size"
-      >
+        class="error-message-size">
         Le format de l'email est inconnu.
       </mat-error>
     </mat-form-field>
@@ -17,8 +16,7 @@
       mat-stroked-button
       color="primary"
       type="button"
-      (click)="onClick()"
-    >
+      (click)="onClick()">
       ANNULER
     </button>
   </form>

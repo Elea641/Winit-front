@@ -1,5 +1,5 @@
 import { CommonModule, registerLocaleData } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
@@ -14,9 +14,8 @@ import * as fr from '@angular/common/locales/fr';
   templateUrl: './tournament-card.component.html',
   styleUrls: ['./tournament-card.component.scss'],
 })
-export class TournamentCardComponent {
-  @Input()
-  public tournament!: TournamentCard;
+export class TournamentCardComponent implements OnInit {
+  @Input() tournament!: TournamentCard;
   public image: any;
 
   constructor(private getImageService: GetImageService) {
@@ -24,10 +23,12 @@ export class TournamentCardComponent {
   }
 
   ngOnInit() {
-    this.getImageService
-      .getImage(this.tournament.imageUrl)
-      .subscribe((data) => {
-        this.image = data;
-      });
+    if (this.tournament && this.tournament.imageUrl) {
+      this.getImageService
+        .getImage(this.tournament.imageUrl)
+        .subscribe(data => {
+          this.image = data;
+        });
+    }
   }
 }

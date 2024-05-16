@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { CanActivate, Router, UrlTree } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { TokenService } from '../shared/token.service';
 
@@ -15,7 +9,10 @@ import { TokenService } from '../shared/token.service';
 export class UserGuard implements CanActivate {
   role!: 'ROLE_USER' | 'ROLE_ADMIN';
 
-  constructor(private router: Router, private tokenS: TokenService) {
+  constructor(
+    private router: Router,
+    private tokenS: TokenService
+  ) {
     this.tokenS
       ._getTokenDetailsSubject$()
       .pipe(map((decodedToken: any) => decodedToken.role))
@@ -24,10 +21,7 @@ export class UserGuard implements CanActivate {
       });
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
+  canActivate():
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean

@@ -6,7 +6,7 @@ import { Observable, fromEvent, map, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class GetImageService {
-  public baseUrl: string = 'http://localhost:8080/uploads/';
+  public baseUrl = 'http://localhost:8080/uploads/';
 
   constructor(private http: HttpClient) {}
 

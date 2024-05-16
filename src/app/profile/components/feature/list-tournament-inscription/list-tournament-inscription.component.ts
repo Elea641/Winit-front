@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardTournamentInscriptionComponent } from '../../ui/card-tournament-inscription/card-tournament-inscription.component';
 import { StatesType } from 'src/app/profile/models/types/state-type.model';
@@ -10,9 +10,9 @@ import { StatesType } from 'src/app/profile/models/types/state-type.model';
   templateUrl: './list-tournament-inscription.component.html',
   styleUrls: ['./list-tournament-inscription.component.scss'],
 })
-export class ListTournamentInscriptionComponent {
+export class ListTournamentInscriptionComponent implements OnInit {
   @Input() userStatistics!: StatesType | null;
-  title: string = '';
+  title = '';
 
   ngOnInit() {
     if (this.userStatistics) {

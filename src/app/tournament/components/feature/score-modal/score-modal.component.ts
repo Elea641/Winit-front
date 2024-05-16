@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScoreModalContent } from 'src/app/tournament/models/ScoreModal.model';
 import {
@@ -32,7 +32,7 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './score-modal.component.html',
   styleUrls: ['./score-modal.component.scss'],
 })
-export class ScoreModalComponent {
+export class ScoreModalComponent implements OnInit {
   content: ScoreModalContent = new ScoreModalContent({
     match: {},
     nextPhase: '',
@@ -63,11 +63,11 @@ export class ScoreModalComponent {
   }
 
   get scoreTeam1() {
-    return this.scoreForm.get('scoreTeam1')!;
+    return this.scoreForm.get('scoreTeam1');
   }
 
   get scoreTeam2() {
-    return this.scoreForm.get('scoreTeam2')!;
+    return this.scoreForm.get('scoreTeam2');
   }
 
   onSubmit() {

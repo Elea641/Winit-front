@@ -26,14 +26,14 @@ import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.componen
 })
 export class TournamentListComponent implements OnInit {
   filteredTournaments$!: Observable<TournamentCard[]>;
-  isDrawerOpened: boolean = false;
-  isOpen: string = '';
-  searchValue: string = '';
-  chronologicalFilter: boolean = false;
-  showOnlyUpcomingTournaments: boolean = false;
-  showNonFullTournaments: boolean = false;
-  selectedSport: string = '';
-  loading: boolean = true;
+  isDrawerOpened = false;
+  isOpen = '';
+  searchValue = '';
+  chronologicalFilter = false;
+  showOnlyUpcomingTournaments = false;
+  showNonFullTournaments = false;
+  selectedSport = '';
+  loading = true;
 
   constructor(
     private tournamentService: TournamentService,
@@ -54,7 +54,7 @@ export class TournamentListComponent implements OnInit {
     this.isOpen = isDrawerOpened ? 'open' : 'close';
   }
 
-  onReceiveApplyFilters(event: CustomEvent) {
+  onReceiveApplyFilters() {
     this.applyFilters();
   }
 
@@ -90,10 +90,10 @@ export class TournamentListComponent implements OnInit {
         this.showOnlyUpcomingTournaments,
         this.showNonFullTournaments
       )
-      .pipe(map((data) => data));
+      .pipe(map(data => data));
   }
 
-  onReceiveResetFilters(event: CustomEvent) {
+  onReceiveResetFilters() {
     this.filteredTournaments$ = this.tournamentService.getAllTournaments();
     this.chronologicalFilter = false;
     this.showOnlyUpcomingTournaments = false;

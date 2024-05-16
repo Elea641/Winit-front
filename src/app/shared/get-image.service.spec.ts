@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
 import { GetImageService } from './get-image.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('GetImageService', () => {
   let service: GetImageService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ imports: [HttpClientModule] });
     service = TestBed.inject(GetImageService);
   });
 

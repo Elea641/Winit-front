@@ -5,7 +5,7 @@ export class TournamentCreationDto {
     public place: string,
     public sport: string,
     public maxTeams: number,
-    public tournamentBanner?: File,
+    public tournamentBanner: File,
     public inscriptionLimitDate?: Date
   ) {}
 }

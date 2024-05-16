@@ -9,8 +9,7 @@
         <input matInput type="text" formControlName="email" />
         <mat-error
           *ngIf="email?.errors && !email?.pristine"
-          class="error-message-size"
-        >
+          class="error-message-size">
           Email invalide
         </mat-error>
       </mat-form-field>
@@ -20,19 +19,22 @@
         <input matInput type="password" formControlName="password" />
         <mat-error
           *ngIf="password?.errors && !password?.pristine"
-          class="error-message-size"
-        >
+          class="error-message-size">
           Mot de passe invalide
         </mat-error>
       </mat-form-field>
+      <a
+        [routerLink]="['/auth/forgotten-password']"
+        class="forgotten-password-link"
+        >Mot de passe oublié ?</a
+      >
 
       <div class="button-container">
         <button
           mat-raised-button
           color="primary"
           type="submit"
-          class="register-button"
-        >
+          class="register-button">
           SE CONNECTER
         </button>
         <button
@@ -40,8 +42,7 @@
           color="primary"
           class="login-button"
           type="button"
-          [routerLink]="['/auth/register']"
-        >
+          [routerLink]="['/auth/register']">
           S'INSCRIRE
         </button>
       </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IGeneratedTreeResult } from '../interfaces/IGeneratedTreeResult.service';
+import { IGeneratedTreeResultService } from '../interfaces/IGeneratedTreeResult.service';
 import { IHelperTournamentService } from '../interfaces/IHelperTournament.service';
 import { Phases } from '../../models/interfaces/phase.interface';
 import { TeamHelper } from '../../models/interfaces/team-helper.interface';
@@ -24,8 +24,8 @@ export class HelperTournamentService implements IHelperTournamentService {
 
   private convertToTournamentPhase(totalPhase: {
     phase: number;
-    randomMatchs: {};
-    totalMatchesWithoutRandoms: {};
+    randomMatchs: any;
+    totalMatchesWithoutRandoms: any;
   }): object {
     let numRounds = 0;
     let teamsRemaining = totalPhase.phase;
@@ -74,10 +74,10 @@ export class HelperTournamentService implements IHelperTournamentService {
     }
 
     const shuffledTeams = [...teams];
-    let randomizedTeamNames: string[] = [];
+    const randomizedTeamNames: string[] = [];
 
     this.shuffleArray(shuffledTeams);
-    shuffledTeams.map((team) => {
+    shuffledTeams.map(team => {
       randomizedTeamNames.push(team.name);
     });
 
@@ -105,10 +105,10 @@ export class HelperTournamentService implements IHelperTournamentService {
     result: Phases,
     totalPhaseMatchs: Phases
   ): Phases[] {
-    let nameAndNumberByPhase: Phases[] = [];
+    const nameAndNumberByPhase: Phases[] = [];
 
-    for (let phase in result) {
-      let valeurTotalMatchs = totalPhaseMatchs[phase];
+    for (const phase in result) {
+      const valeurTotalMatchs = totalPhaseMatchs[phase];
       nameAndNumberByPhase.push({
         phase: result[phase],
         number: valeurTotalMatchs,
@@ -122,12 +122,12 @@ export class HelperTournamentService implements IHelperTournamentService {
     result: Phases,
     totalPhaseMatchs: Phases
   ): Phases[] {
-    let phases: Phases[] = this.namePhaseAndNumberMatches(
+    const phases: Phases[] = this.namePhaseAndNumberMatches(
       result,
       totalPhaseMatchs
     );
 
-    let matchesByPhase: Phases[] = [];
+    const matchesByPhase: Phases[] = [];
 
     phases.forEach((phaseObj: any) => {
       for (let j = 0; j < phaseObj.number / 2; j++) {
@@ -143,8 +143,8 @@ export class HelperTournamentService implements IHelperTournamentService {
     return matchesByPhase;
   }
 
-  private definePhaseMatches(result: any): {} {
-    let defineMatches: any = {};
+  private definePhaseMatches(result: any): object {
+    const defineMatches: any = {};
     defineMatches.randomPhaseMatches = [];
 
     for (let i = 0; i < result.matchsPhase.randomTeams.length; i += 2) {
@@ -209,7 +209,7 @@ export class HelperTournamentService implements IHelperTournamentService {
   }
 
   generatedTree(totalTeams: number, teams: any): any {
-    let result: IGeneratedTreeResult = {
+    const result: IGeneratedTreeResultService = {
       calculPhase: this.calculPhase(totalTeams),
       totalPhase: this.convertToTournamentPhase(this.calculPhase(totalTeams)),
       randomizeTeams: this.randomizeTeams(teams),

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, concatMap, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -20,7 +20,7 @@ import { Team } from 'src/app/team/models/team.model';
   templateUrl: './select-team-page.component.html',
   styleUrls: ['./select-team-page.component.scss'],
 })
-export class SelectTeamPageComponent {
+export class SelectTeamPageComponent implements OnInit {
   tournament$!: Observable<TournamentDetails | null>;
   teams$!: Observable<Team[] | null>;
 
@@ -30,23 +30,28 @@ export class SelectTeamPageComponent {
   ) {}
 
   ngOnInit() {
-    this.tournament$ = this.route.data.pipe(
-      concatMap((data) => {
-        return of(data['tournament']);
-      })
-    );
-    this.tournament$.subscribe((tournament) => {
-      if (tournament) {
-        this.teamService
-          .getAllTeamsByUserForTournament(tournament?.sport)
-          .subscribe((teams) => {
-            if (teams) {
-              this.teams$ = of(teams);
-            } else {
-              this.teams$ = of([]);
-            }
-          });
-      }
-    });
+    if (this.route.data) {
+      this.tournament$ = this.route.data.pipe(
+        concatMap(data => {
+          return of(data['tournament']);
+        })
+      );
+    }
+
+    if (this.tournament$) {
+      this.tournament$.subscribe(tournament => {
+        if (tournament) {
+          this.teamService
+            .getAllTeamsByUserForTournament(tournament?.sport)
+            .subscribe(teams => {
+              if (teams) {
+                this.teams$ = of(teams);
+              } else {
+                this.teams$ = of([]);
+              }
+            });
+        }
+      });
+    }
   }
 }

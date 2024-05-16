@@ -12,5 +12,5 @@ import { FooterComponent } from './components/ui/footer/footer.component';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'WinIt-Front';
+  title = 'WinIt';
 }

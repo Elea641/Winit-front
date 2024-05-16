@@ -35,6 +35,8 @@ import {
 import {
   BackOfficeUserEditComponent
 } from "./back-office/components/feature/back-office-user-edit/back-office-user-edit.component";
+import { PasswordForgottenComponent } from './auth/components/feature/password-forgotten/password-forgotten.component';
+import { NewPasswordComponent } from './auth/components/feature/new-password/new-password.component';
 import { TeamFormComponent } from './team/components/feature/team-form/team-form.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { userStatisticsResolver } from './profile/shared/resolvers/user-statistics-resolver';
@@ -147,6 +149,8 @@ export const routes: Routes = [
     children: [
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginFormComponent },
+      { path: 'forgotten-password', component: PasswordForgottenComponent },
+      { path: 'new-password/:token', component: NewPasswordComponent },
     ],
   },
   { path: 'sport', component: SportComponent },

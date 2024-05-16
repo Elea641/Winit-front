@@ -1,5 +1,5 @@
-@import "../../../../../assets/style/variables.scss";
-@import "../../../../../assets/style/mixins.scss";
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
 
 @include media-mobile-tablet-screen {
   button {
@@ -8,7 +8,7 @@
   }
 
   h2 {
-    color: $secondary-color;
+    color: $secondary-color-text;
     font-weight: 400;
     margin-top: 2rem;
   }

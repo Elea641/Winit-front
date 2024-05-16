@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CurrentProfileDetailsComponent } from '../../components/feature/current-profile-details/current-profile-details.component';
 import { ActivatedRoute } from '@angular/router';
@@ -12,20 +12,22 @@ import { UserStatistics } from '../../models/user-statistics.model';
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss'],
 })
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit {
   userStatistics$!: Observable<UserStatistics>;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.userStatistics$ = this.route.data.pipe(
-      concatMap((data) => {
-        if (data && data['statistics']) {
-          return of(data['statistics']);
-        } else {
-          return of(null);
-        }
-      })
-    );
+    if (this.route.data) {
+      this.userStatistics$ = this.route.data.pipe(
+        concatMap(data => {
+          if (data && data['statistics']) {
+            return of(data['statistics']);
+          } else {
+            return of(null);
+          }
+        })
+      );
+    }
   }
 }
