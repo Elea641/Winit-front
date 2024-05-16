@@ -45,7 +45,7 @@ mat-divider {
 }
 
 .mat-mdc-raised-button:not(:disabled) {
-  color: white;
+  color: $primary-color-text;
 }
 
 .mat-mdc-raised-button:hover,

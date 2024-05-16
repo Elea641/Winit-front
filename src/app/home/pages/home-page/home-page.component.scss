@@ -6,6 +6,11 @@ main {
   padding: 0 2rem 2rem 2rem;
   width: 100vw;
 
+  img {
+    width: 100vw;
+    height: 30vh;
+  }
+
   .tournament-container-home {
     width: 100%;
 
@@ -27,5 +32,25 @@ main {
 
   @include media-large-screen {
     @include flex-column-center;
+
+    .image-container-home {
+      display: flex;
+      justify-content: space-between;
+      width: 100vw;
+      height: 30vh;
+      background-color: #1c0a1a;
+    }
+
+    .image-container-home div:first-child {
+      background-color: #1e0501;
+      width: 50vw;
+      height: 100%;
+    }
+
+    .image-container-home img {
+      transform: translateX(-50%);
+      width: 60vw;
+      height: 30vh;
+    }
   }
 }

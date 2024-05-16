@@ -52,7 +52,6 @@
       justify-self: end;
       width: 10rem;
       color: $primary-color-button-text;
-      @include flex-column-center;
     }
 
     button:last-child {
@@ -62,7 +61,6 @@
       grid-row-end: 4;
       justify-self: end;
       width: 10rem;
-      @include flex-column-center;
     }
   }
 }

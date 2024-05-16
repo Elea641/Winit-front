@@ -4,21 +4,10 @@
 section {
   margin-top: 2rem;
 
-  h1 {
-    color: $secondary-color;
-    font-weight: normal;
-    margin: 1rem 0.5rem;
-  }
-
   h2 {
     color: $secondary-color;
     font-weight: normal;
     margin: 1rem 0.5rem;
-  }
-
-  mat-divider {
-    margin: 0.5rem;
-    border-top-color: $secondary-color;
   }
 
   @include media-mobile-screen {

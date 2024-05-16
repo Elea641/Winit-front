@@ -9,6 +9,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Team } from 'src/app/team/models/team.model';
 import { ModalContent } from 'src/app/components/models/modal-content.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-list-member',
@@ -18,6 +19,7 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
     MemberCardComponent,
     MatButtonModule,
     MatDialogModule,
+    MatIconModule,
   ],
   templateUrl: './list-member.component.html',
   styleUrls: ['./list-member.component.scss'],

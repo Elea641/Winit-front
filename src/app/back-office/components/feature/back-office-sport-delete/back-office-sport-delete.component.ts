@@ -5,11 +5,12 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { BackOfficeSportService } from '../../../shared/back-office-sport.service';
 import { ToastService } from '../../../../shared/toast.service';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-back-office-sport-delete',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatDialogModule],
+  imports: [CommonModule, MatButtonModule, MatDialogModule, MatIconModule],
   templateUrl: './back-office-sport-delete.component.html',
   styleUrls: ['./back-office-sport-delete.component.scss'],
 })

@@ -7,11 +7,12 @@ import { ToastService } from '../../../../shared/toast.service';
 import { Router } from '@angular/router';
 import { CurrentUser } from 'src/app/auth/models/current-user.model';
 import { UserService } from 'src/app/auth/shared/user.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-delete-profile-dialog',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule],
   templateUrl: './delete-profile-dialog.component.html',
   styleUrls: ['./delete-profile-dialog.component.scss'],
 })
