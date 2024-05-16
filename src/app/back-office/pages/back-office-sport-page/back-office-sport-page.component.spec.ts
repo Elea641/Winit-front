@@ -8,7 +8,7 @@ describe('BackOfficeSportPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BackOfficeSportPageComponent]
+      imports: [BackOfficeSportPageComponent],
     });
     fixture = TestBed.createComponent(BackOfficeSportPageComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackOfficePageComponent } from './back-office-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('BackOfficePageComponent', () => {
   let component: BackOfficePageComponent;
@@ -8,7 +11,23 @@ describe('BackOfficePageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BackOfficePageComponent],
+      imports: [
+        BackOfficePageComponent,
+        HttpClientModule,
+        BrowserAnimationsModule,
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => '',
+              },
+            },
+          },
+        },
+      ],
     });
     fixture = TestBed.createComponent(BackOfficePageComponent);
     component = fixture.componentInstance;

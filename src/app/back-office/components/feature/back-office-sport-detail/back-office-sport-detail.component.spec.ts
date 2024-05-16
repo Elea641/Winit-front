@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackOfficeSportDetailComponent } from './back-office-sport-detail.component';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('BackOfficeSportDetailComponent', () => {
   let component: BackOfficeSportDetailComponent;
@@ -8,7 +10,19 @@ describe('BackOfficeSportDetailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BackOfficeSportDetailComponent]
+      imports: [BackOfficeSportDetailComponent, HttpClientModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => '',
+              },
+            },
+          },
+        },
+      ],
     });
     fixture = TestBed.createComponent(BackOfficeSportDetailComponent);
     component = fixture.componentInstance;

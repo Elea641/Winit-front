@@ -8,7 +8,7 @@ describe('BackOfficeUserPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BackOfficeUserPageComponent]
+      imports: [BackOfficeUserPageComponent],
     });
     fixture = TestBed.createComponent(BackOfficeUserPageComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackOfficeUserEditComponent } from './back-office-user-edit.component';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastService } from '../../../../shared/toast.service';
 
 describe('BackOfficeUserEditComponent', () => {
   let component: BackOfficeUserEditComponent;
@@ -8,7 +12,25 @@ describe('BackOfficeUserEditComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BackOfficeUserEditComponent]
+      imports: [
+        BackOfficeUserEditComponent,
+        HttpClientModule,
+        ToastrModule.forRoot(),
+      ],
+      providers: [
+        ToastService,
+        ToastrService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => '',
+              },
+            },
+          },
+        },
+      ],
     });
     fixture = TestBed.createComponent(BackOfficeUserEditComponent);
     component = fixture.componentInstance;

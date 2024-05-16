@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackOfficeSportsTableComponent } from './back-office-sports-table.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('BackOfficeSportsTableComponent', () => {
   let component: BackOfficeSportsTableComponent;
@@ -8,7 +11,23 @@ describe('BackOfficeSportsTableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BackOfficeSportsTableComponent]
+      imports: [
+        BackOfficeSportsTableComponent,
+        HttpClientModule,
+        BrowserAnimationsModule,
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => '',
+              },
+            },
+          },
+        },
+      ],
     });
     fixture = TestBed.createComponent(BackOfficeSportsTableComponent);
     component = fixture.componentInstance;
