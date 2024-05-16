@@ -2,10 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { MemberService } from './member.service';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ToastService } from 'src/app/shared/toast.service';
 import { Member } from '../models/member.model';
@@ -13,7 +10,6 @@ import { Member } from '../models/member.model';
 describe('MemberService', () => {
   let service: MemberService;
   let memberServiceSpy: jasmine.SpyObj<MemberService>;
-  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     const spy = jasmine.createSpyObj('TeamService', [
@@ -37,7 +33,6 @@ describe('MemberService', () => {
     memberServiceSpy = TestBed.inject(
       MemberService
     ) as jasmine.SpyObj<MemberService>;
-    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {

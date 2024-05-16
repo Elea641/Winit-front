@@ -2,22 +2,16 @@ import { TestBed } from '@angular/core/testing';
 
 import { TeamService } from './team.service';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Team } from '../models/team.model';
 import { of } from 'rxjs';
-import { Router } from '@angular/router';
 import { CreatedTeam } from '../models/created-team.model';
 
 describe('TeamService', () => {
   let service: TeamService;
   let teamServiceSpy: jasmine.SpyObj<TeamService>;
-  let httpMock: HttpTestingController;
-  let router: Router;
 
   beforeEach(() => {
     const spy = jasmine.createSpyObj('TeamService', [
@@ -44,8 +38,6 @@ describe('TeamService', () => {
     });
     service = TestBed.inject(TeamService);
     teamServiceSpy = TestBed.inject(TeamService) as jasmine.SpyObj<TeamService>;
-    httpMock = TestBed.inject(HttpTestingController);
-    router = TestBed.inject(Router);
   });
 
   it('should be created', () => {
