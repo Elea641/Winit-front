@@ -11,16 +11,6 @@
         <p *ngIf="!tournamentDetails.isGenerated">
           {{ remainingTime }}
         </p>
-        <button
-          *ngIf="
-            currentNumberOfParticipants !== tournamentDetails.maxNumberOfTeams
-          "
-          mat-raised-button
-          color="primary"
-          type="button"
-          [routerLink]="['/tournament', tournamentId, 'teams']">
-          PARTICIPER
-        </button>
       </div>
       <div
         *ngIf="remainingTime === 'Inscription terminée'"
@@ -43,6 +33,18 @@
           }}
         </p>
       </div>
+    </div>
+    <div class="button-wrapper">
+      <button
+        *ngIf="
+          currentNumberOfParticipants !== tournamentDetails.maxNumberOfTeams
+        "
+        mat-raised-button
+        color="primary"
+        type="button"
+        [routerLink]="['/tournament', tournamentId, 'teams']">
+        PARTICIPER
+      </button>
       <button
         mat-button
         color="warn"

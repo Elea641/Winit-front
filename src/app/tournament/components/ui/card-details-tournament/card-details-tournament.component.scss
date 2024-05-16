@@ -61,6 +61,12 @@ article {
     .mat-mdc-raised-button:focus {
       color: $primary-color-focus;
     }
+
+    .button-wrapper {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 2rem;
+    }
   }
 
   @include media-tablet-screen {
