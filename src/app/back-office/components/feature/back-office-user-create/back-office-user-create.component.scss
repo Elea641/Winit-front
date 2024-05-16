@@ -1,4 +1,4 @@
-@import "../../../../../assets/style/variables.scss";
+@import '../../../../../assets/style/variables.scss';
 
 .back-office-container {
   padding: 2rem;
@@ -78,8 +78,8 @@ h2 {
   color: white;
 }
 
-.slide-toggle>mat-label,
-.radio-button>mat-label {
+.slide-toggle > mat-label,
+.radio-button > mat-label {
   color: var(--mdc-outlined-text-field-label-text-color);
   padding-bottom: 8px;
 }

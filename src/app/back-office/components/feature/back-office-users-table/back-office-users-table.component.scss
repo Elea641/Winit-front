@@ -1,4 +1,4 @@
-@import "../../../../../assets/style/variables.scss";
+@import '../../../../../assets/style/variables.scss';
 
 .mat-mdc-table {
   background-color: $primary-background-color;
@@ -31,7 +31,7 @@
 }
 
 .toggle-off {
-  color: var(--mdc-outlined-text-field-label-text-color);;
+  color: var(--mdc-outlined-text-field-label-text-color);
 }
 
 .actions-container {
@@ -49,7 +49,7 @@
   color: $primary-background-color;
 }
 
-.actions-cell{
+.actions-cell {
   display: flex;
 }
 

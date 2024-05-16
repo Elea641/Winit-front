@@ -19,22 +19,12 @@ import { tournamentResolver } from './tournament/shared/resolvers/tournament-res
 import { tournamentsResolver } from './tournament/shared/resolvers/tournaments-resolver';
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
 import { UserGuard } from './auth/core/user.guard';
-import {
-  BackOfficeSportPageComponent
-} from "./back-office/pages/back-office-sport-page/back-office-sport-page.component";
-import {
-  BackOfficeCreateSportComponent
-} from "./back-office/components/feature/back-office-create-sport/back-office-create-sport.component";
-import {
-  BackOfficeSportDetailComponent
-} from "./back-office/components/feature/back-office-sport-detail/back-office-sport-detail.component";
-import {BackOfficeUserPageComponent} from "./back-office/pages/back-office-user-page/back-office-user-page.component";
-import {
-  BackOfficeUserDetailComponent
-} from "./back-office/components/feature/back-office-user-detail/back-office-user-detail.component";
-import {
-  BackOfficeUserEditComponent
-} from "./back-office/components/feature/back-office-user-edit/back-office-user-edit.component";
+import { BackOfficeSportPageComponent } from './back-office/pages/back-office-sport-page/back-office-sport-page.component';
+import { BackOfficeCreateSportComponent } from './back-office/components/feature/back-office-create-sport/back-office-create-sport.component';
+import { BackOfficeSportDetailComponent } from './back-office/components/feature/back-office-sport-detail/back-office-sport-detail.component';
+import { BackOfficeUserPageComponent } from './back-office/pages/back-office-user-page/back-office-user-page.component';
+import { BackOfficeUserDetailComponent } from './back-office/components/feature/back-office-user-detail/back-office-user-detail.component';
+import { BackOfficeUserEditComponent } from './back-office/components/feature/back-office-user-edit/back-office-user-edit.component';
 import { PasswordForgottenComponent } from './auth/components/feature/password-forgotten/password-forgotten.component';
 import { NewPasswordComponent } from './auth/components/feature/new-password/new-password.component';
 import { TeamFormComponent } from './team/components/feature/team-form/team-form.component';
@@ -42,15 +32,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { userStatisticsResolver } from './profile/shared/resolvers/user-statistics-resolver';
 import { RankingPageComponent } from './ranking/pages/ranking-page/ranking-page.component';
 import { rankingResolver } from './ranking/shared/resolvers/ranking-resolver';
-import {
-  BackOfficeUserCreateComponent
-} from "./back-office/components/feature/back-office-user-create/back-office-user-create.component";
-import {
-  BackOfficeUserDeleteComponent
-} from "./back-office/components/feature/back-office-user-delete/back-office-user-delete.component";
-import {
-  BackOfficeSportEditComponent
-} from "./back-office/components/feature/back-office-sport-edit/back-office-sport-edit.component";
+import { BackOfficeUserCreateComponent } from './back-office/components/feature/back-office-user-create/back-office-user-create.component';
+import { BackOfficeSportEditComponent } from './back-office/components/feature/back-office-sport-edit/back-office-sport-edit.component';
 
 export const routes: Routes = [
   {
@@ -108,7 +91,9 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'back-office', component: BackOfficePageComponent, canActivate: [AdminGuard],
+    path: 'back-office',
+    component: BackOfficePageComponent,
+    canActivate: [AdminGuard],
   },
   {
     path: 'back-office/sport',
@@ -118,17 +103,17 @@ export const routes: Routes = [
       { path: 'create', component: BackOfficeCreateSportComponent },
       { path: 'edit/:id([0-9]+)', component: BackOfficeSportEditComponent },
       { path: ':id([0-9]+)', component: BackOfficeSportDetailComponent },
-    ]
+    ],
   },
   {
     path: 'back-office/user',
     component: BackOfficeUserPageComponent,
     canActivate: [AdminGuard],
     children: [
-      { path: 'create', component: BackOfficeUserCreateComponent},
+      { path: 'create', component: BackOfficeUserCreateComponent },
       { path: 'edit/:id([0-9]+)', component: BackOfficeUserEditComponent },
-      { path: ':id([0-9]+)', component: BackOfficeUserDetailComponent }
-    ]
+      { path: ':id([0-9]+)', component: BackOfficeUserDetailComponent },
+    ],
   },
   {
     path: 'form-team/:mode',

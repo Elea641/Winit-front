@@ -54,10 +54,9 @@
         <span>Profil</span>
       </a>
       <a
-        *ngIf="token && !isTokenEmpty(token) && token.role == 'ROLE_ADMIN'"
+        *ngIf="token && !isTokenEmpty(token) && token.role === 'ROLE_ADMIN'"
         mat-menu-item
-        routerLink="/back-office"
-      >
+        routerLink="/back-office">
         <mat-icon>settings</mat-icon>
         <span>Administration</span>
       </a>

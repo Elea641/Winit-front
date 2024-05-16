@@ -3,20 +3,30 @@
     <h1>Espace administrateur</h1>
     <mat-divider></mat-divider>
     <div>
-      <p class="info-text">Ici, vous pouvez consulter les données et les statistiques d'un utilisateur. Vous pouvez
-        également modifier ses informations personnelles, changer son statut sur l'application et désactiver son compte.
-        Attention, toutes vos modifications auront un impact sur le bon fonctionnement de l'application, veuillez vous
-        assurer d'avoir les autorisations nécessaires avant de les effectuer.</p>
+      <p class="info-text">
+        Ici, vous pouvez consulter les données et les statistiques d'un
+        utilisateur. Vous pouvez également modifier ses informations
+        personnelles, changer son statut sur l'application et désactiver son
+        compte. Attention, toutes vos modifications auront un impact sur le bon
+        fonctionnement de l'application, veuillez vous assurer d'avoir les
+        autorisations nécessaires avant de les effectuer.
+      </p>
     </div>
     <div class="back-office-detail-header">
       <h2>UTILISATEUR</h2>
       <div class="button-container">
-        <button mat-raised-button class="edit-button" color="primary"
-                [routerLink]="['/back-office/user/edit', user.id]">
+        <button
+          mat-raised-button
+          class="edit-button"
+          color="primary"
+          [routerLink]="['/back-office/user/edit', user.id]">
           <mat-icon>edit</mat-icon>
           MODIFIER
         </button>
-        <button mat-stroked-button color="warn" (click)="openDeleteDialog(user.id)">
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="openDeleteDialog(user.id)">
           <mat-icon>delete</mat-icon>
           SUPPRIMER
         </button>
@@ -51,11 +61,15 @@
         </mat-list-item>
         <mat-list-item>
           <span matListItemTitle>Date de création</span>
-          <span matListItemLine>{{ user.createdAt | date: 'dd-MM-yyyy à hh:mm:ss' }}</span>
+          <span matListItemLine>{{
+            user.createdAt | date: 'dd-MM-yyyy à hh:mm:ss'
+          }}</span>
         </mat-list-item>
         <mat-list-item>
           <span matListItemTitle>Dernière mise à jour</span>
-          <span matListItemLine>{{ user.updatedAt | date: 'dd-MM-yyyy à hh:mm:ss' }}</span>
+          <span matListItemLine>{{
+            user.updatedAt | date: 'dd-MM-yyyy à hh:mm:ss'
+          }}</span>
         </mat-list-item>
       </mat-list>
     </div>
