@@ -45,7 +45,7 @@ describe('TeamService', () => {
   });
 
   it('should get team', () => {
-    const mockTeam: any = {
+    const mockTeam: Team = {
       id: 1,
       leaderName: 'John Doe',
       members: [
@@ -72,7 +72,7 @@ describe('TeamService', () => {
   });
 
   it('should get team', () => {
-    const mockTeam: any = {
+    const mockTeam: Team = {
       id: 1,
       leaderName: 'John Doe',
       members: [
