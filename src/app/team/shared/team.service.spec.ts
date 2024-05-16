@@ -17,7 +17,6 @@ describe('TeamService', () => {
   let service: TeamService;
   let httpMock: HttpTestingController;
   let router: Router;
-  let toastService: ToastService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
