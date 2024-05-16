@@ -56,8 +56,9 @@ export class BackOfficeUsersTableComponent implements AfterViewInit {
   ) {}
 
   fetchUsers() {
-    this.backOfficeUserService.getAllUsers().subscribe(
-      (adminUsers: AdminUser[]) => {
+    this.backOfficeUserService
+      .getAllUsers()
+      .subscribe((adminUsers: AdminUser[]) => {
         adminUsers.forEach(user => {
           user.position = ++this.positionColumnData;
           if (user.requiredRole === 'ROLE_ADMIN') {
@@ -67,11 +68,7 @@ export class BackOfficeUsersTableComponent implements AfterViewInit {
           }
         });
         this.dataSource = new MatTableDataSource<AdminUser>(adminUsers);
-      },
-      error => {
-        console.error('Error fetching users:', error);
-      }
-    );
+      });
   }
 
   applyFilter(event: Event) {

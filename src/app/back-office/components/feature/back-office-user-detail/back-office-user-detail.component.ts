@@ -44,19 +44,14 @@ export class BackOfficeUserDetailComponent implements OnInit {
   }
 
   private getUserDetails(id: number) {
-    this.userService.getUserById(id).subscribe(
-      (user: AdminUser) => {
-        this.user = user;
-        if (user.requiredRole === 'ROLE_ADMIN') {
-          user.requiredRole = 'Administrateur';
-        } else {
-          user.requiredRole = 'Utilisateur';
-        }
-      },
-      error => {
-        console.error('Error fetching user with id ' + id + ': ', error);
+    this.userService.getUserById(id).subscribe((user: AdminUser) => {
+      this.user = user;
+      if (user.requiredRole === 'ROLE_ADMIN') {
+        user.requiredRole = 'Administrateur';
+      } else {
+        user.requiredRole = 'Utilisateur';
       }
-    );
+    });
   }
 
   openDeleteDialog(userId: any) {

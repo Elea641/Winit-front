@@ -47,7 +47,7 @@
           formControlNameValue="imageFile"
           labelValue="Image du sport"></app-file-upload>
 
-        <mat-card *ngIf="!imageFile.touched || !imageFile.valid">
+        <mat-card *ngIf="!imageFile?.touched || !imageFile?.valid">
           <img mat-card-image [src]="currentImage" alt="image du sport" />
         </mat-card>
       </div>

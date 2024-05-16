@@ -74,16 +74,11 @@ export class BackOfficeSportEditComponent implements OnInit {
   }
 
   private getSportDetails(id: number) {
-    this.sportService.getSportById(id).subscribe(
-      (sport: AdminSport) => {
-        this.sport = sport;
-        this.displayImage(sport.imageUrl);
-        this.patchValues(sport);
-      },
-      error => {
-        console.error('Error fetching sport with id ' + id + ': ', error);
-      }
-    );
+    this.sportService.getSportById(id).subscribe((sport: AdminSport) => {
+      this.sport = sport;
+      this.displayImage(sport.imageUrl);
+      this.patchValues(sport);
+    });
   }
 
   private patchValues(sport: AdminSport) {

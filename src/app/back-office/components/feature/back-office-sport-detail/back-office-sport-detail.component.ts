@@ -48,15 +48,10 @@ export class BackOfficeSportDetailComponent implements OnInit {
   }
 
   private getSportDetails(id: number) {
-    this.sportService.getSportById(id).subscribe(
-      (sport: AdminSport) => {
-        this.sport = sport;
-        this.displayImage(sport.imageUrl);
-      },
-      error => {
-        console.error('Error fetching sport ' + id + ': ', error);
-      }
-    );
+    this.sportService.getSportById(id).subscribe((sport: AdminSport) => {
+      this.sport = sport;
+      this.displayImage(sport.imageUrl);
+    });
   }
 
   private displayImage(imageUrl: any) {

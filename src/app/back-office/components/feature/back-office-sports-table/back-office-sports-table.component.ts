@@ -53,17 +53,14 @@ export class BackOfficeSportsTableComponent implements AfterViewInit {
   ) {}
 
   fetchSports() {
-    this.backOfficeSportService.getAllSports().subscribe(
-      (sports: AdminSport[]) => {
+    this.backOfficeSportService
+      .getAllSports()
+      .subscribe((sports: AdminSport[]) => {
         sports.forEach(sport => {
           sport.position = ++this.positionColumnData;
         });
         this.dataSource = new MatTableDataSource<AdminSport>(sports);
-      },
-      error => {
-        console.error('Error fetching sports:', error);
-      }
-    );
+      });
   }
 
   applyFilter(event: Event) {

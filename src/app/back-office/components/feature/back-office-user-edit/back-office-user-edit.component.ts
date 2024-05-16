@@ -77,15 +77,10 @@ export class BackOfficeUserEditComponent implements OnInit {
   }
 
   private getUserDetails(id: number) {
-    this.userService.getUserById(id).subscribe(
-      (user: AdminUser) => {
-        this.user = user;
-        this.patchValues(user);
-      },
-      error => {
-        console.error('Error fetching user with id ' + id + ': ', error);
-      }
-    );
+    this.userService.getUserById(id).subscribe((user: AdminUser) => {
+      this.user = user;
+      this.patchValues(user);
+    });
   }
 
   private patchValues(user: AdminUser) {
