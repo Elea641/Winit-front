@@ -3,9 +3,10 @@
     <app-member-card [member]="member"></app-member-card>
     <button
       *ngIf="member.firstName !== team.leaderName"
-      mat-button
+      mat-stroked-button
       color="warn"
       (click)="openDialog(member)">
+      <mat-icon>delete</mat-icon>
       SUPPRIMER
     </button>
   </div>

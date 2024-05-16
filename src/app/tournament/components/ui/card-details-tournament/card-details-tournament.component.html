@@ -46,10 +46,11 @@
         PARTICIPER
       </button>
       <button
-        mat-button
+        mat-stroked-button
         color="warn"
         (click)="openDialog(tournamentDetails)"
         *ngIf="currentUser === true">
+        <mat-icon>delete</mat-icon>
         SUPPRIMER
       </button>
     </div>

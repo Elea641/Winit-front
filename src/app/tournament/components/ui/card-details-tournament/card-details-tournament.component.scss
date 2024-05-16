@@ -4,9 +4,10 @@
 article {
   color: $secondary-color-text;
   @include flex-column;
-
+  align-items: center;
   img {
-    max-width: 20rem;
+    max-width: 15rem;
+    max-height: 15rem;
   }
 
   .card-details-tournament-container-body {
@@ -59,7 +60,7 @@ article {
 
     .mat-mdc-raised-button:hover,
     .mat-mdc-raised-button:focus {
-      color: $primary-color-focus;
+      color: $primary-color-text;
     }
 
     .button-wrapper {
@@ -79,7 +80,7 @@ article {
     flex-direction: row;
 
     .card-details-tournament-container-body {
-      padding: 5rem;
+      padding: 2rem 0 0 5rem;
 
       .card-details-tournament-container-header {
         h3 {

@@ -7,11 +7,12 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button
-      mat-flat-button
+      mat-stroked-button
       color="warn"
       [mat-dialog-close]="true"
       (click)="deleteSport()">
-      Supprimer
+      <mat-icon>delete</mat-icon>
+      SUPPRIMER
     </button>
     <button mat-button mat-dialog-close color="primary">Annuler</button>
   </mat-dialog-actions>
