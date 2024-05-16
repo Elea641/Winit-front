@@ -17,7 +17,6 @@ describe('TeamService', () => {
   let service: TeamService;
   let httpMock: HttpTestingController;
   let router: Router;
-  let toastService: ToastService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,7 +37,6 @@ describe('TeamService', () => {
     service = TestBed.inject(TeamService);
     httpMock = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router);
-    toastService = TestBed.inject(ToastService);
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
   });
 
@@ -216,5 +214,17 @@ describe('TeamService', () => {
     expect(router.navigate).toHaveBeenCalledWith([
       `/teams-details/${mockTeam.name}`,
     ]);
+  });
+
+  it('should delete team', () => {
+    service.deleteTeam('Team A');
+
+    const req = httpMock.expectOne(`${environment.urlApi}/teams/Team A`);
+
+    expect(req.request.method).toBe('DELETE');
+
+    req.flush({});
+
+    expect(router.navigate).toHaveBeenCalledWith(['/profile']);
   });
 });
