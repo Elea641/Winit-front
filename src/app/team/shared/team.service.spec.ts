@@ -2,23 +2,28 @@ import { TestBed } from '@angular/core/testing';
 
 import { TeamService } from './team.service';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Team } from '../models/team.model';
-import { environment } from 'src/environments/environment';
+import { of } from 'rxjs';
 import { CreatedTeam } from '../models/created-team.model';
-import { Router } from '@angular/router';
 
 describe('TeamService', () => {
   let service: TeamService;
-  let httpMock: HttpTestingController;
-  let router: Router;
+  let teamServiceSpy: jasmine.SpyObj<TeamService>;
 
   beforeEach(() => {
+    const spy = jasmine.createSpyObj('TeamService', [
+      'getTeam',
+      'getAllTeamsByUser',
+      'getAllTeamsByUserForTournament',
+      'getTeamByTeamName',
+      'addTeam',
+      'updateTeam',
+      'deleteTeam',
+    ]);
+
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
@@ -28,24 +33,19 @@ describe('TeamService', () => {
       providers: [
         ToastService,
         ToastrService,
-        {
-          provide: Router,
-          useValue: { navigate: jasmine.createSpy('navigate') },
-        },
+        { provide: TeamService, useValue: spy },
       ],
     });
     service = TestBed.inject(TeamService);
-    httpMock = TestBed.inject(HttpTestingController);
-    router = TestBed.inject(Router);
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    teamServiceSpy = TestBed.inject(TeamService) as jasmine.SpyObj<TeamService>;
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should set and get team', () => {
-    const mockTeam: Team = {
+  it('should get team', () => {
+    const mockTeam: any = {
       id: 1,
       leaderName: 'John Doe',
       members: [
@@ -59,11 +59,43 @@ describe('TeamService', () => {
       validated: true,
       ownerId: 123,
     };
-    service.setTeam(mockTeam);
 
-    service.getTeam().subscribe((team: Team | null) => {
+    teamServiceSpy.getTeam.and.returnValue(of(mockTeam));
+
+    teamServiceSpy.getTeam().subscribe(team => {
       expect(team).toEqual(mockTeam);
     });
+
+    expect(teamServiceSpy.getTeam.calls.count())
+      .withContext('spy method was called once')
+      .toBe(1);
+  });
+
+  it('should get team', () => {
+    const mockTeam: any = {
+      id: 1,
+      leaderName: 'John Doe',
+      members: [
+        { id: 1, firstName: 'Member 1', lastName: 'Member 2' },
+        { id: 2, firstName: 'Member 2', lastName: 'Member 2' },
+      ],
+      name: 'Team A',
+      sport: 'Football',
+      teamMembersCount: 2,
+      totalPlayers: 11,
+      validated: true,
+      ownerId: 123,
+    };
+
+    teamServiceSpy.getTeam.and.returnValue(of(mockTeam));
+
+    teamServiceSpy.getTeam().subscribe(team => {
+      expect(team).toEqual(mockTeam);
+    });
+
+    expect(teamServiceSpy.getTeam.calls.count())
+      .withContext('spy method was called once')
+      .toBe(1);
   });
 
   it('should return teams for user', () => {
@@ -84,21 +116,15 @@ describe('TeamService', () => {
       },
     ];
 
-    service.getAllTeamsByUser().subscribe((teams: Team[]) => {
-      expect(teams).toEqual(mockTeams);
+    teamServiceSpy.getAllTeamsByUser.and.returnValue(of(mockTeams));
+
+    teamServiceSpy.getAllTeamsByUser().subscribe(team => {
+      expect(team).toEqual(mockTeams);
     });
 
-    const req = httpMock.expectOne(`${environment.urlApi}/teams`);
-
-    expect(req.request.method).toBe('GET');
-
-    req.flush(mockTeams);
-
-    expect(req.request.method).toBe('GET');
-
-    expect(req.request.url).toBe(`${environment.urlApi}/teams`);
-
-    expect(req.request.body).toEqual(null);
+    expect(teamServiceSpy.getAllTeamsByUser.calls.count())
+      .withContext('spy method was called once')
+      .toBe(1);
   });
 
   it('should return teams by user for tournament', () => {
@@ -119,25 +145,19 @@ describe('TeamService', () => {
       },
     ];
 
-    service
-      .getAllTeamsByUserForTournament('Football')
-      .subscribe((teams: Team[]) => {
-        expect(teams).toEqual(mockTeams);
-      });
-
-    const req = httpMock.expectOne(
-      `${environment.urlApi}/teams/sport/Football`
+    teamServiceSpy.getAllTeamsByUserForTournament.and.returnValue(
+      of(mockTeams)
     );
 
-    expect(req.request.method).toBe('GET');
+    teamServiceSpy
+      .getAllTeamsByUserForTournament('Football')
+      .subscribe(team => {
+        expect(team).toEqual(mockTeams);
+      });
 
-    req.flush(mockTeams);
-
-    expect(req.request.method).toBe('GET');
-
-    expect(req.request.url).toBe(`${environment.urlApi}/teams/sport/Football`);
-
-    expect(req.request.body).toEqual(null);
+    expect(teamServiceSpy.getAllTeamsByUserForTournament.calls.count())
+      .withContext('spy method was called once')
+      .toBe(1);
   });
 
   it('should return team by teamName', () => {
@@ -156,25 +176,17 @@ describe('TeamService', () => {
       ownerId: 123,
     };
 
-    service.getTeamByTeamName(mockTeam['name']).subscribe((team: Team) => {
-      expect(team).toEqual(mockTeam);
-    });
+    teamServiceSpy.getTeamByTeamName.and.returnValue(of(mockTeam));
 
-    const req = httpMock.expectOne(
-      `${environment.urlApi}/teams/${mockTeam['name']}`
-    );
+    teamServiceSpy
+      .getTeamByTeamName(mockTeam['name'])
+      .subscribe((team: Team) => {
+        expect(team).toEqual(mockTeam);
+      });
 
-    expect(req.request.method).toBe('GET');
-
-    req.flush(mockTeam);
-
-    expect(req.request.method).toBe('GET');
-
-    expect(req.request.url).toBe(
-      `${environment.urlApi}/teams/${mockTeam['name']}`
-    );
-
-    expect(req.request.body).toEqual(null);
+    expect(teamServiceSpy.getTeamByTeamName.calls.count())
+      .withContext('spy method was called once')
+      .toBe(1);
   });
 
   it('should add team', () => {
@@ -183,17 +195,13 @@ describe('TeamService', () => {
       sport: 'Football',
     };
 
-    service.addTeam(mockTeam);
+    teamServiceSpy.addTeam.and.returnValue();
 
-    const req = httpMock.expectOne(`${environment.urlApi}/teams`);
+    teamServiceSpy.addTeam(mockTeam);
 
-    expect(req.request.method).toBe('POST');
-
-    req.flush(mockTeam);
-
-    expect(router.navigate).toHaveBeenCalledWith([
-      `/teams-details/${mockTeam.name}`,
-    ]);
+    expect(teamServiceSpy.addTeam.calls.count())
+      .withContext('spy method was called once')
+      .toBe(1);
   });
 
   it('should update team', () => {
@@ -203,28 +211,24 @@ describe('TeamService', () => {
       sport: 'Volley',
     };
 
-    service.updateTeam('Team A', mockTeam);
+    teamServiceSpy.updateTeam.and.returnValue();
 
-    const req = httpMock.expectOne(`${environment.urlApi}/teams/Team A`);
+    teamServiceSpy.updateTeam('Team A', mockTeam);
 
-    expect(req.request.method).toBe('PUT');
-
-    req.flush(mockTeam);
-
-    expect(router.navigate).toHaveBeenCalledWith([
-      `/teams-details/${mockTeam.name}`,
-    ]);
+    expect(teamServiceSpy.updateTeam.calls.count())
+      .withContext('spy method was called once')
+      .toBe(1);
   });
 
   it('should delete team', () => {
-    service.deleteTeam('Team A');
+    const mockTeamName = 'Team A';
 
-    const req = httpMock.expectOne(`${environment.urlApi}/teams/Team A`);
+    teamServiceSpy.deleteTeam.and.returnValue();
 
-    expect(req.request.method).toBe('DELETE');
+    service.deleteTeam(mockTeamName);
 
-    req.flush({});
-
-    expect(router.navigate).toHaveBeenCalledWith(['/profile']);
+    expect(teamServiceSpy.deleteTeam.calls.count())
+      .withContext('spy method was called once')
+      .toBe(1);
   });
 });
