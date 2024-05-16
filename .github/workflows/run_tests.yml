@@ -1,9 +1,7 @@
 name: Angular Tests
 
-on:
-  push:
-    branches:
-      - '*'
+on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,13 +13,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.10'
+          node-version: '18.10.0'
 
       - name: Install Angular CLI
-        run: npm install @angular/cli@16.2
+        run: npm install -g @angular/cli@16.2
 
       - name: Install dependencies
         run: npm install
 
       - name: Run tests
-        run: ng test
+        run: ng test --watch=false --browsers=ChromeHeadless
