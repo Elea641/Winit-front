@@ -1,0 +1,57 @@
+<div class="create-sport-page-container">
+  <div class="create-sport-block">
+    <h1>Ajouter un sport</h1>
+    <mat-divider></mat-divider>
+    <div class="info-text">
+      <mat-hint
+        >Le sport que vous créez pourra ensuite être sélectionné par les
+        utilisateurs lors de la création d'un tournoi et/ou d'une
+        équipe.</mat-hint
+      >
+    </div>
+    <form [formGroup]="createSportForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Nom du sport</mat-label>
+        <input matInput type="text" formControlName="name" />
+        <mat-error
+          *ngIf="name?.errors && !name?.pristine"
+          class="error-message-size">
+          Nom invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre de joueurs par équipe</mat-label>
+        <input matInput type="number" formControlName="numberOfPlayers" />
+        <mat-error
+          *ngIf="numberOfPlayers?.errors && !numberOfPlayers?.pristine"
+          class="error-message-size">
+          Nom invalide
+        </mat-error>
+      </mat-form-field>
+
+      <app-file-upload
+        [groupParent]="createSportForm"
+        formControlNameValue="imageFile"
+        labelValue="Image du sport"></app-file-upload>
+
+      <div class="button-container">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="confirm-button">
+          VALIDER
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          class="cancel-button"
+          type="button"
+          [routerLink]="['/back-office']">
+          ANNULER
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
