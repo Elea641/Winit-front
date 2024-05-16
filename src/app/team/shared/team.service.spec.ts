@@ -37,7 +37,6 @@ describe('TeamService', () => {
     service = TestBed.inject(TeamService);
     httpMock = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router);
-    toastService = TestBed.inject(ToastService);
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
   });
 
