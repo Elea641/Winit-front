@@ -1,9 +1,9 @@
 name: Angular Test
 
 on:
-  pull_request:
+  push:
     branches:
-      - dev
+      - '*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,6 +16,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.10'
+
+      - name: Install Angular CLI
+        run: npm install @angular/cli@16.2
 
       - name: Install dependencies
         run: npm install
