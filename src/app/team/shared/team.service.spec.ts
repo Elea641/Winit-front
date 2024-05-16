@@ -217,4 +217,16 @@ describe('TeamService', () => {
       `/teams-details/${mockTeam.name}`,
     ]);
   });
+
+  it('should delete team', () => {
+    service.deleteTeam('Team A');
+
+    const req = httpMock.expectOne(`${environment.urlApi}/teams/Team A`);
+
+    expect(req.request.method).toBe('DELETE');
+
+    req.flush({});
+
+    expect(router.navigate).toHaveBeenCalledWith(['/profile']);
+  });
 });
