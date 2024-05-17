@@ -11,6 +11,7 @@ article {
   .card-result-total-container-infos {
     display: flex;
     padding: 0.5rem;
+
     p {
       width: 50%;
       text-align: center;
@@ -35,10 +36,9 @@ article {
   @include media-large-screen {
     height: 7rem;
     margin: 1.5rem 1vw 0 1vw;
-    width: 23vw;
+    width: 20vw;
 
     .card-result-total-container-infos {
-      @include flex-justify-content-space-between;
       p {
         width: 40%;
         padding: 0.3rem;
