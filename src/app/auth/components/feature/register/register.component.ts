@@ -133,6 +133,7 @@ export class RegisterComponent implements OnInit {
         requiredRole: 'ROLE_USER',
         enabled: true,
         createdAt: new Date(),
+        acceptTerms: this.acceptTerms?.value,
       };
 
       this.authService.postRegister(newUser);

@@ -32,6 +32,8 @@ export class AuthService {
   ) {}
 
   postRegister(user: CurrentUser): void {
+    console.log(user);
+
     this.http
       .post<CurrentUser>(`${environment.urlApi}/auth/register`, user)
       .subscribe({

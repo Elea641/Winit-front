@@ -12,4 +12,5 @@ export class CurrentUser {
   createdAt?: Date;
   updatedAt?: Date;
   enabled?: boolean;
+  acceptTerms?: boolean;
 }

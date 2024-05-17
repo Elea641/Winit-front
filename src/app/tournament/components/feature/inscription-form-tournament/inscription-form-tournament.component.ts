@@ -110,4 +110,8 @@ export class InscriptionFormTournamentComponent implements OnInit {
       }
     });
   }
+
+  onClick() {
+    this.router.navigate(['/form-team/create']);
+  }
 }
