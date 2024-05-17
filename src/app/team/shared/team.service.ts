@@ -93,7 +93,7 @@ export class TeamService implements ITeamService {
         next: response => {
           if (response) {
             this.toastService.showSuccess(
-              "Equipe supprimée avec succès",
+              'Equipe supprimée avec succès',
               'Suppression'
             );
             this.router.navigate(['/profile']);
