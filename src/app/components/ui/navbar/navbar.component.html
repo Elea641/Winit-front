@@ -47,7 +47,7 @@
     </button>
     <mat-menu #profil="matMenu" class="navbar-custom-menu">
       <a
-        *ngIf="token && !isTokenEmpty(token) && token.role !== 'ROLE_ADMIN'"
+        *ngIf="token && !isTokenEmpty(token)"
         mat-menu-item
         routerLink="/profile">
         <mat-icon>person</mat-icon>

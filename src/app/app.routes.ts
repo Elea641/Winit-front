@@ -18,7 +18,6 @@ import { TournamentPageComponent } from './tournament/pages/tournament-page/tour
 import { tournamentResolver } from './tournament/shared/resolvers/tournament-resolver';
 import { tournamentsResolver } from './tournament/shared/resolvers/tournaments-resolver';
 import { UpdateProfilePageComponent } from './profile/pages/update-profile-page/update-profile-page.component';
-import { UserGuard } from './auth/core/user.guard';
 import { BackOfficeSportPageComponent } from './back-office/pages/back-office-sport-page/back-office-sport-page.component';
 import { BackOfficeCreateSportComponent } from './back-office/components/feature/back-office-create-sport/back-office-create-sport.component';
 import { BackOfficeSportDetailComponent } from './back-office/components/feature/back-office-sport-detail/back-office-sport-detail.component';
@@ -34,6 +33,7 @@ import { RankingPageComponent } from './ranking/pages/ranking-page/ranking-page.
 import { rankingResolver } from './ranking/shared/resolvers/ranking-resolver';
 import { BackOfficeUserCreateComponent } from './back-office/components/feature/back-office-user-create/back-office-user-create.component';
 import { BackOfficeSportEditComponent } from './back-office/components/feature/back-office-sport-edit/back-office-sport-edit.component';
+import { UserOrAdminGuard } from './auth/core/userOrAdmin.guard';
 
 export const routes: Routes = [
   {
@@ -46,7 +46,7 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent,
-    canActivate: [UserGuard],
+    canActivate: [UserOrAdminGuard],
     resolve: {
       statistics: userStatisticsResolver,
     },
@@ -54,7 +54,7 @@ export const routes: Routes = [
   {
     path: 'profile/update',
     component: UpdateProfilePageComponent,
-    canActivate: [UserGuard],
+    canActivate: [UserOrAdminGuard],
   },
   {
     path: 'contact',
@@ -73,7 +73,7 @@ export const routes: Routes = [
   {
     path: 'tournament/create',
     component: TournamentFormComponent,
-    canActivate: [UserGuard],
+    canActivate: [UserOrAdminGuard],
   },
   {
     path: 'tournament/:id',
@@ -85,7 +85,7 @@ export const routes: Routes = [
   {
     path: 'tournament/:id/teams',
     component: SelectTeamPageComponent,
-    canActivate: [UserGuard],
+    canActivate: [UserOrAdminGuard],
     resolve: {
       tournament: tournamentResolver,
     },
@@ -118,12 +118,12 @@ export const routes: Routes = [
   {
     path: 'form-team/:mode',
     component: TeamFormComponent,
-    canActivate: [UserGuard],
+    canActivate: [UserOrAdminGuard],
   },
   {
     path: 'teams-details/:teamName',
     component: TeamPageComponent,
-    canActivate: [UserGuard],
+    canActivate: [UserOrAdminGuard],
     resolve: {
       team: teamResolver,
     },

@@ -2,10 +2,10 @@
 @import '../../../../../assets/style/variables.scss';
 
 .forgotten-password-link {
-  color: $important-color-text;
+  color: $important-color-text-login;
   text-decoration: none;
   padding-right: 0.5rem;
-  opacity: 0.8;
+  opacity: 0.9;
   display: block;
   text-align: end;
 }
