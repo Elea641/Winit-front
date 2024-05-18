@@ -71,7 +71,12 @@ export class AuthService {
           this.toastService.showSuccess('Bienvenue', 'Connexion réussie');
         },
         error: error => {
-          if (error.error) {
+          if (error.error.error_message === 'No JWT provided.') {
+            this.toastService.showError(
+              'Votre compte a été désactivé',
+              'Connexion impossible'
+            );
+          } else {
             this.toastService.showError(
               'La combinaison email / mot de passe est incorrecte.',
               'Connexion impossible'
