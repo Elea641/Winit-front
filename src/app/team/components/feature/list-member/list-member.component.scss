@@ -6,8 +6,8 @@ li {
   padding: 0 2rem;
 
   div {
-    display: flex;
-    justify-content: space-between;
+    @include flex-justify-content-space-between;
+    padding-top: 1rem;
 
     .mat-mdc-button:not(:disabled) {
       width: 12rem;
