@@ -64,7 +64,6 @@ export class TournamentListComponent implements OnInit {
   }
 
   changePage(pageEvent: PageEvent) {
-    console.log(pageEvent);
     this.tournamentsNumber = pageEvent.length;
     this.pageSize = pageEvent.pageSize;
     this.currentPageIndex = pageEvent.pageIndex;
