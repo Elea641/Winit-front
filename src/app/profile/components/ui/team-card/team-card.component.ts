@@ -16,6 +16,7 @@ export class TeamCardComponent implements OnInit {
   @Input() team!: Team;
   currentUrl = '';
   tournamentId: string | null = '';
+
   constructor(
     private router: Router,
     private route: ActivatedRoute

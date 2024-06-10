@@ -5,23 +5,20 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatPaginatorModule
-  ],
+  imports: [CommonModule, MatPaginatorModule],
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+  styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent {
-  @Input() length: number = 0;
-  @Input() pageSize: number = 10;
-  @Input() pageIndex: number = 0;
+  @Input() length = 0;
+  @Input() pageSize = 10;
+  @Input() pageIndex = 0;
   pageSizeOptions = [5, 10, 25];
 
-  hidePageSize: boolean = false;
-  showPageSizeOptions: boolean = true;
-  showFirstLastButtons: boolean = true;
-  disabled: boolean = false;
+  hidePageSize = false;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
+  disabled = false;
 
   pageEvent: PageEvent | undefined;
 
@@ -37,7 +34,9 @@ export class PaginationComponent {
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+      this.pageSizeOptions = setPageSizeOptionsInput
+        .split(',')
+        .map(str => +str);
     }
   }
 }

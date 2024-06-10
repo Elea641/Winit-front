@@ -25,30 +25,30 @@ export class HomePageComponent implements OnInit {
   tournaments$!: Observable<TournamentCard[]>;
   generatedTournaments$!: Observable<TournamentCard[]>;
   currentTournaments$!: Observable<TournamentCard[]>;
-  loadingTournaments = true;
-  loadingGeneratedTournaments = true;
-  loadingCurrentTournaments = true;
+  isLoadingTournaments = true;
+  isLoadingGeneratedTournaments = true;
+  isLoadingCurrentTournaments = true;
 
   constructor(private homeService: HomeService) {}
 
   ngOnInit() {
     this.homeService.getAllTournaments().subscribe(tournaments => {
       this.tournaments$ = of(tournaments);
-      this.loadingTournaments = false;
+      this.isLoadingTournaments = false;
     });
 
     this.homeService
       .getAllGeneratedTournaments()
       .subscribe(generatedTournaments => {
         this.generatedTournaments$ = of(generatedTournaments);
-        this.loadingGeneratedTournaments = false;
+        this.isLoadingGeneratedTournaments = false;
       });
 
     this.homeService
-      .getAllCUrrentTournaments()
+      .getAllCurrentTournaments()
       .subscribe(currentTournaments => {
         this.currentTournaments$ = of(currentTournaments);
-        this.loadingCurrentTournaments = false;
+        this.isLoadingCurrentTournaments = false;
       });
   }
 }

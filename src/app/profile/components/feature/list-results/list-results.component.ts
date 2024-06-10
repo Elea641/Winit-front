@@ -7,10 +7,10 @@ import { ListTournamentInscriptionComponent } from '../list-tournament-inscripti
 import {
   StatesEnumType,
   StatesType,
-} from 'src/app/profile/models/types/state-type.model';
+} from 'src/app/profile/models/state-type.model';
 
 @Component({
-  selector: 'app-list-resultats',
+  selector: 'app-list-results',
   standalone: true,
   imports: [
     CommonModule,
@@ -18,10 +18,10 @@ import {
     CardResultTournamentComponent,
     ListTournamentInscriptionComponent,
   ],
-  templateUrl: './list-resultats.component.html',
-  styleUrls: ['./list-resultats.component.scss'],
+  templateUrl: './list-results.component.html',
+  styleUrls: ['./list-results.component.scss'],
 })
-export class ListResultatsComponent {
+export class ListResultsComponent {
   @Input() userStatistics!: UserStatistics | null;
 
   getObjectEntriesResult(states: UserStatistics | null): StatesEnumType[] {

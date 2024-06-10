@@ -1,6 +1,6 @@
-import { Sport } from './sport.model';
+import { Sport } from './sport.type';
 
-export class CurrentUser {
+export type User = {
   id?: number;
   firstName?: string;
   lastName?: string;
@@ -13,4 +13,4 @@ export class CurrentUser {
   updatedAt?: Date;
   enabled?: boolean;
   acceptTerms?: boolean;
-}
+};

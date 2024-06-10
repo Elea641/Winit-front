@@ -7,9 +7,9 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Observable, Subscription } from 'rxjs';
 import { Team } from 'src/app/team/models/team.model';
-import { ModalContent } from 'src/app/components/models/modal-content.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ModalContent } from 'src/app/components/models/modal-content.class';
 
 @Component({
   selector: 'app-list-member',

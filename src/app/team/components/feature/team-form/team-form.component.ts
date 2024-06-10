@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast.service';
-import { Sport } from 'src/app/sport/models/sport.model';
+import { Sport } from 'src/app/sport/models/sport.type';
 import { SportService } from 'src/app/sport/shared/sport.service';
 import { CreatedTeam } from 'src/app/team/models/created-team.model';
 import { TeamService } from 'src/app/team/shared/team.service';

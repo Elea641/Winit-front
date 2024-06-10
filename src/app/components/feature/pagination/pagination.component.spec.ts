@@ -9,10 +9,7 @@ describe('PaginationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        PaginationComponent,
-        BrowserAnimationsModule
-      ]
+      imports: [PaginationComponent, BrowserAnimationsModule],
     });
     fixture = TestBed.createComponent(PaginationComponent);
     component = fixture.componentInstance;

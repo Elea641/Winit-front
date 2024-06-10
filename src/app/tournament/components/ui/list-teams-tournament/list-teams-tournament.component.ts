@@ -8,8 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { ActivatedRoute } from '@angular/router';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
-import { ModalContent } from 'src/app/components/models/modal-content.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
+import { ModalContent } from 'src/app/components/models/modal-content.class';
 
 @Component({
   selector: 'app-list-teams-tournament',

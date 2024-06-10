@@ -11,8 +11,8 @@ import { TournamentService } from 'src/app/tournament/shared/tournament.service'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
 import { getRemainingTime } from 'src/app/tournament/shared/utils/convertTime.util';
-import { ModalContent } from 'src/app/components/models/modal-content.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
+import { ModalContent } from 'src/app/components/models/modal-content.class';
 @Component({
   selector: 'app-card-details-tournament',
   standalone: true,

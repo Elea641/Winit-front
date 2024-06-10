@@ -18,7 +18,7 @@ import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 import { DropzoneMaterialModule } from '@ngx-dropzone/material';
 
 import { TournamentForm } from 'src/app/tournament/models/tournament-form.model';
-import { Sport } from 'src/app/sport/models/sport.model';
+import { Sport } from 'src/app/sport/models/sport.type';
 
 import { FileUploadComponent } from '../../../../components/feature/file-upload/file-upload.component';
 import { TournamentMappers } from 'src/app/tournament/shared/mappers/TournamentMappers';

@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
 import { environment } from 'src/environments/environment';
-import { UserAuth } from '../models/user-auth.model';
+import { UserAuth } from '../models/user-auth.class';
 import { LocalStorageService } from './local-storage.service';
 import { TokenService } from './token.service';
 import { NewPassword } from '../models/newPassword.class';
-import { CurrentUser } from '../models/current-user.model';
+import { RegistrationUser } from '../models/registration-user.type';
+import { Response } from '../models/response.type';
 
 @Injectable({
   providedIn: 'root',
@@ -31,14 +32,14 @@ export class AuthService {
     private localStorageService: LocalStorageService
   ) {}
 
-  postRegister(user: CurrentUser): void {
-    console.log(user);
-
+  postRegister(user: RegistrationUser): void {
     this.http
-      .post<CurrentUser>(`${environment.urlApi}/auth/register`, user)
+      .post<Response>(`${environment.urlApi}/auth/register`, user)
       .subscribe({
         next: response => {
           if (response) {
+            console.log(response);
+
             this.localStorageService.clearToken();
             this.router.navigate(['/auth/login']);
             this.toastService.showSuccess(

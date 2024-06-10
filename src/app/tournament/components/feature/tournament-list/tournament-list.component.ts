@@ -24,7 +24,7 @@ import { EntityNames } from 'src/app/shared/enums/entity_names.enum';
     SidebarComponent,
     MatDividerModule,
     SpinnerComponent,
-    PaginationComponent
+    PaginationComponent,
   ],
   templateUrl: './tournament-list.component.html',
   styleUrls: ['./tournament-list.component.scss'],
@@ -40,9 +40,9 @@ export class TournamentListComponent implements OnInit {
   selectedSport = '';
   loading = true;
 
-  tournamentsNumber: number = 0;
-  pageSize: number = 10;
-  currentPageIndex: number = 0;
+  tournamentsNumber = 0;
+  pageSize = 10;
+  currentPageIndex = 0;
 
   constructor(
     private tournamentService: TournamentService,
@@ -56,8 +56,12 @@ export class TournamentListComponent implements OnInit {
       this.tournamentsNumber = response.length;
     });
 
-    this.filteredTournaments$ = this.paginationService.getEntityPaginated(EntityNames.tournament, this.currentPageIndex, this.pageSize);
-    
+    this.filteredTournaments$ = this.paginationService.getEntityPaginated(
+      EntityNames.tournament,
+      this.currentPageIndex,
+      this.pageSize
+    );
+
     if (this.isDrawerOpened === true) {
       this.isOpen = 'open';
     }
@@ -67,7 +71,11 @@ export class TournamentListComponent implements OnInit {
     this.tournamentsNumber = pageEvent.length;
     this.pageSize = pageEvent.pageSize;
     this.currentPageIndex = pageEvent.pageIndex;
-    this.filteredTournaments$ = this.paginationService.getEntityPaginated(EntityNames.tournament, this.currentPageIndex, this.pageSize);
+    this.filteredTournaments$ = this.paginationService.getEntityPaginated(
+      EntityNames.tournament,
+      this.currentPageIndex,
+      this.pageSize
+    );
   }
 
   handleDrawerChange(isDrawerOpened: boolean) {

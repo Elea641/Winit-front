@@ -1,5 +1,5 @@
 // To be updated
-export class Sport {
+export type Sport = {
   name?: string;
   viewName?: string;
-}
+};

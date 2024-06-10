@@ -1,24 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Contact } from '../models/contact.model';
-import { ContactDetails } from '../models/contact.details.model';
+import { ContactWinit } from '../models/contact-winit.type';
 import { IContactService } from './interfaces/IContact.service';
+import { ContactDev } from '../models/contact-dev.type';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactService implements IContactService {
-  private contactDataUrl = '../assets/list-contact.model.json';
-  private contactDetailsDataUrl = '../assets/list-contact-details.model.json';
+  private contactDevsDataUrl = '../assets/list-contact-devs.model.json';
+  private contactWinitDataUrl = '../assets/list-contact-winit.model.json';
 
   constructor(private http: HttpClient) {}
 
-  getAllContacts(): Observable<Contact[]> {
-    return this.http.get<Contact[]>(this.contactDataUrl);
+  getAllContactDevs(): Observable<ContactDev[]> {
+    return this.http.get<ContactDev[]>(this.contactDevsDataUrl);
   }
 
-  getAllContactDetails(): Observable<ContactDetails[]> {
-    return this.http.get<ContactDetails[]>(this.contactDetailsDataUrl);
+  getAllContactWinit(): Observable<ContactWinit[]> {
+    return this.http.get<ContactWinit[]>(this.contactWinitDataUrl);
   }
 }

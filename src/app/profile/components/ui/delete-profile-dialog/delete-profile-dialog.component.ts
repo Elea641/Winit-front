@@ -5,9 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProfileService } from '../../../shared/profile.service';
 import { ToastService } from '../../../../shared/toast.service';
 import { Router } from '@angular/router';
-import { CurrentUser } from 'src/app/auth/models/current-user.model';
 import { UserService } from 'src/app/auth/shared/user.service';
 import { MatIconModule } from '@angular/material/icon';
+import { User } from 'src/app/auth/models/user.type';
 
 @Component({
   selector: 'app-delete-profile-dialog',
@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./delete-profile-dialog.component.scss'],
 })
 export class DeleteProfileDialogComponent implements OnInit {
-  currentUser!: CurrentUser;
+  currentUser!: User;
 
   constructor(
     private profileService: ProfileService,

@@ -1,7 +1,4 @@
-export type ModalContentType = {
-  title: string;
-  content: string;
-};
+import { ModalContentType } from './modal-content.type';
 
 export class ModalContent {
   title: string;

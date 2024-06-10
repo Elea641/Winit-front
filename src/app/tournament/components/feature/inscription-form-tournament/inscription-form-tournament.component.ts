@@ -19,7 +19,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { SelectTeam } from 'src/app/tournament/models/selectTeam.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
-import { ModalContent } from 'src/app/components/models/modal-content.model';
+import { ModalContent } from 'src/app/components/models/modal-content.class';
 
 @Component({
   selector: 'app-inscription-form-tournament',

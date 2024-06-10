@@ -6,7 +6,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { ModalContent } from '../../models/modal-content.model';
+import { ModalContent } from '../../models/modal-content.class';
 
 @Component({
   selector: 'app-modal',

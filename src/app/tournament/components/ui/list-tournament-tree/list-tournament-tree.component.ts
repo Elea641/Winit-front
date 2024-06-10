@@ -15,9 +15,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
-import { ModalContent } from 'src/app/components/models/modal-content.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { Match } from 'src/app/tournament/models/match.model';
+import { ModalContent } from 'src/app/components/models/modal-content.class';
 
 @Component({
   selector: 'app-list-tournament-tree',

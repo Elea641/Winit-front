@@ -65,7 +65,9 @@ export class TournamentService implements ITournamentService {
   }
 
   getAllTournamentsPaginated(): Observable<TournamentCard[]> {
-    return this.http.get<TournamentCard[]>(`${environment.urlApi}` + "/pagination/?entityName=tournament");
+    return this.http.get<TournamentCard[]>(
+      `${environment.urlApi}` + '/pagination/?entityName=tournament'
+    );
   }
 
   createTournament(newTournament: TournamentCreationDto): void {

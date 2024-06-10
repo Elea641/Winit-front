@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardTournamentInscriptionComponent } from '../../ui/card-tournament-inscription/card-tournament-inscription.component';
-import { StatesType } from 'src/app/profile/models/types/state-type.model';
+import { StatesType } from 'src/app/profile/models/state-type.model';
 
 @Component({
   selector: 'app-list-tournament-inscription',

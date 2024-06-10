@@ -12,7 +12,7 @@ import { TournamentDetails } from 'src/app/tournament/models/tournament-details.
   styleUrls: ['./card-tournament-inscription.component.scss'],
 })
 export class CardTournamentInscriptionComponent implements OnInit {
-  @Input() result!: TournamentDetails;
+  @Input() tournamentDetails!: TournamentDetails;
   @Input() title = '';
   buttonValue = '';
 

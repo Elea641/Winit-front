@@ -1,4 +1,4 @@
-import { TopWinnerTeamDto } from './topWinnerTeamDto.model';
+import { TopWinnerTeamDto } from './topWinnerTeamDto.class';
 
 export class TopWinnerTeamCountDto extends TopWinnerTeamDto {
   count: number;

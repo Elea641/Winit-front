@@ -22,7 +22,7 @@ export class HomeService {
     );
   }
 
-  getAllCUrrentTournaments(): Observable<TournamentCard[]> {
+  getAllCurrentTournaments(): Observable<TournamentCard[]> {
     return this.http.get<TournamentCard[]>(
       `${environment.urlApi}/tournaments/current`
     );

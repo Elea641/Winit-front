@@ -4,9 +4,9 @@ import { ContactListComponent } from '../../components/feature/contact-list/cont
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogOverviewContactComponent } from '../../components/feature/dialog-overview-contact/dialog-overview-contact.component';
-import { ContactDetails } from '../../models/contact.details.model';
 import { Observable, concatMap, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { ContactWinit } from '../../models/contact-winit.type';
 
 @Component({
   selector: 'app-contact-page',
@@ -21,7 +21,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./contact-page.component.scss'],
 })
 export class ContactPageComponent implements OnInit {
-  contactDetails$!: Observable<ContactDetails[]>;
+  contactDetails$!: Observable<ContactWinit[]>;
 
   constructor(
     public dialog: MatDialog,
@@ -42,7 +42,7 @@ export class ContactPageComponent implements OnInit {
     }
   }
 
-  openDialog(contactDetails: ContactDetails) {
+  openDialog(contactDetails: ContactWinit) {
     this.dialog.open(DialogOverviewContactComponent, {
       data: contactDetails,
     });
