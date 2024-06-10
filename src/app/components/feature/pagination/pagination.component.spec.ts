@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaginationComponent } from './pagination.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PaginationComponent', () => {
   let component: PaginationComponent;
@@ -8,7 +9,10 @@ describe('PaginationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PaginationComponent]
+      imports: [
+        PaginationComponent,
+        BrowserAnimationsModule
+      ]
     });
     fixture = TestBed.createComponent(PaginationComponent);
     component = fixture.componentInstance;
