@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
-import { TournamentCard } from '../../models/tournament-card.model';
-import { TournamentCreationDto } from '../../models/tournament-creation-dto.model';
-import { TournamentDetails } from '../../models/tournament-details.model';
-import { SelectTeam } from '../../models/selectTeam.model';
+import { TournamentCard } from '../../models/tournament-card.type';
+import { TournamentCreationDto } from '../../models/tournament-creation-dto.type';
+import { TournamentDetails } from '../../models/tournament-details.type';
+import { SelectTeam } from '../../models/selectTeam.class';
 
 export interface ITournamentService {
   getAllTournaments(): Observable<TournamentCard[]>;
@@ -13,7 +13,7 @@ export interface ITournamentService {
 
   addTeamToTournament(selectTeam: SelectTeam): Observable<boolean>;
 
-  deleteTeamToTournament(
+  deleteTeamFromTournament(
     tournamentId: number,
     team: { name: string; result: number; url: string }
   ): Observable<boolean>;
@@ -23,7 +23,7 @@ export interface ITournamentService {
     generatedTree: { randomPhaseMatches: object; remainingPhaseMatches: object }
   ): void;
 
-  canceledTournament(tournamentId: number, cancel: boolean): void;
+  cancelTournament(tournamentId: number, cancel: boolean): void;
 
   deleteTournament(tournamentDetails: TournamentDetails): void;
 }

@@ -1,4 +1,4 @@
-import { Member } from '../../models/member.model';
+import { Member } from '../../models/member.type';
 
 export interface IMemberService {
   addMember(teamName: string, member: Member): void;

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CardDetailsTournamentComponent } from './card-details-tournament.component';
+import { CardDetailsTournamentComponent } from './tournament-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast.service';

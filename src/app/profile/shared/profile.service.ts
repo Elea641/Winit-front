@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { IProfileService } from './interfaces/IProfile.service';
-import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
+import { TournamentCard } from 'src/app/tournament/models/tournament-card.type';
 import { UserStatistics } from '../models/user-statistics.model';
 import { User } from 'src/app/auth/models/user.type';
 

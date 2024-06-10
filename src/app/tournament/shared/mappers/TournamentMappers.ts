@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TournamentForm } from '../../models/tournament-form.model';
-import { TournamentCreationDto } from '../../models/tournament-creation-dto.model';
+import { TournamentCreationDto } from '../../models/tournament-creation-dto.type';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TournamentMappers {
-  ToCreationDto(model: TournamentForm['form']): TournamentCreationDto {
+  toCreationDto(model: TournamentForm['form']): TournamentCreationDto {
     const tournament: TournamentCreationDto = {
       name: model.controls['name'].value,
       date: model.controls['date'].value,
@@ -20,7 +20,7 @@ export class TournamentMappers {
     return tournament;
   }
 
-  ToFormData(model: TournamentCreationDto): FormData {
+  toFormData(model: TournamentCreationDto): FormData {
     const formData = new FormData();
 
     formData.append('name', model.name);

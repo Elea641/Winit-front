@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeamService } from 'src/app/team/shared/team.service';
-import { Team } from 'src/app/team/models/team.model';
+import { Team } from 'src/app/team/models/team.type';
 import { MatDividerModule } from '@angular/material/divider';
 import { Observable } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';

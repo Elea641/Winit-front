@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { TournamentCreationDto } from '../models/tournament-creation-dto.model';
-import { TournamentDetails } from '../models/tournament-details.model';
-import { Tournament } from '../models/tournament.model';
+import { TournamentCreationDto } from '../models/tournament-creation-dto.type';
+import { TournamentDetails } from '../models/tournament-details.type';
+import { Tournament } from '../models/tournament.type';
 import { ToastService } from 'src/app/shared/toast.service';
 import { TournamentMappers } from './mappers/TournamentMappers';
-import { TournamentCard } from '../models/tournament-card.model';
+import { TournamentCard } from '../models/tournament-card.type';
 import { ITournamentService } from './interfaces/ITournament.service';
-import { SelectTeam } from '../models/selectTeam.model';
+import { SelectTeam } from '../models/selectTeam.class';
 
 @Injectable({
   providedIn: 'root',
@@ -72,7 +72,7 @@ export class TournamentService implements ITournamentService {
 
   createTournament(newTournament: TournamentCreationDto): void {
     const tournamentCreationDto =
-      this.tournamentMappers.ToFormData(newTournament);
+      this.tournamentMappers.toFormData(newTournament);
 
     const headers = new HttpHeaders();
     headers.append('Content-type', 'multipart/form-data');
@@ -141,7 +141,7 @@ export class TournamentService implements ITournamentService {
     });
   }
 
-  deleteTeamToTournament(
+  deleteTeamFromTournament(
     tournamentId: number,
     team: { name: string; result: number; url: string }
   ): Observable<boolean> {
@@ -209,13 +209,13 @@ export class TournamentService implements ITournamentService {
       });
   }
 
-  canceledTournament(tournamentId: number, canceled: boolean) {
+  cancelTournament(tournamentId: number, isCanceled: boolean) {
     this.http
       .put<TournamentDetails>(
         `${environment.urlApi}/tournaments/${tournamentId}`,
         {
           isGenerated: true,
-          isCanceled: canceled,
+          isCanceled: isCanceled,
         }
       )
       .subscribe({

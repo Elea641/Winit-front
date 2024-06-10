@@ -20,7 +20,7 @@
       <button
         *ngIf="
           !tournament.isGenerated &&
-          !generatedTournament &&
+          !isGenerated &&
           team.currentUser === team.ownerId
         "
         mat-button

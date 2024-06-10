@@ -32,7 +32,7 @@ import { MemberService } from 'src/app/team/shared/member.service';
 })
 export class CreateMemberComponent implements OnInit {
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
-  memberForm!: FormGroup;
+  addMemberForm!: FormGroup;
   teamName = '';
 
   constructor(
@@ -48,23 +48,23 @@ export class CreateMemberComponent implements OnInit {
       });
     }
 
-    this.memberForm = new FormGroup({
+    this.addMemberForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
     });
   }
 
   get email() {
-    return this.memberForm.get('email');
+    return this.addMemberForm.get('email');
   }
 
   onSubmit() {
-    if (this.memberForm.valid) {
+    if (this.addMemberForm.valid) {
       const memberData = {
         email: this.email?.value.trim(),
       };
       this.memberService.addMember(this.teamName, memberData);
       this.cancelClicked.emit();
-      this.memberForm.reset();
+      this.addMemberForm.reset();
     } else {
       this.toastService.showError(
         'Veuillez remplir tous les champs obligatoires',

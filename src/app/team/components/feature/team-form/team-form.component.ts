@@ -11,7 +11,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast.service';
 import { Sport } from 'src/app/sport/models/sport.type';
 import { SportService } from 'src/app/sport/shared/sport.service';
-import { CreatedTeam } from 'src/app/team/models/created-team.model';
+import { CreatedTeam } from 'src/app/team/models/created-team.class';
 import { TeamService } from 'src/app/team/shared/team.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
@@ -61,16 +61,12 @@ export class TeamFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.route.paramMap) {
-      this.route.paramMap.subscribe(params => {
-        const modeParam = params.get('mode');
-        this.mode = modeParam === 'update' ? 'update' : 'create';
-      });
+      const modeParam = this.route.snapshot.paramMap.get('mode');
+      this.mode = modeParam === 'update' ? 'update' : 'create';
     }
 
     if (this.route.queryParams) {
-      this.route.queryParams.subscribe(params => {
-        this.teamName = params['teamName'];
-      });
+      this.teamName = this.route.snapshot.queryParamMap.get('teamName');
     }
 
     if (!this.teamToUpdate && this.teamName && this.mode === 'update') {

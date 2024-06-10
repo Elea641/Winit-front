@@ -7,7 +7,7 @@ import { TournamentService } from 'src/app/tournament/shared/tournament.service'
 import { CarouselComponent } from '../../../../components/ui/carousel/carousel.component';
 import { SidebarComponent } from '../../../../components/ui/sidebar/sidebar.component';
 import { TournamentCardComponent } from '../../ui/tournament-card/tournament-card.component';
-import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
+import { TournamentCard } from 'src/app/tournament/models/tournament-card.type';
 import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.component';
 import { PaginationComponent } from 'src/app/components/feature/pagination/pagination.component';
 import { PageEvent } from '@angular/material/paginator';
@@ -38,7 +38,7 @@ export class TournamentListComponent implements OnInit {
   showOnlyUpcomingTournaments = false;
   showNonFullTournaments = false;
   selectedSport = '';
-  loading = true;
+  isLoading = true;
 
   tournamentsNumber = 0;
   pageSize = 10;
@@ -52,7 +52,7 @@ export class TournamentListComponent implements OnInit {
 
   ngOnInit(): void {
     this.tournamentService.getAllTournaments().subscribe(response => {
-      this.loading = false;
+      this.isLoading = false;
       this.tournamentsNumber = response.length;
     });
 

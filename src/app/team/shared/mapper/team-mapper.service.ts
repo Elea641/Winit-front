@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Team } from '../../models/team.model';
-import { CreatedTeam } from '../../models/created-team.model';
+import { Team } from '../../models/team.type';
+import { CreatedTeam } from '../../models/created-team.class';
 import { ITeamMapperService } from '../interfaces/ITeamMapper.service';
 
 @Injectable({

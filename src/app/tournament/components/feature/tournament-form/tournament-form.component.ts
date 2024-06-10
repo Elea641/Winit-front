@@ -24,7 +24,7 @@ import { FileUploadComponent } from '../../../../components/feature/file-upload/
 import { TournamentMappers } from 'src/app/tournament/shared/mappers/TournamentMappers';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { SportService } from 'src/app/sport/shared/sport.service';
-import { TournamentCreationDto } from 'src/app/tournament/models/tournament-creation-dto.model';
+import { TournamentCreationDto } from 'src/app/tournament/models/tournament-creation-dto.type';
 
 @Component({
   selector: 'app-tournament-form',
@@ -50,7 +50,7 @@ import { TournamentCreationDto } from 'src/app/tournament/models/tournament-crea
 })
 export class TournamentFormComponent implements OnInit, OnDestroy {
   tournamentForm!: TournamentForm['form'];
-  sports$!: Observable<Sport[]>;
+  sports$: Observable<Sport[]> = this.sportService.getAllSports();
   private destroy$!: Subject<void>;
 
   constructor(
@@ -66,14 +66,12 @@ export class TournamentFormComponent implements OnInit, OnDestroy {
     this.tournamentForm = new TournamentForm(this.fb, this.sportService)[
       'form'
     ];
-
-    this.sports$ = this.sportService.getAllSports();
   }
 
   onSubmit() {
     if (this.tournamentForm.valid) {
       const newTournament: TournamentCreationDto =
-        this.tournamentEntityMappers.ToCreationDto(this.tournamentForm);
+        this.tournamentEntityMappers.toCreationDto(this.tournamentForm);
       this.tournamentService.createTournament(newTournament);
     } else {
       console.error('Error submitting form');

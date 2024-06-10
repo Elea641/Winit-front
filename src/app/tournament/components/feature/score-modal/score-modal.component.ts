@@ -14,7 +14,7 @@ import {
 } from '@angular/forms';
 import { MatchService } from 'src/app/tournament/shared/match.service';
 import { MatButtonModule } from '@angular/material/button';
-import { MatchUpdate } from 'src/app/tournament/models/matchUpdate.model';
+import { MatchUpdate } from 'src/app/tournament/models/matchUpdate.type';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 

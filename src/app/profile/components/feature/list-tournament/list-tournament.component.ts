@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { ProfileService } from 'src/app/profile/shared/profile.service';
-import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
+import { TournamentCard } from 'src/app/tournament/models/tournament-card.type';
 import { Observable } from 'rxjs';
 import { TournamentCardComponent } from 'src/app/tournament/components/ui/tournament-card/tournament-card.component';
 

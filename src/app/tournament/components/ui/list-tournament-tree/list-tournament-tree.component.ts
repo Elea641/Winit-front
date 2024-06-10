@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardTournamentMatchComponent } from '../card-tournament-match/card-tournament-match.component';
-import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
+import { TournamentDetails } from 'src/app/tournament/models/tournament-details.type';
 import { HelperTournamentService } from 'src/app/tournament/shared/helpers/helper-tournament.service';
 import { Observable, Subscription } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,7 +16,7 @@ import { TournamentService } from 'src/app/tournament/shared/tournament.service'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
-import { Match } from 'src/app/tournament/models/match.model';
+import { Match } from 'src/app/tournament/models/match.type';
 import { ModalContent } from 'src/app/components/models/modal-content.class';
 
 @Component({
@@ -33,7 +33,7 @@ import { ModalContent } from 'src/app/components/models/modal-content.class';
 })
 export class ListTournamentTreeComponent implements OnInit, OnDestroy {
   @Input() tournament$!: Observable<TournamentDetails>;
-  @Output() generatedTournament: EventEmitter<boolean> = new EventEmitter();
+  @Output() isGenerated: EventEmitter<boolean> = new EventEmitter();
   tournamentDetails!: TournamentDetails;
   generatedTree!: { randomPhaseMatches: object; remainingPhaseMatches: object };
   limitInscriptionTime!: Subscription;
@@ -145,7 +145,7 @@ export class ListTournamentTreeComponent implements OnInit, OnDestroy {
   }
 
   getGenerated(event: boolean): void {
-    this.generatedTournament.emit(event);
+    this.isGenerated.emit(event);
     if (
       this.tournamentDetails.currentNumberOfParticipants &&
       this.tournamentDetails.teams
@@ -194,7 +194,7 @@ export class ListTournamentTreeComponent implements OnInit, OnDestroy {
       if (response === true) {
         this.getGenerated(true);
         this.isCanceled = true;
-        this.tournamentService.canceledTournament(
+        this.tournamentService.cancelTournament(
           this.tournamentDetails.id,
           true
         );

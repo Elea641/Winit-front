@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
+import { TournamentDetails } from 'src/app/tournament/models/tournament-details.type';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +19,7 @@ import { ModalContent } from 'src/app/components/models/modal-content.class';
   styleUrls: ['./list-teams-tournament.component.scss'],
 })
 export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
-  @Input() generatedTournament!: boolean;
+  @Input() isGenerated!: boolean;
   @Input() tournament$!: Observable<TournamentDetails>;
   tournamentId!: number;
   teamSubscription!: Subscription;
@@ -92,7 +92,7 @@ export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(response => {
       if (response === true) {
         this.tournamentService
-          .deleteTeamToTournament(this.tournamentId, team)
+          .deleteTeamFromTournament(this.tournamentId, team)
           .subscribe({
             next: success => {
               if (success) {

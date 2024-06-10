@@ -6,12 +6,12 @@
     <mat-tab label="MATCHS">
       <app-list-tournament-tree
         [tournament$]="tournament$"
-        (generatedTournament)="getGenerated($event)"></app-list-tournament-tree>
+        (isGenerated)="getGenerated($event)"></app-list-tournament-tree>
     </mat-tab>
     <mat-tab label="ÉQUIPES">
       <app-list-teams-tournament
         [tournament$]="tournament$"
-        [generatedTournament]="generatedTournament"></app-list-teams-tournament>
+        [isGenerated]="isGenerated"></app-list-teams-tournament>
     </mat-tab>
   </mat-tab-group>
 </nav>

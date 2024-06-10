@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/shared/toast.service';
-import { Member } from '../models/member.model';
+import { Member } from '../models/member.type';
 import { IMemberService } from './interfaces/IMember.service';
 
 @Injectable({

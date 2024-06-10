@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeamCardComponent } from 'src/app/profile/components/ui/team-card/team-card.component';
-import { Team } from 'src/app/team/models/team.model';
+import { Team } from 'src/app/team/models/team.type';
 @Component({
   selector: 'app-list-team-by-sport',
   standalone: true,
