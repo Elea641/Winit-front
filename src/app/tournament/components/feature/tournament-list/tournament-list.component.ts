@@ -9,6 +9,10 @@ import { SidebarComponent } from '../../../../components/ui/sidebar/sidebar.comp
 import { TournamentCardComponent } from '../../ui/tournament-card/tournament-card.component';
 import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
 import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.component';
+import { PaginationComponent } from 'src/app/components/feature/pagination/pagination.component';
+import { PageEvent } from '@angular/material/paginator';
+import { PaginationService } from 'src/app/components/feature/pagination/shared/pagination.service';
+import { EntityNames } from 'src/app/shared/enums/entity_names.enum';
 
 @Component({
   selector: 'app-tournament-list',
@@ -20,6 +24,7 @@ import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.componen
     SidebarComponent,
     MatDividerModule,
     SpinnerComponent,
+    PaginationComponent
   ],
   templateUrl: './tournament-list.component.html',
   styleUrls: ['./tournament-list.component.scss'],
@@ -35,18 +40,34 @@ export class TournamentListComponent implements OnInit {
   selectedSport = '';
   loading = true;
 
+  tournamentsNumber: number = 0;
+  pageSize: number = 10;
+  currentPageIndex: number = 0;
+
   constructor(
     private tournamentService: TournamentService,
-    private tournamentListFilterService: TournamentListFilterService
+    private tournamentListFilterService: TournamentListFilterService,
+    private paginationService: PaginationService
   ) {}
 
   ngOnInit(): void {
-    this.filteredTournaments$ = this.tournamentService.getAllTournaments();
-    this.filteredTournaments$.subscribe(() => (this.loading = false));
+    this.tournamentService.getAllTournaments().subscribe(response => {
+      this.loading = false;
+      this.tournamentsNumber = response.length;
+    });
 
+    this.filteredTournaments$ = this.paginationService.getEntityPaginated(EntityNames.tournament, this.currentPageIndex, this.pageSize);
+    
     if (this.isDrawerOpened === true) {
       this.isOpen = 'open';
     }
+  }
+
+  changePage(pageEvent: PageEvent) {
+    this.tournamentsNumber = pageEvent.length;
+    this.pageSize = pageEvent.pageSize;
+    this.currentPageIndex = pageEvent.pageIndex;
+    this.filteredTournaments$ = this.paginationService.getEntityPaginated(EntityNames.tournament, this.currentPageIndex, this.pageSize);
   }
 
   handleDrawerChange(isDrawerOpened: boolean) {

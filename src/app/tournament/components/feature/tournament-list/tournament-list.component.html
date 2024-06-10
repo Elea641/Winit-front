@@ -39,6 +39,13 @@
               [tournament]="tournament"></app-tournament-card>
           </div>
         </div>
+        <app-pagination
+          class="wi-paginator"
+          (pageChangeEvent)="changePage($event)"
+          [length]="tournamentsNumber"
+          [pageSize]="pageSize"
+          [pageIndex]="currentPageIndex"
+        ></app-pagination>
       </ng-container>
     </section>
   </div>
