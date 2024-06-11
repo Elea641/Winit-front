@@ -38,6 +38,8 @@ export class TournamentDetailsComponent implements OnInit {
   maxNumberOfTeams!: number;
   teamInscriptionSubscription!: Subscription;
   isCurrentUser!: boolean;
+  limitInscriptionTime!: Subscription;
+  limitInscriptionValue: number | undefined;
 
   constructor(
     private getImageService: GetImageService,
@@ -55,6 +57,11 @@ export class TournamentDetailsComponent implements OnInit {
         this.tournamentId = Number(params['id']);
       });
     }
+
+    this.limitInscriptionTime =
+      this.timeService.limitTimeInscription$.subscribe((limit: number) => {
+        this.limitInscriptionValue = limit;
+      });
 
     this.updateCurrentDate();
 

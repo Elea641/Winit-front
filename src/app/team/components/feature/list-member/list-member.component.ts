@@ -10,6 +10,7 @@ import { Team } from 'src/app/team/models/team.type';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ModalContent } from 'src/app/components/models/modal-content.class';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-list-member',
@@ -33,7 +34,8 @@ export class ListMemberComponent implements OnInit, OnDestroy {
 
   constructor(
     private memberService: MemberService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastService: ToastService
   ) {}
 
   ngOnDestroy(): void {
@@ -79,7 +81,7 @@ export class ListMemberComponent implements OnInit, OnDestroy {
             this.memberService.deleteMemberByTeamName(team.name, member);
             this.memberDelete = member;
           } else {
-            console.error('Utilisateur introuvable');
+            this.toastService.showError('Aucun utilisateur trouvé', 'Erreur');
           }
         });
       }

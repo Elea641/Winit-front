@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { ModalContent } from 'src/app/components/models/modal-content.class';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-list-teams-tournament',
@@ -38,7 +39,8 @@ export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private tournamentService: TournamentService,
     private timeService: TimeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastService: ToastService
   ) {}
 
   ngOnDestroy(): void {
@@ -102,10 +104,7 @@ export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
             },
             error: error => {
               if (error.error) {
-                console.error(
-                  'Une erreur est survenue lors de la suppression :',
-                  error
-                );
+                this.toastService.showError(error, 'Erreur');
               }
             },
           });

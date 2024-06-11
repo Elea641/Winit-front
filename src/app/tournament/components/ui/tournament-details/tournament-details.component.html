@@ -37,7 +37,8 @@
     <div class="button-wrapper">
       <button
         *ngIf="
-          currentNumberOfParticipants !== tournamentDetails.maxNumberOfTeams
+          currentNumberOfParticipants !== tournamentDetails.maxNumberOfTeams &&
+          limitInscriptionValue !== 0
         "
         mat-raised-button
         color="primary"

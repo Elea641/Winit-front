@@ -38,8 +38,6 @@ export class AuthService {
       .subscribe({
         next: response => {
           if (response) {
-            console.log(response);
-
             this.localStorageService.clearToken();
             this.router.navigate(['/auth/login']);
             this.toastService.showSuccess(

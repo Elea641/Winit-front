@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CardDetailsTournamentComponent } from './tournament-details.component';
+import { TournamentDetailsComponent } from './tournament-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('CardDetailsTournamentComponent', () => {
-  let component: CardDetailsTournamentComponent;
-  let fixture: ComponentFixture<CardDetailsTournamentComponent>;
+describe('TournamentDetailsComponent', () => {
+  let component: TournamentDetailsComponent;
+  let fixture: ComponentFixture<TournamentDetailsComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        CardDetailsTournamentComponent,
+        TournamentDetailsComponent,
         HttpClientModule,
         ToastrModule.forRoot(),
         BrowserAnimationsModule,
@@ -34,7 +34,7 @@ describe('CardDetailsTournamentComponent', () => {
         ToastrService,
       ],
     });
-    fixture = TestBed.createComponent(CardDetailsTournamentComponent);
+    fixture = TestBed.createComponent(TournamentDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

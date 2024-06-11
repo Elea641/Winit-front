@@ -25,6 +25,7 @@ import { TournamentMappers } from 'src/app/tournament/shared/mappers/TournamentM
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { SportService } from 'src/app/sport/shared/sport.service';
 import { TournamentCreationDto } from 'src/app/tournament/models/tournament-creation-dto.type';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-tournament-form',
@@ -57,7 +58,8 @@ export class TournamentFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private tournamentEntityMappers: TournamentMappers,
     private tournamentService: TournamentService,
-    private sportService: SportService
+    private sportService: SportService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -74,7 +76,10 @@ export class TournamentFormComponent implements OnInit, OnDestroy {
         this.tournamentEntityMappers.toCreationDto(this.tournamentForm);
       this.tournamentService.createTournament(newTournament);
     } else {
-      console.error('Error submitting form');
+      this.toastService.showError(
+        "Le formulaire n'a pas pu être envoyé",
+        'Erreur'
+      );
     }
   }
 
