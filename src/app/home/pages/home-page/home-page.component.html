@@ -25,10 +25,10 @@
       <ng-container>
         <h1>TOURNOIS OUVERTS À L'INSCRIPTION</h1>
         <mat-divider></mat-divider>
-        <app-spinner *ngIf="isLoadingCurrentTournaments"></app-spinner>
+        <app-spinner *ngIf="isLoadingOpenTournaments"></app-spinner>
         <app-carousel
-          *ngIf="!isLoadingCurrentTournaments"
-          [tournaments$]="currentTournaments$"></app-carousel>
+          *ngIf="!isLoadingOpenTournaments"
+          [tournaments$]="openTournaments$"></app-carousel>
       </ng-container>
     </section>
   </div>

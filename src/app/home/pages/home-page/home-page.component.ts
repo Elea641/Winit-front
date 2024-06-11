@@ -24,10 +24,10 @@ import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.componen
 export class HomePageComponent implements OnInit {
   tournaments$!: Observable<TournamentCard[]>;
   generatedTournaments$!: Observable<TournamentCard[]>;
-  currentTournaments$!: Observable<TournamentCard[]>;
+  openTournaments$!: Observable<TournamentCard[]>;
   isLoadingTournaments = true;
   isLoadingGeneratedTournaments = true;
-  isLoadingCurrentTournaments = true;
+  isLoadingOpenTournaments = true;
 
   constructor(private homeService: HomeService) {}
 
@@ -44,11 +44,9 @@ export class HomePageComponent implements OnInit {
         this.isLoadingGeneratedTournaments = false;
       });
 
-    this.homeService
-      .getAllCurrentTournaments()
-      .subscribe(currentTournaments => {
-        this.currentTournaments$ = of(currentTournaments);
-        this.isLoadingCurrentTournaments = false;
-      });
+    this.homeService.getAllOpenTournaments().subscribe(currentTournaments => {
+      this.openTournaments$ = of(currentTournaments);
+      this.isLoadingOpenTournaments = false;
+    });
   }
 }
