@@ -5,3 +5,7 @@
   color: $secondary-color-text;
   border-radius: 0.2rem;
 }
+
+::ng-deep .mat-mdc-paginator-range-label {
+    margin: 0 !important;
+}
