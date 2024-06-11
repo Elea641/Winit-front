@@ -1,26 +1,24 @@
-# Utiliser une image node officielle basée sur Alpine
 FROM node:18-alpine
 
-# Définir le répertoire de travail dans le conteneur
+# Define workspace
 WORKDIR /app
 
-# Installer les dépendances nécessaires pour node-gyp, y compris Python et les outils de construction
+# Install python for node-gyp dependancy
 RUN apk add --no-cache g++ make py3-pip
 
-# Installer Angular CLI globalement
+# Install Angular CLI
 RUN npm install -g @angular/cli
 
-# Copier les fichiers package.json et package-lock.json
 COPY package.json package-lock.json ./
 
-# Installer les dépendances
+# Clean install dependancies to avoid macOS/windows/linux conflicts
 RUN npm ci
 
-# Copier le reste des fichiers de l'application
+# Copy rest of files
 COPY . .
 
-# Exposer le port 4200
+# Expose port 4200
 EXPOSE 4200
 
-# Démarrer le serveur de développement Angular
+# Start Angular dev server
 CMD ["ng", "serve", "--host", "0.0.0.0"]
