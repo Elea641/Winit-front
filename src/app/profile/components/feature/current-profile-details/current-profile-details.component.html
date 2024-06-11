@@ -5,15 +5,12 @@
   <ng-container>
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="CLASSEMENT">
-        <app-list-resultats
+        <app-list-results
           *ngIf="userStatistics$ | async as userStatistics"
-          [userStatistics]="userStatistics"></app-list-resultats>
+          [userStatistics]="userStatistics"></app-list-results>
       </mat-tab>
       <mat-tab label="TOURNOIS">
-        <app-list-tournament
-          *ngIf="
-            currentProfile$ | async as currentProfile
-          "></app-list-tournament>
+        <app-list-tournament></app-list-tournament>
       </mat-tab>
       <mat-tab label="ÉQUIPES">
         <app-list-team></app-list-team>

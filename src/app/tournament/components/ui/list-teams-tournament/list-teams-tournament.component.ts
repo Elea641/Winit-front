@@ -1,15 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
+import { TournamentDetails } from 'src/app/tournament/models/tournament-details.type';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { ActivatedRoute } from '@angular/router';
 import { TimeService } from 'src/app/tournament/shared/time-service.service';
-import { ModalContent } from 'src/app/components/models/modal-content.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
+import { ModalContent } from 'src/app/components/models/modal-content.class';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-list-teams-tournament',
@@ -19,7 +20,7 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
   styleUrls: ['./list-teams-tournament.component.scss'],
 })
 export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
-  @Input() generatedTournament!: boolean;
+  @Input() isGenerated!: boolean;
   @Input() tournament$!: Observable<TournamentDetails>;
   tournamentId!: number;
   teamSubscription!: Subscription;
@@ -38,7 +39,8 @@ export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private tournamentService: TournamentService,
     private timeService: TimeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastService: ToastService
   ) {}
 
   ngOnDestroy(): void {
@@ -92,7 +94,7 @@ export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(response => {
       if (response === true) {
         this.tournamentService
-          .deleteTeamToTournament(this.tournamentId, team)
+          .deleteTeamFromTournament(this.tournamentId, team)
           .subscribe({
             next: success => {
               if (success) {
@@ -102,10 +104,7 @@ export class ListTeamsTournamentComponent implements OnInit, OnDestroy {
             },
             error: error => {
               if (error.error) {
-                console.error(
-                  'Une erreur est survenue lors de la suppression :',
-                  error
-                );
+                this.toastService.showError(error, 'Erreur');
               }
             },
           });

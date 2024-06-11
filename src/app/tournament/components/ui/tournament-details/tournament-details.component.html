@@ -1,0 +1,59 @@
+<article *ngIf="tournament$ | async as tournamentDetails">
+  <img src="{{ image }}" alt="{{ tournamentDetails.name }}" />
+  <div class="card-details-tournament-container-body">
+    <div class="card-details-tournament-container-header">
+      <h3>{{ tournamentDetails.sport }}</h3>
+      <h2>{{ tournamentDetails.name }}</h2>
+      <div
+        *ngIf="remainingTime !== 'Inscription terminée'"
+        class="card-details-tournament-container-header-inscription">
+        <p *ngIf="tournamentDetails.isGenerated">Inscription terminée</p>
+        <p *ngIf="!tournamentDetails.isGenerated">
+          {{ remainingTime }}
+        </p>
+      </div>
+      <div
+        *ngIf="remainingTime === 'Inscription terminée'"
+        class="card-details-tournament-container-header-inscription">
+        <p>{{ remainingTime }}</p>
+      </div>
+    </div>
+    <div class="card-details-tournament-container-other-info">
+      <div class="card-details-tournament-container-other-info-details">
+        <mat-icon>location_on</mat-icon>
+        <p>{{ tournamentDetails.place }}</p>
+        <mat-icon>date_range</mat-icon>
+        <p>
+          {{ tournamentDetails.date | date: 'dd MMMM yyyy' | titlecase }}
+        </p>
+        <p>
+          Équipes inscrites :
+          {{ currentNumberOfParticipants }}/{{
+            tournamentDetails.maxNumberOfTeams
+          }}
+        </p>
+      </div>
+    </div>
+    <div class="button-wrapper">
+      <button
+        *ngIf="
+          currentNumberOfParticipants !== tournamentDetails.maxNumberOfTeams &&
+          limitInscriptionValue !== 0
+        "
+        mat-raised-button
+        color="primary"
+        type="button"
+        [routerLink]="['/tournament', tournamentId, 'teams']">
+        PARTICIPER
+      </button>
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="openDialog(tournamentDetails)"
+        *ngIf="isCurrentUser">
+        <mat-icon>delete</mat-icon>
+        SUPPRIMER
+      </button>
+    </div>
+  </div>
+</article>

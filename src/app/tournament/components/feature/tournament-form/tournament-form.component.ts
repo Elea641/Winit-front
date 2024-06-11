@@ -18,13 +18,14 @@ import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 import { DropzoneMaterialModule } from '@ngx-dropzone/material';
 
 import { TournamentForm } from 'src/app/tournament/models/tournament-form.model';
-import { Sport } from 'src/app/sport/models/sport.model';
+import { Sport } from 'src/app/sport/models/sport.type';
 
 import { FileUploadComponent } from '../../../../components/feature/file-upload/file-upload.component';
 import { TournamentMappers } from 'src/app/tournament/shared/mappers/TournamentMappers';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { SportService } from 'src/app/sport/shared/sport.service';
-import { TournamentCreationDto } from 'src/app/tournament/models/tournament-creation-dto.model';
+import { TournamentCreationDto } from 'src/app/tournament/models/tournament-creation-dto.type';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-tournament-form',
@@ -50,14 +51,15 @@ import { TournamentCreationDto } from 'src/app/tournament/models/tournament-crea
 })
 export class TournamentFormComponent implements OnInit, OnDestroy {
   tournamentForm!: TournamentForm['form'];
-  sports$!: Observable<Sport[]>;
+  sports$: Observable<Sport[]> = this.sportService.getAllSports();
   private destroy$!: Subject<void>;
 
   constructor(
     private fb: FormBuilder,
     private tournamentEntityMappers: TournamentMappers,
     private tournamentService: TournamentService,
-    private sportService: SportService
+    private sportService: SportService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -66,17 +68,18 @@ export class TournamentFormComponent implements OnInit, OnDestroy {
     this.tournamentForm = new TournamentForm(this.fb, this.sportService)[
       'form'
     ];
-
-    this.sports$ = this.sportService.getAllSports();
   }
 
   onSubmit() {
     if (this.tournamentForm.valid) {
       const newTournament: TournamentCreationDto =
-        this.tournamentEntityMappers.ToCreationDto(this.tournamentForm);
+        this.tournamentEntityMappers.toCreationDto(this.tournamentForm);
       this.tournamentService.createTournament(newTournament);
     } else {
-      console.error('Error submitting form');
+      this.toastService.showError(
+        "Le formulaire n'a pas pu être envoyé",
+        'Erreur'
+      );
     }
   }
 

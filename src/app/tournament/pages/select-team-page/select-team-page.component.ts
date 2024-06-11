@@ -4,10 +4,10 @@ import { Observable, concatMap, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ListTeamBySportComponent } from '../../components/feature/list-team-by-sport/list-team-by-sport.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { TournamentDetails } from '../../models/tournament-details.model';
+import { TournamentDetails } from '../../models/tournament-details.type';
 import { TeamService } from 'src/app/team/shared/team.service';
 import { InscriptionFormTournamentComponent } from '../../components/feature/inscription-form-tournament/inscription-form-tournament.component';
-import { Team } from 'src/app/team/models/team.model';
+import { Team } from 'src/app/team/models/team.type';
 @Component({
   selector: 'app-select-team-page',
   standalone: true,

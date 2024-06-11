@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, fromEvent, map, switchMap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GetImageService {
-  public baseUrl = 'http://localhost:8080/uploads/';
+  public baseUrl = environment.urlUploads;
 
   constructor(private http: HttpClient) {}
 

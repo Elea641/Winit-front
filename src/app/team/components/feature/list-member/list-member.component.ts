@@ -1,15 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Member } from 'src/app/team/models/member.model';
+import { Member } from 'src/app/team/models/member.type';
 import { MemberCardComponent } from '../../ui/member-card/member-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Observable, Subscription } from 'rxjs';
-import { Team } from 'src/app/team/models/team.model';
-import { ModalContent } from 'src/app/components/models/modal-content.model';
+import { Team } from 'src/app/team/models/team.type';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ModalContent } from 'src/app/components/models/modal-content.class';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-list-member',
@@ -26,14 +27,15 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ListMemberComponent implements OnInit, OnDestroy {
   @Input() team$!: Observable<Team | null>;
-  private teamSubscription!: Subscription;
+  teamSubscription!: Subscription;
   members: Member[] = [];
   teamName = '';
   memberDelete!: Member;
 
   constructor(
     private memberService: MemberService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastService: ToastService
   ) {}
 
   ngOnDestroy(): void {
@@ -71,6 +73,7 @@ export class ListMemberComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ModalComponent, {
       data: new ModalContent(modalData),
     });
+
     dialogRef.afterClosed().subscribe(response => {
       if (response === true) {
         this.team$.subscribe(team => {
@@ -78,7 +81,7 @@ export class ListMemberComponent implements OnInit, OnDestroy {
             this.memberService.deleteMemberByTeamName(team.name, member);
             this.memberDelete = member;
           } else {
-            console.error('Utilisateur introuvable');
+            this.toastService.showError('Aucun utilisateur trouvé', 'Erreur');
           }
         });
       }

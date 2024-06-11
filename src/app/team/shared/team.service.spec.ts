@@ -5,9 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { Team } from '../models/team.model';
+import { Team } from '../models/team.type';
 import { of } from 'rxjs';
-import { CreatedTeam } from '../models/created-team.model';
+import { CreatedTeam } from '../models/created-team.class';
 
 describe('TeamService', () => {
   let service: TeamService;

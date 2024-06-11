@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ToastService } from 'src/app/shared/toast.service';
-import { Member } from '../models/member.model';
+import { Member } from '../models/member.type';
 
 describe('MemberService', () => {
   let service: MemberService;

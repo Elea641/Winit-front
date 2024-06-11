@@ -5,7 +5,7 @@ import { ConvertWinEnum } from '../../models/enum/convertWinEnum';
   providedIn: 'root',
 })
 export class HelperProfileService {
-  resultatsToNumber(result: string): string | number {
+  resultsToNumber(result: string): string | number {
     switch (result) {
       case ConvertWinEnum.One:
         return 1;
@@ -21,7 +21,7 @@ export class HelperProfileService {
     }
   }
 
-  resultatsToString(result: string): string {
+  resultsToString(result: string): string {
     switch (result) {
       case ConvertWinEnum.One:
         return 'Premières places';

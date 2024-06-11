@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Member } from 'src/app/team/models/member.model';
+import { Member } from 'src/app/team/models/member.type';
 
 @Component({
   selector: 'app-member-card',

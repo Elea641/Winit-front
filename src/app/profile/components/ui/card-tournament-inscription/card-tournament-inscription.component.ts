@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
+import { TournamentDetails } from 'src/app/tournament/models/tournament-details.type';
 
 @Component({
   selector: 'app-card-tournament-inscription',
@@ -12,7 +12,7 @@ import { TournamentDetails } from 'src/app/tournament/models/tournament-details.
   styleUrls: ['./card-tournament-inscription.component.scss'],
 })
 export class CardTournamentInscriptionComponent implements OnInit {
-  @Input() result!: TournamentDetails;
+  @Input() tournamentDetails!: TournamentDetails;
   @Input() title = '';
   buttonValue = '';
 

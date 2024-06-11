@@ -8,7 +8,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { TokenService } from 'src/app/auth/shared/token.service';
-import { TokenDetails } from 'src/app/auth/models/TokenDetails.model';
+import { TokenDetails } from 'src/app/auth/models/TokenDetails.class';
 
 @Component({
   selector: 'app-navbar',

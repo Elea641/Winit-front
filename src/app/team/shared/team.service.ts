@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { Team } from '../models/team.model';
+import { Team } from '../models/team.type';
 import { Observable, Subject, of } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
-import { CreatedTeam } from '../models/created-team.model';
+import { CreatedTeam } from '../models/created-team.class';
 import { ITeamService } from './interfaces/ITeam.service';
 
 @Injectable({

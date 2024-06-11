@@ -9,26 +9,26 @@
       <ng-container>
         <h1>DERNIERS TOURNOIS CRÉÉS</h1>
         <mat-divider></mat-divider>
-        <app-spinner *ngIf="loadingTournaments"></app-spinner>
+        <app-spinner *ngIf="isLoadingTournaments"></app-spinner>
         <app-carousel
-          *ngIf="!loadingTournaments"
+          *ngIf="!isLoadingTournaments"
           [tournaments$]="tournaments$"></app-carousel>
       </ng-container>
       <ng-container>
         <h1>TOURNOIS EN COURS</h1>
         <mat-divider></mat-divider>
-        <app-spinner *ngIf="loadingGeneratedTournaments"></app-spinner>
+        <app-spinner *ngIf="isLoadingGeneratedTournaments"></app-spinner>
         <app-carousel
-          *ngIf="!loadingGeneratedTournaments"
+          *ngIf="!isLoadingGeneratedTournaments"
           [tournaments$]="generatedTournaments$"></app-carousel>
       </ng-container>
       <ng-container>
         <h1>TOURNOIS OUVERTS À L'INSCRIPTION</h1>
         <mat-divider></mat-divider>
-        <app-spinner *ngIf="loadingCurrentTournaments"></app-spinner>
+        <app-spinner *ngIf="isLoadingOpenTournaments"></app-spinner>
         <app-carousel
-          *ngIf="!loadingCurrentTournaments"
-          [tournaments$]="currentTournaments$"></app-carousel>
+          *ngIf="!isLoadingOpenTournaments"
+          [tournaments$]="openTournaments$"></app-carousel>
       </ng-container>
     </section>
   </div>

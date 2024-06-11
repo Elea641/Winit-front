@@ -1,15 +1,15 @@
-<article *ngIf="result">
+<article *ngIf="tournamentDetails">
   <section>
     <img
       src="../../../../../assets/pictures/award.png"
       alt="sport detail image" />
     <h3>
-      {{ result.name | titlecase }}
+      {{ tournamentDetails.name | titlecase }}
     </h3>
-    <p>{{ result.place | titlecase }}</p>
+    <p>{{ tournamentDetails.place | titlecase }}</p>
   </section>
   <footer>
-    <button mat-raised-button (click)="onClick(result.id)">
+    <button mat-raised-button (click)="onClick(tournamentDetails.id)">
       {{ buttonValue | uppercase }}
     </button>
   </footer>

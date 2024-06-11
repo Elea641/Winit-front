@@ -7,7 +7,7 @@ import { TournamentService } from 'src/app/tournament/shared/tournament.service'
 import { CarouselComponent } from '../../../../components/ui/carousel/carousel.component';
 import { SidebarComponent } from '../../../../components/ui/sidebar/sidebar.component';
 import { TournamentCardComponent } from '../../ui/tournament-card/tournament-card.component';
-import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
+import { TournamentCard } from 'src/app/tournament/models/tournament-card.type';
 import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.component';
 import { PaginationComponent } from 'src/app/components/feature/pagination/pagination.component';
 import { PageEvent } from '@angular/material/paginator';
@@ -24,7 +24,7 @@ import { EntityNames } from 'src/app/shared/enums/entity_names.enum';
     SidebarComponent,
     MatDividerModule,
     SpinnerComponent,
-    PaginationComponent
+    PaginationComponent,
   ],
   templateUrl: './tournament-list.component.html',
   styleUrls: ['./tournament-list.component.scss'],
@@ -38,11 +38,11 @@ export class TournamentListComponent implements OnInit {
   showOnlyUpcomingTournaments = false;
   showNonFullTournaments = false;
   selectedSport = '';
-  loading = true;
+  isLoading = true;
 
-  tournamentsNumber: number = 0;
-  pageSize: number = 10;
-  currentPageIndex: number = 0;
+  tournamentsNumber = 0;
+  pageSize = 10;
+  currentPageIndex = 0;
 
   constructor(
     private tournamentService: TournamentService,
@@ -52,12 +52,16 @@ export class TournamentListComponent implements OnInit {
 
   ngOnInit(): void {
     this.tournamentService.getAllTournaments().subscribe(response => {
-      this.loading = false;
+      this.isLoading = false;
       this.tournamentsNumber = response.length;
     });
 
-    this.filteredTournaments$ = this.paginationService.getEntityPaginated(EntityNames.tournament, this.currentPageIndex, this.pageSize);
-    
+    this.filteredTournaments$ = this.paginationService.getEntityPaginated(
+      EntityNames.tournament,
+      this.currentPageIndex,
+      this.pageSize
+    );
+
     if (this.isDrawerOpened === true) {
       this.isOpen = 'open';
     }
@@ -67,7 +71,11 @@ export class TournamentListComponent implements OnInit {
     this.tournamentsNumber = pageEvent.length;
     this.pageSize = pageEvent.pageSize;
     this.currentPageIndex = pageEvent.pageIndex;
-    this.filteredTournaments$ = this.paginationService.getEntityPaginated(EntityNames.tournament, this.currentPageIndex, this.pageSize);
+    this.filteredTournaments$ = this.paginationService.getEntityPaginated(
+      EntityNames.tournament,
+      this.currentPageIndex,
+      this.pageSize
+    );
   }
 
   handleDrawerChange(isDrawerOpened: boolean) {

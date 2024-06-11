@@ -12,6 +12,7 @@ export class HelperTournamentService implements IHelperTournamentService {
     let phase = 1;
     let randomMatchs = 0;
     let totalMatchesWithoutRandoms = 0;
+
     while (Math.floor(totalTeams / (phase * 2))) {
       phase *= 2;
       randomMatchs = (totalTeams % phase) * 2;
@@ -108,10 +109,10 @@ export class HelperTournamentService implements IHelperTournamentService {
     const nameAndNumberByPhase: Phases[] = [];
 
     for (const phase in result) {
-      const valeurTotalMatchs = totalPhaseMatchs[phase];
+      const totalMatchs = totalPhaseMatchs[phase];
       nameAndNumberByPhase.push({
         phase: result[phase],
-        number: valeurTotalMatchs,
+        number: totalMatchs,
       });
     }
 

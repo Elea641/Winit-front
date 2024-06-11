@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { ContactDetails } from 'src/app/contact/models/contact.details.model';
+import { ContactWinit } from 'src/app/contact/models/contact-winit.type';
 
 @Component({
   selector: 'app-dialog-overview-contact',
@@ -12,5 +12,5 @@ import { ContactDetails } from 'src/app/contact/models/contact.details.model';
   styleUrls: ['./dialog-overview-contact.component.scss'],
 })
 export class DialogOverviewContactComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ContactDetails) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ContactWinit) {}
 }

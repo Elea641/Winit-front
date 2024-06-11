@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatchUpdate } from '../models/matchUpdate.model';
+import { MatchUpdate } from '../models/matchUpdate.type';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/shared/toast.service';
 import { TournamentService } from './tournament.service';
-import { TournamentDetails } from '../models/tournament-details.model';
+import { TournamentDetails } from '../models/tournament-details.type';
 import { IMatchService } from './interfaces/IMatch.service';
 
 @Injectable({

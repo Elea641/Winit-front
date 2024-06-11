@@ -12,7 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { UserAuth } from 'src/app/auth/models/user-auth.model';
+import { UserAuth } from 'src/app/auth/models/user-auth.class';
 import { AuthService } from 'src/app/auth/shared/auth.service';
 import { LocalStorageService } from 'src/app/auth/shared/local-storage.service';
 

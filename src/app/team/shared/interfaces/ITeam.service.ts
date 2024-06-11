@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { Team } from '../../models/team.model';
-import { CreatedTeam } from '../../models/created-team.model';
+import { Team } from '../../models/team.type';
+import { CreatedTeam } from '../../models/created-team.class';
 
 export interface ITeamService {
   getTeam(): Observable<Team | null>;

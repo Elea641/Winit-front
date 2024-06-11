@@ -19,7 +19,7 @@ import { ToastService } from '../../../../shared/toast.service';
 import { Router } from '@angular/router';
 import { DeleteProfileComponent } from '../delete-profile/delete-profile.component';
 import { UserService } from 'src/app/auth/shared/user.service';
-import { CurrentUser } from 'src/app/auth/models/current-user.model';
+import { User } from 'src/app/auth/models/user.type';
 
 @Component({
   selector: 'app-update-profile',
@@ -43,7 +43,7 @@ import { CurrentUser } from 'src/app/auth/models/current-user.model';
 export class UpdateProfileComponent implements OnInit {
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
   updateProfileForm!: FormGroup;
-  currentUser!: CurrentUser;
+  currentUser!: User;
 
   constructor(
     private profileService: ProfileService,

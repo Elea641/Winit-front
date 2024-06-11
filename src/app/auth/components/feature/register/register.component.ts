@@ -17,8 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../shared/auth.service';
 import { checkPasswordMatch } from '../../../shared/password-match';
-import { CurrentUser } from 'src/app/auth/models/current-user.model';
 import { passwordValidator } from 'src/app/auth/core/password.validator';
+import { RegistrationUser } from 'src/app/auth/models/registration-user.type';
 
 @Component({
   selector: 'app-register',
@@ -41,13 +41,11 @@ import { passwordValidator } from 'src/app/auth/core/password.validator';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  user: CurrentUser = {
+  user: RegistrationUser = {
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    requiredRole: 'ROLE_USER',
-    enabled: true,
   };
 
   constructor(private authService: AuthService) {}
@@ -124,14 +122,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const newUser: CurrentUser = {
+      const newUser: RegistrationUser = {
         firstName: this.firstName?.value.trim().toLowerCase(),
         lastName: this.lastName?.value.trim().toLowerCase(),
         city: this.city?.value.trim().toLowerCase(),
         email: this.email?.value.trim(),
         password: this.password?.value.trim(),
-        requiredRole: 'ROLE_USER',
-        enabled: true,
         createdAt: new Date(),
         acceptTerms: this.acceptTerms?.value,
       };

@@ -10,7 +10,7 @@
     (newSportFilter)="onReceiveSportFilter($event)"
     (newResetFilter)="onReceiveResetFilters()"
     (newApplyFilters)="onReceiveApplyFilters()"></app-sidebar>
-  <app-spinner *ngIf="loading"></app-spinner>
+  <app-spinner *ngIf="isLoading"></app-spinner>
 
   <div
     class="tournament-container"
@@ -44,8 +44,7 @@
           (pageChangeEvent)="changePage($event)"
           [length]="tournamentsNumber"
           [pageSize]="pageSize"
-          [pageIndex]="currentPageIndex"
-        ></app-pagination>
+          [pageIndex]="currentPageIndex"></app-pagination>
       </ng-container>
     </section>
   </div>
