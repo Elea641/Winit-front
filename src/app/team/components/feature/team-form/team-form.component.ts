@@ -125,6 +125,8 @@ export class TeamFormComponent implements OnInit, OnDestroy {
         id: this.teamToUpdate?.id,
       };
 
+      console.log(teamData);
+
       if (this.mode === 'create') {
         this.teamService.addTeam(teamData as CreatedTeam);
       } else if (this.mode === 'update' && this.teamToUpdate) {

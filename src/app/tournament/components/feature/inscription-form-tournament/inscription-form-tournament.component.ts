@@ -101,14 +101,18 @@ export class InscriptionFormTournamentComponent implements OnInit {
             });
         } else {
           this.toastService.showError(
-            'Erreur',
-            'Veuillez remplir tous les champs obligatoires'
+            'Veuillez remplir tous les champs obligatoires',
+            'Erreur'
           );
         }
       } else {
         this.router.navigate([`/tournament/${this.tournamentId}`]);
       }
     });
+  }
+
+  cancelAction() {
+    this.router.navigate([`/tournament/${this.tournamentId}`]);
   }
 
   onClick() {

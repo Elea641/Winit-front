@@ -12,7 +12,11 @@
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit">VALIDER</button>
-    <button mat-stroked-button color="primary" type="button" type="submit">
+    <button
+      mat-stroked-button
+      color="primary"
+      type="button"
+      (click)="cancelAction()">
       ANNULER
     </button>
   </form>
