@@ -11,6 +11,7 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ModalContent } from 'src/app/components/models/modal-content.class';
 import { ToastService } from 'src/app/shared/toast.service';
+import { User } from 'src/app/auth/models/user.type';
 
 @Component({
   selector: 'app-list-member',
@@ -27,6 +28,7 @@ import { ToastService } from 'src/app/shared/toast.service';
 })
 export class ListMemberComponent implements OnInit, OnDestroy {
   @Input() team$!: Observable<Team | null>;
+  @Input() currentUser!: User;
   teamSubscription!: Subscription;
   members: Member[] = [];
   teamName = '';

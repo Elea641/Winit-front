@@ -6,7 +6,9 @@
     #tabGroup>
     <mat-tab label="LISTE DES MEMBRES">
       <ul>
-        <app-list-member [team$]="team$"></app-list-member>
+        <app-list-member
+          [team$]="team$"
+          [currentUser]="currentUser"></app-list-member>
       </ul>
     </mat-tab>
     <mat-tab

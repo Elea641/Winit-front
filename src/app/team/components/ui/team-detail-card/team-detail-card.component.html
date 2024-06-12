@@ -5,21 +5,27 @@
     <div class="team-list-card-infos-container">
       <h1>{{ team.name | uppercase }}</h1>
       <h2>{{ team.sport | titlecase }}</h2>
+      <h3>
+        {{ team.ownerFirstName | titlecase }}
+        {{ team.ownerLastName | titlecase }}
+      </h3>
       <div class="list-teams-tounament-total-members">
         <mat-icon>people</mat-icon>
         <p>{{ team.teamMembersCount }}/{{ team.totalPlayers }}</p>
       </div>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        (click)="updateTeam(team)">
-        MODIFIER LE NOM DE L'ÉQUIPE
-      </button>
-      <button mat-stroked-button color="warn" (click)="openDialog()">
-        <mat-icon>delete</mat-icon>
-        SUPPRIMER
-      </button>
+      <ng-container *ngIf="currentUser?.id === team.ownerId">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="updateTeam(team)">
+          MODIFIER LE NOM DE L'ÉQUIPE
+        </button>
+        <button mat-stroked-button color="warn" (click)="openDialog()">
+          <mat-icon>delete</mat-icon>
+          SUPPRIMER L'ÉQUIPE
+        </button>
+      </ng-container>
     </div>
   </section>
 </ng-container>
