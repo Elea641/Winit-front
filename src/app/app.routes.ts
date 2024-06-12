@@ -34,6 +34,8 @@ import { rankingResolver } from './ranking/shared/resolvers/ranking-resolver';
 import { BackOfficeUserCreateComponent } from './back-office/components/feature/back-office-user-create/back-office-user-create.component';
 import { BackOfficeSportEditComponent } from './back-office/components/feature/back-office-sport-edit/back-office-sport-edit.component';
 import { UserOrAdminGuard } from './auth/core/userOrAdmin.guard';
+import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
+import { LegalMentionsPageComponent } from './pages/legal-mentions-page/legal-mentions-page.component';
 
 export const routes: Routes = [
   {
@@ -139,6 +141,8 @@ export const routes: Routes = [
     ],
   },
   { path: 'sport', component: SportComponent },
+  { path: 'legal', component: LegalMentionsPageComponent },
+  { path: 'about', component: AboutUsPageComponent },
   { path: '', component: HomePageComponent },
   { path: '**', component: NotFoundPageComponent },
 ];
