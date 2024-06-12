@@ -10,4 +10,6 @@ export type Team = {
   totalPlayers: number;
   validated: boolean;
   ownerId: number;
+  ownerFirstName: string;
+  ownerLastName: string;
 };

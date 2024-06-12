@@ -11,6 +11,7 @@ import { MemberService } from 'src/app/team/shared/member.service';
 import { Router } from '@angular/router';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { ModalContent } from 'src/app/components/models/modal-content.class';
+import { User } from 'src/app/auth/models/user.type';
 
 @Component({
   selector: 'app-team-detail-card',
@@ -27,12 +28,13 @@ import { ModalContent } from 'src/app/components/models/modal-content.class';
 })
 export class TeamDetailCardComponent implements OnInit, OnDestroy {
   @Input() team$!: Observable<Team | null>;
+  @Input() currentUser!: User;
   private teamSubscription!: Subscription;
 
   constructor(
-    private teamService: TeamService,
-    private dialog: MatDialog,
     private memberService: MemberService,
+    private dialog: MatDialog,
+    private teamService: TeamService,
     private router: Router
   ) {}
 

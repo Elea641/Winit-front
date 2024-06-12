@@ -20,18 +20,31 @@
     color: $secondary-color;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     align-items: center;
 
     h1 {
       grid-column-start: 1;
-      grid-column-end: 1;
+      grid-row-start: 1;
     }
 
     h2 {
+      grid-row-start: 2;
       grid-column-start: 1;
-      grid-column-end: 1;
       color: $important-color-text;
+    }
+
+    h3 {
+      grid-column-start: 1;
+      grid-row-start: 3;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    h3::before {
+      content: url('../../../../../assets/pictures/couronne.png');
+      margin-right: 0.5rem;
     }
 
     .list-teams-tounament-total-members {
