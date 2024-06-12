@@ -1,19 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { CardCurrentProfileComponent } from '../../ui/card-current-profile/card-current-profile.component';
-import { ProfileService } from 'src/app/profile/shared/profile.service';
-import { CurrentProfile } from 'src/app/profile/models/current-profile.model';
 import { Observable } from 'rxjs';
-import { ListResultatsComponent } from '../list-resultats/list-resultats.component';
-import { TeamMembers } from 'src/app/profile/models/teamMembers.model';
+import { ListResultsComponent } from '../list-results/list-results.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ListTeamComponent } from 'src/app/profile/components/feature/list-team/list-team.component';
 import * as fr from '@angular/common/locales/fr';
 import { TeamFormComponent } from 'src/app/team/components/feature/team-form/team-form.component';
-import { CurrentUser } from 'src/app/auth/models/current-user.model';
 import { UserService } from 'src/app/auth/shared/user.service';
 import { ListTournamentComponent } from '../list-tournament/list-tournament.component';
 import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
+import { User } from 'src/app/auth/models/user.type';
 
 @Component({
   selector: 'app-current-profile-details',
@@ -21,7 +18,7 @@ import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
   imports: [
     CommonModule,
     CardCurrentProfileComponent,
-    ListResultatsComponent,
+    ListResultsComponent,
     MatTabsModule,
     TeamFormComponent,
     ListTeamComponent,
@@ -30,22 +27,12 @@ import { UserStatistics } from 'src/app/profile/models/user-statistics.model';
   templateUrl: './current-profile-details.component.html',
   styleUrls: ['./current-profile-details.component.scss'],
 })
-export class CurrentProfileDetailsComponent implements OnInit {
+export class CurrentProfileDetailsComponent {
   @Input() userStatistics$!: Observable<UserStatistics>;
-  currentProfile$!: Observable<CurrentProfile>;
-  currentUser$!: Observable<CurrentUser>;
-  teamMembers$!: Observable<TeamMembers>;
 
-  constructor(
-    private profileService: ProfileService,
-    private userService: UserService
-  ) {
+  currentUser$: Observable<User> = this.userService.getCurrentUser();
+
+  constructor(private userService: UserService) {
     registerLocaleData(fr.default);
-  }
-
-  ngOnInit(): void {
-    this.currentProfile$ = this.profileService.getCurrentProfile();
-    this.currentUser$ = this.userService.getCurrentUser();
-    this.teamMembers$ = this.profileService.getTeamMembers();
   }
 }

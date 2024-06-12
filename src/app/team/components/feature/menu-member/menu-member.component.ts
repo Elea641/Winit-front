@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Team } from 'src/app/team/models/team.model';
+import { Team } from 'src/app/team/models/team.type';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { ListMemberComponent } from '../list-member/list-member.component';
 import { CreateMemberComponent } from '../create-member/create-member.component';

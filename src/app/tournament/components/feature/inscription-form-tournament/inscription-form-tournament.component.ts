@@ -13,13 +13,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Team } from 'src/app/team/models/team.model';
+import { Team } from 'src/app/team/models/team.type';
 import { TournamentService } from 'src/app/tournament/shared/tournament.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { SelectTeam } from 'src/app/tournament/models/selectTeam.model';
+import { SelectTeam } from 'src/app/tournament/models/selectTeam.class';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
-import { ModalContent } from 'src/app/components/models/modal-content.model';
+import { ModalContent } from 'src/app/components/models/modal-content.class';
 
 @Component({
   selector: 'app-inscription-form-tournament',

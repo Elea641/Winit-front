@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
-import { Ranking } from 'src/app/ranking/models/ranking.model';
-import { TopWinnerTeamCountDto } from 'src/app/ranking/models/topWinnerTeamCountDto.model';
-import { TopWinnerTeamDto } from 'src/app/ranking/models/topWinnerTeamDto.model';
+import { Ranking } from 'src/app/ranking/models/ranking.type';
+import { TopWinnerTeamCountDto } from 'src/app/ranking/models/topWinnerTeamCountDto.class';
+import { TopWinnerTeamDto } from 'src/app/ranking/models/topWinnerTeamDto.class';
 import { RankingCardComponent } from '../../ui/ranking-card/ranking-card.component';
 import { MatTabsModule } from '@angular/material/tabs';
 

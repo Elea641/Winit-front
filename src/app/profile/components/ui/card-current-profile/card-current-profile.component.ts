@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { CurrentUser } from 'src/app/auth/models/current-user.model';
+import { User } from 'src/app/auth/models/user.type';
 
 @Component({
   selector: 'app-card-current-profile',
@@ -13,5 +13,5 @@ import { CurrentUser } from 'src/app/auth/models/current-user.model';
   styleUrls: ['./card-current-profile.component.scss'],
 })
 export class CardCurrentProfileComponent {
-  @Input() currentUser!: CurrentUser | null;
+  @Input() currentUser!: User | null;
 }

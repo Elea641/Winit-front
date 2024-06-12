@@ -2,7 +2,7 @@ import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { inject } from '@angular/core';
 import { TeamService } from '../team.service';
-import { Team } from '../../models/team.model';
+import { Team } from '../../models/team.type';
 
 export const teamResolver: ResolveFn<Team | null> = (
   route: ActivatedRouteSnapshot

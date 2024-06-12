@@ -9,7 +9,6 @@ import { ProfilePageComponent } from './profile/pages/profile-page/profile-page.
 import { RegisterComponent } from './auth/components/feature/register/register.component';
 import { Routes } from '@angular/router';
 import { SelectTeamPageComponent } from './tournament/pages/select-team-page/select-team-page.component';
-import { SportComponent } from './sport/pages/sport/sport.component';
 import { TeamPageComponent } from './team/pages/team-page/team-page.component';
 import { teamResolver } from './team/shared/resolvers/team-resolver';
 import { TournamentDetailsPageComponent } from './tournament/pages/tournament-details-page/tournament-details-page.component';
@@ -140,7 +139,6 @@ export const routes: Routes = [
       { path: 'new-password/:token', component: NewPasswordComponent },
     ],
   },
-  { path: 'sport', component: SportComponent },
   { path: 'legal', component: LegalMentionsPageComponent },
   { path: 'about', component: AboutUsPageComponent },
   { path: '', component: HomePageComponent },

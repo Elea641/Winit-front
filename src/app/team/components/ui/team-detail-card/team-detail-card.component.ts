@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Team } from 'src/app/team/models/team.model';
+import { Team } from 'src/app/team/models/team.type';
 import { TeamService } from 'src/app/team/shared/team.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,8 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable, Subscription } from 'rxjs';
 import { MemberService } from 'src/app/team/shared/member.service';
 import { Router } from '@angular/router';
-import { ModalContent } from 'src/app/components/models/modal-content.model';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
+import { ModalContent } from 'src/app/components/models/modal-content.class';
 
 @Component({
   selector: 'app-team-detail-card',

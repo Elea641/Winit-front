@@ -4,7 +4,7 @@ import { HelperProfileService } from 'src/app/profile/shared/helpers/helper-prof
 import {
   StatesEnumType,
   StatesType,
-} from 'src/app/profile/models/types/state-type.model';
+} from 'src/app/profile/models/state-type.model';
 
 @Component({
   selector: 'app-card-result-tournament',
@@ -22,11 +22,12 @@ export class CardResultTournamentComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.result && this.result.length > 0) {
-      this.convertedResult = this.helperProfileService.resultatsToNumber(
+      this.convertedResult = this.helperProfileService.resultsToNumber(
         this.result[0]
       );
-      this.convertedResultToString =
-        this.helperProfileService.resultatsToString(this.result[0]);
+      this.convertedResultToString = this.helperProfileService.resultsToString(
+        this.result[0]
+      );
     }
   }
 }

@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { ProfileService } from './profile.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CurrentProfile } from '../models/current-profile.model';
 import { of } from 'rxjs';
 import { UserStatistics } from '../models/user-statistics.model';
 
@@ -28,26 +27,6 @@ describe('ProfileService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('should get profile', () => {
-    const mockProfile: CurrentProfile = {
-      id: 1,
-      firstname: 'John',
-      lastname: 'Doe',
-      city: 'Bordeaux',
-      team: 'Team A',
-    };
-
-    profileServiceSpy.getCurrentProfile.and.returnValue(of(mockProfile));
-
-    profileServiceSpy.getCurrentProfile().subscribe(profile => {
-      expect(profile).toEqual(mockProfile);
-    });
-
-    expect(profileServiceSpy.getCurrentProfile.calls.count())
-      .withContext('spy method was called once')
-      .toBe(1);
   });
 
   it('should get statistics', () => {

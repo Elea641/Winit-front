@@ -19,7 +19,7 @@
     </button>
     <h2
       *ngIf="
-        tournamentDetails.currentNumberOfParticipants === 1 &&
+        tournamentDetails.currentNumberOfParticipants < 2 &&
         !isCanceled &&
         !tournamentDetails.isCanceled
       ">
@@ -30,7 +30,7 @@
       color="primary"
       (click)="openDialogCancelTournament()"
       *ngIf="
-        tournamentDetails.currentNumberOfParticipants === 1 &&
+        tournamentDetails.currentNumberOfParticipants < 2 &&
         !isCanceled &&
         !tournamentDetails.isCanceled
       ">

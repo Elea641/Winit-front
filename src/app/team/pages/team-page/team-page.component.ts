@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TeamDetailCardComponent } from '../../components/ui/team-detail-card/team-detail-card.component';
 import { MenuMemberComponent } from '../../components/feature/menu-member/menu-member.component';
 import { Observable, concatMap, of } from 'rxjs';
-import { Team } from '../../models/team.model';
+import { Team } from '../../models/team.type';
 
 @Component({
   selector: 'app-team-page',

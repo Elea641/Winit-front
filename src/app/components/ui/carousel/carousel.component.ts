@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Observable } from 'rxjs';
 import { TournamentCardComponent } from '../../../tournament/components/ui/tournament-card/tournament-card.component';
-import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
+import { TournamentCard } from 'src/app/tournament/models/tournament-card.type';
 
 @Component({
   selector: 'app-carousel',

@@ -4,7 +4,7 @@ import { Observable, concatMap, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 import { RankingListComponent } from '../../components/feature/ranking-list/ranking-list.component';
-import { Ranking } from '../../models/ranking.model';
+import { Ranking } from '../../models/ranking.type';
 
 @Component({
   selector: 'app-ranking-page',

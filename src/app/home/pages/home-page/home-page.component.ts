@@ -4,7 +4,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { Observable, of } from 'rxjs';
 import { CarouselComponent } from 'src/app/components/ui/carousel/carousel.component';
 import { SidebarComponent } from 'src/app/components/ui/sidebar/sidebar.component';
-import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
+import { TournamentCard } from 'src/app/tournament/models/tournament-card.type';
 import { HomeService } from '../../shared/home.service';
 import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.component';
 
@@ -24,31 +24,29 @@ import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.componen
 export class HomePageComponent implements OnInit {
   tournaments$!: Observable<TournamentCard[]>;
   generatedTournaments$!: Observable<TournamentCard[]>;
-  currentTournaments$!: Observable<TournamentCard[]>;
-  loadingTournaments = true;
-  loadingGeneratedTournaments = true;
-  loadingCurrentTournaments = true;
+  openTournaments$!: Observable<TournamentCard[]>;
+  isLoadingTournaments = true;
+  isLoadingGeneratedTournaments = true;
+  isLoadingOpenTournaments = true;
 
   constructor(private homeService: HomeService) {}
 
   ngOnInit() {
     this.homeService.getAllTournaments().subscribe(tournaments => {
       this.tournaments$ = of(tournaments);
-      this.loadingTournaments = false;
+      this.isLoadingTournaments = false;
     });
 
     this.homeService
       .getAllGeneratedTournaments()
       .subscribe(generatedTournaments => {
         this.generatedTournaments$ = of(generatedTournaments);
-        this.loadingGeneratedTournaments = false;
+        this.isLoadingGeneratedTournaments = false;
       });
 
-    this.homeService
-      .getAllCUrrentTournaments()
-      .subscribe(currentTournaments => {
-        this.currentTournaments$ = of(currentTournaments);
-        this.loadingCurrentTournaments = false;
-      });
+    this.homeService.getAllOpenTournaments().subscribe(currentTournaments => {
+      this.openTournaments$ = of(currentTournaments);
+      this.isLoadingOpenTournaments = false;
+    });
   }
 }

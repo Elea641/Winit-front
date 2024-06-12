@@ -4,9 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ScoreModalComponent } from '../../feature/score-modal/score-modal.component';
 import { ScoreModalContent } from 'src/app/tournament/models/ScoreModal.model';
-import { TournamentDetails } from 'src/app/tournament/models/tournament-details.model';
+import { TournamentDetails } from 'src/app/tournament/models/tournament-details.type';
 import { BreakpointService } from 'src/app/shared/breakpoint.service';
-import { Match } from 'src/app/tournament/models/match.model';
+import { Match } from 'src/app/tournament/models/match.type';
 
 @Component({
   selector: 'app-card-tournament-match',

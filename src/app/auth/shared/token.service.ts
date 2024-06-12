@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
-import { TokenResponse } from '../models/token.model';
+import { TokenResponse } from '../models/token.class';
 
 @Injectable({
   providedIn: 'root',

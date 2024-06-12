@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
-import { Contact } from '../../models/contact.model';
-import { ContactDetails } from '../../models/contact.details.model';
+import { ContactDev } from '../../models/contact-dev.type';
+import { ContactWinit } from '../../models/contact-winit.type';
 
 export interface IContactService {
-  getAllContacts(): Observable<Contact[]>;
+  getAllContactDevs(): Observable<ContactDev[]>;
 
-  getAllContactDetails(): Observable<ContactDetails[]>;
+  getAllContactWinit(): Observable<ContactWinit[]>;
 }

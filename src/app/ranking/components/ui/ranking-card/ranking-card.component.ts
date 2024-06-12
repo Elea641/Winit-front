@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TopWinnerTeamCountDto } from 'src/app/ranking/models/topWinnerTeamCountDto.model';
-import { TopWinnerTeamDto } from 'src/app/ranking/models/topWinnerTeamDto.model';
+import { TopWinnerTeamCountDto } from 'src/app/ranking/models/topWinnerTeamCountDto.class';
+import { TopWinnerTeamDto } from 'src/app/ranking/models/topWinnerTeamDto.class';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { TopWinnerTeamDtoType } from 'src/app/ranking/models/topWinnerTeamDtoType.model';
+import { TopWinnerTeamDtoType } from 'src/app/ranking/models/topWinnerTeamDtoType.class';
 
 @Component({
   selector: 'app-ranking-card',

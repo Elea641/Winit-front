@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TournamentCard } from 'src/app/tournament/models/tournament-card.model';
+import { TournamentCard } from 'src/app/tournament/models/tournament-card.type';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,9 +22,9 @@ export class HomeService {
     );
   }
 
-  getAllCUrrentTournaments(): Observable<TournamentCard[]> {
+  getAllOpenTournaments(): Observable<TournamentCard[]> {
     return this.http.get<TournamentCard[]>(
-      `${environment.urlApi}/tournaments/current`
+      `${environment.urlApi}/tournaments/open`
     );
   }
 }
