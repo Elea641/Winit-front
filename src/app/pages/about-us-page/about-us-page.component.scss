@@ -1,0 +1,61 @@
+@import '../../../assets/style/variables.scss';
+@import '../../../assets/style/mixins.scss';
+
+main {
+  color: $secondary-color-text;
+  margin: 10rem 10rem;
+}
+
+mat-divider {
+  margin: 1rem 0;
+  border-top-color: $secondary-color;
+}
+
+.text-container {
+  padding: 0.5rem 1rem;
+}
+
+h1 {
+  color: $secondary-color;
+  font-weight: normal;
+}
+
+h3 {
+  margin: 2rem 0 0 1rem;
+  font-weight: normal;
+}
+
+p,
+li {
+  margin: 1rem 0;
+  text-align: justify;
+  line-height: 1.8;
+}
+
+.signature {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  font-style: italic;
+}
+
+.material-icons {
+  line-height: 1.5;
+  margin-right: 0.5rem;
+}
+
+.paragraph-container {
+  display: flex;
+  padding-top: 1rem;
+  align-items: center;
+}
+
+img {
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
+}
+
+ul {
+  padding: 0 1rem;
+}
