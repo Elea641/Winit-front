@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  urlApi: 'http://localhost:8080/api',
-  urlUploads: 'http://localhost:8080/uploads/',
+  urlApi: 'https://win-it.ovh/api',
+  urlUploads: 'https://win-it.ovh/uploads/',
 };
