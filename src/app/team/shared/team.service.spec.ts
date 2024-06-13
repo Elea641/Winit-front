@@ -58,6 +58,8 @@ describe('TeamService', () => {
       totalPlayers: 11,
       validated: true,
       ownerId: 123,
+      ownerFirstName: 'John',
+      ownerLastName: 'Doe',
     };
 
     teamServiceSpy.getTeam.and.returnValue(of(mockTeam));
@@ -85,6 +87,8 @@ describe('TeamService', () => {
       totalPlayers: 11,
       validated: true,
       ownerId: 123,
+      ownerFirstName: 'John',
+      ownerLastName: 'Doe',
     };
 
     teamServiceSpy.getTeam.and.returnValue(of(mockTeam));
@@ -113,6 +117,8 @@ describe('TeamService', () => {
         totalPlayers: 11,
         validated: true,
         ownerId: 123,
+        ownerFirstName: 'John',
+        ownerLastName: 'Doe',
       },
     ];
 
@@ -142,6 +148,8 @@ describe('TeamService', () => {
         totalPlayers: 11,
         validated: true,
         ownerId: 123,
+        ownerFirstName: 'John',
+        ownerLastName: 'Doe',
       },
     ];
 
@@ -174,6 +182,8 @@ describe('TeamService', () => {
       totalPlayers: 11,
       validated: true,
       ownerId: 123,
+      ownerFirstName: 'John',
+      ownerLastName: 'Doe',
     };
 
     teamServiceSpy.getTeamByTeamName.and.returnValue(of(mockTeam));
