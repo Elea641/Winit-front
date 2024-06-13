@@ -3,7 +3,7 @@
   "sport": "Karaté",
   "city": "Bordeaux",
   "date": "2024/03/15",
-  "participants": 30,
+  "participants": 31,
   "teams": [
     { "team": "Team1", "result": 0, "url": "../assets/pictures/award.png" },
     { "team": "Team2", "result": 0, "url": "../assets/pictures/award.png" },
