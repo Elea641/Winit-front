@@ -30,7 +30,7 @@ export class TeamService implements ITeamService {
   }
 
   getAllTeamsByUser(): Observable<Team[]> {
-    return this.http.get<Team[]>(`${environment.urlApi}/teams`);
+    return this.http.get<Team[]>(`${environment.urlApi}/teams/`);
   }
 
   getAllTeamsByUserForTournament(sport: string): Observable<Team[]> {
@@ -42,22 +42,24 @@ export class TeamService implements ITeamService {
   }
 
   addTeam(team: CreatedTeam): void {
-    this.http.post<CreatedTeam>(`${environment.urlApi}/teams`, team).subscribe({
-      next: response => {
-        if (response) {
-          this.router.navigate([`/teams-details/${team.name}`]);
-          this.toastService.showSuccess(
-            'Votre équipe a été créée',
-            'Opération effectuée avec succès'
-          );
-        }
-      },
-      error: error => {
-        if (error.error) {
-          this.toastService.showError(error.error, 'Une erreur est survenue');
-        }
-      },
-    });
+    this.http
+      .post<CreatedTeam>(`${environment.urlApi}/teams/`, team)
+      .subscribe({
+        next: response => {
+          if (response) {
+            this.router.navigate([`/teams-details/${team.name}`]);
+            this.toastService.showSuccess(
+              'Votre équipe a été créée',
+              'Opération effectuée avec succès'
+            );
+          }
+        },
+        error: error => {
+          if (error.error) {
+            this.toastService.showError(error.error, 'Une erreur est survenue');
+          }
+        },
+      });
   }
 
   updateTeam(teamName: string, team: CreatedTeam) {
