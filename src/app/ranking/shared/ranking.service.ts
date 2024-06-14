@@ -12,6 +12,6 @@ export class RankingService implements IRankingService {
   constructor(private http: HttpClient) {}
 
   getAllRanking(): Observable<Ranking> {
-    return this.http.get<Ranking>(`${environment.urlApi}/matches`);
+    return this.http.get<Ranking>(`${environment.urlApi}/matches/`);
   }
 }
