@@ -44,7 +44,8 @@ li {
   margin-right: 0.5rem;
 }
 
-.first-paragraph-container, .second-paragraph-container {
+.first-paragraph-container,
+.second-paragraph-container {
   display: flex;
   padding-top: 1rem;
   align-items: center;
@@ -80,8 +81,6 @@ ul {
   }
 
   img {
-    max-width:300px;
+    max-width: 300px;
   }
 }
-
-
