@@ -11,11 +11,13 @@
           [currentUser]="currentUser"></app-list-member>
       </ul>
     </mat-tab>
-    <mat-tab
-      *ngIf="team.teamMembersCount < team.totalPlayers"
-      label="AJOUT D'UN MEMBRE">
-      <app-create-member
-        (cancelClicked)="handleCancelClick()"></app-create-member>
-    </mat-tab>
+    <ng-container *ngIf="currentUser?.id === team.ownerId">
+      <mat-tab
+        *ngIf="team.teamMembersCount < team.totalPlayers"
+        label="AJOUT D'UN MEMBRE">
+        <app-create-member
+          (cancelClicked)="handleCancelClick()"></app-create-member>
+      </mat-tab>
+    </ng-container>
   </mat-tab-group>
 </nav>
