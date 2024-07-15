@@ -20,6 +20,7 @@ import { BreakpointService } from '../../../shared/breakpoint.service';
 import { InputSearchComponent } from '../../feature/input-search/input-search.component';
 import { SidebarService } from 'src/app/shared/sidebar.service';
 import { SidebarDesktopComponent } from './sidebar-desktop/sidebar-desktop.component';
+import { SidebarMobileComponent } from './sidebar-mobile/sidebar-mobile.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -37,6 +38,7 @@ import { SidebarDesktopComponent } from './sidebar-desktop/sidebar-desktop.compo
     MatFormFieldModule,
     MatSelectModule,
     SidebarDesktopComponent,
+    SidebarMobileComponent,
   ],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
