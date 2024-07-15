@@ -1,0 +1,43 @@
+<footer
+  [ngStyle]="{
+    'margin-left.rem': isOpen === 'open' ? 17.5 : 0,
+    'width.%': isOpen === 'open' ? 80 : 100,
+    'transition.s': 0.3
+  }">
+  <mat-toolbar>
+    <a routerLink="/">
+      <img src="../../../../assets/pictures/logo-white.png" alt="logo_WinIt" />
+    </a>
+    <div class="container-footer-title">
+      <div class="line"></div>
+      <h1>REJOIGNEZ-NOUS</h1>
+      <div class="line"></div>
+    </div>
+    <div class="container-footer-social-network">
+      <a href="https://www.facebook.com" target="_blank">
+        <img
+          src="../../../../assets/pictures/facebook.png"
+          alt="logo_facebook" />
+      </a>
+      <a href="https://twitter.com" target="_blank">
+        <img src="../../../../assets/pictures/twitter.png" alt="logo_twitter" />
+      </a>
+      <a href="https://github.com" target="_blank">
+        <img src="../../../../assets/pictures/git.png" alt="logo_git" />
+      </a>
+      <a href="https://www.youtube.com" target="_blank">
+        <img src="../../../../assets/pictures/youtube.png" alt="logo_youtube" />
+      </a>
+      <a href="https://www.instagram.com" target="_blank">
+        <img
+          src="../../../../assets/pictures/instagram.png"
+          alt="logo_instagram" />
+      </a>
+    </div>
+    <div class="container-footer-links">
+      <button mat-button routerLink="/contact">CONTACT</button>
+      <button mat-button routerLink="/about">A PROPOS</button>
+      <button mat-button routerLink="/legal">MENTIONS LEGALES</button>
+    </div>
+  </mat-toolbar>
+</footer>

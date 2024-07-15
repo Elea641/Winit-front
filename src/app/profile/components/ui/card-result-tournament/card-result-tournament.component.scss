@@ -1,0 +1,85 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+article {
+  background-color: $primary-background-color;
+  display: flex;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  position: relative;
+  border-radius: 4px;
+
+  .card-result-tournament-img {
+    position: relative;
+    padding: 0.5rem;
+    img {
+      display: block;
+      margin: 0 0.7rem 0 0.7rem;
+      width: 6rem;
+    }
+
+    p {
+      color: $secondary-color-text;
+      font-size: 1.2rem;
+      position: absolute;
+      top: 54%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .line {
+    border: 1px solid $secondary-color-line;
+    margin: 0.5rem 0 0.5rem 0.5rem;
+  }
+
+  .card-result-tournament-infos {
+    @include media-mobile-tablet-screen {
+      width: 80%;
+    }
+
+    @include flex-column-center-align-justify;
+    width: 40%;
+    p {
+      color: $important-color-text;
+      font-size: 1.8rem;
+    }
+
+    .card-result-tournament-info-text {
+      font-size: 1rem;
+      color: $secondary-color-text;
+      padding: 0.5rem 0 0 0.5rem;
+      text-align: center;
+    }
+  }
+
+  @include media-large-screen {
+    width: 23vw;
+    display: flex;
+    margin: 1.5rem 1vw 0 0;
+    height: 7rem;
+
+    .card-result-tournament-img {
+      img {
+        width: 5rem;
+      }
+
+      p {
+        top: 52%;
+        font-size: 1rem;
+      }
+    }
+
+    .card-result-tournament-infos {
+      @include flex-column-center-align-justify;
+      width: 100%;
+      p {
+        font-size: 1.5rem;
+      }
+
+      .card-result-tournament-info-text {
+        font-size: 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<form (ngSubmit)="sendSearchValueToParent()">
+  <mat-form-field class="input-search-container" appearance="outline">
+    <mat-label>Recherche</mat-label>
+    <input matInput type="text" name="search-input" [(ngModel)]="searchValue" />
+    <button
+      type="button"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="searchValue = ''"
+      (click)="sendSearchValueToParent()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</form>

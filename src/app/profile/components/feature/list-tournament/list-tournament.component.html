@@ -1,0 +1,13 @@
+<section>
+  <h2 *ngIf="(tournaments$ | async)?.length === 0">
+    Vous ne possédez pas encore de tournoi
+  </h2>
+
+  <div class="all-tournaments-cards">
+    <div
+      *ngFor="let tournament of tournaments$ | async"
+      class="tournament-list">
+      <app-tournament-card [tournament]="tournament"></app-tournament-card>
+    </div>
+  </div>
+</section>

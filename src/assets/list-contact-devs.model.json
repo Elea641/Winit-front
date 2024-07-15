@@ -1,0 +1,34 @@
+[
+  {
+    "id": 2,
+    "name": "Davoust Kevin",
+    "url": "assets/pictures/Kevin-picture.jpeg",
+    "description": "Développeur Angular / Java",
+    "linkedin_url": "https://www.linkedin.com/in/k%C3%A9vin-davoust-319214276/",
+    "github_url": "https://github.com/KevinDavoust"
+  },
+  {
+    "id": 3,
+    "name": "Guerin Coline",
+    "url": "assets/pictures/Coline-picture.jpeg",
+    "description": "Développeuse Angular / Java",
+    "linkedin_url": "https://www.linkedin.com/in/coline-guerin-2804a9139/",
+    "github_url": "https://github.com/colineguerin"
+  },
+  {
+    "id": 4,
+    "name": "Rémi Meslin",
+    "url": "assets/pictures/Remi-picture.jpeg",
+    "description": "Développeur Angular / Java",
+    "linkedin_url": "https://www.linkedin.com/in/r%C3%A9mi-meslin-797047113/",
+    "github_url": "https://github.com/Urzaag"
+  },
+  {
+    "id": 1,
+    "name": "Voliotis Elea",
+    "url": "assets/pictures/Elea-picture.jpeg",
+    "description": "Développeuse Angular / Java",
+    "linkedin_url": "https://www.linkedin.com/in/eleavoliotis/",
+    "github_url": "https://github.com/Elea641"
+  }
+]

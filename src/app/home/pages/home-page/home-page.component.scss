@@ -1,0 +1,56 @@
+@import '../../../../assets/style/mixins.scss';
+@import '../../../../assets/style/variables.scss';
+
+main {
+  @include flex-align-center;
+  padding: 0 2rem 2rem 2rem;
+  width: 100vw;
+
+  img {
+    width: 100vw;
+    height: 30vh;
+  }
+
+  .tournament-container-home {
+    width: 100%;
+
+    h1 {
+      color: $secondary-color;
+      font-weight: normal;
+      margin: 2rem 0.5rem 1rem 0.5rem;
+    }
+
+    mat-divider {
+      margin: 0.5rem;
+      border-top-color: $secondary-color;
+    }
+  }
+
+  @include media-mobile-tablet-screen {
+    @include flex-column-center;
+  }
+
+  @include media-large-screen {
+    @include flex-column-center;
+
+    .image-container-home {
+      display: flex;
+      justify-content: space-between;
+      width: 100vw;
+      height: 30vh;
+      background-color: #1c0a1a;
+    }
+
+    .image-container-home div:first-child {
+      background-color: #1e0501;
+      width: 60vw;
+      height: 100%;
+    }
+
+    .image-container-home img {
+      transform: translateX(-50%);
+      width: 60vw;
+      height: 30vh;
+    }
+  }
+}

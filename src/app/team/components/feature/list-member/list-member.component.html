@@ -1,0 +1,15 @@
+<li *ngIf="team$ | async as team">
+  <div *ngFor="let member of members">
+    <app-member-card [member]="member"></app-member-card>
+    <ng-container *ngIf="currentUser?.id === team.ownerId">
+      <button
+        *ngIf="member.firstName !== team.leaderName"
+        mat-stroked-button
+        color="warn"
+        (click)="openDialog(member)">
+        <mat-icon>delete</mat-icon>
+        SUPPRIMER
+      </button>
+    </ng-container>
+  </div>
+</li>

@@ -1,0 +1,23 @@
+@import '../../../assets/style/mixins.scss';
+@import '../../../assets/style/variables.scss';
+
+main {
+  padding: 0 2rem;
+  height: calc(100vh - 3.7rem);
+  color: $secondary-color-text;
+
+  @include flex-column-center-align-justify;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    line-height: 1.8;
+  }
+
+  a {
+    color: $important-color-text;
+    cursor: pointer;
+  }
+}

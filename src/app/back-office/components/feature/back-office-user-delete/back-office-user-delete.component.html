@@ -1,0 +1,18 @@
+<section>
+  <h2 mat-dialog-title>Etes-vous sûr de vouloir supprimer ce compte ?</h2>
+  <mat-dialog-content
+    >Veuillez noter que ce compte ne peut être supprimé s'il est lié à des
+    tournois ou à des équipes. En revanche, vous pouvez toujours le désactiver.
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button
+      mat-stroked-button
+      color="warn"
+      [mat-dialog-close]="true"
+      (click)="deleteUser()">
+      <mat-icon>delete</mat-icon>
+      SUPPRIMER
+    </button>
+    <button mat-button mat-dialog-close color="primary">Annuler</button>
+  </mat-dialog-actions>
+</section>

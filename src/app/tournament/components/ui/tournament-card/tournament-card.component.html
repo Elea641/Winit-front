@@ -1,0 +1,43 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<mat-card *ngIf="tournament" class="tournament-card">
+  <img mat-card-image [src]="image" alt="" />
+
+  <div class="playercount">
+    <span class="material-symbols-outlined text-white group-icon"> group </span>
+    <span class="text-white small-font number-players"
+      >{{ tournament.currentNumberOfParticipants || 0 }} /
+      {{ tournament.maxNumberOfTeams }}</span
+    >
+  </div>
+  <mat-card-header>
+    <mat-card-subtitle class="tournament-sport small-font">{{
+      tournament.sport
+    }}</mat-card-subtitle>
+    <mat-card-title class="tournament-title text-white">{{
+      tournament.name | titlecase
+    }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row small-font">
+      <span class="material-symbols-outlined text-white"> calendar_month </span>
+      <p class="text-white">
+        {{ tournament.date | date: 'dd MMMM yyyy' | titlecase }}
+      </p>
+    </div>
+    <div class="row">
+      <span class="material-symbols-outlined text-white"> location_on </span>
+      <p class="text-white">{{ tournament.place | titlecase }}</p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <a
+      mat-stroked-button
+      class="see-more-button"
+      [routerLink]="['/tournament/', tournament.id]">
+      Voir plus
+    </a>
+  </mat-card-actions>
+</mat-card>

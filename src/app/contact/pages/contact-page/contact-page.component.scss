@@ -1,0 +1,58 @@
+@import '../../../../assets/style/mixins.scss';
+@import '../../../../assets/style/variables.scss';
+
+section {
+  @include flex-column-center;
+  color: $secondary-color;
+  margin: 5rem 0 5rem 0;
+
+  h1 {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .line {
+    width: 12rem;
+    height: 1px;
+    border-top: 1px solid $primary-color-border;
+    margin-top: 3rem;
+  }
+
+  .container-contact-page-actions {
+    margin: 3rem;
+    @include flex-wrap;
+
+    .button-contact {
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+
+      img {
+        margin: 1rem;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .line {
+      width: 24rem;
+    }
+
+    .container-contact-page-actions {
+      .container-contact-page-actions-item {
+        img {
+          width: 4rem;
+        }
+      }
+    }
+  }
+}

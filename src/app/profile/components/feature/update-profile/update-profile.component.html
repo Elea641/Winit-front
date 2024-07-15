@@ -1,0 +1,60 @@
+<main>
+  <div class="update-block">
+    <div class="delete-button-container">
+      <app-delete-profile></app-delete-profile>
+    </div>
+    <h1>MODIFICATION DU PROFIL</h1>
+    <mat-divider></mat-divider>
+    <form [formGroup]="updateProfileForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="update-profile-form-field">
+        <mat-label>Prénom</mat-label>
+        <input matInput type="text" formControlName="firstName" />
+        <mat-error
+          *ngIf="firstName?.errors && !firstName?.pristine"
+          class="error-message-size">
+          Prénom invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="update-profile-form-field">
+        <mat-label>Nom</mat-label>
+        <input matInput type="text" formControlName="lastName" />
+        <mat-error
+          *ngIf="lastName?.errors && !lastName?.pristine"
+          class="error-message-size">
+          Nom invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="update-profile-form-field">
+        <mat-label>Ville</mat-label>
+        <input matInput type="text" formControlName="city" />
+        <mat-error
+          *ngIf="city?.errors && !city?.pristine"
+          class="error-message-size">
+          Ville invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="update-profile-form-field">
+        <mat-label>Adresse email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error
+          *ngIf="email?.errors && !email?.pristine"
+          class="error-message-size">
+          Email invalide
+        </mat-error>
+      </mat-form-field>
+      <div class="update-profile-buttons">
+        <button mat-raised-button color="primary" type="submit">VALIDER</button>
+        <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          (click)="onClick()">
+          ANNULER
+        </button>
+      </div>
+    </form>
+  </div>
+</main>

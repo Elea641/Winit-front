@@ -1,0 +1,46 @@
+@import '../../../../assets/style/variables.scss';
+
+.mat-toolbar {
+  position: fixed;
+  height: 3.5rem;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: $primary-color;
+  box-shadow: 0 2px 2px $primary-color-shadow;
+
+  .navbar-button-logo {
+    img {
+      width: 5rem;
+    }
+  }
+
+  .container-buttons-navbar-left {
+    margin: 1rem;
+  }
+
+  .navbar-spacer {
+    flex: 1 1 auto;
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $primary-color-button-text;
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $primary-color-button-text;
+  }
+}
+
+::ng-deep .navbar-custom-menu {
+  margin-top: 12px;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background-color: $primary-color;
+
+  .mat-mdc-menu-item {
+    padding: 0 0.8rem;
+  }
+}

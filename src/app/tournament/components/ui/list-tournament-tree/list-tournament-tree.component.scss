@@ -1,0 +1,93 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+@include media-mobile-tablet-screen {
+  button {
+    margin-top: 2rem;
+    color: $secondary-color;
+  }
+
+  h2 {
+    color: $secondary-color-text;
+    font-weight: 400;
+    margin-top: 2rem;
+  }
+
+  .list-tournament-tree-container {
+    color: $secondary-color;
+    width: 100%;
+    margin-top: 2rem;
+
+    .list-tournament-tree-container-details {
+      h2 {
+        color: $secondary-color-text;
+        margin: 1.5rem 0;
+        font-weight: 400;
+      }
+
+      .list-tournament-tree-container-cards {
+        margin: 1rem 0;
+        @include flex-wrap-align-center;
+      }
+    }
+  }
+}
+
+@include media-large-screen {
+  button {
+    margin-top: 2rem;
+    color: $secondary-color;
+  }
+  h2 {
+    color: $secondary-color;
+    font-weight: 400;
+    margin-top: 2rem;
+  }
+
+  .list-tournament-tree-container {
+    @include flex-wrap;
+    color: $secondary-color;
+    width: 100%;
+    margin-top: 2rem;
+
+    .list-tournament-tree-container-details {
+      margin-top: auto;
+      margin-bottom: auto;
+
+      .list-tournament-tree-container-cards-preliminary {
+        display: flex;
+
+        .list-tournament-tree-container-cards-preliminary-cards {
+          display: flex;
+          flex-wrap: wrap;
+
+          h2 {
+            width: 100vw;
+            color: $secondary-color-text;
+            margin: 1rem 0 1.5rem 0;
+            font-weight: 400;
+          }
+        }
+      }
+
+      .list-tournament-tree-container-cards-phases {
+        display: flex;
+
+        h2 {
+          color: $secondary-color-text;
+          margin: 2 0 0.5rem 0;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: $primary-color-button-text;
+}
+
+.mat-mdc-raised-button:hover,
+.mat-mdc-raised-button:focus {
+  color: $primary-color-button-text;
+}

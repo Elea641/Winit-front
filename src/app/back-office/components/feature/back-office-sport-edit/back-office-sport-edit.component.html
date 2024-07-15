@@ -1,0 +1,56 @@
+<div class="back-office-container">
+  <div *ngIf="sport">
+    <h1>Espace administrateur</h1>
+    <mat-divider></mat-divider>
+    <form [formGroup]="editSportForm" (ngSubmit)="onSubmit()">
+      <div class="back-office-detail-header">
+        <h2>Modifier un sport</h2>
+        <div class="button-container">
+          <button
+            mat-raised-button
+            class="confirm-button"
+            color="primary"
+            type="submit">
+            VALIDER
+          </button>
+          <button
+            mat-stroked-button
+            color="primary"
+            [routerLink]="['/back-office']">
+            ANNULER
+          </button>
+        </div>
+      </div>
+      <div class="edit-form-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Nom du sport</mat-label>
+          <input matInput type="text" formControlName="name" />
+          <mat-error
+            *ngIf="name?.errors && !name?.pristine"
+            class="error-message-size">
+            Nom invalide
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre de joueurs par équipe</mat-label>
+          <input matInput type="number" formControlName="numberOfPlayers" />
+          <mat-error
+            *ngIf="numberOfPlayers?.errors && !numberOfPlayers?.pristine"
+            class="error-message-size">
+            Nom invalide
+          </mat-error>
+        </mat-form-field>
+
+        <app-file-upload
+          [groupParent]="editSportForm"
+          formControlNameValue="imageFile"
+          labelValue="Image du sport"></app-file-upload>
+
+        <mat-card *ngIf="!imageFile?.touched || !imageFile?.valid">
+          <img mat-card-image [src]="currentImage" alt="image du sport" />
+        </mat-card>
+      </div>
+    </form>
+  </div>
+</div>

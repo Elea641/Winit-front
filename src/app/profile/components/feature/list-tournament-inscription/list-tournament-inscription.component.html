@@ -1,0 +1,9 @@
+<section
+  *ngIf="userStatistics && userStatistics[1] && userStatistics[1].length > 0">
+  <h2>{{ this.title | uppercase }}</h2>
+  <div *ngFor="let result of userStatistics[1]">
+    <app-card-tournament-inscription
+      [tournamentDetails]="result"
+      [title]="this.title"></app-card-tournament-inscription>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+<section>
+  <div class="list-resultats-container-resultats-desktop">
+    <div class="list-resultats-container-resultats">
+      <app-card-result-total
+        [userStatistics]="userStatistics"></app-card-result-total>
+    </div>
+    <div class="list-resultats-container-items">
+      <div *ngFor="let result of getObjectEntriesResult(userStatistics)">
+        <app-card-result-tournament
+          [result]="result"></app-card-result-tournament>
+      </div>
+    </div>
+  </div>
+  <div class="list-resultats-container-resultats-desktop">
+    <div *ngFor="let result of getObjectEntriesInscription(userStatistics)">
+      <app-list-tournament-inscription
+        [userStatistics]="result"></app-list-tournament-inscription>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,17 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+@include media-large-screen {
+  section {
+    @include flex-column-center;
+
+    .list-resultats-container-resultats-desktop {
+      display: flex;
+      width: 100%;
+
+      .list-resultats-container-items {
+        display: flex;
+      }
+    }
+  }
+}

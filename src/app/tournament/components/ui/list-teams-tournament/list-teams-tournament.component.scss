@@ -1,0 +1,38 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+section {
+  color: $secondary-color-text;
+  margin: 0.5rem 0;
+
+  .list-teams-tounament-header {
+    @include flex-justify-content-space-between;
+
+    .list-teams-tounament-total-members {
+      @include flex-column-center;
+    }
+  }
+
+  .list-teams-tounament-body {
+    li {
+      @include flex-justify-content-space-between;
+
+      div {
+        @include media-mobile-screen {
+          @include flex-wrap;
+        }
+        @include flex-align-center;
+        padding: 0.5rem 0;
+        img {
+          width: 4rem;
+          padding-right: 1rem;
+        }
+
+        .list-teams-tounament-body-text {
+          font-size: 1rem;
+          padding: 0.8rem;
+        }
+      }
+    }
+  }
+}

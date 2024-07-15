@@ -1,0 +1,10 @@
+@import '../../../../assets/style/variables.scss';
+
+::ng-deep .mat-mdc-progress-spinner {
+  margin: 2rem 0;
+}
+
+::ng-deep .mat-mdc-progress-spinner circle,
+.mat-mdc-spinner circle {
+  stroke: $primary-color-spinner;
+}

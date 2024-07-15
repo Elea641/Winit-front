@@ -1,0 +1,23 @@
+<section>
+  <form [formGroup]="addMemberForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+
+      <mat-error
+        *ngIf="email?.errors && !email?.pristine"
+        class="error-message-size">
+        Le format de l'email est inconnu.
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">VALIDER</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      type="button"
+      (click)="onClick()">
+      ANNULER
+    </button>
+  </form>
+</section>

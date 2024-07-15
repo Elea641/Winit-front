@@ -1,0 +1,21 @@
+@import '../../../../assets/style/variables.scss';
+@import '../../../../assets/style/mixins.scss';
+
+section {
+  background-color: $primary-color;
+  padding: 0.5rem;
+  position: fixed;
+  top: calc(40vh - 3.5rem);
+  left: 10vw;
+  right: 10vw;
+  z-index: 3;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
+  color: $secondary-color;
+  font-size: large;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__content {
+  color: $secondary-color;
+}

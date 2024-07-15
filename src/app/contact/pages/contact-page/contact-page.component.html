@@ -1,0 +1,14 @@
+<app-contact-list></app-contact-list>
+<section>
+  <h1>ADRESSES AUXQUELLES NOUS POUVONS ÊTRE JOINTS</h1>
+  <div class="line"></div>
+  <div class="container-contact-page-actions">
+    <div
+      *ngFor="let contactDetails of contactDetails$ | async"
+      class="container-contact-page-actions-item">
+      <button class="button-contact" (click)="openDialog(contactDetails)">
+        <img src="{{ contactDetails.url_picture }}" alt="logo_instagram" />
+      </button>
+    </div>
+  </div>
+</section>

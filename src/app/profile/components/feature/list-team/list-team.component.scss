@@ -1,0 +1,37 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+section {
+  padding: 1rem 0;
+
+  h2 {
+    color: $secondary-color;
+    font-weight: normal;
+    margin: 1rem 0.5rem;
+  }
+
+  ul {
+    @include flex-column-center;
+    @include media-large-screen {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+    @include media-tablet-screen {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+  }
+
+  header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1rem;
+    width: 100%;
+
+    ::ng-deep .mat-mdc-raised-button:not(:disabled) {
+      color: $primary-color-button-text;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import '../../../../../assets/style/variables.scss';
+
+nav {
+  padding: 0 2rem;
+
+  ::ng-deep .mdc-tab__text-label {
+    color: $secondary-color;
+  }
+}

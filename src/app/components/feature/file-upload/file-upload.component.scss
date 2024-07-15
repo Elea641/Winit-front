@@ -1,0 +1,13 @@
+@import '../../../auth/components/feature/register/register.component.scss';
+
+.wi-tournament-form-field-big {
+  width: 100%;
+}
+
+::ng-deep .ngx-mat-dropzone mat-label {
+  display: none;
+}
+
+.wi-file-upload * {
+  cursor: pointer !important;
+}

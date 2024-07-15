@@ -1,0 +1,13 @@
+{
+  "firstname": "Elea",
+  "lastname": "Voliotis",
+  "city": "Bordeaux",
+  "team": "WinIt",
+  "allPlayed": 50,
+  "results": { "win": 10, "second": 5, "third": 3 },
+  "lastTournamentsPlayed": [
+    { "lastTournament": "Basketball", "result": 1 },
+    { "penultimateTournament": "Ultimate", "result": 1 },
+    { "antepenultimateTournament": "Pétanque", "result": 1 }
+  ]
+}

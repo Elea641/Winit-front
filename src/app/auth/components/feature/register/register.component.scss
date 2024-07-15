@@ -1,0 +1,101 @@
+@import '../../../../../assets/style/variables.scss';
+
+.register-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+
+  .register-block {
+    min-width: 200px;
+    max-width: 800px;
+    width: 100%;
+
+    h1 {
+      color: $secondary-color;
+      font-weight: normal;
+      margin: 1rem 0;
+    }
+
+    mat-divider {
+      margin: 0.5rem;
+      border-top-color: $secondary-color;
+    }
+
+    ul {
+      margin: 0 0 16px 0;
+      padding: 8px;
+      color: $secondary-color-text;
+      font-size: small;
+
+      li:first-child {
+        padding-top: 0.5rem;
+      }
+      li {
+        padding: 0.1rem 1.5rem;
+      }
+    }
+
+    mat-divider {
+      margin: 16px 0;
+      border-top-color: $secondary-color;
+    }
+
+    .register-form-field {
+      width: 50%;
+      padding: 8px;
+    }
+
+    .error-message-size {
+      font-size: small;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    .register-button,
+    .login-button {
+      width: 50%;
+      margin-bottom: 16px;
+    }
+
+    .mat-mdc-raised-button:not(:disabled) {
+      color: $primary-color-button-text;
+    }
+
+    .mat-mdc-raised-button:hover,
+    .mat-mdc-raised-button:focus {
+      color: $primary-color-button-text;
+    }
+
+    .mail-taken-error {
+      padding: 0 16px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .register-form-field {
+        width: 100%;
+      }
+
+      .registration-title {
+        font-size: large;
+      }
+
+      .register-button,
+      .login-button {
+        width: 100%;
+      }
+
+      .register-block {
+        margin-bottom: 5vh;
+      }
+    }
+  }
+}

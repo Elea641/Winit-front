@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Tournoi A",
+    "date": "2026-02-01",
+    "inscription_limit_date": "2022-03-01",
+    "place": "Bordeaux",
+    "sport": {
+      "name": "basket"
+    },
+    "currentPlayers": 2,
+    "maxPlayers": 10
+  },
+  {
+    "id": 2,
+    "name": "Tournoi B",
+    "date": "2023-02-04",
+    "inscription_limit_date": "2022-03-01",
+    "place": "Paris",
+    "sport": {
+      "name": "foot"
+    },
+    "currentPlayers": 4,
+    "maxPlayers": 12
+  },
+  {
+    "id": 3,
+    "name": "Tournoi C",
+    "date": "2024-02-03",
+    "inscription_limit_date": "2022-03-01",
+    "place": "Bordeaux",
+    "sport": {
+      "name": "volley"
+    },
+    "currentPlayers": 4,
+    "maxPlayers": 45
+  },
+  {
+    "id": 4,
+    "name": "Tournoi D",
+    "date": "2025-03-01",
+    "inscription_limit_date": "2024-03-01",
+    "place": "Marseille",
+    "sport": {
+      "name": "babyfoot"
+    },
+    "currentPlayers": 2,
+    "maxPlayers": 2
+  },
+  {
+    "id": 5,
+    "name": "Tournoi E",
+    "date": "2021-03-17",
+    "inscription_limit_date": "2022-03-01",
+    "place": "Paris",
+    "sport": {
+      "name": "babyfoot"
+    },
+    "currentPlayers": 12,
+    "maxPlayers": 24
+  },
+  {
+    "id": 6,
+    "name": "Tournoi E",
+    "date": "2025-02-08",
+    "inscription_limit_date": "2024-03-01",
+    "place": "Marseille",
+    "sport": {
+      "name": "volley"
+    },
+    "currentPlayers": 9,
+    "maxPlayers": 9
+  },
+  {
+    "id": 7,
+    "name": "Tournoi F",
+    "date": "2023-10-23",
+    "inscription_limit_date": "2024-03-01",
+    "place": "Bordeaux",
+    "sport": {
+      "name": "babyfoot"
+    },
+    "currentPlayers": 7,
+    "maxPlayers": 8
+  },
+  {
+    "id": 8,
+    "name": "Tournoi G",
+    "date": "2022-05-13",
+    "inscription_limit_date": "2024-03-01",
+    "place": "Bordeaux",
+    "sport": {
+      "name": "babyfoot"
+    },
+    "currentPlayers": 21,
+    "maxPlayers": 21
+  }
+]

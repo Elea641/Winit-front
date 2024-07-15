@@ -1,0 +1,20 @@
+@import '../../../../assets/style/mixins.scss';
+@import '../../../../assets/style/variables.scss';
+
+main {
+  margin-top: 2vh;
+  padding: 2rem;
+  width: 100%;
+
+  h1 {
+    color: $secondary-color;
+    font-weight: normal;
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  .mat-divider {
+    border-top-color: $secondary-color;
+    width: 100%;
+  }
+}

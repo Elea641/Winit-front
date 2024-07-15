@@ -1,0 +1,146 @@
+<section>
+  <form
+    [formGroup]="tournamentForm"
+    (ngSubmit)="onSubmit()"
+    enctype="multipart/form-data">
+    <h1 class="registration-title">CRÉATION D'UN TOURNOI</h1>
+    <mat-divider class="register-divider"></mat-divider>
+    <!-- Name -->
+    <mat-form-field
+      appearance="outline"
+      class="wi-tournament-form-field-big register-form-field">
+      <mat-label for="name">Nom du tournoi</mat-label>
+      <input id="name" type="text" formControlName="name" matInput />
+      <mat-error
+        *ngIf="
+          tournamentForm.controls['name']?.invalid &&
+          (tournamentForm.controls['name']?.dirty ||
+            tournamentForm.controls['name']?.touched)
+        "
+        class="error-message-size">
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['name'].hasError('required')"
+          >Nom du tournoi requis</small
+        >
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['name'].hasError('minlength')"
+          >Le nom du tournoi doit dépasser 3 caractères</small
+        >
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['name'].hasError('maxlength')"
+          >Le nom du tournoi ne doit pas dépasser 30 caractères</small
+        >
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Place -->
+    <mat-form-field appearance="outline" class="register-form-field">
+      <mat-label for="place">Lieu du tournoi</mat-label>
+      <input id="place" type="text" formControlName="place" matInput />
+      <mat-error
+        *ngIf="
+          tournamentForm.controls['place']?.invalid &&
+          (tournamentForm.controls['place']?.dirty ||
+            tournamentForm.controls['place']?.touched)
+        ">
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['place'].hasError('required')"
+          >Lieu du tournoi requis</small
+        >
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['place'].hasError('minlength')"
+          >Le nom du lieu doit dépasser 3 caractères</small
+        >
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['place'].hasError('maxlength')"
+          >Le nom du lieu ne doit pas dépasser 30 caractères</small
+        >
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Date -->
+    <mat-form-field appearance="outline" class="register-form-field">
+      <mat-label for="date">Date du tournoi</mat-label>
+      <input id="date" type="date" formControlName="date" matInput />
+      <mat-error
+        *ngIf="
+          tournamentForm.controls['date']?.invalid &&
+          (tournamentForm.controls['date']?.dirty ||
+            tournamentForm.controls['date']?.touched)
+        ">
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['date'].hasError('required')"
+          >Date du tournoi requise</small
+        >
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['date'].hasError('minimumDate')"
+          >Date du tournoi invalide</small
+        >
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Sport -->
+    <mat-form-field appearance="outline" class="register-form-field">
+      <mat-label for="sport">Sport</mat-label>
+      <mat-select formControlName="sport">
+        <mat-option *ngFor="let sport of sports$ | async" [value]="sport.name">
+          {{ sport.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="
+          tournamentForm.controls['sport']?.invalid &&
+          (tournamentForm.controls['sport']?.dirty ||
+            tournamentForm.controls['sport']?.touched)
+        ">
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['sport'].hasError('required')"
+          >Sport du tournoi requis</small
+        >
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Max Teams -->
+    <mat-form-field appearance="outline" class="register-form-field">
+      <mat-label for="maxTeams">Nombre max d'équipes</mat-label>
+      <input id="maxTeams" type="number" formControlName="maxTeams" matInput />
+      <mat-error
+        *ngIf="
+          tournamentForm.controls['maxTeams']?.invalid &&
+          (tournamentForm.controls['maxTeams']?.dirty ||
+            tournamentForm.controls['maxTeams']?.touched)
+        ">
+        <small
+          class="error"
+          *ngIf="tournamentForm.controls['maxTeams'].hasError('required')"
+          >Nombre max d'équipes requis</small
+        >
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Tournament Banner -->
+    <div class="tournament-banner-container register-form-field">
+      <app-file-upload
+        [groupParent]="tournamentForm"
+        formControlNameValue="tournamentBanner"
+        labelValue="Bannière du tournoi*"></app-file-upload>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="register-button"
+      [disabled]="tournamentForm.invalid">
+      CRÉER LE TOURNOI
+    </button>
+  </form>
+</section>

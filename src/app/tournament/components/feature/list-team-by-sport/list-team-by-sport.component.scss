@@ -1,0 +1,21 @@
+@import '../../../../../assets/style/mixins.scss';
+@import '../../../../../assets/style/variables.scss';
+
+ul {
+  @include media-mobile-screen {
+    @include flex-column-center;
+  }
+
+  @include media-tablet-screen {
+    @include flex-wrap;
+  }
+  @include media-large-screen {
+    @include flex-wrap;
+  }
+}
+
+h2 {
+  color: $secondary-color-text;
+  font-weight: 400;
+  margin-top: 2rem;
+}

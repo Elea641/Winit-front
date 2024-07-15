@@ -1,0 +1,35 @@
+<main class="container-home">
+  <div class="image-container-home">
+    <div class="image-container-home-background-left"></div>
+    <div class="image-container-home-background-right"></div>
+    <img src="../../../../assets/pictures/balles-sport-differents.jpg" alt="" />
+  </div>
+  <div class="tournament-container-home">
+    <section [ngStyle]="{ 'transition.s': 0.3 }">
+      <ng-container>
+        <h1>DERNIERS TOURNOIS CRÉÉS</h1>
+        <mat-divider></mat-divider>
+        <app-spinner *ngIf="isLoadingTournaments"></app-spinner>
+        <app-carousel
+          *ngIf="!isLoadingTournaments"
+          [tournaments$]="tournaments$"></app-carousel>
+      </ng-container>
+      <ng-container>
+        <h1>TOURNOIS EN COURS</h1>
+        <mat-divider></mat-divider>
+        <app-spinner *ngIf="isLoadingGeneratedTournaments"></app-spinner>
+        <app-carousel
+          *ngIf="!isLoadingGeneratedTournaments"
+          [tournaments$]="generatedTournaments$"></app-carousel>
+      </ng-container>
+      <ng-container>
+        <h1>TOURNOIS OUVERTS À L'INSCRIPTION</h1>
+        <mat-divider></mat-divider>
+        <app-spinner *ngIf="isLoadingOpenTournaments"></app-spinner>
+        <app-carousel
+          *ngIf="!isLoadingOpenTournaments"
+          [tournaments$]="openTournaments$"></app-carousel>
+      </ng-container>
+    </section>
+  </div>
+</main>

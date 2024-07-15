@@ -1,0 +1,18 @@
+<section>
+  <h2 mat-dialog-title>Etes-vous sûr de vouloir supprimer votre compte ?</h2>
+  <mat-dialog-content
+    >En cliquant sur confirmer, toutes vos données sur WinIt seront
+    définitivement perdues.
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button
+      mat-stroked-button
+      color="warn"
+      [mat-dialog-close]="true"
+      (click)="deleteProfile()">
+      <mat-icon>delete</mat-icon>
+      SUPPRIMER
+    </button>
+    <button mat-button mat-dialog-close color="primary">Annuler</button>
+  </mat-dialog-actions>
+</section>

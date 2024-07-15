@@ -1,0 +1,50 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+article {
+  background-color: $primary-background-color;
+  border-radius: 0 0 4px 4px;
+  min-height: 4rem;
+
+  @include flex-justify-content-space-between;
+  padding: 1rem 0.8rem;
+
+  section {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+
+    img {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 3;
+      width: 3.5rem;
+    }
+
+    h3,
+    p {
+      padding-left: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 300;
+    }
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $secondary-color-button;
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $secondary-color-button;
+  }
+
+  ::ng-deep .mat-mdc-raised-button:not(:disabled) {
+    background-color: $primary-background-color;
+    box-shadow: none;
+    border: 1px solid $secondary-color-button;
+  }
+}

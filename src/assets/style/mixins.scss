@@ -1,0 +1,95 @@
+/* Utility */
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-justify-align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-justify-content-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin flex-column-center-align-justify {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin flex-wrap-center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@mixin flex-wrap-align-center {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@mixin flex-justify-space-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@mixin flex-justify-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Media Screen*/
+@mixin media-mobile-screen {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin media-tablet-screen {
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin media-mobile-tablet-screen {
+  @media screen and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin media-large-screen {
+  @media screen and (min-width: 1024px) and (max-width: 2000px) {
+    @content;
+  }
+}

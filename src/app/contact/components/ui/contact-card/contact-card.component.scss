@@ -1,0 +1,32 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+li {
+  width: 15rem;
+  margin: 2rem;
+  mat-card {
+    width: 15rem;
+    background-color: $secondary-color;
+
+    img {
+      filter: grayscale(100%) saturate(0%);
+    }
+
+    mat-card-content {
+      color: $primary-color;
+
+      h1 {
+        text-align: center;
+      }
+    }
+
+    mat-card-actions {
+      @include flex-justify-content-center;
+
+      img {
+        margin: 0.5rem 0.5rem 0 0.5rem;
+        width: 3rem;
+      }
+    }
+  }
+}

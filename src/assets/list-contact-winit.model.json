@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "type": "téléphone",
+    "details": "00.00.00.00",
+    "url_picture": "../../../../assets/pictures/call.png"
+  },
+  {
+    "id": 2,
+    "type": "e-mail",
+    "details": "www.winit.com",
+    "url_picture": "../../../../assets/pictures/e-mail.png"
+  },
+  {
+    "id": 3,
+    "type": "Linkedin",
+    "details": "www.likedin/winit.com",
+    "url_picture": "../../../../assets/pictures/linkedin.png"
+  }
+]

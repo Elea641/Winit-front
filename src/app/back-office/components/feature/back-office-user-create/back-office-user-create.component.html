@@ -1,0 +1,112 @@
+<div class="back-office-container">
+  <h1>Espace administrateur</h1>
+  <mat-divider></mat-divider>
+  <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+    <div class="back-office-detail-header">
+      <h2>Créer un utilisateur</h2>
+      <div class="button-container">
+        <button
+          mat-raised-button
+          class="confirm-button"
+          color="primary"
+          type="submit">
+          VALIDER
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          [routerLink]="['/back-office']">
+          ANNULER
+        </button>
+      </div>
+    </div>
+    <div class="create-form-container">
+      <mat-form-field appearance="outline" class="create-user-form-field">
+        <mat-label>Prénom</mat-label>
+        <input matInput type="text" formControlName="firstName" />
+        <mat-error
+          *ngIf="firstName?.errors && !firstName?.pristine"
+          class="error-message-size">
+          Prénom invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="create-user-form-field">
+        <mat-label>Nom</mat-label>
+        <input matInput type="text" formControlName="lastName" />
+        <mat-error
+          *ngIf="lastName?.errors && !lastName?.pristine"
+          class="error-message-size">
+          Nom invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="create-user-form-field">
+        <mat-label>Ville</mat-label>
+        <input matInput type="text" formControlName="city" />
+        <mat-error
+          *ngIf="city?.errors && !city?.pristine"
+          class="error-message-size">
+          Ville invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="create-user-form-field">
+        <mat-label>Adresse email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error
+          *ngIf="email?.errors && !email?.pristine"
+          class="error-message-size">
+          Email invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="create-user-form-field">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error
+          *ngIf="password?.errors && !password?.pristine"
+          class="error-message-size">
+          Le mot de passe n'est pas conforme.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="create-user-form-field">
+        <mat-label>Confirmez le mot de passe</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" />
+        <div
+          *ngIf="
+            createUserForm.hasError('noMatch') && !confirmPassword?.pristine
+          "
+          class="custom-error-message error-message-size">
+          {{ confirmError() }}
+        </div>
+        <mat-error class="error-message-size"
+          >Les mots de passe ne correspondent pas.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-hint
+        >Le mot de passe doit contenir minimum 8 caractères, une majuscule, une
+        minuscule, un chiffre, un caractère spécial.
+      </mat-hint>
+
+      <div class="custom-fields-container">
+        <div class="radio-button">
+          <mat-label>Statut</mat-label>
+          <mat-radio-group formControlName="requiredRole">
+            <mat-radio-button value="ROLE_USER">Utilisateur</mat-radio-button>
+            <mat-radio-button value="ROLE_ADMIN"
+              >Administrateur</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+
+        <div class="slide-toggle">
+          <mat-label>Activation du compte</mat-label>
+          <mat-slide-toggle formControlName="enabled"> </mat-slide-toggle>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,53 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+article {
+  background-color: $primary-background-color;
+  @include flex-column;
+  padding: 0 1rem;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+
+  .card-result-total-container-infos {
+    display: flex;
+    padding: 0.5rem;
+
+    p {
+      width: 50%;
+      text-align: center;
+      color: $important-color-text;
+      font-size: 1.5rem;
+    }
+
+    .card-result-total-container-text {
+      width: 50%;
+      color: $secondary-color-text;
+      text-align: left;
+      font-size: 1.2rem;
+      align-self: center;
+    }
+  }
+
+  .line {
+    border: 1px solid $secondary-color-line;
+    width: 100%;
+  }
+
+  @include media-large-screen {
+    height: 7rem;
+    margin: 1.5rem 1vw 0 1vw;
+    width: 20vw;
+
+    .card-result-total-container-infos {
+      p {
+        width: 40%;
+        padding: 0.3rem;
+      }
+
+      .card-result-total-container-text {
+        width: 50%;
+        font-size: 1rem;
+      }
+    }
+  }
+}

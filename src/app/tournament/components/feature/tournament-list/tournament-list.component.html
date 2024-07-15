@@ -1,0 +1,51 @@
+<main>
+  <app-sidebar
+    (isDrawerOpenedChange)="handleDrawerChange($event)"
+    (newSearchValueEventFromSidebar)="onReceiveSearchValueFromSidebar($event)"
+    (newChronologicalFilterChange)="onReceiveChronologicalFilterChange($event)"
+    (newShowOnlyUpcomingTournaments)="
+      onReceiveShowOnlyUpcomingTournaments($event)
+    "
+    (newShowNonFullTournaments)="onReceiveShowNonFullTournaments($event)"
+    (newSportFilter)="onReceiveSportFilter($event)"
+    (newResetFilter)="onReceiveResetFilters()"
+    (newApplyFilters)="onReceiveApplyFilters()"></app-sidebar>
+  <app-spinner *ngIf="isLoading"></app-spinner>
+
+  <div
+    class="tournament-container"
+    [ngStyle]="{
+      'margin-left.rem': isOpen === 'open' ? 20 : 0,
+      'width.%': isOpen === 'open' ? 80 : 100,
+      'transition.s': 0.3
+    }">
+    <section
+      class="all-tournaments"
+      [ngStyle]="{
+        'transition.s': 0.3
+      }">
+      <ng-container *ngIf="(filteredTournaments$ | async)?.length === 0">
+        <h1>AUCUN TOURNOI CORRESPONDANT À VOTRE RECHERCHE</h1>
+      </ng-container>
+      <ng-container *ngIf="(filteredTournaments$ | async)?.length">
+        <h1>TOUS LES TOURNOIS</h1>
+        <mat-divider></mat-divider>
+
+        <div class="all-tournaments-cards">
+          <div
+            *ngFor="let tournament of filteredTournaments$ | async"
+            class="tournament-list">
+            <app-tournament-card
+              [tournament]="tournament"></app-tournament-card>
+          </div>
+        </div>
+        <app-pagination
+          class="wi-paginator"
+          (pageChangeEvent)="changePage($event)"
+          [length]="tournamentsNumber"
+          [pageSize]="pageSize"
+          [pageIndex]="currentPageIndex"></app-pagination>
+      </ng-container>
+    </section>
+  </div>
+</main>

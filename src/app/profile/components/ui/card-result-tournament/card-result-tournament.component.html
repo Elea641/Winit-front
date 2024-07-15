@@ -1,0 +1,13 @@
+<article *ngIf="result">
+  <div class="card-result-tournament-img">
+    <img src="../../../../../assets/pictures/award.png" alt="award level" />
+    <p>{{ convertedResult }}</p>
+  </div>
+  <div class="line"></div>
+  <div class="card-result-tournament-infos">
+    <p>{{ result[1] }}</p>
+    <p class="card-result-tournament-info-text">
+      {{ convertedResultToString }}
+    </p>
+  </div>
+</article>

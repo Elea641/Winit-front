@@ -1,0 +1,64 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+article {
+  @include flex-column;
+  .profile-card-container-button {
+    @include flex-justify-space-between;
+    .profile-card-container-infos {
+      @include flex-wrap;
+      color: $secondary-color-text;
+      font-size: 1.8rem;
+      p:first-child {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .profile-card-container-other-infos {
+    display: flex;
+    margin: 1rem 0;
+    color: $secondary-color-text;
+    .profile-card-container-other-info {
+      @include flex-align-center;
+      p {
+        font-size: 0.9rem;
+        padding: 0 0 0 0.5rem;
+      }
+    }
+
+    .profile-card-container-other-info:first-child {
+      padding: 0 1rem 0 0;
+    }
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    color: $primary-color-button-text;
+    z-index: 0;
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-raised-button:focus {
+    color: $primary-color-button-text;
+  }
+
+  @include media-tablet-screen {
+    .profile-card-container-other-infos {
+      .profile-card-container-other-info {
+        p {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  @include media-large-screen {
+    .profile-card-container-other-infos {
+      .profile-card-container-other-info {
+        p {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}

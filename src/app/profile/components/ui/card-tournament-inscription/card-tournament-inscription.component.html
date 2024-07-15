@@ -1,0 +1,16 @@
+<article *ngIf="tournamentDetails">
+  <section>
+    <img
+      src="../../../../../assets/pictures/award.png"
+      alt="sport detail image" />
+    <h3>
+      {{ tournamentDetails.name | titlecase }}
+    </h3>
+    <p>{{ tournamentDetails.place | titlecase }}</p>
+  </section>
+  <footer>
+    <button mat-raised-button (click)="onClick(tournamentDetails.id)">
+      {{ buttonValue | uppercase }}
+    </button>
+  </footer>
+</article>

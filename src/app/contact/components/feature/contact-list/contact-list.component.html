@@ -1,0 +1,5 @@
+<section>
+  <ul *ngFor="let contact of contacts$ | async">
+    <app-contact-card [contact]="contact"></app-contact-card>
+  </ul>
+</section>

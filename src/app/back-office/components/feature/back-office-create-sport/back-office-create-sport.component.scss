@@ -1,0 +1,80 @@
+@import '../../../../../assets/style/variables.scss';
+
+.create-sport-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-sport-block {
+  margin-top: 10vh;
+  padding: 16px;
+  min-width: 200px;
+  max-width: 800px;
+  width: 100%;
+}
+
+h1 {
+  color: white;
+  font-weight: normal;
+}
+
+mat-divider {
+  margin: 16px 0;
+  border-top-color: $secondary-color;
+}
+
+.info-text {
+  color: var(--mdc-outlined-text-field-label-text-color);
+  padding: 8px 8px 16px 8px;
+  font-size: small;
+}
+
+mat-form-field {
+  width: 50%;
+  padding: 8px;
+}
+
+.error-message-size {
+  font-size: small;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.confirm-button,
+.cancel-button {
+  width: 50%;
+  margin-bottom: 16px;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: $primary-color-text;
+}
+
+.mat-mdc-raised-button:hover,
+.mat-mdc-raised-button:focus {
+  color: $primary-background-color;
+}
+
+@media screen and (max-width: 768px) {
+  mat-form-field {
+    width: 100%;
+  }
+
+  .confirm-button,
+  .cancel-button {
+    width: 100%;
+  }
+
+  .create-sport-block {
+    margin-bottom: 5vh;
+  }
+}

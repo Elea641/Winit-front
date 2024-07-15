@@ -1,0 +1,23 @@
+<nav *ngIf="team$ | async as team">
+  <mat-tab-group
+    mat-stretch-tabs="false"
+    mat-align-tabs="start"
+    class="mat-tabs"
+    #tabGroup>
+    <mat-tab label="LISTE DES MEMBRES">
+      <ul>
+        <app-list-member
+          [team$]="team$"
+          [currentUser]="currentUser"></app-list-member>
+      </ul>
+    </mat-tab>
+    <ng-container *ngIf="currentUser?.id === team.ownerId">
+      <mat-tab
+        *ngIf="team.teamMembersCount < team.totalPlayers"
+        label="AJOUT D'UN MEMBRE">
+        <app-create-member
+          (cancelClicked)="handleCancelClick()"></app-create-member>
+      </mat-tab>
+    </ng-container>
+  </mat-tab-group>
+</nav>

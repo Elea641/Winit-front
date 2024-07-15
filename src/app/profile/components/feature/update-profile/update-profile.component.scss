@@ -1,0 +1,77 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+main {
+  @include flex-column-center-align-justify;
+}
+
+.update-block {
+  margin-top: 2vh;
+  padding: 16px;
+  min-width: 200px;
+  max-width: 800px;
+  width: 100%;
+}
+
+h1 {
+  color: $secondary-color;
+  font-weight: normal;
+  margin: 2rem 0.5rem 1rem 0.5rem;
+}
+
+mat-divider {
+  margin: 0.5rem 0.5rem 2rem 0.5rem;
+  border-top-color: $secondary-color;
+}
+
+.update-profile-form-field {
+  width: 50%;
+  padding: 8px;
+}
+
+.error-message-size {
+  font-size: small;
+}
+
+button {
+  margin: 1rem 0.5rem 0 0.5rem;
+  width: 100%;
+
+  @include media-mobile-tablet-screen {
+    width: 70vw;
+  }
+
+  @include media-large-screen {
+    width: 50vw;
+  }
+}
+
+.delete-button-container {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.update-profile-buttons {
+  @include flex-column-center;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: $primary-color-button-text;
+}
+
+.mat-mdc-raised-button:hover,
+.mat-mdc-raised-button:focus {
+  color: $primary-color-button-text;
+}
+
+@media screen and (max-width: 768px) {
+  .update-profile-form-field {
+    width: 100%;
+  }
+
+  .update-block {
+    margin-bottom: 5vh;
+  }
+}

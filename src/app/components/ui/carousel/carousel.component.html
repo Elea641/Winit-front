@@ -1,0 +1,12 @@
+<div *ngIf="tournaments$" class="carousel-container">
+  <ngx-slick-carousel
+    class="carousel"
+    #slickModal="slick-carousel"
+    [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of tournaments$ | async" class="slide">
+      <app-tournament-card
+        [tournament]="slide"
+        class="app-tournament-card"></app-tournament-card>
+    </div>
+  </ngx-slick-carousel>
+</div>

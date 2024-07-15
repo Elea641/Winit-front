@@ -1,0 +1,26 @@
+@import '../../../../../assets/style/variables.scss';
+
+.back-office-container {
+  padding: 2rem;
+
+  ::ng-deep .mdc-tab__text-label {
+    color: $secondary-color;
+  }
+}
+
+h1 {
+  color: white;
+  font-weight: normal;
+  margin-bottom: 1rem;
+}
+
+mat-divider {
+  margin-bottom: 1rem;
+  border-top-color: $secondary-color;
+}
+
+.info-text {
+  color: var(--mdc-outlined-text-field-label-text-color);
+  padding: 8px 8px 16px 8px;
+  font-size: small;
+}

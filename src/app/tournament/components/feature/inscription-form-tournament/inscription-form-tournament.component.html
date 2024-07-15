@@ -1,0 +1,31 @@
+<section>
+  <form [formGroup]="inscriptionForm" (ngSubmit)="openDialog()">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom de votre équipe</mat-label>
+      <mat-select formControlName="teamName">
+        <mat-option
+          *ngFor="let team of getTeamsWithMoreThanSixMembers()"
+          [value]="team.name"
+          >{{ team.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">VALIDER</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      type="button"
+      (click)="cancelAction()">
+      ANNULER
+    </button>
+  </form>
+  <button
+    (click)="onClick()"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="team-button">
+    CRÉATION DE VOTRE ÉQUIPE
+  </button>
+</section>

@@ -1,0 +1,59 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+section {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+
+  form {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    justify-self: center;
+
+    @include flex-column-center-align-justify;
+    .mat-mdc-form-field {
+      width: 100%;
+      margin: 1rem 0;
+    }
+
+    button {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+
+  button {
+    margin: 1rem 0;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    justify-self: flex-end;
+    width: 15rem;
+  }
+
+  @include media-tablet-screen {
+    form {
+      @include flex-column-center-align-justify;
+      width: 60%;
+      margin: 1rem 0;
+    }
+  }
+
+  @include media-large-screen {
+    form {
+      @include flex-column-center-align-justify;
+      width: 60%;
+      margin: 1rem 0;
+    }
+  }
+}
+
+::ng-deep
+  .cdk-overlay-pane:not(.mat-mdc-select-panel-above)
+  div.mat-mdc-select-panel {
+  background-color: $primary-background-color;
+}

@@ -1,0 +1,19 @@
+<mat-form-field
+  appearance="outline"
+  class="wi-tournament-form-field-big register-form-field wi-file-upload"
+  [formGroup]="groupParent">
+  <mat-label>{{ labelValue }}</mat-label>
+  <ngx-mat-dropzone>
+    <input type="file" fileInput [formControlName]="formControlNameValue" />
+  </ngx-mat-dropzone>
+  <mat-icon matSuffix color="primary">cloud_upload</mat-icon>
+  <div *ngIf="groupParent.controls[formControlNameValue].value">
+    <mat-chip-row (removed)="clearUploadFile()">
+      {{ groupParent.controls[formControlNameValue].value.name }}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+  </div>
+  <mat-error>Type de fichiers acceptés : .jpeg, .jpg, .png, .gif</mat-error>
+</mat-form-field>

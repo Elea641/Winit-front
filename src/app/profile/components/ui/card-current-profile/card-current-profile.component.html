@@ -1,0 +1,24 @@
+<article>
+  <div class="profile-card-container-button">
+    <div class="profile-card-container-infos">
+      <p>{{ currentUser?.firstName | titlecase }}</p>
+      <p>{{ currentUser?.lastName | titlecase }}</p>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/profile/update']">
+      MODIFIER<mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+  <div class="profile-card-container-other-infos">
+    <div class="profile-card-container-other-info">
+      <mat-icon>location_on</mat-icon>
+      <p>{{ currentUser?.city | titlecase }}</p>
+    </div>
+    <div class="profile-card-container-other-info">
+      <mat-icon>check_circle_outline</mat-icon>
+      <p>Membre depuis le {{ currentUser?.createdAt | date: 'dd-MM-yyyy' }}</p>
+    </div>
+  </div>
+</article>

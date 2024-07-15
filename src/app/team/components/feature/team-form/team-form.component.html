@@ -1,0 +1,43 @@
+<section>
+  <ng-container *ngIf="mode === 'create'">
+    <h1>CRÉATION DE VOTRE ÉQUIPE</h1>
+  </ng-container>
+  <ng-container *ngIf="mode === 'update'">
+    <h1>MISE À JOUR DE VOTRE ÉQUIPE</h1>
+  </ng-container>
+  <mat-divider></mat-divider>
+  <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="team-form-field">
+      <mat-label>Nom</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="name"
+        [value]="teamToUpdate?.name" />
+      <mat-error
+        *ngIf="name?.errors && !name?.pristine"
+        class="error-message-size">
+        Le nom ne peut contenir que des lettres et des chiffres et 55 caractères
+        maximum.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="team-form-field">
+      <mat-label>Sports</mat-label>
+      <mat-select formControlName="sport">
+        <mat-option *ngFor="let sport of sports" [value]="sport.name">{{
+          sport.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">VALIDER</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      type="button"
+      (click)="onClick()">
+      ANNULER
+    </button>
+  </form>
+</section>

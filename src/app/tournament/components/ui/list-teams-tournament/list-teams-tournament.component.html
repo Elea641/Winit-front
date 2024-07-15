@@ -1,0 +1,33 @@
+<section *ngIf="tournament$ | async as tournament" class="list-teams-tounament">
+  <div class="list-teams-tounament-header">
+    <h3>Équipes inscrites</h3>
+    <div class="list-teams-tounament-total-members">
+      <mat-icon>people</mat-icon>
+      <p>{{ currentNumberOfParticipants }}/{{ tournament.maxNumberOfTeams }}</p>
+    </div>
+  </div>
+  <ul
+    *ngFor="let team of teams; let i = index"
+    class="list-teams-tounament-body">
+    <li *ngIf="team.name">
+      <div>
+        <img src="../../../../../assets/pictures/award.png" alt="logo team" />
+        <h3>Équipe n°{{ i + 1 }} :</h3>
+        <p class="list-teams-tounament-body-text">
+          {{ team?.name | uppercase }}
+        </p>
+      </div>
+      <button
+        *ngIf="
+          !tournament.isGenerated &&
+          !isGenerated &&
+          team.currentUser === team.ownerId
+        "
+        mat-button
+        color="warn"
+        (click)="openDialog({ name: team.name, result: 0, url: '' })">
+        SUPPRIMER
+      </button>
+    </li>
+  </ul>
+</section>

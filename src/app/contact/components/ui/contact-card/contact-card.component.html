@@ -1,0 +1,24 @@
+<li *ngIf="contact">
+  <mat-card>
+    <img
+      mat-card-image
+      src="{{ contact.url }}"
+      alt="{{ contact.name }} picture" />
+    <mat-card-content>
+      <h1>{{ contact.name }}</h1>
+      <p>
+        {{ contact.description }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a href="{{ contact.linkedin_url }}" target="_blank">
+        <img
+          src="../../../../assets/pictures/linkedin-dark.png"
+          alt="logo_git" />
+      </a>
+      <a href="{{ contact.github_url }}" target="_blank">
+        <img src="../../../../assets/pictures/git-dark.png" alt="logo_git" />
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</li>

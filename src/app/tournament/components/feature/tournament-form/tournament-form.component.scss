@@ -1,0 +1,141 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+section {
+  @include flex-column-center-align-justify;
+  margin: 2rem 0 1rem 0;
+  padding: 0 2rem;
+  width: 100vw;
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+    margin: 2rem 0;
+
+    @include media-tablet-screen {
+      width: 80vw;
+    }
+
+    @include media-large-screen {
+      width: 60vw;
+    }
+
+    .register-form-field {
+      width: 100%;
+    }
+
+    h1 {
+      color: $secondary-color;
+      font-weight: normal;
+      margin: 1rem 0 0 0;
+      text-align: left;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+
+    .mat-divider {
+      border-top-color: $secondary-color;
+      width: 100%;
+      margin-bottom: 1rem;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+
+    .wi-tournament-form-field-big {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 3;
+      grid-row-end: 4;
+    }
+
+    .tournament-banner-container {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 6;
+      grid-row-end: 7;
+      width: 100%;
+      place-self: center;
+    }
+
+    button:last-child {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 7;
+      grid-row-end: 8;
+      place-self: center;
+      width: 30%;
+
+      @include media-mobile-screen {
+        width: 100%;
+      }
+
+      @include media-tablet-screen {
+        width: 50%;
+      }
+    }
+
+    @keyframes slideaway {
+      from {
+        display: block;
+      }
+      to {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slidein {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+        display: block;
+      }
+      to {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+
+    .wi-displayLimitInscriptionDate {
+      animation: slideaway 300ms;
+      display: none;
+    }
+
+    .wi-hideLimitInscriptionDate {
+      animation: slidein 300ms;
+      display: block;
+    }
+
+    .wi-displayWrapper {
+      display: none;
+    }
+  }
+}
+
+::ng-deep .mat-mdc-raised-button:not(:disabled) {
+  color: $primary-color-button-text;
+}
+
+::ng-deep .mat-mdc-raised-button:hover,
+.mat-mdc-raised-button:focus {
+  color: $primary-color-button-text;
+}
+
+::ng-deep
+  .cdk-overlay-pane:not(.mat-mdc-select-panel-above)
+  div.mat-mdc-select-panel {
+  background-color: $primary-background-color;
+}
+
+::ng-depp .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  width: auto;
+  @include media-mobile-screen {
+    width: 100%;
+  }
+}

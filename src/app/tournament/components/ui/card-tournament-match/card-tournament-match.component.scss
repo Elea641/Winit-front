@@ -1,0 +1,75 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+@include media-mobile-tablet-screen {
+  article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    width: calc(100vw - 4rem);
+    margin: 0.5rem 0 0 0;
+    color: $secondary-color-text;
+    cursor: pointer;
+
+    section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0;
+      padding: 0 0.4rem;
+
+      p {
+        font-size: 1.5rem;
+      }
+    }
+
+    section:first-child {
+      border-right: 1px solid $important-color-line;
+      background-color: $primary-background-color;
+
+      h3 {
+        margin-right: 2rem;
+      }
+    }
+
+    section:last-child {
+      flex-direction: row-reverse;
+      border-left: 1px solid $important-color-line;
+      background-color: $primary-background-color;
+
+      h3 {
+        margin-left: 2rem;
+      }
+    }
+  }
+}
+
+@include media-large-screen {
+  article {
+    display: flex;
+    flex-direction: column;
+    background-color: $primary-background-color;
+    width: 15rem;
+    color: $secondary-color-text;
+    margin-right: 2rem;
+
+    section {
+      margin: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.4rem;
+      border-left: 1px solid $important-color-line;
+      width: 15rem;
+    }
+
+    section:first-child {
+      border-bottom: 1px solid $secondary-color-line;
+    }
+
+    section:nth-child(2) {
+      border-top: 1px solid $secondary-color-line;
+    }
+  }
+}

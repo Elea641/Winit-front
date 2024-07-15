@@ -1,0 +1,16 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+li {
+  @include flex-column;
+  padding: 0 2rem;
+
+  div {
+    @include flex-justify-content-space-between;
+    padding-top: 1rem;
+
+    .mat-mdc-button:not(:disabled) {
+      width: 12rem;
+    }
+  }
+}

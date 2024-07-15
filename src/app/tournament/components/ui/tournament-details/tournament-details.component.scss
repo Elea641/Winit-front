@@ -1,0 +1,114 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+article {
+  color: $secondary-color-text;
+  @include flex-column;
+  align-items: center;
+  img {
+    max-width: 15rem;
+    max-height: 15rem;
+  }
+
+  .card-details-tournament-container-body {
+    @include media-mobile-screen {
+      padding-left: 0;
+    }
+
+    padding-left: 2rem;
+    @include flex-column;
+
+    .card-details-tournament-container-header {
+      h3 {
+        color: $important-color-text;
+        padding-top: 1rem;
+      }
+
+      h2 {
+        padding-top: 1rem;
+      }
+
+      .card-details-tournament-container-header-inscription {
+        @include flex-justify-content-space-between;
+        padding: 1rem 0;
+      }
+    }
+
+    .card-details-tournament-container-other-info {
+      @include flex-align-center;
+      padding-top: 1rem;
+
+      .card-details-tournament-container-other-info-details {
+        @include flex-wrap;
+
+        ::ng-deep .mat-icon {
+          margin-right: 0.5rem;
+        }
+
+        p {
+          padding-right: 0.8rem;
+        }
+      }
+    }
+
+    .mat-mdc-raised-button:not(:disabled) {
+      color: $primary-color-button-text;
+      @include media-mobile-screen {
+        width: 10rem;
+      }
+      z-index: 0;
+    }
+
+    .mat-mdc-raised-button:hover,
+    .mat-mdc-raised-button:focus {
+      color: $primary-color-text;
+    }
+
+    .button-wrapper {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 2rem;
+    }
+  }
+
+  @include media-tablet-screen {
+    display: flex;
+    flex-direction: row;
+  }
+
+  @include media-large-screen {
+    display: flex;
+    flex-direction: row;
+
+    .card-details-tournament-container-body {
+      padding: 2rem 0 0 5rem;
+
+      .card-details-tournament-container-header {
+        h3 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 2.4rem;
+        }
+
+        .card-details-tournament-container-header-inscription {
+          @include flex-justify-content-space-between;
+          padding: 1rem 0;
+        }
+
+        .card-details-tournament-container-other-info {
+          .card-details-tournament-container-other-info-details {
+            p {
+              font-size: 1.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ::ng-deep .mat-mdc-button:not(:disabled) {
+    width: 12rem;
+  }
+}

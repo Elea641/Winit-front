@@ -1,0 +1,7 @@
+@import '../../../../assets/style/variables.scss';
+@import '../../../../assets/style/mixins.scss';
+
+main {
+  @include flex-column;
+  padding: 1rem 2rem;
+}

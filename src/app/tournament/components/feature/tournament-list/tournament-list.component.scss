@@ -1,0 +1,61 @@
+@import '../../../../../assets/style/mixins.scss';
+@import '../../../../../assets/style/variables.scss';
+
+main {
+  @include flex-column-center;
+  width: 100vw;
+
+  .tournament-container {
+    width: 100%;
+    padding: 0 3rem;
+
+    .all-tournaments {
+      margin: 2rem 0;
+
+      h1 {
+        color: $secondary-color;
+        font-weight: normal;
+        margin: 1rem 0.5rem;
+      }
+
+      mat-divider {
+        margin: 0.5rem;
+        border-top-color: $secondary-color;
+      }
+
+      @include media-mobile-screen {
+        .all-tournaments-cards {
+          @include flex-column-center;
+        }
+      }
+
+      @include media-tablet-screen {
+        .all-tournaments-cards {
+          @include flex-wrap;
+        }
+      }
+    }
+  }
+
+  .no-tournament-to-show {
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  @include media-large-screen {
+    .tournament-container {
+      width: 100%;
+      .all-tournaments {
+        width: 100%;
+        .all-tournaments-cards {
+          @include flex-wrap;
+
+          .tournament-list {
+            margin: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

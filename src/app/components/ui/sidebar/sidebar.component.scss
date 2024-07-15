@@ -1,0 +1,214 @@
+@import '../../../../assets/style/variables.scss';
+@import '../../../../assets/style/mixins.scss';
+
+.filters-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & button {
+    font-family: 'Roboto';
+    margin-top: 16px;
+    width: 10rem;
+  }
+
+  .apply-filters {
+    width: 10rem;
+    border-radius: 0.2rem;
+    height: 2.2rem;
+    border: none;
+    background-color: $secondary-color-button;
+    color: $primary-color-text;
+    margin-top: 1rem;
+    cursor: pointer;
+
+    @include media-large-screen {
+      margin-top: 2rem;
+    }
+  }
+
+  .apply-filters:hover {
+    background-color: #2d97ae;
+    color: $primary-color-text;
+  }
+}
+
+.apply-filters {
+  color: $secondary-color;
+}
+
+.reset-filters {
+  color: $secondary-color-button;
+}
+
+.container-sidebar-desktop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: $primary-color;
+  top: 0.2rem;
+  overflow-y: auto;
+  height: calc(100vh + 3.5rem);
+  margin-top: 3.3rem;
+  padding: 0.5rem;
+
+  .container-sidebar-menu {
+    background-color: $primary-color;
+    width: 17rem;
+    border-right: 1px solid $primary-color-border;
+
+    .container-sidebar-menu-input {
+      padding: 0.5rem;
+    }
+
+    h2 {
+      padding: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .line {
+      border: 1px solid $primary-color-line;
+      margin: 0 0.5rem 1rem 0.5rem;
+    }
+
+    .container-sidebar-menu-button {
+      margin: 0;
+      padding: 0.5rem;
+      width: 17rem;
+      background-color: $primary-color;
+      box-shadow: none;
+    }
+  }
+
+  .sidenav-button {
+    position: fixed;
+    top: calc(55% - 3.5rem);
+  }
+
+  .selected {
+    color: $primary-background-color-card;
+  }
+
+  .sidebar-select-sport {
+    & mat-label {
+      font-size: 0.85rem;
+    }
+    & mat-select {
+      padding-top: 0.3rem;
+    }
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .reset-filters-button {
+    display: flex;
+    justify-content: space-around;
+
+    & button {
+      margin-top: 16px;
+      color: $secondary-color-text;
+    }
+  }
+}
+
+.container-sidebar-mobile {
+  @include media-mobile-tablet-screen {
+    width: 100vw;
+    height: auto;
+    z-index: 1;
+    background-color: $primary-color;
+    box-shadow: 0 2px 2px $primary-color-shadow;
+    @include flex-justify-space-around;
+
+    .filter-button-container {
+      height: 3.5rem;
+      font-size: 1.2rem;
+      z-index: 0;
+    }
+
+    .mat-mdc-raised-button:not(:disabled) {
+      color: $secondary-color-text;
+      text-align: center;
+      width: 100%;
+    }
+
+    .mat-mdc-raised-button:hover,
+    .mat-mdc-raised-button:focus {
+      color: $primary-color-focus;
+    }
+  }
+
+  display: none;
+}
+
+::ng-deep .sidebar-custom-menu {
+  margin-top: 27px;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  text-align: center;
+}
+
+.mdc-button__label {
+  width: 100%;
+  text-align: left;
+}
+
+.selected {
+  color: $primary-background-color-card;
+}
+
+.sidebar-select-sport {
+  & mat-label {
+    font-size: 0.85rem;
+  }
+  & mat-select {
+    padding-top: 0.3rem;
+  }
+}
+
+.reset-filters-button {
+  display: flex;
+  justify-content: space-around;
+
+  & button {
+    margin-top: 16px;
+    color: $secondary-color-text;
+  }
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background-color: $primary-color;
+  z-index: 1;
+
+  ::ng-deep .mat-mdc-select-arrow {
+    margin: 1rem;
+  }
+}
+
+::ng-deep .mat-mdc-menu-item-text {
+  display: flex;
+  width: 100%;
+
+  & mat-label {
+    width: 50%;
+  }
+  & mat-select {
+    width: 50%;
+  }
+}
+
+::ng-deep
+  .cdk-overlay-pane:not(.mat-mdc-select-panel-above)
+  div.mat-mdc-select-panel {
+  background-color: $primary-color;
+}
+
+::ng-deep .cdk-overlay-container {
+  position: absolute;
+  z-index: 1;
+}

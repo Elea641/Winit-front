@@ -1,0 +1,18 @@
+<li
+  *ngIf="
+    currentUrl === '/tournament/' + tournamentId + '/teams'
+      ? team.members.length === team.totalPlayers
+      : team
+  ">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ team.name | uppercase }}</mat-card-title>
+      <mat-card-subtitle>{{ team.sport }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button color="primary" mat-stroked-button (click)="onSelectTeam(team)">
+        VOIR
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</li>

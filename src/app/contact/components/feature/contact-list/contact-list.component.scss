@@ -1,0 +1,5 @@
+@import '../../../../../assets/style/mixins.scss';
+
+section {
+  @include flex-wrap-center;
+}

@@ -1,0 +1,72 @@
+@import '../../../../../assets/style/variables.scss';
+
+.mat-mdc-table {
+  background-color: $primary-background-color;
+  overflow: hidden !important;
+  border-radius: 4px;
+}
+
+.mat-mdc-header-row {
+  background-color: $important-color-shadow;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+
+.mat-mdc-paginator {
+  background-color: transparent;
+}
+
+.mat-column-position {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: $primary-color-text;
+}
+
+.mat-mdc-raised-button:hover,
+.mat-mdc-raised-button:focus {
+  color: $primary-background-color;
+}
+
+.actions-cell {
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.actions-cell > a {
+  padding-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.view-link:hover {
+  color: $secondary-color-button;
+  cursor: pointer;
+}
+
+.edit-link:hover {
+  color: $important-color-text;
+  cursor: pointer;
+}
+
+.delete-link:hover {
+  color: $warn-color-button;
+  cursor: pointer;
+}

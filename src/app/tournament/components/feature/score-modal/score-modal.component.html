@@ -1,0 +1,49 @@
+<div class="score-modal-container">
+  <h1 mat-dialog-title>Valider les scores</h1>
+  <mat-dialog-content>
+    Êtes-vous certain de vouloir confirmer les scores ?
+  </mat-dialog-content>
+  <form [formGroup]="scoreForm" (ngSubmit)="onSubmit()">
+    <section>
+      <mat-form-field appearance="outline" class="team-form-field">
+        <mat-label>{{ content.match.team1 }}</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="scoreTeam1"
+          [value]="content.match.scoreTeam1" />
+        <mat-error
+          *ngIf="scoreTeam1?.errors && !scoreTeam1?.pristine"
+          class="error-message-size">
+          Le score de l'équipe 1 doit être un nombre.
+        </mat-error>
+      </mat-form-field>
+    </section>
+    <section>
+      <mat-form-field appearance="outline" class="team-form-field">
+        <mat-label>{{ content.match.team2 }}</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="scoreTeam2"
+          [value]="content.match.scoreTeam2" />
+        <mat-error
+          *ngIf="scoreTeam2?.errors && !scoreTeam2?.pristine"
+          class="error-message-size">
+          Le score de l'équipe 2 doit être un nombre.
+        </mat-error>
+      </mat-form-field>
+    </section>
+  </form>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="dialogRef.close(onSubmit())">
+      Confirmer
+    </button>
+    <button mat-stroked-button color="primary" (click)="dialogRef.close(false)">
+      Annuler
+    </button>
+  </mat-dialog-actions>
+</div>

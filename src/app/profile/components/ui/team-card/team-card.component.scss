@@ -1,0 +1,23 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+li {
+  width: 15rem;
+  margin: 2rem 1rem;
+
+  ::ng-deep .mat-mdc-card {
+    background-color: $primary-background-color;
+    color: $secondary-color-text;
+
+    ::ng-deep .mat-mdc-card-subtitle {
+      color: $important-color-text;
+      margin-top: 1rem;
+    }
+
+    ::ng-deep .mdc-card__actions {
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import '../../../../../assets/style/variables.scss';
+@import '../../../../../assets/style/mixins.scss';
+
+section {
+  color: $secondary-color-text;
+  border-radius: 4px 4px 0 0;
+  margin: 1rem 0;
+  width: calc(100vw - 4rem);
+
+  @include media-large-screen {
+    width: calc(50vw - 2rem);
+    margin: 1rem 0.35rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: $secondary-background-color;
+    height: 3.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+}
