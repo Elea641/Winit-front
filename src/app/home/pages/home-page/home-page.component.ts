@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { Observable, of } from 'rxjs';
 import { CarouselComponent } from 'src/app/components/ui/carousel/carousel.component';
-import { SidebarComponent } from 'src/app/components/ui/sidebar/sidebar.component';
 import { TournamentCard } from 'src/app/tournament/models/tournament-card.type';
 import { HomeService } from '../../shared/home.service';
 import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.component';
@@ -16,7 +15,6 @@ import { SpinnerComponent } from 'src/app/components/ui/spinner/spinner.componen
   imports: [
     CommonModule,
     CarouselComponent,
-    SidebarComponent,
     MatDividerModule,
     SpinnerComponent,
   ],
