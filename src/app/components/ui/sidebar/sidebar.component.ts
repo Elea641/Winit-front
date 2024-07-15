@@ -18,8 +18,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { BreakpointService } from '../../../shared/breakpoint.service';
 import { InputSearchComponent } from '../../feature/input-search/input-search.component';
-import { SportService } from 'src/app/sport/shared/sport.service';
 import { SidebarService } from 'src/app/shared/sidebar.service';
+import { SidebarDesktopComponent } from './sidebar-desktop/sidebar-desktop.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -36,6 +36,7 @@ import { SidebarService } from 'src/app/shared/sidebar.service';
     MatDividerModule,
     MatFormFieldModule,
     MatSelectModule,
+    SidebarDesktopComponent,
   ],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
@@ -65,13 +66,10 @@ export class SidebarComponent implements OnInit {
   constructor(
     private breakpointService: BreakpointService,
     private el: ElementRef,
-    private sportService: SportService,
     private sidebarService: SidebarService
   ) {}
 
   ngOnInit(): void {
-    this.getSportsNames();
-
     this.addClickOutsideListener();
     this.isDesktop = this.breakpointService.isDesktopDevice();
     this.breakpointService.deviceChanged['isDesktop'].subscribe(
@@ -90,12 +88,6 @@ export class SidebarComponent implements OnInit {
     this.sidebarService.isOpen$.subscribe((isOpen: boolean) => {
       this.isDrawerOpened = isOpen;
     });
-  }
-
-  getSportsNames() {
-    this.sportService
-      .getAllSportsNames()
-      .subscribe(sports => (this.sports = sports));
   }
 
   toggleIcon() {
@@ -119,11 +111,40 @@ export class SidebarComponent implements OnInit {
       }
     });
   }
-  onReceiveSearchValueFromInput(value: string) {
+  onReceiveSearchValueFromInput(value: any) {
     this.newSearchValueEventFromSidebar.emit(value);
     if (value.length < 1) {
       this.selectedSport = '';
     }
+  }
+
+  onReceiveChronologicalFilterChange(value: any) {
+    //console.log('value', value);
+    this.newChronologicalFilterChange.emit(value);
+  }
+
+  onReceiveShowOnlyUpcomingTournamentsChange(value: any) {
+    //console.log('value', value);
+    this.newShowOnlyUpcomingTournaments.emit(value);
+  }
+
+  onReceiveShowNonFullTournamentsChange(value: any) {
+    //console.log('value', value);
+    this.newShowNonFullTournaments.emit(value);
+  }
+
+  onReceiveSportFilterChange(value: any) {
+    this.newSportFilter.emit(value);
+  }
+
+  onReceiveApplyFilters(value: any) {
+    //console.log('value', value);
+    this.newApplyFilters.emit(value);
+  }
+
+  onReceiveResetFilters(value: any) {
+    // console.log('value', value);
+    this.newResetFilter.emit(value);
   }
 
   sendApplyFilters() {
