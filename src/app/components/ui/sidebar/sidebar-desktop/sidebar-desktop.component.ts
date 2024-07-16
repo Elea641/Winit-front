@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -7,23 +6,22 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { BreakpointService } from '../../../shared/breakpoint.service';
-import { InputSearchComponent } from '../../feature/input-search/input-search.component';
+import { InputSearchComponent } from 'src/app/components/feature/input-search/input-search.component';
+import { BreakpointService } from 'src/app/shared/breakpoint.service';
 import { SidebarService } from 'src/app/shared/sidebar.service';
-import { SidebarDesktopComponent } from './sidebar-desktop/sidebar-desktop.component';
-import { SidebarMobileComponent } from './sidebar-mobile/sidebar-mobile.component';
+import { SportService } from 'src/app/sport/shared/sport.service';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-sidebar-desktop',
   standalone: true,
   imports: [
     CommonModule,
@@ -35,15 +33,12 @@ import { SidebarMobileComponent } from './sidebar-mobile/sidebar-mobile.componen
     RouterModule,
     InputSearchComponent,
     MatDividerModule,
-    MatFormFieldModule,
     MatSelectModule,
-    SidebarDesktopComponent,
-    SidebarMobileComponent,
   ],
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  templateUrl: './sidebar-desktop.component.html',
+  styleUrls: ['./sidebar-desktop.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarDesktopComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   @Output() isDrawerOpenedChange: EventEmitter<boolean> =
     new EventEmitter<boolean>();
@@ -61,15 +56,20 @@ export class SidebarComponent implements OnInit {
   isLargeDesktop: boolean | undefined = false;
   showFiller = false;
   isDrawerOpened = false;
+
+  sports: string[] = [];
   selectedSport = '';
 
   constructor(
     private breakpointService: BreakpointService,
     private el: ElementRef,
+    private sportService: SportService,
     private sidebarService: SidebarService
   ) {}
 
   ngOnInit(): void {
+    this.getSportsNames();
+
     this.addClickOutsideListener();
     this.isDesktop = this.breakpointService.isDesktopDevice();
     this.breakpointService.deviceChanged['isDesktop'].subscribe(
@@ -90,9 +90,10 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  onReceiveDrawerChange(value: boolean) {
-    this.isDrawerOpened = value;
-    this.isDrawerOpenedChange.emit(this.isDrawerOpened);
+  getSportsNames() {
+    this.sportService
+      .getAllSportsNames()
+      .subscribe(sports => (this.sports = sports));
   }
 
   toggleIcon() {
@@ -116,40 +117,12 @@ export class SidebarComponent implements OnInit {
       }
     });
   }
-  onReceiveSearchValueFromInput(value: any) {
+
+  onReceiveSearchValueFromInput(value: string) {
     this.newSearchValueEventFromSidebar.emit(value);
     if (value.length < 1) {
       this.selectedSport = '';
     }
-  }
-
-  onReceiveChronologicalFilterChange(value: any) {
-    //console.log('value', value);
-    this.newChronologicalFilterChange.emit(value);
-  }
-
-  onReceiveShowOnlyUpcomingTournamentsChange(value: any) {
-    //console.log('value', value);
-    this.newShowOnlyUpcomingTournaments.emit(value);
-  }
-
-  onReceiveShowNonFullTournamentsChange(value: any) {
-    //console.log('value', value);
-    this.newShowNonFullTournaments.emit(value);
-  }
-
-  onReceiveSportFilterChange(value: any) {
-    this.newSportFilter.emit(value);
-  }
-
-  onReceiveApplyFilters(value: any) {
-    //console.log('value', value);
-    this.newApplyFilters.emit(value);
-  }
-
-  onReceiveResetFilters(value: any) {
-    // console.log('value', value);
-    this.newResetFilter.emit(value);
   }
 
   sendApplyFilters() {

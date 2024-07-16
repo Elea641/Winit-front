@@ -1,0 +1,69 @@
+<mat-toolbar class="container-sidebar-mobile">
+  <div class="container-sidebar-menu-input">
+    <app-input-search
+      (newSearchValueEventFromInput)="onReceiveSearchValueFromInput($event)">
+    </app-input-search>
+  </div>
+  <button class="filter-button-container" mat-button [matMenuTriggerFor]="menu">
+    FILTRES
+  </button>
+  <mat-menu #menu="matMenu" class="sidebar-custom-menu">
+    <div class="sidebar-select-sport-mobile" mat-menu-item>
+      <mat-label>Trier par sport</mat-label>
+      <mat-select
+        [(value)]="selectedSport"
+        class="selected"
+        (click)="$event.stopPropagation()">
+        <mat-option
+          selected="selected"
+          value=""
+          (click)="sendSportFilter(selectedSport)"
+          (click)="$event.stopPropagation()"
+          >Aucun</mat-option
+        >
+        <mat-option
+          *ngFor="let sport of sports"
+          value="{{ sport }}"
+          (click)="$event.stopPropagation()"
+          (click)="sendSportFilter(selectedSport)"
+          >{{ sport }}</mat-option
+        >
+      </mat-select>
+    </div>
+    <button
+      mat-menu-item
+      (click)="sendChronologicalFilterChangeToParent()"
+      (click)="$event.stopPropagation()">
+      <span [ngClass]="{ selected: !chronologicalFilter }">Nom</span> /
+      <span [ngClass]="{ selected: chronologicalFilter }">Date</span>
+    </button>
+    <button
+      mat-menu-item
+      (click)="sendShowOnlyUpcomingTournamentsToParent()"
+      (click)="$event.stopPropagation()"
+      [ngClass]="{ selected: showOnlyUpcomingTournaments }">
+      A venir
+    </button>
+    <button
+      mat-menu-item
+      (click)="sendShowNonFullTournaments()"
+      (click)="$event.stopPropagation()"
+      [ngClass]="{ selected: showNonFullTournaments }">
+      Non complet
+    </button>
+    <mat-divider></mat-divider>
+    <div class="filters-button">
+      <button class="apply-filters" (click)="sendApplyFilters()">
+        APPLIQUER
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        class="reset-filters"
+        (click)="sendResetFilters()"
+        (click)="$event.stopPropagation()">
+        RÉINITIALISER LES FILTRES
+      </button>
+    </div>
+  </mat-menu>
+</mat-toolbar>
