@@ -1,5 +1,6 @@
 <ng-container *ngIf="isDesktop || isLargeDesktop; else mobile">
   <app-sidebar-desktop
+    (isDrawerOpenedChange)="onReceiveDrawerChange($event)"
     (newSearchValueEventFromSidebar)="onReceiveSearchValueFromInput($event)"
     (newChronologicalFilterChange)="onReceiveChronologicalFilterChange($event)"
     (newShowOnlyUpcomingTournaments)="

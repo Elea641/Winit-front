@@ -61,8 +61,6 @@ export class SidebarComponent implements OnInit {
   isLargeDesktop: boolean | undefined = false;
   showFiller = false;
   isDrawerOpened = false;
-
-  sports: string[] = [];
   selectedSport = '';
 
   constructor(
@@ -90,6 +88,11 @@ export class SidebarComponent implements OnInit {
     this.sidebarService.isOpen$.subscribe((isOpen: boolean) => {
       this.isDrawerOpened = isOpen;
     });
+  }
+
+  onReceiveDrawerChange(value: boolean) {
+    this.isDrawerOpened = value;
+    this.isDrawerOpenedChange.emit(this.isDrawerOpened);
   }
 
   toggleIcon() {

@@ -42,10 +42,6 @@ export class SidebarMobileComponent implements OnInit {
   chronologicalFilter = false;
   showOnlyUpcomingTournaments = false;
   showNonFullTournaments = false;
-  isDesktop: boolean | undefined = false;
-  isLargeDesktop: boolean | undefined = false;
-  showFiller = false;
-  isDrawerOpened = false;
 
   sports: string[] = [];
   selectedSport = '';
@@ -60,10 +56,6 @@ export class SidebarMobileComponent implements OnInit {
     this.sportService
       .getAllSportsNames()
       .subscribe(sports => (this.sports = sports));
-  }
-
-  toggleIcon() {
-    this.showFiller = !this.showFiller;
   }
 
   onReceiveSearchValueFromInput(value: string) {
