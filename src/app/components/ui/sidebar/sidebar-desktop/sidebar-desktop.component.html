@@ -1,0 +1,80 @@
+<mat-drawer-container class="container-sidebar-desktop">
+  <mat-drawer #drawer mode="side" class="container-sidebar-menu">
+    <div class="container-sidebar-menu-input">
+      <app-input-search
+        (newSearchValueEventFromInput)="
+          onReceiveSearchValueFromInput($event)
+        "></app-input-search>
+    </div>
+    <h2>FILTRES</h2>
+    <div class="line"></div>
+    <div class="container-sidebar-menu-button sidebar-select-sport">
+      <mat-label>Trier par sport</mat-label>
+      <mat-select [(value)]="selectedSport" class="selected">
+        <mat-option
+          selected="selected"
+          value=""
+          (click)="sendSportFilter(selectedSport)"
+          (click)="$event.stopPropagation()"
+          >Aucun</mat-option
+        >
+        <mat-option
+          *ngFor="let sport of sports"
+          value="{{ sport }}"
+          (click)="$event.stopPropagation()"
+          (click)="sendSportFilter(selectedSport)"
+          >{{ sport }}</mat-option
+        >
+      </mat-select>
+    </div>
+    <button
+      (click)="showFiller = !showFiller"
+      mat-raised-button
+      class="container-sidebar-menu-button"
+      (click)="sendChronologicalFilterChangeToParent()">
+      Trier par :
+      <span [ngClass]="{ selected: !chronologicalFilter }">Nom</span> /
+      <span [ngClass]="{ selected: chronologicalFilter }">Date</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button
+      (click)="showFiller = !showFiller"
+      (click)="sendShowOnlyUpcomingTournamentsToParent()"
+      mat-raised-button
+      class="container-sidebar-menu-button"
+      [ngClass]="{ selected: showOnlyUpcomingTournaments }">
+      A venir
+    </button>
+    <button
+      (click)="showFiller = !showFiller"
+      mat-raised-button
+      class="container-sidebar-menu-button"
+      (click)="sendShowNonFullTournaments()"
+      [ngClass]="{ selected: showNonFullTournaments }">
+      Non complet
+    </button>
+
+    <mat-divider></mat-divider>
+    <div class="filters-button">
+      <button class="apply-filters" (click)="sendApplyFilters()">
+        APPLIQUER
+      </button>
+    </div>
+    <div class="filters-button">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="reset-filters"
+        (click)="sendResetFilters()">
+        RÉINITIALISER LES FILTRES
+      </button>
+    </div>
+  </mat-drawer>
+  <div class="sidenav-button">
+    <button mat-icon-button (click)="toggleDrawer()">
+      <mat-icon>{{
+        isDrawerOpened ? 'arrow_back_ios' : 'arrow_forward_ios'
+      }}</mat-icon>
+    </button>
+  </div>
+</mat-drawer-container>
