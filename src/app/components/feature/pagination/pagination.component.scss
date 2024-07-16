@@ -1,9 +1,15 @@
 @import '../../../../assets/style/variables.scss';
+@import '../../../../assets/style/mixins.scss';
 
 .wi-paginator {
-  background-color: $primary-background-color;
+  background-color: $primary-color;
   color: $secondary-color-text;
   border-radius: 0.2rem;
+  margin-top: 15vh;
+
+  @include media-mobile-screen {
+    margin-top: 4vh;
+  }
 }
 
 ::ng-deep .mat-mdc-paginator-range-label {
